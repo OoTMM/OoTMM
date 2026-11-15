@@ -220,10 +220,10 @@
 "Great Bay Temple Boss Key Room":
   dungeon: GB
   exits:
-    "Great Bay Temple After Boss Key": "soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
+    "Great Bay Temple After Boss Key": "can_kill_gekko_gbt"
     "WARP_SONGS": "true"
   events:
-    FROG_4: "has_mask_don_gero && soul_enemy(SOUL_ENEMY_GEKKO) && can_use_ice_arrows"
+    FROG_4: "has_mask_don_gero && can_kill_gekko_gbt"
   locations:
     "Great Bay Temple Crate Before Boss Key 01": "true"
     "Great Bay Temple Crate Before Boss Key 02": "true"

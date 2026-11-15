@@ -9,6 +9,7 @@ typedef struct PlayState PlayState;
 typedef struct SfxSource
 {
     u16     countdown;
+    u16     foreignLoopSfx;
     Vec3f   worldPos;
     Vec3f   projectedPos;
 }
@@ -16,6 +17,7 @@ SfxSource;
 
 ASSERT_SIZE(SfxSource, 0x1c);
 ASSERT_OFFSET(SfxSource, countdown, 0x0);
+ASSERT_OFFSET(SfxSource, foreignLoopSfx, 0x2);
 ASSERT_OFFSET(SfxSource, worldPos, 0x4);
 ASSERT_OFFSET(SfxSource, projectedPos, 0x10);
 

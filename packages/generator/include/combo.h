@@ -146,6 +146,8 @@ void*   comboCacheGetFilePartial(u32 vrom, u32 offset, s32 size);
 void                comboObjectsReset(void);
 void                comboObjectsGC(void);
 void*               comboGetObject(u16 objectId);
+int                 comboEnemyObjectSlot(u16 objectId);
+void*               comboEnemySceneObject(u16 objectId);
 const ObjectData*   comboGetObjectData(u16 objectId);
 u32                 comboLoadObject(void* buffer, u16 objectId);
 void                comboLoadCustomKeep(void);

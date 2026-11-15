@@ -133,6 +133,17 @@ export class Addresses {
     throw new Error(`Address ${addr.toString(16)} not found in vram/vrom table`);
   }
 
+  overlayRanges(): readonly Entry[] {
+    return this.vram.filter(entry => entry.name !== `${this.game}/boot` && entry.name !== `${this.game}/code`).map(entry => {
+      const file = this.vrom.find(file => file.base === entry.base)!;
+      const size = file.vend - file.vstart;
+      const footer = entry.base + size - bufReadU32BE(this.rom, entry.base + size - 4);
+
+      const vend = entry.vstart + size + bufReadU32BE(this.rom, footer + 12);
+      return { ...entry, vend };
+    });
+  }
+
   fileFromRAM(addr: number) {
     return this.fileLookup(addr, this.vram);
   }

@@ -133,6 +133,7 @@ Gfx_SetupDL25_Xlu       = 0x8007e2c0;
 Gfx_SetupDL_42Opa       = 0x8007e868;
 Gfx_SetupDL_61Xlu       = 0x8007e978;
 Matrix_Put              = 0x800aa764;
+Matrix_GetCurrent       = 0x800aa78c;
 Matrix_MultVec3f        = 0x800ab958;
 Matrix_Finalize         = 0x800ab900;
 Gfx_DrawDListOpa        = 0x80028048;
@@ -160,6 +161,7 @@ BgCheck_EntityRaycastDown4 = 0x8002f4b8;
 
 Math_Vec3f_Sum = 0x80063d10;
 Math_Vec3f_Yaw = 0x80063f00;
+Math_Vec3f_Pitch = 0x80063f34;
 
 DynaPoly_DeleteBgActor = 0x80031638;
 DynaPoly_SetBgActor = 0x800313a4;
@@ -264,6 +266,8 @@ Audio_ClearSariaBgmAtPos = 0x800c5e2c;
 Audio_PlaySfx_AtPosWithReverb = 0x800c5264;
 Audio_PlaySfxRiver = 0x800c5374;
 Audio_SetGanonsTowerBgmVolumeLevel = 0x800c55b0;
+SurfaceType_GetMaterial = 0x800345b8;
+SurfaceType_GetSceneExitIndex = 0x800343ac;
 SurfaceType_GetFloorType = 0x800343d4;
 SurfaceType_GetConveyorSpeed = 0x80034778;
 Audio_ClearSariaBgm2 = 0x800c6258;
@@ -440,6 +444,7 @@ Item_DropCollectible2 = 0x800138b0;
 Item_DropCollectibleRandom = 0x80013a84;
 EnItem00_DrawRupee = 0x80013150;
 EnItem00_Update = 0x80012938;
+EnemyPickupTossed = 0x8001251c;
 EnItem00_CollectedHandler = 0x800127e0;
 EnItem00_SetHandler = 0x80011b40;
 
@@ -530,6 +535,7 @@ Quake_Update	            = 0x8007d8c8;
 
 Matrix_ReplaceRotation = 0x800abe54;
 Matrix_RotateZYX = 0x800aaf00;
+Matrix_TranslateRotateZYX = 0x800ab1bc;
 Rand_CenteredFloat = 0x80026d90;
 Matrix_RotateAxis = 0x800ac280;
 Matrix_MtxFToYXZRotS = 0x800abf50;
@@ -660,6 +666,7 @@ EffectSsSibuki2_Spawn = 0x8001d62c;
 EffectSsGMagma2_Spawn = 0x8001d68c;
 EffectSsStone1_Spawn = 0x8001d6fc;
 EffectSsHitMark_Spawn = 0x8001d750;
+EnemyNativeFixedHitMark = 0x8001d7a8;
 EffectSsHitMark_SpawnFixedScale = 0x8001d7a8;
 EffectSsHitMark_SpawnCustomScale = 0x8001d7cc;
 EffectSsFhgFlash_SpawnLightBall = 0x8001d7f8;
@@ -786,6 +793,7 @@ Player_SetCsActionWithHaltedActors = 0x800218ec;
 WaterBox_GetSurface1 = 0x800347fc;
 BgCheck_EntityLineTest1 = 0x800308b4;
 BgCheck_SphVsFirstPoly = 0x80030d08;
+BgCheck_SphVsFirstWall = 0x80030d4c;
 
 Actor_TalkOfferAccepted = 0x80022930;
 Actor_OfferTalk = 0x80022a68;
@@ -855,3 +863,14 @@ Audio_PlaySfx_PauseMenuOpenOrClose = 0x800c7200;
 Player_InBlockingCsMode = 0x8007938c;
 
 D_8011D3AC = 0x800ef1b4;
+
+CollisionCheck_SetAT_SAC = 0x8004be30;
+CollisionCheck_SetAC_SAC = 0x8004c020;
+CollisionCheck_SetOC_SAC = 0x8004c210;
+
+Gfx_SetupDL = 0x8007dfbc;
+gIdentityMtx = 0x800fedb0;
+PROVIDE(FOREIGN_ENEMY_API_SPH_FIRST_WALL = BgCheck_SphVsFirstWall);
+PROVIDE(FOREIGN_ENEMY_API_LILYPAD_COLLISION = CollisionHeader_GetVirtual);
+
+gEffectSsTable = 0x800e7b40;

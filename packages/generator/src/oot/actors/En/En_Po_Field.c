@@ -39,3 +39,5 @@ void EnPoField_Item_Give(PlayState *play, u8 itemId)
 
 PATCH_CALL(0x80af9e58, EnPoField_Item_Give);
 PATCH_CALL(0x80af9e70, EnPoField_Item_Give);
+
+EXPORT_SYMBOL(EnPoField_Item_Give, EnPoField_Item_Give);

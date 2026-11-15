@@ -35,6 +35,8 @@ void EnItem00_GiveItemDefaultRange(Actor_EnItem00* this, PlayState* play, s16 gi
     Player* link;
     s16 itemId;
 
+    if (this->enemySourceQuantity && this->actor.params == ITEM00_NUT && gi == GI_OOT_NUTS_5)
+        gi = GI_OOT_NUT;
     EnItem00_ItemQuery(&q, this, play, gi);
     link = GET_PLAYER(play);
     itemId = -1;

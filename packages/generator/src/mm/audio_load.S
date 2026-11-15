@@ -3,7 +3,7 @@
 /* Use malloc to allocate the (now oversized) bank descriptors */
 PATCH_START 0x80190eb0
   sll a0,a1,0x02
-  jal malloc
+  jal AudioCustom_AllocFontDescriptors
 PATCH_END
 
 /* Use our custom seq table */

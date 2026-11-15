@@ -77,6 +77,8 @@ typedef struct ALIGNED(16)
 #if defined(DEBUG)
     u8              cheats[4];
 #endif
+    u8              soulsEnemyOotOverflow[8];
+    u8              soulsEnemyMmOverflow[8];
 }
 SharedCustomSave;
 

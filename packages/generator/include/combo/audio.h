@@ -61,6 +61,8 @@ extern u8* gFrogsSongPtr;
 #define AudioSfx_SetChannelIO func_800F4C58
 #endif
 
+int EnemyAudio_IsForeignProgram(const u8* sequence, const u8* pc, u8 seqId);
+
 void Audio_SetLoadingSequenceId(u32 seqId);
 void Audio_ClearLoadingSequenceId(void);
 s8 Audio_GetLoadCachePolicy(s8 defaultPolicy, u32 tableType);

@@ -1,7 +1,7 @@
 import type { Settings } from '@ootmm/core';
 import type { ItemPlacement, Location } from '../types';
 import type { World } from '../world';
-import type { Expr, AreaData, ExprDependencies, ExprResult } from '../expr';
+import type { Expr, AreaData, ExprDependencies, ExprResult, ExprEvalCache } from '../expr';
 import type { Age } from '../age';
 import type { Item, ItemsCount, PlayerItems } from '../items';
 
@@ -193,15 +193,34 @@ type PathfinderOptions = {
 export class Pathfinder {
   private opts!: PathfinderOptions;
   private state!: PathfinderState;
+  private readonly evalCaches: [ExprEvalCache, ExprEvalCache][] = [];
+  private readonly globalLocations: Map<string, Location>[] = [];
 
   constructor(
     private readonly worlds: World[],
     private readonly settings: Settings,
     private readonly startingItems: PlayerItems,
   ) {
+    const cache = (): ExprEvalCache => ({ run: 0, successes: [] });
+    for (const _ of worlds) {
+      this.evalCaches.push([cache(), cache()]);
+      this.globalLocations.push(new Map());
+    }
+  }
+
+  private globalLocation(worldId: number, location: string): Location {
+    const cache = this.globalLocations[worldId];
+    let value = cache.get(location);
+    if (value === undefined) {
+      value = makeLocation(location, worldId);
+      cache.set(location, value);
+    }
+    return value;
   }
 
   run(state: PathfinderState | null, opts?: PathfinderOptions) {
+
+    for (const caches of this.evalCaches) for (const cache of caches) ++cache.run;
     this.opts = opts || {};
     this.state = state ?? defaultState(this.startingItems, this.worlds.length);
 
@@ -246,7 +265,7 @@ export class Pathfinder {
         const world = this.worlds[worldId];
         const worldGossips = new Set(Object.values(world.areas).map(x => Object.keys(x.gossip || {})).flat());
         this.state.gossips.push(worldGossips);
-        const locs = [...world.locations].map(x => makeLocation(x, worldId));
+        const locs = [...world.locations].map(x => this.globalLocation(worldId, x));
         locations.push(locs);
       }
       this.state.locations = new Set(locations.flat());
@@ -390,7 +409,7 @@ export class Pathfinder {
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
     const areaData = as.areas.get(area)!;
-    const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events };
+    const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events, evalCache: this.evalCaches[worldId][age] };
 
     const deps: ExprDependencies = {
       items: [],
@@ -475,7 +494,7 @@ export class Pathfinder {
       this.addLocation(worldId, loc);
     } else {
       const ws = this.state.ws[worldId];
-      const globalLoc = makeLocation(loc, worldId);
+      const globalLoc = this.globalLocation(worldId, loc);
       this.state.locations.add(globalLoc);
       this.state.newLocations.add(globalLoc);
       ws.locations.add(loc);
@@ -489,7 +508,7 @@ export class Pathfinder {
       return;
     }
     const world = this.worlds[worldId];
-    const globalLoc = makeLocation(loc, worldId);
+    const globalLoc = this.globalLocation(worldId, loc);
     const playerItem = this.opts.items?.get(globalLoc);
     if (playerItem) {
       const otherWss = playerItem.player === 'all' ? this.state.ws : [this.state.ws[playerItem.player]];
@@ -527,7 +546,7 @@ export class Pathfinder {
 
   private addLocation(worldId: number, loc: string) {
     const ws = this.state.ws[worldId];
-    const globalLoc = makeLocation(loc, worldId);
+    const globalLoc = this.globalLocation(worldId, loc);
     this.state.locations.add(globalLoc);
     ws.locations.add(loc);
     this.collectLocation(worldId, loc);

@@ -340,7 +340,7 @@ static const char* const kSoulsEnemyOot[] = {
     "Shaboms",
     "Baby Dodongos",
     "Dark Link",
-    "Biris/Baris",
+    "Biris",
     "Tailpasarans",
     "Parasites",
     "Skulltulas",
@@ -370,6 +370,31 @@ static const char* const kSoulsEnemyOot[] = {
     "Guays",
     "Gerudo Fighters",
     "Poes",
+    "Dinolfos",
+    "Arwing",
+    "Bad Bats",
+    "Bio Babas",
+    "Boes",
+    "Captain Keeta",
+    "Chuchus",
+    "Dexihands",
+    "Dragonflies",
+    "Eenos",
+    "Eyegores",
+    "Garo",
+    "Gekkos",
+    "Giant Bees",
+    "Gomess",
+    "Hiploops",
+    "Nejirons",
+    "Real Bombchu",
+    "Skullfish",
+    "Snappers",
+    "Takkuri",
+    "Warts",
+    "Wizzrobes",
+    "Moths",
+    "Garahna",
 };
 
 static const char* const kSoulsBossOot[] = {
@@ -481,6 +506,25 @@ static const char* const kSoulsEnemyMm[] = {
     "Captain Keeta",
     "Pirate Fighters",
     "Poes",
+    "Arwing",
+    "Giant Bees",
+    "Moths",
+    "Garahna",
+    "Anubis",
+    "Baby Dodongos",
+    "Biris",
+    "Dark Link",
+    "Dead Hands",
+    "Flare Dancers",
+    "Gohma Larvae",
+    "Lizalfos",
+    "Moblins",
+    "Skull Kids",
+    "Spikes",
+    "Stalfos",
+    "Stingers",
+    "Tailpasarans",
+    "Torch Slugs",
 };
 
 static const char* const kSoulsBossMm[] = {
@@ -998,7 +1042,66 @@ static void printSoul(PlayState* play, const char* const* names, int soulBase, i
     int hasSoul;
 
     id = base + index;
-    hasSoul = mm ? comboHasSoulMm(soulBase + id) : comboHasSoulOot(soulBase + id);
+    int gi = soulBase + id;
+    if (names == kSoulsEnemyOot && id > GI_OOT_SOUL_ENEMY_POE - GI_OOT_SOUL_ENEMY_STALFOS)
+    {
+        static const s16 extra[] = {
+            GI_OOT_SOUL_ENEMY_DINOLFOS,
+            GI_OOT_SOUL_ENEMY_ARWING,
+            GI_OOT_SOUL_ENEMY_BARI,
+            GI_OOT_SOUL_ENEMY_BAD_BAT,
+            GI_OOT_SOUL_ENEMY_BIO_BABA,
+            GI_OOT_SOUL_ENEMY_BOE,
+            GI_OOT_SOUL_ENEMY_CAPTAIN_KEETA,
+            GI_OOT_SOUL_ENEMY_CHUCHU,
+            GI_OOT_SOUL_ENEMY_DEXIHAND,
+            GI_OOT_SOUL_ENEMY_DRAGONFLY,
+            GI_OOT_SOUL_ENEMY_EENO,
+            GI_OOT_SOUL_ENEMY_EYEGORE,
+            GI_OOT_SOUL_ENEMY_GARO,
+            GI_OOT_SOUL_ENEMY_GEKKO,
+            GI_OOT_SOUL_ENEMY_GIANT_BEE,
+            GI_OOT_SOUL_ENEMY_GOMESS,
+            GI_OOT_SOUL_ENEMY_HIPLOOP,
+            GI_OOT_SOUL_ENEMY_NEJIRON,
+            GI_OOT_SOUL_ENEMY_REAL_BOMBCHU,
+            GI_OOT_SOUL_ENEMY_SKULLFISH,
+            GI_OOT_SOUL_ENEMY_SNAPPER,
+            GI_OOT_SOUL_ENEMY_TAKKURI,
+            GI_OOT_SOUL_ENEMY_WART,
+            GI_OOT_SOUL_ENEMY_WIZZROBE,
+            GI_OOT_SOUL_ENEMY_MOTH,
+            GI_OOT_SOUL_ENEMY_GARAHNA,
+        };
+        gi = extra[id - (GI_OOT_SOUL_ENEMY_POE - GI_OOT_SOUL_ENEMY_STALFOS + 1)];
+    }
+    else if (names == kSoulsEnemyMm && id > GI_MM_SOUL_ENEMY_POE - GI_MM_SOUL_ENEMY_OCTOROK)
+    {
+        static const s16 extra[] = {
+            GI_MM_SOUL_ENEMY_ARWING,
+            GI_MM_SOUL_ENEMY_GIANT_BEE,
+            GI_MM_SOUL_ENEMY_MOTH,
+            GI_MM_SOUL_ENEMY_GARAHNA,
+            GI_MM_SOUL_ENEMY_ANUBIS,
+            GI_MM_SOUL_ENEMY_BABY_DODONGO,
+            GI_MM_SOUL_ENEMY_BIRI,
+            GI_MM_SOUL_ENEMY_BARI,
+            GI_MM_SOUL_ENEMY_DARK_LINK,
+            GI_MM_SOUL_ENEMY_DEAD_HAND,
+            GI_MM_SOUL_ENEMY_FLARE_DANCER,
+            GI_MM_SOUL_ENEMY_GOHMA_LARVA,
+            GI_MM_SOUL_ENEMY_LIZALFOS,
+            GI_MM_SOUL_ENEMY_MOBLIN,
+            GI_MM_SOUL_ENEMY_SKULL_KID,
+            GI_MM_SOUL_ENEMY_SPIKE,
+            GI_MM_SOUL_ENEMY_STALFOS,
+            GI_MM_SOUL_ENEMY_STINGER,
+            GI_MM_SOUL_ENEMY_TAILPASARN,
+            GI_MM_SOUL_ENEMY_TORCH_SLUG,
+        };
+        gi = extra[id - (GI_MM_SOUL_ENEMY_POE - GI_MM_SOUL_ENEMY_OCTOROK + 1)];
+    }
+    hasSoul = mm ? comboHasSoulMm(gi) : comboHasSoulOot(gi);
     name = names[id];
     x = -110.f;
     y = 42.f - 12 * index;

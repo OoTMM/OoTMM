@@ -123,6 +123,57 @@ static int mqDungeonId(PlayState* play)
     }
 }
 
+int comboMqEnemyPlacementKey(PlayState* play, const ActorEntry* entry, u32* out)
+{
+    u32 list;
+    u32 address;
+    u32 bytes;
+    u32 distance;
+    u32 slot;
+    u32 sceneBase;
+    s32 room;
+    int dungeon;
+    int contained = 0;
+    char* buffers[2] = { sMqBufferRoomPtr, sMqBufferRoom2Ptr };
+
+    _Static_assert(sizeof(ActorEntry) == 0x10, "MQ actor entry stride");
+    if (!play || !entry || !out)
+        return 0;
+    dungeon = mqDungeonId(play);
+    if (dungeon < 0 || dungeon > MQ_GANON_CASTLE || !Config_IsMq(dungeon))
+        return 0;
+    room = play->roomCtx.curRoom.num;
+    if (room < 0 || room > 0xff || room >= play->numRooms ||
+        !play->actorEntryList || !play->numActorEntries || play->numActorEntries > ROOM_ACTORS_MAX)
+        return 0;
+    list = (u32)play->actorEntryList;
+    address = (u32)entry;
+    bytes = play->numActorEntries * sizeof(ActorEntry);
+    if ((list & 1) || address < list)
+        return 0;
+    distance = address - list;
+    if (distance % sizeof(ActorEntry))
+        return 0;
+    slot = distance / sizeof(ActorEntry);
+    if (slot >= play->numActorEntries)
+        return 0;
+    for (int i = 0; i < 2; ++i)
+    {
+        u32 base = (u32)buffers[i];
+        if (buffers[i] && list >= base && list - base <= ROOM_BUFFER_SIZE &&
+            bytes <= ROOM_BUFFER_SIZE - (list - base))
+            contained = 1;
+    }
+    if (!contained)
+        return 0;
+    sceneBase = dungeon <= MQ_ICE_CAVERN ? dungeon :
+        dungeon == MQ_GERUDO_TRAINING_GROUNDS ? 0xb : 0xd;
+    *out = 0xe0000000u | (sceneBase << 20) | ((u32)room << 12) | slot;
+    return 1;
+}
+
+EXPORT_SYMBOL(ENEMY_NATIVE_MQ_PLACEMENTS_V1, comboMqEnemyPlacementKey);
+
 static void swapMqRooms(void)
 {
     char* tmp = sMqBufferRoomPtr;

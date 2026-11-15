@@ -1,11 +1,17 @@
 import type { CustomAnimation, Game } from '@ootmm/data';
 import type { DecompressedRoms } from '../decompress.ts';
 
-import { DATA_ANIMATIONS, FILES as GAME_FILES } from '@ootmm/data';
+import { DATA_ANIMATIONS } from '@ootmm/data';
 
-import { DmaData } from '../dma.ts';
-import { arrayToIndexMap } from '../util.ts';
 import { CodeGen } from '../util/codegen.ts';
+import {
+  PLAYER_ANIM_FRAME_SIZE,
+  gameFileDma,
+  getDecompressedGameFile,
+  buildPlayerAnimationDedupePlan,
+  remapImportedPlayerAnimationOffset,
+  type PlayerAnimationDedupePlan,
+} from '../compact.ts';
 
 type AnimationDef = {
   name: string;
@@ -30,15 +36,7 @@ type ImportedAnimation = {
   frameSize: number;
 };
 
-const PLAYER_LIMB_COUNT = 0x16;
-const VEC3S_SIZE = 6;
-const PLAYER_ANIM_FRAME_SIZE = PLAYER_LIMB_COUNT * VEC3S_SIZE + 2;
 const IMPORTED_LINK_ANIM_SEGMENT = 0x08;
-
-const FILES_TO_INDEX = {
-  oot: arrayToIndexMap(GAME_FILES.oot),
-  mm: arrayToIndexMap(GAME_FILES.mm),
-};
 
 function assertGame(game: string, label: string): asserts game is Game {
   if (game !== 'oot' && game !== 'mm') {
@@ -109,38 +107,6 @@ function readU32BE(buf: Uint8Array, off: number): number {
   );
 }
 
-function findFileKey(game: Game, wanted: string): string {
-  const keys = Object.keys(FILES_TO_INDEX[game]);
-  const exact = keys.find((key) => key === wanted);
-
-  if (exact) {
-    return exact;
-  }
-
-  const basename = wanted.split('/').pop();
-  const byBasename = keys.find((key) => key.split('/').pop() === basename);
-
-  if (byBasename) {
-    return byBasename;
-  }
-
-  const candidates = keys.filter((key) => key.toLowerCase().includes('anim'));
-
-  throw new Error(
-    `${game}: file not found in file table: ${wanted}\n` +
-    `Animation-ish file keys:\n${candidates.join('\n')}`
-  );
-}
-
-function getFileFromRom(roms: DecompressedRoms, game: Game, file: string): Uint8Array {
-  const key = findFileKey(game, file);
-  const index = FILES_TO_INDEX[game][key];
-  const dma = new DmaData(roms[game].dma);
-  const entry = dma.read(index);
-
-  return roms[game].rom.slice(entry.virtStart, entry.virtEnd);
-}
-
 function parseSourcePlayerAnimHeader(buf: Uint8Array, off: number): SourcePlayerAnimHeader {
   assertRange('gameplay_keep', buf, off, 8);
 
@@ -150,13 +116,13 @@ function parseSourcePlayerAnimHeader(buf: Uint8Array, off: number): SourcePlayer
   };
 }
 
-function buildImportedAnimation(roms: DecompressedRoms, def: CustomAnimation): ImportedAnimation {
+function buildImportedAnimation(roms: DecompressedRoms, def: CustomAnimation, plan: PlayerAnimationDedupePlan): ImportedAnimation {
   const srcGame = def.home_game;
   const dstGame = otherGame(srcGame);
   const frameDataOffset = parseNum(def.frame_data_offset, `${def.name}.frame_data_offset`);
   const headerOffset = parseNum(def.header_offset, `${def.name}.header_offset`);
-  const srcGameplayKeep = getFileFromRom(roms, srcGame, 'objects/gameplay_keep');
-  const srcLinkAnim = getFileFromRom(roms, srcGame, 'link_animetion');
+  const srcGameplayKeep = getDecompressedGameFile(roms, srcGame, 'objects/gameplay_keep');
+  const srcLinkAnim = getDecompressedGameFile(roms, srcGame, 'link_animetion');
   const sourceHeader = parseSourcePlayerAnimHeader(srcGameplayKeep, headerOffset);
   const sourceFrameDataOffset = sourceHeader.frameDataSegmented & 0x00ffffff;
   const frameCount = sourceHeader.frameCount;
@@ -195,13 +161,9 @@ function buildImportedAnimation(roms: DecompressedRoms, def: CustomAnimation): I
     srcGame,
     dstGame,
     frameCount,
-    frameDataOffset,
+    frameDataOffset: remapImportedPlayerAnimationOffset(plan, srcGame, frameDataOffset),
     frameSize: PLAYER_ANIM_FRAME_SIZE,
   };
-}
-
-function buildImportedAnimationPack(roms: DecompressedRoms): ImportedAnimation[] {
-  return DATA_ANIMATIONS.map(anim => buildImportedAnimation(roms, anim));
 }
 
 function defineBaseForAnimation(name: string): string {
@@ -241,10 +203,8 @@ function pushAnimationListMacro(cg: CodeGen, macroName: string, entries: Importe
 }
 
 async function emitImportedAnimationsHeader(roms: DecompressedRoms, pack: ImportedAnimation[]) {
-  const ootLinkAnimIndex = FILES_TO_INDEX.oot[findFileKey('oot', 'link_animetion')];
-  const mmLinkAnimIndex = FILES_TO_INDEX.mm[findFileKey('mm', 'link_animetion')];
-  const ootLinkAnimDma = new DmaData(roms.oot.dma).read(ootLinkAnimIndex);
-  const mmLinkAnimDma = new DmaData(roms.mm.dma).read(mmLinkAnimIndex);
+  const ootLinkAnimDma = gameFileDma(roms, 'oot', 'link_animetion');
+  const mmLinkAnimDma = gameFileDma(roms, 'mm', 'link_animetion');
   const cg = new CodeGen('include/combo/custom_animations.h', 'COMBO_IMPORTED_ANIMATIONS_H');
 
   cg.include('combo.h');
@@ -313,6 +273,7 @@ async function emitImportedAnimationsHeader(roms: DecompressedRoms, pack: Import
 }
 
 export async function patchAnimationPorts(roms: DecompressedRoms) {
-  const pack = buildImportedAnimationPack(roms);
+  const plan = buildPlayerAnimationDedupePlan(roms);
+  const pack = DATA_ANIMATIONS.map(anim => buildImportedAnimation(roms, anim, plan));
   await emitImportedAnimationsHeader(roms, pack);
 }

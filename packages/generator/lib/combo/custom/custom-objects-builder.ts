@@ -25,7 +25,7 @@ export class CustomObjectsBuilder {
   ){
   }
 
-  private async getFile(game: Game, filename: string) {
+  private getFile(game: Game, filename: string) {
     const rom = this.roms[game].rom;
     const dma = new DmaData(this.roms[game].dma);
     const index = FILES_TO_INDEX[game][filename];
@@ -543,10 +543,10 @@ export class CustomObjectsBuilder {
     return { name: 'POWDER_KEG', ...editor.build() }
   }
 
-  private async makeClearTag(): Promise<CustomObject> {
+  makeClearTag(): CustomObject {
     const editor = new ObjectEditor(0x06);
-    const ovl = await this.getFile('mm', 'actors/ovl_En_Clear_Tag');
-    const obj = await this.getFile('mm', 'objects/gameplay_keep');
+    const ovl = this.getFile('mm', 'actors/ovl_En_Clear_Tag');
+    const obj = this.getFile('mm', 'objects/gameplay_keep');
     editor.loadSegment(0x04, obj);
     editor.loadFile(0x80947F60, ovl);
     editor.submitListAddr(0x80947F60 + 0x3130); /* gClearTagDebrisEffectMaterialDL */
@@ -559,6 +559,27 @@ export class CustomObjectsBuilder {
     editor.submitListAddr(0x80947F60 + 0x5ce8); /* gClearTagLightRayEffectDL */
 
     return { name: 'CLEAR_TAG', ...editor.build() }
+  }
+
+  private makeWizReflectedBolt(): CustomObject {
+    const editor = new ObjectEditor(0x06);
+    editor.loadSegment(0x06, this.getFile('mm', 'objects/object_wiz'));
+    editor.submitListAddr(0x06002b40);
+    return { name: 'WIZ_REFLECTED_BOLT', ...editor.build() };
+  }
+
+  private makeArwing(): CustomObject {
+    const editor = new ObjectEditor(0x06);
+    const overlay = this.getFile('oot', 'actors/ovl_En_Clear_Tag');
+    editor.loadSegment(0x04, this.getFile('oot', 'objects/gameplay_keep'));
+    editor.loadFile(0x80a929d0, overlay);
+    const assetBase = 0x80a94fd0;
+    editor.submitListAddr(assetBase);
+    editor.submitListAddr(assetBase + 0x3c98);
+    editor.submitListAddr(assetBase + 0x3f98);
+    editor.submitListAddr(assetBase + 0x4348);
+    editor.submitListAddr(assetBase + 0x43c8);
+    return { name: 'ARWING', ...editor.build() };
   }
 
   private async makeDoorLock(): Promise<CustomObject> {
@@ -599,6 +620,16 @@ export class CustomObjectsBuilder {
     return { name: 'GI_SHOVEL', ...editor.build() }
   }
 
+  private makeRedeadDances(): CustomObject {
+    const editor = new ObjectEditor(0x0a);
+    editor.loadSegment(0x06, this.getFile('mm', 'objects/object_rd'));
+    for (const header of [0x0601216c, 0x06011db8, 0x060118d8])
+      editor.submitOut(editor.processAnimationHeaderAddr(header, 25));
+    const bank = editor.build();
+    if (bank.data.length !== 0xd80) throw new Error('Dancing ReDead animation budget changed');
+    return { name: 'REDEAD_DANCES', ...bank };
+  }
+
   async build(): Promise<CustomObject[]> {
     return [
       await this.makeEqKokiriSword(),
@@ -636,9 +667,12 @@ export class CustomObjectsBuilder {
       await this.makeSongOfHealingEffect(),
       await this.makeSongEffect(),
       await this.makePowderKeg(),
-      await this.makeClearTag(),
+      this.makeClearTag(),
       await this.makeDoorLock(),
       await this.makeGiShovel(),
+      this.makeArwing(),
+      this.makeWizReflectedBolt(),
+      this.makeRedeadDances(),
       //await this.simpleExtract('LIMB_OOT_CHILD_LHAND_CLOSED', 'oot', 'objects/object_link_child', [], 0x06, 0x0a),
     ];
   }

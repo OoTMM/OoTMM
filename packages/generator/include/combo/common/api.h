@@ -656,6 +656,7 @@ u32 Quake_SetDuration(s16 index, s16 duration);
 f32 BgCheck_EntityRaycastFloor5_2(PlayState* play, CollisionContext* colCtx, CollisionPoly** outPoly, s32* bgId, Actor* actor, Vec3f* pos);
 s32 WaterBox_GetSurface1_2(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* ySurface, WaterBox** outWaterBox);
 void EffectSsHahen_Spawn(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, s16 flags, s16 scale, s16 objectId, s16 life, Gfx* dList);
+void EffectSsHahen_SpawnBurst(PlayState* play, Vec3f* pos, f32 burstScale, s16 flags, s16 scale, s16 randScaleRange, s16 count, s16 objectId, s16 life, Gfx* dList);
 s16 CutsceneManager_GetCurrentSubCamId(s16 csId);
 u32 Quake_RemoveRequest(s16 index);
 
@@ -825,13 +826,14 @@ s32 Math3D_TriChkPointParaYSlopedY(Vec3f* v0, Vec3f* v1, Vec3f* v2, f32 z, f32 x
 
 void Actor_PlaySfx_FlaggedCentered2(Actor* actor, u16 sfxId);
 
+f32 Math_Vec3f_StepTo(Vec3f* start, Vec3f* target, f32 speed);
+
 #if defined(GAME_OOT)
 u32 Health_IsCritical(void);
 #endif
 #if defined(GAME_MM)
 u32 LifeMeter_IsCritical(void);
 
-f32 Math_Vec3f_StepTo(Vec3f* start, Vec3f* target, f32 speed);
 s32 Snap_ValidatePictograph(PlayState* play, Actor* actor, s32 flag, Vec3f* pos, Vec3s* rot, f32 distanceMin, f32 distanceMax, s16 angleRange);
 void EffectSsDtBubble_SpawnCustomColor(PlayState* play, Vec3f* pos, Vec3f* velocity, Vec3f* accel, Color_RGBA8* primColor, Color_RGBA8* envColor, s16 scale, s16 life, s16 randXZ);
 void Actor_SetColorFilter(Actor* actor, u16 colorFlag, u16 colorIntensityMax, u16 bufFlag, u16 duration);

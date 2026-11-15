@@ -35,6 +35,8 @@ typedef struct EnMThunder {
     /* 0x1C0 */ u8 chargingAlpha;
     /* 0x1C1 */ u8 scaleTarget;
     /* 0x1C2 */ u8 isCharging;
-} EnMThunder; // size = 0x1C4
+    u32 sourceSpinFlags;
+} EnMThunder;
+ASSERT_SIZE(EnMThunder, 0x1c8);
 
 #endif

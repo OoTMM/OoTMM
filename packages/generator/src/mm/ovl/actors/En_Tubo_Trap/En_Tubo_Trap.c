@@ -325,3 +325,5 @@ void EnTuboTrap_Draw(Actor* thisx, PlayState* play) {
     csmcPotPreDraw(&this->actor, play, o.gi, o.cloakGi, CSMC_POT_NORMAL_DANGEON);
     Gfx_DrawDListOpa(play, gameplay_dangeon_keep_DL_017EA0);
 }
+
+EXPORT_SYMBOL(ENEMY_NATIVE_FLYING_POT_MM_V1, EnTuboTrap_Init);

@@ -82,18 +82,28 @@ static f32 sLightRayMaxScale[] = {
     25.0f, 100.0f, 48.0f, 20.0f, 32.0f,
 };
 
-static TexturePtr sWaterSplashTextures[] = {
-    (TexturePtr) 0x04025A90, /* gEffWaterSplash1Tex */
-    (TexturePtr) 0x04025F90, /* gEffWaterSplash2Tex */
-    (TexturePtr) 0x04026490, /* gEffWaterSplash3Tex */
-    (TexturePtr) 0x04026990, /* gEffWaterSplash4Tex */
-    (TexturePtr) 0x04026E90, /* gEffWaterSplash5Tex */
-    (TexturePtr) 0x04027390, /* gEffWaterSplash6Tex */
-    (TexturePtr) 0x04027890, /* gEffWaterSplash7Tex */
-    (TexturePtr) 0x04027D90, /* gEffWaterSplash8Tex */
-    NULL,
-    NULL,
-    NULL,
+static const u32 kClearTagBurstAssets[] = {
+    CUSTOM_OBJECT_CLEAR_TAG_0,
+    CUSTOM_OBJECT_CLEAR_TAG_1,
+    CUSTOM_OBJECT_CLEAR_TAG_2,
+    CUSTOM_OBJECT_CLEAR_TAG_3,
+    CUSTOM_OBJECT_CLEAR_TAG_4,
+    CUSTOM_OBJECT_CLEAR_TAG_5,
+    CUSTOM_OBJECT_CLEAR_TAG_6,
+    CUSTOM_OBJECT_CLEAR_TAG_7,
+    0x0401a550,
+    0x04028290,
+    0x04025a90, /* gEffWaterSplash1Tex */
+    0x04025f90, /* gEffWaterSplash2Tex */
+    0x04026490, /* gEffWaterSplash3Tex */
+    0x04026990, /* gEffWaterSplash4Tex */
+    0x04026e90, /* gEffWaterSplash5Tex */
+    0x04027390, /* gEffWaterSplash6Tex */
+    0x04027890, /* gEffWaterSplash7Tex */
+    0x04027d90, /* gEffWaterSplash8Tex */
+    0,
+    0,
+    0,
 };
 
 /**
@@ -799,7 +809,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
             // Apply the debris effect material if it has not already been applied.
             if (!isMaterialApplied) {
                 isMaterialApplied++;
-                gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_CLEAR_TAG_0);
+                gSPDisplayList(POLY_OPA_DISP++, kClearTagBurstAssets[0]);
             }
 
             // Draw the debris effect.
@@ -808,7 +818,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
             Matrix_RotateYF(effect->rotationY, MTXMODE_APPLY);
             Matrix_RotateXF(effect->rotationX, MTXMODE_APPLY);
             gSPMatrix(POLY_OPA_DISP++, Matrix_Finalize(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_CLEAR_TAG_1);
+            gSPDisplayList(POLY_OPA_DISP++, kClearTagBurstAssets[1]);
         }
     }
 
@@ -825,7 +835,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
                 Matrix_Put(&mtxF);
                 Matrix_Scale(effect->scale, 1.0f, effect->scale, MTXMODE_APPLY);
                 gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-                gSPDisplayList(POLY_XLU_DISP++, 0x0401a550); /* gEffShockwaveDL */
+                gSPDisplayList(POLY_XLU_DISP++, kClearTagBurstAssets[8]); /* gEffShockwaveDL */
             }
         }
     }
@@ -849,7 +859,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
                 Matrix_Put(&mtxF);
                 Matrix_Scale(effect->scale * 3.0f, 1.0f, effect->scale * 3.0f, MTXMODE_APPLY);
                 gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-                gSPDisplayList(POLY_XLU_DISP++, CUSTOM_OBJECT_CLEAR_TAG_5);
+                gSPDisplayList(POLY_XLU_DISP++, kClearTagBurstAssets[5]);
             }
         }
     }
@@ -861,7 +871,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
         if ((effect->type == CLEAR_TAG_EFFECT_SMOKE) || (effect->type == CLEAR_TAG_EFFECT_ISOLATED_SMOKE)) {
             // Apply the smoke effect material if it has not already been applied.
             if (!isMaterialApplied) {
-                gSPDisplayList(POLY_XLU_DISP++, CUSTOM_OBJECT_CLEAR_TAG_2);
+                gSPDisplayList(POLY_XLU_DISP++, kClearTagBurstAssets[2]);
                 isMaterialApplied++;
             }
 
@@ -878,7 +888,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
             Matrix_Scale(effect->smokeScaleX * effect->scale, effect->smokeScaleY * effect->scale, 1.0f, MTXMODE_APPLY);
             Matrix_Translate(0.0f, 20.0f, 0.0f, MTXMODE_APPLY);
             gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(POLY_XLU_DISP++, CUSTOM_OBJECT_CLEAR_TAG_3);
+            gSPDisplayList(POLY_XLU_DISP++, kClearTagBurstAssets[3]);
         }
     }
 
@@ -889,7 +899,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
         if (effect->type == CLEAR_TAG_EFFECT_FIRE) {
             // Apply the fire effect material if it has not already been applied.
             if (!isMaterialApplied) {
-                gSPDisplayList(POLY_XLU_DISP++, CUSTOM_OBJECT_CLEAR_TAG_2);
+                gSPDisplayList(POLY_XLU_DISP++, kClearTagBurstAssets[2]);
                 gDPSetEnvColor(POLY_XLU_DISP++, 255, 215, 255, 128);
                 isMaterialApplied++;
             }
@@ -902,7 +912,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
             Matrix_ReplaceRotation(&play->billboardMtxF);
             Matrix_Scale(effect->scale, effect->scale, 1.0f, MTXMODE_APPLY);
             gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(POLY_XLU_DISP++, CUSTOM_OBJECT_CLEAR_TAG_3);
+            gSPDisplayList(POLY_XLU_DISP++, kClearTagBurstAssets[3]);
         }
     }
 
@@ -924,7 +934,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
             Matrix_ReplaceRotation(&play->billboardMtxF);
             Matrix_Scale(2.0f * effect->scale, 2.0f * effect->scale, 1.0f, MTXMODE_APPLY);
             gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(POLY_XLU_DISP++, CUSTOM_OBJECT_CLEAR_TAG_4);
+            gSPDisplayList(POLY_XLU_DISP++, kClearTagBurstAssets[4]);
         }
     }
 
@@ -938,7 +948,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
                 gDPPipeSync(POLY_XLU_DISP++);
                 gDPSetEnvColor(POLY_XLU_DISP++, (u8)effect->envColor.r, (u8)effect->envColor.g, (u8)effect->envColor.b,
                                0);
-                gSPDisplayList(POLY_XLU_DISP++, CUSTOM_OBJECT_CLEAR_TAG_6);
+                gSPDisplayList(POLY_XLU_DISP++, kClearTagBurstAssets[6]);
                 isMaterialApplied++;
             }
 
@@ -952,7 +962,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
             Matrix_Scale(effect->scale * 0.5f, effect->scale * 0.5f, effect->maxScale * effect->scale, MTXMODE_APPLY);
             Matrix_RotateXF(M_PIf / 2, MTXMODE_APPLY);
             gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-            gSPDisplayList(POLY_XLU_DISP++, CUSTOM_OBJECT_CLEAR_TAG_7);
+            gSPDisplayList(POLY_XLU_DISP++, kClearTagBurstAssets[7]);
         }
     }
 
@@ -963,7 +973,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
             gDPPipeSync(POLY_XLU_DISP++);
             gDPSetEnvColor(POLY_XLU_DISP++, 255, 255, 255, 200);
             gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 255, 200);
-            gSPSegment(POLY_XLU_DISP++, 0x08, SEGMENTED_TO_VIRTUAL(sWaterSplashTextures[effect->actionTimer]));
+            gSPSegment(POLY_XLU_DISP++, 0x08, SEGMENTED_TO_VIRTUAL(kClearTagBurstAssets[10 + effect->actionTimer]));
             Gfx_SetupDL_61Xlu(gfxCtx);
             gSPClearGeometryMode(POLY_XLU_DISP++, G_CULL_BACK);
             isMaterialApplied++;
@@ -987,7 +997,7 @@ void EnClearTag_DrawEffects(Actor* thisx, PlayState* play) {
                         Matrix_RotateXF(effect->rotationX, MTXMODE_APPLY);
                         Matrix_Scale(effect->scale, effect->scale, effect->scale, MTXMODE_APPLY);
                         gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
-                        gSPDisplayList(POLY_XLU_DISP++, 0x04028290); /* gEffWaterSplashDL */
+                        gSPDisplayList(POLY_XLU_DISP++, kClearTagBurstAssets[9]); /* gEffWaterSplashDL */
                     }
                 }
             }
@@ -1009,4 +1019,12 @@ ActorProfile En_Clear_Tag_InitVars = {
     /**/ EnClearTag_Draw,
 };
 
+static const u32 kLightRayAssets[] = {
+    CUSTOM_OBJECT_TABLE_VROM,
+    CUSTOM_OBJECT_CLEAR_TAG_6,
+    CUSTOM_OBJECT_CLEAR_TAG_7,
+};
+EXPORT_SYMBOL(FOREIGN_ENEMY_MM_LARGE_RAYS_V1, kLightRayAssets);
+EXPORT_SYMBOL(FOREIGN_ENEMY_MM_SMALL_RAYS_V1, kLightRayAssets);
+EXPORT_SYMBOL(FOREIGN_ENEMY_MM_CLEAR_TAG_BURST_V1, kClearTagBurstAssets);
 OVL_INFO_ACTOR(ACTOR_EN_CLEAR_TAG, En_Clear_Tag_InitVars);

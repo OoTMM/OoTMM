@@ -70,3 +70,54 @@ PATCH_END
 PATCH_START 0x800c03bc
   move t6,t5
 PATCH_END
+
+PATCH_START 0x800c6820
+  j Audio_StoreBgmWithoutMiniboss
+   nop
+PATCH_END
+
+.set push
+.set noreorder
+Audio_StoreBgmWithoutMiniboss:
+  andi t0,a0,0xff
+  addiu t1,zero,0x38
+  bne t0,t1,2f
+   nop
+  addiu sp,sp,-0x20
+  sw ra,0x14(sp)
+  sw a0,0x18(sp)
+  jal comboEnemyMusicSuppressed
+   nop
+  lw a0,0x18(sp)
+  lw ra,0x14(sp)
+  bnez v0,1f
+   addiu sp,sp,0x20
+2:
+  addiu sp,sp,-0x28
+  j 0x800c6828
+   sw ra,0x14(sp)
+1:
+  jr ra
+   nop
+.set pop
+
+PATCH_START 0x800c6894
+  j Audio_RestoreBgmForNativeEncounter
+   nop
+PATCH_END
+
+.set push
+.set noreorder
+Audio_RestoreBgmForNativeEncounter:
+  addiu sp,sp,-0x18
+  sw ra,0x14(sp)
+  jal comboEnemyMusicSuppressed
+   nop
+  beqz v0,1f
+   lw ra,0x14(sp)
+  jr ra
+   addiu sp,sp,0x18
+1:
+  j 0x800c689c
+   nop
+.set pop

@@ -3,6 +3,7 @@
 #include <combo/custom.h>
 #include <combo/player.h>
 #include <combo/mask.h>
+#include <combo/magic.h>
 #include <combo/config.h>
 #include <combo/global.h>
 #include <combo/dpad.h>
@@ -520,14 +521,13 @@ static u16 blastMaskDelay(void)
 
 static void Player_BlastMask(PlayState* play, Player* link)
 {
-    EnBomMM* bomb;
-
     if (gBlastMaskDelayAcc)
         return;
-    bomb = (EnBomMM*)Actor_Spawn(&play->actorCtx, play, ACTOR_CUSTOM_EN_BOM, link->actor.focus.pos.x, link->actor.focus.pos.y, link->actor.focus.pos.z, BOMB_EXPLOSIVE_TYPE_BLAST, 0, 0, 0);
-    if (!bomb)
+    Vec3f* pos = &link->actor.focus.pos;
+    Actor* bomb = Actor_Spawn(&play->actorCtx, play, ACTOR_CUSTOM_EN_BOM, pos->x, pos->y, pos->z,
+                              BOMB_EXPLOSIVE_TYPE_BLAST, 0, 0, 0);
+    if (!bomb || !bomb->update)
         return;
-    bomb->timer = 0;
     gBlastMaskDelayAcc = blastMaskDelay();
     Interface_LoadItemIconImpl(play, 0);
 }
@@ -1143,6 +1143,17 @@ static int Player_ItemAndArrowType(PlayState* play, Player* this, int* outItem, 
 }
 
 PATCH_FUNC(0x808323dc, Player_ItemAndArrowType);
+
+static Actor* Player_SpawnBowProjectile(ActorContext* actorCtx, Actor* parent, PlayState* play, s16 actorId,
+                                        f32 x, f32 y, f32 z, s16 rx, s16 ry, s16 rz, s32 params)
+{
+    Actor* projectile = Actor_SpawnAsChild(actorCtx, parent, play, actorId, x, y, z, rx, ry, rz, params);
+    if (!projectile && params >= 3 && params <= 5 && gSaveContext.magicState == MAGIC_STATE_CONSUME_SETUP)
+        Magic_Reset(play);
+    return projectile;
+}
+
+PATCH_CALL(0x808325c8, Player_SpawnBowProjectile);
 
 typedef struct
 {

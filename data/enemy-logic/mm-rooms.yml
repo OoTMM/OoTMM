@@ -1,0 +1,2147 @@
+"mm/overworld/Astral Observatory Passage":
+  rooms:
+    - scene: 41
+      room: 0
+      setup: 0
+      slots:
+        - 1
+        - 2
+
+"mm/overworld/Deku Palace Front":
+  rooms:
+    - scene: 43
+      room: 0
+      setup: 0
+      slots:
+        - 10
+
+"mm/overworld/Deku Palace Main":
+  rooms:
+    - scene: 43
+      room: 1
+      setup: 0
+      slots:
+        - 23
+        - 24
+    - scene: 43
+      room: 2
+      setup: 0
+      slots:
+        - 23
+        - 24
+
+"mm/overworld/Deku Palace Upper":
+  rooms:
+    - scene: 43
+      room: 1
+      setup: 0
+      slots:
+        - 23
+        - 24
+
+"mm/overworld/Deku Shrine Main":
+  rooms:
+    - scene: 82
+      room: 0
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 3
+        - 4
+    - scene: 82
+      room: 2
+      setup: 0
+      slots:
+        - 8
+        - 9
+        - 10
+        - 11
+    - scene: 82
+      room: 3
+      setup: 0
+      slots:
+        - 6
+        - 7
+        - 8
+    - scene: 82
+      room: 4
+      setup: 0
+      slots:
+        - 6
+
+"mm/overworld/Deku Shrine End":
+  rooms:
+    - scene: 82
+      room: 8
+      setup: 0
+      slots:
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+
+"mm/overworld/Goron Village":
+  rooms:
+    - scene: 77
+      room: 0
+      setup: 0
+      slots:
+        - 45
+        - 46
+
+"mm/overworld/Lone Peak Shrine":
+  rooms:
+    - scene: 7
+      room: 5
+      setup: 0
+      slots:
+        - 3
+
+"mm/overworld/Ikana Graveyard":
+  rooms:
+    - scene: 67
+      room: 1
+      setup: 0
+      slots:
+        - 27
+        - 28
+        - 40
+        - 41
+        - 43
+    - scene: 67
+      room: 1
+      setup: 1
+      slots:
+        - 8
+        - 9
+    - scene: 67
+      room: 0
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+        - 22
+        - 23
+        - 32
+        - 33
+        - 34
+        - 36
+
+"mm/overworld/Beneath The Graveyard Night 1":
+  rooms:
+    - scene: 12
+      room: 1
+      setup: 0
+      slots:
+        - 0
+  clearChecks:
+    "Beneath The Graveyard Chest":
+      - 12/1/0
+  rules:
+    - section: locations
+      key: "Beneath The Graveyard Chest"
+      expectedRule: "soul_enemy(SOUL_ENEMY_BAD_BAT) && (can_fight || has_explosives || has_arrows || can_hookshot_short || can_use_din || has_mask_deku)"
+      template: "($ENEMY0)"
+      selectors:
+        ENEMY0:
+          scene: 12
+          room: 1
+          setup: 0
+          slots:
+            - 0
+
+"mm/overworld/Beneath The Graveyard Night 2 After Door":
+  rooms:
+    - scene: 12
+      room: 4
+      setup: 0
+      slots:
+        - 0
+    - scene: 12
+      room: 3
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+  clearChecks:
+    "Beneath The Graveyard HP":
+      - 12/4/0
+  rules:
+    - section: locations
+      key: "Beneath The Graveyard HP"
+      expectedRule: "soul_iron_knuckle && (has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere) && (has_weapon || has_mask_goron || has_explosives)"
+      template: "(has_explosives || trick_keg_explosives) && (can_use_lens || short_hook_anywhere) && ($ENEMY0)"
+      selectors:
+        ENEMY0:
+          scene: 12
+          room: 4
+          setup: 0
+          slots:
+            - 0
+
+"mm/overworld/Sakon Hideout":
+  rooms:
+    - scene: 79
+      room: 1
+      setup: 0
+      slots:
+        - 0
+        - 36
+        - 37
+        - 38
+  rules:
+    - section: events
+      key: "SUN_MASK"
+      expectedRule: "(can_fight || has_explosives || has_arrows) && soul_deku_baba && soul_wolfos"
+      template: "($ENEMY0)"
+      selectors:
+        ENEMY0:
+          scene: 79
+          room: 1
+          setup: 0
+          slots:
+            - 0
+            - 36
+            - 37
+            - 38
+
+"mm/overworld/Ikana Castle Exterior":
+  rooms:
+    - scene: 29
+      room: 0
+      setup: 0
+      slots:
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+
+"mm/overworld/Mountain Village":
+  rooms:
+    - scene: 90
+      room: 0
+      setup: 0
+      slots:
+        - 4
+        - 34
+        - 35
+
+"mm/overworld/Mountain Village Cliff":
+  rooms:
+    - scene: 90
+      room: 0
+      setup: 0
+      slots:
+        - 4
+        - 34
+        - 35
+
+"mm/overworld/Road to Ikana Front":
+  rooms:
+    - scene: 83
+      room: 0
+      setup: 0
+      slots:
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+        - 27
+        - 28
+        - 29
+        - 42
+        - 43
+        - 44
+        - 45
+        - 46
+        - 47
+        - 48
+        - 49
+        - 50
+        - 51
+        - 52
+        - 53
+        - 54
+        - 55
+        - 56
+        - 57
+        - 58
+
+"mm/overworld/Road to Southern Swamp":
+  rooms:
+    - scene: 64
+      room: 0
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+
+"mm/overworld/Snowhead Near Fairy Fountain":
+  rooms:
+    - scene: 92
+      room: 0
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+        - 27
+    - scene: 92
+      room: 0
+      setup: 1
+      slots:
+        - 0
+        - 1
+        - 3
+        - 4
+        - 5
+
+"mm/overworld/Swamp Front":
+  rooms:
+    - scene: 69
+      room: 0
+      setup: 0
+      slots:
+        - 3
+        - 4
+        - 6
+        - 44
+
+"mm/overworld/Swamp Water Near Witch":
+  rooms:
+    - scene: 69
+      room: 0
+      setup: 0
+      slots:
+        - 3
+        - 4
+        - 6
+        - 44
+
+"mm/overworld/Swamp Near Frog":
+  rooms:
+    - scene: 69
+      room: 0
+      setup: 0
+      slots:
+        - 3
+        - 4
+        - 6
+        - 44
+
+"mm/overworld/Swamp Rupee Flowers":
+  rooms:
+    - scene: 69
+      room: 0
+      setup: 0
+      slots:
+        - 3
+        - 4
+        - 6
+        - 44
+
+"mm/overworld/Swamp Near Potion Shop":
+  rooms:
+    - scene: 69
+      room: 0
+      setup: 0
+      slots:
+        - 3
+        - 4
+        - 6
+        - 44
+
+"mm/overworld/Owl Swamp":
+  rooms:
+    - scene: 69
+      room: 0
+      setup: 0
+      slots:
+        - 3
+        - 4
+        - 6
+        - 44
+
+"mm/overworld/Termina Field":
+  rooms:
+    - scene: 45
+      room: 0
+      setup: 0
+      slots:
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 19
+        - 20
+        - 30
+        - 31
+        - 32
+        - 33
+        - 34
+        - 35
+        - 36
+        - 37
+        - 38
+        - 39
+        - 40
+        - 41
+        - 42
+        - 43
+        - 44
+        - 45
+        - 46
+        - 52
+        - 53
+        - 54
+        - 57
+        - 58
+        - 59
+        - 60
+        - 61
+        - 62
+        - 63
+        - 65
+        - 66
+        - 67
+        - 142
+        - 143
+        - 144
+
+"mm/overworld/Peahat Grotto":
+  rooms:
+    - scene: 7
+      room: 13
+      setup: 0
+      slots:
+        - 0
+  clearChecks:
+    "Termina Field Peahat Grotto":
+      - 7/13/0
+  rules:
+    - section: locations
+      key: "Termina Field Peahat Grotto"
+      expectedRule: "soul_peahat && (can_fight || has_arrows || deku_stick_fighting || has_mask_deku || can_use_slingshot) && is_day"
+      template: "($ENEMY0)"
+      selectors:
+        ENEMY0:
+          scene: 7
+          room: 13
+          setup: 0
+          slots:
+            - 0
+
+"mm/overworld/Dodongo Grotto":
+  rooms:
+    - scene: 7
+      room: 7
+      setup: 0
+      slots:
+        - 0
+        - 1
+  clearChecks:
+    "Termina Field Dodongo Grotto":
+      - 7/7/0
+  rules:
+    - section: locations
+      key: "Termina Field Dodongo Grotto"
+      expectedRule: "soul_dodongo && (has_weapon || has_explosives || has_mask_goron || has_arrows || deku_stick_fighting)"
+      template: "($ENEMY0)"
+      selectors:
+        ENEMY0:
+          scene: 7
+          room: 7
+          setup: 0
+          slots:
+            - 0
+            - 1
+
+"mm/overworld/Twin Islands":
+  rooms:
+    - scene: 93
+      room: 0
+      setup: 0
+      slots:
+        - 3
+        - 26
+        - 27
+
+"mm/overworld/Twin Islands Frozen Grotto":
+  rooms:
+    - scene: 7
+      room: 14
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 6
+
+"mm/overworld/Woodfall":
+  rooms:
+    - scene: 70
+      room: 0
+      setup: 0
+      slots:
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 24
+        - 25
+        - 26
+
+"mm/overworld/Woodfall Shrine":
+  rooms:
+    - scene: 70
+      room: 0
+      setup: 0
+      slots:
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 24
+        - 25
+        - 26
+
+"mm/overworld/Woodfall Near Fairy Fountain":
+  rooms:
+    - scene: 70
+      room: 0
+      setup: 0
+      slots:
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 24
+        - 25
+        - 26
+
+"mm/overworld/Owl Woodfall":
+  rooms:
+    - scene: 70
+      room: 0
+      setup: 0
+      slots:
+        - 4
+        - 5
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 24
+        - 25
+        - 26
+
+"mm/overworld/Woods of Mystery":
+  rooms:
+    - scene: 100
+      room: 3
+      setup: 0
+      slots:
+        - 0
+    - scene: 100
+      room: 4
+      setup: 0
+      slots:
+        - 0
+    - scene: 100
+      room: 5
+      setup: 0
+      slots:
+        - 0
+    - scene: 100
+      room: 7
+      setup: 0
+      slots:
+        - 0
+
+"mm/overworld/Zora Cape":
+  rooms:
+    - scene: 56
+      room: 0
+      setup: 0
+      slots:
+        - 17
+    - scene: 56
+      room: 0
+      setup: 1
+      slots:
+        - 18
+
+"mm/overworld/Waterfall Cliffs":
+  rooms:
+    - scene: 56
+      room: 0
+      setup: 0
+      slots:
+        - 17
+    - scene: 56
+      room: 0
+      setup: 1
+      slots:
+        - 18
+
+"mm/WF/Woodfall Temple Entrance Front":
+  rooms:
+    - scene: 27
+      room: 2
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+
+"mm/WF/Woodfall Temple Entrance Back":
+  rooms:
+    - scene: 27
+      room: 2
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+        - 17
+        - 18
+
+"mm/WF/Woodfall Temple Main Entrance Ledge":
+  rooms:
+    - scene: 27
+      room: 1
+      setup: 0
+      slots:
+        - 3
+        - 4
+  rules:
+    - section: locations
+      key: "Woodfall Temple SF Main Deku Baba"
+      expectedRule: "can_kill_baba_nuts"
+      template: "$ENEMY"
+      selectors:
+        ENEMY:
+          scene: 27
+          room: 1
+          setup: 0
+          slots:
+            - 4
+
+"mm/WF/Woodfall Temple Main Water Room Ledge":
+  rooms:
+    - scene: 27
+      room: 1
+      setup: 0
+      slots:
+        - 3
+        - 4
+
+"mm/WF/Woodfall Temple Main Pots":
+  rooms:
+    - scene: 27
+      room: 1
+      setup: 0
+      slots:
+        - 3
+        - 4
+
+"mm/WF/Woodfall Temple Map Room":
+  rooms:
+    - scene: 27
+      room: 6
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+  clearChecks:
+    "Woodfall Temple Map":
+      - 27/6/0
+
+"mm/WF/Woodfall Temple Maze":
+  rooms:
+    - scene: 27
+      room: 3
+      setup: 0
+      slots:
+        - 1
+        - 3
+        - 4
+  rules:
+    - section: locations
+      key: "Woodfall Temple SF Maze Skulltula"
+      expectedRule: "can_kill_skulltulas"
+      template: "$ENEMY"
+      selectors:
+        ENEMY:
+          scene: 27
+          room: 3
+          setup: 0
+          slots:
+            - 3
+
+"mm/WF/Woodfall Temple Compass Room":
+  rooms:
+    - scene: 27
+      room: 4
+      setup: 0
+      slots:
+        - 3
+        - 4
+  clearChecks:
+    "Woodfall Temple Compass":
+      - 27/4/0
+
+"mm/WF/Woodfall Temple Dark Room":
+  rooms:
+    - scene: 27
+      room: 9
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+  clearChecks:
+    "Woodfall Temple Dark Chest":
+      - 27/9/0
+
+"mm/WF/Woodfall Temple Pits Room":
+  rooms:
+    - scene: 27
+      room: 10
+      setup: 0
+      slots:
+        - 4
+        - 5
+
+"mm/WF/Woodfall Temple Main Upper Ledge":
+  rooms:
+    - scene: 27
+      room: 1
+      setup: 0
+      slots:
+        - 3
+        - 4
+
+"mm/WF/Woodfall Temple Bow Room":
+  rooms:
+    - scene: 27
+      room: 7
+      setup: 0
+      slots:
+        - 0
+  clearChecks:
+    "Woodfall Temple Bow":
+      - 27/7/0
+
+"mm/WF/Woodfall Temple Pre-Boss Main Ledge":
+  rooms:
+    - scene: 27
+      room: 0
+      setup: 0
+      slots:
+        - 6
+        - 7
+        - 8
+        - 19
+        - 20
+
+"mm/WF/Woodfall Temple Pre-Boss Far Ledge":
+  rooms:
+    - scene: 27
+      room: 0
+      setup: 0
+      slots:
+        - 6
+        - 7
+        - 8
+        - 19
+        - 20
+
+"mm/WF/Woodfall Temple Pre-Boss Rupee Platform":
+  rooms:
+    - scene: 27
+      room: 0
+      setup: 0
+      slots:
+        - 6
+        - 7
+        - 8
+        - 19
+        - 20
+
+"mm/SH/Snowhead Temple Entrance":
+  rooms:
+    - scene: 33
+      room: 0
+      setup: 0
+      slots:
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+
+"mm/SH/Snowhead Temple Main":
+  rooms:
+    - scene: 33
+      room: 0
+      setup: 0
+      slots:
+        - 10
+        - 11
+        - 12
+        - 13
+        - 14
+        - 15
+        - 16
+
+"mm/SH/Snowhead Temple Bridge Front":
+  rooms:
+    - scene: 33
+      room: 2
+      setup: 0
+      slots:
+        - 14
+        - 15
+        - 16
+  clearChecks:
+    "Snowhead Temple Bridge Room":
+      - 33/2/0
+  rules:
+    - section: locations
+      key: "Snowhead Temple Bridge Room"
+      expectedRule: "soul_freezard && (can_hookshot_short || (has_hover_boots && can_kill_freezard_short_range))"
+      template: "($ENEMY0)"
+      selectors:
+        ENEMY0:
+          scene: 33
+          room: 2
+          setup: 0
+          slots:
+            - 14
+            - 15
+            - 16
+
+"mm/SH/Snowhead Temple Bridge Back":
+  rooms:
+    - scene: 33
+      room: 2
+      setup: 0
+      slots:
+        - 14
+        - 15
+        - 16
+  clearChecks:
+    "Snowhead Temple Bridge Room":
+      - 33/2/0
+  rules:
+    - section: locations
+      key: "Snowhead Temple Bridge Room"
+      expectedRule: "soul_freezard && (can_use_fire_short_range || (has_hover_boots && can_kill_freezard_short_range))"
+      template: "($ENEMY0)"
+      selectors:
+        ENEMY0:
+          scene: 33
+          room: 2
+          setup: 0
+          slots:
+            - 14
+            - 15
+            - 16
+
+"mm/SH/Snowhead Temple Map Room":
+  rooms:
+    - scene: 33
+      room: 9
+      setup: 0
+      slots:
+        - 1
+        - 5
+
+"mm/SH/Snowhead Temple Map Room Upper":
+  rooms:
+    - scene: 33
+      room: 9
+      setup: 0
+      slots:
+        - 1
+        - 5
+    - scene: 33
+      room: 4
+      setup: 0
+      slots:
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+
+"mm/SH/Snowhead Temple Center Level 1":
+  rooms:
+    - scene: 33
+      room: 4
+      setup: 0
+      slots:
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+
+"mm/SH/Snowhead Temple Pillars Room Upper":
+  rooms:
+    - scene: 33
+      room: 5
+      setup: 0
+      slots:
+        - 22
+        - 23
+        - 24
+  clearChecks:
+    "Snowhead Temple Pillars Room":
+      - 33/5/0
+  rules:
+    - section: locations
+      key: "Snowhead Temple Pillars Room"
+      expectedRule: "soul_freezard && can_kill_freezard_short_range"
+      template: "($ENEMY0)"
+      selectors:
+        ENEMY0:
+          scene: 33
+          room: 5
+          setup: 0
+          slots:
+            - 22
+            - 23
+            - 24
+
+"mm/SH/Snowhead Temple Pillars Room Lower":
+  rooms:
+    - scene: 33
+      room: 5
+      setup: 0
+      slots:
+        - 22
+        - 23
+        - 24
+
+"mm/SH/Snowhead Temple Center Level 0":
+  rooms:
+    - scene: 33
+      room: 4
+      setup: 0
+      slots:
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+
+"mm/SH/Snowhead Temple Compass Room":
+  rooms:
+    - scene: 33
+      room: 1
+      setup: 0
+      slots:
+        - 10
+        - 11
+
+"mm/SH/Snowhead Temple Dual Switches Locked":
+  rooms:
+    - scene: 33
+      room: 8
+      setup: 0
+      slots:
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+
+"mm/SH/Snowhead Temple Dual Switches Unlocked":
+  rooms:
+    - scene: 33
+      room: 8
+      setup: 0
+      slots:
+        - 6
+        - 7
+        - 8
+        - 9
+        - 10
+
+"mm/SH/Snowhead Temple Center Level 2 Dual":
+  rooms:
+    - scene: 33
+      room: 4
+      setup: 0
+      slots:
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+
+"mm/SH/Snowhead Temple Center Level 2 Iced":
+  rooms:
+    - scene: 33
+      room: 4
+      setup: 0
+      slots:
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+
+"mm/SH/Snowhead Temple Fire Arrow":
+  rooms:
+    - scene: 33
+      room: 4
+      setup: 0
+      slots:
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+  encounters:
+    - source: mm-wizrobe-scripted
+      room:
+        scene: 33
+        room: 6
+        setup: 0
+        slots:
+          - 0
+      rules:
+        - section: locations
+          key: "Snowhead Temple Fire Arrow"
+          expectedRule: "soul_enemy(SOUL_ENEMY_WIZZROBE)"
+          template: "$ENEMY"
+
+"mm/SH/Snowhead Temple Center Level 3 Snow":
+  rooms:
+    - scene: 33
+      room: 4
+      setup: 0
+      slots:
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+
+"mm/SH/Snowhead Temple Center Level 3 Iced":
+  rooms:
+    - scene: 33
+      room: 4
+      setup: 0
+      slots:
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+
+"mm/SH/Snowhead Temple Snow Room":
+  rooms:
+    - scene: 33
+      room: 10
+      setup: 0
+      slots:
+        - 7
+        - 16
+
+"mm/SH/Snowhead Temple Boss Key Room":
+  rooms:
+    - scene: 33
+      room: 4
+      setup: 0
+      slots:
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+  encounters:
+    - source: mm-wizrobe-scripted
+      room:
+        scene: 33
+        room: 12
+        setup: 0
+        slots:
+          - 0
+      rules:
+        - section: locations
+          key: "Snowhead Temple Boss Key"
+          expectedRule: "soul_enemy(SOUL_ENEMY_WIZZROBE)"
+          template: "$ENEMY"
+
+"mm/SH/Snowhead Temple Center Level 4":
+  rooms:
+    - scene: 33
+      room: 4
+      setup: 0
+      slots:
+        - 18
+        - 19
+        - 20
+        - 21
+        - 22
+        - 23
+        - 24
+        - 25
+        - 26
+
+"mm/GB/Great Bay Temple Water Wheel":
+  rooms:
+    - scene: 73
+      room: 8
+      setup: 0
+      slots:
+        - 7
+        - 8
+        - 9
+  rules:
+    - section: locations
+      key: "Great Bay Temple SF Water Wheel Skulltula"
+      expectedRule: "soul_skulltula && (can_fight || has_weapon_range || has_explosives || deku_stick_fighting)"
+      template: "$ENEMY"
+      selectors:
+        ENEMY:
+          scene: 73
+          room: 8
+          setup: 0
+          slots:
+            - 7
+
+"mm/GB/Great Bay Temple Baba Room Surface":
+  rooms:
+    - scene: 73
+      room: 3
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+  clearChecks:
+    "Great Bay Temple Baba Chest":
+      - 73/3/0
+  rules:
+    - section: events
+      key: "GBT_BABA_CHEST_SPAWN"
+      expectedRule: "soul_enemy(SOUL_ENEMY_BIO_BABA) && (has_mask_zora || has_arrows || (has_mask_blast && can_hookshot_short))"
+      template: "($ENEMY0)"
+      selectors:
+        ENEMY0:
+          scene: 73
+          room: 3
+          setup: 0
+          slots:
+            - 1
+            - 2
+            - 3
+            - 4
+
+"mm/GB/Great Bay Temple Compass Room":
+  rooms:
+    - scene: 73
+      room: 4
+      setup: 0
+      slots:
+        - 8
+        - 15
+        - 16
+
+"mm/GB/Great Bay Temple Red Pipe 1":
+  rooms:
+    - scene: 73
+      room: 6
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 7
+
+"mm/GB/Great Bay Temple Ice Arrow Room":
+  rooms:
+    - scene: 73
+      room: 14
+      setup: 0
+      slots:
+        - 0
+        - 1
+  encounters:
+    - source: mm-wart-scripted
+      room:
+        scene: 73
+        room: 7
+        setup: 0
+        slots:
+          - 8
+      rules:
+        - section: locations
+          key: "Great Bay Temple Ice Arrow"
+          expectedRule: "can_kill_warts"
+          template: "$ENEMY"
+
+"mm/GB/Great Bay Temple Red Pipe 2":
+  rooms:
+    - scene: 73
+      room: 2
+      setup: 0
+      slots:
+        - 0
+        - 1
+
+"mm/GB/Great Bay Temple After Boss Key":
+  rooms:
+    - scene: 73
+      room: 4
+      setup: 0
+      slots:
+        - 8
+        - 15
+        - 16
+
+"mm/GB/Great Bay Temple Green Pipe 1":
+  rooms:
+    - scene: 73
+      room: 12
+      setup: 0
+      slots:
+        - 5
+        - 15
+        - 16
+
+"mm/GB/Great Bay Temple Green Pipe 3":
+  rooms:
+    - scene: 73
+      room: 10
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+
+"mm/ST/Stone Tower Temple Entrance":
+  rooms:
+    - scene: 22
+      room: 0
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 3
+
+"mm/ST/Stone Tower Temple West":
+  rooms:
+    - scene: 22
+      room: 2
+      setup: 0
+      slots:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+
+"mm/ST/Stone Tower Temple West Garden":
+  rooms:
+    - scene: 22
+      room: 2
+      setup: 0
+      slots:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+
+"mm/ST/Stone Tower Temple Under West Garden":
+  rooms:
+    - scene: 22
+      room: 4
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 3
+        - 4
+
+"mm/ST/Stone Tower Temple Under West Garden After Block":
+  rooms:
+    - scene: 22
+      room: 4
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 3
+        - 4
+  rules:
+    - section: locations
+      key: "Stone Tower Temple Under West Garden Lava Chest"
+      expectedRule: "soul_armos && (can_fight || has_explosives)"
+      template: "($ENEMY0)"
+      selectors:
+        ENEMY0:
+          scene: 22
+          room: 4
+          setup: 0
+          slots:
+            - 1
+            - 2
+            - 3
+            - 4
+
+"mm/ST/Stone Tower Temple Center West":
+  rooms:
+    - scene: 22
+      room: 1
+      setup: 0
+      slots:
+        - 10
+        - 11
+
+"mm/ST/Stone Tower Temple Center East":
+  rooms:
+    - scene: 22
+      room: 1
+      setup: 0
+      slots:
+        - 10
+        - 11
+
+"mm/ST/Stone Tower Temple East":
+  rooms:
+    - scene: 22
+      room: 3
+      setup: 0
+      slots:
+        - 9
+        - 18
+        - 19
+
+"mm/ST/Stone Tower Temple East Water":
+  rooms:
+    - scene: 22
+      room: 3
+      setup: 0
+      slots:
+        - 9
+        - 18
+        - 19
+
+"mm/ST/Stone Tower Temple Mirrors Room":
+  rooms:
+    - scene: 22
+      room: 7
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 24
+        - 25
+        - 26
+
+"mm/ST/Stone Tower Temple Wind Room":
+  rooms:
+    - scene: 22
+      room: 9
+      setup: 0
+      slots:
+        - 10
+
+"mm/ST/Stone Tower Temple Before Water Bridge":
+  rooms:
+    - scene: 22
+      room: 8
+      setup: 0
+      slots:
+        - 12
+
+"mm/ST/Stone Tower Temple Water Bridge":
+  rooms:
+    - scene: 22
+      room: 1
+      setup: 0
+      slots:
+        - 10
+        - 11
+  encounters:
+    - source: mm-eyegore-scripted
+      room:
+        scene: 22
+        room: 1
+        setup: 0
+        slots:
+          - 2
+      rules:
+        - section: locations
+          key: "Stone Tower Temple Water Bridge Chest"
+          expectedRule: "can_kill_eyegore_world"
+          template: "$ENEMY"
+
+"mm/IST/Stone Tower Temple Inverted Entrance":
+  rooms:
+    - scene: 22
+      room: 0
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 3
+
+"mm/IST/Stone Tower Temple Inverted East":
+  rooms:
+    - scene: 22
+      room: 3
+      setup: 0
+      slots:
+        - 9
+        - 18
+        - 19
+    - scene: 24
+      room: 3
+      setup: 0
+      slots:
+        - 13
+        - 14
+        - 15
+
+"mm/IST/Stone Tower Temple Inverted East Bridge":
+  rooms:
+    - scene: 22
+      room: 3
+      setup: 0
+      slots:
+        - 9
+        - 18
+        - 19
+    - scene: 24
+      room: 3
+      setup: 0
+      slots:
+        - 13
+        - 14
+        - 15
+
+"mm/IST/Stone Tower Temple Inverted East Ledge":
+  rooms:
+    - scene: 24
+      room: 3
+      setup: 0
+      slots:
+        - 13
+        - 14
+        - 15
+
+"mm/IST/Stone Tower Temple Inverted Wizzrobe Ledge":
+  rooms:
+    - scene: 22
+      room: 4
+      setup: 0
+      slots:
+        - 1
+        - 2
+        - 3
+        - 4
+    - scene: 24
+      room: 2
+      setup: 0
+      slots:
+        - 6
+        - 7
+        - 8
+  encounters:
+    - source: mm-wizrobe-scripted
+      room:
+        scene: 24
+        room: 4
+        setup: 0
+        slots:
+          - 1
+      rules:
+        - section: locations
+          key: "Stone Tower Temple Inverted Wizzrobe Chest"
+          expectedRule: "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_fight || has_arrows)"
+          template: "$ENEMY"
+
+"mm/IST/Stone Tower Temple Inverted Death Armos Maze":
+  rooms:
+    - scene: 22
+      room: 2
+      setup: 0
+      slots:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 6
+        - 7
+    - scene: 24
+      room: 2
+      setup: 0
+      slots:
+        - 6
+        - 7
+        - 8
+
+"mm/IST/Stone Tower Temple Inverted Gomess Corridor":
+  rooms:
+    - scene: 24
+      room: 3
+      setup: 0
+      slots:
+        - 13
+        - 14
+        - 15
+
+"mm/IST/Stone Tower Temple Inverted Center Bridge":
+  rooms:
+    - scene: 22
+      room: 1
+      setup: 0
+      slots:
+        - 10
+        - 11
+  encounters:
+    - source: mm-eyegore-scripted
+      room:
+        scene: 24
+        room: 1
+        setup: 0
+        slots:
+          - 3
+      rules:
+        - section: locations
+          key: "Stone Tower Temple Inverted Giant Mask"
+          expectedRule: "can_kill_eyegore_world"
+          template: "$ENEMY"
+        - section: exits
+          key: "Stone Tower Temple Inverted Pre-Boss"
+          expectedRule: "can_kill_eyegore_world"
+          template: "$ENEMY"
+
+"mm/IST/Stone Tower Temple Inverted Pre-Boss":
+  rooms:
+    - scene: 24
+      room: 8
+      setup: 0
+      slots:
+        - 15
+
+"mm/PF/Pirate Fortress Hookshot Room Upper":
+  rooms:
+    - scene: 35
+      room: 3
+      setup: 0
+      slots:
+        - 0
+
+"mm/PF/Pirate Fortress Hookshot Room Lower":
+  rooms:
+    - scene: 35
+      room: 3
+      setup: 0
+      slots:
+        - 0
+
+"mm/PF/Pirate Fortress Barrel Maze Aquarium":
+  rooms:
+    - scene: 35
+      room: 8
+      setup: 0
+      slots:
+        - 0
+
+"mm/PF/Pirate Fortress Lone Guard Aquarium":
+  rooms:
+    - scene: 35
+      room: 6
+      setup: 0
+      slots:
+        - 0
+
+"mm/PF/Pirate Fortress Treasure Room Aquarium":
+  rooms:
+    - scene: 35
+      room: 13
+      setup: 0
+      slots:
+        - 0
+
+"mm/ACoI/Ancient Castle of Ikana Interior":
+  rooms:
+    - scene: 29
+      room: 1
+      setup: 0
+      slots:
+        - 2
+        - 3
+        - 4
+        - 5
+
+"mm/ACoI/Ancient Castle of Ikana Interior North 2":
+  rooms:
+    - scene: 29
+      room: 4
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+
+"mm/ACoI/Ancient Castle of Ikana Interior North 3":
+  rooms:
+    - scene: 29
+      room: 6
+      setup: 0
+      slots:
+        - 0
+        - 1
+
+"mm/ACoI/Ancient Castle of Ikana South Last":
+  rooms:
+    - scene: 29
+      room: 7
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+
+"mm/BtW/Beneath The Well Near Fountain":
+  rooms:
+    - scene: 75
+      room: 5
+      setup: 0
+      slots:
+        - 2
+
+"mm/BtW/Beneath The Well Keese":
+  rooms:
+    - scene: 75
+      room: 10
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+
+"mm/BtW/Beneath The Well East Section":
+  rooms:
+    - scene: 75
+      room: 1
+      setup: 0
+      slots:
+        - 2
+        - 3
+        - 4
+        - 5
+        - 20
+
+"mm/BtW/Beneath The Well Cow Hall":
+  rooms:
+    - scene: 75
+      room: 3
+      setup: 0
+      slots:
+        - 0
+        - 1
+
+"mm/BtW/Beneath The Well Middle Section":
+  rooms:
+    - scene: 75
+      room: 6
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+
+"mm/BtW/Beneath The Well Skulltulla Room":
+  rooms:
+    - scene: 75
+      room: 8
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+
+"mm/BtW/Beneath The Well Final Hall":
+  rooms:
+    - scene: 75
+      room: 7
+      setup: 0
+      slots:
+        - 1
+        - 4
+        - 5
+
+"mm/SS/Secret Shrine Boss Dinolfos":
+  rooms:
+    - scene: 96
+      room: 2
+      setup: 0
+      slots:
+        - 0
+        - 1
+        - 2
+  clearChecks:
+    "Secret Shrine Dinolfos Chest":
+      - 96/2/0
+
+"mm/OSH/Ocean Spider House Back":
+  rooms:
+    - scene: 40
+      room: 4
+      setup: 0
+      slots:
+        - 0
+    - scene: 40
+      room: 5
+      setup: 0
+      slots:
+        - 1
+        - 2
+
+"mm/Moon/Moon Trial Link Iron Knuckle Fight":
+  rooms:
+    - scene: 102
+      room: 3
+      setup: 0
+      slots:
+        - 1
+  clearChecks:
+    "Moon Trial Link Iron Knuckle Chest":
+      - 102/3/0
+  rules:
+    - section: locations
+      key: "Moon Trial Link Iron Knuckle Chest"
+      expectedRule: "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5)))"
+      template: "($ENEMY0)"
+      selectors:
+        ENEMY0:
+          scene: 102
+          room: 3
+          setup: 0
+          slots:
+            - 1
+    - section: exits
+      key: "Moon Trial Link Rest 2"
+      expectedRule: "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5)))"
+      template: "($ENEMY0)"
+      selectors:
+        ENEMY0:
+          scene: 102
+          room: 3
+          setup: 0
+          slots:
+            - 1
+    - section: exits
+      key: "Moon Trial Link Rest 3"
+      expectedRule: "soul_iron_knuckle && (has_weapon || has_mask_goron || has_bombs || has_bombchu || (has_mask_blast && masks(5))) && ((has_bombchu && (has_arrows || can_use_slingshot)) || short_hook_anywhere)"
+      template: "($ENEMY0) && ((has_bombchu && (has_arrows || can_use_slingshot)) || short_hook_anywhere)"
+      selectors:
+        ENEMY0:
+          scene: 102
+          room: 3
+          setup: 0
+          slots:
+            - 1
+
+"mm_us/DekuPalace/Deku Palace Near JP Grotto Climb Left":
+  rooms:
+    - scene: 43
+      room: 2
+      setup: 0
+      slots:
+        - 23
+        - 24
+
+"mm_jp/DekuPalace/Deku Palace Corner Ledge Middle":
+  rooms:
+    - scene: 43
+      room: 2
+      setup: 0
+      slots:
+        - 23
+        - 24
+
+"mm/WF/Woodfall Temple Boss Key Room":
+  rooms: []
+  encounters:
+    - source: mm-snapper-gekko-scripted
+      room:
+        scene: 27
+        room: 8
+        setup: 0
+        slots:
+          - 0
+      rules:
+        - section: events
+          key: "WOODFALL_TEMPLE_GEKKO"
+          expectedRule: "can_kill_gekko_wft"
+          template: "$ENEMY"
+
+"mm/GB/Great Bay Temple Boss Key Room":
+  rooms: []
+  encounters:
+    - source: mm-big-slime-scripted
+      room:
+        scene: 73
+        room: 5
+        setup: 0
+        slots:
+          - 0
+      rules:
+        - section: events
+          key: "FROG_4"
+          expectedRule: "has_mask_don_gero && can_kill_gekko_gbt"
+          template: "has_mask_don_gero && $ENEMY"
+        - section: exits
+          key: "Great Bay Temple After Boss Key"
+          expectedRule: "can_kill_gekko_gbt"
+          template: "$ENEMY"
+
+"mm/ACoI/Ancient Castle of Ikana Throne Room":
+  rooms: []
+  encounters:
+    - source: mm-ikana-throne-scripted
+      room:
+        scene: 86
+        room: 1
+        setup: 0
+        slots:
+          - 0
+      rules:
+        - section: exits
+          key: "Ancient Castle of Ikana After Boss"
+          expectedRule: "can_kill_igos"
+          template: "$ENEMY"
+
+"mm/ST/Stone Tower Temple Light Arrow Room":
+  rooms: []
+  encounters:
+    - source: mm-garo-master-scripted
+      room:
+        scene: 22
+        room: 10
+        setup: 0
+        slots:
+          - 0
+      rules:
+        - section: locations
+          key: "Stone Tower Temple Light Arrow"
+          expectedRule: "can_kill_garo_master_world"
+          template: "$ENEMY"
+        - section: exits
+          key: "Stone Tower Temple Before Water Bridge"
+          expectedRule: "can_kill_garo_master_world"
+          template: "$ENEMY"
+
+"mm/Moon/Moon Trial Link Garo Fight":
+  rooms: []
+  encounters:
+    - source: mm-garo-master-scripted
+      room:
+        scene: 102
+        room: 2
+        setup: 0
+        slots:
+          - 0
+      rules:
+        - section: locations
+          key: "Moon Trial Link Garo Master Chest"
+          expectedRule: "can_kill_garo_master_world && can_hookshot_short"
+          template: "$ENEMY && can_hookshot_short"
+        - section: exits
+          key: "Moon Trial Link Rest 1"
+          expectedRule: "can_kill_garo_master_world"
+          template: "$ENEMY"
+        - section: exits
+          key: "Moon Trial Link Rest 2"
+          expectedRule: "can_kill_garo_master_world && can_hookshot_short"
+          template: "$ENEMY && can_hookshot_short"
+
+"mm/SS/Secret Shrine Boss Garo Master":
+  rooms: []
+  encounters:
+    - source: mm-garo-master-scripted
+      room:
+        scene: 96
+        room: 5
+        setup: 0
+        slots:
+          - 0
+      rules:
+        - section: events
+          key: "SECRET_SHRINE_GARO"
+          expectedRule: "can_kill_garo_master_shrine"
+          template: "$ENEMY"
+
+"mm/SS/Secret Shrine Boss Wart":
+  rooms: []
+  encounters:
+    - source: mm-wart-scripted
+      room:
+        scene: 96
+        room: 4
+        setup: 0
+        slots:
+          - 0
+      rules:
+        - section: events
+          key: "SECRET_SHRINE_WART"
+          expectedRule: "can_kill_warts_shrine"
+          template: "$ENEMY"
+
+"mm/IST/Stone Tower Temple Inverted Boss Key Room":
+  rooms: []
+  encounters:
+    - source: mm-gomess-scripted
+      room:
+        scene: 24
+        room: 11
+        setup: 0
+        slots:
+          - 0
+      rules:
+        - section: locations
+          key: "Stone Tower Temple Inverted Boss Key"
+          expectedRule: "can_kill_gomess"
+          template: "$ENEMY"
+
+"mm/SS/Secret Shrine Boss Wizzrobe":
+  rooms: []
+  encounters:
+    - source: mm-wizrobe-scripted
+      room:
+        scene: 96
+        room: 3
+        setup: 0
+        slots:
+          - 0
+      rules:
+        - section: events
+          key: "SECRET_SHRINE_WIZZROBE"
+          expectedRule: "soul_enemy(SOUL_ENEMY_WIZZROBE)"
+          template: "$ENEMY"
+
+"mm/IST/Stone Tower Temple Inverted Wizzrobe":
+  rooms: []
+  encounters:
+    - source: mm-wizrobe-scripted
+      room:
+        scene: 24
+        room: 4
+        setup: 0
+        slots:
+          - 1
+      rules:
+        - section: exits
+          key: "Stone Tower Temple Inverted Wizzrobe Ledge"
+          expectedRule: "(soul_enemy(SOUL_ENEMY_WIZZROBE) && can_hookshot_short && (can_fight || has_arrows)) || short_hook_anywhere"
+          template: "($ENEMY && can_hookshot_short) || short_hook_anywhere"
+
+"mm/ACoI/Ancient Castle of Ikana Wizzrobe":
+  rooms: []
+  encounters:
+    - source: mm-wizrobe-scripted
+      room:
+        scene: 29
+        room: 5
+        setup: 0
+        slots:
+          - 0
+      rules:
+        - section: exits
+          key: "Ancient Castle of Ikana Interior South"
+          expectedRule: "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_use_light_arrows || short_hook_anywhere) && (can_fight || has_arrows || deku_stick_fighting)"
+          template: "$ENEMY && (can_use_light_arrows || short_hook_anywhere)"
+        - section: exits
+          key: "Ancient Castle of Ikana South Last"
+          expectedRule: "soul_enemy(SOUL_ENEMY_WIZZROBE) && (can_fight || has_arrows || deku_stick_fighting)"
+          template: "$ENEMY"

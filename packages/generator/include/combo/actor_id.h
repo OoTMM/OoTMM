@@ -497,6 +497,7 @@
 # define ACTOR_EN_M_FIRE1           0x034
 # define ACTOR_EN_M_THUNDER         0x035
 # define ACTOR_BG_BREAKWALL         0x036
+# define ACTOR_CUSTOM_ENEMY_ARENA   0x037
 # define ACTOR_DOOR_WARP1           0x038
 # define ACTOR_OBJ_SYOKUDAI         0x039
 # define ACTOR_ITEM_B_HEART         0x03a

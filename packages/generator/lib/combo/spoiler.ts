@@ -3,7 +3,7 @@ import type { PlayerItem, LogicResult, HintGossipFoolish, HintGossipPath, HintGo
 
 import { sortBy } from 'lodash-es';
 import { ENTRANCES, hintLocations } from '@ootmm/data';
-import { SETTINGS, TRICKS, exportSettings, regionData, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS } from '@ootmm/core';
+import { SETTINGS, TRICKS, exportSettings, regionData, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS, enemyDefinition } from '@ootmm/core';
 import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from './names';
@@ -170,6 +170,22 @@ class SpoilerWriter {
     for (const location of junkLocations) {
       this.writer.write(`${location}`);
     }
+    this.writer.unindent('');
+  }
+
+  private writeEnemies() {
+    if (!this.logic.worlds.some(w => w.enemyPlan.length)) return;
+    this.writer.indent('Enemy Replacement Plans');
+    for (let i = 0; i < this.worlds; ++i) {
+      if (this.isMulti) this.writer.indent(`World ${i + 1}`);
+      for (const p of this.logic.worlds[i].enemyPlan) {
+        const source = enemyDefinition(p.source);
+        const target = enemyDefinition(p.target);
+        this.writer.write(`${source.game.toUpperCase()} ${source.name} -> ${target.name}`);
+      }
+      if (this.isMulti) this.writer.unindent('');
+    }
+    this.writer.write('Unsafe placements and replacements exceeding object memory remain vanilla.');
     this.writer.unindent('');
   }
 
@@ -622,6 +638,7 @@ class SpoilerWriter {
     this.writePreCompleted();
     this.writeEntrances();
     this.writeSongEvents();
+    this.writeEnemies();
     this.writeHints();
     this.writePaths();
     this.writePlando();

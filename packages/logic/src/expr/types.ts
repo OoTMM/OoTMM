@@ -59,6 +59,8 @@ export type ExprState = {
   areaData: AreaData;
   settings: Settings;
   world: ExprStateWorld;
+
+  evalCache?: ExprEvalCache;
 };
 
 export type ExprDependencies = {
@@ -91,4 +93,9 @@ export type AreaData = {
   mmTime2: number;
   flagsOn: number;
   flagsOff: number;
+};
+
+export type ExprEvalCache = {
+  run: number;
+  successes: number[];
 };

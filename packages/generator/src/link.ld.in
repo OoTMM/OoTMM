@@ -31,6 +31,8 @@ SECTIONS
     SORT(*)(.bss*);
   }
 
+  __combo_payload_end = .;
+
   .MIPS.abiflags : {
     SORT(*)(.MIPS.abiflags*);
   }

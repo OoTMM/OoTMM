@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/enemy.h>
 #include <assets/mm/objects/gameplay_keep.h>
 #include <combo/custom_animations.h>
 #include <combo/custom.h>
@@ -12,6 +13,7 @@
 #include <combo/dpad.h>
 #include <combo/global.h>
 #include <combo/effect.h>
+#include <combo/sfx.h>
 #include "../actors.h"
 #include <combo/mm/boomerang.h>
 #include <combo/mm/adultmask.h>
@@ -283,6 +285,98 @@ static void Player_SyncCustomSwordSpecialMaskB(
     }
 }
 
+extern void comboEnemySfxGeneral(u16, Vec3f*, u8, f32*, f32*, s8*);
+
+void comboMmDarkLinkControllerVoice(Actor* actor, u16 sfxId)
+{
+    static f32 frequency = 0.7950898f;
+    static s8 reverb = 35;
+
+    if (actor->id == 0xc33 && (sfxId - 0x6800u <= 2 || sfxId == 0x6814))
+        comboEnemySfxGeneral(sfxId, &actor->projectedPos, 4, &frequency, &gSfxDefaultFreqAndVolScale, &reverb);
+}
+
+static s32 Player_DarkLinkHostileLockOn(Player* player)
+{
+    Actor* target = player->lockOnActor;
+
+    int darkLinkTarget = player->actor.id == 0xc33 && target && target->id == ACTOR_PLAYER;
+    if (target && (darkLinkTarget ||
+                   (target->flags & (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE)) ==
+                       (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE)))
+    {
+        player->stateFlags3 |= PLAYER_STATE3_MM_HOSTILE_LOCK_ON;
+        if (darkLinkTarget)
+            player->stateFlags1 &= ~PLAYER_STATE1_MM_FRIENDLY_ACTOR_FOCUS;
+        return 1;
+    }
+    if (player->stateFlags3 & PLAYER_STATE3_MM_HOSTILE_LOCK_ON)
+    {
+        player->stateFlags3 &= ~PLAYER_STATE3_MM_HOSTILE_LOCK_ON;
+        if (player->linearVelocity == 0.f)
+            player->currentYaw = player->actor.shape.rot.y;
+    }
+    return 0;
+}
+PATCH_FUNC(0x8082fb68, Player_DarkLinkHostileLockOn);
+
+static PlayState* sDarkLinkPerchPlay;
+static PlayerActionFunc sDarkLinkPerchAction;
+static u32 sDarkLinkPerchFrame;
+
+static s32 Player_DarkLinkHazardGuard(Player* player, PlayState* play)
+{
+    if (player->actor.id == 0xc33 && player != GET_PLAYER(play))
+    {
+        player->unk_D6A = 0;
+        if ((Player_GetHeight(player) - 8.f < player->unk_AB8 * player->actor.scale.y) ||
+            (player->actor.bgCheckFlags & BGCHECKFLAG_CRUSHED) ||
+            *(s32*)OverlayAddr(0x80862b08) == 9 ||
+            (player->stateFlags2 & PLAYER_STATE2_MM_80000000))
+        {
+            player->stateFlags2 |= PLAYER_STATE2_MM_80000000;
+            return 1;
+        }
+    }
+    return ((s32(*)(Player*, PlayState*))OverlayAddr(0x80834600))(player, play);
+}
+
+PATCH_CALL(0x80845778, Player_DarkLinkHazardGuard);
+
+int comboMmDarkLinkPerch(PlayState* play, int hold)
+{
+    Player* player = GET_PLAYER(play);
+    if (hold)
+    {
+        if (sDarkLinkPerchPlay == play && play->gameplayFrames - sDarkLinkPerchFrame <= 1 &&
+            player->actionFunc != sDarkLinkPerchAction)
+        {
+            sDarkLinkPerchPlay = NULL;
+            return 0;
+        }
+        sDarkLinkPerchPlay = play;
+        sDarkLinkPerchAction = player->actionFunc;
+        sDarkLinkPerchFrame = play->gameplayFrames;
+        return 1;
+    }
+    else if (sDarkLinkPerchPlay == play)
+    {
+        sDarkLinkPerchPlay = NULL;
+    }
+    return 0;
+}
+
+static void Player_DarkLinkPerch(Player* player, PlayState* play)
+{
+    f32 speed = player->skelAnime.playSpeed;
+    player->stateFlags2 |= PLAYER_STATE2_MM_20 | PLAYER_STATE2_MM_40;
+    player->linearVelocity = player->actor.speed = 0.f;
+    player->skelAnime.curFrame = 2.f;
+    player->skelAnime.playSpeed = 0.f;
+    PlayerAnimation_Update(play, &player->skelAnime);
+    player->skelAnime.playSpeed = speed;
+}
+
 void Player_UpdateWrapper(Player* this, PlayState* play)
 {
     ArrowCycle_Handle(this, play);
@@ -296,7 +390,26 @@ void Player_UpdateWrapper(Player* this, PlayState* play)
         Inventory_UpdateDeitySwordEquip(play);
     }
 
-    Player_Update(this, play);
+    Actor* hand = this->actor.parent;
+    int heldByHand = hand && hand->id == 0xca5 && (this->stateFlags2 & PLAYER_STATE2_MM_80);
+    if (sDarkLinkPerchPlay == play && play->gameplayFrames - sDarkLinkPerchFrame <= 1 &&
+        this->actionFunc == sDarkLinkPerchAction)
+    {
+        this->actionFunc = Player_DarkLinkPerch;
+        Player_Update(this, play);
+        if (this->actionFunc == Player_DarkLinkPerch)
+            this->actionFunc = sDarkLinkPerchAction;
+    }
+    else
+    {
+        Player_Update(this, play);
+    }
+    if (heldByHand && this->actor.parent == hand && !(this->stateFlags2 & PLAYER_STATE2_MM_80))
+    {
+        this->actor.parent = NULL;
+        if (this->invincibilityTimer > -30)
+            this->invincibilityTimer = -30;
+    }
     PlayerVoice_UpdateHumanAgeRouting(this);
     if (this->transformation == MM_PLAYER_FORM_HUMAN)
     {
@@ -3155,6 +3268,9 @@ void Player_SetMeleeWeaponInfo(Player* this, PlayerMeleeWeaponAnimation meleeWea
 
     func_80833728(this, 0, dmgInfo->dmgFlags, damage);
     func_80833728(this, 1, dmgInfo->dmgFlags, damage);
+    u32 sourceFlags = comboEnemyMeleeFlags(this, dmgInfo->dmgFlags, strong, meleeWeaponAnim >= PLAYER_MWA_SPIN_ATTACK_1H);
+    comboEnemyAttackRecord(&this->actor, &this->meleeWeaponQuads[0].elem, sourceFlags);
+    comboEnemyAttackRecord(&this->actor, &this->meleeWeaponQuads[1].elem, sourceFlags);
 }
 
 PATCH_FUNC(0x8083375C, Player_SetMeleeWeaponInfo)

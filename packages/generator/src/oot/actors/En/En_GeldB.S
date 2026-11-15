@@ -1,6 +1,7 @@
 #include <combo.h>
 
 /* Use our hook */
+.globl EnGeldB_Caught_Trampoline
 EnGeldB_Caught_Trampoline:
   HOOK_CALL EnGe1_AfterCaught
 

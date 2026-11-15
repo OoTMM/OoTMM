@@ -424,6 +424,16 @@ void EnItem00_InitGiveItem(Actor_EnItem00* this, PlayState* play, s32* getItemId
 
 void EnItem00_UpdateGiveItem(Actor_EnItem00* this, PlayState* play, s32* getItemId)
 {
+    if (this->enemySourceQuantity && this->actor.params == ITEM00_ARROWS_10)
+    {
+        comboAddArrowsMm(5);
+        return;
+    }
+    if (this->enemySourceQuantity && this->actor.params == ITEM00_NUT)
+    {
+        *getItemId = GI_MM_NUTS_5;
+        return;
+    }
     switch (this->actor.params)
     {
     case ITEM00_RUPEE_GREEN:

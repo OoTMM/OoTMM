@@ -5,6 +5,7 @@ import type { SongEventSongs } from '../song-events';
 
 import { cloneDeep, isEqual } from 'lodash-es';
 import { SETTINGS } from './data';
+import { normalizeEnemyShuffleWeights } from '../enemies';
 import { MM_AGE_REQ_ITEMS } from '../mm-age-requirements';
 import { DEFAULT_TRICKS, TRICKS } from './tricks';
 import { DEFAULT_SPECIAL_COND, DEFAULT_SPECIAL_CONDS, SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from './special-conds';
@@ -12,20 +13,20 @@ import { patchArray } from './patch';
 import { SETTINGS_DEFAULT_HINTS } from './hints';
 import { SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, type PlandoSongEvent, SONG_EVENT_SONG_IDS } from '../song-events';
 
-export const DEFAULT_SETTINGS: Settings = { ...SETTINGS.map(s => {
-  if (s.type === 'set') {
-    return {[s.key]: { type: s.default }};
-  } else {
-    return {[s.key]: s.default};
-  }
-}).reduce((a, b) => ({...a, ...b} as any), {}),
+const DEFAULT_BASE_SETTINGS = Object.fromEntries(SETTINGS.map(s =>
+  [s.key, s.type === 'set' ? { type: s.default } : s.default])) as SettingsBase;
+
+export const DEFAULT_SETTINGS: Settings = {
+  ...DEFAULT_BASE_SETTINGS,
   startingItems: {},
   junkLocations: [] as string[],
+  enemyShuffleExcluded: [],
+  enemyShuffleWeights: {},
   tricks: [ ...DEFAULT_TRICKS ],
   specialConds: { ...DEFAULT_SPECIAL_CONDS },
-  plando: { locations: {}, entrances: {}, songEvents: { oot: {}, mm: {} } },
+  plando: { locations: {}, entrances: {} as Settings['plando']['entrances'], songEvents: { oot: {}, mm: {} } },
   hints: [ ...SETTINGS_DEFAULT_HINTS ],
-} as Settings;
+};
 
 const sortUnique = <T>(arr: T[]): T[] => {
   return [ ...new Set(arr.sort()) ];
@@ -39,6 +40,11 @@ function validateSettingsStep(settings: Settings): Settings {
 
   /* Validate junk locations */
   s.junkLocations = sortUnique(s.junkLocations);
+  s.enemyShuffleWeights = sortCopyObject(normalizeEnemyShuffleWeights(Object.fromEntries(Object.entries(s.enemyShuffleWeights ?? {}).filter(
+    ([key, value]) => /^(oot|mm):[a-z0-9_-]+$/.test(key) &&
+      typeof value === 'number' && Number.isFinite(value) && value > 0 && value <= 1000,
+  ))));
+  s.enemyShuffleExcluded = sortUnique((s.enemyShuffleExcluded ?? []).filter(key => typeof key === 'string'));
 
   /* Validate starting items */
   const newStartingItems: Settings['startingItems'] = {};
@@ -249,6 +255,14 @@ export function makeSettings(arg: PartialDeep<Settings>): Settings {
     result.junkLocations = sortCopyArray(arg.junkLocations);
   }
 
+  if (arg.enemyShuffleWeights) {
+    result.enemyShuffleWeights = { ...arg.enemyShuffleWeights } as Settings['enemyShuffleWeights'];
+  }
+
+  if (Array.isArray(arg.enemyShuffleExcluded)) {
+    result.enemyShuffleExcluded = sortCopyArray(arg.enemyShuffleExcluded);
+  }
+
   /* Apply the tricks */
   if (arg.tricks !== undefined && Array.isArray(arg.tricks)) {
     result.tricks = sortCopyArray(arg.tricks);
@@ -266,6 +280,7 @@ export function makeSettings(arg: PartialDeep<Settings>): Settings {
 
   /* Apply plando */
   if (arg.plando !== undefined) {
+    if (arg.plando.enemyTargets !== undefined) result.plando.enemyTargets = { ...arg.plando.enemyTargets };
     if (arg.plando.locations !== undefined) {
       result.plando.locations = sortCopyObject({ ...arg.plando.locations }) as Settings['plando']['locations'];
     }
@@ -339,6 +354,13 @@ export function mergeSettings(settings: Settings, patch: SettingsPatch): Setting
   if (patch.junkLocations !== undefined)
     s.junkLocations = patchArray(s.junkLocations, patch.junkLocations);
 
+  if (patch.enemyShuffleWeights !== undefined) {
+    s.enemyShuffleWeights = { ...patch.enemyShuffleWeights } as Settings['enemyShuffleWeights'];
+  }
+
+  if (patch.enemyShuffleExcluded !== undefined)
+    s.enemyShuffleExcluded = patchArray(s.enemyShuffleExcluded, patch.enemyShuffleExcluded);
+
   /* Apply tricks */
   if (patch.tricks !== undefined)
     s.tricks = patchArray(s.tricks, patch.tricks);
@@ -355,6 +377,7 @@ export function mergeSettings(settings: Settings, patch: SettingsPatch): Setting
 
   /* Apply plando */
   if (patch.plando !== undefined) {
+    if (patch.plando.enemyTargets !== undefined) s.plando.enemyTargets = patch.plando.enemyTargets === null ? {} : applyPartialKeyValue(s.plando.enemyTargets ?? {}, patch.plando.enemyTargets);
     s.plando.locations = applyKeyValue(s.plando.locations, patch.plando.locations);
     s.plando.entrances = applyKeyValue(s.plando.entrances, patch.plando.entrances);
 

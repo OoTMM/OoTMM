@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/global.h>
+#include <combo/enemy.h>
 #include <combo/actor.h>
 
 u8 gCurrentSpawnActorNum = 0xff;
@@ -55,6 +56,7 @@ void ParseSceneRoomHeaders_ActorsList(PlayState* play, void* cmd)
 
     /* Forward */
     _ParseSceneRoomHeaders_ActorsList(play, cmd);
+    comboEnemyEncounterBeginRoom(play, cmd, play->setupActorList, play->numSetupActors);
 }
 
 static void ZeroActor(Actor* this, int size)
@@ -64,3 +66,16 @@ static void ZeroActor(Actor* this, int size)
 }
 
 PATCH_CALL(0x800baf54, ZeroActor);
+
+PATCH_CALL(0x800b9430, comboEnemySpawnRoomEntry);
+
+static void SpawnSetupActorsNativeFirst(PlayState* play, ActorContext* ctx)
+{
+    int batch = play->numSetupActors > 0;
+    if (batch)
+        comboEnemyBeginSpawnBatch();
+    ((void (*)(PlayState*, ActorContext*))0x800b9334)(play, ctx);
+    if (batch)
+        comboEnemyEndSpawnBatch(ctx, play);
+}
+PATCH_CALL(0x800b97e8, SpawnSetupActorsNativeFirst);

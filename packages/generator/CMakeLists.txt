@@ -55,6 +55,18 @@ function(build game)
   # Overlays
   set(OVL_OBJECTS "")
   set(OVL_NAMES "")
+  set(shared_mm_overlays Standalone_GaroMaster Standalone_Gomess Standalone_Igos Standalone_Keeta Standalone_Slime Standalone_Snapper Standalone_Wart Standalone_Wiz En_Tanron1 En_Tanron3 En_Estone)
+  set(Standalone_GaroMaster_SOURCE "src/oot/enemy_ports/generated/mm_en_jso2.c")
+  set(Standalone_Gomess_SOURCE "src/oot/enemy_ports/generated/mm_en_death.c")
+  set(Standalone_Igos_SOURCE "src/oot/enemy_ports/generated/mm_en_knight.c")
+  set(Standalone_Keeta_SOURCE "src/oot/enemy_ports/generated/mm_en_bsb.c")
+  set(Standalone_Slime_SOURCE "src/oot/enemy_ports/generated/mm_en_bigslime.c")
+  set(Standalone_Snapper_SOURCE "src/oot/enemy_ports/generated/mm_en_pametfrog.c")
+  set(Standalone_Wiz_SOURCE "src/oot/enemy_ports/generated/mm_en_wiz.c")
+  set(Standalone_Wart_SOURCE "src/oot/enemy_ports/generated/mm_boss_04.c")
+  set(En_Tanron1_SOURCE "src/oot/enemy_ports/generated/mm_en_tanron1.c")
+  set(En_Tanron3_SOURCE "src/oot/enemy_ports/generated/mm_en_tanron3.c")
+  set(En_Estone_SOURCE "src/oot/enemy_ports/generated/mm_en_estone.c")
   foreach(ovl_category actors effects gamemodes)
     # Extract the list of OVLs for the current category
     set(ovls "")
@@ -63,11 +75,18 @@ function(build game)
       get_filename_component(ovl_name "${ovl_dir}" NAME)
       list(APPEND ovls "${ovl_name}")
     endforeach()
+    if(game STREQUAL "mm" AND ovl_category STREQUAL "actors")
+      list(APPEND ovls ${shared_mm_overlays})
+    endif()
     list(REMOVE_DUPLICATES ovls)
 
     # Process the OVLs
     foreach(ovl ${ovls})
       file(GLOB_RECURSE OVL_SOURCES "src/${game}/ovl/${ovl_category}/${ovl}/*.c" "src/${game}/ovl/${ovl_category}/${ovl}/*.S" "src/common/ovl/${ovl_category}/${ovl}/*.c" "src/common/ovl/${ovl_category}/${ovl}/*.S")
+
+      if(game STREQUAL "mm" AND DEFINED ${ovl}_SOURCE)
+        set(OVL_SOURCES "${${ovl}_SOURCE}")
+      endif()
 
       # Compile the OVL into objects
       set(target_name "${game}_ovl_${ovl}")
@@ -88,7 +107,7 @@ function(build game)
           --rename-section .bss=.${ovl}.bss
           --rename-section .meta=.${ovl}.meta
           "${target_file}"
-        DEPENDS $<TARGET_OBJECTS:${target_name}> "${LDSCRIPT_OVL}"
+        DEPENDS ${target_name} $<TARGET_OBJECTS:${target_name}> "${LDSCRIPT_OVL}"
         COMMENT "Merging objects for ${ovl}"
         VERBATIM
         COMMAND_EXPAND_LISTS
@@ -97,6 +116,36 @@ function(build game)
       list(APPEND OVL_OBJECTS ${target_file})
       list(APPEND OVL_NAMES ${ovl})
     endforeach()
+  endforeach()
+
+  file(GLOB NATIVE_PORT_SOURCES "src/${game}/enemy_ports/generated/oot_*.c" "src/${game}/enemy_ports/generated/mm_*.c")
+  list(SORT NATIVE_PORT_SOURCES)
+  foreach(port_source ${NATIVE_PORT_SOURCES})
+    get_filename_component(port_stem "${port_source}" NAME_WE)
+    set(ovl "Native_Enemy_${port_stem}")
+    set(target_name "${game}_native_${port_stem}")
+    add_library(${target_name} OBJECT "${port_source}")
+    target_compile_options(${target_name} PRIVATE "-fno-merge-constants" "-mno-explicit-relocs" "-mno-split-addresses")
+    target_compile_definitions(${target_name} PRIVATE ${game_define})
+    target_include_directories(${target_name} PRIVATE ${OVL_INCLUDE_DIRS})
+    set(target_file "${CMAKE_BINARY_DIR}/${game}_ovl_${ovl}.o")
+    add_custom_command(
+      OUTPUT "${target_file}"
+      COMMAND "${ARCH}-ld" -r -o "${target_file}" "-T${LDSCRIPT_OVL}" $<TARGET_OBJECTS:${target_name}>
+      COMMAND "${ARCH}-objcopy"
+        --rename-section .text=.${ovl}.text
+        --rename-section .data=.${ovl}.data
+        --rename-section .rodata=.${ovl}.rodata
+        --rename-section .bss=.${ovl}.bss
+        --rename-section .meta=.${ovl}.meta
+        "${target_file}"
+      DEPENDS ${target_name} $<TARGET_OBJECTS:${target_name}> "${LDSCRIPT_OVL}"
+      COMMENT "Preparing native enemy overlay ${port_stem}"
+      VERBATIM
+      COMMAND_EXPAND_LISTS
+    )
+    list(APPEND OVL_OBJECTS ${target_file})
+    list(APPEND OVL_NAMES ${ovl})
   endforeach()
 
   # Linker script
@@ -125,6 +174,10 @@ function(build game)
   file(GLOB_RECURSE SOURCES "src/${game}/*.c" "src/${game}/*.S" "src/common/*.c" "src/common/*.S" "build/src/${game}/*.c" "build/src/${game}/*.S" "build/src/common/*.c" "build/src/common/*.S")
   file(GLOB_RECURSE SOURCES_OVL "src/${game}/ovl/*.c" "src/common/ovl/*.c")
   list(REMOVE_ITEM SOURCES ${SOURCES_OVL})
+  list(REMOVE_ITEM SOURCES ${NATIVE_PORT_SOURCES})
+  if(game STREQUAL "mm")
+    list(REMOVE_ITEM SOURCES "${CMAKE_SOURCE_DIR}/src/mm/enemy_ports/stalfos.c")
+  endif()
 
   add_executable(${game} ${SOURCES} ${OVL_OBJECTS})
   set_target_properties(${game} PROPERTIES LINK_DEPENDS "${ldscript}")

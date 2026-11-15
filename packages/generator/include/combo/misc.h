@@ -145,7 +145,7 @@ typedef struct SkelAnime {
     /* 0x3E */ Vec3s baseTransl;  /* Base modelspace translation. */
 } SkelAnime; /* size = 0x44 */
 
-typedef struct {
+typedef struct ActorEntry {
     /* 0x00 */ s16   id;
     /* 0x02 */ Vec3s pos;
     /* 0x08 */ Vec3s rot;

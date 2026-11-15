@@ -107,7 +107,7 @@ static u8 foreignSampleTable(u8 sampleTableId)
 {
     if (sampleTableId == 0xff)
         return 0xff;
-    return sampleTableId + 8;
+    return sampleTableId ^ 8;
 }
 
 static u8 customSampleTable(u8 sampleTableId)
@@ -134,11 +134,14 @@ static u8 foreignBank(u8 bankId)
         return bankId + 0x30;
 }
 
+int EnemyAudio_Init(AudioTableEntry* sequence);
+
 void AudioCustom_Init(void)
 {
     AudioTableEntry* e;
     ALIGNED(16) u8 banks[0x80];
     u16* tmp;
+    int foreignEnemyAudio;
 
     /* Init the tables */
     gCustomAudioTables.seq = allocTable(0x100);
@@ -185,6 +188,8 @@ void AudioCustom_Init(void)
             e->data[1] = customSampleTable(e->data[1]);
         }
     }
+
+    foreignEnemyAudio = EnemyAudio_Init(gCustomAudioTables.seq->entries);
 
     /* Resolve virtual sequence addresses (for custom music) */
     for (int i = 0; i < 256; ++i)
@@ -258,6 +263,14 @@ void AudioCustom_Init(void)
     gCustomAudioSeqBanks[1024] = 2;
     gCustomAudioSeqBanks[1025] = 1;
     gCustomAudioSeqBanks[1026] = 0;
+    if (foreignEnemyAudio)
+    {
+        gCustomAudioSeqBanks[1024] = 4;
+        gCustomAudioSeqBanks[1025] = 0x31;
+        gCustomAudioSeqBanks[1026] = 0x30;
+        gCustomAudioSeqBanks[1027] = 1;
+        gCustomAudioSeqBanks[1028] = 0;
+    }
 }
 
 static void Audio_UpdateMusicName(PlayState* play)

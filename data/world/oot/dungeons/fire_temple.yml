@@ -31,9 +31,9 @@
   dungeon: Fire
   exits:
     "Fire Temple Boss Key Loop Start": "true"
-    "Fire Temple Boss Key Loop Flare Dancer": "true"
+    "Fire Temple Boss Key Loop Flare Dancer": "can_clear_flying_floor_tiles"
   locations:
-    "Fire Temple GS Hammer Statues": "gs"
+    "Fire Temple GS Hammer Statues": "gs && can_clear_flying_floor_tiles"
 
 "Fire Temple Boss Key Loop Flare Dancer":
   dungeon: Fire

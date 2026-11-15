@@ -1,0 +1,223 @@
+#ifndef COMBO_ENEMY_NATIVE_TYPES_MM_BOSS_05_H
+#define COMBO_ENEMY_NATIVE_TYPES_MM_BOSS_05_H
+
+#include <combo.h>
+
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_BACK_FOOT
+#define BIO_DEKU_BABA_HEAD_LIMB_BACK_FOOT 6
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_BACK_LOWER_LEG
+#define BIO_DEKU_BABA_HEAD_LIMB_BACK_LOWER_LEG 5
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_BACK_UPPER_LEG
+#define BIO_DEKU_BABA_HEAD_LIMB_BACK_UPPER_LEG 4
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_BODY
+#define BIO_DEKU_BABA_HEAD_LIMB_BODY 1
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_LEAVES
+#define BIO_DEKU_BABA_HEAD_LIMB_LEAVES 19
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_LEFT_EYE
+#define BIO_DEKU_BABA_HEAD_LIMB_LEFT_EYE 12
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_LEFT_FOOT
+#define BIO_DEKU_BABA_HEAD_LIMB_LEFT_FOOT 9
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_LEFT_LOWER_EYESTALK
+#define BIO_DEKU_BABA_HEAD_LIMB_LEFT_LOWER_EYESTALK 10
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_LEFT_LOWER_LEG
+#define BIO_DEKU_BABA_HEAD_LIMB_LEFT_LOWER_LEG 8
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_LEFT_UPPER_EYESTALK
+#define BIO_DEKU_BABA_HEAD_LIMB_LEFT_UPPER_EYESTALK 11
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_LEFT_UPPER_LEG
+#define BIO_DEKU_BABA_HEAD_LIMB_LEFT_UPPER_LEG 7
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_LOWER_JAW
+#define BIO_DEKU_BABA_HEAD_LIMB_LOWER_JAW 2
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_MAX
+#define BIO_DEKU_BABA_HEAD_LIMB_MAX 20
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_NONE
+#define BIO_DEKU_BABA_HEAD_LIMB_NONE 0
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_RIGHT_EYE
+#define BIO_DEKU_BABA_HEAD_LIMB_RIGHT_EYE 15
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_RIGHT_FOOT
+#define BIO_DEKU_BABA_HEAD_LIMB_RIGHT_FOOT 18
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_RIGHT_LOWER_EYESTALK
+#define BIO_DEKU_BABA_HEAD_LIMB_RIGHT_LOWER_EYESTALK 13
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_RIGHT_LOWER_LEG
+#define BIO_DEKU_BABA_HEAD_LIMB_RIGHT_LOWER_LEG 17
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_RIGHT_UPPER_EYESTALK
+#define BIO_DEKU_BABA_HEAD_LIMB_RIGHT_UPPER_EYESTALK 14
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_RIGHT_UPPER_LEG
+#define BIO_DEKU_BABA_HEAD_LIMB_RIGHT_UPPER_LEG 16
+#endif
+#ifndef BIO_DEKU_BABA_HEAD_LIMB_UPPER_JAW
+#define BIO_DEKU_BABA_HEAD_LIMB_UPPER_JAW 3
+#endif
+#ifndef BIO_DEKU_BABA_LILY_PAD_LIMB_LEAF
+#define BIO_DEKU_BABA_LILY_PAD_LIMB_LEAF 9
+#endif
+#ifndef BIO_DEKU_BABA_LILY_PAD_LIMB_LEFT_LOWER_ARM
+#define BIO_DEKU_BABA_LILY_PAD_LIMB_LEFT_LOWER_ARM 6
+#endif
+#ifndef BIO_DEKU_BABA_LILY_PAD_LIMB_LEFT_UPPER_ARM
+#define BIO_DEKU_BABA_LILY_PAD_LIMB_LEFT_UPPER_ARM 5
+#endif
+#ifndef BIO_DEKU_BABA_LILY_PAD_LIMB_LOWER_STEM
+#define BIO_DEKU_BABA_LILY_PAD_LIMB_LOWER_STEM 4
+#endif
+#ifndef BIO_DEKU_BABA_LILY_PAD_LIMB_MAX
+#define BIO_DEKU_BABA_LILY_PAD_LIMB_MAX 10
+#endif
+#ifndef BIO_DEKU_BABA_LILY_PAD_LIMB_MIDDLE_STEM
+#define BIO_DEKU_BABA_LILY_PAD_LIMB_MIDDLE_STEM 3
+#endif
+#ifndef BIO_DEKU_BABA_LILY_PAD_LIMB_NONE
+#define BIO_DEKU_BABA_LILY_PAD_LIMB_NONE 0
+#endif
+#ifndef BIO_DEKU_BABA_LILY_PAD_LIMB_RIGHT_LOWER_ARM
+#define BIO_DEKU_BABA_LILY_PAD_LIMB_RIGHT_LOWER_ARM 8
+#endif
+#ifndef BIO_DEKU_BABA_LILY_PAD_LIMB_RIGHT_UPPER_ARM
+#define BIO_DEKU_BABA_LILY_PAD_LIMB_RIGHT_UPPER_ARM 7
+#endif
+#ifndef BIO_DEKU_BABA_LILY_PAD_LIMB_ROOTS
+#define BIO_DEKU_BABA_LILY_PAD_LIMB_ROOTS 1
+#endif
+#ifndef BIO_DEKU_BABA_LILY_PAD_LIMB_UPPER_STEM
+#define BIO_DEKU_BABA_LILY_PAD_LIMB_UPPER_STEM 2
+#endif
+#ifndef COMBO_ENEMY_ASSET_ENUM_BioDekuBabaHeadLimb
+#define COMBO_ENEMY_ASSET_ENUM_BioDekuBabaHeadLimb
+typedef s32 BioDekuBabaHeadLimb;
+#endif
+#ifndef COMBO_ENEMY_ASSET_ENUM_BioDekuBabaLilyPadLimb
+#define COMBO_ENEMY_ASSET_ENUM_BioDekuBabaLilyPadLimb
+typedef s32 BioDekuBabaLilyPadLimb;
+#endif
+struct Boss05;
+
+typedef void (*Boss05ActionFunc)(struct Boss05*, PlayState*);
+
+typedef enum BioDekuBabaType {
+    BIO_BABA_TYPE_LILY_PAD_WITH_HEAD,
+    BIO_BABA_TYPE_NO_LEAF_LILY_PAD_WITH_HEAD,
+    BIO_BABA_TYPE_LILY_PAD,
+    BIO_BABA_TYPE_FALLING_HEAD,
+    BIO_BABA_TYPE_WALKING_HEAD,
+    BIO_BABA_TYPE_FRAGMENT_BASE = 10,
+    BIO_BABA_TYPE_FRAGMENT_LOWER_JAW = BIO_BABA_TYPE_FRAGMENT_BASE,
+    BIO_BABA_TYPE_FRAGMENT_UPPER_JAW,
+    BIO_BABA_TYPE_FRAGMENT_BODY,
+    BIO_BABA_TYPE_FRAGMENT_BACK_UPPER_LEG,
+    BIO_BABA_TYPE_FRAGMENT_BACK_LOWER_LEG,
+    BIO_BABA_TYPE_FRAGMENT_LEFT_UPPER_LEG,
+    BIO_BABA_TYPE_FRAGMENT_LEFT_LOWER_LEG,
+    BIO_BABA_TYPE_FRAGMENT_LEFT_LOWER_EYESTALK,
+    BIO_BABA_TYPE_FRAGMENT_LEFT_UPPER_EYESTALK,
+    BIO_BABA_TYPE_FRAGMENT_RIGHT_LOWER_EYESTALK,
+    BIO_BABA_TYPE_FRAGMENT_RIGHT_UPPER_EYESTALK,
+    BIO_BABA_TYPE_FRAGMENT_RIGHT_UPPER_LEG,
+    BIO_BABA_TYPE_FRAGMENT_RIGHT_LOWER_LEG,
+    BIO_BABA_TYPE_FRAGMENT_LEAVES,
+    BIO_BABA_TYPE_MAX
+} BioDekuBabaType;
+
+typedef enum BioDekuBabaBodyPart {
+    BIO_BABA_BODYPART_HEAD,
+    BIO_BABA_BODYPART_MAX
+} BioDekuBabaBodyPart;
+
+typedef enum BioDekuBabaHeadCollider {
+    BIO_BABA_HEAD_COLLIDER_HEAD,
+    BIO_BABA_HEAD_COLLIDER_MAX
+} BioDekuBabaHeadCollider;
+
+typedef enum BioDekuBabaLilyPadCollider {
+    BIO_BABA_LILY_PAD_COLLIDER_UPPER_STEM,
+    BIO_BABA_LILY_PAD_COLLIDER_MIDDLE_STEM,
+    BIO_BABA_LILY_PAD_COLLIDER_MAX
+} BioDekuBabaLilyPadCollider;
+
+typedef enum BioDekuBabaLilyPadWithHeadLimbRotIndex {
+    BIO_BABA_LILY_PAD_WITH_HEAD_LIMB_ROT_INDEX_NONE = -1,
+    BIO_BABA_LILY_PAD_WITH_HEAD_LIMB_ROT_INDEX_UPPER_STEM,
+    BIO_BABA_LILY_PAD_WITH_HEAD_LIMB_ROT_INDEX_MIDDLE_STEM,
+    BIO_BABA_LILY_PAD_WITH_HEAD_LIMB_ROT_INDEX_LOWER_STEM,
+    BIO_BABA_LILY_PAD_WITH_HEAD_LIMB_ROT_INDEX_LEFT_UPPER_ARM,
+    BIO_BABA_LILY_PAD_WITH_HEAD_LIMB_ROT_INDEX_LEFT_LOWER_ARM,
+    BIO_BABA_LILY_PAD_WITH_HEAD_LIMB_ROT_INDEX_RIGHT_UPPER_ARM,
+    BIO_BABA_LILY_PAD_WITH_HEAD_LIMB_ROT_INDEX_RIGHT_LOWER_ARM,
+    BIO_BABA_LILY_PAD_WITH_HEAD_LIMB_ROT_INDEX_MAX
+} BioDekuBabaLilyPadWithHeadLimbRotIndex;
+
+#define BIO_BABA_GET_TYPE(thisx) ((thisx)->params)
+#define BIO_BABA_GET_FRAGMENT_INDEX(thisx) ((thisx)->params - BIO_BABA_TYPE_FRAGMENT_BASE)
+#define BIO_BABA_FORCE_DETACH_TIMER(thisx) ((thisx)->world.rot.z)
+
+typedef struct Boss05 {
+    DynaPolyActor dyna;
+    union {
+                    u8 lilyPadWithHeadAttackState;
+                    u8 fragmentState;
+                };
+    s16 flipAttackFrameCounter;
+    s16 frameCounter;
+    s16 timers[3];
+    s16 forceDetachTimer;
+    s16 damagedTimer;
+    s16 damagedFlashTimer;
+    Boss05ActionFunc actionFunc;
+    u8 lilyPadWithHeadMovementState;
+    s16 lilyPadRotY;
+    s16 lilyPadRotX;
+    s16 drawDmgEffTimer;
+    f32 drawDmgEffScale;
+    f32 drawDmgEffFrozenSteamScale;
+    f32 drawDmgEffAlpha;
+    u8 drawDmgEffState;
+    u8 drawDmgEffType;
+    Vec3f bodyPartsPos[BIO_BABA_BODYPART_MAX];
+    f32 fallingHeadLilyPadLimbScale;
+    s16 lilyPadWithHeadStemRotX;
+    Vec3s lilyPadWithHeadLimbRot[BIO_BABA_LILY_PAD_WITH_HEAD_LIMB_ROT_INDEX_MAX];
+    ColliderJntSph lilyPadCollider;
+    ColliderJntSphElement lilyPadColliderElements[BIO_BABA_LILY_PAD_COLLIDER_MAX];
+    SkelAnime lilyPadSkelAnime;
+    Vec3s lilyPadJointTable[BIO_DEKU_BABA_LILY_PAD_LIMB_MAX];
+    Vec3s lilyPadMorphTable[BIO_DEKU_BABA_LILY_PAD_LIMB_MAX];
+    union {
+                    Vec3f headPos;
+                    Vec3f fragmentPos;
+                };
+    Vec3s headRot;
+    f32 knockbackMagnitude;
+    Vec3f knockbackVelocity;
+    s16 knockbackAngle;
+    Vec3f walkTargetPos;
+    f32 walkAngularVelocityY;
+    f32 lowerJawScaleXZ;
+    f32 headBodyScale;
+    f32 headLimbScale;
+    ColliderJntSph headCollider;
+    ColliderJntSphElement headColliderElements[BIO_BABA_HEAD_COLLIDER_MAX];
+    SkelAnime headSkelAnime;
+    Vec3s headJointTable[BIO_DEKU_BABA_HEAD_LIMB_MAX];
+    Vec3s headMorphTable[BIO_DEKU_BABA_HEAD_LIMB_MAX];
+    f32 animEndFrame;
+    Vec3s fragmentAngularVelocity;
+} Boss05;
+
+#endif

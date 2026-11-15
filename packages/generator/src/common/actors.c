@@ -1,10 +1,11 @@
 #include <combo.h>
+#include <combo/enemy.h>
 #include <combo/global.h>
 #include <combo/actors.h>
 
 void SetRoomClearHook(PlayState* play, u32 flag)
 {
-    if (!g.roomEnemyLackSoul)
+    if (!g.roomEnemyLackSoul && !comboEnemyEncounterPending(flag))
         Flags_SetClear(play, flag);
 }
 

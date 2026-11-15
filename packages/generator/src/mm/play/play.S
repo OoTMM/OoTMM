@@ -71,3 +71,36 @@ PATCH_START 0x80173324
   j Play_FastInit
    move a0,v0
 PATCH_END
+
+.set push
+.set noreorder
+PATCH_START 0x8082dfd0
+  .word 0x55c0fffc
+PATCH_END
+
+PATCH_START 0x8082dfc4
+  j Player_DarkLinkVoiceReturn
+PATCH_END
+
+Player_DarkLinkVoiceReturn:
+  move a1,a3
+  j comboMmDarkLinkControllerVoice
+   addiu sp,sp,0x18
+
+PATCH_START 0x8082ed34
+  .word 0x11c00005
+   addiu at,zero,1
+  j Player_DarkLinkIdle
+PATCH_END
+
+Player_DarkLinkIdle:
+  addiu at,zero,0xc33
+  beq t6,at,1f
+   addiu v0,v0,-0x1bf0
+  jr ra
+   nop
+1:
+  lui v0,0x0400
+  jr ra
+   ori v0,v0,0xd468
+.set pop

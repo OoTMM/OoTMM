@@ -145,7 +145,7 @@
   exits:
     "WARP_SONGS": "true"
   locations:
-    "Stone Tower Temple Inverted Boss Key": "soul_enemy(SOUL_ENEMY_GOMESS) && can_use_light_arrows && can_fight" # Mercy fight requirements so you dont need to rely on magic and arrow drops from bats if you only have Light Arrows
+    "Stone Tower Temple Inverted Boss Key": "can_kill_gomess" # Mercy fight requirements so you dont need to rely on magic and arrow drops from bats if you only have Light Arrows
     "Stone Tower Temple Inverted Pot Gomess 1": "true"
     "Stone Tower Temple Inverted Pot Gomess 2": "true"
     "Stone Tower Temple Inverted Pot Gomess 3": "true"
@@ -170,13 +170,13 @@
 "Stone Tower Temple Inverted Center Bridge":
   dungeon: IST
   exits:
-    "Stone Tower Temple Inverted Pre-Boss": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron || can_hammer)"
+    "Stone Tower Temple Inverted Pre-Boss": "can_kill_eyegore_world"
     "Stone Tower Temple Inverted Gomess Corridor": "(trick(MM_ISTT_EYEGORE) && has_explosives) || has_mask_goron || has_hover_boots || short_hook_anywhere"
     "Stone Tower Temple Inverted Center": "(trick(MM_ISTT_EYEGORE) && has_explosives) || has_mask_goron || has_hover_boots || short_hook_anywhere"
     "Stone Tower Temple Inverted Entrance Top": "small_keys_st(4)"
     "WARP_SONGS": "true"
   locations:
-    "Stone Tower Temple Inverted Giant Mask": "soul_enemy(SOUL_ENEMY_EYEGORE) && (has_explosives || has_arrows || can_hookshot_short || has_mask_zora || has_mask_goron || can_hammer)"
+    "Stone Tower Temple Inverted Giant Mask": "can_kill_eyegore_world"
 
 "Stone Tower Temple Inverted Pre-Boss":
   dungeon: IST

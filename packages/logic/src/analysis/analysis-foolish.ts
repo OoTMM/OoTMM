@@ -58,6 +58,7 @@ class LogicPassAnalysisFoolish {
     let allowed = new Set(zz.allowed);
     const forbidden = new Set(zz.forbidden);
     let lastBanished: Location | null = null;
+    let witness: PathfinderState | null = null;
 
     for (;;) {
       if (locations.size === 0) {
@@ -67,7 +68,10 @@ class LogicPassAnalysisFoolish {
       allowed.delete(loc);
       locations.delete(loc);
       forbidden.add(loc);
+
+      if (witness && !witness.locations.has(loc)) continue;
       const pathfinderState = this.pathfinder.run(null, { recursive: true, items: this.state.items, forbiddenLocations: forbidden, stopAtGoal: true });
+      if (pathfinderState.goal) witness = pathfinderState;
       if (!pathfinderState.goal) {
         if (!this.conditionallyRequiredLocations.has(loc)) {
           this.markAsSometimesRequired(loc);

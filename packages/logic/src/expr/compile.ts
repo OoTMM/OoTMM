@@ -81,67 +81,60 @@ export const exprRestrictionsOr = (exprs: ExprResult[]): ExprRestrictions => {
 };
 
 function evalOr(exprs: Expr[], state: ExprState, deps: ExprDependencies) {
-  const results: ExprResult[] = [];
-  let result = false;
 
+  let restrictions: ExprRestrictions | undefined;
   const indexItems = deps.items.length;
   const indexEvents = deps.events.length;
 
   for (const e of exprs) {
     const r = e.eval(state, deps);
-    results.push(r);
-    if (r.result) {
-      result = true;
-      if (!r.restrictions) {
-        deps.items = deps.items.slice(0, indexItems);
-        deps.events = deps.events.slice(0, indexEvents);
-        return RESULT_TRUE;
-      }
-    }
-  }
-
-  if (result) {
-    const restrictions = exprRestrictionsOr(results);
-    if (isDefaultRestrictions(restrictions)) {
+    if (!r.result) continue;
+    if (!r.restrictions) {
       deps.items = deps.items.slice(0, indexItems);
       deps.events = deps.events.slice(0, indexEvents);
       return RESULT_TRUE;
-    } else {
-      return { result: true, restrictions };
     }
-  } else {
-    return RESULT_FALSE;
-  }
-}
-
-function evalAnd(exprs: Expr[], state: ExprState, deps: ExprDependencies) {
-  const results: ExprResult[] = [];
-  const indexItems = deps.items.length;
-  const indexEvents = deps.events.length;
-
-  for (const e of exprs) {
-    const r = e.eval(state, deps);
-    results.push(r);
-
-    /* Early exit */
-    if (!r.result) {
-      return RESULT_FALSE;
-    }
+    restrictions ??= maxRestrictions();
+    restrictions.ootTime = (restrictions.ootTime & r.restrictions.ootTime) >>> 0;
+    restrictions.mmTime = (restrictions.mmTime & r.restrictions.mmTime) >>> 0;
+    restrictions.mmTime2 = (restrictions.mmTime2 & r.restrictions.mmTime2) >>> 0;
+    restrictions.flagsOn = (restrictions.flagsOn & r.restrictions.flagsOn) >>> 0;
+    restrictions.flagsOff = (restrictions.flagsOff & r.restrictions.flagsOff) >>> 0;
   }
 
-  const restrictions = exprRestrictionsAnd(results);
-  /* Check for a contradiction (a restriction that prevents everything) */
-  if (isRestrictionImpossible(restrictions)) {
-    return RESULT_FALSE;
-  }
-
+  if (!restrictions) return RESULT_FALSE;
   if (isDefaultRestrictions(restrictions)) {
     deps.items = deps.items.slice(0, indexItems);
     deps.events = deps.events.slice(0, indexEvents);
     return RESULT_TRUE;
-  } else {
-    return { result: true, restrictions };
   }
+  return { result: true, restrictions };
+}
+
+function evalAnd(exprs: Expr[], state: ExprState, deps: ExprDependencies) {
+  let restrictions: ExprRestrictions | undefined;
+  const indexItems = deps.items.length;
+  const indexEvents = deps.events.length;
+
+  for (const e of exprs) {
+    const r = e.eval(state, deps);
+    if (!r.result) return RESULT_FALSE;
+    if (!r.restrictions) continue;
+    restrictions ??= defaultRestrictions();
+    restrictions.ootTime = (restrictions.ootTime | r.restrictions.ootTime) >>> 0;
+    restrictions.mmTime = (restrictions.mmTime | r.restrictions.mmTime) >>> 0;
+    restrictions.mmTime2 = (restrictions.mmTime2 | r.restrictions.mmTime2) >>> 0;
+    restrictions.flagsOn = (restrictions.flagsOn | r.restrictions.flagsOn) >>> 0;
+    restrictions.flagsOff = (restrictions.flagsOff | r.restrictions.flagsOff) >>> 0;
+  }
+
+  if (restrictions && isRestrictionImpossible(restrictions)) return RESULT_FALSE;
+  if (!restrictions || isDefaultRestrictions(restrictions)) {
+    deps.items = deps.items.slice(0, indexItems);
+    deps.events = deps.events.slice(0, indexEvents);
+    return RESULT_TRUE;
+  }
+  return { result: true, restrictions };
 }
 
 const itemCount = (state: ExprState, item: Item): number => state.items.get(item) || 0;
@@ -301,6 +294,27 @@ function makeEvalFunc(expr: ExprNode): ExprFunc {
   }
 }
 
+const exprAreaMasks: number[] = [];
+function areaMask(expr: ExprNode): number {
+  switch (expr.type) {
+    case 'time-oot': return 1;
+    case 'time-mm': return 2;
+    case 'flag-on': case 'flag-off': return 4;
+    case 'and': case 'or': return expr.exprs.reduce((mask, child) => mask | exprAreaMasks[child.id], 0);
+    default: return 0;
+  }
+}
+function cachedEval(id: number, evaluate: ExprFunc): ExprFunc {
+  return (state, deps) => {
+    const cache = state.evalCache;
+    if (cache && cache.successes[id] === cache.run) return RESULT_TRUE;
+    const result = evaluate(state, deps);
+
+    if (cache && result.result && !result.restrictions) cache.successes[id] = cache.run;
+    return result;
+  };
+}
+
 let nextExprId = 0;
 const exprMemoIds: Record<string, number> = {};
 const exprMemo: Expr[] = [];
@@ -314,7 +328,12 @@ export function compileExpr(expr: ExprNode): Expr {
   id = nextExprId++;
   exprMemoIds[key] = id;
 
-  const e = Object.assign({}, expr, { id, eval: makeEvalFunc(expr) });
+  const mask = exprAreaMasks[id] = areaMask(expr);
+  const evaluate = makeEvalFunc(expr);
+  const e = Object.assign({}, expr, {
+    id,
+    eval: !mask && (expr.type === 'and' || expr.type === 'or') ? cachedEval(id, evaluate) : evaluate
+  });
   Object.freeze(e);
   exprMemo[id] = e;
   return e;

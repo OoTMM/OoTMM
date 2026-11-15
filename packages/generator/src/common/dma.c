@@ -39,6 +39,47 @@ static int dmaLookupNative(DmaEntry* buf, u32 vromAddr)
     return 0;
 }
 
+extern u32 __osDisableInt(void);
+extern void __osRestoreInt(u32);
+
+#define ALT_DMA_CACHE_COUNT 8
+static struct {
+    DmaEntry entry;
+    u32 table;
+    u32 count;
+    u32 flag;
+} sAltDmaCache[ALT_DMA_CACHE_COUNT];
+static u32 sAltDmaCacheNext;
+
+static int dmaLookupAltCached(DmaEntry* out, u32 table, u32 count, u32 flag, u32 vrom)
+{
+    u32 mask = __osDisableInt();
+    for (u32 i = 0; i < ALT_DMA_CACHE_COUNT; ++i)
+    {
+        if (sAltDmaCache[i].count == count && count && sAltDmaCache[i].table == table &&
+            sAltDmaCache[i].flag == flag && vrom >= sAltDmaCache[i].entry.vstart &&
+            vrom < sAltDmaCache[i].entry.vend)
+        {
+            *out = sAltDmaCache[i].entry;
+            __osRestoreInt(mask);
+            return 1;
+        }
+    }
+    __osRestoreInt(mask);
+    return 0;
+}
+
+static void dmaLookupAltRemember(const DmaEntry* entry, u32 table, u32 count, u32 flag)
+{
+    u32 mask = __osDisableInt();
+    u32 slot = sAltDmaCacheNext++ % ALT_DMA_CACHE_COUNT;
+    sAltDmaCache[slot].entry = *entry;
+    sAltDmaCache[slot].table = table;
+    sAltDmaCache[slot].count = count;
+    sAltDmaCache[slot].flag = flag;
+    __osRestoreInt(mask);
+}
+
 static int dmaLookupAlt(DmaEntry* buf, u32 dmaAddr, u32 dmaCount, u32 dmaFlag, u32 vromAddr)
 {
     const DmaEntry* e;
@@ -46,6 +87,10 @@ static int dmaLookupAlt(DmaEntry* buf, u32 dmaAddr, u32 dmaCount, u32 dmaFlag, u
     u32 rawVromAddr;
     u32 offset;
 
+    if (dmaLookupAltCached(buf, dmaAddr, dmaCount, dmaFlag, vromAddr))
+        return 1;
+    if (!dmaCount)
+        return 0;
     rawVromAddr = vromAddr & ~dmaFlag;
     offset = 0;
     for (;;)
@@ -62,6 +107,7 @@ static int dmaLookupAlt(DmaEntry* buf, u32 dmaAddr, u32 dmaCount, u32 dmaFlag, u
                 memcpy(buf, e, sizeof(DmaEntry));
                 buf->vstart |= dmaFlag;
                 buf->vend |= dmaFlag;
+                dmaLookupAltRemember(buf, dmaAddr, dmaCount, dmaFlag);
                 return 1;
             }
         }
@@ -100,6 +146,30 @@ void comboDmaLookupForeignId(DmaEntry* dst, int id)
     dst->vend |= VROM_FOREIGN_OFFSET;
 }
 
+static void dmaReadRaw(u32 source, void* destination, u32 size)
+{
+    ALIGNED(16) u8 scratch[256];
+    u8* out = destination;
+    if (!size)
+        return;
+    if (!(((u32)destination & 7) | (source & 1) | (size & 1)))
+    {
+        DMARomToRam(source | PI_DOM1_ADDR2, destination, size);
+        return;
+    }
+    while (size)
+    {
+        u32 prefix = source & 7;
+        u32 amount = MIN(size, sizeof(scratch) - prefix);
+        u32 transfer = (prefix + amount + 1) & ~1u;
+        DMARomToRam((source - prefix) | PI_DOM1_ADDR2, scratch, transfer);
+        memcpy(out, scratch + prefix, amount);
+        source += amount;
+        out += amount;
+        size -= amount;
+    }
+}
+
 void DmaManagerRunRequest(const DmaRequest* dma)
 {
     DmaEntry e;
@@ -117,7 +187,7 @@ void DmaManagerRunRequest(const DmaRequest* dma)
     {
         /* File is not compressed - load and allow partial loading */
         offset = dma->vromAddr - e.vstart;
-        DMARomToRam((e.pstart + offset) | PI_DOM1_ADDR2, dma->dramAddr, dma->size);
+        dmaReadRaw(e.pstart + offset, dma->dramAddr, dma->size);
     }
     else
     {

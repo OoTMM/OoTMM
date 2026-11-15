@@ -207,8 +207,8 @@
     "Dodongo Cavern Room After Upper Lizalfos": "event(DC_MQ_UPPER_LIZALFOS_CLEAR_FROM_UPPER) || event(DC_MQ_UPPER_LIZALFOS_CLEAR_FROM_LOWER)"
     #"Dodongo Cavern Lower Lizalfos": "has_explosives_or_hammer || hookshot_anywhere || climb_anywhere"
   events:
-    DC_MQ_UPPER_LIZALFOS_CLEAR_FROM_UPPER: "soul_lizalfos_dinolfos && (can_use_sticks || has_weapon || can_use_slingshot)"
-    DC_MQ_LOWER_LIZALFOS_CLEAR_FROM_UPPER: "(time_travel_at_will && (has_explosives_or_hammer || hookshot_anywhere || climb_anywhere)) && soul_lizalfos_dinolfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+    DC_MQ_UPPER_LIZALFOS_CLEAR_FROM_UPPER: "soul_lizalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+    DC_MQ_LOWER_LIZALFOS_CLEAR_FROM_UPPER: "(time_travel_at_will && (has_explosives_or_hammer || hookshot_anywhere || climb_anywhere)) && soul_lizalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
   locations:
     "MQ Dodongo Cavern GS Upper Lizalfos": "gs && (has_explosives_or_hammer || (climb_anywhere && can_damage_skull) || longshot_anywhere)"
     "MQ Dodongo Cavern Pot Miniboss 1": "true"
@@ -265,8 +265,8 @@
     "Dodongo Cavern Poe Room": "event(DC_MQ_LOWER_LIZALFOS_CLEAR_FROM_UPPER) || event(DC_MQ_LOWER_LIZALFOS_CLEAR_FROM_LOWER)"
     #"Dodongo Cavern Upper Lizalfos": "climb_anywhere || longshot_anywhere"
   events:
-    DC_MQ_LOWER_LIZALFOS_CLEAR_FROM_LOWER: "soul_lizalfos_dinolfos && (can_use_sticks || has_weapon || can_use_slingshot)"
-    DC_MQ_UPPER_LIZALFOS_CLEAR_FROM_LOWER: "((climb_anywhere || longshot_anywhere) && time_travel_at_will) && soul_lizalfos_dinolfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+    DC_MQ_LOWER_LIZALFOS_CLEAR_FROM_LOWER: "soul_lizalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
+    DC_MQ_UPPER_LIZALFOS_CLEAR_FROM_LOWER: "((climb_anywhere || longshot_anywhere) && time_travel_at_will) && soul_lizalfos && (can_use_sticks || has_weapon || can_use_slingshot)"
   locations:
     "MQ Dodongo Cavern Heart Lizalfos Room": "true"
     "MQ Dodongo Cavern GS Upper Lizalfos": "gs && (longshot_anywhere || (climb_anywhere && can_damage_skull))" #In Upper section, putting it here too because of the lizalfos event won't trigger when starting in opposite section.

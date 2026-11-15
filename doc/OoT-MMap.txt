@@ -2,7 +2,9 @@ OoT
 
 0x80000000 - 0x803fffff: Vanilla
 0x80400000 - 0x804xxxxx: Payload
-0x80600000 - 0x8067ffff: Extended Audio Heap
+0x80480000 - 0x8057ffff: Optional OoT native arena supplement (1 MiB, shuffle-only; existing enemy budget plus gameplay reserve)
+0x80580000 - 0x805fffff: Optional private gameplay object pool (512 KiB, shuffle-only; song/effect and equipment models)
+0x80600000 - 0x806fffff: Extended Audio Heap
 0x80700000 - 0x807fffff: Custom Heap
 
 ===

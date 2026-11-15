@@ -1,0 +1,2047 @@
+export const ENEMY_GOLD_SOURCES = [
+  {
+    'key': 'oot-gold-00-001',
+    'game': 'oot',
+    'scene': 0,
+    'reward': 1,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 12, 'offset': 38568216, 'actorId': 149, 'params': 33026, 'raw': '0095fee7fcd1fe4c0000000000008102', 'spawnParams': 33026 },
+    ],
+    'location': 'Deku Tree GS Basement Gate',
+  },
+  {
+    'key': 'oot-gold-00-002',
+    'game': 'oot',
+    'scene': 0,
+    'reward': 2,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 15, 'offset': 38568264, 'actorId': 149, 'params': 33028, 'raw': '0095005ffd37ffd50000d3e900008104', 'spawnParams': 33028 },
+    ],
+    'location': 'Deku Tree GS Basement Vines',
+  },
+  {
+    'key': 'oot-gold-00-000',
+    'game': 'oot',
+    'scene': 0,
+    'reward': 0,
+    'slots': [
+      { 'mq': false, 'room': 8, 'setup': 0, 'slot': 1, 'offset': 38768744, 'actorId': 149, 'params': 33025, 'raw': '0095f5effd8efe650000800000008101', 'spawnParams': 33025 },
+    ],
+    'location': 'Deku Tree GS Basement Back Room',
+  },
+  {
+    'key': 'oot-gold-00-003',
+    'game': 'oot',
+    'scene': 0,
+    'reward': 3,
+    'slots': [
+      { 'mq': false, 'room': 10, 'setup': 0, 'slot': 9, 'offset': 38813928, 'actorId': 149, 'params': 33032, 'raw': '0095fbc7036201f50000800000008108', 'spawnParams': 33032 },
+    ],
+    'location': 'Deku Tree GS Compass',
+  },
+  {
+    'key': 'oot-gold-01-009',
+    'game': 'oot',
+    'scene': 1,
+    'reward': 9,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 11, 'offset': 32784656, 'actorId': 149, 'params': 33282, 'raw': '0095085400dcfd330000000000008202', 'spawnParams': 33282 },
+    ],
+    'location': 'Dodongo Cavern GS Scarecrow',
+  },
+  {
+    'key': 'oot-gold-01-008',
+    'game': 'oot',
+    'scene': 1,
+    'reward': 8,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 19, 'offset': 32825724, 'actorId': 149, 'params': 33281, 'raw': '0095f83002abfb180000000000008201', 'spawnParams': 33281 },
+    ],
+    'location': 'Dodongo Cavern GS Stairs Vines',
+  },
+  {
+    'key': 'oot-gold-01-00a',
+    'game': 'oot',
+    'scene': 1,
+    'reward': 10,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 21, 'offset': 32825756, 'actorId': 149, 'params': 33284, 'raw': '0095f853027bf7f50000000000008204', 'spawnParams': 33284 },
+    ],
+    'location': 'Dodongo Cavern GS Stairs Top',
+  },
+  {
+    'key': 'oot-gold-01-00c',
+    'game': 'oot',
+    'scene': 1,
+    'reward': 12,
+    'slots': [
+      { 'mq': false, 'room': 11, 'setup': 0, 'slot': 5, 'offset': 33149084, 'actorId': 149, 'params': 33296, 'raw': '00950a01003f027a0000800000008210', 'spawnParams': 33296 },
+    ],
+    'location': 'Dodongo Cavern GS Side Room',
+  },
+  {
+    'key': 'oot-gold-01-00b',
+    'game': 'oot',
+    'scene': 1,
+    'reward': 11,
+    'slots': [
+      { 'mq': false, 'room': 14, 'setup': 0, 'slot': 1, 'offset': 33210464, 'actorId': 149, 'params': 33288, 'raw': '009505c30080ed7d0000000000008208', 'spawnParams': 33288 },
+    ],
+    'location': 'Dodongo Cavern GS Near Boss',
+  },
+  {
+    'key': 'oot-gold-02-010',
+    'game': 'oot',
+    'scene': 2,
+    'reward': 16,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 6, 'offset': 41324748, 'actorId': 149, 'params': 33537, 'raw': '0095ffacfc2ff1b70000000000008301', 'spawnParams': 33537 },
+    ],
+    'location': 'Jabu-Jabu GS Bottom Lower',
+  },
+  {
+    'key': 'oot-gold-02-011',
+    'game': 'oot',
+    'scene': 2,
+    'reward': 17,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 7, 'offset': 41324764, 'actorId': 149, 'params': 33538, 'raw': '0095febbfc63f24b00002b6100008302', 'spawnParams': 33538 },
+    ],
+    'location': 'Jabu-Jabu GS Bottom Upper',
+  },
+  {
+    'key': 'oot-gold-02-012',
+    'game': 'oot',
+    'scene': 2,
+    'reward': 18,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 7, 'offset': 41378012, 'actorId': 149, 'params': 33540, 'raw': '00950668feeefa1f00005e9400008304', 'spawnParams': 33540 },
+    ],
+    'location': 'Jabu-Jabu GS Near Boss',
+  },
+  {
+    'key': 'oot-gold-02-013',
+    'game': 'oot',
+    'scene': 2,
+    'reward': 19,
+    'slots': [
+      { 'mq': false, 'room': 14, 'setup': 0, 'slot': 6, 'offset': 41537740, 'actorId': 149, 'params': 33544, 'raw': '00950321fb97f6b40000400000008308', 'spawnParams': 33544 },
+    ],
+    'location': 'Jabu-Jabu GS Water Switch',
+  },
+  {
+    'key': 'oot-gold-03-019',
+    'game': 'oot',
+    'scene': 3,
+    'reward': 25,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 2, 'offset': 37638260, 'actorId': 149, 'params': 33794, 'raw': '009501c4042202820000c00000008402', 'spawnParams': 33794 },
+    ],
+    'location': 'Forest Temple GS Entrance',
+  },
+  {
+    'key': 'oot-gold-03-01b',
+    'game': 'oot',
+    'scene': 3,
+    'reward': 27,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 4, 'offset': 37720220, 'actorId': 149, 'params': 33800, 'raw': '009501c50259f68c0000c00000008408', 'spawnParams': 33800 },
+    ],
+    'location': 'Forest Temple GS Main',
+  },
+  {
+    'key': 'oot-gold-03-018',
+    'game': 'oot',
+    'scene': 3,
+    'reward': 24,
+    'slots': [
+      { 'mq': false, 'room': 7, 'setup': 0, 'slot': 6, 'offset': 37875896, 'actorId': 149, 'params': 33793, 'raw': '009505fd01bcf5210000c00000008401', 'spawnParams': 33793 },
+    ],
+    'location': 'Forest Temple GS Garden East',
+  },
+  {
+    'key': 'oot-gold-03-01a',
+    'game': 'oot',
+    'scene': 3,
+    'reward': 26,
+    'slots': [
+      { 'mq': false, 'room': 8, 'setup': 0, 'slot': 6, 'offset': 37953720, 'actorId': 149, 'params': 33796, 'raw': '0095fb9d0310f4280000000000008404', 'spawnParams': 33796 },
+    ],
+    'location': 'Forest Temple GS Garden West',
+  },
+  {
+    'key': 'oot-gold-03-01c',
+    'game': 'oot',
+    'scene': 3,
+    'reward': 28,
+    'slots': [
+      { 'mq': false, 'room': 17, 'setup': 0, 'slot': 3, 'offset': 38297732, 'actorId': 149, 'params': 33808, 'raw': '0095fe65fdadfb540000200000008410', 'spawnParams': 33808 },
+    ],
+    'location': 'Forest Temple GS Antichamber',
+  },
+  {
+    'key': 'oot-gold-04-022',
+    'game': 'oot',
+    'scene': 4,
+    'reward': 34,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 17, 'offset': 36843876, 'actorId': 149, 'params': 34052, 'raw': '009508960b43fb57ff4a000000008504', 'spawnParams': 34052 },
+    ],
+    'location': 'Fire Temple GS Maze',
+  },
+  {
+    'key': 'oot-gold-04-024',
+    'game': 'oot',
+    'scene': 4,
+    'reward': 36,
+    'slots': [
+      { 'mq': false, 'room': 7, 'setup': 0, 'slot': 0, 'offset': 36917332, 'actorId': 149, 'params': 34064, 'raw': '0095068010fbfcec0000c00000008510', 'spawnParams': 34064 },
+    ],
+    'location': 'Fire Temple GS Scarecrow Wall',
+  },
+  {
+    'key': 'oot-gold-04-023',
+    'game': 'oot',
+    'scene': 4,
+    'reward': 35,
+    'slots': [
+      { 'mq': false, 'room': 8, 'setup': 0, 'slot': 1, 'offset': 36933732, 'actorId': 149, 'params': 34056, 'raw': '009506c01179ff190000e00000008508', 'spawnParams': 34056 },
+    ],
+    'location': 'Fire Temple GS Scarecrow Top',
+  },
+  {
+    'key': 'oot-gold-04-021',
+    'game': 'oot',
+    'scene': 4,
+    'reward': 33,
+    'slots': [
+      { 'mq': false, 'room': 18, 'setup': 0, 'slot': 6, 'offset': 37306552, 'actorId': 149, 'params': 34050, 'raw': '009501520056f9d80000000000008502', 'spawnParams': 34050 },
+    ],
+    'location': 'Fire Temple GS Hammer Statues',
+  },
+  {
+    'key': 'oot-gold-04-020',
+    'game': 'oot',
+    'scene': 4,
+    'reward': 32,
+    'slots': [
+      { 'mq': false, 'room': 19, 'setup': 0, 'slot': 9, 'offset': 37322984, 'actorId': 149, 'params': 34049, 'raw': '0095032a0155f9320000400000008501', 'spawnParams': 34049 },
+    ],
+    'location': 'Fire Temple GS Lava Side Room',
+  },
+  {
+    'key': 'oot-gold-05-02a',
+    'game': 'oot',
+    'scene': 5,
+    'reward': 42,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 3, 'offset': 39731336, 'actorId': 149, 'params': 34308, 'raw': '0095feed03d3fe9f0000000000008604', 'spawnParams': 34308 },
+    ],
+    'location': 'Water Temple GS Center',
+  },
+  {
+    'key': 'oot-gold-05-028',
+    'game': 'oot',
+    'scene': 5,
+    'reward': 40,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 4, 'offset': 39800984, 'actorId': 149, 'params': 34305, 'raw': '0095f6f9019203580000400000008601', 'spawnParams': 34305 },
+    ],
+    'location': 'Water Temple GS Cage',
+  },
+  {
+    'key': 'oot-gold-05-029',
+    'game': 'oot',
+    'scene': 5,
+    'reward': 41,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 7, 'offset': 39854280, 'actorId': 149, 'params': 34306, 'raw': '0095f9380388fe370000000000008602', 'spawnParams': 34306 },
+    ],
+    'location': 'Water Temple GS Large Pit',
+  },
+  {
+    'key': 'oot-gold-05-02b',
+    'game': 'oot',
+    'scene': 5,
+    'reward': 43,
+    'slots': [
+      { 'mq': false, 'room': 12, 'setup': 0, 'slot': 11, 'offset': 40108300, 'actorId': 149, 'params': 34312, 'raw': '0095fb6500a5f7400000400000008608', 'spawnParams': 34312 },
+    ],
+    'location': 'Water Temple GS Waterfalls',
+  },
+  {
+    'key': 'oot-gold-05-02c',
+    'game': 'oot',
+    'scene': 5,
+    'reward': 44,
+    'slots': [
+      { 'mq': false, 'room': 21, 'setup': 0, 'slot': 10, 'offset': 40321280, 'actorId': 149, 'params': 34320, 'raw': '0095f719015df2730000000000008610', 'spawnParams': 34320 },
+    ],
+    'location': 'Water Temple GS River',
+  },
+  {
+    'key': 'oot-gold-06-034',
+    'game': 'oot',
+    'scene': 6,
+    'reward': 52,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 7, 'offset': 45166788, 'actorId': 149, 'params': 34576, 'raw': '0095fea30097fbf14000000000008710', 'spawnParams': 34576 },
+    ],
+    'location': 'Spirit Temple GS Child Fence',
+  },
+  {
+    'key': 'oot-gold-06-033',
+    'game': 'oot',
+    'scene': 6,
+    'reward': 51,
+    'slots': [
+      { 'mq': false, 'room': 4, 'setup': 0, 'slot': 6, 'offset': 45207732, 'actorId': 149, 'params': 34568, 'raw': '0095fba001bafb164000400000008708', 'spawnParams': 34568 },
+    ],
+    'location': 'Spirit Temple GS Child Climb',
+  },
+  {
+    'key': 'oot-gold-06-032',
+    'game': 'oot',
+    'scene': 6,
+    'reward': 50,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 19, 'offset': 45240712, 'actorId': 149, 'params': 34564, 'raw': '0095fd8b035cf9ed4000400000008704', 'spawnParams': 34564 },
+    ],
+    'location': 'Spirit Temple GS Statue',
+  },
+  {
+    'key': 'oot-gold-06-030',
+    'game': 'oot',
+    'scene': 6,
+    'reward': 48,
+    'slots': [
+      { 'mq': false, 'room': 9, 'setup': 0, 'slot': 0, 'offset': 45420620, 'actorId': 149, 'params': 34561, 'raw': '0095f95d043001f60000000000008701', 'spawnParams': 34561 },
+    ],
+    'location': 'Spirit Temple GS Iron Knuckle',
+  },
+  {
+    'key': 'oot-gold-06-031',
+    'game': 'oot',
+    'scene': 6,
+    'reward': 49,
+    'slots': [
+      { 'mq': false, 'room': 13, 'setup': 0, 'slot': 0, 'offset': 45502544, 'actorId': 149, 'params': 34562, 'raw': '009504eb0014fbc64000400000008702', 'spawnParams': 34562 },
+    ],
+    'location': 'Spirit Temple GS Boulders',
+  },
+  {
+    'key': 'oot-gold-07-039',
+    'game': 'oot',
+    'scene': 7,
+    'reward': 57,
+    'slots': [
+      { 'mq': false, 'room': 10, 'setup': 0, 'slot': 1, 'offset': 41947236, 'actorId': 149, 'params': 34818, 'raw': '00950302fb080fe2c000400000008802', 'spawnParams': 34818 },
+    ],
+    'location': 'Shadow Temple GS Falling Spikes',
+  },
+  {
+    'key': 'oot-gold-07-03a',
+    'game': 'oot',
+    'scene': 7,
+    'reward': 58,
+    'slots': [
+      { 'mq': false, 'room': 12, 'setup': 0, 'slot': 0, 'offset': 41996372, 'actorId': 149, 'params': 34820, 'raw': '0095e8fefb5cf9cf4000400000008804', 'spawnParams': 34820 },
+    ],
+    'location': 'Shadow Temple GS Triple Skull Pot',
+  },
+  {
+    'key': 'oot-gold-07-038',
+    'game': 'oot',
+    'scene': 7,
+    'reward': 56,
+    'slots': [
+      { 'mq': false, 'room': 14, 'setup': 0, 'slot': 4, 'offset': 42025108, 'actorId': 149, 'params': 34817, 'raw': '00950517faea043a4000400000008801', 'spawnParams': 34817 },
+    ],
+    'location': 'Shadow Temple GS Skull Pot',
+  },
+  {
+    'key': 'oot-gold-07-03b',
+    'game': 'oot',
+    'scene': 7,
+    'reward': 59,
+    'slots': [
+      { 'mq': false, 'room': 16, 'setup': 0, 'slot': 6, 'offset': 42082492, 'actorId': 149, 'params': 34824, 'raw': '0095176bfbf908514000c00000008808', 'spawnParams': 34824 },
+    ],
+    'location': 'Shadow Temple GS Invisible Scythe',
+  },
+  {
+    'key': 'oot-gold-07-03c',
+    'game': 'oot',
+    'scene': 7,
+    'reward': 60,
+    'slots': [
+      { 'mq': false, 'room': 21, 'setup': 0, 'slot': 11, 'offset': 42184968, 'actorId': 149, 'params': 34832, 'raw': '00950f29fc4cfa294000400000008810', 'spawnParams': 34832 },
+    ],
+    'location': 'Shadow Temple GS Near Boat',
+  },
+  {
+    'key': 'oot-gold-08-040',
+    'game': 'oot',
+    'scene': 8,
+    'reward': 64,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 7, 'offset': 53293264, 'actorId': 149, 'params': 35073, 'raw': '0095046a007cfd1c0000000040008901', 'spawnParams': 35073 },
+    ],
+    'location': 'Bottom of the Well GS East Cage',
+  },
+  {
+    'key': 'oot-gold-08-041',
+    'game': 'oot',
+    'scene': 8,
+    'reward': 65,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 5, 'offset': 53469348, 'actorId': 149, 'params': 35074, 'raw': '00950065007efb484000400000008902', 'spawnParams': 35074 },
+    ],
+    'location': 'Bottom of the Well GS Inner East',
+  },
+  {
+    'key': 'oot-gold-08-042',
+    'game': 'oot',
+    'scene': 8,
+    'reward': 66,
+    'slots': [
+      { 'mq': false, 'room': 6, 'setup': 0, 'slot': 1, 'offset': 53481564, 'actorId': 149, 'params': 35076, 'raw': '0095febb007efafec000800000008904', 'spawnParams': 35076 },
+    ],
+    'location': 'Bottom of the Well GS Inner West',
+  },
+  {
+    'key': 'oot-gold-09-049',
+    'game': 'oot',
+    'scene': 9,
+    'reward': 73,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 1, 'offset': 46239860, 'actorId': 149, 'params': 35330, 'raw': '0095fff000c7ff5940005f4a00008a02', 'spawnParams': 35330 },
+    ],
+    'location': 'Ice Cavern GS Scythe Room',
+  },
+  {
+    'key': 'oot-gold-09-048',
+    'game': 'oot',
+    'scene': 9,
+    'reward': 72,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 6, 'offset': 46309576, 'actorId': 149, 'params': 35329, 'raw': '0095fd0700b9fdf30000a88900008a01', 'spawnParams': 35329 },
+    ],
+    'location': 'Ice Cavern GS Block Room',
+  },
+  {
+    'key': 'oot-gold-09-04a',
+    'game': 'oot',
+    'scene': 9,
+    'reward': 74,
+    'slots': [
+      { 'mq': false, 'room': 11, 'setup': 0, 'slot': 4, 'offset': 46457000, 'actorId': 149, 'params': 35332, 'raw': '00950545008f00a30000800000008a04', 'spawnParams': 35332 },
+    ],
+    'location': 'Ice Cavern GS HP Room',
+  },
+  {
+    'key': 'oot-gold-38-093',
+    'game': 'oot',
+    'scene': 56,
+    'reward': 147,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 4, 'offset': 53829768, 'actorId': 416, 'params': 29448, 'raw': '01a0005afe8cff89ffff000000007308', 'spawnParams': 62216 },
+    ],
+    'location': 'Laboratory GS Crate',
+  },
+  {
+    'key': 'oot-gold-3e-050',
+    'game': 'oot',
+    'scene': 62,
+    'reward': 80,
+    'slots': [
+      { 'mq': false, 'room': 4, 'setup': 0, 'slot': 4, 'offset': 40730764, 'actorId': 149, 'params': 35585, 'raw': '00950e7d00a0fed64000cccd00008b01', 'spawnParams': 35585 },
+    ],
+    'location': 'Hyrule Field Grotto Near Gerudo GS',
+  },
+  {
+    'key': 'oot-gold-3e-071',
+    'game': 'oot',
+    'scene': 62,
+    'reward': 113,
+    'slots': [
+      { 'mq': false, 'room': 8, 'setup': 0, 'slot': 5, 'offset': 40824984, 'actorId': 149, 'params': 36610, 'raw': '0095064a007b0590000053e900008f02', 'spawnParams': 36610 },
+    ],
+    'location': 'Hyrule Castle GS Grotto',
+  },
+  {
+    'key': 'oot-gold-3e-051',
+    'game': 'oot',
+    'scene': 62,
+    'reward': 81,
+    'slots': [
+      { 'mq': false, 'room': 13, 'setup': 0, 'slot': 1, 'offset': 40960084, 'actorId': 149, 'params': 35586, 'raw': '009502ea008cfe144000d55500008b02', 'spawnParams': 35586 },
+    ],
+    'location': 'Hyrule Field Grotto Near Kakariko GS',
+  },
+  {
+    'key': 'oot-gold-4d-073',
+    'game': 'oot',
+    'scene': 77,
+    'reward': 115,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 7, 'offset': 54067408, 'actorId': 416, 'params': 28424, 'raw': '01a0004c0000ff2effff400000006f08', 'spawnParams': 61192 },
+    ],
+    'location': 'Market Pot House GS',
+  },
+  {
+    'key': 'oot-gold-52-081',
+    'game': 'oot',
+    'scene': 82,
+    'reward': 129,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 1, 'slot': 23, 'offset': 33648136, 'actorId': 149, 'params': 45314, 'raw': '0095fe2f0179fc8800006e390000b102', 'spawnParams': 45314 },
+    ],
+    'location': 'Kakariko GS Bazaar',
+  },
+  {
+    'key': 'oot-gold-52-082',
+    'game': 'oot',
+    'scene': 82,
+    'reward': 130,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 1, 'slot': 24, 'offset': 33648152, 'actorId': 149, 'params': 45316, 'raw': '0095000502aeff55000080000000b104', 'spawnParams': 45316 },
+    ],
+    'location': 'Kakariko GS Ladder',
+  },
+  {
+    'key': 'oot-gold-52-083',
+    'game': 'oot',
+    'scene': 82,
+    'reward': 131,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 1, 'slot': 25, 'offset': 33648168, 'actorId': 149, 'params': 45320, 'raw': '00950144010e0389400000000000b108', 'spawnParams': 45320 },
+    ],
+    'location': 'Kakariko GS Shooting Gallery',
+  },
+  {
+    'key': 'oot-gold-52-084',
+    'game': 'oot',
+    'scene': 82,
+    'reward': 132,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 1, 'slot': 26, 'offset': 33648184, 'actorId': 149, 'params': 45328, 'raw': '0095fda600780460400000000000b110', 'spawnParams': 45328 },
+    ],
+    'location': 'Kakariko GS House of Skulltula',
+  },
+  {
+    'key': 'oot-gold-52-085',
+    'game': 'oot',
+    'scene': 82,
+    'reward': 133,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 1, 'slot': 39, 'offset': 33648392, 'actorId': 119, 'params': 8193, 'raw': '0077fca40000020a0000400000712001', 'spawnParams': 61728 },
+    ],
+    'location': 'Kakariko GS Tree',
+  },
+  {
+    'key': 'oot-gold-52-086',
+    'game': 'oot',
+    'scene': 82,
+    'reward': 134,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 3, 'slot': 18, 'offset': 33647228, 'actorId': 149, 'params': 45376, 'raw': '0095ffee021c0708000080000000b140', 'spawnParams': 45376 },
+    ],
+    'location': 'Kakariko GS Roof',
+  },
+  {
+    'key': 'oot-gold-53-080',
+    'game': 'oot',
+    'scene': 83,
+    'reward': 128,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 12, 'offset': 33747256, 'actorId': 463, 'params': 20737, 'raw': '01cffd350078feac0000000000005101', 'spawnParams': 53505 },
+      { 'mq': false, 'room': 1, 'setup': 1, 'slot': 47, 'offset': 33750668, 'actorId': 463, 'params': 20737, 'raw': '01cffd350078feac0000000000005101', 'spawnParams': 53505 },
+    ],
+    'location': 'Graveyard GS Soil',
+  },
+  {
+    'key': 'oot-gold-53-087',
+    'game': 'oot',
+    'scene': 83,
+    'reward': 135,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 1, 'slot': 51, 'offset': 33750732, 'actorId': 149, 'params': 45440, 'raw': '0095009c013b031b400080000000b180', 'spawnParams': 45440 },
+    ],
+    'location': 'Graveyard GS Wall',
+  },
+  {
+    'key': 'oot-gold-54-089',
+    'game': 'oot',
+    'scene': 84,
+    'reward': 137,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 54, 'offset': 33919952, 'actorId': 119, 'params': 513, 'raw': '0077f9660064022a0000155500720201', 'spawnParams': 61954 },
+    ],
+    'location': 'Zora River GS Tree',
+  },
+  {
+    'key': 'oot-gold-54-08c',
+    'game': 'oot',
+    'scene': 84,
+    'reward': 140,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 2, 'slot': 14, 'offset': 33920692, 'actorId': 149, 'params': 45584, 'raw': '0095001a02be0102400082d80000b210', 'spawnParams': 45584 },
+    ],
+    'location': 'Zora River GS Near Grotto',
+  },
+  {
+    'key': 'oot-gold-54-088',
+    'game': 'oot',
+    'scene': 84,
+    'reward': 136,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 4, 'offset': 33976480, 'actorId': 149, 'params': 45569, 'raw': '00950e8f0287f9b74000a0000000b201', 'spawnParams': 45569 },
+    ],
+    'location': 'Zora River GS Ladder',
+  },
+  {
+    'key': 'oot-gold-54-08b',
+    'game': 'oot',
+    'scene': 84,
+    'reward': 139,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 2, 'slot': 8, 'offset': 33977004, 'actorId': 149, 'params': 45576, 'raw': '00950b10041ffa464000238e0000b208', 'spawnParams': 45576 },
+    ],
+    'location': 'Zora River GS Near Bridge',
+  },
+  {
+    'key': 'oot-gold-55-061',
+    'game': 'oot',
+    'scene': 85,
+    'reward': 97,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 30, 'offset': 34083444, 'actorId': 149, 'params': 44290, 'raw': '0095fae5009901910000cd830000ad02', 'spawnParams': 44290 },
+    ],
+    'location': 'Kokiri Forest GS Night Child',
+  },
+  {
+    'key': 'oot-gold-55-060',
+    'game': 'oot',
+    'scene': 85,
+    'reward': 96,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 31, 'offset': 34083460, 'actorId': 463, 'params': 19713, 'raw': '01cf04a60000fe200000000000004d01', 'spawnParams': 52481 },
+    ],
+    'location': 'Kokiri Forest GS Soil',
+  },
+  {
+    'key': 'oot-gold-55-062',
+    'game': 'oot',
+    'scene': 85,
+    'reward': 98,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 2, 'slot': 25, 'offset': 34084736, 'actorId': 149, 'params': 44292, 'raw': '0095048100fb02714000e93f0000ad04', 'spawnParams': 44292 },
+      { 'mq': false, 'room': 0, 'setup': 3, 'slot': 16, 'offset': 34085248, 'actorId': 149, 'params': 44292, 'raw': '0095048100fb02714000e93f0000ad04', 'spawnParams': 44292 },
+    ],
+    'location': 'Kokiri Forest GS Night Adult',
+  },
+  {
+    'key': 'oot-gold-56-06b',
+    'game': 'oot',
+    'scene': 86,
+    'reward': 107,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 2, 'slot': 14, 'offset': 34346100, 'actorId': 149, 'params': 44552, 'raw': '00950216012101184000c0000000ae08', 'spawnParams': 44552 },
+    ],
+    'location': 'Sacred Meadow GS Night Adult',
+  },
+  {
+    'key': 'oot-gold-57-090',
+    'game': 'oot',
+    'scene': 87,
+    'reward': 144,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 38, 'offset': 34501340, 'actorId': 463, 'params': 21249, 'raw': '01cff5d6fbf70e210000000000005301', 'spawnParams': 54017 },
+    ],
+    'location': 'Lake Hylia GS Soil',
+  },
+  {
+    'key': 'oot-gold-57-091',
+    'game': 'oot',
+    'scene': 87,
+    'reward': 145,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 40, 'offset': 34501372, 'actorId': 149, 'params': 45826, 'raw': '00950336fb1a1c14400000000000b302', 'spawnParams': 45826 },
+    ],
+    'location': 'Lake Hylia GS Island',
+  },
+  {
+    'key': 'oot-gold-57-092',
+    'game': 'oot',
+    'scene': 87,
+    'reward': 146,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 41, 'offset': 34501388, 'actorId': 149, 'params': 45828, 'raw': '0095f4c7fc560fb3555500000000b304', 'spawnParams': 45828 },
+    ],
+    'location': 'Lake Hylia GS Lab Wall',
+  },
+  {
+    'key': 'oot-gold-57-094',
+    'game': 'oot',
+    'scene': 87,
+    'reward': 148,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 2, 'slot': 20, 'offset': 34502336, 'actorId': 149, 'params': 45840, 'raw': '0095fd24fd451d150000a16c0000b310', 'spawnParams': 45840 },
+    ],
+    'location': 'Lake Hylia GS Big Tree',
+  },
+  {
+    'key': 'oot-gold-58-08e',
+    'game': 'oot',
+    'scene': 88,
+    'reward': 142,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 2, 'slot': 7, 'offset': 34616352, 'actorId': 149, 'params': 45632, 'raw': '0095fff60381fc73400000000000b240', 'spawnParams': 45632 },
+    ],
+    'location': 'Zora Domain GS Waterfall',
+  },
+  {
+    'key': 'oot-gold-59-08f',
+    'game': 'oot',
+    'scene': 89,
+    'reward': 143,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 13, 'offset': 34742596, 'actorId': 119, 'params': 32769, 'raw': '007700ba002c08ae0000200000728001', 'spawnParams': 62080 },
+      { 'mq': false, 'room': 0, 'setup': 1, 'slot': 13, 'offset': 34744344, 'actorId': 119, 'params': 32769, 'raw': '007700ba002c08ae0000200000728001', 'spawnParams': 62080 },
+    ],
+    'location': 'Zora Fountain GS Tree',
+  },
+  {
+    'key': 'oot-gold-59-08a',
+    'game': 'oot',
+    'scene': 89,
+    'reward': 138,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 1, 'slot': 15, 'offset': 34744376, 'actorId': 149, 'params': 45572, 'raw': '0095f89d00bb0777400046660000b204', 'spawnParams': 45572 },
+    ],
+    'location': 'Zora Fountain GS Wall',
+  },
+  {
+    'key': 'oot-gold-59-08d',
+    'game': 'oot',
+    'scene': 89,
+    'reward': 141,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 2, 'slot': 47, 'offset': 34743924, 'actorId': 149, 'params': 45600, 'raw': '009503dd04270698400056c10000b220', 'spawnParams': 45600 },
+    ],
+    'location': 'Zora Fountain GS Upper',
+  },
+  {
+    'key': 'oot-gold-5a-099',
+    'game': 'oot',
+    'scene': 90,
+    'reward': 153,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 16, 'offset': 34853244, 'actorId': 149, 'params': 46082, 'raw': '009506ab005fff1d47d2e71c0000b402', 'spawnParams': 46082 },
+    ],
+    'location': 'Gerudo Valley GS Wall',
+  },
+  {
+    'key': 'oot-gold-5a-098',
+    'game': 'oot',
+    'scene': 90,
+    'reward': 152,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 17, 'offset': 34853260, 'actorId': 463, 'params': 21505, 'raw': '01cffdfdf7fd006e0000000000005401', 'spawnParams': 54273 },
+    ],
+    'location': 'Gerudo Valley GS Soil',
+  },
+  {
+    'key': 'oot-gold-5a-09a',
+    'game': 'oot',
+    'scene': 90,
+    'reward': 154,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 2, 'slot': 46, 'offset': 34854472, 'actorId': 149, 'params': 46084, 'raw': '0095facf0168013531c7e4fa0000b404', 'spawnParams': 46084 },
+    ],
+    'location': 'Gerudo Valley GS Pillar',
+  },
+  {
+    'key': 'oot-gold-5a-09b',
+    'game': 'oot',
+    'scene': 90,
+    'reward': 155,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 2, 'slot': 47, 'offset': 34854488, 'actorId': 149, 'params': 46088, 'raw': '0095fb6d00a0fb37400000000000b408', 'spawnParams': 46088 },
+    ],
+    'location': 'Gerudo Valley GS Tent',
+  },
+  {
+    'key': 'oot-gold-5b-068',
+    'game': 'oot',
+    'scene': 91,
+    'reward': 104,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 2, 'offset': 35066000, 'actorId': 463, 'params': 19969, 'raw': '01cffb3c000003a70000000000004e01', 'spawnParams': 52737 },
+    ],
+    'location': 'Lost Woods GS Soil Bridge',
+  },
+  {
+    'key': 'oot-gold-5b-069',
+    'game': 'oot',
+    'scene': 91,
+    'reward': 105,
+    'slots': [
+      { 'mq': false, 'room': 6, 'setup': 0, 'slot': 4, 'offset': 35094704, 'actorId': 463, 'params': 19970, 'raw': '01cf02620000f9160000000000004e02', 'spawnParams': 52738 },
+    ],
+    'location': 'Lost Woods GS Soil Theater',
+  },
+  {
+    'key': 'oot-gold-5b-06a',
+    'game': 'oot',
+    'scene': 91,
+    'reward': 106,
+    'slots': [
+      { 'mq': false, 'room': 6, 'setup': 2, 'slot': 1, 'offset': 35094888, 'actorId': 149, 'params': 44548, 'raw': '0095030400d2f8f00000e0000000ae04', 'spawnParams': 44548 },
+    ],
+    'location': 'Lost Woods GS Bean Ride',
+  },
+  {
+    'key': 'oot-gold-5c-0a8',
+    'game': 'oot',
+    'scene': 92,
+    'reward': 168,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 17, 'offset': 35258768, 'actorId': 463, 'params': 22017, 'raw': '01cfface000801220000000000005601', 'spawnParams': 54785 },
+    ],
+    'location': 'Desert Colossus GS Soil',
+  },
+  {
+    'key': 'oot-gold-5c-0ab',
+    'game': 'oot',
+    'scene': 92,
+    'reward': 171,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 2, 'slot': 19, 'offset': 35259812, 'actorId': 149, 'params': 46600, 'raw': '009501c8010c091c400000000000b608', 'spawnParams': 46600 },
+    ],
+    'location': 'Desert Colossus GS Tree',
+  },
+  {
+    'key': 'oot-gold-5c-0aa',
+    'game': 'oot',
+    'scene': 92,
+    'reward': 170,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 2, 'slot': 20, 'offset': 35259828, 'actorId': 149, 'params': 46596, 'raw': '0095053801b4fde20c1780000000b604', 'spawnParams': 46596 },
+    ],
+    'location': 'Desert Colossus GS Plateau',
+  },
+  {
+    'key': 'oot-gold-5d-0a1',
+    'game': 'oot',
+    'scene': 93,
+    'reward': 161,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 3, 'slot': 21, 'offset': 35378924, 'actorId': 149, 'params': 46338, 'raw': '0095063e03e7f8284000c0000000b502', 'spawnParams': 46338 },
+    ],
+    'location': 'Gerudo Fortress GS Wall',
+  },
+  {
+    'key': 'oot-gold-5d-0a0',
+    'game': 'oot',
+    'scene': 93,
+    'reward': 160,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 3, 'slot': 14, 'offset': 35452140, 'actorId': 149, 'params': 46337, 'raw': '00950d3106c6ecb9400000000000b501', 'spawnParams': 46337 },
+    ],
+    'location': 'Gerudo Fortress GS Target',
+  },
+  {
+    'key': 'oot-gold-5e-0a9',
+    'game': 'oot',
+    'scene': 94,
+    'reward': 169,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 4, 'offset': 35528864, 'actorId': 149, 'params': 38402, 'raw': '0095027dfe77f6184000000000009602', 'spawnParams': 38402 },
+    ],
+    'location': 'Haunted Wasteland GS',
+  },
+  {
+    'key': 'oot-gold-5f-072',
+    'game': 'oot',
+    'scene': 95,
+    'reward': 114,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 48, 'offset': 35713876, 'actorId': 119, 'params': 1024, 'raw': '0077ff6f04410b9100000000006f0400', 'spawnParams': 61188 },
+    ],
+    'location': 'Hyrule Castle GS Tree',
+  },
+  {
+    'key': 'oot-gold-60-07a',
+    'game': 'oot',
+    'scene': 96,
+    'reward': 122,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 24, 'offset': 35897868, 'actorId': 149, 'params': 36868, 'raw': '0095f98b01de04aa4000c00000009004', 'spawnParams': 36868 },
+      { 'mq': false, 'room': 0, 'setup': 2, 'slot': 32, 'offset': 35898964, 'actorId': 149, 'params': 36868, 'raw': '0095f98b01de04aa4000c00000009004', 'spawnParams': 36868 },
+    ],
+    'location': 'Death Mountain Trail GS Entrance',
+  },
+  {
+    'key': 'oot-gold-60-079',
+    'game': 'oot',
+    'scene': 96,
+    'reward': 121,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 25, 'offset': 35897884, 'actorId': 463, 'params': 20482, 'raw': '01cff9b602a5fd210000000000005002', 'spawnParams': 53250 },
+    ],
+    'location': 'Death Mountain Trail GS Soil',
+  },
+  {
+    'key': 'oot-gold-60-07b',
+    'game': 'oot',
+    'scene': 96,
+    'reward': 123,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 2, 'slot': 33, 'offset': 35898980, 'actorId': 149, 'params': 45064, 'raw': '0095fb7205b9fcd44000d3330000b008', 'spawnParams': 45064 },
+    ],
+    'location': 'Death Mountain Trail GS Above Dodongo',
+  },
+  {
+    'key': 'oot-gold-60-07c',
+    'game': 'oot',
+    'scene': 96,
+    'reward': 124,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 2, 'slot': 34, 'offset': 35898996, 'actorId': 149, 'params': 45072, 'raw': '00950000084bf3844000b8e40000b010', 'spawnParams': 45072 },
+    ],
+    'location': 'Death Mountain Trail GS Before Climb',
+  },
+  {
+    'key': 'oot-gold-61-078',
+    'game': 'oot',
+    'scene': 97,
+    'reward': 120,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 26, 'offset': 36037144, 'actorId': 463, 'params': 20481, 'raw': '01cfff8101a5ff580000000000005001', 'spawnParams': 53249 },
+    ],
+    'location': 'Death Mountain Crater GS Soil',
+  },
+  {
+    'key': 'oot-gold-61-07f',
+    'game': 'oot',
+    'scene': 97,
+    'reward': 127,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 38, 'offset': 36037336, 'actorId': 416, 'params': 28800, 'raw': '01a0fc4a05500764ffff160b00007080', 'spawnParams': 61568 },
+    ],
+    'location': 'Death Mountain Crater GS Crate',
+  },
+  {
+    'key': 'oot-gold-62-07e',
+    'game': 'oot',
+    'scene': 98,
+    'reward': 126,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 49, 'offset': 36160380, 'actorId': 416, 'params': 28736, 'raw': '01a0fb9c0208fac50000000000007040', 'spawnParams': 61504 },
+    ],
+    'location': 'Goron City GS Maze',
+  },
+  {
+    'key': 'oot-gold-62-07d',
+    'game': 'oot',
+    'scene': 98,
+    'reward': 125,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 2, 'slot': 14, 'offset': 36341048, 'actorId': 149, 'params': 36896, 'raw': '0095000101f300a54000822200009020', 'spawnParams': 36896 },
+    ],
+    'location': 'Goron City GS Platform',
+  },
+  {
+    'key': 'oot-gold-63-05b',
+    'game': 'oot',
+    'scene': 99,
+    'reward': 91,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 15, 'offset': 43835764, 'actorId': 119, 'params': 2049, 'raw': '0077051d0000f73f0000e38e006c0801', 'spawnParams': 60424 },
+      { 'mq': false, 'room': 0, 'setup': 1, 'slot': 28, 'offset': 43837500, 'actorId': 119, 'params': 2049, 'raw': '0077051d0000f73f0000e38e006c0801', 'spawnParams': 60424 },
+    ],
+    'location': 'Lon Lon Ranch GS Tree',
+  },
+  {
+    'key': 'oot-gold-63-058',
+    'game': 'oot',
+    'scene': 99,
+    'reward': 88,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 1, 'slot': 25, 'offset': 43837452, 'actorId': 149, 'params': 35841, 'raw': '0095f6d800b402a04000599a00008c01', 'spawnParams': 35841 },
+    ],
+    'location': 'Lon Lon Ranch GS Back Wall',
+  },
+  {
+    'key': 'oot-gold-63-059',
+    'game': 'oot',
+    'scene': 99,
+    'reward': 89,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 1, 'slot': 26, 'offset': 43837468, 'actorId': 149, 'params': 35842, 'raw': '00950328003001464000000000008c02', 'spawnParams': 35842 },
+    ],
+    'location': 'Lon Lon Ranch GS Rain Shed',
+  },
+  {
+    'key': 'oot-gold-63-05a',
+    'game': 'oot',
+    'scene': 99,
+    'reward': 90,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 1, 'slot': 27, 'offset': 43837484, 'actorId': 149, 'params': 35844, 'raw': '009503e5011ef5764000c00000008c04', 'spawnParams': 35844 },
+    ],
+    'location': 'Lon Lon Ranch GS House',
+  },
+  {
+    'key': 'oot-gold-64-070',
+    'game': 'oot',
+    'scene': 100,
+    'reward': 112,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 2, 'offset': 43188368, 'actorId': 149, 'params': 36609, 'raw': '0095042305a8031840006aab00008f01', 'spawnParams': 36609 },
+    ],
+    'location': 'Ganon Castle Exterior GS',
+  },
+  {
+    'key': 'mm-gold-27-01e',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 30,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 16, 'offset': 38273384, 'actorId': 130, 'params': 30, 'raw': '2082ffa60000ff2d0007007f017f001e', 'spawnParams': 65401 },
+    ],
+    'location': 'Swamp Skulltula Main Room Jar',
+  },
+  {
+    'key': 'mm-gold-27-000',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 0,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 17, 'offset': 38273400, 'actorId': 80, 'params': 65283, 'raw': '2050000001affb500007007f007fff03', 'spawnParams': 65283 },
+    ],
+    'location': 'Swamp Skulltula Main Room Near Ceiling',
+  },
+  {
+    'key': 'mm-gold-27-008',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 8,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 18, 'offset': 38273416, 'actorId': 80, 'params': 2595, 'raw': '20500078ffecfe9800075a7f007f0a23', 'spawnParams': 2595 },
+    ],
+    'location': 'Swamp Skulltula Main Room Water',
+  },
+  {
+    'key': 'mm-gold-27-009',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 9,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 19, 'offset': 38273432, 'actorId': 249, 'params': 2313, 'raw': '00f9fe980070fd142d072d0c007f0909', 'spawnParams': 65317 },
+    ],
+    'location': 'Swamp Skulltula Main Room Lower Left Soft Soil',
+  },
+  {
+    'key': 'mm-gold-27-00b',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 11,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 21, 'offset': 38273464, 'actorId': 249, 'params': 2828, 'raw': '00f9012d0165ff4c2d075a10007f0b0c', 'spawnParams': 65325 },
+    ],
+    'location': 'Swamp Skulltula Main Room Upper Soft Soil',
+  },
+  {
+    'key': 'mm-gold-27-00f',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 15,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 23, 'offset': 38273496, 'actorId': 80, 'params': 1087, 'raw': '205000d00026fcb300075a7f007f043f', 'spawnParams': 1087 },
+    ],
+    'location': 'Swamp Skulltula Main Room Pillar',
+  },
+  {
+    'key': 'mm-gold-27-00c',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 12,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 24, 'offset': 38273512, 'actorId': 249, 'params': 3087, 'raw': '00f90168006dfd9787072d0e007f0c0f', 'spawnParams': 65329 },
+    ],
+    'location': 'Swamp Skulltula Main Room Lower Right Soft Soil',
+  },
+  {
+    'key': 'mm-gold-27-013',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 19,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 26, 'offset': 38273544, 'actorId': 80, 'params': 65359, 'raw': '2050ff30014afbc500075a7f007fff4f', 'spawnParams': 65359 },
+    ],
+    'location': 'Swamp Skulltula Main Room Upper Pillar',
+  },
+  {
+    'key': 'mm-gold-27-012',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 18,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 12, 'offset': 38318376, 'actorId': 228, 'params': 32786, 'raw': '00e4fff401b0f9da00070017007f8012', 'spawnParams': 65353 },
+    ],
+    'location': 'Swamp Skulltula Gold Room Hive',
+  },
+  {
+    'key': 'mm-gold-27-001',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 1,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 15, 'offset': 38318424, 'actorId': 80, 'params': 65287, 'raw': '205000000176f9700007007f007fff07', 'spawnParams': 65287 },
+    ],
+    'location': 'Swamp Skulltula Gold Room Near Ceiling',
+  },
+  {
+    'key': 'mm-gold-27-004',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 4,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 16, 'offset': 38318440, 'actorId': 80, 'params': 275, 'raw': '20500096014af9e800075a7f007f0113', 'spawnParams': 275 },
+    ],
+    'location': 'Swamp Skulltula Gold Room Pillar',
+  },
+  {
+    'key': 'mm-gold-27-019',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 25,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 19, 'offset': 38318488, 'actorId': 80, 'params': 65383, 'raw': '2050ff50006cfa7e00072d7f007fff67', 'spawnParams': 65383 },
+    ],
+    'location': 'Swamp Skulltula Gold Room Wall',
+  },
+  {
+    'key': 'mm-gold-27-00a',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 10,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 11, 'offset': 38342936, 'actorId': 229, 'params': 32778, 'raw': '00e5fc940000fef200072d7f007f800a', 'spawnParams': 65321 },
+    ],
+    'location': 'Swamp Skulltula Monument Room Crate 1',
+  },
+  {
+    'key': 'mm-gold-27-01b',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 27,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 12, 'offset': 38342952, 'actorId': 229, 'params': 32795, 'raw': '00e5fd120000fc9400075a7f007f801b', 'spawnParams': 65389 },
+    ],
+    'location': 'Swamp Skulltula Monument Room Crate 2',
+  },
+  {
+    'key': 'mm-gold-27-002',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 2,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 13, 'offset': 38342968, 'actorId': 80, 'params': 65291, 'raw': '2050fe5c0154fc950007877f007fff0b', 'spawnParams': 65291 },
+    ],
+    'location': 'Swamp Skulltula Monument Room Torch',
+  },
+  {
+    'key': 'mm-gold-27-00d',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 13,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 16, 'offset': 38343016, 'actorId': 80, 'params': 1591, 'raw': '2050fc7f00d6fcb900072d7f007f0637', 'spawnParams': 1591 },
+    ],
+    'location': 'Swamp Skulltula Monument Room Lower Wall',
+  },
+  {
+    'key': 'mm-gold-27-00e',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 14,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 17, 'offset': 38343032, 'actorId': 80, 'params': 1851, 'raw': '2050fd6c0112fda80007007f007f073b', 'spawnParams': 1851 },
+    ],
+    'location': 'Swamp Skulltula Monument Room On Monument',
+  },
+  {
+    'key': 'mm-gold-27-005',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 5,
+    'slots': [
+      { 'mq': false, 'room': 4, 'setup': 0, 'slot': 6, 'offset': 38363336, 'actorId': 130, 'params': 5, 'raw': '208202020000fda90007007f017f0005', 'spawnParams': 65301 },
+    ],
+    'location': 'Swamp Skulltula Pot Room Jar',
+  },
+  {
+    'key': 'mm-gold-27-017',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 23,
+    'slots': [
+      { 'mq': false, 'room': 4, 'setup': 0, 'slot': 9, 'offset': 38363384, 'actorId': 228, 'params': 32791, 'raw': '00e401e40250fcaf00070018007f8017', 'spawnParams': 65373 },
+    ],
+    'location': 'Swamp Skulltula Pot Room Hive 1',
+  },
+  {
+    'key': 'mm-gold-27-01c',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 28,
+    'slots': [
+      { 'mq': false, 'room': 4, 'setup': 0, 'slot': 10, 'offset': 38363400, 'actorId': 228, 'params': 32796, 'raw': '00e402490250fcea00070018007f801c', 'spawnParams': 65393 },
+    ],
+    'location': 'Swamp Skulltula Pot Room Hive 2',
+  },
+  {
+    'key': 'mm-gold-27-010',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 16,
+    'slots': [
+      { 'mq': false, 'room': 4, 'setup': 0, 'slot': 13, 'offset': 38363448, 'actorId': 80, 'params': 65345, 'raw': '205002bd005bfbc600079611007fff41', 'spawnParams': 65345 },
+    ],
+    'location': 'Swamp Skulltula Pot Room Pot 1',
+  },
+  {
+    'key': 'mm-gold-27-011',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 17,
+    'slots': [
+      { 'mq': false, 'room': 4, 'setup': 0, 'slot': 15, 'offset': 38363480, 'actorId': 80, 'params': 65349, 'raw': '205002be005bfd0a00078712007fff45', 'spawnParams': 65349 },
+    ],
+    'location': 'Swamp Skulltula Pot Room Pot 2',
+  },
+  {
+    'key': 'mm-gold-27-014',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 20,
+    'slots': [
+      { 'mq': false, 'room': 4, 'setup': 0, 'slot': 17, 'offset': 38363512, 'actorId': 80, 'params': 65363, 'raw': '20500317002cfaca0007877f007fff53', 'spawnParams': 65363 },
+    ],
+    'location': 'Swamp Skulltula Pot Room Behind Vines',
+  },
+  {
+    'key': 'mm-gold-27-016',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 22,
+    'slots': [
+      { 'mq': false, 'room': 4, 'setup': 0, 'slot': 19, 'offset': 38363544, 'actorId': 80, 'params': 1371, 'raw': '2050021c0246fa2e0007007f007f055b', 'spawnParams': 1371 },
+    ],
+    'location': 'Swamp Skulltula Pot Room Wall',
+  },
+  {
+    'key': 'mm-gold-27-01a',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 26,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 8, 'offset': 38404328, 'actorId': 228, 'params': 32794, 'raw': '00e4009601d6f5b100072d1a007f801a', 'spawnParams': 65385 },
+    ],
+    'location': 'Swamp Skulltula Tree Room Hive',
+  },
+  {
+    'key': 'mm-gold-27-006',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 6,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 10, 'offset': 38404360, 'actorId': 80, 'params': 539, 'raw': '205000d20078f7360007877f007f021b', 'spawnParams': 539 },
+    ],
+    'location': 'Swamp Skulltula Tree Room Grass 1',
+  },
+  {
+    'key': 'mm-gold-27-007',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 7,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 11, 'offset': 38404376, 'actorId': 80, 'params': 2335, 'raw': '2050ffbe0078f56800079fff007f091f', 'spawnParams': 2335 },
+    ],
+    'location': 'Swamp Skulltula Tree Room Grass 2',
+  },
+  {
+    'key': 'mm-gold-27-015',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 21,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 12, 'offset': 38404392, 'actorId': 80, 'params': 65366, 'raw': '205000220194f64600074393007fff56', 'spawnParams': 65366 },
+    ],
+    'location': 'Swamp Skulltula Tree Room Tree 1',
+  },
+  {
+    'key': 'mm-gold-27-018',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 24,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 14, 'offset': 38404424, 'actorId': 80, 'params': 65378, 'raw': '2050fff70197f61200075a13007fff62', 'spawnParams': 65378 },
+    ],
+    'location': 'Swamp Skulltula Tree Room Tree 2',
+  },
+  {
+    'key': 'mm-gold-27-01d',
+    'game': 'mm',
+    'scene': 39,
+    'reward': 29,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 16, 'offset': 38404456, 'actorId': 80, 'params': 65398, 'raw': '2050ffce0197f64d00075a13007fff76', 'spawnParams': 65398 },
+    ],
+    'location': 'Swamp Skulltula Tree Room Tree 3',
+  },
+  {
+    'key': 'mm-gold-28-00c',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 12,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 8, 'offset': 38478044, 'actorId': 80, 'params': 1075, 'raw': '2050001e0145fe7a5a075a7f007f0433', 'spawnParams': 1075 },
+    ],
+    'location': 'Ocean Skulltula Entrance Right Wall',
+  },
+  {
+    'key': 'mm-gold-28-00d',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 13,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 9, 'offset': 38478060, 'actorId': 80, 'params': 1591, 'raw': '2050ffd801c2ff885a072d7f007f0637', 'spawnParams': 1591 },
+    ],
+    'location': 'Ocean Skulltula Entrance Left Wall',
+  },
+  {
+    'key': 'mm-gold-28-00f',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 15,
+    'slots': [
+      { 'mq': false, 'room': 0, 'setup': 0, 'slot': 10, 'offset': 38478076, 'actorId': 80, 'params': 65343, 'raw': '2050ff86023afc924a87007f007fff3f', 'spawnParams': 65343 },
+    ],
+    'location': 'Ocean Skulltula Entrance Web',
+  },
+  {
+    'key': 'mm-gold-28-00b',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 11,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 7, 'offset': 38506696, 'actorId': 130, 'params': 11, 'raw': '20820041fff4f9460007007f017f000b', 'spawnParams': 65325 },
+    ],
+    'location': 'Ocean Skulltula 2nd Room Jar',
+  },
+  {
+    'key': 'mm-gold-28-005',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 5,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 11, 'offset': 38506760, 'actorId': 80, 'params': 791, 'raw': '205000370064fc0e00075a7f007f0317', 'spawnParams': 791 },
+    ],
+    'location': 'Ocean Skulltula 2nd Room Ceiling Edge',
+  },
+  {
+    'key': 'mm-gold-28-006',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 6,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 12, 'offset': 38506776, 'actorId': 80, 'params': 27, 'raw': '2050ff3c01a4fb4c00072d7f007f001b', 'spawnParams': 27 },
+    ],
+    'location': 'Ocean Skulltula 2nd Room Ceiling Plank',
+  },
+  {
+    'key': 'mm-gold-28-00e',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 14,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 14, 'offset': 38506808, 'actorId': 80, 'params': 65339, 'raw': '2050ffadff9ef83c0007007f007fff3b', 'spawnParams': 65339 },
+    ],
+    'location': 'Ocean Skulltula 2nd Room Webbed Hole',
+  },
+  {
+    'key': 'mm-gold-28-017',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 23,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 19, 'offset': 38506888, 'actorId': 80, 'params': 65373, 'raw': '2050003f00ecf94700079d10007fff5d', 'spawnParams': 65373 },
+    ],
+    'location': 'Ocean Skulltula 2nd Room Webbed Pot',
+  },
+  {
+    'key': 'mm-gold-28-018',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 24,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 21, 'offset': 38506920, 'actorId': 80, 'params': 65377, 'raw': '2050003c00ecf9ee0007ab91007fff61', 'spawnParams': 65377 },
+    ],
+    'location': 'Ocean Skulltula 2nd Room Upper Pot',
+  },
+  {
+    'key': 'mm-gold-28-01b',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 27,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 23, 'offset': 38506952, 'actorId': 80, 'params': 65389, 'raw': '2050003dffcefa9800076593007fff6d', 'spawnParams': 65389 },
+    ],
+    'location': 'Ocean Skulltula 2nd Room Lower Pot',
+  },
+  {
+    'key': 'mm-gold-28-01d',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 29,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 25, 'offset': 38506984, 'actorId': 80, 'params': 1911, 'raw': '2050fee300eafa9f00072d7f007f0777', 'spawnParams': 1911 },
+    ],
+    'location': 'Ocean Skulltula 2nd Room Behind Skull 1',
+  },
+  {
+    'key': 'mm-gold-28-01e',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 30,
+    'slots': [
+      { 'mq': false, 'room': 1, 'setup': 0, 'slot': 26, 'offset': 38507000, 'actorId': 80, 'params': 1403, 'raw': '2050ff240016f9dd00075a7f007f057b', 'spawnParams': 1403 },
+    ],
+    'location': 'Ocean Skulltula 2nd Room Behind Skull 2',
+  },
+  {
+    'key': 'mm-gold-28-014',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 20,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 12, 'offset': 38560024, 'actorId': 528, 'params': 20, 'raw': '0210fc3a0122facc00072d17007f0014', 'spawnParams': 65363 },
+    ],
+    'location': 'Ocean Skulltula Library Behind Picture',
+  },
+  {
+    'key': 'mm-gold-28-002',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 2,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 14, 'offset': 38560056, 'actorId': 80, 'params': 65291, 'raw': '2050fcd60114fe9400075a7f007fff0b', 'spawnParams': 65291 },
+    ],
+    'location': 'Ocean Skulltula Library Hole Behind Picture',
+  },
+  {
+    'key': 'mm-gold-28-003',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 3,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 15, 'offset': 38560072, 'actorId': 80, 'params': 65295, 'raw': '2050fcf400d2fa240007007f007fff0f', 'spawnParams': 65295 },
+    ],
+    'location': 'Ocean Skulltula Library Hole Behind Cabinet',
+  },
+  {
+    'key': 'mm-gold-28-004',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 4,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 16, 'offset': 38560088, 'actorId': 80, 'params': 65299, 'raw': '2050fe8d012cfd5100075aff007fff13', 'spawnParams': 65299 },
+    ],
+    'location': 'Ocean Skulltula Library On Corner Bookshelf',
+  },
+  {
+    'key': 'mm-gold-28-008',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 8,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 17, 'offset': 38560104, 'actorId': 80, 'params': 547, 'raw': '2050fe7a0190fa880007877f007f0223', 'spawnParams': 547 },
+    ],
+    'location': 'Ocean Skulltula Library Ceiling Edge',
+  },
+  {
+    'key': 'mm-gold-28-015',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 21,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 18, 'offset': 38560120, 'actorId': 80, 'params': 65367, 'raw': '2050fb7000d0fcec00075a7f007fff57', 'spawnParams': 65367 },
+    ],
+    'location': 'Ocean Skulltula Library Behind Bookcase 1',
+  },
+  {
+    'key': 'mm-gold-28-01c',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 28,
+    'slots': [
+      { 'mq': false, 'room': 2, 'setup': 0, 'slot': 19, 'offset': 38560136, 'actorId': 80, 'params': 65395, 'raw': '2050fbcf00dafc7d0007007f007fff73', 'spawnParams': 65395 },
+    ],
+    'location': 'Ocean Skulltula Library Behind Bookcase 2',
+  },
+  {
+    'key': 'mm-gold-28-013',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 19,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 9, 'offset': 38605032, 'actorId': 528, 'params': 19, 'raw': '021001dfffc4fa0500070014007f0013', 'spawnParams': 65359 },
+    ],
+    'location': 'Ocean Skulltula Colored Skulls Behind Picture',
+  },
+  {
+    'key': 'mm-gold-28-007',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 7,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 10, 'offset': 38605048, 'actorId': 80, 'params': 287, 'raw': '2050008a0046fc0400072d7f007f011f', 'spawnParams': 287 },
+    ],
+    'location': 'Ocean Skulltula Colored Skulls Ceiling Edge',
+  },
+  {
+    'key': 'mm-gold-28-010',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 16,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 12, 'offset': 38605080, 'actorId': 80, 'params': 65346, 'raw': '205001a30064faf400075a0f007fff42', 'spawnParams': 65346 },
+    ],
+    'location': 'Ocean Skulltula Colored Skulls Chandelier 1',
+  },
+  {
+    'key': 'mm-gold-28-011',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 17,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 14, 'offset': 38605112, 'actorId': 80, 'params': 65350, 'raw': '205001b70064fb250007168f007fff46', 'spawnParams': 65350 },
+    ],
+    'location': 'Ocean Skulltula Colored Skulls Chandelier 2',
+  },
+  {
+    'key': 'mm-gold-28-012',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 18,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 16, 'offset': 38605144, 'actorId': 80, 'params': 65354, 'raw': '205001920064fb2700079d8f007fff4a', 'spawnParams': 65354 },
+    ],
+    'location': 'Ocean Skulltula Colored Skulls Chandelier 3',
+  },
+  {
+    'key': 'mm-gold-28-019',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 25,
+    'slots': [
+      { 'mq': false, 'room': 3, 'setup': 0, 'slot': 20, 'offset': 38605208, 'actorId': 80, 'params': 65381, 'raw': '20500297ff88fa2100079c12007fff65', 'spawnParams': 65381 },
+    ],
+    'location': 'Ocean Skulltula Colored Skulls Pot',
+  },
+  {
+    'key': 'mm-gold-28-01a',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 26,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 3, 'offset': 38666376, 'actorId': 130, 'params': 26, 'raw': '2082fd370055f9c70007007f017f001a', 'spawnParams': 65385 },
+    ],
+    'location': 'Ocean Skulltula Storage Room Jar',
+  },
+  {
+    'key': 'mm-gold-28-016',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 22,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 5, 'offset': 38666408, 'actorId': 229, 'params': 32790, 'raw': '00e5fe09ff88f8ac0007007f007f8016', 'spawnParams': 65369 },
+    ],
+    'location': 'Ocean Skulltula Storage Room Crate',
+  },
+  {
+    'key': 'mm-gold-28-001',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 1,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 6, 'offset': 38666424, 'actorId': 80, 'params': 65287, 'raw': '2050fc8efff8f9a200072d7f007fff07', 'spawnParams': 65287 },
+    ],
+    'location': 'Ocean Skulltula Storage Room Behind Boat',
+  },
+  {
+    'key': 'mm-gold-28-009',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 9,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 9, 'offset': 38666472, 'actorId': 80, 'params': 65319, 'raw': '2050fce40041f9f85a07007f007fff27', 'spawnParams': 65319 },
+    ],
+    'location': 'Ocean Skulltula Storage Room Ceiling Web',
+  },
+  {
+    'key': 'mm-gold-28-00a',
+    'game': 'mm',
+    'scene': 40,
+    'reward': 10,
+    'slots': [
+      { 'mq': false, 'room': 5, 'setup': 0, 'slot': 10, 'offset': 38666488, 'actorId': 80, 'params': 65323, 'raw': '2050fdafffe5faa20007007f007fff2b', 'spawnParams': 65323 },
+    ],
+    'location': 'Ocean Skulltula Storage Room Behind Crate',
+  },
+  {
+    'key': 'oot-gold-00-0b1',
+    'game': 'oot',
+    'scene': 0,
+    'reward': 177,
+    'slots': [
+      { 'mq': true, 'room': 0, 'setup': 0, 'slot': 19, 'offset': 7404, 'actorId': 149, 'params': 33026, 'raw': '009501160168014c0000a00000008102', 'spawnParams': 33026 },
+    ],
+    'location': 'MQ Deku Tree GS Lobby Crate',
+  },
+  {
+    'key': 'oot-gold-00-0b3',
+    'game': 'oot',
+    'scene': 0,
+    'reward': 179,
+    'slots': [
+      { 'mq': true, 'room': 2, 'setup': 0, 'slot': 12, 'offset': 8076, 'actorId': 149, 'params': 33032, 'raw': '0095fbdf030206704000a00000008108', 'spawnParams': 33032 },
+    ],
+    'location': 'MQ Deku Tree GS Compass Room',
+  },
+  {
+    'key': 'oot-gold-00-0b2',
+    'game': 'oot',
+    'scene': 0,
+    'reward': 178,
+    'slots': [
+      { 'mq': true, 'room': 7, 'setup': 0, 'slot': 8, 'offset': 9594, 'actorId': 149, 'params': 33028, 'raw': '0095f82efee8005b0000000000008104', 'spawnParams': 33028 },
+    ],
+    'location': 'MQ Deku Tree GS Song of Time Blocks',
+  },
+  {
+    'key': 'oot-gold-00-0b0',
+    'game': 'oot',
+    'scene': 0,
+    'reward': 176,
+    'slots': [
+      { 'mq': true, 'room': 8, 'setup': 0, 'slot': 3, 'offset': 10132, 'actorId': 149, 'params': 33025, 'raw': '0095f563fd8efd160000200000008101', 'spawnParams': 33025 },
+    ],
+    'location': 'MQ Deku Tree GS Back Room',
+  },
+  {
+    'key': 'oot-gold-01-0ba',
+    'game': 'oot',
+    'scene': 1,
+    'reward': 186,
+    'slots': [
+      { 'mq': true, 'room': 3, 'setup': 0, 'slot': 6, 'offset': 12668, 'actorId': 149, 'params': 33284, 'raw': '00950df30213f8450000000000008204', 'spawnParams': 33284 },
+    ],
+    'location': 'MQ Dodongo Cavern GS Upper Lizalfos',
+  },
+  {
+    'key': 'oot-gold-01-0bc',
+    'game': 'oot',
+    'scene': 1,
+    'reward': 188,
+    'slots': [
+      { 'mq': true, 'room': 6, 'setup': 0, 'slot': 0, 'offset': 13644, 'actorId': 149, 'params': 33296, 'raw': '0095080d019bf9110000800000008210', 'spawnParams': 33296 },
+    ],
+    'location': 'MQ Dodongo Cavern GS Larve Room',
+  },
+  {
+    'key': 'oot-gold-01-0b8',
+    'game': 'oot',
+    'scene': 1,
+    'reward': 184,
+    'slots': [
+      { 'mq': true, 'room': 8, 'setup': 0, 'slot': 16, 'offset': 14326, 'actorId': 149, 'params': 33281, 'raw': '0095061100c4f1940000000000008201', 'spawnParams': 33281 },
+    ],
+    'location': 'MQ Dodongo Cavern GS Near Boss',
+  },
+  {
+    'key': 'oot-gold-01-0b9',
+    'game': 'oot',
+    'scene': 1,
+    'reward': 185,
+    'slots': [
+      { 'mq': true, 'room': 13, 'setup': 0, 'slot': 5, 'offset': 15566, 'actorId': 149, 'params': 33282, 'raw': '0095089501b8f2c20000400000008202', 'spawnParams': 33282 },
+    ],
+    'location': 'MQ Dodongo Cavern GS Poe Room Side',
+  },
+  {
+    'key': 'oot-gold-01-0bb',
+    'game': 'oot',
+    'scene': 1,
+    'reward': 187,
+    'slots': [
+      { 'mq': true, 'room': 15, 'setup': 0, 'slot': 4, 'offset': 15770, 'actorId': 149, 'params': 33288, 'raw': '0095f9200000ff020000800000008208', 'spawnParams': 33288 },
+    ],
+    'location': 'MQ Dodongo Cavern GS Time Blocks',
+  },
+  {
+    'key': 'oot-gold-02-0c1',
+    'game': 'oot',
+    'scene': 2,
+    'reward': 193,
+    'slots': [
+      { 'mq': true, 'room': 5, 'setup': 0, 'slot': 8, 'offset': 17908, 'actorId': 149, 'params': 33538, 'raw': '00950570002af9735dde222200008302', 'spawnParams': 33538 },
+    ],
+    'location': 'MQ Jabu-Jabu GS Pre-Boss',
+  },
+  {
+    'key': 'oot-gold-02-0c2',
+    'game': 'oot',
+    'scene': 2,
+    'reward': 194,
+    'slots': [
+      { 'mq': true, 'room': 12, 'setup': 0, 'slot': 11, 'offset': 19302, 'actorId': 149, 'params': 33540, 'raw': '0095fe71ffc5e9c69e944eef00008304', 'spawnParams': 33540 },
+    ],
+    'location': 'MQ Jabu-Jabu GS Back',
+  },
+  {
+    'key': 'oot-gold-02-0c3',
+    'game': 'oot',
+    'scene': 2,
+    'reward': 195,
+    'slots': [
+      { 'mq': true, 'room': 13, 'setup': 0, 'slot': 10, 'offset': 19504, 'actorId': 149, 'params': 33544, 'raw': '0095fb43fbeff772c000ddde00008308', 'spawnParams': 33544 },
+    ],
+    'location': 'MQ Jabu-Jabu GS Basement Side Room',
+  },
+  {
+    'key': 'oot-gold-02-0c0',
+    'game': 'oot',
+    'scene': 2,
+    'reward': 192,
+    'slots': [
+      { 'mq': true, 'room': 14, 'setup': 0, 'slot': 9, 'offset': 19694, 'actorId': 149, 'params': 33537, 'raw': '009503acfaf3f5e80000000000008301', 'spawnParams': 33537 },
+    ],
+    'location': 'MQ Jabu-Jabu GS SoT Block',
+  },
+  {
+    'key': 'oot-gold-03-0c9',
+    'game': 'oot',
+    'scene': 3,
+    'reward': 201,
+    'slots': [
+      { 'mq': true, 'room': 1, 'setup': 0, 'slot': 3, 'offset': 20016, 'actorId': 149, 'params': 33794, 'raw': '009500480243fdd30000000000008402', 'spawnParams': 33794 },
+    ],
+    'location': 'MQ Forest Temple GS Entryway',
+  },
+  {
+    'key': 'oot-gold-03-0c8',
+    'game': 'oot',
+    'scene': 3,
+    'reward': 200,
+    'slots': [
+      { 'mq': true, 'room': 7, 'setup': 0, 'slot': 6, 'offset': 20988, 'actorId': 149, 'params': 33793, 'raw': '009503fd0212f6d80000600000008401', 'spawnParams': 33793 },
+    ],
+    'location': 'MQ Forest Temple GS East Garden',
+  },
+  {
+    'key': 'oot-gold-03-0ca',
+    'game': 'oot',
+    'scene': 3,
+    'reward': 202,
+    'slots': [
+      { 'mq': true, 'room': 8, 'setup': 0, 'slot': 7, 'offset': 21320, 'actorId': 149, 'params': 33796, 'raw': '0095fb6e01a8f9a70000705b00008404', 'spawnParams': 33796 },
+    ],
+    'location': 'MQ Forest Temple GS West Garden',
+  },
+  {
+    'key': 'oot-gold-03-0cb',
+    'game': 'oot',
+    'scene': 3,
+    'reward': 203,
+    'slots': [
+      { 'mq': true, 'room': 9, 'setup': 0, 'slot': 0, 'offset': 21442, 'actorId': 149, 'params': 33800, 'raw': '0095fbadff06f8940000400000008408', 'spawnParams': 33800 },
+    ],
+    'location': 'MQ Forest Temple GS Well',
+  },
+  {
+    'key': 'oot-gold-03-0cc',
+    'game': 'oot',
+    'scene': 3,
+    'reward': 204,
+    'slots': [
+      { 'mq': true, 'room': 11, 'setup': 0, 'slot': 17, 'offset': 21942, 'actorId': 149, 'params': 33808, 'raw': '0095fa74017ffc220000c00000008410', 'spawnParams': 33808 },
+    ],
+    'location': 'MQ Forest Temple GS Climb Room',
+  },
+  {
+    'key': 'oot-gold-04-0d2',
+    'game': 'oot',
+    'scene': 4,
+    'reward': 210,
+    'slots': [
+      { 'mq': true, 'room': 8, 'setup': 0, 'slot': 6, 'offset': 25548, 'actorId': 149, 'params': 34052, 'raw': '009507921248fe76ff4a200000008504', 'spawnParams': 34052 },
+    ],
+    'location': 'MQ Fire Temple GS Burning Block',
+  },
+  {
+    'key': 'oot-gold-04-0d1',
+    'game': 'oot',
+    'scene': 4,
+    'reward': 209,
+    'slots': [
+      { 'mq': true, 'room': 10, 'setup': 0, 'slot': 41, 'offset': 26342, 'actorId': 149, 'params': 34050, 'raw': '0095faec0eb8004a4000600000008502', 'spawnParams': 34050 },
+    ],
+    'location': 'MQ Fire Temple GS Topmost',
+  },
+  {
+    'key': 'oot-gold-04-0d3',
+    'game': 'oot',
+    'scene': 4,
+    'reward': 211,
+    'slots': [
+      { 'mq': true, 'room': 11, 'setup': 0, 'slot': 10, 'offset': 26734, 'actorId': 149, 'params': 34056, 'raw': '0095fa350b1cfffec000400000008508', 'spawnParams': 34056 },
+    ],
+    'location': 'MQ Fire Temple GS Fire Walls Middle',
+  },
+  {
+    'key': 'oot-gold-04-0d0',
+    'game': 'oot',
+    'scene': 4,
+    'reward': 208,
+    'slots': [
+      { 'mq': true, 'room': 20, 'setup': 0, 'slot': 2, 'offset': 28268, 'actorId': 149, 'params': 34049, 'raw': '009507e70098f8b80000c00000008501', 'spawnParams': 34049 },
+    ],
+    'location': 'MQ Fire Temple GS 1f Lava Room',
+  },
+  {
+    'key': 'oot-gold-04-0d4',
+    'game': 'oot',
+    'scene': 4,
+    'reward': 212,
+    'slots': [
+      { 'mq': true, 'room': 25, 'setup': 0, 'slot': 1, 'offset': 28776, 'actorId': 149, 'params': 34064, 'raw': '0095fd8e0b36fac60000e00000008510', 'spawnParams': 34064 },
+    ],
+    'location': 'MQ Fire Temple GS Fire Walls Side Room',
+  },
+  {
+    'key': 'oot-gold-05-0dc',
+    'game': 'oot',
+    'scene': 5,
+    'reward': 220,
+    'slots': [
+      { 'mq': true, 'room': 3, 'setup': 0, 'slot': 17, 'offset': 30256, 'actorId': 149, 'params': 34320, 'raw': '0095f7520208035f8000000000008610', 'spawnParams': 34320 },
+    ],
+    'location': 'MQ Water Temple GS Three Torch',
+  },
+  {
+    'key': 'oot-gold-05-0da',
+    'game': 'oot',
+    'scene': 5,
+    'reward': 218,
+    'slots': [
+      { 'mq': true, 'room': 10, 'setup': 0, 'slot': 13, 'offset': 32302, 'actorId': 149, 'params': 34308, 'raw': '0095fb7e035c003a0000400000008604', 'spawnParams': 34308 },
+    ],
+    'location': 'MQ Water Temple GS High Water Changer',
+  },
+  {
+    'key': 'oot-gold-05-0db',
+    'game': 'oot',
+    'scene': 5,
+    'reward': 219,
+    'slots': [
+      { 'mq': true, 'room': 12, 'setup': 0, 'slot': 21, 'offset': 32960, 'actorId': 149, 'params': 34312, 'raw': '0095fe760000f3c80000400000008608', 'spawnParams': 34312 },
+    ],
+    'location': 'MQ Water Temple GS Side Loop',
+  },
+  {
+    'key': 'oot-gold-05-0d8',
+    'game': 'oot',
+    'scene': 5,
+    'reward': 216,
+    'slots': [
+      { 'mq': true, 'room': 20, 'setup': 0, 'slot': 14, 'offset': 34544, 'actorId': 149, 'params': 34305, 'raw': '0095033401c6021c0000400000008601', 'spawnParams': 34305 },
+    ],
+    'location': 'MQ Water Temple GS Lizalfos Hallway',
+  },
+  {
+    'key': 'oot-gold-05-0d9',
+    'game': 'oot',
+    'scene': 5,
+    'reward': 217,
+    'slots': [
+      { 'mq': true, 'room': 21, 'setup': 0, 'slot': 15, 'offset': 34922, 'actorId': 149, 'params': 34306, 'raw': '0095f5fb01f9f55400000000582e8602', 'spawnParams': 34306 },
+    ],
+    'location': 'MQ Water Temple GS River',
+  },
+  {
+    'key': 'oot-gold-06-0e0',
+    'game': 'oot',
+    'scene': 6,
+    'reward': 224,
+    'slots': [
+      { 'mq': true, 'room': 8, 'setup': 0, 'slot': 23, 'offset': 37910, 'actorId': 149, 'params': 34561, 'raw': '0095fb9a046201a50000000000008701', 'spawnParams': 34561 },
+    ],
+    'location': 'MQ Spirit Temple GS Sun Block Room',
+  },
+  {
+    'key': 'oot-gold-06-0e3',
+    'game': 'oot',
+    'scene': 6,
+    'reward': 227,
+    'slots': [
+      { 'mq': true, 'room': 12, 'setup': 0, 'slot': 9, 'offset': 38492, 'actorId': 149, 'params': 34568, 'raw': '009506c70000f9664000a00000008708', 'spawnParams': 34568 },
+    ],
+    'location': 'MQ Spirit Temple GS Symphony Room',
+  },
+  {
+    'key': 'oot-gold-06-0e1',
+    'game': 'oot',
+    'scene': 6,
+    'reward': 225,
+    'slots': [
+      { 'mq': true, 'room': 14, 'setup': 0, 'slot': 2, 'offset': 38876, 'actorId': 149, 'params': 34562, 'raw': '00950205010efc158000000000008702', 'spawnParams': 34562 },
+    ],
+    'location': 'MQ Spirit Temple GS Leever Room',
+  },
+  {
+    'key': 'oot-gold-06-0e2',
+    'game': 'oot',
+    'scene': 6,
+    'reward': 226,
+    'slots': [
+      { 'mq': true, 'room': 22, 'setup': 0, 'slot': 10, 'offset': 40412, 'actorId': 149, 'params': 34564, 'raw': '0095019a06c9fb224000400000008704', 'spawnParams': 34564 },
+    ],
+    'location': 'MQ Spirit Temple GS Top Floor Left Wall',
+  },
+  {
+    'key': 'oot-gold-06-0e4',
+    'game': 'oot',
+    'scene': 6,
+    'reward': 228,
+    'slots': [
+      { 'mq': true, 'room': 22, 'setup': 0, 'slot': 11, 'offset': 40428, 'actorId': 149, 'params': 34576, 'raw': '009502a906acf97c4000000000008710', 'spawnParams': 34576 },
+    ],
+    'location': 'MQ Spirit Temple GS Top Floor Back Wall',
+  },
+  {
+    'key': 'oot-gold-07-0ea',
+    'game': 'oot',
+    'scene': 7,
+    'reward': 234,
+    'slots': [
+      { 'mq': true, 'room': 3, 'setup': 0, 'slot': 0, 'offset': 42480, 'actorId': 149, 'params': 34820, 'raw': '0095f3e9fa87020f4000000000008804', 'spawnParams': 34820 },
+    ],
+    'location': 'MQ Shadow Temple GS Pre-Boss',
+  },
+  {
+    'key': 'oot-gold-07-0e9',
+    'game': 'oot',
+    'scene': 7,
+    'reward': 233,
+    'slots': [
+      { 'mq': true, 'room': 10, 'setup': 0, 'slot': 1, 'offset': 43824, 'actorId': 149, 'params': 34818, 'raw': '00950302fb080fe2c000400000008802', 'spawnParams': 34818 },
+    ],
+    'location': 'MQ Shadow Temple GS Spike Curtain',
+  },
+  {
+    'key': 'oot-gold-07-0e8',
+    'game': 'oot',
+    'scene': 7,
+    'reward': 232,
+    'slots': [
+      { 'mq': true, 'room': 19, 'setup': 0, 'slot': 4, 'offset': 46110, 'actorId': 149, 'params': 34817, 'raw': '009513f4fb5dff824000c00000008801', 'spawnParams': 34817 },
+    ],
+    'location': 'MQ Shadow Temple GS Wind Hint',
+  },
+  {
+    'key': 'oot-gold-07-0eb',
+    'game': 'oot',
+    'scene': 7,
+    'reward': 235,
+    'slots': [
+      { 'mq': true, 'room': 20, 'setup': 0, 'slot': 2, 'offset': 46224, 'actorId': 149, 'params': 34824, 'raw': '00951063faadfaed00001c7200008808', 'spawnParams': 34824 },
+    ],
+    'location': 'MQ Shadow Temple GS After Wind Bomb',
+  },
+  {
+    'key': 'oot-gold-07-0ec',
+    'game': 'oot',
+    'scene': 7,
+    'reward': 236,
+    'slots': [
+      { 'mq': true, 'room': 21, 'setup': 0, 'slot': 14, 'offset': 46618, 'actorId': 149, 'params': 34832, 'raw': '0095f7fffa35fa754000000000008810', 'spawnParams': 34832 },
+    ],
+    'location': 'MQ Shadow Temple GS After Boat',
+  },
+  {
+    'key': 'oot-gold-08-0f0',
+    'game': 'oot',
+    'scene': 8,
+    'reward': 240,
+    'slots': [
+      { 'mq': true, 'room': 1, 'setup': 0, 'slot': 20, 'offset': 48188, 'actorId': 149, 'params': 35073, 'raw': '0095fc76fd30fa290000000000008901', 'spawnParams': 35073 },
+    ],
+    'location': 'MQ Bottom of the Well GS Basement',
+  },
+  {
+    'key': 'oot-gold-08-0f2',
+    'game': 'oot',
+    'scene': 8,
+    'reward': 242,
+    'slots': [
+      { 'mq': true, 'room': 2, 'setup': 0, 'slot': 3, 'offset': 48416, 'actorId': 149, 'params': 35076, 'raw': '0095f6120000fc6a0000000000008904', 'spawnParams': 35076 },
+    ],
+    'location': 'MQ Bottom of the Well GS Coffin Room',
+  },
+  {
+    'key': 'oot-gold-08-0f1',
+    'game': 'oot',
+    'scene': 8,
+    'reward': 241,
+    'slots': [
+      { 'mq': true, 'room': 6, 'setup': 0, 'slot': 6, 'offset': 49278, 'actorId': 149, 'params': 35074, 'raw': '0095feb60000fbb90000000000008902', 'spawnParams': 35074 },
+    ],
+    'location': 'MQ Bottom of the Well GS West Middle Room',
+  },
+  {
+    'key': 'oot-gold-09-0f8',
+    'game': 'oot',
+    'scene': 9,
+    'reward': 248,
+    'slots': [
+      { 'mq': true, 'room': 5, 'setup': 0, 'slot': 7, 'offset': 50362, 'actorId': 149, 'params': 35329, 'raw': '0095fb8000b9f9870000288900008a01', 'spawnParams': 35329 },
+    ],
+    'location': 'MQ Ice Cavern GS Scarecrow',
+  },
+  {
+    'key': 'oot-gold-09-0fa',
+    'game': 'oot',
+    'scene': 9,
+    'reward': 250,
+    'slots': [
+      { 'mq': true, 'room': 5, 'setup': 0, 'slot': 8, 'offset': 50378, 'actorId': 149, 'params': 35332, 'raw': '0095fa8e0000ff170000800000008a04', 'spawnParams': 35332 },
+    ],
+    'location': 'MQ Ice Cavern GS Clear Blocks',
+  },
+  {
+    'key': 'oot-gold-09-0f9',
+    'game': 'oot',
+    'scene': 9,
+    'reward': 249,
+    'slots': [
+      { 'mq': true, 'room': 9, 'setup': 0, 'slot': 14, 'offset': 51146, 'actorId': 149, 'params': 35330, 'raw': '0095017800d5f8000000000000008a02', 'spawnParams': 35330 },
+    ],
+    'location': 'MQ Ice Cavern GS Compass Room',
+  },
+] as const;

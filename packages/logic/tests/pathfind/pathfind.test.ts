@@ -48,6 +48,7 @@ function makeWorld(areas: World['areas'], locations: string[] = []): World {
     checkItems: new Map(locations.map(l => [l, Items.NOTHING])),
     songLocations: new Set(),
     warpLocations: new Set(),
+    enemyPlan: [],
     prices: [],
     songEventsOot: [],
     songEventsMm: [],

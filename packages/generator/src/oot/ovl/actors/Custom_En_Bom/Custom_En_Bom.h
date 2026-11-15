@@ -35,6 +35,7 @@ typedef struct EnBomMM {
     /* 0x1F9 */ u8 isPowderKeg;
     /* 0x1FA */ s16 unk_1FA;
     /* 0x1FC */ u8 unk_1FC;
+    u8 isBlastMask;
     /* 0x200 */ EnBomMMActionFunc actionFunc;
 } EnBomMM; // size = 0x204
 

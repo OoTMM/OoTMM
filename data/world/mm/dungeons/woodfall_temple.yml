@@ -127,6 +127,8 @@
     "WARP_SONGS": "true"
   events:
     WFT_MAP_ROOM_ENEMIES: "can_kill_snappers_flowers"
+  enemy_clear_events:
+    WFT_MAP_ROOM_ENEMIES: { scene: 27, room: 6, setup: 0, slots: [0, 1, 2], vanilla: can_kill_snappers_flowers }
   locations:
     "Woodfall Temple Map": "event(WFT_MAP_ROOM_ENEMIES)"
     "Woodfall Temple Grass Map Room 1": "true"
@@ -157,6 +159,8 @@
     "WARP_SONGS": "true"
   events:
     WFT_COMPASS_ROOM_ENEMIES: "can_kill_dragonflies"
+  enemy_clear_events:
+    WFT_COMPASS_ROOM_ENEMIES: { scene: 27, room: 4, setup: 0, slots: [3, 4], vanilla: can_kill_dragonflies }
   locations:
     "Woodfall Temple Compass": "event(WFT_COMPASS_ROOM_ENEMIES)"
     "Woodfall Temple Grass Compass Room 1": "true"
@@ -173,6 +177,8 @@
     STICKS: "can_kill_baba_sticks"
     NUTS: "can_kill_baba_nuts"
     WFT_DARK_ROOM_ENEMIES: "can_kill_boes"
+  enemy_clear_events:
+    WFT_DARK_ROOM_ENEMIES: { scene: 27, room: 9, setup: 0, slots: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], vanilla: can_kill_boes }
   locations:
     "Woodfall Temple Dark Chest": "event(WFT_DARK_ROOM_ENEMIES)"
 
@@ -239,7 +245,9 @@
     "Woodfall Temple Water Room Upper Ledge": "event(WFT_BOW_ROOM_ENEMIES)"
     "WARP_SONGS": "true"
   events:
-    WFT_BOW_ROOM_ENEMIES: "can_kill_lizalfos_dinolfos"
+    WFT_BOW_ROOM_ENEMIES: "can_kill_dinolfos"
+  enemy_clear_events:
+    WFT_BOW_ROOM_ENEMIES: { scene: 27, room: 7, setup: 0, slots: [0], vanilla: can_kill_dinolfos }
   locations:
     "Woodfall Temple Bow": "event(WFT_BOW_ROOM_ENEMIES)"
 

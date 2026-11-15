@@ -25,3 +25,5 @@ void EnDekubaba_GiveItemDefaultRange(Actor* this, PlayState* play, s16 gi)
 
 PATCH_CALL(0x808fdde4, EnDekubaba_GiveItemDefaultRange);
 PATCH_CALL(0x809baebc, EnDekubaba_GiveItemDefaultRange); /* En_Karebaba */
+
+EXPORT_SYMBOL(ENEMY_NATIVE_RENEWABLE_BABA_ITEM_OOT_V1, EnDekubaba_GiveItemDefaultRange);

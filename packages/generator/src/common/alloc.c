@@ -1,4 +1,8 @@
 #include <combo.h>
+#if defined(GAME_OOT)
+#include <combo/oot_gameplay_memory.h>
+static void* sGameplayHeap;
+#endif
 
 #define SENTINEL 0x99999999
 
@@ -19,15 +23,28 @@ void initHeap(void)
     gHeapFirstBlock = (HeapBlockHeader*)HEAP_BASE;
     gHeapFirstBlock->next = NULL;
     gHeapFirstBlock->prev = NULL;
+#if defined(GAME_OOT)
+    sGameplayHeap = NULL;
+#endif
     gHeapFirstBlock->size = HEAP_SIZE;
     gHeapFirstBlock->free = 1;
 
 #if defined(DEBUG_ALLOC)
     memset((char*)HEAP_BASE + 0x10, 0x99, HEAP_SIZE - 0x10);
 #endif
+#if defined(GAME_OOT)
+    if (comboEnemyOotHeadroomEnabled())
+    {
+        HeapBlockHeader* block = (void*)OOT_GAMEPLAY_CUSTOM_BASE;
+        block->next = block->prev = NULL;
+        block->size = OOT_GAMEPLAY_CUSTOM_RESERVE;
+        block->free = 1;
+        sGameplayHeap = block;
+    }
+#endif
 }
 
-static void* _malloc(size_t size)
+static void* _mallocFrom(HeapBlockHeader* first, size_t size)
 {
     HeapBlockHeader* best;
     HeapBlockHeader* block;
@@ -44,7 +61,7 @@ static void* _malloc(size_t size)
 
     /* Search for the smallest block */
     best = NULL;
-    block = gHeapFirstBlock;
+    block = first;
     while (block)
     {
         /* Check for a smaller block */
@@ -86,6 +103,11 @@ static void* _malloc(size_t size)
     best->free = 0;
 
     return &best[1];
+}
+
+static void* _malloc(size_t size)
+{
+    return _mallocFrom(gHeapFirstBlock, size);
 }
 
 static void mergeFreeBlocks(HeapBlockHeader* block)
@@ -295,6 +317,39 @@ void* malloc(size_t size)
 
     mask = osSetIntMask(1);
     ptr = _malloc(size);
+    osSetIntMask(mask);
+    return ptr;
+}
+
+void* mallocGameplay(size_t size)
+{
+    u64 mask = osSetIntMask(1);
+    void* ptr = NULL;
+#if defined(GAME_OOT)
+    if (sGameplayHeap)
+        ptr = _mallocFrom(sGameplayHeap, size);
+#endif
+    if (!ptr)
+        ptr = _malloc(size);
+    osSetIntMask(mask);
+    return ptr;
+}
+
+void* mallocWithReserve(size_t size, size_t reserve)
+{
+    u64 mask = osSetIntMask(1);
+    void* ptr = _malloc(size);
+    if (ptr && reserve)
+    {
+        HeapBlockHeader* block = gHeapFirstBlock;
+        while (block && (!block->free || block->size - sizeof(*block) < reserve))
+            block = block->next;
+        if (!block)
+        {
+            _free(ptr);
+            ptr = NULL;
+        }
+    }
     osSetIntMask(mask);
     return ptr;
 }

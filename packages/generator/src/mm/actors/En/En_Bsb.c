@@ -121,3 +121,6 @@ void EnBsb_WaitForSong(EnBsb* this, PlayState* play) {
 }
 
 PATCH_FUNC(0x80c0bfe8, EnBsb_WaitForSong)
+
+EXPORT_SYMBOL(ENEMY_SCRIPTED_MM_KEETA_VICTORY_V1, EnBsb_OnDeath);
+EXPORT_SYMBOL(ENEMY_SCRIPTED_MM_KEETA_SONG_V1, EnBsb_WaitForSong);

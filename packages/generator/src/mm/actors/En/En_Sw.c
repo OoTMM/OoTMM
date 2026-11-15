@@ -19,3 +19,5 @@ static void EnSw_GoldPreDraw1(Actor* this, PlayState* play, int unk)
 }
 
 PATCH_CALL(0x808db928, EnSw_GoldPreDraw1);
+
+EXPORT_SYMBOL(ENEMY_NATIVE_SKULLWALLTULA_TOKEN_DRAW_V1, EnSw_GoldPreDraw1);

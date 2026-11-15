@@ -59,18 +59,44 @@ export class ExprParser {
   private ctx: ParseContext[] = [];
   private macros: {[k: string]: Macro} = {};
   private vars: Map<string, number> = new Map;
+  private macroSpecializations = new Map<string, string>();
+  private parsedMacros = new Map<string, Expr>();
+  private macroCacheDepth = 0;
+
+  withMacroCache<T>(parse: () => T): T {
+    if (!this.macroCacheDepth) this.parsedMacros.clear();
+    ++this.macroCacheDepth;
+    try {
+      return parse();
+    }
+    finally {
+      if (!--this.macroCacheDepth) this.parsedMacros.clear();
+    }
+  }
 
   constructor(private settings: Settings, private resolvedFlags: ResolvedWorldFlags, private game: Game) {}
 
   addMacro(name: string, args: string[], buffer: string) {
+    this.parsedMacros.clear();
     this.macros[name] = { args, buffer };
   }
 
+  addMacroSpecialization(name: string, args: readonly (string | number)[], buffer: string) {
+    const macro = this.macros[name];
+    if (!macro || macro.args.length !== args.length) throw new Error(`Invalid macro specialization: ${name}`);
+    const key = name + JSON.stringify(args);
+    if (this.macroSpecializations.has(key)) throw new Error(`Duplicate macro specialization: ${name}`);
+    this.parsedMacros.clear();
+    this.macroSpecializations.set(key, buffer);
+  }
+
   addVar(name: string, value: number) {
+    this.parsedMacros.clear();
     this.vars.set(name, value);
   }
 
   parse(input: string) {
+    if (!this.macroCacheDepth) this.parsedMacros.clear();
     this.ctx.push({ buffer: input, cursor: 0, macroValues: {} });
 
     const expr = this.parseExpr();
@@ -457,6 +483,10 @@ export class ExprParser {
       throw this.error(`Expected ${macro.args.length} arguments at ${this.ctx[0].cursor}`);
     }
 
+    const cacheKey = name + JSON.stringify(args);
+    const cached = this.parsedMacros.get(cacheKey);
+    if (cached) return cached;
+
     /* Zip the arguments */
     const macroValues: {[k: string]: Token} = {};
     for (let i = 0; i < macro.args.length; i++) {
@@ -464,7 +494,8 @@ export class ExprParser {
     }
 
     /* Setup the context */
-    this.ctx.push({ buffer: macro.buffer, cursor: 0, macroValues });
+    const specialization = this.macroSpecializations.get(name + JSON.stringify(args.map(arg => 'value' in arg ? arg.value : undefined)));
+    this.ctx.push({ buffer: specialization ?? macro.buffer, cursor: 0, macroValues });
 
     /* Parse */
     const expr = this.parseExpr();
@@ -473,6 +504,7 @@ export class ExprParser {
     }
     this.expect('EOF');
     this.ctx.pop();
+    this.parsedMacros.set(cacheKey, expr);
     return expr;
   }
 

@@ -59,6 +59,7 @@ typedef struct EnBigokuta
     /* 0x148 */ SkelAnime skelAnime;
     /* 0x18C */ EnBigokutaActionFunc actionFunc;
     /* 0x190 */ u8 drawDmgEffType;
+    u8 selectedCombat;
     /* 0x192 */ s16 timer;
     /* 0x194 */ s16 subCamId;
     /* 0x196 */ s16 csId;

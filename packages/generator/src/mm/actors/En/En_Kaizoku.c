@@ -15,3 +15,5 @@ void EnKaizoku_ThrowOut(PlayState* play)
 }
 
 PATCH_CALL(0x80b86ae0, EnKaizoku_ThrowOut);
+
+EXPORT_SYMBOL(ENEMY_NATIVE_FIGHTER_THROWOUT_V1, EnKaizoku_ThrowOut);

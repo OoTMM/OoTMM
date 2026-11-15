@@ -64,6 +64,7 @@ type UnionToIntersection<U> =
 export type SettingsBase = UnionToIntersection<SettingShapes>;
 
 type SettingsPlando = {
+  enemyTargets?: Partial<Record<'oot' | 'mm', string>>;
   locations: {[k: string]: string | null};
   entrances: Record<Entrance, Entrance>;
   songEvents: PlandoSongEvents;
@@ -71,6 +72,8 @@ type SettingsPlando = {
 export type Settings = SettingsBase & {
   startingItems: {[k: string]: number};
   junkLocations: string[];
+  enemyShuffleExcluded: string[];
+  enemyShuffleWeights: Record<string, number>;
   tricks: TrickKey[];
   specialConds: SpecialConds;
   plando: SettingsPlando;

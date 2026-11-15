@@ -1,3 +1,6 @@
+#include <combo/enemy_soul_preview.h>
+#include <combo/enemy_gold.h>
+#include <combo/enemy.h>
 #include <combo.h>
 #include <combo/dungeon.h>
 #include <combo/souls.h>
@@ -9,12 +12,20 @@
 #include <combo/multi.h>
 #include <combo/actors.h>
 
+void comboEnemyGohmaHatchedWrap(Actor *, PlayState *);
+
 static s16 sActorIdToSpawn;
 
 static int opt(int x)
 {
     return x > 0 ? 1 : -1;
 }
+
+#if defined(DEBUG)
+extern int gDebugEnemySpawn;
+#endif
+
+int gOotBariChildSpawn;
 
 static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
 {
@@ -23,6 +34,8 @@ static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
 
     switch (actorId)
     {
+    case 0x073:
+        return variable ? 1 : comboHasSoulOot(GI_OOT_SOUL_ENEMY_ARWING);
     case ACTOR_EN_DS:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_OLD_HAG));
     case ACTOR_EN_JS:
@@ -77,7 +90,7 @@ static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
     case ACTOR_EN_PEEHAT:
         return comboHasSoulOot(GI_OOT_SOUL_ENEMY_PEAHAT);
     case ACTOR_EN_ZF:
-        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_LIZALFOS_DINOLFOS);
+        return comboHasSoulOot((u16)variable == 0xfffe ? GI_OOT_SOUL_ENEMY_DINOLFOS : GI_OOT_SOUL_ENEMY_LIZALFOS);
     case ACTOR_EN_GOMA:
         if (play->sceneId == SCE_OOT_LAIR_GOHMA)
             return 1;
@@ -89,8 +102,9 @@ static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
     case ACTOR_EN_TORCH2:
         return comboHasSoulOot(GI_OOT_SOUL_ENEMY_DARK_LINK);
     case ACTOR_EN_BILI:
+        return gOotBariChildSpawn || comboHasSoulOot(GI_OOT_SOUL_ENEMY_BIRI);
     case ACTOR_EN_VALI:
-        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_BIRI_BARI);
+        return comboHasSoulOot(GI_OOT_SOUL_ENEMY_BARI);
     case ACTOR_EN_TP:
         return comboHasSoulOot(GI_OOT_SOUL_ENEMY_TAILPASARN);
     case ACTOR_EN_ST:
@@ -341,11 +355,21 @@ Actor *Actor_SpawnWrapper(ActorContext *actorCtx, PlayState *play, short actorId
     int ret;
     Actor *actor;
 
+    if (comboIsForeignEnemyActor(actorId))
+        return comboSpawnForeignEnemy(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, 0x7f, 0x3ff, NULL);
+
     if (actorId < 0 || !canSpawnActor(play, actorId, variable))
         return NULL;
 
-    ret = canSpawnSoul(play, actorId, variable);
+    comboEnemySoulPreviewGateBegin();
+#if defined(DEBUG)
+    if (gDebugEnemySpawn)
+        ret = 1;
+    else
+#endif
+        ret = canSpawnSoul(play, actorId, variable);
 
+    ret = comboEnemySoulPreviewGate(play, 0, actorId, variable, x, y, z, ry, ret);
     if (ret <= 0)
     {
         if (ret == 0)
@@ -394,8 +418,15 @@ Actor *Actor_SpawnWrapper(ActorContext *actorCtx, PlayState *play, short actorId
         if (((variable >> 8) & 0xff) == 3)
             return NULL;
 
+    int hatchedGohma = actorId == ACTOR_EN_GOMA && variable == 0x4006;
+    if (hatchedGohma)
+        variable = 6;
     sActorIdToSpawn = actorId;
     actor = _Actor_Spawn(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable);
+    if (hatchedGohma)
+        comboEnemyGohmaHatchedWrap(actor, play);
+    if (actorId == ACTOR_EN_SW)
+        comboEnemyGoldWrap(actor, play, variable);
     if (actorId == ACTOR_ARMS_HOOK && gSave.age == AGE_ADULT)
         actor->objectSlot = Object_GetSlot(&play->objectCtx, 0x14);
     return actor;
@@ -405,6 +436,13 @@ static int GetRoomClearFlagForActor(PlayState *play, int flag)
 {
     int res;
 
+#if defined(DEBUG)
+    if (gDebugEnemySpawn)
+        return 0;
+#endif
+
+    if (comboEnemyGoldSpawning())
+        return 0;
     res = Flags_GetClear(play, flag);
     if (Config_Flag(CFG_ER_WALLMASTERS) && sActorIdToSpawn == ACTOR_EN_WALLMAS)
         res = 0;
@@ -505,5 +543,6 @@ void Actor_RunUpdate(Actor *this, PlayState *play, ActorFunc update)
 
 void Actor_AfterDrawAll(void)
 {
+    comboEnemySoulPreviewDraw(gPlay);
     Multi_DrawWisps(gPlay);
 }

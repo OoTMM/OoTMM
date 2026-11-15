@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/souls.h>
+#include <combo/enemy_soul_preview.h>
 
 extern const u16 kAddItemParams[];
 
@@ -14,7 +15,14 @@ static void soulInfosOot(u8** bm, int* index, s16 gi)
 
     switch (type)
     {
-    case 0: *bm = gSharedCustomSave.soulsEnemyOot; break;
+    case 0:
+        *bm = gSharedCustomSave.soulsEnemyOot;
+        if (*index >= 64)
+        {
+            *bm = gSharedCustomSave.soulsEnemyOotOverflow;
+            *index -= 64;
+        }
+        break;
     case 1: *bm = gSharedCustomSave.soulsBossOot; break;
     case 2: *bm = gSharedCustomSave.soulsNpcOot; break;
     case 3: *bm = gSharedCustomSave.soulsAnimalsOot; break;
@@ -34,7 +42,14 @@ static void soulInfosMm(u8** bm, int* index, s16 gi)
 
     switch (type)
     {
-    case 0: *bm = gSharedCustomSave.soulsEnemyMm; break;
+    case 0:
+        *bm = gSharedCustomSave.soulsEnemyMm;
+        if (*index >= 64)
+        {
+            *bm = gSharedCustomSave.soulsEnemyMmOverflow;
+            *index -= 64;
+        }
+        break;
     case 1: *bm = gSharedCustomSave.soulsBossMm; break;
     case 2: *bm = gSharedCustomSave.soulsNpcMm; break;
     case 3: *bm = gSharedCustomSave.soulsAnimalsMm; break;
@@ -67,7 +82,9 @@ int comboHasSoulOot(s16 gi)
     int index;
 
     soulInfosOot(&bm, &index, gi);
-    return !!BITMAP8_GET(bm, index);
+    int present = !!BITMAP8_GET(bm, index);
+    comboEnemySoulPreviewObserve(0, gi, present, (kAddItemParams[gi - 1] >> 12) == 0);
+    return present;
 }
 
 int comboHasSoulMm(s16 gi)
@@ -76,5 +93,7 @@ int comboHasSoulMm(s16 gi)
     int index;
 
     soulInfosMm(&bm, &index, gi);
-    return !!BITMAP8_GET(bm, index);
+    int present = !!BITMAP8_GET(bm, index);
+    comboEnemySoulPreviewObserve(1, gi, present, (kAddItemParams[gi - 1] >> 12) == 0);
+    return present;
 }

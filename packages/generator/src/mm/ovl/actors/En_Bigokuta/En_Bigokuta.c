@@ -1,6 +1,7 @@
 #include "En_Bigokuta.h"
 
 #include <combo.h>
+#include <combo/global.h>
 
 #define FLAGS (ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE)
 
@@ -22,6 +23,7 @@ void EnBigokuta_SetupHoldPlayer(EnBigokuta *this);
 void EnBigokuta_HoldPlayer(EnBigokuta *this, PlayState *play);
 void EnBigokuta_PlayDeathCutscene(EnBigokuta *this, PlayState *play);
 void EnBigokuta_SetupDeathEffects(EnBigokuta *this);
+void EnBigokuta_ShootPlayer(EnBigokuta *this, PlayState *play);
 void EnBigokuta_PlayDeathEffects(EnBigokuta *this, PlayState *play);
 
 ActorProfile En_Bigokuta_Profile = {
@@ -86,6 +88,32 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 33, ICHAIN_STOP),
 };
 
+static const u32 kBigOctoCombatAbi[] = { 0x424f4354, 1, 0x49, 12, 150, 285, (u32)-1350 };
+EXPORT_SYMBOL(ENEMY_NATIVE_BIG_OCTO_MM_V1, kBigOctoCombatAbi);
+
+static int EnBigokuta_IsSelectedCombat(Actor *actor, PlayState *play)
+{
+    return actor->params == 0xff && actor->csId == CS_ID_NONE && play->sceneId == 0x49 && actor->room == 12 &&
+           play->roomCtx.curRoom.num == 12 && actor->home.pos.x == 150.f && actor->home.pos.y == 285.f &&
+           actor->home.pos.z == -1350.f;
+}
+
+static int EnBigokuta_CheckSelectedWater(Actor *actor, PlayState *play)
+{
+    Vec3f probe = actor->home.pos;
+    f32 surface;
+    void *box;
+    CollisionPoly *floor = NULL;
+    s32 bgId;
+    s32 (*getWater)(PlayState *, CollisionContext *, f32, f32, f32 *, void **, s32 *) = (void *)0x800c9ebc;
+    if (!getWater(play, &play->colCtx, probe.x, probe.z, &surface, &box, &bgId) || !box || bgId != BGCHECK_SCENE ||
+        surface != 285.f)
+        return 0;
+    probe.y -= 99.f;
+    f32 floorY = BgCheck_EntityRaycastFloor5_2(play, &play->colCtx, &floor, &bgId, actor, &probe);
+    return floor && bgId == BGCHECK_SCENE && floorY < surface - 110.f;
+}
+
 void EnBigokuta_Init(Actor *thisx, PlayState *play)
 {
     EnBigokuta *this = (EnBigokuta *)thisx;
@@ -99,14 +127,26 @@ void EnBigokuta_Init(Actor *thisx, PlayState *play)
     CollisionCheck_SetInfo(&this->picto.actor.colChkInfo, NULL, &sColChkInfoInit);
     this->csId = CutsceneManager_GetAdditionalCsId(this->picto.actor.csId);
 
-    if (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) ||
+    this->selectedCombat = EnBigokuta_IsSelectedCombat(thisx, play);
+    if (this->selectedCombat && !EnBigokuta_CheckSelectedWater(thisx, play))
+    {
+        g.roomEnemyLackSoul = 1;
+        Actor_Kill(thisx);
+        return;
+    }
+    if (!this->selectedCombat && (MM_GET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF) ||
         ((EN_BIGOKUTA_GET_SWITCH_FLAG(&this->picto.actor) != 0xFF) &&
-         Flags_GetSwitch(play, EN_BIGOKUTA_GET_SWITCH_FLAG(&this->picto.actor))))
+         Flags_GetSwitch(play, EN_BIGOKUTA_GET_SWITCH_FLAG(&this->picto.actor)))))
     {
         Actor_Kill(&this->picto.actor);
     }
     else
     {
+        if (this->selectedCombat)
+        {
+            Actor_ChangeCategory(play, &play->actorCtx, thisx, ACTORCAT_ENEMY);
+            thisx->flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
+        }
         this->picto.actor.world.pos.y -= 99.0f;
         EnBigokuta_SetupIdle(this);
     }
@@ -121,6 +161,10 @@ void EnBigokuta_Init(Actor *thisx, PlayState *play)
 void EnBigokuta_Destroy(Actor *thisx, PlayState *play)
 {
     EnBigokuta *this = (EnBigokuta *)thisx;
+
+    Player *player = GET_PLAYER(play);
+    if (this->selectedCombat && player && player->actor.parent == thisx)
+        EnBigokuta_ShootPlayer(this, play);
 
     Collider_DestroyCylinder(play, &this->shellCollider);
     Collider_DestroyCylinder(play, &this->bodyCollider);
@@ -324,7 +368,8 @@ void EnBigokuta_SetupSuckInPlayer(EnBigokuta *this, PlayState *play)
     this->timer = 0;
 
     Animation_Change(&this->skelAnime, (AnimationHeader *)&gBigOctoIdleAnim, 1.0f, 12.0f, 12.0f, ANIMMODE_ONCE, -3.0f);
-    CutsceneManager_Queue(this->picto.actor.csId);
+    if (!this->selectedCombat)
+        CutsceneManager_Queue(this->picto.actor.csId);
 
     this->playerHoldPos.x = (Math_SinS(this->picto.actor.shape.rot.y) * 66.0f) + this->picto.actor.world.pos.x;
     this->playerHoldPos.y = (this->picto.actor.home.pos.y - 49.5f) + 42.899998f;
@@ -403,10 +448,11 @@ void EnBigokuta_HoldPlayer(EnBigokuta *this, PlayState *play)
 
 void EnBigokuta_SetupDeathCutscene(EnBigokuta *this)
 {
-    CutsceneManager_Queue(this->csId);
+    if (!this->selectedCombat)
+        CutsceneManager_Queue(this->csId);
     this->timer = 0;
     this->bodyCollider.base.acFlags &= ~AC_ON;
-    if (Config_Flag(CFG_MM_SKIP_CUTSCENES))
+    if (!this->selectedCombat && Config_Flag(CFG_MM_SKIP_CUTSCENES))
     {
         if (EN_BIGOKUTA_GET_SWITCH_FLAG(&this->picto.actor) != 0xFF)
         {
@@ -437,18 +483,21 @@ void EnBigokuta_PlayDeathCutscene(EnBigokuta *this, PlayState *play)
             EnBigokuta_SetupDeathEffects(this);
         }
     }
-    else if (CutsceneManager_IsNext(this->csId))
+    else if (this->selectedCombat || CutsceneManager_IsNext(this->csId))
     {
-        CutsceneManager_Start(this->csId, &this->picto.actor);
+        if (!this->selectedCombat)
+        {
+            CutsceneManager_Start(this->csId, &this->picto.actor);
 
-        if (!MM_CHECK_EVENT_INF(EVENTINF_41) && !MM_CHECK_EVENT_INF(EVENTINF_35))
-        {
-            Player_SetCsAction(play, &this->picto.actor, PLAYER_CSACTION_WAIT);
-        }
-        else
-        {
-            player = GET_PLAYER(play);
-            player->stateFlags1 |= PLAYER_STATE1_MM_20;
+            if (!MM_CHECK_EVENT_INF(EVENTINF_41) && !MM_CHECK_EVENT_INF(EVENTINF_35))
+            {
+                Player_SetCsAction(play, &this->picto.actor, PLAYER_CSACTION_WAIT);
+            }
+            else
+            {
+                player = GET_PLAYER(play);
+                player->stateFlags1 |= PLAYER_STATE1_MM_20;
+            }
         }
 
         if (this->drawDmgEffType == ACTOR_DRAW_DMGEFF_FROZEN_NO_SFX)
@@ -532,18 +581,23 @@ void EnBigokuta_PlayDeathEffects(EnBigokuta *this, PlayState *play)
                     Flags_SetSwitch(play, EN_BIGOKUTA_GET_SWITCH_FLAG(&this->picto.actor));
                 }
 
-                CutsceneManager_Stop(this->csId);
+                if (this->selectedCombat)
+                    this->picto.actor.colChkInfo.health = 0;
+                else
+                    CutsceneManager_Stop(this->csId);
                 Actor_Kill(&this->picto.actor);
 
-                if (!MM_CHECK_EVENT_INF(EVENTINF_41) && !MM_CHECK_EVENT_INF(EVENTINF_35))
+                if (!this->selectedCombat)
                 {
-                    Player_SetCsAction(play, &this->picto.actor, PLAYER_CSACTION_END);
-                }
-                else
-                {
-                    Player *player = GET_PLAYER(play);
-
-                    player->stateFlags1 &= ~PLAYER_STATE1_MM_20;
+                    if (!MM_CHECK_EVENT_INF(EVENTINF_41) && !MM_CHECK_EVENT_INF(EVENTINF_35))
+                    {
+                        Player_SetCsAction(play, &this->picto.actor, PLAYER_CSACTION_END);
+                    }
+                    else
+                    {
+                        Player *player = GET_PLAYER(play);
+                        player->stateFlags1 &= ~PLAYER_STATE1_MM_20;
+                    }
                 }
             }
 
@@ -617,6 +671,8 @@ void EnBigokuta_Update(Actor *thisx, PlayState *play)
 
     if (!EnBigokuta_IsInWater(this, play))
     {
+        if (this->selectedCombat)
+            g.roomEnemyLackSoul = 1;
         Actor_Kill(&this->picto.actor);
         return;
     }

@@ -2,7 +2,7 @@ import { parseChecks } from './checks';
 import { parseDrawGi, parseEntrances, parseGi, parseHints, parseLinkAnimations, parseNpcs, parseRegions, parseScenes } from './common';
 import { parseFiles } from './files';
 import { parseGossips } from './gossips';
-import { emit, emitJson } from './helpers';
+import { emit, emitJson, loadYaml } from './helpers';
 import { parseMacros } from './macros';
 import { parseWorld } from './world';
 
@@ -51,6 +51,8 @@ async function run() {
     emitJson('lib/data-checks.json', checks.checks),
     emitJson('lib/data-checks-xflags.json', checks.matches),
     emitJson('lib/data-macros.json', macros),
+    ...['mm-rooms', 'oot-rooms'].map(async name =>
+      emitJson(`lib/enemy-logic-${name}.json`, await loadYaml(`enemy-logic/${name}.yml`))),
     emitJson('lib/data-world.json', world),
     emitJson('lib/data-regions.json', regions),
     emitJson('lib/data-hints.json', hints),
