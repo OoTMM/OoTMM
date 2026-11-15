@@ -13,10 +13,13 @@ typedef struct {
 } EnemyDependency;
 _Static_assert(sizeof(EnemyDependency) == 16, "MM room dependency ABI");
 typedef struct {
-    EnemyDependency data;
     Vec3f lastPos;
+    u16 params;
+    s16 yaw;
+    u8 hostSlot, type;
     u8 room, slot, seen, done;
 } EnemyDependencyState;
+_Static_assert(sizeof(EnemyDependencyState) == 24, "Compact runtime dependency state");
 static EnemyDependencyState sDependencies[64];
 static u32 sDependencyVrom __attribute__((section(".data"))) = 0;
 EXPORT_SYMBOL(ENEMY_MM_ROOM_DEPENDENCIES_V1, sDependencyVrom);
@@ -39,7 +42,7 @@ void comboEnemyDependenciesBeginRoom(PlayState* play, ActorEntry* list, u32 coun
     {
         EnemyDependencyState* state = &sDependencies[i];
         if (state->room == room || state->room != (u8)play->roomCtx.prefRoom.num)
-            state->data.type = 0;
+            state->type = 0;
     }
     u32 segment = (u32)play->roomCtx.curRoom.segment;
     RomFile* files = play->roomList;
@@ -66,10 +69,14 @@ void comboEnemyDependenciesBeginRoom(PlayState* play, ActorEntry* list, u32 coun
         for (u32 j = 0; j < ARRAY_COUNT(sDependencies); ++j)
         {
             EnemyDependencyState* state = &sDependencies[j];
-            if (state->data.type)
+            if (state->type)
                 continue;
-            *state = (EnemyDependencyState){ .data = data, .room = room, .slot = (data.key - key) / sizeof(*list) };
-            state->lastPos = (Vec3f){ data.pos.x, data.pos.y, data.pos.z };
+            *state = (EnemyDependencyState){
+                .lastPos = { data.pos.x, data.pos.y, data.pos.z },
+                .params = data.params, .yaw = data.yaw,
+                .hostSlot = data.hostSlot, .type = data.type,
+                .room = room, .slot = (data.key - key) / sizeof(*list)
+            };
             break;
         }
     }
@@ -82,10 +89,10 @@ void comboEnemyDependenciesSpawnIce(PlayState* play)
     for (u32 i = 0; i < ARRAY_COUNT(sDependencies); ++i)
     {
         EnemyDependencyState* state = &sDependencies[i];
-        if (state->data.type != 2 || state->done || state->room != (u8)play->roomCtx.curRoom.num)
+        if (state->type != 2 || state->done || state->room != (u8)play->roomCtx.curRoom.num)
             continue;
         Actor* ice = Actor_Spawn(&play->actorCtx, play, ACTOR_OBJ_ICE_POLY,
-                                 state->data.pos.x, state->data.pos.y, state->data.pos.z, 0, state->data.yaw, 0, state->data.params);
+                                 state->lastPos.x, state->lastPos.y, state->lastPos.z, 0, state->yaw, 0, state->params);
         if (ice)
             state->done = 1;
     }
@@ -97,20 +104,20 @@ int comboEnemyFairyHost(Actor* fairy, PlayState* play, Vec3f* pos)
     for (u32 i = 0; i < ARRAY_COUNT(sDependencies); ++i)
     {
         EnemyDependencyState* state = &sDependencies[i];
-        if (state->data.type != 1 || state->room != fairy->room || state->slot != fairy->actorIndex)
+        if (state->type != 1 || state->room != fairy->room || state->slot != fairy->actorIndex)
             continue;
         *pos = state->lastPos;
-        int foreign = comboIsForeignEnemyActor(state->data.params);
-        if (foreign && comboEnemyRoomSlotComplete(state->room, state->data.hostSlot))
+        int foreign = comboIsForeignEnemyActor(state->params);
+        if (foreign && comboEnemyRoomSlotComplete(state->room, state->hostSlot))
             return 2;
         for (u32 cat = 0; cat < ACTORCAT_MAX; ++cat)
         {
             for (Actor* actor = play->actorCtx.actors[cat].first; actor; actor = actor->next)
             {
-                if (actor->room != state->room || actor->actorIndex != state->data.hostSlot || actor->parent)
+                if (actor->room != state->room || actor->actorIndex != state->hostSlot || actor->parent)
                     continue;
-                u16 expected = comboEnemyMmStandaloneMinibossSlot(state->data.params, 0x807f);
-                if (actor->id != state->data.params && actor->id != expected)
+                u16 expected = comboEnemyMmStandaloneMinibossSlot(state->params, 0x807f);
+                if (actor->id != state->params && actor->id != expected)
                     continue;
                 if (actor->init)
                     return 0;

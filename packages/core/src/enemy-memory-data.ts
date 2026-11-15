@@ -1001,6 +1001,7 @@ export const ENEMY_MEMORY_FACTS = {
     'mm/689': { 'object': 300, 'code': 880, 'instance': 512 },
   },
   'foreign': {
+    'mm/275': { 'code': 11952, 'instance': 4148 },
     'mm/300': { 'code': 13440, 'instance': 18648 },
     'mm/301': { 'code': 15920, 'instance': 1280 },
     'mm/341': { 'code': 5632, 'instance': 2244 },
@@ -1052,7 +1053,7 @@ export const ENEMY_MEMORY_FACTS = {
     'oot/53': { 'code': 7920, 'instance': 464 },
     'oot/99': { 'code': 10176, 'instance': 1088 },
     'oot/396': { 'code': 7904, 'instance': 712 },
-    'oot/75': { 'code': 64, 'instance': 1252 },
+    'oot/75': { 'code': 12672, 'instance': 1252 },
     'oot/107': { 'code': 1680, 'instance': 408 },
     'mm/314': { 'code': 10816, 'instance': 2780 },
     'mm/102': { 'code': 9088, 'instance': 704 },
@@ -1062,9 +1063,9 @@ export const ENEMY_MEMORY_FACTS = {
     'oot/29': { 'code': 15296, 'instance': 1060 },
     'oot/432': { 'code': 7696, 'instance': 832 },
     'mm/11': { 'code': 13296, 'instance': 2060 },
-    'oot/277': { 'code': 64, 'instance': 760 },
+    'oot/277': { 'code': 4896, 'instance': 760 },
     'oot/7': { 'code': 2336, 'instance': 340 },
-    'oot/37': { 'code': 64, 'instance': 1376 },
+    'oot/37': { 'code': 16176, 'instance': 1376 },
   },
   'objects': {
     'oot': {
@@ -3140,6 +3141,10 @@ export const ENEMY_MEMORY_FACTS = {
     'mm/WizReflectedBolt': { 'code': 1728, 'instance': 544, 'object': 1 },
   },
   'buildBounds': {
+    'ovl/oot/oot_ovl_Native_Enemy_mm_en_jso.zovlx': { 'memory': 11952, 'profileOffset': 10232, 'instance': 4148 },
+    'ovl/mm/mm_ovl_Native_Enemy_oot_en_zf.zovlx': { 'memory': 16176, 'profileOffset': 13648, 'instance': 1376 },
+    'ovl/mm/mm_ovl_Native_Enemy_oot_en_mb.zovlx': { 'memory': 12672, 'profileOffset': 10756, 'instance': 1252 },
+    'ovl/mm/mm_ovl_Native_Enemy_oot_en_skj.zovlx': { 'memory': 4896, 'profileOffset': 4064, 'instance': 760 },
     'ovl/oot/oot_ovl_Enemy_Arwing.zovlx': { 'memory': 5728, 'profileOffset': 5072, 'instance': 968 },
     'ovl/oot/oot_ovl_Enemy_GomessBat.zovlx': { 'memory': 22048, 'profileOffset': 15420, 'instance': 772 },
     'ovl/oot/oot_ovl_Enemy_Minislime.zovlx': { 'memory': 10528, 'profileOffset': 9292, 'instance': 872 },

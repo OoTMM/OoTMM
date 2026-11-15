@@ -238,7 +238,7 @@ export const SETTINGS = [{
   name: 'Enemy Randomizer (OoT)',
   category: 'enemies',
   type: 'boolean',
-  description: 'Experimental: shuffle ordinary enemies and compatible miniboss encounters in Ocarina of Time. Dungeon bosses use the separate boss shuffle.',
+  description: 'Shuffle ordinary enemies and compatible miniboss encounters in Ocarina of Time. Dungeon bosses use the separate boss shuffle.',
   default: false,
   cond: hasOoT,
 }, {
@@ -246,7 +246,7 @@ export const SETTINGS = [{
   name: 'Enemy Placement (OoT)',
   category: 'enemies',
   type: 'enum',
-  description: 'Choose enemies separately for each placement, or choose compatible replacements together for enemies sharing a model bank within a scene.',
+  description: 'Choose enemies separately for each placement, or replace all the same enemies in a scene with the same shuffled enemy.',
   values: [
     { value: 'individual', name: 'Individual', description: 'Choose each enemy separately, following OoT location rules.' },
     { value: 'grouped', name: 'Grouped', description: 'Enemies sharing a model bank within a scene use compatible replacements from the same model bank.' },
@@ -258,7 +258,7 @@ export const SETTINGS = [{
   name: 'Enemy Randomizer (MM)',
   category: 'enemies',
   type: 'boolean',
-  description: 'Experimental: shuffle ordinary enemies and compatible miniboss encounters in Majora’s Mask. Dungeon bosses use the separate boss shuffle.',
+  description: 'Shuffle ordinary enemies and compatible miniboss encounters in Majora’s Mask. Dungeon bosses use the separate boss shuffle.',
   default: false,
   cond: hasMM,
 }, {
@@ -266,7 +266,7 @@ export const SETTINGS = [{
   name: 'Enemy Placement (MM)',
   category: 'enemies',
   type: 'enum',
-  description: 'Choose enemies separately for each placement, or replace enemies together by their shared model bank within a scene. The scene model budget still applies.',
+  description: 'Choose enemies separately for each placement, or replace all the same enemies in a scene with the same shuffled enemy. (MM has very strict memory requirements whicb requires some more resource heavy areas like Termina Field to always use grouped enemy spawning)',
   values: [
     { value: 'individual', name: 'Individual', description: 'Choose each spawn separately within the room’s placement and native model budget.' },
     { value: 'grouped', name: 'Grouped', description: 'Choose replacements by shared model bank within each scene, following the standalone MM shuffle.' },
@@ -278,7 +278,7 @@ export const SETTINGS = [{
   name: 'Gold Skulltula Enemy Shuffle',
   category: 'enemies',
   type: 'boolean',
-  description: 'Replace Gold Skulltulas with combat enemies. Hidden spawn triggers stay intact and defeating the replacement drops the original token or randomized item.',
+  description: 'Replace Gold Skulltulas with other enemies, the enemy that replaces them will still drop the token and/or shuffled item.',
   default: false,
   cond: (s: any) => (hasOoT(s) && s.enemyShuffleOot) || (hasMM(s) && s.enemyShuffleMm),
 }, {
@@ -286,7 +286,15 @@ export const SETTINGS = [{
   name: 'Include Minibosses in Enemy Shuffle',
   category: 'enemies',
   type: 'boolean',
-  description: 'Allow compatible minibosses as enemy replacements. Authored encounter shuffle follows its own placement rules.',
+  description: 'Allow minibosses as enemy replacements.',
+  default: false,
+  cond: (s: any) => (hasOoT(s) && s.enemyShuffleOot) || (hasMM(s) && s.enemyShuffleMm),
+}, {
+  key: 'enemyShufflePreserveMinibosses',
+  name: 'Keep Original Minibosses Vanilla',
+  category: 'enemies',
+  type: 'boolean',
+  description: 'Leave original spawns of enemies classified as minibosses in the roster unshuffled, with their original encounter behavior. Minibosses can still replace other enemies when included in the target pool.',
   default: false,
   cond: (s: any) => (hasOoT(s) && s.enemyShuffleOot) || (hasMM(s) && s.enemyShuffleMm),
 }, {
@@ -294,7 +302,7 @@ export const SETTINGS = [{
   name: 'Mini Boss Shuffle Type',
   category: 'enemies',
   type: 'enum',
-  description: 'Choose where minibosses appear. Required miniboss replacements ignore enemy weights.',
+  description: 'Choose where minibosses appear.',
   values: [
     { value: 'anywhere', name: 'Anywhere', description: 'Mix minibosses into the normal enemy pool.' },
     { value: 'rooms', name: 'Mini Boss Rooms', description: 'Only replace authored miniboss slots with minibosses.' },
@@ -307,7 +315,7 @@ export const SETTINGS = [{
   name: 'Enemy Spawn Mode',
   category: 'enemies',
   type: 'enum',
-  description: 'Keep replacements consistent for the seed or reroll each eligible spawn. Chaotic spawns are available with No Logic.',
+  description: 'Keep replacements consistent for the seed or reroll each eligible spawn. Chaotic spawns are only available with No Logic (Chaotic spawns are not tested and may still lead to memory issues!).',
   values: [
     { value: 'seeded', name: 'Seeded', description: 'Each spawn uses its replacement from the seed.' },
     { value: 'chaotic', name: 'Chaotic', description: 'Reroll eligible replacements at spawn time.' },
@@ -335,9 +343,9 @@ export const SETTINGS = [{
   name: 'Remove Spawn Restrictions',
   category: 'enemies',
   type: 'boolean',
-  description: 'Allow enemies to replace spawns outside their usual habitat, including aquatic enemies in dry rooms.',
+  description: 'Allow enemies to replace spawns outside their usual habitat, including aquatic enemies in dry rooms. Only available with No Logic.',
   default: false,
-  cond: (s: any) => (hasOoT(s) && s.enemyShuffleOot) || (hasMM(s) && s.enemyShuffleMm),
+  cond: (s: any) => s.logic === 'none' && ((hasOoT(s) && s.enemyShuffleOot) || (hasMM(s) && s.enemyShuffleMm)),
 }, {
   key: 'crossGameEnemies',
   name: 'Cross-Game Enemies',
@@ -2801,12 +2809,17 @@ export const SETTINGS = [{
   cond: hasMM,
 }, {
   key: 'soulsEnemyLens',
-  name: 'Enemy Soul Lens Previews',
+  name: 'Enemy Soul Ghosts',
   category: 'items.extensions.systems',
   group: 'Enemy Souls',
-  type: 'boolean',
-  description: 'The Lens of Truth reveals inactive, lightly transparent models of enemies whose souls you have not obtained. Burrowed enemies are shown above ground. Enemies activate after obtaining their Soul and reloading the room. Requires Enemy Souls.',
-  default: false,
+  type: 'enum',
+  description: 'Show inactive, lightly transparent models of enemies whose souls you have not obtained. Burrowed enemies are shown above ground. Enemies activate after obtaining their Soul and reloading the room. Requires Enemy Souls.',
+  values: [
+    { value: 'always', name: 'Ghosts', description: 'Show ghosts without needing the Lens of Truth.' },
+    { value: 'lens', name: 'Ghosts that require lens', description: 'Only show ghosts while the Lens of Truth is active.' },
+    { value: 'none', name: 'No ghosts', description: 'Enemies remain absent until you obtain their Soul and reload the room.' },
+  ],
+  default: 'none',
   cond: (s: any) => s.soulsEnemyOot || s.soulsEnemyMm,
 }, {
   key: 'soulsBossOot',

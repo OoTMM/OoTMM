@@ -68,7 +68,7 @@
         - 5
   rules:
     - section: events
-      key: "MQ_DC_CLEAR_LARVAE_ROOM"
+      key: "DC_MQ_CLEAR_LARVAE_ROOM"
       expectedRule: "soul_enemy(SOUL_ENEMY_GOHMA_LARVA) && can_damage"
       enemyRule: "can_clear_room(DC_MQ_LARVAE_ROOM)"
       template: "$ENEMY"
@@ -1474,9 +1474,9 @@
   rules:
     - section: exits
       key: "Bottom of the Well Main"
-      expectedRule: "has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din"
+      expectedRule: "get_past_skulltulas_no_stone || climb_anywhere"
       enemyRule: "can_kill_named('Bottom of the Well Entryway Skulltula')"
-      template: "$ENEMY"
+      template: "$ENEMY || climb_anywhere"
       selectors:
         "Bottom of the Well Entryway Skulltula": *a84
 
@@ -1491,7 +1491,7 @@
   rules:
     - section: exits
       key: "Bottom of the Well Front Hallway"
-      expectedRule: "has_nuts || can_use_sword || has_explosives_or_hammer || has_ranged_weapon || can_use_din"
+      expectedRule: "true"
       enemyRule: "can_kill_named('Bottom of the Well Entryway Skulltula')"
       template: "$ENEMY"
       selectors:

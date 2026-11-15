@@ -246,7 +246,7 @@ static void previewDraw(PlayState* play)
         else
             meshAt = &mesh->next;
     }
-    if (!play->actorCtx.lensActive)
+    if (Config_Flag(CFG_SOULS_ENEMY_LENS_REQUIRED) && !play->actorCtx.lensActive)
         return;
     OPEN_DISPS(play->state.gfxCtx);
     for (Preview* p = sPreviews; p; p = p->next)

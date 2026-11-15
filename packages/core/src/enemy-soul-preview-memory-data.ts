@@ -252,4 +252,4 @@ export const ENEMY_SOUL_PREVIEW_OBJECTS: Readonly<Record<string, readonly [strin
   'mm/530': ['mm', 322],
 };
 
-export const ENEMY_UTILITY_MODULE_BYTES = 4928;
+export const ENEMY_UTILITY_MODULE_BYTES = 4944;

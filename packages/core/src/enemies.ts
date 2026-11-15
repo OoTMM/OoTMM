@@ -1499,8 +1499,9 @@ export function enemyNeverShuffled(game: Game, actorId: number): boolean {
   return game === 'oot' ? [0xc6, 0xde].includes(actorId) : [0x1a8, 0x206].includes(actorId);
 }
 
-export function enemySourceAllowedBySettings(game: Game, actorId: number, settings: Settings): boolean {
+export function enemySourceAllowedBySettings(game: Game, actorId: number, settings: Settings, params?: number): boolean {
   if (enemyNeverShuffled(game, actorId)) return false;
+  if (settings.enemyShufflePreserveMinibosses && isMinibossEnemy(game, actorId, params)) return false;
 
   return game === 'oot' ? actorId !== 0x11d || settings.shufflePotsOot === 'none' :
     actorId !== 0x8d || settings.shufflePotsMm === 'none';
@@ -2966,7 +2967,7 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
   const enabled = (game: Game) => (settings.games === 'ootmm' || settings.games === game) &&
     (game === 'oot' ? settings.enemyShuffleOot : settings.enemyShuffleMm);
   const strict = settings.enemyShuffleMinibosses && settings.enemyShuffleMinibossType !== 'anywhere';
-  if (enabled('oot')) {
+  if (enabled('oot') && !settings.enemyShufflePreserveMinibosses) {
     const targets = NATIVE_ARENA_COMBAT_TARGETS.map(row => defs.find(def => def.key === row.key)!)
       .filter(enemy => !strict || isMinibossEnemy(enemy.game, enemy.actorId, enemy.spawnParams));
     for (const source of ['oot-dead-hand-encounter', 'oot-dark-link-encounter']) {
@@ -2976,7 +2977,7 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
     }
   }
   for (const source of NATIVE_FIGHT_RESTORATION_SOURCES) {
-    if (!enabled(source.game))
+    if (!enabled(source.game) || !enemySourceAllowedBySettings(source.game, source.actorId, settings, source.params[0]))
       continue;
     const targets = defs.filter(enemy => enemy.game === source.game && !enemy.foreignOnly &&
       !enemy.arenaOnly && enemy.targetAllowed !== false && enemy.habitat === 'ground' &&
@@ -2992,7 +2993,8 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
     if (guard)
       output.push({ source: KEETA_GUARDS.key, target: guard.key, kind: 'keeta-guards' });
     for (const source of SCRIPTED_MM_ENEMIES) {
-      if (source.actorId === 0x28f || (source.actorId === 0x15d && !settings.enemyShuffleMinibosses))
+      if (!enemySourceAllowedBySettings(source.game, source.actorId, settings, source.spawnParams) ||
+        source.actorId === 0x28f || (source.actorId === 0x15d && !settings.enemyShuffleMinibosses))
         continue;
       const targets = defs.filter(enemy => scriptedMmTargetAllowed(enemy, settings.crossGameEnemies, source) &&
         (!strict || isMinibossEnemy(enemy.game, enemy.actorId, enemy.spawnParams)));
@@ -4089,7 +4091,7 @@ export function importForeignEnemyCombat(output: Record<string, string>, native:
   const hostId = host.toUpperCase();
   const donorSoulPattern = new RegExp(`\\b${soulAlias}\\(\\s*(${sourceId}_SOUL_ENEMY_[A-Z0-9_]+)\\s*\\)`, 'g');
   const sharedSoulPattern = new RegExp(`\\b${soulAlias}\\(\\s*(SOUL_ENEMY_[A-Z0-9_]+)\\s*\\)`, 'g');
-  const importableMacro = /^(?:can_kill_|soul_|shared_soul_enemy$)/;
+  const importableMacro = /^(?:can_kill_|soul_|shared_soul_enemy$|can_damage_skulltulas$)/;
   const visit = (name: string): string => {
     const alias = foreignEnemyCombatName(source, name);
     if (active.has(name))
