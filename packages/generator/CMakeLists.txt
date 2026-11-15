@@ -175,11 +175,21 @@ function(build game)
   file(GLOB_RECURSE SOURCES_OVL "src/${game}/ovl/*.c" "src/common/ovl/*.c")
   list(REMOVE_ITEM SOURCES ${SOURCES_OVL})
   list(REMOVE_ITEM SOURCES ${NATIVE_PORT_SOURCES})
+  # These handwritten ports are included by their generated overlay wrappers.
+  # Compile each only into its overlay, never into the resident payload as well.
   if(game STREQUAL "mm")
-    list(REMOVE_ITEM SOURCES "${CMAKE_SOURCE_DIR}/src/mm/enemy_ports/stalfos.c")
+    foreach(port stalfos lizalfos moblin skull_kid)
+      list(REMOVE_ITEM SOURCES "${CMAKE_SOURCE_DIR}/src/mm/enemy_ports/${port}.c")
+    endforeach()
+  else()
+    list(REMOVE_ITEM SOURCES "${CMAKE_SOURCE_DIR}/src/oot/enemy_ports/garo.c")
   endif()
 
   add_executable(${game} ${SOURCES} ${OVL_OBJECTS})
+  # Main-payload functions/data can be stripped individually. The linker script
+  # keeps patch/export roots and every separately loaded overlay intact.
+  target_compile_options(${game} PRIVATE "-ffunction-sections" "-fdata-sections")
+  target_link_options(${game} PRIVATE "-Wl,--gc-sections")
   set_target_properties(${game} PROPERTIES LINK_DEPENDS "${ldscript}")
   add_dependencies(${game} ldscript_${game})
   target_compile_definitions(${game} PRIVATE ${game_define})

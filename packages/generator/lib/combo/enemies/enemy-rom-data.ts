@@ -1542,7 +1542,7 @@ export const native_garo_facts = {
   'objectId': 341,
   'combatParams': [0],
   'sourceOverlay': { 'vrom': 14812560, 'size': 15472, 'crc32': 3369156211 },
-  'nativePort': { 'version': 1, 'prefix': 'FOREIGN_ENEMY_PORT_GARO', 'objectVrom': 23089152, 'objectSize': 46592, 'objectCrc32': 3492899932, 'sourceChildren': [], 'damageEffects': true },
+  'nativePort': { 'version': 1, 'prefix': 'FOREIGN_ENEMY_PORT_MM_EN_JSO', 'overlay': 'Native_Enemy_mm_en_jso', 'objectVrom': 23089152, 'objectSize': 46592, 'objectCrc32': 3492899932, 'sourceChildren': [], 'damageEffects': true },
   'sourceSounds': [6150, 6168, 14354, 14494, 14781, 14782, 14784, 14785, 14789, 14790, 14791, 14879],
   'sourceAudio': false,
   'randomDropRows': [],
@@ -1659,7 +1659,7 @@ export const native_port_keeps = {
       ],
     },
     {
-      'prefix': 'FOREIGN_ENEMY_PORT_MOBLIN',
+      'prefix': 'FOREIGN_ENEMY_PORT_OOT_EN_MB',
       'actorId': 75,
       'objectId': 48,
       'sourceCrc32': 3184418116,
@@ -1700,7 +1700,7 @@ export const native_port_keeps = {
       ],
     },
     {
-      'prefix': 'FOREIGN_ENEMY_PORT_SKULL_KID',
+      'prefix': 'FOREIGN_ENEMY_PORT_OOT_EN_SKJ',
       'actorId': 277,
       'objectId': 266,
       'sourceCrc32': 2540661362,
@@ -1710,7 +1710,7 @@ export const native_port_keeps = {
       'roots': [3760, 5320, 15248, 15496, 14888, 14192, 14440, 17968, 16392, 16616, 17608, 20784, 20408, 19704, 19240, 18864, 18448, 13984, 15944],
     },
     {
-      'prefix': 'FOREIGN_ENEMY_PORT_LIZALFOS',
+      'prefix': 'FOREIGN_ENEMY_PORT_OOT_EN_ZF',
       'actorId': 37,
       'objectId': 27,
       'sourceCrc32': 2716630391,
@@ -8706,7 +8706,7 @@ export const native_ports = {
       ],
       'runtimeImports': [],
     },
-    'nativePort': { 'version': 1, 'prefix': 'FOREIGN_ENEMY_PORT_MOBLIN', 'objectVrom': 18161664, 'objectSize': 82336, 'objectCrc32': 216985147 },
+    'nativePort': { 'version': 1, 'prefix': 'FOREIGN_ENEMY_PORT_OOT_EN_MB', 'overlay': 'Native_Enemy_oot_en_mb', 'objectVrom': 18161664, 'objectSize': 82336, 'objectCrc32': 216985147 },
   },
   'SKULL_KID': {
     'program': {
@@ -8721,7 +8721,7 @@ export const native_ports = {
       ],
       'runtimeImports': [],
     },
-    'nativePort': { 'version': 1, 'prefix': 'FOREIGN_ENEMY_PORT_SKULL_KID', 'objectVrom': 23769088, 'objectSize': 36400, 'objectCrc32': 3581994469 },
+    'nativePort': { 'version': 1, 'prefix': 'FOREIGN_ENEMY_PORT_OOT_EN_SKJ', 'overlay': 'Native_Enemy_oot_en_skj', 'objectVrom': 23769088, 'objectSize': 36400, 'objectCrc32': 3581994469 },
   },
   'MOBLIN_WAVE': {
     'program': {
@@ -8753,7 +8753,7 @@ export const native_ports = {
     },
     'nativePort': {
       'version': 1,
-      'prefix': 'FOREIGN_ENEMY_PORT_LIZALFOS',
+      'prefix': 'FOREIGN_ENEMY_PORT_OOT_EN_ZF', 'overlay': 'Native_Enemy_oot_en_zf',
       'objectVrom': 17375232,
       'objectSize': 91040,
       'objectCrc32': 2609975532,

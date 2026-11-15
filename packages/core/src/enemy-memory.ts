@@ -109,7 +109,7 @@ export function enemyScriptedControllerCost(): EnemyMemoryCost {
 }
 
 export type EnemyMemoryOptions = {
-  soulsEnemyLens?: boolean;
+  soulsEnemyLens?: 'none' | 'always' | 'lens';
   enemyShuffleGoldSkulltulas?: boolean;
   enemyShuffleBari?: boolean;
   enemyShuffleEeno?: boolean;
@@ -120,7 +120,8 @@ const costs = new Map<string, EnemyMemoryCost>();
 export function enemyMemoryCost(host: Game, game: Game, actorId: number, params: number, options: EnemyMemoryOptions = {}): EnemyMemoryCost {
   const randomSplit = game === 'oot' && actorId === 0x63 && options.enemyShuffleBari !== false ||
     game === 'mm' && actorId === 0x1e6 && (params & 255) === 1 && options.enemyShuffleEeno !== false;
-  const cacheKey = `${host}/${game}/${actorId}/${params}/${+randomSplit}/${+!!options.soulsEnemyLens}/${+!!options.enemyShuffleGoldSkulltulas}`;
+  const previews = options.soulsEnemyLens === 'always' || options.soulsEnemyLens === 'lens';
+  const cacheKey = `${host}/${game}/${actorId}/${params}/${+randomSplit}/${+previews}/${+!!options.enemyShuffleGoldSkulltulas}`;
   const cached = costs.get(cacheKey);
   if (cached)
     return cached;
@@ -128,7 +129,7 @@ export function enemyMemoryCost(host: Game, game: Game, actorId: number, params:
 
   shared.enemyUtilityModule = ENEMY_UTILITY_MODULE_BYTES;
   const finish = (cost: EnemyMemoryCost): EnemyMemoryCost => {
-    const size = options.soulsEnemyLens ? ENEMY_SOUL_PREVIEW_MEMORY[`${game}/${actorId}`] : 0;
+    const size = previews ? ENEMY_SOUL_PREVIEW_MEMORY[`${game}/${actorId}`] : 0;
     if (size) {
       const object = ENEMY_SOUL_PREVIEW_OBJECTS[`${game}/${actorId}`];
       if (object) {

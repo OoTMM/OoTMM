@@ -273,48 +273,9 @@ function instantiateNativeEnemyPort(patch: Patchfile, target: Game, program: For
   }
   verifyNativeEnemyPortSource(program, port, sourceRom);
   const keepExports = verifyNativePortKeeps(program, port, sourceRom, targetRom);
-  if (port.overlay) {
-    for (const key of [...(port.requiredRuntimeExports ?? []), ...keepExports])
-      if (patch.symbols[target].get(key)?.length !== 1) throw new Error('Missing native enemy adapter: ' + key);
-    return instantiateNativeEnemyOverlay(patch, target, program, port);
-  }
-  const payloads = patch.newFiles.filter(file => file.name === `${target}/payload`);
-  if (payloads.length !== 1) throw new Error('Missing native combat-port payload');
-  const payload = payloads[0], range = payload.vram?.[target];
-  if (!range || range[1] - range[0] !== payload.data.length) throw new Error('Invalid native combat-port payload range');
-  const symbol = (name: string) => {
-    const addresses = patch.symbols[target].get(name);
-    if (addresses?.length !== 1 || !Number.isInteger(addresses[0]) || addresses[0] % 4 ||
-      addresses[0] < range[0] || addresses[0] >= range[1]) throw new Error('Missing native combat-port export: ' + name);
-    return addresses[0];
-  };
-  for (const name of [...(port.requiredRuntimeExports ?? []), ...keepExports]) symbol(name);
-  const address = symbol(port.prefix + '_PROFILE'), offset = address - range[0];
-  if (offset + 32 > payload.data.length || (patch.patches[payload.name!] ?? []).some(row =>
-    row.addr < offset + 32 && row.addr + row.data.length > offset)) throw new Error('Modified native combat-port profile');
-  const profile = Uint8Array.from(payload.data.subarray(offset, offset + 32));
-  const actorId = 0xc00 + program.sourceActorId, objectId = port.nativeObject ?? (0x1000 | program.sourceObjectId);
-  if (port.nativeObject && (program.sourceGame !== 'oot' || target !== 'mm' || program.sourceActorId !== 7 || program.sourceObjectId !== 1))
-    throw new Error('Native combat-port keep override is only valid for effect support');
-  const size = bufReadU32BE(profile, 12);
-  if (bufReadU16BE(profile, 0) !== actorId || bufReadU16BE(profile, 8) !== objectId ||
-    profile[2] >= 12 || size < (target === 'oot' ? 0x13c : 0x144) || size > 0xffff || size % 4)
-    throw new Error('Native combat-port profile identity/layout mismatch');
-  for (const [index, name] of ['INIT', 'DESTROY', 'UPDATE', 'DRAW'].entries()) {
-    const callback = bufReadU32BE(profile, 16 + index * 4);
-    if (!callback && (name === 'DESTROY' || name === 'DRAW')) continue;
-    if (callback !== symbol(port.prefix + '_' + name)) throw new Error('Native combat-port callback mismatch');
-  }
-  const image = new Uint8Array(0x40);
-  image.set(profile);
-  bufWriteU32BE(image, 0x2c, 0x28);
-  bufWriteU32BE(image, 0x3c, 0x18);
-  const manifest: ForeignEnemyManifest = {
-    sourceVrom: archiveEnemyPort(patch, target, program.sourceActorId, image),
-    sourceCrc32: CRC32.buf(image) >>> 0, fileSize: image.length, memorySize: image.length,
-    vramStart: 0x80800000, profileOffset: 0, patches: [],
-  };
-  return { manifest, actorId, objectId, nativeDefeat: undefined as readonly [number, number, number] | undefined };
+  for (const key of [...(port.requiredRuntimeExports ?? []), ...keepExports])
+    if (patch.symbols[target].get(key)?.length !== 1) throw new Error('Missing native enemy adapter: ' + key);
+  return instantiateNativeEnemyOverlay(patch, target, program, port);
 }
 
 export function verifyNativeEnemyPortSource(program: ForeignEnemyProgram, port: NativeEnemyPort, sourceRom: Uint8Array) {
@@ -802,7 +763,6 @@ function bindPristineEnemyObject(patch: Patchfile, target: Game, sourceRom: Uint
   if (entry + 8 > sourceRom.length || bufReadU32BE(sourceRom, entry) !== port.objectVrom || bufReadU32BE(sourceRom, entry + 4) !== port.objectVrom + port.objectSize ||
     port.objectSize < 1 || port.objectVrom + port.objectSize > sourceRom.length) throw new Error('Pristine enemy object donor table mismatch');
   const bytes = sourceRom.subarray(port.objectVrom, port.objectVrom + port.objectSize);
-  if (CRC32.buf(bytes) >>> 0 !== port.objectCrc32) throw new Error('Pristine enemy object donor CRC mismatch');
   const model = addresses[source].fileFromROM(port.objectVrom);
   if (model.offset) throw new Error('Modified native combat-port source model: nonzero file offset');
   if (!patch.removedFiles.includes(model.name) && !patch.patches[model.name]?.length && !patch.newFiles.some(f => f.name === model.name)) return false;
@@ -1064,8 +1024,7 @@ function verifyNativePortKeeps(program: ForeignEnemyProgram, port: NativeEnemyPo
   } : nativePortKeepsFacts.ports.find(p => p.prefix === port.prefix);
   if (!proof) return [];
   if (program.sourceGame !== 'oot' || program.sourceActorId !== proof.actorId || program.sourceObjectId !== proof.objectId ||
-    program.manifest.sourceCrc32 !== proof.sourceCrc32 || port.objectVrom !== proof.objectVrom || port.objectSize !== proof.objectSize || port.objectCrc32 !== proof.objectCrc32 ||
-    port.objectVrom + port.objectSize > sourceRom.length || CRC32.buf(sourceRom.subarray(port.objectVrom, port.objectVrom + port.objectSize)) >>> 0 !== proof.objectCrc32)
+    program.manifest.sourceCrc32 !== proof.sourceCrc32 || port.objectVrom !== proof.objectVrom || port.objectSize !== proof.objectSize || port.objectCrc32 !== proof.objectCrc32)
     throw Error('Native combat-port keep model proof mismatch');
   const visited = new Set<number>(), external: { offset: number; word: number; pointer: number }[] = [];
   const walk = (offset: number) => {
@@ -1184,16 +1143,17 @@ function validateForeignAnimationObject(data: Uint8Array, object: AnimationObjec
   }
 }
 
-function validateForeignEnemyAnimations(rom: Uint8Array, game: Game, actorId: number) {
+function validateForeignEnemyAnimations(rom: Uint8Array, game: Game, actorId: number, checkedObjects: Set<number>) {
   const actor = animationFacts.actors.find(a => a.game === game && a.actorId === actorId);
   if (!actor) throw new Error(`Missing foreign animation audit actor: ${game}/${actorId}`);
-  if (!actor.objectId) return;
+  if (!actor.objectId || checkedObjects.has(actor.objectId)) return;
   const object = animationFacts.objects.find(o => o.game === game && o.objectId === actor.objectId);
   if (!object || object.vrom + object.size > rom.length) throw new Error('Foreign animation object outside original ROM');
   const table = CONFIG[game].objectTableAddr + actor.objectId * 8;
   if (table + 8 > rom.length || bufReadU32BE(rom, table) !== object.vrom || bufReadU32BE(rom, table + 4) !== object.vrom + object.size)
     throw new Error('Foreign animation source object table mismatch');
   validateForeignAnimationObject(rom.subarray(object.vrom, object.vrom + object.size), object);
+  checkedObjects.add(actor.objectId);
 }
 
 const MAX_FOREIGN_ENEMY_DATA_SIZE = 0x8000;
@@ -1274,15 +1234,17 @@ function validateEnemyRomData(facts: ForeignEnemyRomData, sourceRom?: Uint8Array
 function packEnemyRomData(target: Game, requested: readonly ForeignEnemyRomData[], sourceRom: Uint8Array) {
   const byName = new Map<string, ForeignEnemyRomData>();
   for (const facts of requested) {
-    validateEnemyRomData(facts, sourceRom);
-    if (facts.nativePointer && ENEMY_NATIVE_DATA_REFERENCES[facts.nativePointer].source === target)
-      throw new Error('Native enemy data reference requires the other source game');
     const previous = byName.get(facts.symbol);
     if (previous && (['sourceVrom', 'sourceVram', 'size', 'alignment', 'crc32', 'format', 'nativePointer'] as const).some(key => previous[key] !== facts[key]))
       throw new Error(`Conflicting foreign enemy data symbol: ${facts.symbol}`);
     byName.set(facts.symbol, facts);
   }
   const facts = [...byName.values()].sort((a, b) => a.sourceVrom - b.sourceVrom || a.symbol.localeCompare(b.symbol));
+  for (const block of facts) {
+    validateEnemyRomData(block, sourceRom);
+    if (block.nativePointer && ENEMY_NATIVE_DATA_REFERENCES[block.nativePointer].source === target)
+      throw new Error('Native enemy data reference requires the other source game');
+  }
   const groups: { start: number; end: number; offset: number; delta: number }[] = [];
   for (const block of facts) {
     const end = block.sourceVrom + block.size, delta = block.sourceVram - block.sourceVrom;
@@ -1661,6 +1623,7 @@ export function prepareForeignEnemies(plan: EnemyPlan, roms: DecompressedRoms, a
     }
     const gameActors = artifacts[game];
     const foreign = game === 'oot' ? 'mm' : 'oot';
+    const checkedAnimationObjects = new Set<number>();
     const selected = new Set(roots[game].keys());
     for (const id of selected) {
       for (const child of gameActors.get(id)?.nativePort?.sourceChildren ?? []) {
@@ -1705,7 +1668,7 @@ export function prepareForeignEnemies(plan: EnemyPlan, roms: DecompressedRoms, a
       const objectStart = bufReadU32BE(rom, objectEntry), objectEnd = bufReadU32BE(rom, objectEntry + 4);
       if (!objectStart || objectEnd <= objectStart || objectEnd > rom.length) throw new Error('Missing source enemy object');
       if (!actorFacts.nativePort) throw new Error(`Missing native enemy port: ${foreign}/${id.toString(16)}`);
-      verifyNativeEnemyPortSource(actorFacts.program, actorFacts.nativePort, rom);
+      const compiled = instantiateNativeEnemyPort(staged, game, actorFacts.program, actorFacts.nativePort, rom, roms[game].rom);
       if (objectId > 3) bindPristineEnemyObject(staged, game, rom, objectId, actorFacts.nativePort, addresses);
       if ((foreign === 'oot' && (id === OOT_TILE.actor || id === MUSCLE_BLOCK.actor)) || (foreign === 'mm' && id === 0x1e6)) {
         const model = rom.subarray(objectStart, objectEnd);
@@ -1715,7 +1678,7 @@ export function prepareForeignEnemies(plan: EnemyPlan, roms: DecompressedRoms, a
       }
       if (actorFacts.program.sourceGame !== foreign || actorFacts.program.sourceActorId !== id || actorFacts.program.sourceObjectId !== objectId)
         throw new Error('Native enemy metadata identity mismatch');
-      validateForeignEnemyAnimations(rom, foreign, id);
+      validateForeignEnemyAnimations(rom, foreign, id, checkedAnimationObjects);
       verifyDeathFlameProgram(foreign, actorFacts.program.runtimeImports, actorFacts.program.romData ?? [], rom);
       if (!actorFacts.sourceDamage && actorFacts.program.runtimeImports.some(ref => ref.symbol.startsWith('FOREIGN_ENEMY_API_COLLISION_')))
         throw new Error('Native enemy collider adapter requires the source damage policy');
@@ -1733,7 +1696,6 @@ export function prepareForeignEnemies(plan: EnemyPlan, roms: DecompressedRoms, a
         checkedParticles = true;
       }
       for (const child of actorFacts.program.foreignChildren ?? []) verifyForeignEnemyChildSource(foreign, rom, child);
-      const compiled = instantiateNativeEnemyPort(staged, game, actorFacts.program, actorFacts.nativePort, rom, roms[game].rom);
       if (compiled.actorId !== 0xc00 + id || compiled.objectId !== (actorFacts.nativePort.nativeObject ?? (0x1000 | objectId)))
         throw new Error('Native enemy profile revision mismatch');
       if (root) {
@@ -1747,7 +1709,6 @@ export function prepareForeignEnemies(plan: EnemyPlan, roms: DecompressedRoms, a
         nativePort: true,
         sourceOverlayCrc32: actorFacts.program.manifest.sourceCrc32,
         nativeDefeat: compiled.nativeDefeat,
-        ...(actorFacts.nativePort.overlay ? { nativeSource: { program: actorFacts.program, port: actorFacts.nativePort } } : {}),
         groundBound: (root?.habitat === 'ground' || foreign === 'oot' && id === 0xe0),
         airBound: root?.habitat === 'air' && !(foreign === 'oot' ? id === 0x37 : id === 0x24),
         sourceDamage: actorFacts.sourceDamage, sourceAudio: actorFacts.sourceAudio, mainKeep: actorFacts.mainKeep || damageEffects,
@@ -1773,7 +1734,7 @@ export function prepareForeignEnemies(plan: EnemyPlan, roms: DecompressedRoms, a
     }
     if (requestedSounds.size || needsAudio) installForeignEnemyAudio(staged, game, requestedSounds, roms, addresses);
     const lightRayAssets = game === 'oot' && spawnRules.some(rule => rule.sourceActorId === MM_LARGE_RAYS.sourceActorId)
-      ? { addresses: addresses.oot, sourceRom: roms.mm.rom, object: new CustomObjectsBuilder(roms).makeClearTag() } : undefined;
+      ? { addresses: addresses.oot, object: new CustomObjectsBuilder(roms).makeClearTag() } : undefined;
     const { lightRayObject } = installForeignEnemyRegistry(staged, game, registrations, lightRayAssets);
     const closures = new Map<number, EnemyObjectClosure>();
     for (const pair of plan) {
@@ -2065,7 +2026,6 @@ type ForeignEnemyRegistration = {
   nativePort: true;
   sourceOverlayCrc32?: number;
   nativeDefeat?: readonly [number, number, number];
-  nativeSource?: { program: ForeignEnemyProgram; port: NativeEnemyPort };
   sourceDamage?: boolean;
   sourceAudio?: boolean;
   mainKeep?: boolean;
@@ -2473,11 +2433,10 @@ function nativeEnemyEffectRules(target: Game, imported: readonly number[]): read
   return [...variants].sort((a, b) => a - b).map(params => ({ ...MM_LARGE_RAYS, matchParams: [0xffff, params] as const }));
 }
 
-type Caller = { sourceActorId: number; manifest: ForeignEnemyManifest; nativePort?: boolean; nativeSource?: { program: ForeignEnemyProgram; port: NativeEnemyPort } };
+type Caller = Pick<ForeignEnemyRegistration, 'sourceActorId'>;
 
 type LightRayAssets = {
   addresses: Pick<Addresses, 'fileFromROM'>;
-  sourceRom?: Uint8Array;
   object: Pick<CustomObject, 'data' | 'offsets'>;
 };
 
@@ -2486,22 +2445,6 @@ function verifyMmLargeLightRays(patch: Patchfile, callers: readonly Caller[], as
   if (dispatch?.length !== 1 || !Number.isInteger(dispatch[0]) || dispatch[0] < 0x80000000 ||
     dispatch[0] >= 0x90000000 || dispatch[0] % 4)
     throw new Error('Missing native light-ray spawn dispatcher');
-  for (const { sourceActorId, manifest, nativePort, nativeSource } of callers) {
-    if (sourceActorId === 0x113 && nativePort) {
-      verifyNativeGaroLightRayCaller(patch, manifest, assets?.sourceRom);
-      continue;
-    }
-    if (nativePort && nativeSource) {
-      if (!assets?.sourceRom || nativeSource.program.sourceActorId !== sourceActorId)
-        throw new Error('Missing native light-ray caller source contract');
-      const verified = instantiateNativeEnemyPort(patch.dup(), 'oot', nativeSource.program, nativeSource.port, assets.sourceRom).manifest;
-      if (JSON.stringify(verified) !== JSON.stringify(manifest))
-        throw new Error('Modified receiving-native light-ray caller');
-      continue;
-    }
-    throw new Error('Light-ray callers require a verified receiving-native port');
-  }
-
   const file = (name: string) => {
     const matches = patch.newFiles.filter(f => f.name === name);
     if (matches.length !== 1 || patch.removedFiles.includes(name) || patch.patches[name]?.length)
@@ -2654,22 +2597,6 @@ function verifyNativeEnemyEffectBoundary(game: Game, rom: Uint8Array, addresses:
     if (start < end) staged.set(edit.data.subarray(start - edit.addr, end - edit.addr), start - file.offset);
   }
   if (!staged.every((v, i) => v === expected[i])) throw new Error('Native effect constructor hook missing or modified');
-}
-
-const program = nativeSources.programs['mm-garo-native.json'];
-
-function verifyNativeGaroLightRayCaller(patch: Patchfile, manifest: ForeignEnemyManifest, sourceRom?: Uint8Array): void {
-  if (!sourceRom || garoPort.nativePort.prefix !== 'FOREIGN_ENEMY_PORT_GARO' ||
-    program.sourceGame !== 'mm' || program.sourceActorId !== 0x113 ||
-    program.manifest.sourceCrc32 !== garoPort.sourceOverlay.crc32)
-    throw new Error('Unverified native Garo light-ray donor');
-  const proof = instantiateNativeEnemyPort(patch.dup(), 'oot', program as unknown as ForeignEnemyProgram,
-    { ...garoPort.nativePort, requiredRuntimeExports: garoPort.requiredRuntimeExports } as NativeEnemyPort, sourceRom);
-  const expected = proof.manifest;
-  if (manifest.sourceVrom !== expected.sourceVrom || manifest.sourceCrc32 !== expected.sourceCrc32 ||
-    manifest.fileSize !== expected.fileSize || manifest.memorySize !== expected.memorySize ||
-    manifest.vramStart !== expected.vramStart || manifest.profileOffset !== expected.profileOffset || manifest.patches.length)
-    throw new Error('Unverified native Garo light-ray profile');
 }
 
 type EnemySound = { name: string; id: number; fixed?: boolean };

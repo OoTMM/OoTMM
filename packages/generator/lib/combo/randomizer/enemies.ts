@@ -771,6 +771,13 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
       !matchesRomBytes(rom, 0xcd9678, '8093b9a0') || !matchesRomBytes(rom, 0xcd99d8, '82000018'))
       throw new Error('Missing native Dancing ReDead update/relocation adapter');
   }
+  // Source overlays and installed hooks stay unchanged while this batch is checked.
+  const checkedSources = new Set<string>();
+  const verifySource = (key: string, check: () => void) => {
+    if (checkedSources.has(key)) return;
+    check();
+    checkedSources.add(key);
+  };
   const sorted = new Map<number, NativePlacementRecord>();
   for (const row of records) {
     const floor = !!(row.operation & 32), traits = row.operation & (256 | 512 | 1024), operation = row.operation & ~(32 | 256 | 512 | 1024);
@@ -811,7 +818,7 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
       if (bufReadU16BE(overlay.data, profile + 8) !== object)
         throw Error('Wrong standalone native miniboss object');
     }
-    if (game === 'mm' && row.targetId === 0x23d) verifyNativeStandaloneMm(row.targetId, rom, addresses, patch);
+    if (game === 'mm' && row.targetId === 0x23d) verifySource(`standalone/${row.targetId}`, () => verifyNativeStandaloneMm(row.targetId, rom, addresses, patch));
     const sourceData = row.mq?.source ?? rom, sourceOffset = row.mq?.offset ?? row.sourceVrom ?? row.vrom;
     if (row.sourceVrom !== undefined) {
       const relocations = patch.meta.enemyRoomRelocations;
@@ -871,18 +878,27 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
     const source = bufReadU16BE(row.original, 0), params = bufReadU16BE(row.original, 14);
     if (operation === 3) {
       if (game !== 'oot' || patch.symbols.oot.get('ENEMY_NATIVE_STALCHILD_V1')?.length !== 1) throw new Error('Missing native Stalchild night gate');
-      validateNativeStalchildPlacement(game, rom, row, addresses, patch);
+      validateNativeStalchildPlacement(game, row);
+      verifySource('stalchild', () => {
+        if (!verifyNativeOotStalchild(rom, addresses, patch)) throw new Error('Native Stalchild source/profile/model revision mismatch');
+        verifyNativeOotCallback(patch, 'ENEMY_NATIVE_STALCHILD_V1', 'Stalchild');
+      });
     } else if (operation === 5) {
       if (game !== 'mm' || (patch.symbols.mm.get('ENEMY_NATIVE_SKULLWALLTULA_V1')?.length !== 1 || patch.symbols.mm.get('ENEMY_NATIVE_SKULLWALLTULA_WALL_V2')?.length !== 1)) throw new Error('Missing native Skullwalltula attachment adapter');
-      validateNativeSkullwalltulaPlacement(game, rom, row, addresses, patch);
+      validateNativeSkullwalltulaPlacement(game, row);
+      verifySource('skullwalltula', () => verifyNativeSkullwalltulaSource(game, rom, addresses, patch));
     } else if (operation === 7) {
       if (game !== 'oot' || patch.symbols.oot.get('ENEMY_NATIVE_GUAY_V1')?.length !== 1) throw new Error('Missing native Guay victory adapter');
-      validateNativeGuayPlacement(game, rom, row, addresses, patch);
+      validateNativeGuayPlacement(game, row);
+      verifySource('guay', () => {
+        if (!verifyNativeOotGuay(rom, addresses, patch)) throw new Error('Native Guay source/profile/model revision mismatch');
+        verifyNativeOotCallback(patch, 'ENEMY_NATIVE_GUAY_V1', 'Guay');
+      });
     } else if (operation === 31) {
       if (game !== 'mm' || row.targetId !== 0x13a || row.targetParams !== 0x0fff ||
         patch.symbols.mm.get('ENEMY_NATIVE_LILY_V1')?.length !== 1)
         throw Error('Missing native Carnivorous Lily adapter');
-      verifyNativeActivationSource('Carnivorous Lily', 'mm', NATIVE_LILY_FACTS, rom, addresses, patch);
+      verifySource('Carnivorous Lily', () => verifyNativeActivationSource('Carnivorous Lily', 'mm', NATIVE_LILY_FACTS, rom, addresses, patch));
     } else if (operation === 30) {
       if (game !== 'mm' || ![0xf1, 0x14a].includes(row.targetId) ||
         (row.targetId === 0xf1 ? ![0, 1].includes(row.targetParams) : (row.targetParams & 0xff) > 3) ||
@@ -890,7 +906,8 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
         throw new Error('Missing native nonrespawning enemy adapter');
     } else if (operation === 6) {
       if (patch.symbols[game].get('ENEMY_NATIVE_RENEWABLE_BABA_V1')?.length !== 1) throw new Error('Missing native renewable Baba adapter');
-      validateNativeRenewableBabaPlacement(game, rom, row, addresses, patch);
+      validateNativeRenewableBabaPlacement(game, row);
+      verifySource('renewable-baba', () => verifyNativeRenewableBabaSource(game, rom, addresses, patch));
     } else if (operation === 4) {
       if (patch.symbols[game].get('ENEMY_NATIVE_PEAHAT_V1')?.length !== 1) throw new Error('Missing native Peahat day gate');
       validateNativePeahatPlacement(game, rom, row, addresses, patch);
@@ -900,65 +917,66 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
         bufReadU16BE(row.replacement, 14) !== row.targetParams ||
         patch.symbols.mm.get('ENEMY_NATIVE_GARO_V1')?.length !== 1)
         throw new Error('Missing native Garo combat activation adapter');
-      verifyNativeActivationSource('Garo', game, nativeGaroFacts[game], rom, addresses, patch, 'ENEMY_NATIVE_GARO_INTRO_V1');
+      verifySource('Garo', () => verifyNativeActivationSource('Garo', game, nativeGaroFacts[game], rom, addresses, patch, 'ENEMY_NATIVE_GARO_INTRO_V1'));
     } else if (operation === 10) {
       if (row.targetId !== (game === 'oot' ? 0x1c : 0x216) || ![0, game === 'oot' ? 1 : 0x8000].includes(row.targetParams) ||
         (bufReadU16BE(row.replacement, 0) & 0x1fff) !== row.targetId ||
         bufReadU16BE(row.replacement, 14) !== row.targetParams ||
         patch.symbols[game].get('ENEMY_NATIVE_LEEVER_V1')?.length !== 1)
         throw new Error('Missing native Leever terrain activation adapter');
-      verifyNativeActivationSource('Leever', game, nativeLeeverFacts[game], rom, addresses, patch, 'ENEMY_NATIVE_LEEVER_FLOOR_V1');
+      verifySource('Leever', () => verifyNativeActivationSource('Leever', game, nativeLeeverFacts[game], rom, addresses, patch, 'ENEMY_NATIVE_LEEVER_FLOOR_V1'));
     } else if (operation === 11) {
       if (row.targetId !== (game === 'oot' ? 0x175 : 0x208) || row.targetParams !== (game === 'oot' ? 1 : 0xff00) ||
         (bufReadU16BE(row.replacement, 0) & 0x1fff) !== row.targetId ||
         bufReadU16BE(row.replacement, 14) !== row.targetParams ||
         patch.symbols[game].get('ENEMY_NATIVE_BIG_POE_V1')?.length !== 1)
         throw new Error('Missing native Big Poe combat activation adapter');
-      verifyNativeActivationSource('Big Poe', game, nativeBigPoeFacts[game], rom, addresses, patch, 'ENEMY_NATIVE_BIG_POE_SWITCH_V1');
+      verifySource('Big Poe', () => verifyNativeActivationSource('Big Poe', game, nativeBigPoeFacts[game], rom, addresses, patch, 'ENEMY_NATIVE_BIG_POE_SWITCH_V1'));
     } else if (operation === 15) {
-      validateNativeFlyingPotPlacement(game, rom, row, addresses, patch);
+      validateNativeFlyingPotPlacement(game, row);
+      verifySource('flying-pot', () => verifyNativeFlyingPotSource(game, rom, addresses, patch));
     } else if (operation === 17) {
       if (game !== 'oot' || row.targetId !== 0x69 || ![0x00fd, 0x02fc, 0x02fb].includes(row.targetParams) ||
         bufReadU16BE(row.replacement, 0) !== row.targetId || bufReadU16BE(row.replacement, 14) !== row.targetParams ||
         patch.symbols.oot.get('ENEMY_NATIVE_BUBBLE_PATROL_V1')?.length !== 1)
         throw new Error('Missing native Bubble patrol adapter');
-      verifyNativeActivationSource('Bubble patrol', 'oot', nativeBubbleFacts, rom, addresses, patch);
+      verifySource('Bubble patrol', () => verifyNativeActivationSource('Bubble patrol', 'oot', nativeBubbleFacts, rom, addresses, patch));
     } else if (operation === 18) {
       if (game !== 'mm' || row.targetId !== 0x291 || row.targetParams !== 0 ||
         (bufReadU16BE(row.replacement, 0) & 0x1fff) !== row.targetId || bufReadU16BE(row.replacement, 14) !== 0 ||
         patch.symbols.mm.get('ENEMY_NATIVE_TAKKURI_V1')?.length !== 1)
         throw new Error('Missing native Takkuri combat adapter');
-      verifyNativeActivationSource('Takkuri', 'mm', nativeTakkuriFacts, rom, addresses, patch, 'ENEMY_NATIVE_TAKKURI_ITEMS_V1');
+      verifySource('Takkuri', () => verifyNativeActivationSource('Takkuri', 'mm', nativeTakkuriFacts, rom, addresses, patch, 'ENEMY_NATIVE_TAKKURI_ITEMS_V1'));
     } else if (operation === 12) {
       if (row.targetId !== (game === 'oot' ? 0x197 : 0x21d) || row.targetParams !== (game === 'oot' ? 0 : 0x1fc0) ||
         (bufReadU16BE(row.replacement, 0) & 0x1fff) !== row.targetId || bufReadU16BE(row.replacement, 14) !== row.targetParams ||
         patch.symbols[game].get('ENEMY_NATIVE_FIGHTER_V1')?.length !== 1)
         throw new Error('Missing native fighter combat adapter');
-      verifyNativeActivationSource('Fighter', game, nativeFighterFacts[game], rom, addresses, patch);
+      verifySource('Fighter', () => verifyNativeActivationSource('Fighter', game, nativeFighterFacts[game], rom, addresses, patch));
     } else if (operation === 13) {
       if (row.targetId !== (game === 'oot' ? 0x91 : 0x1e8) || ![0, 0x100, 0x200, 0x300].includes(row.targetParams) ||
         (bufReadU16BE(row.replacement, 0) & 0x1fff) !== row.targetId || bufReadU16BE(row.replacement, 14) !== row.targetParams ||
         patch.symbols[game].get('ENEMY_NATIVE_POE_SISTER_V1')?.length !== 1)
         throw new Error('Missing native Poe Sister combat adapter');
-      verifyNativeActivationSource('Poe Sister', game, nativePoeSisterFacts[game], rom, addresses, patch);
+      verifySource('Poe Sister', () => verifyNativeActivationSource('Poe Sister', game, nativePoeSisterFacts[game], rom, addresses, patch));
     } else if (operation === 19) {
       if (game !== 'mm' || row.targetId !== 0x184 || row.targetParams !== 0x1fc0 ||
         (bufReadU16BE(row.replacement, 0) & 0x1fff) !== row.targetId || bufReadU16BE(row.replacement, 14) !== row.targetParams ||
         patch.symbols.mm.get('ENEMY_NATIVE_EYEGORE_V1')?.length !== 1)
         throw new Error('Missing native Eyegore chase adapter');
-      verifyNativeActivationSource('Eyegore', game, nativeEyegoreFacts[game], rom, addresses, patch);
+      verifySource('Eyegore', () => verifyNativeActivationSource('Eyegore', game, nativeEyegoreFacts[game], rom, addresses, patch));
     } else if (operation === 20) {
       if (game !== 'oot' || row.mq || floor || row.targetId !== 0xde || ![0xff00, 0xff01, 0xff02].includes(row.targetParams) ||
         bufReadU16BE(row.replacement, 0) !== row.targetId || bufReadU16BE(row.replacement, 14) !== row.targetParams ||
         (bufReadU16BE(row.replacement, 4) << 16 >> 16) !== nativeTentaclePlacementY(game, rom, sourceOffset, addresses, patch) ||
         patch.symbols.oot.get('ENEMY_NATIVE_TENTACLE_V1')?.length !== 1)
         throw Error('Missing certified native Tentacle ceiling placement');
-      verifyNativeActivationSource('Parasitic Tentacle', game, nativeTentacleFacts[game], rom, addresses, patch);
+      verifySource('Parasitic Tentacle', () => verifyNativeActivationSource('Parasitic Tentacle', game, nativeTentacleFacts[game], rom, addresses, patch));
     } else if (operation === 21) {
       if (game !== 'mm' || row.targetId !== 0x1a8 || row.targetParams !== 0xff || traits & 256)
         throw Error('Invalid native MM Big Octo placement');
       verifyNativeBigOctoRecord(rom, sourceOffset, row.original, row.replacement);
-      verifyNativeBigOctoSource(rom, addresses, patch);
+      verifySource('big-octo', () => verifyNativeBigOctoSource(rom, addresses, patch));
     } else if (operation === 25) {
       if (game !== 'mm' || row.targetId !== 0x15d || ![0x807f, 0x817f].includes(row.targetParams) ||
         !traits || (traits & 256))
@@ -970,11 +988,11 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
     } else if (operation === 29) {
       if (game !== 'mm' || !mmAquaticTarget(game, row.targetId, row.targetParams) || mmAquaticSlot(sourceOffset) || !(traits & 256) || !(traits & 512))
         throw new Error('Invalid relaxed MM aquatic placement');
-      if (row.targetId === 0x23f) verifyNativeStandaloneMm(row.targetId, rom, addresses, patch);
+      if (row.targetId === 0x23f) verifySource(`standalone/${row.targetId}`, () => verifyNativeStandaloneMm(row.targetId, rom, addresses, patch));
     } else if (operation === 24) {
       if (game !== 'mm' || row.targetId !== 0x23f || row.targetParams !== 0 || !traits || (traits & 256))
         throw Error('Invalid native Garahna activation record');
-      verifyNativeStandaloneMm(row.targetId, rom, addresses, patch);
+      verifySource(`standalone/${row.targetId}`, () => verifyNativeStandaloneMm(row.targetId, rom, addresses, patch));
     } else if (operation === 128) {
       if (game !== 'mm' || floor || !bufEqual(row.original, row.replacement))
         throw new Error('Invalid scripted MM source entry');
@@ -1002,16 +1020,18 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
         throw new Error('Missing native arena controller adapter');
       if (row.targetId === 0x113) {
         if (patch.symbols.oot.get('ENEMY_NATIVE_IRON_KNUCKLE_V1')?.length !== 1) throw new Error('Missing native Iron Knuckle spawn-mode adapter');
-        verifyNativeIronKnuckleSource(rom);
+        verifySource('iron-knuckle', () => verifyNativeIronKnuckleSource(rom));
       }
     } else if (operation === 16) {
       if (game !== 'oot' || patch.symbols.oot.get('ENEMY_NATIVE_SKULL_KID_V1')?.length !== 1)
         throw new Error('Missing native Skull Kid constructor adapter');
-      validateNativeSkullKidPlacement(rom, { ...row, operation });
+      validateNativeSkullKidPlacement({ ...row, operation });
+      verifySource('skull-kid', () => verifyNativeSkullKidSource(rom));
     } else if (operation === 64) {
       if (game !== 'oot' || patch.symbols.oot.get('ENEMY_NATIVE_IRON_KNUCKLE_V1')?.length !== 1)
         throw new Error('Missing native Iron Knuckle spawn-mode adapter');
-      validateNativeIronKnucklePlacement(rom, { ...row, operation });
+      validateNativeIronKnucklePlacement({ ...row, operation });
+      verifySource('iron-knuckle', () => verifyNativeIronKnuckleSource(rom));
     } else if (operation !== 0) throw new Error('Unsupported native placement operation');
     const previous = sorted.get(row.vrom);
     if (previous && (previous.operation !== row.operation || previous.targetId !== row.targetId || previous.targetParams !== row.targetParams ||
@@ -1089,8 +1109,7 @@ function nativeTentaclePlacementY(game: Game, rom: Uint8Array, offset: number, a
 
 const sceneKeeps = placementData.sceneKeeps;
 
-function validateNativeFlyingPotPlacement(game: Game, rom: Uint8Array, row: NativePlacementRecord,
-  addresses: GameAddresses, patch: Patchfile) {
+function validateNativeFlyingPotPlacement(game: Game, row: NativePlacementRecord) {
   const offset = row.sourceVrom ?? row.vrom;
   const scene = row.mq?.scene ?? row.ootPlacement?.key.scene ??
     sceneKeeps.rooms[game].find(room => offset >= room.start && offset + 16 <= room.end)?.scene;
@@ -1100,6 +1119,10 @@ function validateNativeFlyingPotPlacement(game: Game, rom: Uint8Array, row: Nati
   if (row.targetId !== f.actorId || row.targetParams !== params || row.replacement.length !== 16 ||
     (bufReadU16BE(row.replacement, 0) & 0x1fff) !== f.actorId || bufReadU16BE(row.replacement, 14) !== params)
     throw new Error('Invalid selected native flying pot');
+}
+
+function verifyNativeFlyingPotSource(game: Game, rom: Uint8Array, addresses: GameAddresses, patch: Patchfile) {
+  const f = flyingPotFacts[game];
   if (!matchesRomBytes(rom, f.actorTable, f.actorTableBytes) ||
     !matchesRomBytes(rom, f.profileOffset, f.profileBytes) ||
     !matchesRomBytes(rom, f.objectTable, f.objectTableBytes) ||
@@ -1140,14 +1163,13 @@ function verifyNativeIronKnuckleSource(rom: Uint8Array) {
     throw new Error('Native Iron Knuckle walk helper revision mismatch');
 }
 
-function validateNativeIronKnucklePlacement(rom: Uint8Array, row: {
+function validateNativeIronKnucklePlacement(row: {
   operation: number; replacement: Uint8Array; targetId: number; targetParams: number;
 }) {
   if (row.operation !== 64 || row.targetId !== 0x113 || row.replacement.length !== 16 ||
     ![0xff81, 0xff82, 0xff83].includes(row.targetParams) || bufReadU16BE(row.replacement, 0) !== 0x113 ||
     bufReadU16BE(row.replacement, 14) !== row.targetParams)
     throw new Error('Invalid native Iron Knuckle combat placement');
-  verifyNativeIronKnuckleSource(rom);
 }
 
 const NATIVE_SKULL_KID = { operation: 16, actorId: 0x115, params: 0xffff, objectId: 0x10a } as const;
@@ -1158,7 +1180,7 @@ function verifyNativeSkullKidSource(rom: Uint8Array) {
     donor.nativePort as NativeEnemyPort, rom);
 }
 
-function validateNativeSkullKidPlacement(rom: Uint8Array, record: {
+function validateNativeSkullKidPlacement(record: {
   operation: number; replacement: Uint8Array; targetId: number; targetParams: number;
 }) {
   const expected = NATIVE_SKULL_KID;
@@ -1167,7 +1189,6 @@ function validateNativeSkullKidPlacement(rom: Uint8Array, record: {
     bufReadU16BE(record.replacement, 0) !== expected.actorId ||
     bufReadU16BE(record.replacement, 14) !== expected.params)
     throw new Error('Invalid native Skull Kid combat placement');
-  verifyNativeSkullKidSource(rom);
 }
 
 const facts = { mm: source };
@@ -1215,12 +1236,11 @@ function verifyNativeSkullwalltulaSource(game: 'mm', rom: Uint8Array, addresses?
 
 }
 
-function validateNativeSkullwalltulaPlacement(game: 'mm', rom: Uint8Array, row: NativePlacementRecord, addresses: GameAddresses, patch: Patchfile) {
+function validateNativeSkullwalltulaPlacement(game: 'mm', row: NativePlacementRecord) {
   const f = facts[game], params = [0xff00];
   if (row.targetId !== f.actorId || !params.includes(row.targetParams) || row.replacement.length !== 16 ||
     (bufReadU16BE(row.replacement, 0) & 0x1fff) !== f.actorId || bufReadU16BE(row.replacement, 14) !== row.targetParams)
     throw new Error('Invalid selected native Skullwalltula placement');
-  verifyNativeSkullwalltulaSource(game, rom, addresses, patch);
 }
 
 function nativeMmSkullwalltulaSlotAllows(source: number, target: { game: Game; actorId: number; spawnParams: number }, params?: number, csId?: number): boolean {
@@ -1278,12 +1298,11 @@ function verifyNativeRenewableBabaSource(game: Game, rom: Uint8Array, addresses?
   }
 }
 
-function validateNativeRenewableBabaPlacement(game: Game, rom: Uint8Array, row: NativePlacementRecord, addresses: GameAddresses, patch: Patchfile) {
+function validateNativeRenewableBabaPlacement(game: Game, row: NativePlacementRecord) {
   const f = nativeRenewableBabaFacts[game], params = game === 'oot' ? [1] : [1, 2];
   if (row.targetId !== f.actorId || !params.includes(row.targetParams) || row.replacement.length !== 16 ||
     (bufReadU16BE(row.replacement, 0) & (game === 'mm' ? 0x1fff : 0xffff)) !== f.actorId || bufReadU16BE(row.replacement, 14) !== row.targetParams)
     throw new Error('Invalid selected native renewable Baba placement');
-  verifyNativeRenewableBabaSource(game, rom, addresses, patch);
 }
 
 function nativeOotRenewableBabaPolicyAllows(policy: { foreignOrdinary: boolean }, target: { game: Game; actorId: number; spawnParams: number }): boolean {
@@ -1325,22 +1344,16 @@ function verifyNativeOotCallback(patch: Patchfile, symbol: string, enemy: string
     throw new Error('Missing selected native ' + enemy + ' callback capability');
 }
 
-function validateNativeGuayPlacement(game: Game, rom: Uint8Array,
-  row: NativePlacementRecord, addresses: GameAddresses, patch: Patchfile): void {
+function validateNativeGuayPlacement(game: Game, row: NativePlacementRecord): void {
   if (game !== 'oot' || row.targetId !== guayFacts.actorId || ![0, 1].includes(row.targetParams) || row.replacement.length !== 16 ||
     row.replacement[0] * 256 + row.replacement[1] !== guayFacts.actorId || bufReadU16BE(row.replacement, 14) !== row.targetParams) throw new Error('Invalid selected native Guay placement');
-  if (!verifyNativeOotGuay(rom, addresses, patch)) throw new Error('Native Guay source/profile/model revision mismatch');
-  verifyNativeOotCallback(patch, 'ENEMY_NATIVE_GUAY_V1', 'Guay');
 }
 
 const verifyNativeOotStalchild = (rom: Uint8Array, addresses?: GameAddresses, patch?: Patchfile) => verifyOotCounterpart(stalchildFacts, rom, addresses, patch);
 
-function validateNativeStalchildPlacement(game: Game, rom: Uint8Array,
-  row: NativePlacementRecord, addresses: GameAddresses, patch: Patchfile): void {
+function validateNativeStalchildPlacement(game: Game, row: NativePlacementRecord): void {
   if (game !== 'oot' || row.targetId !== stalchildFacts.actorId || ![0, 5, 10].includes(row.targetParams) || row.replacement.length !== 16 ||
     row.replacement[0] * 256 + row.replacement[1] !== stalchildFacts.actorId || bufReadU16BE(row.replacement, 14) !== row.targetParams) throw new Error('Invalid selected native Stalchild placement');
-  if (!verifyNativeOotStalchild(rom, addresses, patch)) throw new Error('Native Stalchild source/profile/model revision mismatch');
-  verifyNativeOotCallback(patch, 'ENEMY_NATIVE_STALCHILD_V1', 'Stalchild');
 }
 
 function nativeOotStalchildPolicyAllows(policy: { foreignOrdinary: boolean }, target: { game: string; actorId: number; spawnParams: number }): boolean {
@@ -2748,12 +2761,6 @@ function nativeActorPreservation(plan: EnemyPlan, roms: DecompressedRoms, addres
       if (!mqHasObject(after!.data, row.header, row.objectId))
         throw Error('Enemy shuffle removed an unshuffled MQ actor model');
     }
-    patch.meta.enemyNativePreservation = {
-      roomActorEntries: entries.size,
-      mqActorEntries: mqEntries.length,
-      nativeObjectDependencies: dependencies.size,
-      mqObjectDependencies: mqDependencies.length,
-    };
   };
 }
 
@@ -2822,7 +2829,6 @@ function installFieldStalchildShuffle(patch: Patchfile, settings: Settings, plan
 function installMmEnemyDependencies(rom: Uint8Array, plan: EnemyPlan, patch: Patchfile) {
   const replacements = new Map(plan.filter(row => row.placement).map(row => [row.placement!.actorOffset, row.placement!]));
   const rows = new Map<number, Uint8Array>();
-  const audit: { kind: string; scene: number; room: number; source: number; key: number }[] = [];
   const relocations = patch.meta.enemyRoomRelocations ?? [];
   for (const room of collectEnemyRooms(rom, 'mm')) for (const header of room.headers) {
     const list = header.actors;
@@ -2862,7 +2868,6 @@ function installMmEnemyDependencies(rom: Uint8Array, plan: EnemyPlan, patch: Pat
       data[14] = hostSlot;
       data[15] = type;
       if (rows.has(key) && !bufEqual(rows.get(key)!, data)) throw Error('Conflicting MM enemy puzzle binding');
-      if (!rows.has(key)) audit.push({ kind: type === 1 ? 'fairy' : 'ice', scene: header.scene, room: header.room, source, key });
       rows.set(key, data);
     }
   }
@@ -2875,7 +2880,6 @@ function installMmEnemyDependencies(rom: Uint8Array, plan: EnemyPlan, patch: Pat
   const vrom = allocatePlacementMetadata(patch, 'mm', data.length, 'MM enemy puzzle metadata capacity exceeded');
   patch.addNewFile({ name: 'enemy/mm-room-dependencies', vrom, data, compressed: false });
   patch.addSymbolPatch('ENEMY_MM_ROOM_DEPENDENCIES_V1', new Uint8Array([vrom >>> 24, vrom >>> 16, vrom >>> 8, vrom]));
-  patch.meta.enemyRoomDependencies = audit;
 }
 
 function installLilySourceChoices(plan: EnemyPlan, rom: Uint8Array, patch: Patchfile, rooms: EnemySupplementalRoom[]) {
@@ -2938,7 +2942,7 @@ function installGoldSkulltulaChoices(plan: EnemyPlan, roms: DecompressedRoms, pa
 }
 
 export function installSoulPreviews(roms: DecompressedRoms, patch: Patchfile, settings: Settings) {
-  const enabled = settings.soulsEnemyLens && (settings.soulsEnemyOot || settings.soulsEnemyMm);
+  const enabled = settings.soulsEnemyLens !== 'none' && (settings.soulsEnemyOot || settings.soulsEnemyMm);
   const { meshes, failures } = enabled ? buildSoulPreviewMeshes(roms) : { meshes: [], failures: [] };
   if (failures.length) throw Error('Invalid soul preview meshes: ' + failures.join('; '));
   if (enabled) {
@@ -3317,7 +3321,6 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
     }
     installNativePlacements(game, rom, patch, [...exactRecords, ...records], addresses);
   }
-  patch.meta.enemySupplementalRooms = supplementalRooms;
   installChaoticPlacements('oot', patch, chaoticOotPools);
   installChaoticPlacements('mm', patch, chaoticMmPools);
   for (const row of plan) {
