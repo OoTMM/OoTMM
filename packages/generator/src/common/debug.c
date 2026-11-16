@@ -9,23 +9,23 @@
 #include <combo/enemy.h>
 #include <combo/enemy_native.h>
 #include <combo/dma.h>
-#define DEBUGMENU_PAGE_NONE     0
-#define DEBUGMENU_PAGE_MAIN     1
-#define DEBUGMENU_PAGE_CHEATS   2
-#define DEBUGMENU_PAGE_WARP     3
-#define DEBUGMENU_PAGE_WARP2    4
-#define DEBUGMENU_PAGE_TIME     5
-#define DEBUGMENU_PAGE_AGE      6
-#define DEBUGMENU_PAGE_RELOAD   7
-#define DEBUGMENU_PAGE_WIN      8
-#define DEBUGMENU_PAGE_ENEMIES  9
+#define DEBUGMENU_PAGE_NONE    0
+#define DEBUGMENU_PAGE_MAIN    1
+#define DEBUGMENU_PAGE_CHEATS  2
+#define DEBUGMENU_PAGE_WARP    3
+#define DEBUGMENU_PAGE_WARP2   4
+#define DEBUGMENU_PAGE_TIME    5
+#define DEBUGMENU_PAGE_AGE     6
+#define DEBUGMENU_PAGE_RELOAD  7
+#define DEBUGMENU_PAGE_WIN     8
+#define DEBUGMENU_PAGE_ENEMIES 9
 
 #define DEBUG_X 30
 #define DEBUG_Y 30
 
-#define OPTION_NONE     0
-#define OPTION_OK       1
-#define OPTION_CANCEL   2
+#define OPTION_NONE   0
+#define OPTION_OK     1
+#define OPTION_CANCEL 2
 
 static const float kScale = 0.75f;
 static const float kScaleInv = 1.0f / kScale;
@@ -56,8 +56,7 @@ static const Gfx kDlistLoadIA4_8x12[] = {
         0,
         G_TX_WRAP, G_TX_WRAP,
         G_TX_NOMASK, G_TX_NOMASK,
-        G_TX_NOLOD, G_TX_NOLOD
-    ),
+        G_TX_NOLOD, G_TX_NOLOD),
     gsDPTileSync(),
     gsSPEndDisplayList(),
 };
@@ -79,7 +78,7 @@ static const DebugMenuEntry kMenuMain[] = {
     { "Age Swap", DEBUGMENU_PAGE_AGE },
 #endif
     { "Reload", DEBUGMENU_PAGE_RELOAD },
-    { "Win",    DEBUGMENU_PAGE_WIN },
+    { "Win", DEBUGMENU_PAGE_WIN },
     { NULL, 0 },
 };
 
@@ -121,8 +120,7 @@ static void debugDrawChar(int x, int y, char c)
         (x + 8) * 4 * kScale, (y + 12) * 4 * kScale,
         0,
         0, 0,
-        (1 << 10) * kScaleInv, (1 << 10) * kScaleInv
-    );
+        (1 << 10) * kScaleInv, (1 << 10) * kScaleInv);
     CLOSE_DISPS();
 }
 
@@ -148,7 +146,6 @@ static u8 menu(const DebugMenuEntry* entries, s16* cursor, s16* scroll, u32* dat
     int displayCount;
     int tmpCursor;
 
-    /* Count entries */
     entryCount = 0;
     for (;;)
     {
@@ -166,17 +163,21 @@ static u8 menu(const DebugMenuEntry* entries, s16* cursor, s16* scroll, u32* dat
     }
     debugDrawChar(0, *cursor - *scroll, '>');
 
-    /* Movement */
     tmpCursor = *cursor;
-    if (btnPressed(D_JPAD)) tmpCursor++;
-    if (btnPressed(U_JPAD)) tmpCursor--;
-    if (btnPressed(L_JPAD)) tmpCursor -= 5;
-    if (btnPressed(R_JPAD)) tmpCursor += 5;
-    if (tmpCursor < 0) tmpCursor = entryCount - 1;
-    if (tmpCursor >= entryCount) tmpCursor = 0;
+    if (btnPressed(D_JPAD))
+        tmpCursor++;
+    if (btnPressed(U_JPAD))
+        tmpCursor--;
+    if (btnPressed(L_JPAD))
+        tmpCursor -= 5;
+    if (btnPressed(R_JPAD))
+        tmpCursor += 5;
+    if (tmpCursor < 0)
+        tmpCursor = entryCount - 1;
+    if (tmpCursor >= entryCount)
+        tmpCursor = 0;
     *cursor = (u16)tmpCursor;
 
-    /* Scrolling */
     if (*cursor < *scroll)
         *scroll = *cursor;
     if (*cursor >= *scroll + displayCount)
@@ -239,7 +240,6 @@ static void DebugHandler_Cheats(int trigger)
         return;
     }
 
-    /* Draw */
     for (int i = 0; i < ARRAY_COUNT(kCheats); ++i)
     {
         debugDrawChar(2, i, '[');
@@ -251,12 +251,18 @@ static void DebugHandler_Cheats(int trigger)
 
     debugDrawStr(2, ARRAY_COUNT(kCheats), "Spawn Enemy");
     debugDrawChar(0, sCursor[1], '>');
-    if (btnPressed(D_JPAD)) sCursor[1]++;
-    if (btnPressed(U_JPAD)) sCursor[1]--;
-    if (btnPressed(R_JPAD)) sCursor[1] += 5;
-    if (btnPressed(L_JPAD)) sCursor[1] -= 5;
-    if (sCursor[1] < 0) sCursor[1] = 0;
-    if (sCursor[1] > ARRAY_COUNT(kCheats)) sCursor[1] = ARRAY_COUNT(kCheats);
+    if (btnPressed(D_JPAD))
+        sCursor[1]++;
+    if (btnPressed(U_JPAD))
+        sCursor[1]--;
+    if (btnPressed(R_JPAD))
+        sCursor[1] += 5;
+    if (btnPressed(L_JPAD))
+        sCursor[1] -= 5;
+    if (sCursor[1] < 0)
+        sCursor[1] = 0;
+    if (sCursor[1] > ARRAY_COUNT(kCheats))
+        sCursor[1] = ARRAY_COUNT(kCheats);
 
     if (btnPressed(A_BUTTON))
     {
@@ -278,7 +284,8 @@ int gDebugEnemySpawn;
 int gDebugEnemyWater;
 f32 gDebugEnemyWaterSurface;
 
-typedef struct {
+typedef struct
+{
     CollisionHeader* original;
     CollisionHeader header;
     WaterBox box;
@@ -309,7 +316,8 @@ void comboDebugEnemyRunInWater(ActorFunc callback, Actor* actor, PlayState* play
     play->colCtx.colHeader = scope.original;
 }
 
-typedef struct DebugAquaticActor {
+typedef struct DebugAquaticActor
+{
     struct DebugAquaticActor* next;
     Actor* actor;
     ActorFunc init, update, fini;
@@ -338,7 +346,8 @@ static void DebugAquatic_Call(DebugAquaticActor* entry, ActorFunc callback, Acto
     actor->update = entry->update;
     comboDebugEnemyRunInWater(callback, actor, play, entry->surface);
     entry->update = actor->update;
-    if (actor->update) actor->update = DebugAquatic_Update;
+    if (actor->update)
+        actor->update = DebugAquatic_Update;
     gDebugEnemySpawn = savedDebug;
     gDebugEnemyWater = savedWater;
     gDebugEnemyWaterSurface = savedSurface;
@@ -347,32 +356,38 @@ static void DebugAquatic_Call(DebugAquaticActor* entry, ActorFunc callback, Acto
 static void DebugAquatic_Init(Actor* actor, PlayState* play)
 {
     DebugAquaticActor* entry = *DebugAquatic_Find(actor);
-    if (entry) DebugAquatic_Call(entry, entry->init, actor, play);
+    if (entry)
+        DebugAquatic_Call(entry, entry->init, actor, play);
 }
 
 static void DebugAquatic_Update(Actor* actor, PlayState* play)
 {
     DebugAquaticActor* entry = *DebugAquatic_Find(actor);
-    if (entry && entry->update) DebugAquatic_Call(entry, entry->update, actor, play);
+    if (entry && entry->update)
+        DebugAquatic_Call(entry, entry->update, actor, play);
 }
 
 static void DebugAquatic_Destroy(Actor* actor, PlayState* play)
 {
     DebugAquaticActor** link = DebugAquatic_Find(actor);
     DebugAquaticActor* entry = *link;
-    if (!entry) return;
+    if (!entry)
+        return;
     *link = entry->next;
-    if (entry->fini) comboDebugEnemyRunInWater(entry->fini, actor, play, entry->surface);
+    if (entry->fini)
+        comboDebugEnemyRunInWater(entry->fini, actor, play, entry->surface);
     free(entry);
 }
 
 static void DebugAquatic_Track(Actor* actor, f32 surface)
 {
     DebugAquaticActor* entry = malloc(sizeof(*entry));
-    if (!entry) return;
+    if (!entry)
+        return;
     *entry = (DebugAquaticActor){ sDebugAquatics, actor, actor->init, actor->update, actor->fini, surface };
     sDebugAquatics = entry;
-    if (actor->init) actor->init = DebugAquatic_Init;
+    if (actor->init)
+        actor->init = DebugAquatic_Init;
     actor->update = DebugAquatic_Update;
     actor->fini = DebugAquatic_Destroy;
 }
@@ -381,7 +396,8 @@ static const char* Debug_SpawnEnemy(u32 data)
 {
     PlayState* play = gPlay;
     Player* player = GET_PLAYER(play);
-    if (!player || play->roomCtx.curRoom.num < 0) return "Wait for the room to load";
+    if (!player || play->roomCtx.curRoom.num < 0)
+        return "Wait for the room to load";
 
     Vec3f from = player->actor.world.pos;
     from.y += 30.f;
@@ -431,19 +447,25 @@ static const char* Debug_SpawnEnemy(u32 data)
     int lackSoul = g.roomEnemyLackSoul;
     int foreign = comboIsForeignEnemyActor(actorId);
     DebugEnemyWaterScope scope;
-    if (dryAquatic) DebugEnemyWater_Begin(&scope, play, &pos, water);
+    if (dryAquatic)
+        DebugEnemyWater_Begin(&scope, play, &pos, water);
     gDebugEnemySpawn = 1;
     gDebugEnemyWater = dryAquatic;
     gDebugEnemyWaterSurface = water;
     Actor* enemy;
     u32 variantOperation = 0;
 #if defined(GAME_OOT)
-    if (actorId == 0x1c0) variantOperation = 7;
-    if (actorId == 0x1b0) variantOperation = 3;
-    if (actorId == 0x1c) variantOperation = 10;
+    if (actorId == 0x1c0)
+        variantOperation = 7;
+    if (actorId == 0x1b0)
+        variantOperation = 3;
+    if (actorId == 0x1c)
+        variantOperation = 10;
 #else
-    if (actorId == 0xf1) variantOperation = 30;
-    if (actorId == 0x216) variantOperation = 10;
+    if (actorId == 0xf1 || actorId == ACTOR_EN_BB)
+        variantOperation = 30;
+    if (actorId == 0x216)
+        variantOperation = 10;
 #endif
     if (!foreign && variantOperation)
     {
@@ -458,16 +480,14 @@ static const char* Debug_SpawnEnemy(u32 data)
     }
     else
 #if defined(GAME_MM)
-    if (actorId == 0x184 && params == 0x1fc0)
+        if (actorId == 0x184 && params == 0x1fc0)
     {
         ActorEntry entry = { actorId, { pos.x, pos.y, pos.z }, { 7, 0x7f, 0x7f }, params };
         enemy = comboEnemyNativeEyegoreSpawn(&play->actorCtx, &entry, play);
     }
     else
 #endif
-    enemy = foreign
-                    ? comboDebugSpawnForeignEnemy(play, actorId, params, &pos, yaw + 0x8000)
-                    : Actor_Spawn(&play->actorCtx, play, actorId, pos.x, pos.y, pos.z, 0, yaw + 0x8000, 0, params);
+        enemy = foreign ? comboDebugSpawnForeignEnemy(play, actorId, params, &pos, yaw + 0x8000) : Actor_Spawn(&play->actorCtx, play, actorId, pos.x, pos.y, pos.z, 0, yaw + 0x8000, 0, params);
 #if defined(GAME_OOT)
     void comboDebugTrackOotDarkLink(Actor*);
     comboDebugTrackOotDarkLink(enemy);
@@ -476,11 +496,14 @@ static const char* Debug_SpawnEnemy(u32 data)
     if (dryAquatic)
     {
         play->colCtx.colHeader = scope.original;
-        if (enemy && enemy->update && !foreign) DebugAquatic_Track(enemy, water);
+        if (enemy && enemy->update && !foreign)
+            DebugAquatic_Track(enemy, water);
     }
     g.roomEnemyLackSoul = lackSoul;
-    if (!enemy) return "Actor allocation or load failed";
-    if (!enemy->update) return "Actor ended during initialization";
+    if (!enemy)
+        return "Actor allocation or load failed";
+    if (!enemy->update)
+        return "Actor ended during initialization";
     return "Spawned";
 }
 
@@ -499,11 +522,14 @@ static void DebugHandler_Enemies(int trigger)
     {
         sCursor[2] = sScroll[2] = 0;
         sEnemySpawnStatus = NULL;
-        if (sDebugEnemyEntries || !sDebugEnemyTableVrom) return;
+        if (sDebugEnemyEntries || !sDebugEnemyTableVrom)
+            return;
         u32 size = comboDmaLoadFile(NULL, sDebugEnemyTableVrom);
-        if (size < 16 || size > 0x1000) return;
+        if (size < 16 || size > 0x1000)
+            return;
         DebugMenuEntry* entries = malloc(size);
-        if (!entries) return;
+        if (!entries)
+            return;
         if (comboDmaLoadFile(entries, sDebugEnemyTableVrom) != size)
         {
             free(entries);
@@ -517,7 +543,8 @@ static void DebugHandler_Enemies(int trigger)
     if (!sDebugEnemyEntries)
     {
         debugDrawStr(2, 0, "Enemy catalog load failed");
-        if (btnPressed(B_BUTTON)) setPage(DEBUGMENU_PAGE_CHEATS);
+        if (btnPressed(B_BUTTON))
+            setPage(DEBUGMENU_PAGE_CHEATS);
         return;
     }
     u32 data;
@@ -530,7 +557,8 @@ static void DebugHandler_Enemies(int trigger)
         setPage(DEBUGMENU_PAGE_CHEATS);
         return;
     }
-    if (sEnemySpawnStatus) debugDrawStr(2, 22, sEnemySpawnStatus);
+    if (sEnemySpawnStatus)
+        debugDrawStr(2, 22, sEnemySpawnStatus);
 }
 
 static void DebugHandler_Warp(int trigger)
@@ -613,7 +641,6 @@ static void DebugHandler_Time(int trigger)
 
     if (trigger)
     {
-        /* Extract current time */
         sTimeDay = gSave.day;
         sTimeHour = gSave.time / (0x10000 / 24);
         sTimeMinute = (gSave.time % (0x10000 / 24)) / (0x10000 / 24 / 60);
@@ -621,36 +648,45 @@ static void DebugHandler_Time(int trigger)
         return;
     }
 
-    /* Cursor */
-    if (btnPressed(D_JPAD)) sCursor[1]++;
-    if (btnPressed(U_JPAD)) sCursor[1]--;
-    if (sCursor[1] < 0) sCursor[1] = 2;
-    if (sCursor[1] > 2) sCursor[1] = 0;
+    if (btnPressed(D_JPAD))
+        sCursor[1]++;
+    if (btnPressed(U_JPAD))
+        sCursor[1]--;
+    if (sCursor[1] < 0)
+        sCursor[1] = 2;
+    if (sCursor[1] > 2)
+        sCursor[1] = 0;
 
-    /* Change */
     delta = 0;
-    if (btnPressed(L_JPAD)) delta--;
-    if (btnPressed(R_JPAD)) delta++;
+    if (btnPressed(L_JPAD))
+        delta--;
+    if (btnPressed(R_JPAD))
+        delta++;
     switch (sCursor[1])
     {
     case 0:
         sTimeDay += delta;
-        if (sTimeDay < 1) sTimeDay = 1;
-        if (sTimeDay > 4) sTimeDay = 4;
+        if (sTimeDay < 1)
+            sTimeDay = 1;
+        if (sTimeDay > 4)
+            sTimeDay = 4;
         break;
     case 1:
         sTimeHour += delta;
-        if (sTimeHour < 0) sTimeHour = 23;
-        if (sTimeHour > 23) sTimeHour = 0;
+        if (sTimeHour < 0)
+            sTimeHour = 23;
+        if (sTimeHour > 23)
+            sTimeHour = 0;
         break;
     case 2:
         sTimeMinute += delta * 10;
-        if (sTimeMinute < 0) sTimeMinute = 50;
-        if (sTimeMinute > 50) sTimeMinute = 0;
+        if (sTimeMinute < 0)
+            sTimeMinute = 50;
+        if (sTimeMinute > 50)
+            sTimeMinute = 0;
         break;
     }
 
-    /* Draw */
     debugDrawStr(2, 0, "Day");
     debugDrawStr(2, 1, "Hour");
     debugDrawStr(2, 2, "Minute");
@@ -663,7 +699,6 @@ static void DebugHandler_Time(int trigger)
 
     debugDrawChar(0, sCursor[1], '>');
 
-    /* Actions */
     if (btnPressed(B_BUTTON))
     {
         sDebugPage = DEBUGMENU_PAGE_MAIN;
@@ -679,7 +714,7 @@ static void DebugHandler_Time(int trigger)
     isNightNew = (timeNew >= 0xc000 || timeNew < 0x4000);
     isNightOld = (timeOld >= 0xc000 || timeOld < 0x4000);
     if (gSave.day != sTimeDay || isNightOld != isNightNew)
-        DebugHandler_Reload(1); /* Needs a reload */
+        DebugHandler_Reload(1);
     gSave.day = sTimeDay;
     gSave.time = timeNew;
     gSave.isNight = isNightNew;
@@ -744,8 +779,6 @@ void Debug_Init(void)
 #if defined(GAME_MM)
 static void cheatAllItems(PlayState* play)
 {
-
-    /* Notebook */
     gSave.info.weekEventReg[66] = 0xff;
     gSave.info.weekEventReg[67] = 0xff;
     gSave.info.weekEventReg[68] = 0xff;
@@ -768,7 +801,6 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.upgrades.strength = 3;
     gMmExtraFlags2.childWallet = 1;
     gSave.info.inventory.upgrades.wallet = 3;
-    //gMmExtraFlags3.bottomlessWallet = 1;
     gSave.info.inventory.upgrades.bombBag = 3;
     gSharedCustomSave.bombchuBagMm = 3;
     Inventory_UpdateMaxBombchu();
@@ -838,11 +870,6 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.quest.songOrder = 1;
     gSave.info.inventory.quest.songSun = 1;
 
-    //gSave.info.inventory.quest.remainsGoht = 1;
-    //gSave.info.inventory.quest.remainsGyorg = 1;
-    //gSave.info.inventory.quest.remainsTwinmold = 1;
-    //gSave.info.inventory.quest.remainsOdolwa = 1;
-
     gMmSave.info.playerData.isMagicAcquired = 1;
     gMmSave.info.playerData.isDoubleMagicAcquired = 1;
     gMmSave.info.playerData.magic = 2 * 0x30;
@@ -873,24 +900,20 @@ static void cheatAllItems(PlayState* play)
     gMmExtraItems.gibdoSpooky = 3;
     gMmExtraItems.fierceDeityAdult = 3;
 
-    // gCustomSave.halfDays = 0b111111;
-
     gSave.info.inventory.items[ITS_MM_TRADE1] = ITEM_MM_DEED_LAND;
     gSave.info.inventory.items[ITS_MM_TRADE2] = ITEM_MM_ROOM_KEY;
     gSave.info.inventory.items[ITS_MM_TRADE3] = ITEM_MM_PENDANT_OF_MEMORIES;
 
-    gMmOwlFlags = 0x3ff; /* all owls statues */
+    gMmOwlFlags = 0x3ff;
 
     MM_SET_EVENT_WEEK(EV_MM_WEEK_HEALED_WITCH_WOODS);
     MM_SET_EVENT_WEEK(EV_MM_WEEK_SPIN_UPGRADE);
-
 }
 #endif
 
 #if defined(GAME_OOT)
 static void cheatAllItems(PlayState* play)
 {
-    // gSave.info.inventory.quest.gerudoCard = 1;
     MM_SET_EVENT_WEEK(EV_MM_WEEK_DRANK_CHATEAU_ROMANI);
     SetEventChk(EV_OOT_CHK_MASTER_SWORD_PULLED);
     SetEventChk(EV_OOT_CHK_MASTER_SWORD_CHAMBER);
@@ -900,11 +923,6 @@ static void cheatAllItems(PlayState* play)
     gSharedCustomSave.ootChildShields = (1u << OOT_CHILD_SHIELD_DEKU) | (1u << OOT_CHILD_SHIELD_HERO);
     gSave.info.inventory.goldTokens = 100;
     gSharedCustomSave.foundMasterSword = 1;
-
-    //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_WF);
-    //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_SH);
-    //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_GB);
-    //MM_SET_EVENT_WEEK(EV_MM_WEEK_DUNGEON_ST);
 
     gSave.info.inventory.quest.gerudoCard = 1;
     gSave.info.inventory.quest.agonyStone = 1;
@@ -976,22 +994,10 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.quest.songTpForest = 1;
     gSave.info.inventory.quest.songTpSpirit = 1;
 
-    //gSave.info.inventory.quest.stoneEmerald = 1;
-    //gSave.info.inventory.quest.stoneRuby = 1;
-    //gSave.info.inventory.quest.stoneSapphire = 1;
-
     gSave.info.playerData.isMagicAcquired = 1;
     gSave.info.playerData.isDoubleMagicAcquired = 1;
     gOotSave.info.playerData.magicLevel = 0;
     gSaveContext.magicFillTarget = 0x60;
-
-
-    //gSave.info.inventory.quest.medallionShadow = 1;
-    //gSave.info.inventory.quest.medallionSpirit = 1;
-    //gSave.info.inventory.quest.medallionForest = 1;
-    //gSave.info.inventory.quest.medallionFire = 1;
-    //gSave.info.inventory.quest.medallionWater = 1;
-    //gSave.info.inventory.quest.medallionLight = 1;
 
     gSave.info.playerData.healthCapacity = 20 * 0x10;
     gSave.info.playerData.health = gSave.info.playerData.healthCapacity;
@@ -1011,9 +1017,6 @@ static void cheatAllItems(PlayState* play)
     gSave.info.inventory.items[ITS_OOT_TRADE_CHILD] = ITEM_OOT_BUNNY_HOOD;
 
     SetEventChk(EV_OOT_CHK_EPONA);
-
-    // gSave.info.equips.buttonItems[1] = ITEM_OOT_MASK_STONE;
-    // gSave.info.equips.cButtonSlots[0] = ITS_OOT_TRADE_CHILD;
 
     gCustomSave.hasElegy = 1;
     gCustomSave.hasSongHealing = 1;

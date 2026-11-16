@@ -1,7 +1,7 @@
 #include <combo.h>
 #include <combo/enemy_native.h>
 
-#define NativeIronKnuckleSpawnEntry ((Actor* (*)(ActorContext*, ActorEntry*, PlayState*))0x800255c4)
+#define NativeIronKnuckleSpawnEntry ((Actor * (*)(ActorContext*, ActorEntry*, PlayState*))0x800255c4)
 
 u16 comboEnemyNativeIronKnuckleParams(u16 encoded)
 {
@@ -43,10 +43,10 @@ static void nativeIronKnuckleInit(Actor* actor, PlayState* play)
     actor->init = init;
     init(actor, play);
     actor->init = NULL;
-    comboEnemyNativeIronKnuckleActivate(actor, encoded);
+    comboEnemyNativeIronKnuckleActivate(actor, play, encoded);
 }
 
-void comboEnemyNativeIronKnuckleActivate(Actor* actor, u16 encoded)
+void comboEnemyNativeIronKnuckleActivate(Actor* actor, PlayState* play, u16 encoded)
 {
     void (*start)(Actor*);
     if (!actor || actor->id != 0x113 || (encoded != 0xff81 && encoded != 0xff82 && encoded != 0xff83))
@@ -66,7 +66,10 @@ void comboEnemyNativeIronKnuckleActivate(Actor* actor, u16 encoded)
     actor->shape.rot.z = 0;
     actor->update = nativeIronKnuckleUpdate;
     actor->flags |= ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE;
+    u32 previousSegment = gSegments[6];
+    Actor_SetObjectDependency(play, actor);
     start(actor);
+    gSegments[6] = previousSegment;
 }
 
 Actor* comboEnemyNativeIronKnuckleSpawn(ActorContext* ctx, ActorEntry* entry, PlayState* play)
@@ -82,7 +85,8 @@ Actor* comboEnemyNativeIronKnuckleSpawn(ActorContext* ctx, ActorEntry* entry, Pl
     native = *entry;
     native.params = comboEnemyNativeIronKnuckleParams(encoded);
     actor = NativeIronKnuckleSpawnEntry(ctx, &native, play);
-    comboEnemyNativeIronKnuckleActivate(actor, encoded);
+    comboEnemyNativeIronKnuckleActivate(actor, play, encoded);
     return actor;
 }
+
 EXPORT_SYMBOL(ENEMY_NATIVE_IRON_KNUCKLE_V1, comboEnemyNativeIronKnuckleSpawn);

@@ -18,7 +18,8 @@
 #include <combo/enemy_scripted.h>
 #endif
 
-typedef struct {
+typedef struct
+{
     u32 vrom;
     u32 operation;
     ActorEntry original;
@@ -26,9 +27,11 @@ typedef struct {
     s16 targetId;
     u16 targetParams;
 } NativePlacement;
+
 _Static_assert(sizeof(NativePlacement) == 44, "native placement metadata ABI");
 
-typedef struct {
+typedef struct
+{
     Actor* actor;
     ActorFunc init;
     ActorFunc update;
@@ -52,7 +55,8 @@ typedef struct {
 } NativePlacementState;
 
 #if defined(GAME_OOT)
-typedef struct {
+typedef struct
+{
     Actor* actor;
     ActorFunc init;
     ActorFunc update;
@@ -64,6 +68,7 @@ typedef struct {
     s16 room;
     u8 hadHealth;
 } NativeArenaTargetState;
+
 static NativeArenaTargetState sNativeArenaTargets[64];
 static u32 sNativeArenaGeneration;
 #endif
@@ -74,6 +79,7 @@ static NativePlacementState* sNativeStates;
 static u32 sNativeVisits[32];
 static u32 sNativeBlockedVisits[32];
 static NativePlacementState* sNativeScope;
+
 int comboEnemyNativeMusicSuppressed(void)
 {
     if (!sNativeScope || sNativeScope->operation == ENEMY_NATIVE_ARENA)
@@ -88,13 +94,13 @@ int comboEnemyNativeMusicSuppressed(void)
 static u32 sNativePlacementVrom __attribute__((section(".data"))) = 0;
 static u32 sChaoticPlacementVrom __attribute__((section(".data"))) = 0;
 #if defined(GAME_OOT)
-# define NativePlacementSpawnEntry ((Actor* (*)(ActorContext*, ActorEntry*, PlayState*))0x800255c4)
-# define NATIVE_PLACEMENT_GAME 0u
+#define NativePlacementSpawnEntry ((Actor * (*)(ActorContext*, ActorEntry*, PlayState*))0x800255c4)
+#define NATIVE_PLACEMENT_GAME     0u
 EXPORT_SYMBOL(ENEMY_NATIVE_PLACEMENTS_OOT, sNativePlacementVrom);
 EXPORT_SYMBOL(ENEMY_CHAOTIC_PLACEMENTS_OOT, sChaoticPlacementVrom);
 #else
-# define NativePlacementSpawnEntry ((Actor* (*)(ActorContext*, ActorEntry*, PlayState*))0x800bb2d0)
-# define NATIVE_PLACEMENT_GAME 1u
+#define NativePlacementSpawnEntry ((Actor * (*)(ActorContext*, ActorEntry*, PlayState*))0x800bb2d0)
+#define NATIVE_PLACEMENT_GAME     1u
 EXPORT_SYMBOL(ENEMY_NATIVE_PLACEMENTS_MM, sNativePlacementVrom);
 EXPORT_SYMBOL(ENEMY_CHAOTIC_PLACEMENTS_MM, sChaoticPlacementVrom);
 #endif
@@ -190,10 +196,13 @@ static int chaoticPlacementChoose(NativePlacement* seed, NativePlacement* choice
         }
         u32 offset = pool[1];
         u32 count = pool[2];
-        struct {
+
+        struct
+        {
             u32 operation;
             ActorEntry replacement;
         } alternative;
+
         _Static_assert(sizeof(alternative) == 20, "Chaotic placement record size");
         u32 stride = version == 3 ? 24 : sizeof(alternative);
         if (offset < 16 + poolCount * sizeof(pool) || offset > fileSize || (offset & 3) ||
@@ -396,6 +405,7 @@ void comboEnemyNativePlacementBlock(s32 room)
     if (room >= 0 && room < 32 && sNativeVisits[room])
         sNativeBlockedVisits[room] = sNativeVisits[room];
 }
+
 EXPORT_SYMBOL(ENEMY_SCRIPTED_MM_V1, comboEnemyNativePlacementBlock);
 #endif
 
@@ -451,6 +461,7 @@ static void shuffledDexihandThrow(PlayState* play, Actor* actor, f32 speed, s16 
     }
     ((void (*)(PlayState*, Actor*, f32, s16, f32, u32))0x800b8d50)(play, actor, speed, yaw, lift, damage);
 }
+
 PATCH_CALL(0x80af55f4, shuffledDexihandThrow);
 #endif
 
@@ -552,6 +563,7 @@ static int nativeArenaOwnerCurrent(NativeArenaTargetState* target, PlayState* pl
 
 static void nativeArenaTargetUpdate(Actor*, PlayState*);
 static void nativeArenaTargetFini(Actor*, PlayState*);
+
 static void nativeArenaTargetInit(Actor* actor, PlayState* play)
 {
     NativeArenaTargetState* target = nativeArenaTargetState(actor);
@@ -649,7 +661,9 @@ int comboEnemyNativeArenaTrackTarget(PlayState* play, Actor* actor)
     actor->fini = nativeArenaTargetFini;
     return 1;
 }
+
 EXPORT_SYMBOL(ENEMY_NATIVE_ARENA_LIFETIME_V1, comboEnemyNativeArenaTrackTarget);
+
 int comboEnemyNativeArenaDefeated(PlayState* play)
 {
     return sNativeScope && sNativeScope->operation == ENEMY_NATIVE_ARENA && nativePlacementCurrent(sNativeScope, play) &&
@@ -697,6 +711,7 @@ int comboEnemyNativeAirBound(Actor* actor)
 
 static void nativePlacementUpdate(Actor*, PlayState*);
 static void nativePlacementFini(Actor*, PlayState*);
+
 static void nativePlacementInit(Actor* actor, PlayState* play)
 {
     NativePlacementState* state = nativePlacementState(actor);
@@ -768,7 +783,7 @@ static void nativePlacementFini(Actor* actor, PlayState* play)
 #else
          || state->operation == 5 || (state->operation == ENEMY_SCRIPTED_MM && ((EnemyScriptedBinding*)actor)->pending)
 #endif
-        ))
+             ))
     {
         if (!(state->operation == ENEMY_NATIVE_RESOURCE && state->resource.state == ENEMY_RESOURCE_PENDING && nativePlacementCurrent(state, play)))
             sNativeBlockedVisits[state->room] = state->visit;
@@ -795,6 +810,7 @@ static s32 nativeDarkLinkOverrideLimbDraw(PlayState* play, s32 limb, Gfx** dList
     gSave.age = age;
     return result;
 }
+
 PATCH_FUNC(0x808bf70c, nativeDarkLinkOverrideLimbDraw);
 
 static int nativeDarkLinkSafeFloor(PlayState* play, CollisionPoly* floor, s32 bgId)
@@ -853,7 +869,8 @@ static void nativeDarkLinkRecover(Player* player, PlayState* play)
         return;
     Player* link = GET_PLAYER(play);
     if (link && link != player && (link->actor.bgCheckFlags & BGCHECKFLAG_GROUND) &&
-        (link->actor.room == actor->room || actor->room < 0) &&
+        (link->actor.room == actor->room || actor->room < 0 ||
+         (link->actor.room < 0 && actor->room == play->roomCtx.curRoom.num)) &&
         nativeDarkLinkRecoverFloor(player, play, link->actor.world.pos))
         return;
 
@@ -881,7 +898,7 @@ static void nativeDarkLinkRecover(Player* player, PlayState* play)
 static s32 nativeDarkLinkPlayerDamage(Player* player, PlayState* play)
 {
     s32 (*damage)(Player*, PlayState*) = OverlayAddr(0x808363dc);
-    if (&player->actor == sStandaloneDarkLink)
+    if (player->actor.id == ACTOR_EN_TORCH2 && player != GET_PLAYER(play))
     {
         s8* environmentalDamage = (s8*)((u8*)player + 0xa76);
         f32 crushHeight = *(f32*)((u8*)player + 0x6b4);
@@ -897,11 +914,12 @@ static s32 nativeDarkLinkPlayerDamage(Player* player, PlayState* play)
     }
     return damage(player, play);
 }
+
 PATCH_CALL(0x80847a64, nativeDarkLinkPlayerDamage);
 
 static void nativeDarkLinkPlayerFallSetup(PlayState* play, Player* player)
 {
-    if (&player->actor == sStandaloneDarkLink)
+    if (player->actor.id == ACTOR_EN_TORCH2 && player != GET_PLAYER(play))
     {
         nativeDarkLinkRecover(player, play);
         return;
@@ -909,6 +927,7 @@ static void nativeDarkLinkPlayerFallSetup(PlayState* play, Player* player)
     void (*setup)(PlayState*, Player*) = OverlayAddr(0x80837060);
     setup(play, player);
 }
+
 PATCH_CALL(0x808370f8, nativeDarkLinkPlayerFallSetup);
 PATCH_CALL(0x80837684, nativeDarkLinkPlayerFallSetup);
 
@@ -982,9 +1001,7 @@ static void nativeDarkLinkPlayerUpdate(Player* player, PlayState* play, Input* i
 static u8* nativeDarkLinkOverlay(Actor* actor)
 {
     ActorOvl* overlay = actor->ovl;
-    return overlay && overlay->vramStart == 0x808bd8e0 && overlay->vramEnd > 0x808c0075
-               ? overlay->data
-               : NULL;
+    return overlay && overlay->vramStart == 0x808bd8e0 && overlay->vramEnd > 0x808c0075 ? overlay->data : NULL;
 }
 
 static void nativeDarkLinkDraw(Actor* actor, PlayState* play)
@@ -1002,6 +1019,9 @@ static void nativeDarkLinkDraw(Actor* actor, PlayState* play)
 static void nativeDarkLinkUpdate(Actor* actor, PlayState* play, void (*update)(Actor*, PlayState*))
 {
     u8* overlay = nativeDarkLinkOverlay(actor);
+    Player* link = GET_PLAYER(play);
+    int preserveRecoil = link->speedXZ == -18.f &&
+                         !comboEnemyDarkLinkClashedWithPlayer((Player*)actor, link);
     if (actor->draw)
         actor->draw = nativeDarkLinkDraw;
     ((Player*)actor)->ageProperties = OverlayAddr(0x808512e8);
@@ -1019,8 +1039,14 @@ static void nativeDarkLinkUpdate(Actor* actor, PlayState* play, void (*update)(A
     sDarkLinkPlayerUpdate = NULL;
     sStandaloneDarkLink = NULL;
 
-    if (actor->update && actor->colChkInfo.health && actor->world.pos.y < actor->home.pos.y - 180.f &&
-        (!actor->floorPoly || actor->floorHeight < actor->home.pos.y - 180.f))
+    if (preserveRecoil)
+        link->speedXZ = -18.f;
+
+    if (actor->update && actor->colChkInfo.health &&
+        (actor->world.pos.y < -4000.f ||
+         (actor->floorPoly && actor->world.pos.y < actor->floorHeight - 180.f) ||
+         (actor->world.pos.y < actor->home.pos.y - 180.f &&
+          (!actor->floorPoly || actor->floorHeight < actor->home.pos.y - 180.f))))
         nativeDarkLinkRecover((Player*)actor, play);
 
     if (actor->update && actor->colChkInfo.health &&
@@ -1054,20 +1080,22 @@ void comboDebugTrackOotDarkLink(Actor* actor)
 #endif
 
 #if defined(GAME_OOT)
-#define REDEAD_ACTION_OFFSET 0x2f8
+#define REDEAD_ACTION_OFFSET  0x2f8
 #define REDEAD_ATTEMPT_FREEZE 0x8093aee0
-#define REDEAD_SETUP_IDLE 0x80939d38
+#define REDEAD_SETUP_IDLE     0x80939d38
 #else
-#define REDEAD_ACTION_OFFSET 0x188
+#define REDEAD_ACTION_OFFSET  0x188
 #define REDEAD_ATTEMPT_FREEZE 0x808d5ccc
-#define REDEAD_SETUP_IDLE 0x808d4308
+#define REDEAD_SETUP_IDLE     0x808d4308
 #endif
 
-typedef struct {
+typedef struct
+{
     Actor actor;
     u8 pad[REDEAD_ACTION_OFFSET - sizeof(Actor)];
     ActorFunc action;
 } NativeRedead;
+
 _Static_assert(__builtin_offsetof(NativeRedead, action) == REDEAD_ACTION_OFFSET, "ReDead action offset");
 
 void comboEnemyRedeadUpdate(Actor* actor, PlayState* play, ActorFunc update)
@@ -1160,7 +1188,7 @@ static void nativePlacementUpdate(Actor* actor, PlayState* play)
     else
 #endif
 #if defined(GAME_MM)
-    if (state->update && nativeDrySkullfish())
+        if (state->update && nativeDrySkullfish())
     {
         Player* player = GET_PLAYER(play);
         u32 swim = player->stateFlags1 & 0x08000000;
@@ -1170,7 +1198,7 @@ static void nativePlacementUpdate(Actor* actor, PlayState* play)
     }
     else
 #endif
-    if (state->update)
+        if (state->update)
     {
 #if defined(GAME_MM)
         int largeEeno = actor->id == 0x1e6 && actor->params == 1;
@@ -1209,9 +1237,12 @@ static int nativeResourceTarget(s16 id, u16 params)
     switch (id)
     {
     case 0xdd:
-    case 0xec: return params == 0;
-    case 0x1b: return params == 0 || params == 0xffff;
-    default: return 0;
+    case 0xec:
+        return params == 0;
+    case 0x1b:
+        return params == 0 || params == 0xffff;
+    default:
+        return 0;
     }
 #else
     switch (id)
@@ -1219,12 +1250,17 @@ static int nativeResourceTarget(s16 id, u16 params)
     case 0x00b:
     case 0x06c:
     case 0x109:
-    case 0x204: return params == 0;
-    case 0x00c: return params == 0 || params == 2;
+    case 0x204:
+        return params == 0;
+    case 0x00c:
+        return params == 0 || params == 2;
     case 0x012:
-    case 0x032: return params == 0xffff;
-    case 0x15b: return params == 0x0101;
-    default: return 0;
+    case 0x032:
+        return params == 0xffff;
+    case 0x15b:
+        return params == 0x0101;
+    default:
+        return 0;
     }
 #endif
 }
@@ -1233,36 +1269,59 @@ static Actor* nativePlacementPolicySpawn(ActorContext* ctx, ActorEntry* entry, P
 {
     switch (operation)
     {
-    case 0: return NativePlacementSpawnEntry(ctx, entry, play);
-    case 15: return NativePlacementSpawnEntry(ctx, entry, play);
-    case 4: return comboEnemyNativePeahatSpawn(ctx, entry, play);
-    case 6: return comboEnemyNativeRenewableBabaSpawn(ctx, entry, play);
-    case 10: return comboEnemyNativeLeeverSpawn(ctx, entry, play);
-    case 11: return comboEnemyNativeBigPoeSpawn(ctx, entry, play);
-    case 12: return comboEnemyNativeFighterSpawn(ctx, entry, play);
-    case 13: return comboEnemyNativePoeSisterSpawn(ctx, entry, play);
+    case 0:
+        return NativePlacementSpawnEntry(ctx, entry, play);
+    case 15:
+        return NativePlacementSpawnEntry(ctx, entry, play);
+    case 4:
+        return comboEnemyNativePeahatSpawn(ctx, entry, play);
+    case 6:
+        return comboEnemyNativeRenewableBabaSpawn(ctx, entry, play);
+    case 10:
+        return comboEnemyNativeLeeverSpawn(ctx, entry, play);
+    case 11:
+        return comboEnemyNativeBigPoeSpawn(ctx, entry, play);
+    case 12:
+        return comboEnemyNativeFighterSpawn(ctx, entry, play);
+    case 13:
+        return comboEnemyNativePoeSisterSpawn(ctx, entry, play);
 #if defined(GAME_MM)
-    case 30: return comboEnemyNativeRenewableSpawn(ctx, entry, play);
-    case 31: return comboEnemyNativeLilySpawn(ctx, entry, play);
-    case 25: return NativePlacementSpawnEntry(ctx, entry, play);
-    case 5: return comboEnemyNativeSkullwalltulaSpawn(ctx, entry, play);
-    case 9: return comboEnemyNativeGaroSpawn(ctx, entry, play);
-    case 18: return comboEnemyNativeTakkuriSpawn(ctx, entry, play);
-    case 19: return comboEnemyNativeEyegoreSpawn(ctx, entry, play);
+    case 30:
+        return comboEnemyNativeRenewableSpawn(ctx, entry, play);
+    case 31:
+        return comboEnemyNativeLilySpawn(ctx, entry, play);
+    case 25:
+        return NativePlacementSpawnEntry(ctx, entry, play);
+    case 5:
+        return comboEnemyNativeSkullwalltulaSpawn(ctx, entry, play);
+    case 9:
+        return comboEnemyNativeGaroSpawn(ctx, entry, play);
+    case 18:
+        return comboEnemyNativeTakkuriSpawn(ctx, entry, play);
+    case 19:
+        return comboEnemyNativeEyegoreSpawn(ctx, entry, play);
     case 21:
     case ENEMY_NATIVE_GARAHNA:
     case ENEMY_NATIVE_DRY_MM_AQUATIC:
         return NativePlacementSpawnEntry(ctx, entry, play);
 #else
-    case ENEMY_NATIVE_DRY_AQUATIC: return NativePlacementSpawnEntry(ctx, entry, play);
-    case 20: return comboEnemyNativeTentacleSpawn(ctx, entry, play);
-    case 17: return comboEnemyNativeBubbleSpawn(ctx, entry, play);
-    case 3: return comboEnemyNativeStalchildSpawn(ctx, entry, play);
-    case 7: return comboEnemyNativeGuaySpawn(ctx, entry, play);
-    case ENEMY_NATIVE_IRON_KNUCKLE: return comboEnemyNativeIronKnuckleSpawn(ctx, entry, play);
-    case ENEMY_NATIVE_SKULL_KID: return comboEnemyNativeSkullKidSpawn(ctx, entry, play);
+    case ENEMY_NATIVE_DRY_AQUATIC:
+        return NativePlacementSpawnEntry(ctx, entry, play);
+    case 20:
+        return comboEnemyNativeTentacleSpawn(ctx, entry, play);
+    case 17:
+        return comboEnemyNativeBubbleSpawn(ctx, entry, play);
+    case 3:
+        return comboEnemyNativeStalchildSpawn(ctx, entry, play);
+    case 7:
+        return comboEnemyNativeGuaySpawn(ctx, entry, play);
+    case ENEMY_NATIVE_IRON_KNUCKLE:
+        return comboEnemyNativeIronKnuckleSpawn(ctx, entry, play);
+    case ENEMY_NATIVE_SKULL_KID:
+        return comboEnemyNativeSkullKidSpawn(ctx, entry, play);
 #endif
-    default: return NULL;
+    default:
+        return NULL;
     }
 }
 
@@ -1550,8 +1609,8 @@ retrySeed:
         !memcmp(&record.original, &record.replacement, sizeof(*entry)))
         return 1;
     if (record.operation == ENEMY_NATIVE_RESOURCE ? (record.targetId != entry->id || record.targetParams != (u16)entry->params ||
-                                                     !nativeResourceTarget(record.targetId, record.targetParams))
-                                                  : (record.operation != ENEMY_NATIVE_ARENA || (record.original.id != 0x136 && record.original.id != 0xc8) ||
+                                                     !nativeResourceTarget(record.targetId, record.targetParams)) :
+                                                    (record.operation != ENEMY_NATIVE_ARENA || (record.original.id != 0x136 && record.original.id != 0xc8) ||
                                                      record.targetId < 0 || record.targetId >= 0x400))
     {
         g.roomEnemyLackSoul = 1;
@@ -1714,6 +1773,10 @@ retrySeed:
     if (record.operation == ENEMY_NATIVE_RESOURCE && comboEnemyNativeResourceAlreadyComplete(play, &state->resource))
     {
         memset(state, 0, sizeof(*state));
+#if defined(GAME_OOT)
+        if (record.original.id == ACTOR_EN_GELDB)
+            return 1;
+#endif
         NativePlacementSpawnEntry(ctx, &record.original, play);
         return 1;
     }
@@ -1950,32 +2013,37 @@ int comboEnemyAirPlacement(PlayState* play, Actor* actor, f32 clearance)
 extern u8 gCurrentSpawnActorNum;
 
 #if defined(GAME_OOT)
-# define NativeEncounterSpawnEntry Actor_SpawnEntry
-# define NativeEncounterDelete ((Actor* (*)(ActorContext*, Actor*, PlayState*))0x80025648)
-# define NativeEncounterGetTemp ((s32 (*)(PlayState*, s32))0x80020694)
-# define NativeEncounterSetPermanent ((void (*)(PlayState*, s32))0x80020658)
-# define NativeEncounterUnsetPermanent ((void (*)(PlayState*, s32))0x80020674)
-# define NativeEncounterUnsetTemp ((void (*)(PlayState*, s32))0x800206c8)
+#define NativeEncounterSpawnEntry     Actor_SpawnEntry
+#define NativeEncounterDelete         ((Actor * (*)(ActorContext*, Actor*, PlayState*))0x80025648)
+#define NativeEncounterGetTemp        ((s32(*)(PlayState*, s32))0x80020694)
+#define NativeEncounterSetPermanent   ((void (*)(PlayState*, s32))0x80020658)
+#define NativeEncounterUnsetPermanent ((void (*)(PlayState*, s32))0x80020674)
+#define NativeEncounterUnsetTemp      ((void (*)(PlayState*, s32))0x800206c8)
 #else
-# define NativeEncounterSpawnEntry ((Actor* (*)(ActorContext*, ActorEntry*, PlayState*))0x800bb2d0)
-# define NativeEncounterDelete ((Actor* (*)(ActorContext*, Actor*, PlayState*))0x800bb498)
-# define NativeEncounterGetTemp ((s32 (*)(PlayState*, s32))0x800b5d18)
-# define NativeEncounterSetPermanent ((void (*)(PlayState*, s32))0x800b5cdc)
-# define NativeEncounterUnsetPermanent ((void (*)(PlayState*, s32))0x800b5cf8)
-# define NativeEncounterUnsetTemp ((void (*)(PlayState*, s32))0x800b5d4c)
+#define NativeEncounterSpawnEntry     ((Actor * (*)(ActorContext*, ActorEntry*, PlayState*))0x800bb2d0)
+#define NativeEncounterDelete         ((Actor * (*)(ActorContext*, Actor*, PlayState*))0x800bb498)
+#define NativeEncounterGetTemp        ((s32(*)(PlayState*, s32))0x800b5d18)
+#define NativeEncounterSetPermanent   ((void (*)(PlayState*, s32))0x800b5cdc)
+#define NativeEncounterUnsetPermanent ((void (*)(PlayState*, s32))0x800b5cf8)
+#define NativeEncounterUnsetTemp      ((void (*)(PlayState*, s32))0x800b5d4c)
 #endif
 
 typedef struct
 {
     Actor* actor;
-    union {
+
+    union
+    {
         EnemyPlacement placement;
-        struct {
+
+        struct
+        {
             u32 listVrom, visit;
             u8 room, slot, complete, shared;
         };
     };
 } EnemyEncounter;
+
 _Static_assert(sizeof(EnemyEncounter) == 16, "Enemy encounter state");
 
 typedef struct
@@ -2017,14 +2085,17 @@ int comboEnemyDefeatState(const Actor* actor, const EnemyDefeatTransition* t, co
 }
 
 #if defined(GAME_OOT)
-typedef struct {
+typedef struct
+{
     ActorEntry* list;
     u32 firstKey;
     u16 count;
     u16 scene;
     u8 mq;
 } OotEnemizerRoomKeys;
+
 static OotEnemizerRoomKeys sOotEnemizerRoomKeys[32];
+
 static void ootEnemizerCaptureKeys(PlayState* play, ActorEntry* list, u32 count)
 {
     s32 room;
@@ -2209,7 +2280,7 @@ static int enemyRoomStandaloneMiniboss(const ActorEntry* entry)
 void comboEnemyBeginSpawnBatch(void)
 {
 #if defined(GAME_MM)
-    comboEnemyDependenciesSpawnIce(gPlay);
+    comboEnemyDependenciesSpawnActors(gPlay);
 #endif
     sAllocationRetryPhase = 0;
     memset(sDeferredRoomActors, 0, sizeof(sDeferredRoomActors));
@@ -2401,9 +2472,9 @@ Actor* comboEnemyScriptedSpawnTarget(Actor* monitor, PlayState* play, f32 x, f32
     Actor* actor;
     if ((binding->original.id & 0x1fff) == 0x15d &&
         ((binding->targetId == 0x184 && binding->targetParams == 0x1fc0) ||
-         (binding->targetId == 0x1e8 && binding->targetParams == 0)))
+         (binding->targetId == 0x1e8 && binding->targetParams == 0) ||
+         binding->targetId == ACTOR_EN_BB))
     {
-
         ActorEntry entry = { 0 };
         entry.id = binding->targetId;
         entry.params = binding->targetParams;
@@ -2411,7 +2482,10 @@ Actor* comboEnemyScriptedSpawnTarget(Actor* monitor, PlayState* play, f32 x, f32
         entry.rot.x = 7;
         entry.rot.z = 0x7f;
         entry.rot.y = ((u16)(s16)(yaw * (360.0f / 65536.0f)) << 7) | 0x7f;
-        actor = binding->targetId == 0x184 ? comboEnemyNativeEyegoreSpawn(&play->actorCtx, &entry, play) : comboEnemyNativePoeSisterSpawn(&play->actorCtx, &entry, play);
+        if (binding->targetId == ACTOR_EN_BB)
+            actor = comboEnemyNativeRenewableSpawn(&play->actorCtx, &entry, play);
+        else
+            actor = binding->targetId == 0x184 ? comboEnemyNativeEyegoreSpawn(&play->actorCtx, &entry, play) : comboEnemyNativePoeSisterSpawn(&play->actorCtx, &entry, play);
     }
     else
     {
@@ -2423,6 +2497,7 @@ Actor* comboEnemyScriptedSpawnTarget(Actor* monitor, PlayState* play, f32 x, f32
     sNextActor = previousActor;
     return actor;
 }
+
 EXPORT_SYMBOL(ENEMY_SCRIPTED_MM_LEASE_V1, comboEnemyScriptedSpawnTarget);
 #endif
 
@@ -2466,7 +2541,7 @@ int comboEnemyEncounterRetryAllocation(const EnemyPlacement* placement)
 void comboEnemyEncounterPostFrame(PlayState* play)
 {
 #if defined(GAME_MM)
-    comboEnemyDependenciesSpawnIce(play);
+    comboEnemyDependenciesSpawnActors(play);
 #endif
     if (sAllocationRetryPhase == 2 && !comboEnemyCurrentActor() && sCompletingRoom < 0)
     {
@@ -2757,6 +2832,7 @@ static void enemyActorEscape(Actor* actor)
     }
     Actor_Kill(actor);
 }
+
 EXPORT_LINKABLE_SYMBOL(FOREIGN_ENEMY_API_ESCAPE, enemyActorEscape);
 #endif
 

@@ -8,6 +8,7 @@
 #include <combo/mm/actor_arms_hook.h>
 #include <combo/sfx.h>
 #include <combo/custom.h>
+#include <combo/enemy_native.h>
 
 extern void FOREIGN_ENEMY_API_SFX_GENERAL(u16 sfxId, Vec3f* pos, u8 token, f32* frequency, f32* volume, s8* reverb);
 
@@ -17,8 +18,8 @@ static PlayerAgeProperties sDarkLinkAdultProperties;
 static u8 sDarkLinkAdultPropertiesLoaded;
 
 #define DARK_LINK_COMBAT_IDLE ((PlayerAnimationHeader*)0x0400d468)
-#define DARK_LINK_PERCH_JUMP ((PlayerAnimationHeader*)0x0400dcd8)
-#define DARK_LINK_PERCH_LAND ((PlayerAnimationHeader*)0x0400d420)
+#define DARK_LINK_PERCH_JUMP  ((PlayerAnimationHeader*)0x0400dcd8)
+#define DARK_LINK_PERCH_LAND  ((PlayerAnimationHeader*)0x0400d420)
 
 static void DarkLink_PlayOotVoice(Actor* actor, u16 sfxId) {
     FOREIGN_ENEMY_API_SFX_GENERAL(sfxId, &actor->projectedPos, 4, &sDarkLinkSfxFrequency, &gSfxDefaultFreqAndVolScale,
@@ -77,15 +78,42 @@ static void DarkLink_UpdateBody(MmDarkLink* enemy) {
 }
 
 static DamageTable sDamageTable = { {
-    DMG_ENTRY(0, 0x1), DMG_ENTRY(2, 0x0), DMG_ENTRY(1, 0x0), DMG_ENTRY(2, 0x0), DMG_ENTRY(0, 0x1), DMG_ENTRY(2, 0x0),
-    DMG_ENTRY(2, 0x0), DMG_ENTRY(0, 0x1), DMG_ENTRY(1, 0x0), DMG_ENTRY(2, 0x0), DMG_ENTRY(4, 0x0), DMG_ENTRY(2, 0x0),
-    DMG_ENTRY(2, 0x0), DMG_ENTRY(2, 0x0), DMG_ENTRY(2, 0x0), DMG_ENTRY(2, 0x0), DMG_ENTRY(2, 0x0), DMG_ENTRY(2, 0xE),
-    DMG_ENTRY(0, 0x6), DMG_ENTRY(3, 0xD), DMG_ENTRY(0, 0x0), DMG_ENTRY(0, 0x0), DMG_ENTRY(1, 0x0), DMG_ENTRY(4, 0x0),
-    DMG_ENTRY(2, 0x0), DMG_ENTRY(2, 0x0), DMG_ENTRY(8, 0x0), DMG_ENTRY(4, 0x0), DMG_ENTRY(0, 0x0), DMG_ENTRY(0, 0x0),
-    DMG_ENTRY(4, 0x0), DMG_ENTRY(0, 0x0),
+    DMG_ENTRY(0, 0x1),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(1, 0x0),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(0, 0x1),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(0, 0x1),
+    DMG_ENTRY(1, 0x0),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(4, 0x0),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(2, 0xE),
+    DMG_ENTRY(0, 0x6),
+    DMG_ENTRY(3, 0xD),
+    DMG_ENTRY(0, 0x0),
+    DMG_ENTRY(0, 0x0),
+    DMG_ENTRY(1, 0x0),
+    DMG_ENTRY(4, 0x0),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(2, 0x0),
+    DMG_ENTRY(8, 0x0),
+    DMG_ENTRY(4, 0x0),
+    DMG_ENTRY(0, 0x0),
+    DMG_ENTRY(0, 0x0),
+    DMG_ENTRY(4, 0x0),
+    DMG_ENTRY(0, 0x0),
 } };
 
 s32 FOREIGN_ENEMY_API_COLLISION_AC(PlayState*, CollisionCheckContext*, Collider*);
+
 static Actor* DarkLink_ProjectileThreat(PlayState* play, Actor* actor) {
     s32 (*cylinderIntersects)(f32, f32, f32, Vec3f*, Vec3f*, Vec3f*, Vec3f*, Vec3f*) = (void*)0x800e8784;
     for (Actor* shot = play->actorCtx.actors[ACTORCAT_ITEMACTION].first; shot; shot = shot->next) {
@@ -329,7 +357,10 @@ static void DarkLink_Reposition(MmDarkLink* enemy, PlayState* play, Player* play
     actor->world.pos = actor->prevPos = spot;
     actor->shape.yOffset = 0.f;
     enemy->player.invincibilityTimer = 0;
+    enemy->player.stateFlags1 &= ~(PLAYER_STATE1_MM_20000000 | PLAYER_STATE1_MM_80000000);
     enemy->player.stateFlags2 &= ~PLAYER_STATE2_MM_80000000;
+    enemy->player.fallStartHeight = spot.y;
+    enemy->player.fallDistance = 0;
     actor->velocity.y = actor->speed = enemy->player.linearVelocity = 0.f;
     Actor_UpdateBgCheckInfo(play, actor, 20.f, 30.f, 35.f, 5);
     enemy->recovery = enemy->swordPerch = 0;
@@ -345,7 +376,6 @@ static void DarkLink_HoldStunnedPose(Player* fighter, PlayState* play) {
 }
 
 static void DarkLink_SwordStandPose(Player* fighter, PlayState* play) {
-
     int finished = PlayerAnimation_Update(play, &fighter->skelAnime);
     if (fighter->skelAnime.animation == DARK_LINK_PERCH_JUMP && (finished || fighter->skelAnime.curFrame >= 2.f))
         PlayerAnimation_PlayOnce(play, &fighter->skelAnime, DARK_LINK_PERCH_LAND);
@@ -359,6 +389,7 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
     Player* fighter = &enemy->player;
     Input* input = &enemy->input;
     Player* player = GET_PLAYER(play);
+    int playerClashed = comboEnemyDarkLinkClashedWithPlayer(fighter, player);
 
     if (actor->colChkInfo.health && enemy->alpha < 255)
         enemy->alpha = MIN(255, enemy->alpha + 4);
@@ -367,9 +398,8 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
         Actor_MoveWithGravity(actor);
 
         Actor_UpdateBgCheckInfo(play, actor, 20.f, 30.f, 35.f,
-                                actor->colChkInfo.health  ? 1
-                                : actor->velocity.y > 0.f ? 7
-                                                          : 5);
+                                actor->colChkInfo.health ? 1 : actor->velocity.y > 0.f ? 7 :
+                                                                                         5);
         if (!actor->colChkInfo.health) {
             if (actor->velocity.y > 0.f && (actor->bgCheckFlags & BGCHECKFLAG_CEILING))
                 actor->velocity.y = 0.f;
@@ -773,7 +803,7 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
             enemy->staggerTimer = enemy->staggerCount = 0;
         }
     }
-    if (player->linearVelocity == -18.f)
+    if (playerClashed && player->linearVelocity == -18.f)
         player->linearVelocity = actor->xzDistToPlayer > 80.f ? 1.2f : actor->xzDistToPlayer < 70.f ? -1.5f : 1.f;
     if (enemy->counter == 1 && !fighter->meleeWeaponState)
         enemy->counter = 0;

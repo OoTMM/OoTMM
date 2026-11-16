@@ -12,7 +12,7 @@
 #include <combo/multi.h>
 #include <combo/actors.h>
 
-void comboEnemyGohmaHatchedWrap(Actor *, PlayState *);
+void comboEnemyGohmaHatchedWrap(Actor*, PlayState*);
 
 static s16 sActorIdToSpawn;
 
@@ -27,7 +27,7 @@ extern int gDebugEnemySpawn;
 
 int gOotBariChildSpawn;
 
-static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
+int comboEnemyNativeSoulCheck(PlayState* play, s16 actorId, u16 variable)
 {
     if (g.isCredits)
         return 1;
@@ -75,7 +75,7 @@ static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
     case ACTOR_BG_BDAN_OBJECTS:
         if (variable & 0xff)
             return 1;
-        /* Fallthrough */
+        __attribute__((fallthrough));
     case ACTOR_EN_OKUTA:
     case ACTOR_EN_BIGOKUTA:
         return comboHasSoulOot(GI_OOT_SOUL_ENEMY_OCTOROK);
@@ -259,7 +259,7 @@ static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
     case ACTOR_BG_SPOT15_RRBOX:
         if (play->sceneId != SCE_OOT_HYRULE_CASTLE)
             return 1;
-        /* Fallthrough */
+        __attribute__((fallthrough));
     case ACTOR_EN_TA:
         return opt(comboHasSoulOot(GI_OOT_SOUL_NPC_TALON));
     case ACTOR_EN_FISHING:
@@ -319,7 +319,7 @@ static int canSpawnSoul(PlayState *play, s16 actorId, u16 variable)
     }
 }
 
-static int canSpawnActor(PlayState *play, s16 actorId, u16 param)
+static int canSpawnActor(PlayState* play, s16 actorId, u16 param)
 {
     switch (actorId)
     {
@@ -350,10 +350,10 @@ static int canSpawnActor(PlayState *play, s16 actorId, u16 param)
     }
 }
 
-Actor *Actor_SpawnWrapper(ActorContext *actorCtx, PlayState *play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
+Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState* play, short actorId, float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 variable)
 {
     int ret;
-    Actor *actor;
+    Actor* actor;
 
     if (comboIsForeignEnemyActor(actorId))
         return comboSpawnForeignEnemy(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, 0x7f, 0x3ff, NULL);
@@ -367,7 +367,7 @@ Actor *Actor_SpawnWrapper(ActorContext *actorCtx, PlayState *play, short actorId
         ret = 1;
     else
 #endif
-        ret = canSpawnSoul(play, actorId, variable);
+        ret = comboEnemyNativeSoulCheck(play, actorId, variable);
 
     ret = comboEnemySoulPreviewGate(play, 0, actorId, variable, x, y, z, ry, ret);
     if (ret <= 0)
@@ -389,7 +389,6 @@ Actor *Actor_SpawnWrapper(ActorContext *actorCtx, PlayState *play, short actorId
         return NULL;
     }
 
-    /* Inert grass & rocks */
     if (actorId == ACTOR_OBJ_HANA)
     {
         switch (variable & 3)
@@ -432,7 +431,7 @@ Actor *Actor_SpawnWrapper(ActorContext *actorCtx, PlayState *play, short actorId
     return actor;
 }
 
-static int GetRoomClearFlagForActor(PlayState *play, int flag)
+static int GetRoomClearFlagForActor(PlayState* play, int flag)
 {
     int res;
 
@@ -451,7 +450,7 @@ static int GetRoomClearFlagForActor(PlayState *play, int flag)
 
 PATCH_CALL(0x80025284, GetRoomClearFlagForActor);
 
-static int shouldActorIgnorePlayer(Actor *this, Player *link)
+static int shouldActorIgnorePlayer(Actor* this, Player* link)
 {
     u16 variable;
 
@@ -506,7 +505,7 @@ static int shouldActorIgnorePlayer(Actor *this, Player *link)
     }
 }
 
-void Actor_RunUpdate(Actor *this, PlayState *play, ActorFunc update)
+void Actor_RunUpdate(Actor* this, PlayState* play, ActorFunc update)
 {
     int ignorePlayer;
     s16 yawTowardsPlayer;

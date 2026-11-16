@@ -68,7 +68,7 @@ function EnemyTable({ game }: { game: Game }) {
                 <th scope="col" className={headerClass}>
                   <span className="inline-flex items-center gap-1">
                     Weight
-                    <Tooltip>Weight controls how often an eligible enemy type is chosen.</Tooltip>
+                    <Tooltip>Weight controls how often an eligible enemy type is chosen. Variants under one entry share that weight.</Tooltip>
                   </span>
                 </th>
               </tr>
@@ -81,7 +81,7 @@ function EnemyTable({ game }: { game: Game }) {
                   key === row.key || row.legacyKeys.includes(key) ||
                   (key.startsWith(legacyPrefix) && row.legacyKeys.includes(key.slice(legacyPrefix.length))),
                 );
-                const defaultWeight = defaultEnemyShuffleWeight(row.miniboss);
+                const defaultWeight = defaultEnemyShuffleWeight(row.miniboss, row.name);
                 const weight = settings.enemyShuffleWeights[row.key] ?? defaultWeight;
                 return (
                   <tr key={row.key} className={'ux-border-b last:border-b-0' + (disabled ? ' opacity-50' : '')}>

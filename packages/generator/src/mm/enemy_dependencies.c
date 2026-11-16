@@ -2,8 +2,10 @@
 #include <combo/dma.h>
 #include <combo/enemy.h>
 #include <combo/enemy_placement.h>
+#include <combo/souls.h>
 
-typedef struct {
+typedef struct
+{
     u32 key;
     Vec3s pos;
     u16 params;
@@ -11,14 +13,18 @@ typedef struct {
     u8 hostSlot;
     u8 type;
 } EnemyDependency;
+
 _Static_assert(sizeof(EnemyDependency) == 16, "MM room dependency ABI");
-typedef struct {
+
+typedef struct
+{
     Vec3f lastPos;
     u16 params;
     s16 yaw;
     u8 hostSlot, type;
     u8 room, slot, seen, done;
 } EnemyDependencyState;
+
 _Static_assert(sizeof(EnemyDependencyState) == 24, "Compact runtime dependency state");
 static EnemyDependencyState sDependencies[64];
 static u32 sDependencyVrom __attribute__((section(".data"))) = 0;
@@ -27,6 +33,7 @@ extern u8 gCurrentSpawnActorNum;
 s16 comboEnemyMmStandaloneMinibossSlot(s16, u16);
 
 void comboEnemyKeetaGuardsReset(void);
+
 void comboEnemyDependenciesReset(void)
 {
     memset(sDependencies, 0, sizeof(sDependencies));
@@ -64,7 +71,7 @@ void comboEnemyDependenciesBeginRoom(PlayState* play, ActorEntry* list, u32 coun
             return;
         if (data.key < key || data.key >= key + count * sizeof(*list) || (data.key - key) % sizeof(*list))
             continue;
-        if ((data.type != 1 && data.type != 2) || data.hostSlot >= count)
+        if ((data.type != 1 && data.type != 2 && data.type != 3) || data.hostSlot >= count)
             continue;
         for (u32 j = 0; j < ARRAY_COUNT(sDependencies); ++j)
         {
@@ -73,27 +80,37 @@ void comboEnemyDependenciesBeginRoom(PlayState* play, ActorEntry* list, u32 coun
                 continue;
             *state = (EnemyDependencyState){
                 .lastPos = { data.pos.x, data.pos.y, data.pos.z },
-                .params = data.params, .yaw = data.yaw,
-                .hostSlot = data.hostSlot, .type = data.type,
-                .room = room, .slot = (data.key - key) / sizeof(*list)
+                .params = data.params,
+                .yaw = data.yaw,
+                .hostSlot = data.hostSlot,
+                .type = data.type,
+                .room = room,
+                .slot = (data.key - key) / sizeof(*list)
             };
             break;
         }
     }
 }
 
-void comboEnemyDependenciesSpawnIce(PlayState* play)
+void comboEnemyDependenciesSpawnActors(PlayState* play)
 {
     u8 saved = gCurrentSpawnActorNum;
     gCurrentSpawnActorNum = 0xff;
     for (u32 i = 0; i < ARRAY_COUNT(sDependencies); ++i)
     {
         EnemyDependencyState* state = &sDependencies[i];
-        if (state->type != 2 || state->done || state->room != (u8)play->roomCtx.curRoom.num)
+        if ((state->type != 2 && state->type != 3) || state->done || state->room != (u8)play->roomCtx.curRoom.num)
             continue;
-        Actor* ice = Actor_Spawn(&play->actorCtx, play, ACTOR_OBJ_ICE_POLY,
-                                 state->lastPos.x, state->lastPos.y, state->lastPos.z, 0, state->yaw, 0, state->params);
-        if (ice)
+        int missingSoul = state->type == 3 && !comboHasSoulMm(GI_MM_SOUL_ENEMY_BIO_BABA);
+        u16 params = state->type == 3 ? 2 : state->params;
+        Actor* dependency = Actor_Spawn(&play->actorCtx, play, state->type == 3 ? ACTOR_BOSS_05 : ACTOR_OBJ_ICE_POLY,
+                                        state->lastPos.x, state->lastPos.y, state->lastPos.z, 0, state->yaw, 0, params);
+        if (dependency && (dependency->init || dependency->update))
+        {
+            dependency->room = state->room;
+            state->done = 1;
+        }
+        if (missingSoul)
             state->done = 1;
     }
     gCurrentSpawnActorNum = saved;

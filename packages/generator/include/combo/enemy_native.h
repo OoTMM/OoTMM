@@ -4,9 +4,27 @@
 #include <combo/types.h>
 #include <combo/common/actor_init.h>
 #include <combo/math/vec.h>
+#include <combo/player.h>
 
 #define ENEMY_NATIVE_KEEP_MAIN 1u
-#define ENEMY_NATIVE_KEEP_SUB 2u
+#define ENEMY_NATIVE_KEEP_SUB  2u
+
+static inline int comboEnemyDarkLinkClashedWithPlayer(Player* fighter, Player* player)
+{
+    Collider* shield = &fighter->shieldQuad.base;
+    if (shield->ac == &player->actor && (shield->acFlags & AC_BOUNCED))
+        return 1;
+    for (int i = 0; i < 2; ++i)
+    {
+        Collider* sword = &fighter->meleeWeaponQuads[i].base;
+        if ((sword->ac == &player->actor && (sword->acFlags & AC_BOUNCED)) ||
+            (sword->at == &player->actor && (sword->atFlags & AT_BOUNCED)))
+            return 1;
+    }
+    return 0;
+}
+
+extern int gEnemyFrozenWallmasterIceSpawn;
 
 typedef struct
 {
@@ -20,12 +38,15 @@ struct ActorContext;
 struct ActorEntry;
 struct PlayState;
 
+#if defined(GAME_OOT)
+int comboEnemyNativeSoulCheck(struct PlayState*, s16, u16);
+#endif
 struct Actor* comboEnemyNativeStandaloneSpawn(struct ActorContext*, struct ActorEntry*, struct PlayState*, u32);
 int comboEnemyNativeEnter(struct PlayState* play, EnemyNativeSegments* scope, u32 required);
 void comboEnemyNativeLeave(EnemyNativeSegments* scope);
 int comboEnemyTentacleCeiling(struct PlayState*, Vec3f*);
 u16 comboEnemyNativeIronKnuckleParams(u16);
-void comboEnemyNativeIronKnuckleActivate(struct Actor*, u16);
+void comboEnemyNativeIronKnuckleActivate(struct Actor*, struct PlayState*, u16);
 
 struct Actor* comboEnemyNativeBigPoeSpawn(struct ActorContext*, struct ActorEntry*, struct PlayState*);
 struct Actor* comboEnemyNativeBubbleSpawn(struct ActorContext*, struct ActorEntry*, struct PlayState*);

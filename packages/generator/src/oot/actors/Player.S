@@ -536,3 +536,45 @@ PATCH_END
 PATCH_START 0x8085558c
 .int 0
 PATCH_END
+
+/* Keep Dark Link's environmental damage separate from the real player. */
+Player_EnvironmentalDamageS0:
+  j Player_InflictEnvironmentalDamage
+   move a2,s0
+
+Player_EnvironmentalBurnDamage:
+  j Player_InflictEnvironmentalDamage
+   lw a2,0x7c(sp)
+
+PATCH_START 0x80836410
+  jal Player_EnvironmentalDamageS0
+PATCH_END
+
+PATCH_START 0x80841fbc
+  jal Player_EnvironmentalDamageS0
+PATCH_END
+
+PATCH_START 0x80846fd4
+  jal Player_EnvironmentalBurnDamage
+PATCH_END
+
+PATCH_START 0x8084dcac
+  jal Player_EnvironmentalDamageS0
+PATCH_END
+
+/* The environmental damage hooks */
+PATCH_START 0x80853b38
+  .int 0
+PATCH_END
+
+PATCH_START 0x80854d68
+  .int 0
+PATCH_END
+
+PATCH_START 0x808554b0
+  .int 0
+PATCH_END
+
+PATCH_START 0x80855e44
+  .int 0
+PATCH_END

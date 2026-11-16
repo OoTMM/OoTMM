@@ -3,18 +3,18 @@
 
 #include <combo.h>
 
-#define ENEMY_NATIVE_RESOURCE 1u
-#define ENEMY_NATIVE_SUPPRESS 2u
-#define ENEMY_NATIVE_ARENA 8u
-#define ENEMY_NATIVE_SKULL_KID 16u
-#define ENEMY_NATIVE_GARAHNA 24u
-#define ENEMY_NATIVE_DRY_AQUATIC 28u
+#define ENEMY_NATIVE_RESOURCE       1u
+#define ENEMY_NATIVE_SUPPRESS       2u
+#define ENEMY_NATIVE_ARENA          8u
+#define ENEMY_NATIVE_SKULL_KID      16u
+#define ENEMY_NATIVE_GARAHNA        24u
+#define ENEMY_NATIVE_DRY_AQUATIC    28u
 #define ENEMY_NATIVE_DRY_MM_AQUATIC 29u
-#define ENEMY_NATIVE_FLOOR 32u
-#define ENEMY_NATIVE_AIR 256u
-#define ENEMY_NATIVE_UPRIGHT 512u
-#define ENEMY_NATIVE_GROUND 1024u
-#define ENEMY_NATIVE_IRON_KNUCKLE 64u
+#define ENEMY_NATIVE_FLOOR          32u
+#define ENEMY_NATIVE_AIR            256u
+#define ENEMY_NATIVE_UPRIGHT        512u
+#define ENEMY_NATIVE_GROUND         1024u
+#define ENEMY_NATIVE_IRON_KNUCKLE   64u
 void comboEnemyRedeadUpdate(Actor*, PlayState*, ActorFunc);
 int comboEnemyNativeAirBound(Actor*);
 int comboEnemyNativePlacementActive(Actor*);
@@ -33,7 +33,7 @@ Actor* comboEnemyNativeDryAquaticOwner(PlayState*, f32*);
 void comboEnemyNativePlacementBlock(s32 room);
 void comboEnemyDependenciesReset(void);
 void comboEnemyDependenciesBeginRoom(PlayState*, ActorEntry*, u32);
-void comboEnemyDependenciesSpawnIce(PlayState*);
+void comboEnemyDependenciesSpawnActors(PlayState*);
 int comboEnemyFairyHost(Actor*, PlayState*, Vec3f*);
 int comboEnemyRoomSlotComplete(s32, u32);
 

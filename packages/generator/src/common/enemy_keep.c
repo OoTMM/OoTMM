@@ -22,19 +22,23 @@
 #endif
 #endif
 
-#define KEEP_ENTRY_LIMIT 128
-#define KEEP_ASSET_LIMIT 0x10000u
-#define KEEP_TOTAL_LIMIT 0x20000u
+#define KEEP_ENTRY_LIMIT    128
+#define KEEP_ASSET_LIMIT    0x10000u
+#define KEEP_TOTAL_LIMIT    0x20000u
 #define KEEP_METADATA_LIMIT 0x10000u
-#define KEEP_DEPTH_LIMIT 32
+#define KEEP_DEPTH_LIMIT    32
 
-typedef struct {
+typedef struct
+{
     u32 objectId, offset, size, crc, fixupOffset, fixupCount;
 } KeepEntry;
-typedef struct {
+
+typedef struct
+{
     void* data;
     u32 state;
 } KeepState;
+
 static u8* sKeepMetadata;
 static KeepState* sKeepStates;
 static u32 sKeepCount, sKeepConfig;
@@ -201,9 +205,9 @@ void* comboEnemyKeepAsset(u16 objectId, u32 offset)
 }
 
 #if defined(GAME_OOT)
-# define NativeSlots(ctx) ((ctx)->status)
+#define NativeSlots(ctx) ((ctx)->status)
 #else
-# define NativeSlots(ctx) ((ctx)->slots)
+#define NativeSlots(ctx) ((ctx)->slots)
 #endif
 
 static void* enemyNativeKeep(ObjectContext* ctx, u32 index, int main)
@@ -267,9 +271,11 @@ void comboEnemyNativeLeave(EnemyNativeSegments* scope)
 #endif
 #endif
 
-typedef struct {
+typedef struct
+{
     u32 scene, room, first, count;
 } RoomModelRow;
+
 static u32* sRoomModelMetadata;
 static u32 sRoomModelConfig, sRoomModelCount, sRoomModelVersion;
 static int sRoomModelOnlyOom;
@@ -484,9 +490,9 @@ invalid:
 }
 
 #if defined(GAME_OOT)
-#define NativeResourceSpawnEntry ((Actor* (*)(ActorContext*, ActorEntry*, PlayState*))0x800255c4)
+#define NativeResourceSpawnEntry ((Actor * (*)(ActorContext*, ActorEntry*, PlayState*))0x800255c4)
 #else
-#define NativeResourceSpawnEntry ((Actor* (*)(ActorContext*, ActorEntry*, PlayState*))0x800bb2d0)
+#define NativeResourceSpawnEntry ((Actor * (*)(ActorContext*, ActorEntry*, PlayState*))0x800bb2d0)
 #endif
 
 static s16 enemyResourceObject(s16 actorId)
@@ -543,7 +549,36 @@ int comboEnemyNativeResourceInit(EnemyNativeResource* state, const ActorEntry* o
     state->actorIndex = gCurrentSpawnActorNum;
     return 1;
 }
+
 EXPORT_SYMBOL(ENEMY_NATIVE_FIGHT_RESTORE_V1, comboEnemyNativeResourceInit);
+
+#if defined(GAME_OOT)
+static int enemyGerudoFightComplete(PlayState* play, const EnemyNativeResource* state)
+{
+    u16 key = (u16)state->original.params >> 8;
+    u16 rescued;
+    switch (key)
+    {
+    case 0x0a:
+        rescued = EV_OOT_CHK_CARPENTER_4;
+        break;
+    case 0x0c:
+        rescued = EV_OOT_CHK_CARPENTER_1;
+        break;
+    case 0x0e:
+        rescued = EV_OOT_CHK_CARPENTER_2;
+        break;
+    case 0x0f:
+        rescued = EV_OOT_CHK_CARPENTER_3;
+        break;
+    default:
+        return 0;
+    }
+    return Config_Flag(CFG_OOT_CARPENTERS_NONE) ||
+           (Config_Flag(CFG_OOT_CARPENTERS_ONE) && key != 0x0c) ||
+           GetEventChk(rescued) || Flags_GetCollectible(play, key);
+}
+#endif
 
 int comboEnemyNativeResourceAlreadyComplete(PlayState* play, const EnemyNativeResource* state)
 {
@@ -552,8 +587,7 @@ int comboEnemyNativeResourceAlreadyComplete(PlayState* play, const EnemyNativeRe
     if (Flags_GetClear(play, state->room))
         return 1;
 #if defined(GAME_OOT)
-    return state->original.id == 0x197 && ((u16)state->original.params & 0xff00) &&
-           Flags_GetCollectible(play, (u16)state->original.params >> 8);
+    return state->original.id == ACTOR_EN_GELDB && enemyGerudoFightComplete(play, state);
 #else
     s16 actorId = state->original.id & 0x1fff;
     u16 params = state->original.params;
@@ -592,7 +626,11 @@ void comboEnemyNativeResourceUpdate(PlayState* play, EnemyNativeResource* state)
 #if defined(GAME_OOT)
     if (actorId == ACTOR_EN_GELDB)
     {
-
+        if (enemyGerudoFightComplete(play, state))
+        {
+            state->state = ENEMY_RESOURCE_RESTORED;
+            return;
+        }
         Vec3f pos = { original.pos.x, original.pos.y, original.pos.z };
         actor = Item_DropCollectible(play, &pos, (original.params & 0x3f00) | 0x11);
     }
