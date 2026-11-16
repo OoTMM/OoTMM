@@ -151,8 +151,7 @@
 "has_shield": "has_shield_hylian || has_mirror_shield || has_shield_deku"
 "has_shield_for_scrubs": "(is_adult && has_shield_hylian) || has_shield_deku"
 "has_mirror_shield_raw_nonshared": "cond(setting(progressiveShieldsOot, progressive), has(SHIELD, 3), has(SHIELD_MIRROR))"
-"has_mirror_shield_raw_shared": "cond(setting(progressiveShieldsOot, progressive), has(SHARED_SHIELD, 3), has(SHARED_SHIELD_MIRROR))"
-"has_mirror_shield": "age_shield_adult && cond(setting(sharedMirrorShield), has_mirror_shield_raw_shared, has_mirror_shield_raw_nonshared)"
+"has_mirror_shield": "age_shield_adult && cond(setting(sharedMirrorShield), has(SHARED_SHIELD_MIRROR) || has(SHARED_SHIELD, 3), has_mirror_shield_raw_nonshared)"
 "has_one_hand_shield": "has_shield_for_scrubs || has_mirror_shield"
 
 "can_reflect_light": "has_sunlight_arrows || has_mirror_shield"
