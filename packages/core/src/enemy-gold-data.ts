@@ -538,6 +538,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 0, 'setup': 1, 'slot': 39, 'offset': 33648392, 'actorId': 119, 'params': 8193, 'raw': '0077fca40000020a0000400000712001', 'spawnParams': 61728 },
     ],
     'location': 'Kakariko GS Tree',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-52-086',
@@ -559,6 +560,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 1, 'setup': 1, 'slot': 47, 'offset': 33750668, 'actorId': 463, 'params': 20737, 'raw': '01cffd350078feac0000000000005101', 'spawnParams': 53505 },
     ],
     'location': 'Graveyard GS Soil',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-53-087',
@@ -579,6 +581,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 0, 'setup': 0, 'slot': 54, 'offset': 33919952, 'actorId': 119, 'params': 513, 'raw': '0077f9660064022a0000155500720201', 'spawnParams': 61954 },
     ],
     'location': 'Zora River GS Tree',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-54-08c',
@@ -629,6 +632,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 0, 'setup': 0, 'slot': 31, 'offset': 34083460, 'actorId': 463, 'params': 19713, 'raw': '01cf04a60000fe200000000000004d01', 'spawnParams': 52481 },
     ],
     'location': 'Kokiri Forest GS Soil',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-55-062',
@@ -660,6 +664,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 0, 'setup': 0, 'slot': 38, 'offset': 34501340, 'actorId': 463, 'params': 21249, 'raw': '01cff5d6fbf70e210000000000005301', 'spawnParams': 54017 },
     ],
     'location': 'Lake Hylia GS Soil',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-57-091',
@@ -690,6 +695,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 0, 'setup': 2, 'slot': 20, 'offset': 34502336, 'actorId': 149, 'params': 45840, 'raw': '0095fd24fd451d150000a16c0000b310', 'spawnParams': 45840 },
     ],
     'location': 'Lake Hylia GS Big Tree',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-58-08e',
@@ -711,6 +717,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 0, 'setup': 1, 'slot': 13, 'offset': 34744344, 'actorId': 119, 'params': 32769, 'raw': '007700ba002c08ae0000200000728001', 'spawnParams': 62080 },
     ],
     'location': 'Zora Fountain GS Tree',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-59-08a',
@@ -751,6 +758,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 0, 'setup': 0, 'slot': 17, 'offset': 34853260, 'actorId': 463, 'params': 21505, 'raw': '01cffdfdf7fd006e0000000000005401', 'spawnParams': 54273 },
     ],
     'location': 'Gerudo Valley GS Soil',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-5a-09a',
@@ -781,6 +789,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 5, 'setup': 0, 'slot': 2, 'offset': 35066000, 'actorId': 463, 'params': 19969, 'raw': '01cffb3c000003a70000000000004e01', 'spawnParams': 52737 },
     ],
     'location': 'Lost Woods GS Soil Bridge',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-5b-069',
@@ -791,6 +800,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 6, 'setup': 0, 'slot': 4, 'offset': 35094704, 'actorId': 463, 'params': 19970, 'raw': '01cf02620000f9160000000000004e02', 'spawnParams': 52738 },
     ],
     'location': 'Lost Woods GS Soil Theater',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-5b-06a',
@@ -811,6 +821,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 0, 'setup': 0, 'slot': 17, 'offset': 35258768, 'actorId': 463, 'params': 22017, 'raw': '01cfface000801220000000000005601', 'spawnParams': 54785 },
     ],
     'location': 'Desert Colossus GS Soil',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-5c-0ab',
@@ -821,6 +832,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 0, 'setup': 2, 'slot': 19, 'offset': 35259812, 'actorId': 149, 'params': 46600, 'raw': '009501c8010c091c400000000000b608', 'spawnParams': 46600 },
     ],
     'location': 'Desert Colossus GS Tree',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-5c-0aa',
@@ -871,6 +883,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 0, 'setup': 0, 'slot': 48, 'offset': 35713876, 'actorId': 119, 'params': 1024, 'raw': '0077ff6f04410b9100000000006f0400', 'spawnParams': 61188 },
     ],
     'location': 'Hyrule Castle GS Tree',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-60-07a',
@@ -892,6 +905,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 0, 'setup': 0, 'slot': 25, 'offset': 35897884, 'actorId': 463, 'params': 20482, 'raw': '01cff9b602a5fd210000000000005002', 'spawnParams': 53250 },
     ],
     'location': 'Death Mountain Trail GS Soil',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-60-07b',
@@ -922,6 +936,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 1, 'setup': 0, 'slot': 26, 'offset': 36037144, 'actorId': 463, 'params': 20481, 'raw': '01cfff8101a5ff580000000000005001', 'spawnParams': 53249 },
     ],
     'location': 'Death Mountain Crater GS Soil',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-61-07f',
@@ -963,6 +978,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 0, 'setup': 1, 'slot': 28, 'offset': 43837500, 'actorId': 119, 'params': 2049, 'raw': '0077051d0000f73f0000e38e006c0801', 'spawnParams': 60424 },
     ],
     'location': 'Lon Lon Ranch GS Tree',
+    'groundReward': true,
   },
   {
     'key': 'oot-gold-63-058',
@@ -1043,6 +1059,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 1, 'setup': 0, 'slot': 19, 'offset': 38273432, 'actorId': 249, 'params': 2313, 'raw': '00f9fe980070fd142d072d0c007f0909', 'spawnParams': 65317 },
     ],
     'location': 'Swamp Skulltula Main Room Lower Left Soft Soil',
+    'groundReward': true,
   },
   {
     'key': 'mm-gold-27-00b',
@@ -1053,6 +1070,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 1, 'setup': 0, 'slot': 21, 'offset': 38273464, 'actorId': 249, 'params': 2828, 'raw': '00f9012d0165ff4c2d075a10007f0b0c', 'spawnParams': 65325 },
     ],
     'location': 'Swamp Skulltula Main Room Upper Soft Soil',
+    'groundReward': true,
   },
   {
     'key': 'mm-gold-27-00f',
@@ -1073,6 +1091,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 1, 'setup': 0, 'slot': 24, 'offset': 38273512, 'actorId': 249, 'params': 3087, 'raw': '00f90168006dfd9787072d0e007f0c0f', 'spawnParams': 65329 },
     ],
     'location': 'Swamp Skulltula Main Room Lower Right Soft Soil',
+    'groundReward': true,
   },
   {
     'key': 'mm-gold-27-013',
@@ -1283,6 +1302,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 5, 'setup': 0, 'slot': 12, 'offset': 38404392, 'actorId': 80, 'params': 65366, 'raw': '205000220194f64600074393007fff56', 'spawnParams': 65366 },
     ],
     'location': 'Swamp Skulltula Tree Room Tree 1',
+    'groundReward': true,
   },
   {
     'key': 'mm-gold-27-018',
@@ -1293,6 +1313,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 5, 'setup': 0, 'slot': 14, 'offset': 38404424, 'actorId': 80, 'params': 65378, 'raw': '2050fff70197f61200075a13007fff62', 'spawnParams': 65378 },
     ],
     'location': 'Swamp Skulltula Tree Room Tree 2',
+    'groundReward': true,
   },
   {
     'key': 'mm-gold-27-01d',
@@ -1303,6 +1324,7 @@ export const ENEMY_GOLD_SOURCES = [
       { 'mq': false, 'room': 5, 'setup': 0, 'slot': 16, 'offset': 38404456, 'actorId': 80, 'params': 65398, 'raw': '2050ffce0197f64d00075a13007fff76', 'spawnParams': 65398 },
     ],
     'location': 'Swamp Skulltula Tree Room Tree 3',
+    'groundReward': true,
   },
   {
     'key': 'mm-gold-28-00c',

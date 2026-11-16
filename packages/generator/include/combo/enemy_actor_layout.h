@@ -2,8 +2,30 @@
 #define COMBO_ENEMY_ACTOR_LAYOUT_H
 
 #include <combo/actor.h>
+#include <combo/actor_id.h>
 
-typedef struct {
+typedef struct
+{
+    Actor actor;
+    SkelAnime skeleton;
+    ActorFunc action;
+    s16 timer, switchFlag;
+} EnemyNativeWallmaster;
+#if defined(GAME_OOT)
+ASSERT_OFFSET(EnemyNativeWallmaster, switchFlag, 0x186);
+#else
+ASSERT_OFFSET(EnemyNativeWallmaster, switchFlag, 0x18e);
+#endif
+
+static inline int comboEnemyFrozenWallmaster(const Actor* actor)
+{
+    return actor && actor->id == ACTOR_EN_WALLMAS &&
+           (((const EnemyNativeWallmaster*)actor)->switchFlag == 0x17f ||
+            ((const EnemyNativeWallmaster*)actor)->switchFlag == 0x17e);
+}
+
+typedef struct
+{
     Actor actor;
     ColliderCylinder body;
     ColliderJntSph explosion;
@@ -20,7 +42,8 @@ typedef struct {
     ActorFunc action;
 } EnemyNativeBomb;
 
-typedef struct {
+typedef struct
+{
     Actor actor;
     ColliderQuad collider;
     WeaponInfo weapon;
@@ -35,7 +58,8 @@ typedef struct {
     ActorFunc action;
 } EnemyNativeHookshot;
 
-typedef struct {
+typedef struct
+{
     Actor actor;
     ColliderCylinder stand;
     ColliderCylinder flame;
@@ -59,7 +83,8 @@ ASSERT_SIZE(EnemyNativeHookshot, 0x210);
 ASSERT_OFFSET(EnemyNativeTorch, litTimer, 0x1dc);
 #endif
 
-typedef struct {
+typedef struct
+{
     Actor actor;
 #if defined(GAME_OOT)
     Vec3f bodyParts[4];
@@ -102,7 +127,8 @@ static inline void comboEnemyNativeGuaySize(Actor* actor)
 }
 
 #if defined(GAME_OOT)
-typedef struct {
+typedef struct
+{
     Actor actor;
     SkelAnime skeleton;
     Vec3s joints[16], morph[16];
@@ -116,7 +142,8 @@ typedef struct {
 ASSERT_OFFSET(EnemyNativeAnubis, isPlayerOutOfRange, 0x250);
 ASSERT_OFFSET(EnemyNativeAnubis, home, 0x288);
 
-typedef struct {
+typedef struct
+{
     Actor actor;
     SkelAnime skeleton;
     Vec3s joints[24], morph[24];
@@ -125,11 +152,29 @@ typedef struct {
 
 ASSERT_OFFSET(EnemyNativePeahat, state, 0x2a0);
 
-typedef struct {
+typedef struct
+{
     Actor actor;
     ActorFunc action;
     s16 maxCurSpawns, curNumSpawn;
+    s16 spawnType, maxTotalSpawns, totalNumSpawn, outOfRangeTimer, fieldSpawnTimer;
+    s16 killCount, numLeeverSpawns, leeverIndex, timer;
+    u8 reduceLeevers;
+    f32 spawnRange;
+    Actor* bigLeever;
 } EnemyNativeEncounterSpawner;
+
+typedef struct
+{
+    Actor actor;
+    u8 unused[0x270 - sizeof(Actor)];
+    s16 aimType;
+} EnemyNativeLeeverAim;
+
+ASSERT_OFFSET(EnemyNativeLeeverAim, aimType, 0x270);
+ASSERT_OFFSET(EnemyNativeEncounterSpawner, leeverIndex, 0x152);
+ASSERT_OFFSET(EnemyNativeEncounterSpawner, timer, 0x154);
+ASSERT_SIZE(EnemyNativeEncounterSpawner, 0x160);
 
 ASSERT_OFFSET(EnemyNativeEncounterSpawner, curNumSpawn, 0x142);
 #endif

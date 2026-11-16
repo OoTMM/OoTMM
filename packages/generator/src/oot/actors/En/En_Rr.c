@@ -8,7 +8,8 @@
 
 #define ENRR_SHIELD_RECORDS 32
 
-typedef struct {
+typedef struct
+{
     Actor* owner;
     MmShieldId shield;
 } EnRrShieldRecord;
@@ -23,8 +24,10 @@ static void EnRr_RecordShield(Actor* owner, MmShieldId shield)
     if (!owner || owner->id != ACTOR_EN_RR)
         return;
 
-    for (i = 0; i < ENRR_SHIELD_RECORDS; ++i) {
-        if (sShieldRecords[i].owner == owner) {
+    for (i = 0; i < ENRR_SHIELD_RECORDS; ++i)
+    {
+        if (sShieldRecords[i].owner == owner)
+        {
             sShieldRecords[i].shield = shield;
             return;
         }
@@ -39,15 +42,16 @@ static Actor* EnRr_FindOwner(PlayState* play, const Vec3f* dropPos)
 {
     Actor* actor;
 
-    for (actor = play->actorCtx.actors[ACTORCAT_ENEMY].first;
-         actor;
-         actor = actor->next)
+    for (s32 category = 0; category < ACTORCAT_MAX; ++category)
     {
-        if (actor->id == ACTOR_EN_RR &&
-            actor->world.pos.x == dropPos->x &&
-            actor->world.pos.y == dropPos->y &&
-            actor->world.pos.z == dropPos->z)
-            return actor;
+        for (actor = play->actorCtx.actors[category].first; actor; actor = actor->next)
+        {
+            if (actor->id == ACTOR_EN_RR &&
+                actor->world.pos.x == dropPos->x &&
+                actor->world.pos.y == dropPos->y &&
+                actor->world.pos.z == dropPos->z)
+                return actor;
+        }
     }
     return NULL;
 }
@@ -55,7 +59,8 @@ static Actor* EnRr_FindOwner(PlayState* play, const Vec3f* dropPos)
 static MmShieldId EnRr_RecordedShield(Actor* owner)
 {
     s32 i;
-    for (i = 0; i < ENRR_SHIELD_RECORDS; ++i) {
+    for (i = 0; i < ENRR_SHIELD_RECORDS; ++i)
+    {
         if (sShieldRecords[i].owner == owner)
             return sShieldRecords[i].shield;
     }
@@ -72,9 +77,11 @@ static u8 EnRr_DeleteShield(PlayState* play, s16 equipment)
         return 0;
 
     nativeShield = gOotSave.info.equips.equipment.shields;
-    switch (nativeShield) {
+    switch (nativeShield)
+    {
     case 1:
-        switch (OotChildShield_GetEquippedVariant()) {
+        switch (OotChildShield_GetEquippedVariant())
+        {
         case OOT_CHILD_SHIELD_DEKU:
             shield = MM_SHIELD_DEKU;
             break;
@@ -136,8 +143,6 @@ static void EnRr_UpdateShieldDrop(Actor* actor, PlayState* play)
     comboGiveItem(actor, play, &q, 50.f, 80.f);
 }
 
-
-
 static void EnRr_DrawShieldDrop(Actor* actor, PlayState* play)
 {
     Actor_EnItem00* item = (Actor_EnItem00*)actor;
@@ -146,7 +151,6 @@ static void EnRr_DrawShieldDrop(Actor* actor, PlayState* play)
         return;
     Draw_Gi(play, NULL, item->xflagGi, DRAW_RAW);
 }
-
 
 static Actor* EnRr_DropShield(
     PlayState* play,

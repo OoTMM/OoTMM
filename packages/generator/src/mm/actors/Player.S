@@ -1273,7 +1273,7 @@ PATCH_START 0x808336EC
   nop
   addiu     a2, sp, 0x0018
   jal       Player_SpecialMeleeWeaponAnim_Hook
-  sw	      v1, 0x0018 (sp)
+  sw        v1, 0x0018 (sp)
   lw        v1, 0x0018 (sp)
   jal       0x801241B4
 PATCH_END
@@ -1328,7 +1328,7 @@ PATCH_START 0x80861D88
 PATCH_END
 
 Player_HammerShockwaveCheck_Hook:
-  lw	      a0, 0x0044 (sp)
+  lw        a0, 0x0044 (sp)
   sw        ra, 0x0024 (sp)
   jal       Player_HammerShockwaveCheck
   lw        a1, 0x0020 (sp)
@@ -1421,4 +1421,66 @@ PATCH_END
 
 PATCH_START 0x808606d4
 .int 0
+PATCH_END
+
+/* Pass the actor that burned or landed; native damage otherwise uses GET_PLAYER. */
+Player_EnvironmentalDamageS0:
+  j Player_InflictEnvironmentalDamage
+   move a2,s0
+
+Player_EnvironmentalDamageS1:
+  j Player_InflictEnvironmentalDamage
+   move a2,s1
+
+Player_EnvironmentalDamageS4:
+  j Player_InflictEnvironmentalDamage
+   move a2,s4
+
+PATCH_START 0x80834474
+  jal Player_EnvironmentalDamageS4
+PATCH_END
+
+PATCH_START 0x80834634
+  jal Player_EnvironmentalDamageS0
+PATCH_END
+
+PATCH_START 0x80836fe0
+  jal Player_EnvironmentalDamageS1
+PATCH_END
+
+PATCH_START 0x808547b0
+  jal Player_EnvironmentalDamageS0
+PATCH_END
+
+/* The fall and environmental damage hooks */
+PATCH_START 0x8085ee38
+  .int 0
+PATCH_END
+
+PATCH_START 0x8085ee74
+  .int 0
+PATCH_END
+
+PATCH_START 0x8085ee88
+  .int 0
+PATCH_END
+
+PATCH_START 0x8085ef9c
+  .int 0
+PATCH_END
+
+PATCH_START 0x8085f008
+  .int 0
+PATCH_END
+
+PATCH_START 0x8085f208
+  .int 0
+PATCH_END
+
+PATCH_START 0x80861d6c
+  .int 0
+PATCH_END
+
+PATCH_START 0x80861d70
+  .int 0
 PATCH_END

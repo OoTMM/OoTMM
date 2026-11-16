@@ -1320,6 +1320,21 @@
         - 8
         - 15
         - 16
+  rules:
+    - section: locations
+      key: "Great Bay Temple Compass"
+      expectedRule: "soul_enemy(SOUL_ENEMY_BIO_BABA) || can_hookshot || can_use_ice_arrows || short_hook_anywhere"
+      template: "$PADS || can_hookshot || can_use_ice_arrows || short_hook_anywhere"
+      selectors:
+        PADS:
+          scene: 73
+          room: 4
+          setup: 0
+          slots:
+            - 15
+            - 16
+          bioBabaPad: true
+          vanilla: "soul_enemy(SOUL_ENEMY_BIO_BABA)"
 
 "mm/GB/Great Bay Temple Red Pipe 1":
   rooms:

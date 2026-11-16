@@ -1,6 +1,7 @@
 import { ENEMY_SOUL_PREVIEW_MEMORY, ENEMY_SOUL_PREVIEW_OBJECTS, ENEMY_UTILITY_MODULE_BYTES } from './enemy-soul-preview-memory-data';
 import { ENEMY_DYNAMIC_COLLISION } from './enemy-collision-data';
 import type { Game } from '@ootmm/data';
+import type { Settings } from './settings';
 import { ENEMY_MEMORY_FACTS } from './enemy-memory-data';
 import { enemy_oot_resources } from './enemy-data';
 import { OOT_GAMEPLAY_MEMORY } from './oot-gameplay-memory-data';
@@ -109,6 +110,7 @@ export function enemyScriptedControllerCost(): EnemyMemoryCost {
 }
 
 export type EnemyMemoryOptions = {
+  gerudoFortress?: Settings['gerudoFortress'];
   soulsEnemyLens?: 'none' | 'always' | 'lens';
   enemyShuffleGoldSkulltulas?: boolean;
   enemyShuffleBari?: boolean;
@@ -118,6 +120,8 @@ export type EnemyMemoryOptions = {
 const costs = new Map<string, EnemyMemoryCost>();
 
 export function enemyMemoryCost(host: Game, game: Game, actorId: number, params: number, options: EnemyMemoryOptions = {}): EnemyMemoryCost {
+  const redIce = game === host && (params === 0x7e04 && (game === 'oot' ? actorId === 0x90 : actorId === 0x4c) ||
+    (game === 'oot' ? actorId === 0x11 && params === 0x7e80 : actorId === 0xa && params === 0x7e81));
   const randomSplit = game === 'oot' && actorId === 0x63 && options.enemyShuffleBari !== false ||
     game === 'mm' && actorId === 0x1e6 && (params & 255) === 1 && options.enemyShuffleEeno !== false;
   const previews = options.soulsEnemyLens === 'always' || options.soulsEnemyLens === 'lens';
@@ -158,7 +162,7 @@ export function enemyMemoryCost(host: Game, game: Game, actorId: number, params:
     actors += count;
     if (ENEMY_DYNAMIC_COLLISION.actors[game].includes(id)) dynamicCollisions += count;
     for (const [child, n] of Object.entries(facts.children[key] ?? {}))
-      if (!ancestors.includes(+child) && +child !== id)
+      if (!ancestors.includes(+child) && +child !== id && !(redIce && game === 'mm' && id === actorId && +child === 0x8e))
         add(+child, count * n, [...ancestors, id]);
   };
   if (game === 'oot' && actorId === 0x73 || game === 'mm' && actorId === 0x56) {
@@ -233,8 +237,20 @@ export function enemyMemoryCost(host: Game, game: Game, actorId: number, params:
       if (+key.split('/')[1] > 3)
         shared[`model/${key}`] = Math.max(shared[`model/${key}`] ?? 0, size);
   }
-  if (game === host && ((game === 'oot' && actorId === 0x90) || (game === 'mm' && actorId === 0x4c)) && (params & 255) === 4)
+  if (redIce) {
+    const ice = facts.actors[`${host}/${host === 'oot' ? 0xef : 0x45}`];
+    shared[`code/${host}/${host === 'oot' ? 0xef : 0x45}`] = ice.code;
+    shared['model/oot/107'] = align(enemyObjectBytes('oot', 0x6b)) + 16;
+    instances += ice.instance;
+    actors++;
+  }
+  if (!redIce && game === host && ((game === 'oot' && actorId === 0x90) || (game === 'mm' && actorId === 0x4c)) && (params & 255) === 4)
     add(game === 'oot' ? 0x11e : 0x8e, 1, [actorId]);
+  if (game === host && (game === 'oot' ? actorId === 0x11 && params === 0x7f80 : actorId === 0xa && params === 0x7f81)) {
+    const ice = game === 'oot' ? 0x11e : 0x8e;
+    if (!(facts.children[`${game}/${actorId}`]?.[ice]))
+      add(ice, 1, [actorId]);
+  }
   if (game === 'oot' && actorId === 0x1d && params === 0) {
     const row = facts.actors['oot/29'], port = host === 'mm' ? facts.foreign['oot/29'] : undefined;
     instances += 3 * (Math.max(row.instance, align(port?.instance ?? 0) + 16) + (host === 'mm' ? 128 : 0));
@@ -753,6 +769,13 @@ export function solveAdaptiveMemory<T>(pools: readonly (readonly AdaptiveMemoryC
       ratio = relative;
       choices.push({ ...first, values: [...first.values, ...second.values] });
     }
+    const partial: (T | undefined)[] = Array(pools.length).fill(undefined);
+    if (!choices.some(choice => {
+      for (const [i, value] of choice.values)
+        partial[i] = value;
+      return fits(partial);
+    }))
+      choices.length = 0;
     mergeCache.set(key, choices);
     return choices;
   };

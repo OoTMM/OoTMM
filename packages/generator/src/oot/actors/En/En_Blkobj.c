@@ -35,7 +35,7 @@ static Actor* En_Blkobj_Actor_Spawn_Hook(ActorContext* ctx, PlayState* play, s16
     sArenaTarget = Actor_Spawn(ctx, play, targetId, x, y, z, rx, ry, rz,
                                targetId == 0x113 ? comboEnemyNativeIronKnuckleParams(targetParams) : targetParams);
     if (targetId == 0x113)
-        comboEnemyNativeIronKnuckleActivate(sArenaTarget, targetParams);
+        comboEnemyNativeIronKnuckleActivate(sArenaTarget, play, targetParams);
     if (sArenaTarget && (sArenaTarget->update || sArenaTarget->init) && comboEnemyNativeArenaTrackTarget(play, sArenaTarget))
         sArenaSpawnFailed = 0;
     return sArenaTarget;
@@ -67,7 +67,6 @@ static Actor* En_Blkobj_Actor_Find_Hook(void* actorCtx, s32 actorId, s32 actorCa
         }
         return (Actor*)1;
     }
-    /* Check for enemy soul shuffle */
     if (!comboHasSoulOot(GI_OOT_SOUL_ENEMY_DARK_LINK))
         return (Actor*)1;
     return ActorFind(actorCtx, actorId, actorCategory);

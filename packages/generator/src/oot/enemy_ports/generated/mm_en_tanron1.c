@@ -7,23 +7,23 @@
 #include <combo/mm/regs.h>
 #include "types/en_tanron1.h"
 #undef Audio_PlaySfx_AtPos
-#define Audio_PlaySfx_AtPos ((void (*)(Vec3f* pos, u16 sfxId))0x8019f1c0)
+#define Audio_PlaySfx_AtPos ((void (*)(Vec3f * pos, u16 sfxId))0x8019f1c0)
 #undef BgCheck_GetWaterSurfaceNoBgIdAlt
-#define BgCheck_GetWaterSurfaceNoBgIdAlt ((s32 (*)(PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* outWaterSurface, WaterBox** outWaterBox))0x800ca1ac)
+#define BgCheck_GetWaterSurfaceNoBgIdAlt ((s32(*)(PlayState * play, CollisionContext * colCtx, f32 x, f32 z, f32 * outWaterSurface, WaterBox * *outWaterBox))0x800ca1ac)
 #undef Gfx_SetupDL25_Opa
-#define Gfx_SetupDL25_Opa ((void (*)(GraphicsContext* gfxCtx))0x8012c28c)
+#define Gfx_SetupDL25_Opa ((void (*)(GraphicsContext * gfxCtx))0x8012c28c)
 #undef Math_ApproachF
-#define Math_ApproachF ((void (*)(f32* pValue, f32 target, f32 scale, f32 maxStep))0x800ffdf8)
+#define Math_ApproachF ((void (*)(f32 * pValue, f32 target, f32 scale, f32 maxStep))0x800ffdf8)
 #undef Math_ApproachS
-#define Math_ApproachS ((void (*)(s16* pValue, s16 target, s16 scale, s16 maxStep))0x800fffd8)
+#define Math_ApproachS ((void (*)(s16 * pValue, s16 target, s16 scale, s16 maxStep))0x800fffd8)
 #undef Math_ApproachZeroF
-#define Math_ApproachZeroF ((void (*)(f32* pValue, f32 scale, f32 maxStep))0x800ffe68)
+#define Math_ApproachZeroF ((void (*)(f32 * pValue, f32 scale, f32 maxStep))0x800ffe68)
 #undef Math_Atan2S
-#define Math_Atan2S ((s16 (*)(f32 y, f32 x))0x8017fee4)
+#define Math_Atan2S ((s16(*)(f32 y, f32 x))0x8017fee4)
 #undef Math_SinS
-#define Math_SinS ((f32 (*)(s16 angle))0x800fed84)
+#define Math_SinS ((f32(*)(s16 angle))0x800fed84)
 #undef Matrix_MultVecZ
-#define Matrix_MultVecZ ((void (*)(f32 z, Vec3f* dest))0x80181c10)
+#define Matrix_MultVecZ ((void (*)(f32 z, Vec3f * dest))0x80181c10)
 #undef Matrix_RotateXS
 #define Matrix_RotateXS ((void (*)(s16 x, MatrixMode mode))0x80180478)
 #undef Matrix_RotateYS
@@ -33,13 +33,13 @@
 #undef Matrix_Translate
 #define Matrix_Translate ((void (*)(f32 x, f32 y, f32 z, MatrixMode mode))0x8018029c)
 #undef Rand_CenteredFloat
-#define Rand_CenteredFloat ((f32 (*)(f32 scale))0x801795c0)
+#define Rand_CenteredFloat ((f32(*)(f32 scale))0x801795c0)
 #undef Rand_ZeroFloat
-#define Rand_ZeroFloat ((f32 (*)(f32 scale))0x80179594)
+#define Rand_ZeroFloat ((f32(*)(f32 scale))0x80179594)
 #undef Rand_ZeroOne
-#define Rand_ZeroOne ((f32 (*)(void))0x80086fdc)
+#define Rand_ZeroOne ((f32(*)(void))0x80086fdc)
 #undef SkinMatrix_Vec3fMtxFMultXYZW
-#define SkinMatrix_Vec3fMtxFMultXYZW ((void (*)(MtxF* mf, Vec3f* src, Vec3f* xyzDest, f32* wDest))0x80138ba0)
+#define SkinMatrix_Vec3fMtxFMultXYZW ((void (*)(MtxF * mf, Vec3f * src, Vec3f * xyzDest, f32 * wDest))0x80138ba0)
 #else
 #include "mm_native_compat.h"
 
@@ -53,37 +53,37 @@
 #undef NA_SE_EN_MB_MOTH_DEAD
 #define NA_SE_EN_MB_MOTH_DEAD 0x399c
 #undef Math_Atan2S
-#define Math_Atan2S ((s16 (*)(f32 y, f32 x))(void*)FOREIGN_ENEMY_API_ATAN2S)
+#define Math_Atan2S ((s16(*)(f32 y, f32 x))(void*)FOREIGN_ENEMY_API_ATAN2S)
 #undef Matrix_RotateYS
 #define Matrix_RotateYS ((void (*)(s16 y, MatrixMode mode))(void*)FOREIGN_ENEMY_API_MATRIX_ROTATE_YS)
 #undef Matrix_RotateXS
 #define Matrix_RotateXS ((void (*)(s16 x, MatrixMode mode))(void*)FOREIGN_ENEMY_API_MATRIX_ROTATE_XS)
 #undef Matrix_MultVecZ
-#define Matrix_MultVecZ ((void (*)(f32 z, Vec3f* dest))(void*)FOREIGN_ENEMY_API_MATRIX_MULT_Z)
+#define Matrix_MultVecZ ((void (*)(f32 z, Vec3f * dest))(void*)FOREIGN_ENEMY_API_MATRIX_MULT_Z)
 #undef Matrix_Translate
 #define Matrix_Translate ((void (*)(f32 x, f32 y, f32 z, MatrixMode mode))(void*)FOREIGN_ENEMY_API_MATRIX_TRANSLATE)
 #undef Matrix_Scale
 #define Matrix_Scale ((void (*)(f32 x, f32 y, f32 z, MatrixMode mode))(void*)FOREIGN_ENEMY_API_MATRIX_SCALE)
 #undef Rand_ZeroFloat
-#define Rand_ZeroFloat ((f32 (*)(f32 scale))0x80026d64u)
+#define Rand_ZeroFloat ((f32(*)(f32 scale))0x80026d64u)
 #undef Rand_ZeroOne
-#define Rand_ZeroOne ((f32 (*)(void))0x800cdcccu)
+#define Rand_ZeroOne ((f32(*)(void))0x800cdcccu)
 #undef Math_SinS
-#define Math_SinS ((f32 (*)(s16 angle))0x800636c4u)
+#define Math_SinS ((f32(*)(s16 angle))0x800636c4u)
 #undef Rand_CenteredFloat
-#define Rand_CenteredFloat ((f32 (*)(f32 scale))0x80026d90u)
+#define Rand_CenteredFloat ((f32(*)(f32 scale))0x80026d90u)
 #undef Math_ApproachS
-#define Math_ApproachS ((void (*)(s16* pValue, s16 target, s16 scale, s16 maxStep))0x80064624u)
+#define Math_ApproachS ((void (*)(s16 * pValue, s16 target, s16 scale, s16 maxStep))0x80064624u)
 #undef Math_ApproachZeroF
-#define Math_ApproachZeroF ((void (*)(f32* pValue, f32 scale, f32 maxStep))0x800642f0u)
+#define Math_ApproachZeroF ((void (*)(f32 * pValue, f32 scale, f32 maxStep))0x800642f0u)
 #undef Math_ApproachF
-#define Math_ApproachF ((void (*)(f32* pValue, f32 target, f32 scale, f32 maxStep))0x80064280u)
+#define Math_ApproachF ((void (*)(f32 * pValue, f32 target, f32 scale, f32 maxStep))0x80064280u)
 #undef BgCheck_GetWaterSurfaceNoBgIdAlt
-#define BgCheck_GetWaterSurfaceNoBgIdAlt ((s32 (*)(struct PlayState* play, CollisionContext* colCtx, f32 x, f32 z, f32* outWaterSurface, WaterBox** outWaterBox))0x80034908u)
+#define BgCheck_GetWaterSurfaceNoBgIdAlt ((s32(*)(struct PlayState * play, CollisionContext * colCtx, f32 x, f32 z, f32 * outWaterSurface, WaterBox * *outWaterBox))0x80034908u)
 #undef Gfx_SetupDL25_Opa
-#define Gfx_SetupDL25_Opa ((void (*)(GraphicsContext* gfxCtx))0x8007e298u)
+#define Gfx_SetupDL25_Opa ((void (*)(GraphicsContext * gfxCtx))0x8007e298u)
 #undef Matrix_Finalize
-#define Matrix_Finalize ((Mtx* (*)(struct GraphicsContext* gfxCtx))0x800ab900u)
+#define Matrix_Finalize ((Mtx * (*)(struct GraphicsContext * gfxCtx))0x800ab900u)
 #endif
 
 #define FLAGS                                                                                 \
@@ -100,18 +100,18 @@ void func_80BB5AAC(EnTanron1* this, PlayState* play);
 
 ActorProfile En_Tanron1_Profile = {
 #if defined(GAME_MM)
-      0x23d,
+    0x23d,
 #else
-      0xe3d,
+    0xe3d,
 #endif
-      ACTORCAT_ENEMY,
+    ACTORCAT_ENEMY,
     FLAGS,
 #if defined(GAME_MM)
-      1,
+    1,
 #else
-      GAMEPLAY_KEEP,
+    GAMEPLAY_KEEP,
 #endif
-      sizeof(EnTanron1),
+    sizeof(EnTanron1),
     EnTanron1_Init,
     EnTanron1_Destroy,
     EnTanron1_Update,
@@ -123,35 +123,35 @@ ActorProfile En_Tanron1_Profile = {
 #define ENEMY_MOTH_TORCH_ID 0x39
 void comboEnemyNativePlacementBlock(s32);
 #define EnemyMothBurning(player) ((player)->unk_B28)
-#define EnemyMothMelee(player) ((player)->unk_ADC)
-#define EnemyMothDeku(player) ((player)->transformation==MM_PLAYER_FORM_DEKU)
-#define EnemyMothKnockback ((void (*)(PlayState*,Actor*,f32,s16,f32,s32,u32))0x800b8d10)
-#define EnemyMothRaycast ((f32 (*)(CollisionContext*,CollisionPoly**,Vec3f*))0x800c3fa0)
-#define EnemyMothAudio Audio_PlaySfx_AtPos
-#define EnemyMothStopAudio ((void (*)(Vec3f*,u16))0x801a7328)
-#define EnemyMothSoundThreshold (KREG(39)+20)
-#define EnemyMothAlloc ((void* (*)(u32))0x80102c60)
-#define EnemyMothFree ((void (*)(void*))0x80102ce0)
+#define EnemyMothMelee(player)   ((player)->unk_ADC)
+#define EnemyMothDeku(player)    ((player)->transformation == MM_PLAYER_FORM_DEKU)
+#define EnemyMothKnockback       ((void (*)(PlayState*, Actor*, f32, s16, f32, s32, u32))0x800b8d10)
+#define EnemyMothRaycast         ((f32(*)(CollisionContext*, CollisionPoly**, Vec3f*))0x800c3fa0)
+#define EnemyMothAudio           Audio_PlaySfx_AtPos
+#define EnemyMothStopAudio       ((void (*)(Vec3f*, u16))0x801a7328)
+#define EnemyMothSoundThreshold  (KREG(39) + 20)
+#define EnemyMothAlloc           ((void* (*)(u32))0x80102c60)
+#define EnemyMothFree            ((void (*)(void*))0x80102ce0)
 #else
-#define ENEMY_MOTH_TORCH_ID 0x5e
+#define ENEMY_MOTH_TORCH_ID      0x5e
 #define EnemyMothBurning(player) ((player)->unk_860)
-#define EnemyMothMelee(player) ((player)->meleeWeaponState)
-#define EnemyMothDeku(player) 0
+#define EnemyMothMelee(player)   ((player)->meleeWeaponState)
+#define EnemyMothDeku(player)    0
 void FOREIGN_ENEMY_API_MM_KNOCKBACK_SMALL(PlayState*, Actor*, f32, s16, f32, s32, u32);
-#define EnemyMothKnockback FOREIGN_ENEMY_API_MM_KNOCKBACK_SMALL
-#define EnemyMothRaycast BgCheck_EntityRaycastDown1
-#define EnemyMothAudio comboEnemySfxPosition
-#define EnemyMothStopAudio comboEnemySfxStopPosition
-#define EnemyMothSoundThreshold 20
-#define EnemyMothAlloc ((void* (*)(u32))0x80066c10)
-#define EnemyMothFree ((void (*)(void*))0x80066c90)
+#define EnemyMothKnockback       FOREIGN_ENEMY_API_MM_KNOCKBACK_SMALL
+#define EnemyMothRaycast         BgCheck_EntityRaycastDown1
+#define EnemyMothAudio           comboEnemySfxPosition
+#define EnemyMothStopAudio       comboEnemySfxStopPosition
+#define EnemyMothSoundThreshold  20
+#define EnemyMothAlloc           ((void* (*)(u32))0x80066c10)
+#define EnemyMothFree            ((void (*)(void*))0x80066c90)
 #endif
 static void enemyMothAllocationFailed(Actor* actor, PlayState* play) {
     g.roomEnemyLackSoul = 1;
 #if defined(GAME_MM)
- comboEnemyNativePlacementBlock(play->roomCtx.curRoom.num);
+    comboEnemyNativePlacementBlock(play->roomCtx.curRoom.num);
 #endif
- Actor_Kill(actor);
+    Actor_Kill(actor);
 }
 
 static ColliderCylinderInit sEnemyMothCollider = {
@@ -160,7 +160,9 @@ static ColliderCylinderInit sEnemyMothCollider = {
     { 55, 80, -40, { 0, 0, 0 } }
 };
 void func_80BB4E50(EnTanron1Struct*, Vec3f*, s16, s16);
+
 static void enemyMothKnockDown(EnTanron1* this) {
+    this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     this->actor.colChkInfo.health = 0;
     this->mothDeathTimer = 120;
     for (s32 i = 0; i < this->mothCapacity; ++i) {
@@ -197,8 +199,10 @@ static void enemyMothCombat(EnTanron1* this, PlayState* play) {
         this->actor.colChkInfo.health = 0;
         this->mothDeathTimer = 120;
     }
-    if (!this->actor.colChkInfo.health && this->mothDeathTimer && !--this->mothDeathTimer) {
-        Actor_Kill(&this->actor);
+    if (!this->actor.colChkInfo.health) {
+        this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
+        if (this->mothDeathTimer && !--this->mothDeathTimer)
+            Actor_Kill(&this->actor);
         return;
     }
     if (live) {
@@ -209,81 +213,288 @@ static void enemyMothCombat(EnTanron1* this, PlayState* play) {
         this->actor.focus.pos = center;
         this->actor.focus.rot = this->actor.world.rot;
     }
-    if (this->actor.colChkInfo.health) {
-        if (this->standaloneCollider.base.acFlags & AC_HIT) {
-            this->standaloneCollider.base.acFlags &= ~AC_HIT;
-            if (this->actor.colChkInfo.damage)
-                enemyMothKnockDown(this);
+    if (this->standaloneCollider.base.acFlags & AC_HIT) {
+        this->standaloneCollider.base.acFlags &= ~AC_HIT;
+        if (this->actor.colChkInfo.damage) {
+            enemyMothKnockDown(this);
+            return;
         }
-        Collider_UpdateCylinder(&this->actor, &this->standaloneCollider);
-        CollisionCheck_SetAC(play, &play->colChkCtx, &this->standaloneCollider.base);
     }
+    Collider_UpdateCylinder(&this->actor, &this->standaloneCollider);
+    CollisionCheck_SetAC(play, &play->colChkCtx, &this->standaloneCollider.base);
 }
 
 u64 ovl_En_Tanron1Tex_001028[] = {
-    0x0000000000000000, 0x0000000000000000, 0x0000000000000000, 0x0000000000000000, 0x0000000000000000,
-    0x000000000000524F, 0xAC9DAC5B520D0000, 0x0000000000000000, 0x0000000000000000, 0x00000000B49FBD21,
-    0xBD23BCE1AC9DA45B, 0x520D000000000000, 0x0000000000000000, 0x0000B4DFC563CDA7, 0x7B998399BD23B49F,
-    0x93D9520D00000000, 0x0000000000000000, 0xB4DFC563CDE96B17, 0x2909318B9C5FBD23, 0x8397AC5B00000000,
-    0x000000000000AC5D, 0xBD21CDA76B170001, 0x000100016B17C5A5, 0x5A51AC5B520D0000, 0x00000000520DB49D,
-    0xC565D62B0001C807, 0xC80760030001CDE9, 0x00017B0FAC5D0000, 0x00000000A4595A4F, 0x00016B170001C807,
-    0xFF01C8070001D62B, 0x0001990FAC5D49CB, 0x0000520DAC5B0001, 0x0001000100016003, 0xC807C8070001DE6F,
-    0x0001990F7B0F0001, 0x0000A419AC5B0001, 0x4D07000173590001, 0x000100010001E6B1, 0x00010001990F49CB,
-    0x0000520DA4590001, 0x00010001E6F3EF35, 0x739B000100017359, 0xD62BAC5B000151CB, 0x00000000A4195A4F,
-    0x0001000100010001, 0xB569000100010001, 0x0001AC5B7B0F0001, 0x000000009BD7AC5B, 0x5A9100014D070001,
-    0xEEF50001C807C807, 0x60030001000151CB, 0x000000000000A41B, 0xBCE1000122830001, 0xE6F30001C807FF01,
-    0xC807000172CF0001, 0x000000000000520D, 0xB4DF000100010001, 0xE6B100016003C807, 0xC8070001000151CB,
-    0x0000000000000000, 0x5A4FC56362D50001, 0xDE6F735900010001, 0x0001BD216ACF0001, 0x0000000000000000,
-    0x0000BD21FFFFCDE9, 0x6B5700010001CDA7, 0xBD23B49F0001520D, 0x0000000000000000, 0xAC9DB49FBCE1C565,
-    0x0001FF0183810001, 0x0001AC5B51CB7315, 0x000000000000AC5B, 0xAC5B520D0000BD23, 0x0001838100010001,
-    0x520DA41920C50001, 0x000000000000AC5B, 0x520D00000000C565, 0x7BDF00010001520D, 0xA419000049CB7315,
-    0x00000000520D0000, 0x000000000000D62D, 0xF7BBFFFF520DA419, 0x0000000018C50001, 0x0000000000000000,
-    0x0000000000000000, 0xE6F3520DA4190000, 0x0000000039897315, 0x0000000000000000, 0x0000000000000000,
-    0xD62DAC5B00000000, 0x0000000000000001, 0x0000000000000000, 0x0000000000000000, 0xCDA7520D00000000,
-    0x0000000000006AD3, 0x0000000000000000, 0x0000000000000000, 0xC565000000000000, 0x0000000000000001,
-    0x0000000000000000, 0x0000000000000000, 0xBD21000000000000, 0x000000000000520F, 0x0000000000000000,
-    0x0000000000000000, 0xB4DF000000000000, 0x0000000000000001, 0x0000000000000000, 0x0000000000000000,
-    0xB4DF520D00000000, 0x0000000000004189, 0x0000000000000000, 0x0000000000000000, 0xB4DFAC5B520D0000,
-    0x0000000000000000, 0x0000000000000000, 0x0000000000000000, 0x5A4FAC5BA4590000, 0x0000000000000000,
-    0x0000000000000000, 0x0000000000000000, 0x00005A4F00000000, 0x0000000000000000, 0x0000000000000000,
-    0x0000000000000000, 0x0000000000000000, 0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x000000000000524F,
+    0xAC9DAC5B520D0000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x00000000B49FBD21,
+    0xBD23BCE1AC9DA45B,
+    0x520D000000000000,
+    0x0000000000000000,
+    0x0000B4DFC563CDA7,
+    0x7B998399BD23B49F,
+    0x93D9520D00000000,
+    0x0000000000000000,
+    0xB4DFC563CDE96B17,
+    0x2909318B9C5FBD23,
+    0x8397AC5B00000000,
+    0x000000000000AC5D,
+    0xBD21CDA76B170001,
+    0x000100016B17C5A5,
+    0x5A51AC5B520D0000,
+    0x00000000520DB49D,
+    0xC565D62B0001C807,
+    0xC80760030001CDE9,
+    0x00017B0FAC5D0000,
+    0x00000000A4595A4F,
+    0x00016B170001C807,
+    0xFF01C8070001D62B,
+    0x0001990FAC5D49CB,
+    0x0000520DAC5B0001,
+    0x0001000100016003,
+    0xC807C8070001DE6F,
+    0x0001990F7B0F0001,
+    0x0000A419AC5B0001,
+    0x4D07000173590001,
+    0x000100010001E6B1,
+    0x00010001990F49CB,
+    0x0000520DA4590001,
+    0x00010001E6F3EF35,
+    0x739B000100017359,
+    0xD62BAC5B000151CB,
+    0x00000000A4195A4F,
+    0x0001000100010001,
+    0xB569000100010001,
+    0x0001AC5B7B0F0001,
+    0x000000009BD7AC5B,
+    0x5A9100014D070001,
+    0xEEF50001C807C807,
+    0x60030001000151CB,
+    0x000000000000A41B,
+    0xBCE1000122830001,
+    0xE6F30001C807FF01,
+    0xC807000172CF0001,
+    0x000000000000520D,
+    0xB4DF000100010001,
+    0xE6B100016003C807,
+    0xC8070001000151CB,
+    0x0000000000000000,
+    0x5A4FC56362D50001,
+    0xDE6F735900010001,
+    0x0001BD216ACF0001,
+    0x0000000000000000,
+    0x0000BD21FFFFCDE9,
+    0x6B5700010001CDA7,
+    0xBD23B49F0001520D,
+    0x0000000000000000,
+    0xAC9DB49FBCE1C565,
+    0x0001FF0183810001,
+    0x0001AC5B51CB7315,
+    0x000000000000AC5B,
+    0xAC5B520D0000BD23,
+    0x0001838100010001,
+    0x520DA41920C50001,
+    0x000000000000AC5B,
+    0x520D00000000C565,
+    0x7BDF00010001520D,
+    0xA419000049CB7315,
+    0x00000000520D0000,
+    0x000000000000D62D,
+    0xF7BBFFFF520DA419,
+    0x0000000018C50001,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xE6F3520DA4190000,
+    0x0000000039897315,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xD62DAC5B00000000,
+    0x0000000000000001,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xCDA7520D00000000,
+    0x0000000000006AD3,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xC565000000000000,
+    0x0000000000000001,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xBD21000000000000,
+    0x000000000000520F,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xB4DF000000000000,
+    0x0000000000000001,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xB4DF520D00000000,
+    0x0000000000004189,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xB4DFAC5B520D0000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x5A4FAC5BA4590000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x00005A4F00000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
 
 };
 
 u64 ovl_En_Tanron1_DL_001428[] = {
-    0x0000000000000000, 0x0000000000000000, 0x0000000000000000, 0x0000000000000000, 0x0000000000000000,
-    0x000000000000524F, 0x0000AC5B00000000, 0x0000000000000000, 0x0000000000000000, 0x00000000B49F0000,
-    0xBD230000AC9D0000, 0x520D000000000000, 0x0000000000000000, 0x0000B4DFC563CDA7, 0x000000000000B49F,
-    0x0000520D00000000, 0x0000000000000000, 0xB4DF0000CDE96B17, 0x2909318B00000000, 0x0000AC5B00000000,
-    0x000000000000AC5D, 0x0000CDA76B170001, 0x0001000100000000, 0x0000AC5B520D0000, 0x00000000520DB49D,
-    0xC565D62B00010000, 0x000060030001CDE9, 0x00010000AC5D0000, 0x0000000000000000, 0x000100000001C807,
-    0x0000C8070001D62B, 0x0001000000000000, 0x0000520DAC5B0001, 0x0001000100010000, 0x0000C80700010000,
-    0x0001990F00000001, 0x0000000000000001, 0x0000000173590001, 0x0001000100010000, 0x00010001000049CB,
-    0x0000000000000001, 0x00010001E6F30000, 0x739B000100010000, 0x0000000000010000, 0x00000000A4190000,
-    0x0001000100010001, 0x0000000100010001, 0x0001000000000001, 0x000000009BD7AC5B, 0x000000014D070001,
-    0x00000001C8070000, 0x60030001000151CB, 0x0000000000000000, 0xBCE1000100000001, 0x000000010000FF01,
-    0x0000000172CF0001, 0x0000000000000000, 0xB4DF000100010001, 0x0000000100000000, 0x0000000100010000,
-    0x0000000000000000, 0x0000C56300000001, 0xDE6F000000010001, 0x0001BD2100000001, 0x0000000000000000,
-    0x00000000FFFFCDE9, 0x6B5700010001CDA7, 0xBD23000000010000, 0x0000000000000000, 0x0000B49F0000C565,
-    0x0001FF0183810001, 0x0001000051CB7315, 0x0000000000000000, 0xAC5B000000000000, 0x0001838100010001,
-    0x0000A41900000001, 0x000000000000AC5B, 0x000000000000C565, 0x0000000100010000, 0x0000000000007315,
-    0x0000000000000000, 0x0000000000000000, 0xF7BB000000000000, 0x0000000000000001, 0x0000000000000000,
-    0x0000000000000000, 0x0000000000000000, 0x0000000039890000, 0x0000000000000000, 0x0000000000000000,
-    0xD62DAC5B00000000, 0x0000000000000001, 0x0000000000000000, 0x0000000000000000, 0xCDA7000000000000,
-    0x0000000000006AD3, 0x0000000000000000, 0x0000000000000000, 0x0000000000000000, 0x0000000000000001,
-    0x0000000000000000, 0x0000000000000000, 0xBD21000000000000, 0x000000000000520F, 0x0000000000000000,
-    0x0000000000000000, 0x0000000000000000, 0x0000000000000001, 0x0000000000000000, 0x0000000000000000,
-    0xB4DF520D00000000, 0x0000000000000000, 0x0000000000000000, 0x0000000000000000, 0x00000000520D0000,
-    0x0000000000000000, 0x0000000000000000, 0x0000000000000000, 0x00000000A4590000, 0x0000000000000000,
-    0x0000000000000000, 0x0000000000000000, 0x00005A4F00000000, 0x0000000000000000, 0x0000000000000000,
-    0x0000000000000000, 0x0000000000000000, 0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x000000000000524F,
+    0x0000AC5B00000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x00000000B49F0000,
+    0xBD230000AC9D0000,
+    0x520D000000000000,
+    0x0000000000000000,
+    0x0000B4DFC563CDA7,
+    0x000000000000B49F,
+    0x0000520D00000000,
+    0x0000000000000000,
+    0xB4DF0000CDE96B17,
+    0x2909318B00000000,
+    0x0000AC5B00000000,
+    0x000000000000AC5D,
+    0x0000CDA76B170001,
+    0x0001000100000000,
+    0x0000AC5B520D0000,
+    0x00000000520DB49D,
+    0xC565D62B00010000,
+    0x000060030001CDE9,
+    0x00010000AC5D0000,
+    0x0000000000000000,
+    0x000100000001C807,
+    0x0000C8070001D62B,
+    0x0001000000000000,
+    0x0000520DAC5B0001,
+    0x0001000100010000,
+    0x0000C80700010000,
+    0x0001990F00000001,
+    0x0000000000000001,
+    0x0000000173590001,
+    0x0001000100010000,
+    0x00010001000049CB,
+    0x0000000000000001,
+    0x00010001E6F30000,
+    0x739B000100010000,
+    0x0000000000010000,
+    0x00000000A4190000,
+    0x0001000100010001,
+    0x0000000100010001,
+    0x0001000000000001,
+    0x000000009BD7AC5B,
+    0x000000014D070001,
+    0x00000001C8070000,
+    0x60030001000151CB,
+    0x0000000000000000,
+    0xBCE1000100000001,
+    0x000000010000FF01,
+    0x0000000172CF0001,
+    0x0000000000000000,
+    0xB4DF000100010001,
+    0x0000000100000000,
+    0x0000000100010000,
+    0x0000000000000000,
+    0x0000C56300000001,
+    0xDE6F000000010001,
+    0x0001BD2100000001,
+    0x0000000000000000,
+    0x00000000FFFFCDE9,
+    0x6B5700010001CDA7,
+    0xBD23000000010000,
+    0x0000000000000000,
+    0x0000B49F0000C565,
+    0x0001FF0183810001,
+    0x0001000051CB7315,
+    0x0000000000000000,
+    0xAC5B000000000000,
+    0x0001838100010001,
+    0x0000A41900000001,
+    0x000000000000AC5B,
+    0x000000000000C565,
+    0x0000000100010000,
+    0x0000000000007315,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xF7BB000000000000,
+    0x0000000000000001,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000039890000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xD62DAC5B00000000,
+    0x0000000000000001,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xCDA7000000000000,
+    0x0000000000006AD3,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000001,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xBD21000000000000,
+    0x000000000000520F,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000001,
+    0x0000000000000000,
+    0x0000000000000000,
+    0xB4DF520D00000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x00000000520D0000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x00000000A4590000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x00005A4F00000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
+    0x0000000000000000,
 
 };
 
 Vtx ovl_En_Tanron1Vtx_001828[] = {
-    VTX(0, -3, -7, 538, 1338, 84, 171, 0, 255), VTX(7, 5, 0, -346, 666, 84, 171, 0, 255),
-    VTX(0, -3, 7, 510, -397, 84, 171, 0, 255),  VTX(0, -3, 7, 510, -397, 172, 171, 0, 255),
-    VTX(-7, 5, 0, -346, 666, 172, 171, 0, 255), VTX(0, -3, -7, 538, 1338, 172, 171, 0, 255),
+    VTX(0, -3, -7, 538, 1338, 84, 171, 0, 255),
+    VTX(7, 5, 0, -346, 666, 84, 171, 0, 255),
+    VTX(0, -3, 7, 510, -397, 84, 171, 0, 255),
+    VTX(0, -3, 7, 510, -397, 172, 171, 0, 255),
+    VTX(-7, 5, 0, -346, 666, 172, 171, 0, 255),
+    VTX(0, -3, -7, 538, 1338, 172, 171, 0, 255),
 
 };
 

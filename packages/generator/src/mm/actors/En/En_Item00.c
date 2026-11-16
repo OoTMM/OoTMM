@@ -83,8 +83,8 @@ static int dropBombs(int dropId)
 {
     int hasChuBag;
     int hasBombBag;
-    u8  bombCount;
-    u8  bombchuCount;
+    u8 bombCount;
+    u8 bombchuCount;
 
     hasChuBag = (gSharedCustomSave.bombchuBagMm > 0);
     hasBombBag = (gMmSave.info.inventory.upgrades.bombBag > 0);
@@ -99,11 +99,9 @@ static int dropBombs(int dropId)
     if (!hasBombBag)
         return ITEM00_BOMBCHU;
 
-    /* We have both, check for ammo */
     bombCount = gMmSave.info.inventory.ammo[ITS_MM_BOMBS];
     bombchuCount = gMmSave.info.inventory.ammo[ITS_MM_BOMBCHU];
 
-    /* Low on ammo */
     if (bombCount < 15 || bombchuCount < 15)
     {
         if (bombchuCount < bombCount)
@@ -111,7 +109,6 @@ static int dropBombs(int dropId)
         return dropId;
     }
 
-    /* Not low, return at random */
     if (Rand_ZeroOne() < 0.5f)
         return ITEM00_BOMBCHU;
     return dropId;
@@ -148,7 +145,6 @@ static int fixDropArrowSeeds(int size)
     return ITEM00_SEEDS;
 }
 
-/* TODO: Flexible drops would ideally need to be patched on top of this */
 int EnItem00_FixDrop(int dropId)
 {
     switch (dropId)
@@ -201,20 +197,20 @@ void EnItem00_DrawShield(PlayState* play)
     else
         gi = GI_MM_SHIELD_HERO;
 
-
     Draw_Gi(play, NULL, gi, DRAW_RAW);
 }
 
 static s32 EnItem00_IsDekuSeedBlockedScene(s16 sceneId)
 {
-    switch (sceneId) {
-        case SCE_MM_ROMANI_RANCH:
-        case SCE_MM_LAIR_TWINMOLD:
-        case SCE_MM_LAIR_MAJORA:
-            return true;
+    switch (sceneId)
+    {
+    case SCE_MM_ROMANI_RANCH:
+    case SCE_MM_LAIR_TWINMOLD:
+    case SCE_MM_LAIR_MAJORA:
+        return true;
 
-        default:
-            return false;
+    default:
+        return false;
     }
 }
 
@@ -222,10 +218,14 @@ void EnItem00_InitType(Actor_EnItem00* this, PlayState* play, f32* shadowOffset,
 {
     Actor* thisx = &this->actor;
 
-    if (thisx->params == ITEM00_SEEDS && EnItem00_IsDekuSeedBlockedScene(play->sceneId)) {
-        if (gSave.info.inventory.upgrades.quiver != 0) {
+    if (thisx->params == ITEM00_SEEDS && EnItem00_IsDekuSeedBlockedScene(play->sceneId))
+    {
+        if (gSave.info.inventory.upgrades.quiver != 0)
+        {
             thisx->params = ITEM00_ARROWS_10;
-        } else {
+        }
+        else
+        {
             thisx->params = ITEM00_NOTHING;
         }
     }
@@ -315,7 +315,7 @@ void EnItem00_InitType(Actor_EnItem00* this, PlayState* play, f32* shadowOffset,
         break;
 
     case ITEM00_SHIELD_HERO:
-        thisx->objectSlot = Object_GetSlot(&play->objectCtx, OBJECT_GI_SHIELD_2);
+        thisx->objectSlot = Object_GetSlot(&play->objectCtx, OBJECT_GAMEPLAY_KEEP);
         EnItem00_SetObject(this, play, shadowOffset, shadowScale);
         break;
 
@@ -563,30 +563,32 @@ extern u8 gDropDekuNutTex[];
 extern u8 gDropDekuStickTex[];
 extern u8 gDropMagicLargeTex[];
 
-typedef enum {
+typedef enum
+{
     DROP_TEX_VANILLA,
     DROP_TEX_CUSTOM_KEEP,
 } DropTexSource;
 
-typedef struct {
+typedef struct
+{
     DropTexSource source;
     u32 ptr;
 } DropTex;
 
 static DropTex sItemDropTextures[] = {
-    { DROP_TEX_VANILLA,     (u32)gDropRecoveryHeartTex },
-    { DROP_TEX_VANILLA,     (u32)gDropBombTex },
-    { DROP_TEX_VANILLA,     (u32)gDropArrows1Tex },
-    { DROP_TEX_VANILLA,     (u32)gDropArrows2Tex },
-    { DROP_TEX_VANILLA,     (u32)gDropArrows3Tex },
-    { DROP_TEX_VANILLA,     (u32)gDropBombTex },
-    { DROP_TEX_VANILLA,     (u32)gDropDekuNutTex },
-    { DROP_TEX_VANILLA,     (u32)gDropDekuStickTex },
-    { DROP_TEX_VANILLA,     (u32)gDropMagicLargeTex },
-    { DROP_TEX_VANILLA,     (u32)gDropMagicSmallTex },
-    { DROP_TEX_VANILLA,     (u32)gDropBombchuTex },
-    { DROP_TEX_VANILLA,     (u32)gDropKeySmallTex },
-    { DROP_TEX_CUSTOM_KEEP,  CUSTOM_KEEP_DROP_DEKU_SEEDS_TEXTURE },
+    { DROP_TEX_VANILLA, (u32)gDropRecoveryHeartTex },
+    { DROP_TEX_VANILLA, (u32)gDropBombTex },
+    { DROP_TEX_VANILLA, (u32)gDropArrows1Tex },
+    { DROP_TEX_VANILLA, (u32)gDropArrows2Tex },
+    { DROP_TEX_VANILLA, (u32)gDropArrows3Tex },
+    { DROP_TEX_VANILLA, (u32)gDropBombTex },
+    { DROP_TEX_VANILLA, (u32)gDropDekuNutTex },
+    { DROP_TEX_VANILLA, (u32)gDropDekuStickTex },
+    { DROP_TEX_VANILLA, (u32)gDropMagicLargeTex },
+    { DROP_TEX_VANILLA, (u32)gDropMagicSmallTex },
+    { DROP_TEX_VANILLA, (u32)gDropBombchuTex },
+    { DROP_TEX_VANILLA, (u32)gDropKeySmallTex },
+    { DROP_TEX_CUSTOM_KEEP, CUSTOM_KEEP_DROP_DEKU_SEEDS_TEXTURE },
 };
 
 static void* EnItem00_ResolveDropTexture(s32 texIndex)
@@ -640,8 +642,7 @@ void EnItem00_DrawSprite(Actor_EnItem00* this, PlayState* play)
     gSPMatrix(
         POLY_OPA_DISP++,
         Matrix_Finalize(play->state.gfxCtx),
-        G_MTX_MODELVIEW | G_MTX_LOAD
-    );
+        G_MTX_MODELVIEW | G_MTX_LOAD);
 
     gSPDisplayList(POLY_OPA_DISP++, gItemDropDL);
 
@@ -652,7 +653,8 @@ void EnItem00_Draw(Actor_EnItem00* this, PlayState* play)
 {
     if (!(this->blinkTimer & this->blinkMask))
     {
-        switch (this->actor.params) {
+        switch (this->actor.params)
+        {
         case ITEM00_RUPEE_GREEN:
         case ITEM00_RUPEE_BLUE:
         case ITEM00_RUPEE_RED:
@@ -690,7 +692,7 @@ void EnItem00_Draw(Actor_EnItem00* this, PlayState* play)
                 }
                 break;
             }
-            // fallthrough
+            __attribute__((fallthrough));
         case ITEM00_BOMB:
         case ITEM00_ARROWS_10:
         case ITEM00_ARROWS_30:

@@ -46,8 +46,7 @@ static void PlayerVoice_UpdateHumanAgeRouting(Player* player)
         return;
 
     dst = seqData + CUSTOM_MM_HUMAN_VOICE_POINTER_TABLE_OFFSET;
-    src = seqData + (
-        comboIsLinkAdult() ? CUSTOM_MM_ADULT_VOICE_POINTER_TABLE_OFFSET : CUSTOM_MM_CHILD_VOICE_POINTER_TABLE_OFFSET);
+    src = seqData + (comboIsLinkAdult() ? CUSTOM_MM_ADULT_VOICE_POINTER_TABLE_OFFSET : CUSTOM_MM_CHILD_VOICE_POINTER_TABLE_OFFSET);
 
     if (memcmp(dst, src, MM_HUMAN_VOICE_POINTER_BYTES))
         memcpy(dst, src, MM_HUMAN_VOICE_POINTER_BYTES);
@@ -98,13 +97,13 @@ static s32 Player_GetCustomEffectiveMask(void)
 {
     switch (gCustomSave.customMask)
     {
-        case PLAYER_CUSTOM_MASK_SPOOKY:
-            return Player_IsNightTime() ? MASK_GIBDO : 0;
+    case PLAYER_CUSTOM_MASK_SPOOKY:
+        return Player_IsNightTime() ? MASK_GIBDO : 0;
 
-        case PLAYER_CUSTOM_MASK_GERUDO:
-        case PLAYER_CUSTOM_MASK_SKULL:
-        default:
-            return 0;
+    case PLAYER_CUSTOM_MASK_GERUDO:
+    case PLAYER_CUSTOM_MASK_SKULL:
+    default:
+        return 0;
     }
 }
 
@@ -186,17 +185,17 @@ static u8 Player_GetCustomSwordBItem(void)
 {
     switch (MmSword_GetEquipped())
     {
-        case MM_SWORD_MASTER:
-            return ITEM_MM_SWORD_MASTER;
+    case MM_SWORD_MASTER:
+        return ITEM_MM_SWORD_MASTER;
 
-        case MM_SWORD_GIANTS_KNIFE:
-            return ITEM_MM_SWORD_GIANTS_KNIFE;
+    case MM_SWORD_GIANTS_KNIFE:
+        return ITEM_MM_SWORD_GIANTS_KNIFE;
 
-        case MM_SWORD_BIGGORON:
-            return ITEM_MM_SWORD_BIGGORON;
+    case MM_SWORD_BIGGORON:
+        return ITEM_MM_SWORD_BIGGORON;
 
-        default:
-            return ITEM_NONE;
+    default:
+        return ITEM_NONE;
     }
 }
 
@@ -204,13 +203,13 @@ static s32 Player_MaskUsesSpecialBAction(Player* player)
 {
     switch (player->currentMask)
     {
-        case MASK_BLAST:
-        case MASK_BREMEN:
-        case MASK_KAMARO:
-            return 1;
+    case MASK_BLAST:
+    case MASK_BREMEN:
+    case MASK_KAMARO:
+        return 1;
 
-        default:
-            return 0;
+    default:
+        return 0;
     }
 }
 
@@ -220,13 +219,13 @@ static s32 Player_IsTemporaryMinigameBItem(u8 item)
 {
     switch (item)
     {
-        case ITEM_MM_BOW:
-        case ITEM_MM_BOMB:
-        case ITEM_MM_BOMBCHU:
-            return 1;
+    case ITEM_MM_BOW:
+    case ITEM_MM_BOMB:
+    case ITEM_MM_BOMBCHU:
+        return 1;
 
-        default:
-            return 0;
+    default:
+        return 0;
     }
 }
 
@@ -318,6 +317,7 @@ static s32 Player_DarkLinkHostileLockOn(Player* player)
     }
     return 0;
 }
+
 PATCH_FUNC(0x8082fb68, Player_DarkLinkHostileLockOn);
 
 static PlayState* sDarkLinkPerchPlay;
@@ -342,6 +342,21 @@ static s32 Player_DarkLinkHazardGuard(Player* player, PlayState* play)
 }
 
 PATCH_CALL(0x80845778, Player_DarkLinkHazardGuard);
+
+static void Player_DarkLinkFallSetup(PlayState* play, Player* player)
+{
+    if (player->actor.id == 0xc33 && player != GET_PLAYER(play))
+    {
+        player->stateFlags2 |= PLAYER_STATE2_MM_80000000;
+        return;
+    }
+    ((void (*)(PlayState*, Player*))OverlayAddr(0x80834104))(play, player);
+}
+
+PATCH_CALL(0x8083416c, Player_DarkLinkFallSetup);
+PATCH_CALL(0x80835458, Player_DarkLinkFallSetup);
+PATCH_CALL(0x80835b6c, Player_DarkLinkFallSetup);
+PATCH_CALL(0x80854774, Player_DarkLinkFallSetup);
 
 int comboMmDarkLinkPerch(PlayState* play, int hold)
 {
@@ -457,8 +472,7 @@ void Player_TalkDisplayTextBox(PlayState* play, s16 textId, Actor* actor)
 
 PATCH_CALL(0x80837bb0, Player_TalkDisplayTextBox);
 
-static s32 sCustomItemActions[] =
-{
+static s32 sCustomItemActions[] = {
     PLAYER_CUSTOM_IA_SPELL_WIND,
     PLAYER_CUSTOM_IA_SPELL_LOVE,
     PLAYER_CUSTOM_IA_SPELL_FIRE,
@@ -476,87 +490,82 @@ static s32 sCustomItemActions[] =
     PLAYER_CUSTOM_IA_MASK_ADULT,
 };
 
-static u8 sMagicSpellCosts[] =
-{
+static u8 sMagicSpellCosts[] = {
     12,
     24,
     12,
 };
 
-static s16 sMagicSpellActorIds[] =
-{
+static s16 sMagicSpellActorIds[] = {
     ACTOR_CUSTOM_SPELL_WIND,
     ACTOR_CUSTOM_SPELL_LOVE,
     ACTOR_CUSTOM_SPELL_FIRE,
 };
 
-typedef enum {
-    /* 1 */ ANIMSFX_TYPE_1 = 1,
-    /* 2 */ ANIMSFX_TYPE_2,
-    /* 3 */ ANIMSFX_TYPE_3,
-    /* 4 */ ANIMSFX_TYPE_4,
-    /* 5 */ ANIMSFX_TYPE_5,
-    /* 6 */ ANIMSFX_TYPE_6,
-    /* 7 */ ANIMSFX_TYPE_7,
-    /* 8 */ ANIMSFX_TYPE_8,
-    /* 9 */ ANIMSFX_TYPE_9
+typedef enum
+{
+    ANIMSFX_TYPE_1 = 1,
+    ANIMSFX_TYPE_2,
+    ANIMSFX_TYPE_3,
+    ANIMSFX_TYPE_4,
+    ANIMSFX_TYPE_5,
+    ANIMSFX_TYPE_6,
+    ANIMSFX_TYPE_7,
+    ANIMSFX_TYPE_8,
+    ANIMSFX_TYPE_9
 } AnimSfxType;
 
-typedef struct AnimSfxEntry {
-    /* 0x0 */ u16 sfxId;
-    /* 0x2 */ s16 flags; /* negative marks the end */
+typedef struct AnimSfxEntry
+{
+    u16 sfxId;
+    s16 flags;
 } AnimSfxEntry;
 
 #define ANIMSFX_SHIFT_TYPE(type) ((type) << 11)
 
-#define ANIMSFX_DATA(type, frame) ((ANIMSFX_SHIFT_TYPE(type) | ((frame)&0x7FF)))
+#define ANIMSFX_DATA(type, frame) ((ANIMSFX_SHIFT_TYPE(type) | ((frame) & 0x7FF)))
 
-static AnimSfxEntry sMagicSpellStartSfx[] =
-{
-    { 0x83D, ANIMSFX_DATA(ANIMSFX_TYPE_1, 20) }, /* NA_SE_PL_SKIP */
-    { 0x6800, ANIMSFX_DATA(ANIMSFX_TYPE_4, 20) }, /* NA_SE_VO_LI_SWORD_N */
+static AnimSfxEntry sMagicSpellStartSfx[] = {
+    { 0x83D, ANIMSFX_DATA(ANIMSFX_TYPE_1, 20) },
+    { 0x6800, ANIMSFX_DATA(ANIMSFX_TYPE_4, 20) },
     { 0, -ANIMSFX_DATA(ANIMSFX_TYPE_6, 26) },
 };
 
-static AnimSfxEntry sMagicSpellSfx[][2] =
-{
+static AnimSfxEntry sMagicSpellSfx[][2] = {
     {
         { 0, ANIMSFX_DATA(ANIMSFX_TYPE_8, 20) },
-        { 0x6817, -ANIMSFX_DATA(ANIMSFX_TYPE_4, 30) }, /* NA_SE_VO_LI_MAGIC_FROL */
+        { 0x6817, -ANIMSFX_DATA(ANIMSFX_TYPE_4, 30) },
     },
     {
         { 0, ANIMSFX_DATA(ANIMSFX_TYPE_8, 20) },
-        { 0x6815, -ANIMSFX_DATA(ANIMSFX_TYPE_4, 44) }, /* NA_SE_VO_LI_MAGIC_NALE */
+        { 0x6815, -ANIMSFX_DATA(ANIMSFX_TYPE_4, 44) },
     },
     {
-        { 0x681C, ANIMSFX_DATA(ANIMSFX_TYPE_4, 20) }, /* NA_SE_VO_LI_MAGIC_ATTACK */
-        { 0x1818, -ANIMSFX_DATA(ANIMSFX_TYPE_1, 20) }, /* NA_SE_IT_SWORD_SWING_HARD */
+        { 0x681C, ANIMSFX_DATA(ANIMSFX_TYPE_4, 20) },
+        { 0x1818, -ANIMSFX_DATA(ANIMSFX_TYPE_1, 20) },
     },
     {
-        { 0x6801, ANIMSFX_DATA(ANIMSFX_TYPE_4, 20) }, /* NA_SE_VO_LI_SWORD_L */
-        { 0x1818, -ANIMSFX_DATA(ANIMSFX_TYPE_1, 20) }, /* NA_SE_IT_SWORD_SWING_HARD */
+        { 0x6801, ANIMSFX_DATA(ANIMSFX_TYPE_4, 20) },
+        { 0x1818, -ANIMSFX_DATA(ANIMSFX_TYPE_1, 20) },
     },
 };
 
-static PlayerAnimationHeader* sMagicSpellFirstAnimation[] =
-{
-    (PlayerAnimationHeader*)0x0400da28, /* &gPlayerAnim_link_magic_kaze1, */
-    (PlayerAnimationHeader*)0x0400da10, /* &gPlayerAnim_link_magic_honoo1, */
-    (PlayerAnimationHeader*)0x0400da40, /* &gPlayerAnim_link_magic_tamashii1, */
+static PlayerAnimationHeader* sMagicSpellFirstAnimation[] = {
+    (PlayerAnimationHeader*)0x0400da28,
+    (PlayerAnimationHeader*)0x0400da10,
+    (PlayerAnimationHeader*)0x0400da40,
 };
 
-static PlayerAnimationHeader* sMagicSpellSecondAnimation[] =
-{
-    (PlayerAnimationHeader*)0x0400da30, /* &gPlayerAnim_link_magic_kaze2, */
-    (PlayerAnimationHeader*)0x0400da18, /* &gPlayerAnim_link_magic_honoo2, */
-    (PlayerAnimationHeader*)0x0400da48, /* &gPlayerAnim_link_magic_tamashii2, */
+static PlayerAnimationHeader* sMagicSpellSecondAnimation[] = {
+    (PlayerAnimationHeader*)0x0400da30,
+    (PlayerAnimationHeader*)0x0400da18,
+    (PlayerAnimationHeader*)0x0400da48,
 };
 
-static PlayerAnimationHeader* sMagicSpellThirdAnimation[] =
-{
-    (PlayerAnimationHeader*)0x0400da38, /* &gPlayerAnim_link_magic_kaze3, */
-    (PlayerAnimationHeader*)0x0400da20, /* &gPlayerAnim_link_magic_honoo3, */
-    (PlayerAnimationHeader*)0x0400da50, /* &gPlayerAnim_link_magic_tamashii3, */
+static PlayerAnimationHeader* sMagicSpellThirdAnimation[] = {
+    (PlayerAnimationHeader*)0x0400da38,
+    (PlayerAnimationHeader*)0x0400da20,
+    (PlayerAnimationHeader*)0x0400da50,
 };
 
 static u8 sMagicSpellLoopTimer[] = { 70, 10, 10 };
@@ -565,12 +574,12 @@ s32 Player_CustomItemToItemAction(Player* this, s32 item, s32 itemAction)
 {
     switch (item)
     {
-        case ITEM_MM_SWORD_MASTER:
-            return PLAYER_CUSTOM_IA_SWORD_MASTER;
-        case ITEM_MM_SWORD_GIANTS_KNIFE:
-            return PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE;
-        case ITEM_MM_SWORD_BIGGORON:
-            return PLAYER_CUSTOM_IA_SWORD_BIGGORON;
+    case ITEM_MM_SWORD_MASTER:
+        return PLAYER_CUSTOM_IA_SWORD_MASTER;
+    case ITEM_MM_SWORD_GIANTS_KNIFE:
+        return PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE;
+    case ITEM_MM_SWORD_BIGGORON:
+        return PLAYER_CUSTOM_IA_SWORD_BIGGORON;
     }
     s32 customItem = item - ITEM_MM_CUSTOM_MIN;
     if (customItem < 0)
@@ -629,14 +638,14 @@ static s32 Player_ActionToCustomMask(Player* this, s32 itemAction)
 {
     switch (itemAction)
     {
-        case PLAYER_CUSTOM_IA_MASK_GERUDO:
-            return PLAYER_CUSTOM_MASK_GERUDO;
-        case PLAYER_CUSTOM_IA_MASK_SKULL:
-            return PLAYER_CUSTOM_MASK_SKULL;
-        case PLAYER_CUSTOM_IA_MASK_SPOOKY:
-            return PLAYER_CUSTOM_MASK_SPOOKY;
-        default:
-            return PLAYER_CUSTOM_MASK_NONE;
+    case PLAYER_CUSTOM_IA_MASK_GERUDO:
+        return PLAYER_CUSTOM_MASK_GERUDO;
+    case PLAYER_CUSTOM_IA_MASK_SKULL:
+        return PLAYER_CUSTOM_MASK_SKULL;
+    case PLAYER_CUSTOM_IA_MASK_SPOOKY:
+        return PLAYER_CUSTOM_MASK_SPOOKY;
+    default:
+        return PLAYER_CUSTOM_MASK_NONE;
     }
 }
 
@@ -646,24 +655,24 @@ s32 Player_CustomSwordFromIA(Player* player, s32 itemAction)
 
     switch (itemAction)
     {
-        case PLAYER_IA_LAST_USED:
-        case PLAYER_IA_SWORD_KOKIRI:
-            return 0;
+    case PLAYER_IA_LAST_USED:
+    case PLAYER_IA_SWORD_KOKIRI:
+        return 0;
 
-        case PLAYER_IA_SWORD_RAZOR:
-            return 1;
+    case PLAYER_IA_SWORD_RAZOR:
+        return 1;
 
-        case PLAYER_IA_SWORD_GILDED:
-        case PLAYER_CUSTOM_IA_SWORD_MASTER:
-            return 2;
+    case PLAYER_IA_SWORD_GILDED:
+    case PLAYER_CUSTOM_IA_SWORD_MASTER:
+        return 2;
 
-        case PLAYER_IA_SWORD_TWO_HANDED:
-        case PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE:
-        case PLAYER_CUSTOM_IA_SWORD_BIGGORON:
-            return 3;
+    case PLAYER_IA_SWORD_TWO_HANDED:
+    case PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE:
+    case PLAYER_CUSTOM_IA_SWORD_BIGGORON:
+        return 3;
 
-        default:
-            return -1;
+    default:
+        return -1;
     }
 }
 
@@ -700,7 +709,7 @@ PATCH_FUNC(0x80124110, Player_CustomBButtonSwordFromIA);
 Actor* Player_SpawnMagicSpellActor(PlayState* play, Player* this, s8 magicSpell)
 {
     return Actor_Spawn(&play->actorCtx, play, sMagicSpellActorIds[magicSpell], this->actor.world.pos.x, this->actor.world.pos.y, this->actor.world.pos.z, 0, 0, 0, 0);
-}      /* size = 0x4 */
+}
 
 typedef void (*Player_PlayAnimSfx)(Player*, AnimSfxEntry*);
 typedef void (*Player_func_80832F24)(Player*);
@@ -738,7 +747,7 @@ void Player_Action_CastingSpell(Player* this, PlayState* play)
 
                 if (Player_SpawnMagicSpellActor(play, this, this->av1.actionVar1) != NULL)
                 {
-                    this->stateFlags1 |= 0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
+                    this->stateFlags1 |= 0x30000000;
                     if ((this->av1.actionVar1 != 0) || (gSaveContext.respawn[RESPAWN_MODE_HUMAN].data <= 0))
                     {
                         gSaveContext.magicState = MAGIC_STATE_CONSUME_SETUP;
@@ -778,7 +787,6 @@ void Player_Action_CastingSpell(Player* this, PlayState* play)
                 fw->playerParams = 0x6ff;
                 fw->data = 40;
 
-                /* Copy Game Over / Soar to Entrance respawn data. */
                 memcpy(&gCustomSave.fwRespawnTop[fwAge], &gSaveContext.respawn[RESPAWN_MODE_TOP], sizeof(RespawnData));
                 memcpy(&gCustomSave.fwRespawnDungeonEntrance[fwAge], &gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], sizeof(RespawnData));
 
@@ -802,7 +810,7 @@ void Player_Action_CastingSpell(Player* this, PlayState* play)
                 Player_PlayAnimSfx(this, sMagicSpellSfx[spellSfxIndex]);
                 if ((this->av1.actionVar1 == 2) && PlayerAnimation_OnFrame(&this->skelAnime, 30.0f))
                 {
-                    this->stateFlags1 &= ~0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
+                    this->stateFlags1 &= ~0x30000000;
                 }
             }
             else if (sMagicSpellLoopTimer[this->av1.actionVar1] < this->av2.actionVar2++)
@@ -833,15 +841,15 @@ void Player_CastSpell(PlayState* play, Player* this, s32 magicSpell)
         Player_SetAction_PreserveItemAction = OverlayAddr(0x80831760);
         Player_SetAction_PreserveItemAction(play, this, Player_Action_CastingSpell, 0);
 
-        this->av1.actionVar1 = magicSpell; /* - 3? */
+        this->av1.actionVar1 = magicSpell;
 
-        PlayerAnimation_PlayOnceSetSpeed(play, &this->skelAnime, (PlayerAnimationHeader*)0x0400da58, 0.83f); /* gPlayerAnim_link_magic_tame */
+        PlayerAnimation_PlayOnceSetSpeed(play, &this->skelAnime, (PlayerAnimationHeader*)0x0400da58, 0.83f);
 
-        this->csId = 0x7B; /* CS_ID_GLOBAL_TALK */
+        this->csId = 0x7B;
         Player_func_8083249C = OverlayAddr(0x8083249c);
         Player_func_8083249C(this);
 
-        this->stateFlags3 |= 0x80; /* PLAYER_STATE3_80 */
+        this->stateFlags3 |= 0x80;
     }
 }
 
@@ -855,17 +863,16 @@ void Player_Action_FaroresWindText(Player* this, PlayState* play)
     Player_func_8085B384 Player_func_8085B384;
     char* b;
 
-    this->stateFlags3 |= 0x80; /* PLAYER_STATE3_80 */
+    this->stateFlags3 |= 0x80;
 
     PlayerAnimation_Update(play, &this->skelAnime);
     Player_UpdateUpperBody(this, play);
 
     if (this->av2.actionVar2 == 0)
     {
-        /* Message Id is the same as OoT, but here it's the Great Fairy's Sword get-item message. Doesn't matter though. */
         PlayerDisplayTextBox(play, 0x3B, &this->actor);
         b = play->msgCtx.font.textBuffer.schar;
-        b[2] = 0xFE; /* Use No icon. */
+        b[2] = 0xFE;
         b += 11;
         comboTextAppendStr(&b, TEXT_FAST "You cast Farore's Wind!" TEXT_NL);
         comboTextAppendStr(&b, TEXT_COLOR_GREEN TEXT_CHOICE3 "     Return to the Warp Point" TEXT_NL "     Dispel the Warp Point" TEXT_NL "     Exit" TEXT_END);
@@ -873,7 +880,6 @@ void Player_Action_FaroresWindText(Player* this, PlayState* play)
         return;
     }
 
-    /* MSGMODE_TEXT_DONE */
     if (play->msgCtx.msgMode == 0x42 && Message_ShouldAdvance(play))
     {
         Audio_PlaySfx_MessageDecide();
@@ -887,11 +893,8 @@ void Player_Action_FaroresWindText(Player* this, PlayState* play)
             play->nextEntrance = gSaveContext.respawn[RESPAWN_MODE_HUMAN].entrance;
             play->transitionType = TRANS_TYPE_FADE_WHITE_FAST;
             u8 fwAge = comboMmFwAge();
-            /* Restore Game Over / Soar to Entrance respawn data. */
             memcpy(&gSaveContext.respawn[RESPAWN_MODE_TOP], &gCustomSave.fwRespawnTop[fwAge], sizeof(RespawnData));
             memcpy(&gSharedCustomSave.respawn[CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE], &gCustomSave.fwRespawnDungeonEntrance[fwAge], sizeof(RespawnData));
-
-            /* TODO cancel timers? */
 
             return;
         }
@@ -899,9 +902,9 @@ void Player_Action_FaroresWindText(Player* this, PlayState* play)
         if (play->msgCtx.choiceIndex == 1)
         {
             gSaveContext.respawn[RESPAWN_MODE_HUMAN].data = -gSaveContext.respawn[RESPAWN_MODE_HUMAN].data;
-            RespawnData *fw = &gCustomSave.fw[comboMmFwAge()];
+            RespawnData* fw = &gCustomSave.fw[comboMmFwAge()];
             fw->data = 0;
-            Audio_PlaySfx_AtPos(&fw->pos, 0x8C8); /* NA_SE_PL_MAGIC_WIND_VANISH */
+            Audio_PlaySfx_AtPos(&fw->pos, 0x8C8);
         }
 
         Player_func_8085B384 = OverlayAddr(0x8085B384);
@@ -951,10 +954,10 @@ s32 Player_CustomCsItem(Player* this, PlayState* play)
         {
             Player_SetAction = OverlayAddr(0x80831494);
             Player_SetAction(play, this, Player_Action_FaroresWindText, 1);
-            this->stateFlags1 |= 0x30000000; /* PLAYER_STATE1_20000000 | PLAYER_STATE1_10000000 */
+            this->stateFlags1 |= 0x30000000;
             Player_GetWaitAnimation = OverlayAddr(0x8082ED20);
             PlayerAnimation_PlayOnce(play, &this->skelAnime, Player_GetWaitAnimation(this));
-            this->csId = 0x7B; /* CS_ID_GLOBAL_TALK */
+            this->csId = 0x7B;
             Player_func_8083249C = OverlayAddr(0x8083249c);
             Player_func_8083249C(this);
         }
@@ -968,38 +971,31 @@ s32 Player_CustomCsItem(Player* this, PlayState* play)
         AdultMask_AfterStart(this);
         return 1;
     }
-    else if (this->itemAction >= 0x3a && this->itemAction <= 0x51) /* PLAYER_IA_MASK_MIN // PLAYER_IA_MASK_MAX */
+    else if (this->itemAction >= 0x3a && this->itemAction <= 0x51)
     {
         return -1;
     }
     return 0;
 }
 
-/* Written as a function because there are several uses for this */
-u8 Player_IsHumanChild(Player* player) {
+u8 Player_IsHumanChild(Player* player)
+{
     return (player->transformation == MM_PLAYER_FORM_HUMAN && !comboIsLinkAdult());
 }
 
 s16 sBootData[7][18] = {
-    /* Child Link - Iron Boots */
     { 200, 1000, 300, 700, 550, 270, 1000, 0, 120, 800, 300, -160, 600, 590, 750, 125, 200, 130 },
 
-    /* Child Link - Hover Boots */
     { 200, 1000, 300, 700, 550, 270, 600, 600, 120, 800, 550, -100, 600, 540, 270, 25, 0, 130 },
 
-    /* Child Link - Iron Boots (Underwater) */
     { 80, 800, 150, 700, 480, 270, 600, 50, 120, 800, 550, -40, 400, 540, 270, 25, 0, 80 },
 
-    /* Adult Link - Kokiri Boots */
     { 200, 1000, 300, 700, 550, 270, 700, 300, 120, 800, 600, -100, 600, 590, 750, 125, 200, 130 },
 
-    /* Adult Link - Iron Boots */
     { 200, 1000, 300, 700, 550, 270, 1000, 0, 120, 800, 300, -160, 600, 590, 750, 125, 200, 130 },
 
-    /* Adult Link - Hover Boots */
     { 200, 1000, 300, 700, 550, 270, 600, 600, 120, 800, 550, -100, 600, 540, 270, 25, 0, 130 },
 
-    /* Adult Link - Iron Boots (Underwater) */
     { 80, 800, 150, 700, 480, 270, 600, 50, 120, 800, 550, -40, 400, 540, 270, 25, 0, 80 },
 };
 
@@ -1020,20 +1016,20 @@ void Player_CheckCustomBoots(PlayState* play)
             REG(27) = 2000;
             REG(48) = 370;
 
-            switch(currentBoots)
+            switch (currentBoots)
             {
             case PLAYER_BOOTS_IRON:
-                player->currentBoots = 6; /* PLAYER_BOOTS_GORON */
+                player->currentBoots = 6;
                 player->actor.flags |= ACTOR_FLAG_CAN_PRESS_HEAVY_SWITCHES;
                 if (player->stateFlags1 & PLAYER_ACTOR_STATE_WATER)
                 {
-                    currentBoots = 3; /* Iron Underwater */
+                    currentBoots = 3;
                 }
                 REG(27) = 500;
                 REG(48) = 100;
                 break;
             case PLAYER_BOOTS_HOVER:
-                player->currentBoots = 0; /* PLAYER_BOOTS_FIERCE_DEITY */
+                player->currentBoots = 0;
                 player->actor.flags &= ~ACTOR_FLAG_CAN_PRESS_SWITCHES;
                 break;
             }
@@ -1090,9 +1086,8 @@ s32 Player_CustomUseItem(Player* this, PlayState* play, s32 itemAction)
         }
         else
         {
-            PlaySound(0x4806); /* NA_SE_SY_ERROR */
+            PlaySound(0x4806);
         }
-        /* Handled */
         return 1;
     }
 
@@ -1109,14 +1104,13 @@ s32 Player_CustomUseItem(Player* this, PlayState* play, s32 itemAction)
 
             if (!boots)
             {
-                this->currentBoots = 1; /* PLAYER_BOOTS_HYLIAN */
+                this->currentBoots = 1;
             }
 
             Player_SetBootData(play, this);
-            Player_PlaySfx(this, 0x835); /* NA_SE_PL_CHANGE_ARMS */
+            Player_PlaySfx(this, 0x835);
         }
 
-        /* Handled */
         return 1;
     }
 
@@ -1132,10 +1126,9 @@ s32 Player_CustomUseItem(Player* this, PlayState* play, s32 itemAction)
             }
             gSaveContext.save.info.itemEquips.tunic = newTunic;
 
-            Player_PlaySfx(this, 0x835); /* NA_SE_PL_CHANGE_ARMS */
+            Player_PlaySfx(this, 0x835);
         }
 
-        /* Handled */
         return 1;
     }
     if (AdultMask_TryUse(this, play, itemAction))
@@ -1181,16 +1174,12 @@ s32 Player_CustomUseItem(Player* this, PlayState* play, s32 itemAction)
         if (this->transformation == MM_PLAYER_FORM_HUMAN)
             return 0;
 
-        PlaySound(0x4806); /* NA_SE_SY_ERROR */
+        PlaySound(0x4806);
         return 1;
     }
 
-    /* PLAYER_IA_MASK_MIN = 0x3A, */
-    /* PLAYER_IA_MASK_MAX = 0x51, */
-    /* PLAYER_IA_MASK_GIANT = 0x4D, */
     if (itemAction >= 0x3A && itemAction <= 0x51 && (this->transformation != MM_PLAYER_FORM_HUMAN || itemAction >= 0x4D))
     {
-        /* Vanilla code doesn't need to check more conditions. */
         return -1;
     }
 
@@ -1217,7 +1206,7 @@ void Player_Action_FaroresWindSpawning(Player* this, PlayState* play)
     if (this->av2.actionVar2++ == 20)
     {
         gSaveContext.respawn[RESPAWN_MODE_HUMAN].data++;
-        Audio_PlaySfx_AtPos(&gCustomSave.fw[comboMmFwAge()].pos, 0x87B); /* NA_SE_PL_MAGIC_WIND_WARP */
+        Audio_PlaySfx_AtPos(&gCustomSave.fw[comboMmFwAge()].pos, 0x87B);
     }
 }
 
@@ -1226,12 +1215,11 @@ void Player_InitFaroresWindRespawn(PlayState* play, Player* this)
     Player_SetAction Player_SetAction = OverlayAddr(0x80831494);
     this->actor.draw = NULL;
     Player_SetAction(play, this, Player_Action_FaroresWindSpawning, 0);
-    this->stateFlags1 |= 0x20000000; /* PLAYER_STATE1_20000000 */
+    this->stateFlags1 |= 0x20000000;
 }
 
 void Player_AfterInit(PlayState* play)
 {
-    /* Displaced code: */
     Map_SetAreaEntrypoint(play);
 
     Player* player = GET_PLAYER(play);
@@ -1377,8 +1365,7 @@ const Gfx gLinkAdultLeftHoverBootDL[] = {
     gsSP2Triangles(6, 8, 9, 0, 2, 26, 0, 0),
     gsSP2Triangles(0, 26, 20, 0, 26, 18, 20, 0),
     gsDPPipeSync(),
-    gsDPLoadTextureBlock(gLinkAdultHoverBootsFeatherTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0, G_TX_NOMIRROR |
-                         G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureBlock(gLinkAdultHoverBootsFeatherTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
     gsSPClearGeometryMode(G_CULL_BOTH),
@@ -1430,8 +1417,7 @@ const Gfx gLinkAdultRightHoverBootDL[] = {
     gsSP2Triangles(9, 6, 8, 0, 2, 26, 0, 0),
     gsSP2Triangles(18, 26, 2, 0, 18, 20, 26, 0),
     gsDPPipeSync(),
-    gsDPLoadTextureBlock(gLinkAdultHoverBootsFeatherTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0, G_TX_NOMIRROR |
-                         G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD),
+    gsDPLoadTextureBlock(gLinkAdultHoverBootsFeatherTex, G_IM_FMT_RGBA, G_IM_SIZ_16b, 32, 16, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 5, 4, G_TX_NOLOD, G_TX_NOLOD),
     gsDPSetCombineLERP(TEXEL0, 0, SHADE, 0, 0, 0, 0, TEXEL0, COMBINED, 0, PRIMITIVE, 0, 0, 0, 0, COMBINED),
     gsDPSetRenderMode(G_RM_FOG_SHADE_A, G_RM_AA_ZB_TEX_EDGE2),
     gsSPClearGeometryMode(G_CULL_BOTH),
@@ -1452,8 +1438,7 @@ const Gfx gHoverBootsCircleDL[] = {
     gsDPPipeSync(),
     gsDPSetTextureLUT(G_TT_NONE),
     gsSPTexture(0xFFFF, 0xFFFF, 0, G_TX_RENDERTILE, G_ON),
-    gsDPLoadTextureBlock(gEffUnknown13Tex, G_IM_FMT_I, G_IM_SIZ_8b, 16, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR
-                         | G_TX_CLAMP, 4, 5, G_TX_NOLOD, 1),
+    gsDPLoadTextureBlock(gEffUnknown13Tex, G_IM_FMT_I, G_IM_SIZ_8b, 16, 32, 0, G_TX_NOMIRROR | G_TX_CLAMP, G_TX_NOMIRROR | G_TX_CLAMP, 4, 5, G_TX_NOLOD, 1),
     gsDPLoadMultiBlock(gEffUnknown14Tex, 0x0100, 1, G_IM_FMT_I, G_IM_SIZ_8b, 16, 32, 0, G_TX_MIRROR | G_TX_WRAP,
                        G_TX_NOMIRROR | G_TX_WRAP, 4, 5, 15, 14),
     gsDPSetCombineLERP(TEXEL1, PRIMITIVE, ENV_ALPHA, TEXEL0, 0, 0, 0, TEXEL0, PRIMITIVE, 0, COMBINED, ENVIRONMENT,
@@ -1601,12 +1586,8 @@ static void DrawGauntlets(PlayState* play, Player* link)
         s32 playerRightHandType = *(s32*)0x801f59f8;
         gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_GAUNTLETS_0);
         gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_GAUNTLETS_3);
-        gSPDisplayList(POLY_OPA_DISP++, (playerLeftHandType == 0) /* PLAYER_MODELTYPE_LH_OPEN */
-                                            ? CUSTOM_OBJECT_GAUNTLETS_1
-                                            : CUSTOM_OBJECT_GAUNTLETS_2);
-        gSPDisplayList(POLY_OPA_DISP++, (playerRightHandType == 6) /* PLAYER_MODELTYPE_RH_OPEN */
-                                            ? CUSTOM_OBJECT_GAUNTLETS_4
-                                            : CUSTOM_OBJECT_GAUNTLETS_5);
+        gSPDisplayList(POLY_OPA_DISP++, (playerLeftHandType == 0) ? CUSTOM_OBJECT_GAUNTLETS_1 : CUSTOM_OBJECT_GAUNTLETS_2);
+        gSPDisplayList(POLY_OPA_DISP++, (playerRightHandType == 6) ? CUSTOM_OBJECT_GAUNTLETS_4 : CUSTOM_OBJECT_GAUNTLETS_5);
     }
     else
     {
@@ -1624,10 +1605,10 @@ static Vec3s sHoverBootsRot = { 0, 0, 0 };
 static s32 sHoverBootCircleAlpha = 255;
 
 static Color_RGB8 sTunicColors[4] = {
-    { 30, 105, 27 }, /* PLAYER_TUNIC_NONE (default in MM) */
-    { 30, 105, 27 }, /* PLAYER_TUNIC_KOKIRI (will not be used) */
-    { 100, 20, 0 },  /* PLAYER_TUNIC_GORON */
-    { 0, 60, 100 },  /* PLAYER_TUNIC_ZORA */
+    { 30, 105, 27 },
+    { 30, 105, 27 },
+    { 100, 20, 0 },
+    { 0, 60, 100 },
 };
 
 static Color_RGB8 sGerudoMaskTunicColor = { 120, 0, 180 };
@@ -1636,11 +1617,11 @@ EXPORT_SYMBOL(MM_COLOR_TUNIC_KOKIRI, sTunicColors[0]);
 EXPORT_SYMBOL(MM_COLOR_TUNIC_GORON, sTunicColors[2]);
 EXPORT_SYMBOL(MM_COLOR_TUNIC_ZORA, sTunicColors[3]);
 
-#define DLIST_INDIRECT(x)           (*(u32*)((x)))
-#define DLIST_RHAND_OPEN            DLIST_INDIRECT(0x801c01c4)
-#define DLIST_RHAND_CLOSED          DLIST_INDIRECT(0x801c01ec)
-#define DLIST_LHAND_OPEN            DLIST_INDIRECT(0x801c0134)
-#define DLIST_LHAND_CLOSED          DLIST_INDIRECT(0x801c015c)
+#define DLIST_INDIRECT(x)  (*(u32*)((x)))
+#define DLIST_RHAND_OPEN   DLIST_INDIRECT(0x801c01c4)
+#define DLIST_RHAND_CLOSED DLIST_INDIRECT(0x801c01ec)
+#define DLIST_LHAND_OPEN   DLIST_INDIRECT(0x801c0134)
+#define DLIST_LHAND_CLOSED DLIST_INDIRECT(0x801c015c)
 
 static void* Player_CustomEquipment(u32 baseDlist, void* object, u32 eqDlist)
 {
@@ -1677,19 +1658,18 @@ static Gfx* Player_OffsetHeldShield(PlayState* play, Gfx* original)
     return dlist;
 }
 
-
 static MmSwordId Player_GetActiveCustomSword(Player* player)
 {
     switch (player->heldItemAction)
     {
-        case PLAYER_CUSTOM_IA_SWORD_MASTER:
-            return MM_SWORD_MASTER;
-        case PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE:
-            return MM_SWORD_GIANTS_KNIFE;
-        case PLAYER_CUSTOM_IA_SWORD_BIGGORON:
-            return MM_SWORD_BIGGORON;
-        default:
-            return MM_SWORD_NONE;
+    case PLAYER_CUSTOM_IA_SWORD_MASTER:
+        return MM_SWORD_MASTER;
+    case PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE:
+        return MM_SWORD_GIANTS_KNIFE;
+    case PLAYER_CUSTOM_IA_SWORD_BIGGORON:
+        return MM_SWORD_BIGGORON;
+    default:
+        return MM_SWORD_NONE;
     }
 }
 
@@ -1775,7 +1755,8 @@ static void DrawSlingshotString(PlayState* play, Player* player)
     f32 stringPullScale;
 
     obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT);
-    if (!obj) {
+    if (!obj)
+    {
         return;
     }
 
@@ -1789,44 +1770,52 @@ static void DrawSlingshotString(PlayState* play, Player* player)
 
     if ((player->stateFlags3 & PLAYER_STATE3_MM_40) &&
         (player->unk_B28 >= 0) &&
-        (player->unk_ACC < 0xB)) {
+        (player->unk_ACC < 0xB))
+    {
         Matrix_MultVec3f(&sZeroVec, &stringOrigin);
         distXYZ = Math_Vec3f_DistXYZ(&player->leftHandWorld.pos, &stringOrigin);
 
-        if (comboIsLinkAdult()) {
+        if (comboIsLinkAdult())
+        {
             stringMaxScale = 1.65f;
             stringPullScale = 1.6f;
-        } else {
+        }
+        else
+        {
             stringMaxScale = 1.0f;
             stringPullScale = 1.6f;
         }
 
         player->unk_B08 = distXYZ - 3.0f;
 
-        if (distXYZ < 3.0f) {
+        if (distXYZ < 3.0f)
+        {
             player->unk_B08 = 0.0f;
-        } else {
+        }
+        else
+        {
             player->unk_B08 *= stringPullScale;
 
-            if (player->unk_B08 > stringMaxScale) {
+            if (player->unk_B08 > stringMaxScale)
+            {
                 player->unk_B08 = stringMaxScale;
             }
         }
 
         player->unk_B0C = -0.5f;
-        }
+    }
 
     Matrix_Scale(1.0f, player->unk_B08, 1.0f, MTXMODE_APPLY);
 
-    if (!comboIsLinkAdult()) {
+    if (!comboIsLinkAdult())
+    {
         Matrix_RotateZ(player->unk_B08 * -0.2f, MTXMODE_APPLY);
     }
 
     gSPMatrix(
         POLY_XLU_DISP++,
         Matrix_Finalize(play->state.gfxCtx),
-        G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW
-    );
+        G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
 
     gSPDisplayList(POLY_XLU_DISP++, CUSTOM_OBJECT_EQ_SLINGSHOT_1);
 
@@ -1837,9 +1826,9 @@ static void DrawSlingshotString(PlayState* play, Player* player)
 
 static Vec3f sChildHylianShieldQuad[4] = {
     { -3000.0f, -3000.0f, -900.0f },
-    {  3000.0f, -3000.0f, -900.0f },
-    { -3000.0f,  3000.0f, -900.0f },
-    {  3000.0f,  3000.0f, -900.0f },
+    { 3000.0f, -3000.0f, -900.0f },
+    { -3000.0f, 3000.0f, -900.0f },
+    { 3000.0f, 3000.0f, -900.0f },
 };
 
 void Player_PostLimbDrawGameplayWrapper(PlayState* play, s32 limbIndex, Gfx** dList1, Gfx** dList2, Vec3s* rot, Actor* actor)
@@ -1934,20 +1923,18 @@ static void* Player_CustomSlingshotFirstPerson(s32 limbIndex)
         if (!armObj)
             return (void*)kDListEmpty;
 
-        /* Adult arm limb: draw only the arm DL here */
-        if (limbIndex == PLAYER_LIMB_RIGHT_FOREARM) /* or PLAYER_LIMB_RIGHT_ARM */
+        if (limbIndex == PLAYER_LIMB_RIGHT_FOREARM)
         {
             d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 4);
 
             gSPSegment(d++, 0x0a, armObj);
-            gSPDisplayList(d++, CUSTOM_OBJECT_EQ_ADULT_RIGHT_ARM_OUT_0); /* gLinkAdultRightArmOutNearDL */
+            gSPDisplayList(d++, CUSTOM_OBJECT_EQ_ADULT_RIGHT_ARM_OUT_0);
 
             gSPEndDisplayList(d++);
 
             return dlist;
         }
 
-        /* Adult hand limb: draw hand + slingshot here */
         if (limbIndex == PLAYER_LIMB_RIGHT_HAND)
         {
             slingshotObj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT);
@@ -1957,7 +1944,7 @@ static void* Player_CustomSlingshotFirstPerson(s32 limbIndex)
             d = dlist = GRAPH_ALLOC(gPlay->state.gfxCtx, sizeof(Gfx) * 6);
 
             gSPSegment(d++, 0x0a, armObj);
-            gSPDisplayList(d++, CUSTOM_OBJECT_EQ_ADULT_RIGHT_ARM_OUT_1); /* gLinkAdultRightHandOutNearDL */
+            gSPDisplayList(d++, CUSTOM_OBJECT_EQ_ADULT_RIGHT_ARM_OUT_1);
 
             gSPSegment(d++, 0x0a, slingshotObj);
             gSPDisplayList(d++, CUSTOM_OBJECT_EQ_SLINGSHOT_0);
@@ -1970,7 +1957,6 @@ static void* Player_CustomSlingshotFirstPerson(s32 limbIndex)
         return NULL;
     }
 
-    /* Child: keep the old combined stretched arm on the hand limb */
     if (limbIndex == PLAYER_LIMB_RIGHT_HAND)
     {
         slingshotObj = comboGetObject(CUSTOM_OBJECT_ID_EQ_SLINGSHOT);
@@ -2000,25 +1986,23 @@ static int Player_IsCustomBoomerangThrown(Player* player)
     return !!(player->stateFlags1 & PLAYER_STATE1_MM_2000000);
 }
 
-#define MM_PLAYER_IS_Z_TARGETING                 0x8082FBE8
+#define MM_PLAYER_IS_Z_TARGETING 0x8082FBE8
 typedef s32 (*MmPlayerIsZTargetingFunc)(Player* player, PlayState* play);
-#define Player_IsZTargeting                 ((MmPlayerIsZTargetingFunc)OverlayAddr(MM_PLAYER_IS_Z_TARGETING))
+#define Player_IsZTargeting ((MmPlayerIsZTargetingFunc)OverlayAddr(MM_PLAYER_IS_Z_TARGETING))
 
 static int Player_IsCustomSlingshotZTargetAiming(PlayState* play, Player* player)
 {
     return player->transformation == MM_PLAYER_FORM_HUMAN &&
            player->itemAction == PLAYER_CUSTOM_IA_SLINGSHOT &&
-           (
-               Player_IsZTargeting(player, play) ||
-               player->lockOnActor != NULL
-           );
+           (Player_IsZTargeting(player, play) ||
+            player->lockOnActor != NULL);
 }
 
 int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* unk)
 {
     Player* player = GET_PLAYER(play);
     if (Player_IsUsingCustomSlingshot(player) &&
-            sPlayerOverrideLimb == Player_OverrideLimbDrawGameplayFirstPerson)
+        sPlayerOverrideLimb == Player_OverrideLimbDrawGameplayFirstPerson)
     {
         if (limbIndex == PLAYER_LIMB_RIGHT_HAND || limbIndex == PLAYER_LIMB_RIGHT_FOREARM)
         {
@@ -2039,27 +2023,27 @@ int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3
 
                 switch (sword)
                 {
-                    case MM_SWORD_MASTER:
-                        obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD);
-                        swordDlist = CUSTOM_OBJECT_EQ_MASTER_SWORD_0;
-                        break;
+                case MM_SWORD_MASTER:
+                    obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_MASTER_SWORD);
+                    swordDlist = CUSTOM_OBJECT_EQ_MASTER_SWORD_0;
+                    break;
 
-                    case MM_SWORD_GIANTS_KNIFE:
-                    case MM_SWORD_BIGGORON:
-                        if (sword == MM_SWORD_GIANTS_KNIFE && MmSword_GetGiantsKnifeHealth() == 0)
-                        {
-                            obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_BIGGORON_SWORD_BROKEN);
-                            swordDlist = CUSTOM_OBJECT_EQ_BIGGORON_SWORD_BROKEN_0;
-                        }
-                        else
-                        {
-                            obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_BIGGORON_SWORD);
-                            swordDlist = CUSTOM_OBJECT_EQ_BIGGORON_SWORD_0;
-                        }
-                        break;
+                case MM_SWORD_GIANTS_KNIFE:
+                case MM_SWORD_BIGGORON:
+                    if (sword == MM_SWORD_GIANTS_KNIFE && MmSword_GetGiantsKnifeHealth() == 0)
+                    {
+                        obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_BIGGORON_SWORD_BROKEN);
+                        swordDlist = CUSTOM_OBJECT_EQ_BIGGORON_SWORD_BROKEN_0;
+                    }
+                    else
+                    {
+                        obj = comboGetObject(CUSTOM_OBJECT_ID_EQ_BIGGORON_SWORD);
+                        swordDlist = CUSTOM_OBJECT_EQ_BIGGORON_SWORD_0;
+                    }
+                    break;
 
-                    default:
-                        break;
+                default:
+                    break;
                 }
 
                 if (obj)
@@ -2186,20 +2170,20 @@ static void DrawExtendedMask(PlayState* play, s32 customMask)
 
     switch (customMask)
     {
-        case PLAYER_CUSTOM_MASK_GERUDO:
-            objectId = CUSTOM_OBJECT_ID_MASK_OOT_GERUDO | MASK_FOREIGN_OBJECT;
-            dlist = CUSTOM_OBJECT_MASK_OOT_GERUDO_0;
-            break;
-        case PLAYER_CUSTOM_MASK_SKULL:
-            objectId = CUSTOM_OBJECT_ID_MASK_OOT_SKULL | MASK_FOREIGN_OBJECT;
-            dlist = CUSTOM_OBJECT_MASK_OOT_SKULL_0;
-            break;
-        case PLAYER_CUSTOM_MASK_SPOOKY:
-            objectId = CUSTOM_OBJECT_ID_MASK_OOT_SPOOKY | MASK_FOREIGN_OBJECT;
-            dlist = CUSTOM_OBJECT_MASK_OOT_SPOOKY_0;
-            break;
-        default:
-            return;
+    case PLAYER_CUSTOM_MASK_GERUDO:
+        objectId = CUSTOM_OBJECT_ID_MASK_OOT_GERUDO | MASK_FOREIGN_OBJECT;
+        dlist = CUSTOM_OBJECT_MASK_OOT_GERUDO_0;
+        break;
+    case PLAYER_CUSTOM_MASK_SKULL:
+        objectId = CUSTOM_OBJECT_ID_MASK_OOT_SKULL | MASK_FOREIGN_OBJECT;
+        dlist = CUSTOM_OBJECT_MASK_OOT_SKULL_0;
+        break;
+    case PLAYER_CUSTOM_MASK_SPOOKY:
+        objectId = CUSTOM_OBJECT_ID_MASK_OOT_SPOOKY | MASK_FOREIGN_OBJECT;
+        dlist = CUSTOM_OBJECT_MASK_OOT_SPOOKY_0;
+        break;
+    default:
+        return;
     }
 
     obj = comboGetObject(objectId);
@@ -2291,11 +2275,13 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
             DrawExtendedMask(play, gCustomSave.customMask);
         }
 
-        if (player->transformation == MM_PLAYER_FORM_HUMAN && player->itemAction == PLAYER_CUSTOM_IA_HAMMER) {
+        if (player->transformation == MM_PLAYER_FORM_HUMAN && player->itemAction == PLAYER_CUSTOM_IA_HAMMER)
+        {
             DrawHammer(play);
         }
 
-        if (player->transformation == MM_PLAYER_FORM_HUMAN && player->itemAction == PLAYER_CUSTOM_IA_BOOMERANG && !(player->stateFlags1 & PLAYER_STATE1_MM_2000000)) {
+        if (player->transformation == MM_PLAYER_FORM_HUMAN && player->itemAction == PLAYER_CUSTOM_IA_BOOMERANG && !(player->stateFlags1 & PLAYER_STATE1_MM_2000000))
+        {
             DrawBoomerang(play);
         }
 
@@ -2305,37 +2291,41 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
             s32 strength = Player_GetEffectiveHumanStrength();
             switch (strength)
             {
-                case 1:
-                    gSPSegment(POLY_OPA_DISP++, 0x08, g.customKeep);
-                    gSPDisplayList(POLY_OPA_DISP++, gLinkChildGoronBraceletDL);
-                    break;
-                case 2:
-                case 3:
-                    gauntletColor = &sGauntletColors[strength - 2];
-                    gDPPipeSync(POLY_OPA_DISP++);
-                    gDPSetEnvColor(POLY_OPA_DISP++, gauntletColor->r, gauntletColor->g, gauntletColor->b, 0);
+            case 1:
+                gSPSegment(POLY_OPA_DISP++, 0x08, g.customKeep);
+                gSPDisplayList(POLY_OPA_DISP++, gLinkChildGoronBraceletDL);
+                break;
+            case 2:
+            case 3:
+                gauntletColor = &sGauntletColors[strength - 2];
+                gDPPipeSync(POLY_OPA_DISP++);
+                gDPSetEnvColor(POLY_OPA_DISP++, gauntletColor->r, gauntletColor->g, gauntletColor->b, 0);
 
-                    DrawGauntlets(play, player);
-                    break;
+                DrawGauntlets(play, player);
+                break;
             }
         }
     }
 
     gSPSegment(POLY_XLU_DISP++, 0x08, g.customKeep);
 
-    if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_HOVER && !(player->actor.bgCheckFlags & BGCHECKFLAG_GROUND)
-        && !(player->stateFlags1 & (1 << 23)) && player->hoverBootsTimer != 0)
+    if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_HOVER && !(player->actor.bgCheckFlags & BGCHECKFLAG_GROUND) && !(player->stateFlags1 & (1 << 23)) && player->hoverBootsTimer != 0)
     {
         s32 sp5C;
         s32 hoverBootsTimer = player->hoverBootsTimer;
 
-        if (player->hoverBootsTimer < 19) {
-            if (hoverBootsTimer >= 15) {
+        if (player->hoverBootsTimer < 19)
+        {
+            if (hoverBootsTimer >= 15)
+            {
                 sHoverBootCircleAlpha = (19 - hoverBootsTimer) * 51.0f;
-            } else if (hoverBootsTimer < 19) {
+            }
+            else if (hoverBootsTimer < 19)
+            {
                 sp5C = hoverBootsTimer;
 
-                if (sp5C > 9) {
+                if (sp5C > 9)
+                {
                     sp5C = 9;
                 }
 
@@ -2352,7 +2342,7 @@ void Player_SkelAnime_DrawFlexLod(PlayState* play, void** skeleton, Vec3s* joint
             gSPMatrix(POLY_XLU_DISP++, Matrix_Finalize(play->state.gfxCtx), G_MTX_NOPUSH | G_MTX_LOAD | G_MTX_MODELVIEW);
             gSPSegment(POLY_XLU_DISP++, 0x09,
                        DisplaceTexture(play->state.gfxCtx, G_TX_RENDERTILE, 0, 0, 16, 32, 1, 0,
-                                        (play->gameplayFrames * -15) % 128, 16, 32));
+                                       (play->gameplayFrames * -15) % 128, 16, 32));
             gDPSetPrimColor(POLY_XLU_DISP++, 0x80, 0x80, 255, 255, 255, sHoverBootCircleAlpha);
             gDPSetEnvColor(POLY_XLU_DISP++, 120, 90, 30, 128);
             gSPDisplayList(POLY_XLU_DISP++, gHoverBootsCircleDL);
@@ -2406,15 +2396,16 @@ void Player_ColorAfterMask(GraphicsContext* gfxCtx, s32 maskIDMinusOne, PlayerMa
 
 PATCH_CALL(0x80124858, Player_SkelAnime_DrawFlexLod);
 
-u16 Player_GetFloorSfxByAge(Player* this, u16 sfxId) {
+u16 Player_GetFloorSfxByAge(Player* this, u16 sfxId)
+{
     if (GET_PLAYER_CUSTOM_BOOTS(this) == PLAYER_BOOTS_IRON)
     {
         switch (sfxId)
         {
-        case 0x800: /* NA_SE_PL_WALK_GROUND */
-        case 0x810: /* NA_SE_PL_JUMP_GROUND */
-        case 0x820: /* NA_SE_PL_LAND_GROUND */
-            return 0x28DC; /* NA_SE_EV_IRON_DOOR_CLOSE */
+        case 0x800:
+        case 0x810:
+        case 0x820:
+            return 0x28DC;
         }
     }
 
@@ -2427,7 +2418,7 @@ s32 Player_ShouldCheckItemUsabilityWhileSwimming(Player* player, u8 itemAction)
 {
     switch (itemAction)
     {
-    case 0x50: /* PLAYER_IA_MASK_ZORA */
+    case 0x50:
     case PLAYER_CUSTOM_IA_BOOTS_IRON:
     case PLAYER_CUSTOM_IA_BOOTS_HOVER:
     case PLAYER_CUSTOM_IA_TUNIC_ZORA:
@@ -2450,7 +2441,6 @@ f32 Player_GetEnvironmentWindSpeed(PlayState* play)
         return 0.0f;
     }
 
-    /* Displaced code: */
     return play->envCtx.windSpeed;
 }
 
@@ -2461,30 +2451,28 @@ s32 Player_IsBeingPushed(Player* this, PlayState* play)
         return this->pushedSpeed != 0.0f;
     }
 
-    /* Displaced code: */
     return this->pushedSpeed != 0.0f || this->windSpeed != 0.0f || play->envCtx.windSpeed >= 50.0f;
 }
 
 s32 Player_PlayHoverSound(Player* this, f32* arg1Ptr)
 {
-    /* Displaced code: */
     f32 arg1 = *arg1Ptr;
     f32 updateScale = R_UPDATE_RATE / 2.0f;
 
     arg1 *= updateScale;
-    if (arg1 < -7.25f) {
+    if (arg1 < -7.25f)
+    {
         arg1 = -7.25f;
-    } else if (arg1 > 7.25f) {
+    }
+    else if (arg1 > 7.25f)
+    {
         arg1 = 7.25f;
     }
     *arg1Ptr = arg1;
-    /* End displaced code */
 
-    if (GET_PLAYER_CUSTOM_BOOTS(this) == PLAYER_BOOTS_HOVER
-        && !(this->actor.bgCheckFlags & BGCHECKFLAG_GROUND)
-        && this->hoverBootsTimer != 0)
+    if (GET_PLAYER_CUSTOM_BOOTS(this) == PLAYER_BOOTS_HOVER && !(this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) && this->hoverBootsTimer != 0)
     {
-        Actor_PlaySfx_FlaggedCentered1(&this->actor, 0xC9); /* NA_SE_PL_HOBBERBOOTS_LV - SFX_FLAG */
+        Actor_PlaySfx_FlaggedCentered1(&this->actor, 0xC9);
         return 1;
     }
 
@@ -2542,7 +2530,8 @@ s32 Player_UpdateHoverBoots(Player* this)
 
     if (this->actor.bgCheckFlags & BGCHECKFLAG_GROUND)
     {
-        if (!canHoverOnGround) {
+        if (!canHoverOnGround)
+        {
             this->hoverBootsTimer = 19;
         }
 
@@ -2550,9 +2539,9 @@ s32 Player_UpdateHoverBoots(Player* this)
         return 0;
     }
 
-    if (!(this->stateFlags1 & 0x8000000)) /* PLAYER_STATE1_8000000 // Swimming */
+    if (!(this->stateFlags1 & 0x8000000))
     {
-        *sPlayerFloorType = 0; /* FLOOR_TYPE_0; */
+        *sPlayerFloorType = 0;
     }
     this->floorPitch = this->floorPitchAlt = *sPlayerFloorPitchShape = 0;
 
@@ -2569,7 +2558,7 @@ s32 Player_CheckHoverBoots(Player* player)
     {
         s32* sPlayerPrevFloorProperty = OverlayAddr(0x80862B1C);
         player->actor.velocity.y = 1.0f;
-        *sPlayerPrevFloorProperty = 9; /* FLOOR_PROPERTY_9 */
+        *sPlayerPrevFloorProperty = 9;
         return 1;
     }
     return 0;
@@ -2582,9 +2571,7 @@ s32 Player_IsFloorSlippery(Player* player, s32 floorType)
         return 1;
     }
 
-    /* Displaced code: */
-    return (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND) && floorType == 5 && player->currentBoots < 5; /* PLAYER_BOOTS_ZORA_UNDERWATER */
-    /* End displaced code */
+    return (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND) && floorType == 5 && player->currentBoots < 5;
 }
 
 int Player_IsGoronOrGoronTunic(Player* player)
@@ -2593,10 +2580,9 @@ int Player_IsGoronOrGoronTunic(Player* player)
 }
 
 static u8 sFloorDamageDelay[] = { 120, 60 };
+
 s32 Player_ShouldTakeFloorDamage(Player* player, s32 isWallDamaging, s32 floorDamageType, s32 isFloorDamaging)
 {
-    /* (floorDamageType < 0 && !isWallDamaging) never enters this code */
-
     if (isFloorDamaging || isWallDamaging || player->actor.depthInWater > 0.0f)
     {
         player->floorTypeTimer = 0;
@@ -2604,7 +2590,6 @@ s32 Player_ShouldTakeFloorDamage(Player* player, s32 isWallDamaging, s32 floorDa
         return 1;
     }
 
-    /* probably redundant, but better to be safe */
     if (floorDamageType < 0 || floorDamageType > 1)
     {
         return 0;
@@ -2620,16 +2605,15 @@ s32 Player_ShouldTakeFloorDamage(Player* player, s32 isWallDamaging, s32 floorDa
     return 0;
 }
 
-/* This skips the environment hazard text for hot rooms, but there are no hot rooms in MM. */
-s32 Player_GetEnvironmentalHazardCustom(PlayState* play) {
+s32 Player_GetEnvironmentalHazardCustom(PlayState* play)
+{
     Player* player = GET_PLAYER(play);
 
     if (play->roomCtx.curRoom.behaviorType2 == ROOM_BEHAVIOR_TYPE2_HOT)
     {
         return PLAYER_ENV_HAZARD_HOTROOM;
     }
-    else if (player->transformation != MM_PLAYER_FORM_ZORA && player->underwaterTimer > 80
-        && (!Config_Flag(CFG_MM_SCALES) || GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON || player->underwaterTimer >= 300))
+    else if (player->transformation != MM_PLAYER_FORM_ZORA && player->underwaterTimer > 80 && (!Config_Flag(CFG_MM_SCALES) || GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON || player->underwaterTimer >= 300))
     {
         if (GET_PLAYER_CUSTOM_BOOTS(player) == PLAYER_BOOTS_IRON && (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND))
         {
@@ -2637,11 +2621,9 @@ s32 Player_GetEnvironmentalHazardCustom(PlayState* play) {
         }
         return PLAYER_ENV_HAZARD_UNDERWATER_FREE;
     }
-    else if (player->stateFlags1 & 0x08000000) /* PLAYER_STATE1_SWIM */
+    else if (player->stateFlags1 & 0x08000000)
     {
-        if ((player->transformation == MM_PLAYER_FORM_ZORA)
-            && (player->currentBoots >= 5) /* PLAYER_BOOTS_ZORA_UNDERWATER */
-            && (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND))
+        if ((player->transformation == MM_PLAYER_FORM_ZORA) && (player->currentBoots >= 5) && (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND))
         {
             return PLAYER_ENV_HAZARD_UNDERWATER_FLOOR;
         }
@@ -2660,15 +2642,14 @@ PATCH_FUNC(0x801242dc, Player_GetEnvironmentalHazardCustom);
 
 s32 Player_CanSurface(Player* player)
 {
-    return player->stateFlags1 & 0x08000000 /* PLAYER_STATE1_SWIM */
-        && player->transformation == MM_PLAYER_FORM_ZORA;
+    return player->stateFlags1 & 0x08000000 && player->transformation == MM_PLAYER_FORM_ZORA;
 }
 
 s32 Player_GetItemCamMode(Player* this)
 {
     if (this->transformation == MM_PLAYER_FORM_HUMAN)
     {
-        if ((this->heldItemAction == PLAYER_IA_HOOKSHOT && (this->stateFlags1 & 0x8000000)) || (comboIsLinkAdult())) /* PLAYER_IA_HOOKSHOT // PLAYER_STATE1_8000000 // Swimming */
+        if ((this->heldItemAction == PLAYER_IA_HOOKSHOT && (this->stateFlags1 & 0x8000000)) || (comboIsLinkAdult()))
         {
             return CAM_MODE_BOWARROW;
         }
@@ -2706,7 +2687,7 @@ f32 Player_GetMaxDiveDepth()
 
 u8 Player_GetStrengthCustom(u8 formStrength)
 {
-    if (Config_Flag(CFG_MM_STRENGTH) && gSaveContext.save.playerForm == MM_PLAYER_FORM_HUMAN) /* || gSaveContext.save.playerForm == MM_PLAYER_FORM_FIERCE_DEITY) */
+    if (Config_Flag(CFG_MM_STRENGTH) && gSaveContext.save.playerForm == MM_PLAYER_FORM_HUMAN)
     {
         return Player_GetEffectiveHumanStrength();
     }
@@ -2740,29 +2721,29 @@ u8 Player_AfterMaskLoaded(Player* player)
         u32* maskObjectSegment;
         switch (player->currentMask)
         {
-            case MASK_KEATON:
-                maskObjectSegment = (u32*)player->maskObjectSegment;
-                maskObjectSegment[0x12a] = 0xde000000;
-                maskObjectSegment[0x12b] = 0x0405a2e0;
-                break;
-            case MASK_BUNNY:
-                maskObjectSegment = (u32*)player->maskObjectSegment;
-                maskObjectSegment[0x188] = 0xde000000;
-                maskObjectSegment[0x189] = 0x0405a2e0;
-                maskObjectSegment[0x1e0] = 0xde000000;
-                maskObjectSegment[0x1e1] = 0x0405a2e8;
-                maskObjectSegment[0x1ec] = 0xde000000;
-                maskObjectSegment[0x1ed] = 0x0405a2e0;
-                maskObjectSegment[0x224] = 0xde000000;
-                maskObjectSegment[0x225] = 0x0405a2e8;
-                maskObjectSegment[0x230] = 0xde000000;
-                maskObjectSegment[0x231] = 0x0405a2e0;
-                break;
-            case MASK_SCENTS:
-                maskObjectSegment = (u32*)player->maskObjectSegment;
-                maskObjectSegment[0x1c6] = 0xde000000;
-                maskObjectSegment[0x1c7] = 0x0405a2e0;
-                break;
+        case MASK_KEATON:
+            maskObjectSegment = (u32*)player->maskObjectSegment;
+            maskObjectSegment[0x12a] = 0xde000000;
+            maskObjectSegment[0x12b] = 0x0405a2e0;
+            break;
+        case MASK_BUNNY:
+            maskObjectSegment = (u32*)player->maskObjectSegment;
+            maskObjectSegment[0x188] = 0xde000000;
+            maskObjectSegment[0x189] = 0x0405a2e0;
+            maskObjectSegment[0x1e0] = 0xde000000;
+            maskObjectSegment[0x1e1] = 0x0405a2e8;
+            maskObjectSegment[0x1ec] = 0xde000000;
+            maskObjectSegment[0x1ed] = 0x0405a2e0;
+            maskObjectSegment[0x224] = 0xde000000;
+            maskObjectSegment[0x225] = 0x0405a2e8;
+            maskObjectSegment[0x230] = 0xde000000;
+            maskObjectSegment[0x231] = 0x0405a2e0;
+            break;
+        case MASK_SCENTS:
+            maskObjectSegment = (u32*)player->maskObjectSegment;
+            maskObjectSegment[0x1c6] = 0xde000000;
+            maskObjectSegment[0x1c7] = 0x0405a2e0;
+            break;
         }
     }
     if (player->actor.id == ACTOR_PLAYER)
@@ -2778,7 +2759,7 @@ s32 Player_OverrideLimbDrawGameplayDefault_Custom(PlayState* play, s32 limbIndex
         switch (limbIndex)
         {
         case PLAYER_LIMB_ROOT:
-            if (player->stateFlags3 & 0x20000000 && comboIsLinkAdult()) /* PLAYER_STATE3_20000000 */
+            if (player->stateFlags3 & 0x20000000 && comboIsLinkAdult())
             {
                 pos->y += 1280.0f;
             }
@@ -2815,10 +2796,6 @@ static void Player_FormChangeResetState(Player* this)
     this->actor.world.pos.y = sTransformPos.y;
     this->actor.world.pos.z = sTransformPos.z;
 
-    /*
-     * KLUDGE: This is a workaround for various glitches related to fast-masking
-     * quickly on a shore. Should be fixed properly someday.
-     */
     this->stateFlags1 ^= 0x08000000;
     this->stateFlags3 &= ~0x8000;
 
@@ -2827,7 +2804,6 @@ static void Player_FormChangeResetState(Player* this)
 
 static void Player_ToggleForm(PlayState* play, Player* link, int form)
 {
-    /* Sanity checks */
     if (link->actor.draw == NULL)
         return;
     if (Player_InCsMode(play))
@@ -2837,13 +2813,11 @@ static void Player_ToggleForm(PlayState* play, Player* link, int form)
     if (link->stateFlags3 & 0x1000)
         return;
 
-    /* Toggle form */
     if (gSave.playerForm == form)
         gSave.playerForm = MM_PLAYER_FORM_HUMAN;
     else
         gSave.playerForm = (u8)form;
 
-    /* Start the process */
     *((u8*)link + 0xae7) = 0;
     link->actor.update = Player_UpdateForm;
     link->actor.draw = NULL;
@@ -2897,10 +2871,9 @@ static s32 Player_ShouldNativeMaskClearCustomMask(s16 itemId)
 s32 Player_IsAdultMaskItem(Player* player, s16 itemId)
 {
     return Player_CustomItemToItemAction(
-        player,
-        itemId,
-        PLAYER_IA_NONE
-    ) == PLAYER_CUSTOM_IA_MASK_ADULT;
+               player,
+               itemId,
+               PLAYER_IA_NONE) == PLAYER_CUSTOM_IA_MASK_ADULT;
 }
 
 void Player_UseItem(PlayState* play, Player* this, s16 itemId)
@@ -2945,19 +2918,20 @@ void Player_UseItem(PlayState* play, Player* this, s16 itemId)
         Player_UseItemImpl(play, this, itemId);
     }
 }
+
 static s32 Player_ExtendedSwordActionToNative(s32 itemAction)
 {
     switch (itemAction)
     {
-        case PLAYER_CUSTOM_IA_SWORD_MASTER:
-            return PLAYER_IA_SWORD_GILDED;
+    case PLAYER_CUSTOM_IA_SWORD_MASTER:
+        return PLAYER_IA_SWORD_GILDED;
 
-        case PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE:
-        case PLAYER_CUSTOM_IA_SWORD_BIGGORON:
-            return PLAYER_IA_SWORD_TWO_HANDED;
+    case PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE:
+    case PLAYER_CUSTOM_IA_SWORD_BIGGORON:
+        return PLAYER_IA_SWORD_TWO_HANDED;
 
-        default:
-            return itemAction;
+    default:
+        return itemAction;
     }
 }
 
@@ -2994,29 +2968,30 @@ void Player_StartCustomSpinAttack(PlayState* play, Player* this, s32 magicCost, 
         }
     }
 }
+
 PATCH_FUNC(0x808332A0, Player_StartCustomSpinAttack);
 
-s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction) {
+s32 Player_CustomActionToModelGroup(Player* player, s32 itemAction)
+{
     switch (itemAction)
     {
     case PLAYER_CUSTOM_IA_HAMMER:
-        return 10; /* uses deku stick model group but does not draw deku stick because of the way the original draw code for it works */
+        return 10;
     case PLAYER_CUSTOM_IA_BOOMERANG:
     case PLAYER_CUSTOM_IA_SLINGSHOT:
     case PLAYER_CUSTOM_IA_MASK_GERUDO:
     case PLAYER_CUSTOM_IA_MASK_SKULL:
     case PLAYER_CUSTOM_IA_MASK_SPOOKY:
     case PLAYER_CUSTOM_IA_MASK_ADULT:
-        return 3;  /* PLAYER_MODELGROUP_DEFAULT */
+        return 3;
     }
 
-    u8* sActionModelGroups = (u8*)0x801BFF3C; /* using original table also means original glitches, if that matters */
+    u8* sActionModelGroups = (u8*)0x801BFF3C;
     s32 modelGroup = sActionModelGroups[Player_ExtendedSwordActionToNative(itemAction)];
     if (modelGroup == 2 && Player_UsesChildHylianShield(player))
         return 1;
-    /* if ((modelGroup == PLAYER_MODELGROUP_ONE_HAND_SWORD) && Player_IsGoronOrDeku(player)) { */
-    if ((modelGroup == 2) && (player->transformation == MM_PLAYER_FORM_GORON || player->transformation == MM_PLAYER_FORM_DEKU)) {
-        /* return PLAYER_MODELGROUP_1;  */
+    if ((modelGroup == 2) && (player->transformation == MM_PLAYER_FORM_GORON || player->transformation == MM_PLAYER_FORM_DEKU))
+    {
         return 1;
     }
     return modelGroup;
@@ -3079,16 +3054,14 @@ PATCH_CALL(0x8084b690, Player_IsGoronOrDekuOrChildHylian);
 PATCH_CALL(0x8084b6c8, Player_IsGoronOrDekuOrChildHylian);
 PATCH_CALL(0x8084b9c8, Player_IsGoronOrDekuOrChildHylian);
 PATCH_CALL(0x80834848, Player_IsGoronOrDekuOrChildHylian);
-/*
-    first two arguments match Player_SetUpperAction which allows it to replace relevant calls in which the third argument would always be this->heldItemAction
-*/
 extern s32 Player_InitItemAction_CustomBoomerang_Upper(Player* player, PlayState* play);
 extern s32 Player_InitItemAction_CustomBoomerang(Player* player, PlayState* play);
 
 extern s32 Player_InitItemAction_CustomSlingshot(PlayState* play, Player* player);
 extern s32 Player_CheckSlingshotReadyOrStart(Player* player, PlayState* play);
 
-void Player_SetCustomItemActionUpperFunc(PlayState* play, Player* player) {
+void Player_SetCustomItemActionUpperFunc(PlayState* play, Player* player)
+{
     PlayerUpperActionFunc* sPlayerUpperActionUpdateFuncs = (PlayerUpperActionFunc*)OverlayAddr(0x8085c9f0);
     void (*Player_SetUpperAction)(PlayState* play, Player* this, PlayerUpperActionFunc upperActionFunc) = OverlayAddr(0x8082f43c);
     s8 upperItemAction = player->heldItemAction;
@@ -3110,12 +3083,12 @@ void Player_SetCustomItemActionUpperFunc(PlayState* play, Player* player) {
     case PLAYER_CUSTOM_IA_MASK_ADULT:
         return;
     }
-    /* If more custom items were to be added that go to this extent I would suggest a sPlayerCustomUpperActionUpdateFuncs array */
     upperItemAction = Player_ExtendedSwordActionToNative(upperItemAction);
     Player_SetUpperAction(play, player, sPlayerUpperActionUpdateFuncs[upperItemAction]);
 }
 
-void Player_RunCustomItemActionInitFunc(PlayState* play, Player* player, s32 itemAction) {
+void Player_RunCustomItemActionInitFunc(PlayState* play, Player* player, s32 itemAction)
+{
     PlayerInitItemActionFunc* sPlayerItemActionInitFuncs = (PlayerInitItemActionFunc*)OverlayAddr(0x8085cb3c);
 
     switch (itemAction)
@@ -3135,7 +3108,6 @@ void Player_RunCustomItemActionInitFunc(PlayState* play, Player* player, s32 ite
     case PLAYER_CUSTOM_IA_MASK_ADULT:
         return;
     }
-    /* If more custom items were to be added that go to this extent I would suggest a sPlayerItemActionInitFuncs array */
     itemAction = Player_ExtendedSwordActionToNative(itemAction);
     sPlayerItemActionInitFuncs[itemAction](play, player);
 }
@@ -3143,7 +3115,7 @@ void Player_RunCustomItemActionInitFunc(PlayState* play, Player* player, s32 ite
 PATCH_CALL(0x80830A14, Player_SetCustomItemActionUpperFunc);
 PATCH_CALL(0x808488B4, Player_SetCustomItemActionUpperFunc);
 PATCH_CALL(0x80848B10, Player_SetCustomItemActionUpperFunc);
-PATCH_CALL(0x8082F914, Player_RunCustomItemActionInitFunc); /* this was not a function but it's ok */
+PATCH_CALL(0x8082F914, Player_RunCustomItemActionInitFunc);
 
 PlayerMeleeWeapon
 Player_CustomMeleeWeaponFromIA(s32 itemAction)
@@ -3160,12 +3132,14 @@ Player_CustomMeleeWeaponFromIA(s32 itemAction)
 
 PATCH_FUNC(0x80124168, Player_CustomMeleeWeaponFromIA);
 
-void Player_GetCustomSwordLength(PlayState* play, Player* player) {
+void Player_GetCustomSwordLength(PlayState* play, Player* player)
+{
     Vec3f* D_801C0994 = (Vec3f*)0x801C0994;
     f32* sMeleeWeaponLengths = (f32*)0x801C0D78;
     PlayerMeleeWeapon (*Player_GetMeleeWeaponHeld)(Player* this) = (void*)0x80124190;
 
-    if (player->itemAction == PLAYER_CUSTOM_IA_HAMMER) {
+    if (player->itemAction == PLAYER_CUSTOM_IA_HAMMER)
+    {
         D_801C0994->x = 2500.0f;
         return;
     }
@@ -3180,39 +3154,34 @@ void Player_GetCustomSwordLength(PlayState* play, Player* player) {
     {
         switch (player->heldItemAction)
         {
-            case PLAYER_CUSTOM_IA_SWORD_MASTER:
-                D_801C0994->x = 4000.0f;
-                return;
+        case PLAYER_CUSTOM_IA_SWORD_MASTER:
+            D_801C0994->x = 4000.0f;
+            return;
 
-            case PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE:
-                D_801C0994->x =
-                    MmSword_GetGiantsKnifeHealth()
-                        ? 5500.0f
-                        : 1500.0f;
-                return;
+        case PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE:
+            D_801C0994->x =
+                MmSword_GetGiantsKnifeHealth() ? 5500.0f : 1500.0f;
+            return;
 
-            case PLAYER_CUSTOM_IA_SWORD_BIGGORON:
-                D_801C0994->x = 5500.0f;
-                return;
+        case PLAYER_CUSTOM_IA_SWORD_BIGGORON:
+            D_801C0994->x = 5500.0f;
+            return;
 
-            default:
-                break;
+        default:
+            break;
         }
     }
 
     D_801C0994->x = sMeleeWeaponLengths[Player_GetMeleeWeaponHeld(player)];
 }
 
-static MeleeWeaponDamageInfo megatonHammerDmgInfo =
-    { DMG_GORON_PUNCH, 2, 4, 2, 4 };
-static MeleeWeaponDamageInfo sMasterSwordDmgInfo =
-    { DMG_SWORD, 4, 8, 2, 4 };
-static MeleeWeaponDamageInfo sBiggoronSwordDmgInfo =
-    { DMG_SWORD, 4, 8, 4, 8 };
-static MeleeWeaponDamageInfo sBrokenGiantsKnifeDmgInfo =
-    { DMG_SWORD, 4, 8, 1, 2 };
+static MeleeWeaponDamageInfo megatonHammerDmgInfo = { DMG_GORON_PUNCH, 2, 4, 2, 4 };
+static MeleeWeaponDamageInfo sMasterSwordDmgInfo = { DMG_SWORD, 4, 8, 2, 4 };
+static MeleeWeaponDamageInfo sBiggoronSwordDmgInfo = { DMG_SWORD, 4, 8, 4, 8 };
+static MeleeWeaponDamageInfo sBrokenGiantsKnifeDmgInfo = { DMG_SWORD, 4, 8, 1, 2 };
 
-void Player_SetMeleeWeaponInfo(Player* this, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
+void Player_SetMeleeWeaponInfo(Player* this, PlayerMeleeWeaponAnimation meleeWeaponAnim)
+{
     MeleeWeaponDamageInfo* D_8085D09C = OverlayAddr(0x8085D09C);
     MeleeWeaponDamageInfo* dmgInfo = &D_8085D09C[0];
     PlayerMeleeWeapon (*Player_GetMeleeWeaponHeld)(Player* this) = (void*)0x80124190;
@@ -3222,23 +3191,26 @@ void Player_SetMeleeWeaponInfo(Player* this, PlayerMeleeWeaponAnimation meleeWea
     s32 human;
     s32 damage;
 
-    if (this->actor.id == ACTOR_EN_TEST3) {
-        /* Was Kafei originally intended to be able to punch? */
+    if (this->actor.id == ACTOR_EN_TEST3)
+    {
         meleeWeaponAnim = PLAYER_MWA_GORON_PUNCH_LEFT;
         this->meleeWeaponAnimation = -1;
         dmgInfo = &D_8085D09C[0];
-    } else if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
+    }
+    else if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER)
+    {
         dmgInfo = &megatonHammerDmgInfo;
-    } else if (this->transformation == MM_PLAYER_FORM_HUMAN) {
-        switch (this->heldItemAction) {
+    }
+    else if (this->transformation == MM_PLAYER_FORM_HUMAN)
+    {
+        switch (this->heldItemAction)
+        {
         case PLAYER_CUSTOM_IA_SWORD_MASTER:
             dmgInfo = &sMasterSwordDmgInfo;
             break;
 
         case PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE:
-            dmgInfo = MmSword_GetGiantsKnifeHealth()
-                ? &sBiggoronSwordDmgInfo
-                : &sBrokenGiantsKnifeDmgInfo;
+            dmgInfo = MmSword_GetGiantsKnifeHealth() ? &sBiggoronSwordDmgInfo : &sBrokenGiantsKnifeDmgInfo;
             break;
 
         case PLAYER_CUSTOM_IA_SWORD_BIGGORON:
@@ -3249,12 +3221,10 @@ void Player_SetMeleeWeaponInfo(Player* this, PlayerMeleeWeaponAnimation meleeWea
             dmgInfo = &D_8085D09C[Player_GetMeleeWeaponHeld(this)];
             break;
         }
-    } else {
-        dmgInfo = &D_8085D09C[
-            this->transformation == MM_PLAYER_FORM_GORON
-                ? PLAYER_MELEEWEAPON_NONE
-                : Player_GetMeleeWeaponHeld(this)
-        ];
+    }
+    else
+    {
+        dmgInfo = &D_8085D09C[this->transformation == MM_PLAYER_FORM_GORON ? PLAYER_MELEEWEAPON_NONE : Player_GetMeleeWeaponHeld(this)];
     }
 
     human = this->transformation == MM_PLAYER_FORM_HUMAN;
@@ -3262,9 +3232,7 @@ void Player_SetMeleeWeaponInfo(Player* this, PlayerMeleeWeaponAnimation meleeWea
         meleeWeaponAnim >= PLAYER_MWA_FLIPSLASH_START &&
         meleeWeaponAnim <= PLAYER_MWA_ZORA_JUMPKICK_FINISH;
 
-    damage = strong
-        ? (human ? dmgInfo->dmgHumanStrong : dmgInfo->dmgTransformedStrong)
-        : (human ? dmgInfo->dmgHumanNormal : dmgInfo->dmgTransformedNormal);
+    damage = strong ? (human ? dmgInfo->dmgHumanStrong : dmgInfo->dmgTransformedStrong) : (human ? dmgInfo->dmgHumanNormal : dmgInfo->dmgTransformedNormal);
 
     func_80833728(this, 0, dmgInfo->dmgFlags, damage);
     func_80833728(this, 1, dmgInfo->dmgFlags, damage);
@@ -3307,7 +3275,7 @@ s32 Player_HandleSwordDurability(PlayState* play, Player* player)
 
 PATCH_FUNC(0x8083FFEC, Player_HandleSwordDurability)
 
-static Gfx sEffectSsStickCullBackDL[] = {gsSPSetGeometryMode(G_CULL_BACK),gsSPEndDisplayList()};
+static Gfx sEffectSsStickCullBackDL[] = { gsSPSetGeometryMode(G_CULL_BACK), gsSPEndDisplayList() };
 
 void EffectSsStick_Draw_Custom(PlayState* play, u32 index, EffectSs* this)
 {
@@ -3322,10 +3290,13 @@ void EffectSsStick_Draw_Custom(PlayState* play, u32 index, EffectSs* this)
 
     Matrix_Translate(this->pos.x, this->pos.y, this->pos.z, MTXMODE_NEW);
 
-    if (drawSwordShard) {
+    if (drawSwordShard)
+    {
         Matrix_Scale(0.01f, 0.01f, 0.01f, MTXMODE_APPLY);
         Matrix_RotateZYX(0, this->regs[1], play->gameplayFrames * 10000, MTXMODE_APPLY);
-    } else {
+    }
+    else
+    {
         Matrix_Scale(0.01f, 0.0025f, 0.01f, MTXMODE_APPLY);
         Matrix_RotateZYX(0, this->regs[1], 0, MTXMODE_APPLY);
     }
@@ -3335,10 +3306,13 @@ void EffectSsStick_Draw_Custom(PlayState* play, u32 index, EffectSs* this)
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     gSPSegment(POLY_OPA_DISP++, 0x0c, sEffectSsStickCullBackDL);
 
-    if (drawSwordShard) {
+    if (drawSwordShard)
+    {
         gSPSegment(POLY_OPA_DISP++, 0x0a, obj);
         gSPDisplayList(POLY_OPA_DISP++, CUSTOM_OBJECT_EQ_BIGGORON_SWORD_BROKEN_1);
-    } else {
+    }
+    else
+    {
         gSPSegment(POLY_OPA_DISP++, 0x06, play->objectCtx.slots[this->regs[0]].segment);
         gSPDisplayList(POLY_OPA_DISP++, gDekuStickDL);
     }
@@ -3349,20 +3323,23 @@ void EffectSsStick_Draw_Custom(PlayState* play, u32 index, EffectSs* this)
 PATCH_FUNC(0x8097B924, EffectSsStick_Draw_Custom);
 
 static AttackAnimInfo sHammerAttackAnimInfo[] = {
-    /* PLAYER_MWA_HAMMER_FORWARD */
     { (PlayerAnimationHeader*)&gPlayerAnim_link_hammer_hit, (PlayerAnimationHeader*)&gPlayerAnim_link_hammer_hit_end, (PlayerAnimationHeader*)&gPlayerAnim_link_hammer_hit_endR, 3, 10 },
-    /* PLAYER_MWA_HAMMER_SIDE */
     { (PlayerAnimationHeader*)&gPlayerAnim_link_hammer_side_hit, (PlayerAnimationHeader*)&gPlayerAnim_link_hammer_side_hit_end, (PlayerAnimationHeader*)&gPlayerAnim_link_hammer_side_hit_endR, 2, 11 },
 };
 
-AttackAnimInfo* Player_GetMeleeAttackAnimInfo(void* a0, Player* player, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
+AttackAnimInfo* Player_GetMeleeAttackAnimInfo(void* a0, Player* player, PlayerMeleeWeaponAnimation meleeWeaponAnim)
+{
     AttackAnimInfo* sMeleeAttackAnimInfo = OverlayAddr(0x8085cd30);
     AttackAnimInfo* ret = &sMeleeAttackAnimInfo[meleeWeaponAnim];
 
-    if (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER && meleeWeaponAnim < PLAYER_MWA_FLIPSLASH_START) {
-        if (meleeWeaponAnim == PLAYER_MWA_RIGHT_SLASH_2H) {
+    if (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER && meleeWeaponAnim < PLAYER_MWA_FLIPSLASH_START)
+    {
+        if (meleeWeaponAnim == PLAYER_MWA_RIGHT_SLASH_2H)
+        {
             ret = &sHammerAttackAnimInfo[1];
-        } else {
+        }
+        else
+        {
             ret = &sHammerAttackAnimInfo[0];
         }
     }
@@ -3374,13 +3351,13 @@ s32 Player_IsHoldingTwoHandedWeapon(Player* player)
 {
     switch (player->heldItemAction)
     {
-        case PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE:
-        case PLAYER_CUSTOM_IA_SWORD_BIGGORON:
-        case PLAYER_CUSTOM_IA_HAMMER:
-            return 1;
+    case PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE:
+    case PLAYER_CUSTOM_IA_SWORD_BIGGORON:
+    case PLAYER_CUSTOM_IA_HAMMER:
+        return 1;
 
-        default:
-            break;
+    default:
+        break;
     }
 
     return player->heldItemAction >= PLAYER_IA_SWORD_TWO_HANDED && player->heldItemAction <= PLAYER_IA_DEKU_STICK;
@@ -3395,20 +3372,24 @@ static s8 sHammerAttackAnims[] = {
     PLAYER_MWA_RIGHT_SLASH_1H,
 };
 
-void Player_SpecialMeleeWeaponAnim(Player* this, void* a1, PlayerMeleeWeaponAnimation* animation) {
+void Player_SpecialMeleeWeaponAnim(Player* this, void* a1, PlayerMeleeWeaponAnimation* animation)
+{
     s32 temp_a1 = this->unk_AE3[this->unk_ADE];
 
-    if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
+    if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER)
+    {
         *animation = sHammerAttackAnims[temp_a1];
-        /* no combo and no lunge */
         this->unk_ADD = 0;
         this->stateFlags2 &= ~(1 << 30);
-    } else if (this->heldItemAction == PLAYER_IA_DEKU_STICK) {
+    }
+    else if (this->heldItemAction == PLAYER_IA_DEKU_STICK)
+    {
         *animation = PLAYER_MWA_FORWARD_SLASH_1H;
     }
 }
 
-s32 Player_CanQuickspin(Player* this) {
+s32 Player_CanQuickspin(Player* this)
+{
     s8 sp3C[4];
     s8* iter;
     s8* iter2;
@@ -3417,29 +3398,34 @@ s32 Player_CanQuickspin(Player* this) {
     s32 i;
 
     if (this->heldItemAction == PLAYER_IA_DEKU_STICK || this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER ||
-    (this->heldItemAction == PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE && MmSword_GetGiantsKnifeHealth() == 0))
+        (this->heldItemAction == PLAYER_CUSTOM_IA_SWORD_GIANTS_KNIFE && MmSword_GetGiantsKnifeHealth() == 0))
     {
         return 0;
     }
 
     iter = &this->unk_ADF[0];
     iter2 = &sp3C[0];
-    for (i = 0; i < 4; i++, iter++, iter2++) {
-        if ((*iter2 = *iter) < 0) {
+    for (i = 0; i < 4; i++, iter++, iter2++)
+    {
+        if ((*iter2 = *iter) < 0)
+        {
             return 0;
         }
         *iter2 *= 2;
     }
 
     temp1 = sp3C[0] - sp3C[1];
-    if (ABS_ALT(temp1) < 10) {
+    if (ABS_ALT(temp1) < 10)
+    {
         return 0;
     }
 
     iter2 = &sp3C[1];
-    for (i = 1; i < 3; i++, iter2++) {
+    for (i = 1; i < 3; i++, iter2++)
+    {
         temp2 = *iter2 - *(iter2 + 1);
-        if ((ABS_ALT(temp2) < 10) || (temp2 * temp1 < 0)) {
+        if ((ABS_ALT(temp2) < 10) || (temp2 * temp1 < 0))
+        {
             return 0;
         }
     }
@@ -3459,16 +3445,20 @@ PlayerMeleeWeapon Player_GetMeleeWeaponHeldForCharge(Player* player)
 
 PATCH_CALL(0x8083A5C4, Player_GetMeleeWeaponHeldForCharge);
 
-Actor* Player_FindGrottoNearPos(PlayState* play, Vec3f* refPos, f32 distanceXZ, f32 distanceY) {
+Actor* Player_FindGrottoNearPos(PlayState* play, Vec3f* refPos, f32 distanceXZ, f32 distanceY)
+{
     Actor* actor = play->actorCtx.actors[ACTORCAT_ITEMACTION].first;
 
-    while (actor != NULL) {
-        if (ACTOR_DOOR_ANA != actor->id) {
+    while (actor != NULL)
+    {
+        if (ACTOR_DOOR_ANA != actor->id)
+        {
             actor = actor->next;
             continue;
         }
 
-        if (VectDist(refPos, &actor->world.pos) <= distanceXZ && fabsf(refPos->y - actor->world.pos.y) <= distanceY) {
+        if (VectDist(refPos, &actor->world.pos) <= distanceXZ && fabsf(refPos->y - actor->world.pos.y) <= distanceY)
+        {
             return actor;
         }
 
@@ -3478,24 +3468,25 @@ Actor* Player_FindGrottoNearPos(PlayState* play, Vec3f* refPos, f32 distanceXZ, 
     return NULL;
 }
 
-/* This function hits all of the active colliders for all of the HakuginPost actors */
-/* This seems bad, but because these actors have a somewhat deranged check to make sure you're in front and facing it, I think this is okay. */
-void Player_HammerBonkHakuginPost(BgHakuginPost* hakuginPost) {
+void Player_HammerBonkHakuginPost(BgHakuginPost* hakuginPost)
+{
     BgHakuginPostUnkStruct* hakuginPostCrazyStruct = actorAddr(ACTOR_BG_HAKUGIN_POST, 0x80a9e028);
     ColliderCylinder* collider;
     s32 i;
 
-    for (i = 0; i < hakuginPostCrazyStruct->count; i++) {
+    for (i = 0; i < hakuginPostCrazyStruct->count; i++)
+    {
         collider = hakuginPostCrazyStruct->unk_0000[i].collider;
 
-        /* Force hit one of the Hakugin_Post colliders belonging to the one you just smacked with a hammer */
-        if (collider != NULL) {
+        if (collider != NULL)
+        {
             collider->base.acFlags |= AC_HIT;
         }
     }
 }
 
-s32 Player_CollideMeleeWithWall(PlayState* play, Player* this) {
+s32 Player_CollideMeleeWithWall(PlayState* play, Player* this)
+{
     void (*func_808400CC)(PlayState* play, Player* this) = OverlayAddr(0x808400CC);
     void (*func_80840094)(PlayState* play, Player* this) = OverlayAddr(0x80840094);
     void (*Player_RequestRumble)(PlayState* play, Player* this, s32 sourceIntensity, s32 decayTimer, s32 decayStep, s32 distSq) = OverlayAddr(0x8082df48);
@@ -3505,13 +3496,17 @@ s32 Player_CollideMeleeWithWall(PlayState* play, Player* this) {
     void (*func_8082DF2C)(PlayState* play) = OverlayAddr(0x8082DF2C);
     void (*Player_RequestQuakeAndRumble)(PlayState* play, Player* this, u16 sfxId) = OverlayAddr(0x8083fe90);
 
-    if (this->meleeWeaponState >= 1) {
+    if (this->meleeWeaponState >= 1)
+    {
         s32 temp_v0_3;
 
-        if (this->meleeWeaponAnimation < PLAYER_MWA_SPIN_ATTACK_1H) {
+        if (this->meleeWeaponAnimation < PLAYER_MWA_SPIN_ATTACK_1H)
+        {
             if (!(this->meleeWeaponQuads[0].base.atFlags & AT_BOUNCED) &&
-                !(this->meleeWeaponQuads[1].base.atFlags & AT_BOUNCED)) {
-                if (this->skelAnime.curFrame >= 2.0f) {
+                !(this->meleeWeaponQuads[1].base.atFlags & AT_BOUNCED))
+            {
+                if (this->skelAnime.curFrame >= 2.0f)
+                {
                     CollisionPoly* poly;
                     s32 bgId;
                     Vec3f spC8;
@@ -3521,14 +3516,17 @@ s32 Player_CollideMeleeWithWall(PlayState* play, Player* this) {
                     Vec3f* temp_a0 = &this->meleeWeaponInfo[0].tip;
                     f32 var_fv1;
 
-                    if (this->linearVelocity >= 0.0f) {
+                    if (this->linearVelocity >= 0.0f)
+                    {
                         var_a1 = &this->meleeWeaponInfo[0].base;
-                        if ((this->transformation == MM_PLAYER_FORM_GORON) || (this->actor.id == ACTOR_EN_TEST3)) {
+                        if ((this->transformation == MM_PLAYER_FORM_GORON) || (this->actor.id == ACTOR_EN_TEST3))
+                        {
                             var_a1 = &this->unk_AF0[1];
                         }
 
                         var_fv1 = Math_Vec3f_DistXYZAndStoreDiff(temp_a0, var_a1, &spB0);
-                        if (var_fv1 != 0.0f) {
+                        if (var_fv1 != 0.0f)
+                        {
                             var_fv1 = (var_fv1 + 10.0f) / var_fv1;
                         }
 
@@ -3536,18 +3534,22 @@ s32 Player_CollideMeleeWithWall(PlayState* play, Player* this) {
                         spC8.y = temp_a0->y + (spB0.y * var_fv1);
                         spC8.z = temp_a0->z + (spB0.z * var_fv1);
                         if (BgCheck_EntityLineTest2(&play->colCtx, &spC8, temp_a0, &pos, &poly, 1, 0, 0, 1, &bgId,
-                                                    &this->actor)) {
+                                                    &this->actor))
+                        {
                             if (!SurfaceType_IsIgnoredByEntities(&play->colCtx, poly, bgId) &&
                                 (SurfaceType_GetFloorType(&play->colCtx, poly, bgId) != FLOOR_TYPE_6) &&
-                                !func_800B90AC(play, &this->actor, poly, bgId, &pos)) {
-                                if (this->transformation == MM_PLAYER_FORM_GORON || this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) { // for hammer
+                                !func_800B90AC(play, &this->actor, poly, bgId, &pos))
+                            {
+                                if (this->transformation == MM_PLAYER_FORM_GORON || this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER)
+                                {
                                     MtxF sp64;
                                     Vec3s actorRot;
                                     DynaPolyActor* temp_v0;
 
                                     func_8082DF2C(play);
                                     Player_RequestQuakeAndRumble(play, this, NA_SE_IT_HAMMER_HIT);
-                                    if (this->transformation == MM_PLAYER_FORM_GORON) {
+                                    if (this->transformation == MM_PLAYER_FORM_GORON)
+                                    {
                                         Actor_SetPlayerImpact(play, PLAYER_IMPACT_GORON_GROUND_POUND, 2, 100.0f,
                                                               &this->actor.world.pos);
                                         func_800C0094(poly, pos.x, pos.y, pos.z, &sp64);
@@ -3556,55 +3558,64 @@ s32 Player_CollideMeleeWithWall(PlayState* play, Player* this) {
                                                     actorRot.x, actorRot.y, actorRot.z, 500);
                                     }
 
-                                    if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
+                                    if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER)
+                                    {
                                         Actor_SetPlayerImpact(play, PLAYER_IMPACT_GORON_GROUND_POUND, 2, 100.0f, &this->actor.world.pos);
                                     }
 
-                                    /*
-                                        This statement despite normally only being accessible checks for the goron form a couple more times.
-                                        Probably intended for before the Hammer was removed. This piece right here does not check the form and
-                                        may also have been intended for the Hammer, but this is not in OoT so I blocked it off anyway.
-                                        When enabled it just makes the hammer hit dynapoly objects multiple times.
-                                    */
-                                    if (bgId != BGCHECK_SCENE) {
+                                    if (bgId != BGCHECK_SCENE)
+                                    {
                                         temp_v0 = DynaPoly_GetActor(&play->colCtx, bgId);
 
-                                        if (this->heldItemAction != PLAYER_CUSTOM_IA_HAMMER) {
+                                        if (this->heldItemAction != PLAYER_CUSTOM_IA_HAMMER)
+                                        {
                                             if (((this->meleeWeaponQuads[0].base.atFlags & AT_HIT) &&
-                                                (&temp_v0->actor == this->meleeWeaponQuads[0].base.at)) ||
+                                                 (&temp_v0->actor == this->meleeWeaponQuads[0].base.at)) ||
                                                 ((this->meleeWeaponQuads[1].base.atFlags & AT_HIT) &&
-                                                (&temp_v0->actor == this->meleeWeaponQuads[1].base.at))) {
+                                                 (&temp_v0->actor == this->meleeWeaponQuads[1].base.at)))
+                                            {
                                                 return 0;
                                             }
-                                        } else if (temp_v0 != NULL) { /* hammer versus dynapoly object */
-                                            if (temp_v0->actor.id == ACTOR_BG_HAKUGIN_POST) { /* inactive snowhead temple ice pillar */
+                                        }
+                                        else if (temp_v0 != NULL)
+                                        {
+                                            if (temp_v0->actor.id == ACTOR_BG_HAKUGIN_POST)
+                                            {
                                                 Player_HammerBonkHakuginPost((BgHakuginPost*)temp_v0);
                                             }
                                         }
                                     }
 
                                     func_808400CC(play, this);
-                                    if (this->transformation != MM_PLAYER_FORM_GORON) {
+                                    if (this->transformation != MM_PLAYER_FORM_GORON)
+                                    {
                                         return 1;
                                     }
                                     return 0;
                                 }
 
-                                if (this->linearVelocity >= 0.0f) {
+                                if (this->linearVelocity >= 0.0f)
+                                {
                                     SurfaceMaterial surfaceMaterial =
                                         SurfaceType_GetMaterial(&play->colCtx, poly, bgId);
 
-                                    if (surfaceMaterial == SURFACE_MATERIAL_WOOD) {
+                                    if (surfaceMaterial == SURFACE_MATERIAL_WOOD)
+                                    {
                                         CollisionCheck_SpawnShieldParticlesWood(play, &pos, &this->actor.projectedPos);
-                                    } else {
+                                    }
+                                    else
+                                    {
                                         pos.x += 8.0f * COLPOLY_GET_NORMAL(poly->normal.x);
                                         pos.y += 8.0f * COLPOLY_GET_NORMAL(poly->normal.y);
                                         pos.x += 8.0f * COLPOLY_GET_NORMAL(poly->normal.z);
                                         CollisionCheck_SpawnShieldParticles(play, &pos);
 
-                                        if (surfaceMaterial == SURFACE_MATERIAL_DIRT_SOFT) {
+                                        if (surfaceMaterial == SURFACE_MATERIAL_DIRT_SOFT)
+                                        {
                                             Player_PlaySfx(this, NA_SE_IT_WALL_HIT_SOFT);
-                                        } else {
+                                        }
+                                        else
+                                        {
                                             Player_PlaySfx(this, NA_SE_IT_WALL_HIT_HARD);
                                         }
                                     }
@@ -3617,7 +3628,9 @@ s32 Player_CollideMeleeWithWall(PlayState* play, Player* this) {
                         }
                     }
                 }
-            } else {
+            }
+            else
+            {
                 func_808400CC(play, this);
                 func_8082DF2C(play);
                 return 1;
@@ -3625,19 +3638,24 @@ s32 Player_CollideMeleeWithWall(PlayState* play, Player* this) {
         }
 
         temp_v0_3 = (this->meleeWeaponQuads[0].base.atFlags & AT_HIT) != 0;
-        if (temp_v0_3 || (this->meleeWeaponQuads[1].base.atFlags & AT_HIT)) {
+        if (temp_v0_3 || (this->meleeWeaponQuads[1].base.atFlags & AT_HIT))
+        {
             if ((this->meleeWeaponAnimation < PLAYER_MWA_SPIN_ATTACK_1H) &&
-                (this->transformation != MM_PLAYER_FORM_GORON)) {
+                (this->transformation != MM_PLAYER_FORM_GORON))
+            {
                 Actor* temp_v1 = this->meleeWeaponQuads[temp_v0_3 ? 0 : 1].base.at;
 
-                if ((temp_v1 != NULL) && (temp_v1->id != ACTOR_EN_KANBAN)) {
+                if ((temp_v1 != NULL) && (temp_v1->id != ACTOR_EN_KANBAN))
+                {
                     func_8082DF2C(play);
                 }
             }
 
-            if (!func_8083FF30(play, this)) {
+            if (!func_8083FF30(play, this))
+            {
                 func_8083FFEC(play, this);
-                if (this->actor.colChkInfo.atHitEffect == 1) {
+                if (this->actor.colChkInfo.atHitEffect == 1)
+                {
                     this->actor.colChkInfo.damage = 8;
                     func_80833B18(play, this, 4, 0.0f, 0.0f, this->actor.shape.rot.y, 20);
                     return 1;
@@ -3649,15 +3667,17 @@ s32 Player_CollideMeleeWithWall(PlayState* play, Player* this) {
     return 0;
 }
 
-void Player_HammerShockwaveCheck(PlayState* play, Player* this) {
-    /* Can be moved */
+void Player_HammerShockwaveCheck(PlayState* play, Player* this)
+{
     void (*Player_RequestQuakeAndRumble)(PlayState* play, Player* this, u16 sfxId) = OverlayAddr(0x8083fe90);
     f32 (*func_80835CD8)(PlayState* play, Player* this, Vec3f* arg2, Vec3f* pos, CollisionPoly** outPoly, s32* outBgId) = OverlayAddr(0x80835CD8);
     s32 (*func_80832754)(Player* this, s32 arg1) = OverlayAddr(0x80832754);
 
-    if (!PlayerAnimation_OnFrame(&this->skelAnime, this->skelAnime.endFrame) && this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) { // OoT floor bonk function, originally somewhere else completely
+    if (!PlayerAnimation_OnFrame(&this->skelAnime, this->skelAnime.endFrame) && this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER)
+    {
         if ((this->meleeWeaponAnimation == PLAYER_MWA_FORWARD_SLASH_2H) ||
-            (this->meleeWeaponAnimation == PLAYER_MWA_JUMPSLASH_FINISH)) {
+            (this->meleeWeaponAnimation == PLAYER_MWA_JUMPSLASH_FINISH))
+        {
             static Vec3f sShockwaveOffset = { 0.0f, 40.0f, 45.0f };
             static Vec3f zeroVec = { 0.0f, 0.0f, 0.0f };
             Actor* nearbyGrotto = NULL;
@@ -3666,43 +3686,42 @@ void Player_HammerShockwaveCheck(PlayState* play, Player* this) {
             CollisionPoly* poly;
             s32 bgId;
 
-            shockwavePos.y = func_80835CD8(play, this, &sShockwaveOffset, &shockwavePos, &poly, &bgId); // OoT uses a wrapper for this function that discards the poly and bgId. MM has this too at 0x80835D2C, but I need those for the goron switch check.
+            shockwavePos.y = func_80835CD8(play, this, &sShockwaveOffset, &shockwavePos, &poly, &bgId);
             sp2C = this->actor.world.pos.y - shockwavePos.y;
 
             Math_ScaledStepToS(&this->actor.focus.rot.x, Math_Atan2S_XY(45.0f, sp2C), 800);
             func_80832754(this, 1);
 
             if ((((this->meleeWeaponAnimation == PLAYER_MWA_FORWARD_SLASH_2H) &&
-                PlayerAnimation_OnFrame(&this->skelAnime, 7.0f)) ||
-                ((this->meleeWeaponAnimation == PLAYER_MWA_JUMPSLASH_FINISH) &&
-                PlayerAnimation_OnFrame(&this->skelAnime, 2.0f))) &&
-                (sp2C > -40.0f) && (sp2C < 40.0f)) {
-                //func_80842A28(play, this);
+                  PlayerAnimation_OnFrame(&this->skelAnime, 7.0f)) ||
+                 ((this->meleeWeaponAnimation == PLAYER_MWA_JUMPSLASH_FINISH) &&
+                  PlayerAnimation_OnFrame(&this->skelAnime, 2.0f))) &&
+                (sp2C > -40.0f) && (sp2C < 40.0f))
+            {
                 Player_RequestQuakeAndRumble(play, this, NA_SE_IT_HAMMER_HIT);
                 EffectSsBlast_SpawnWhiteShockwave(play, &shockwavePos, &zeroVec, &zeroVec);
                 Actor_SetPlayerImpact(play, PLAYER_IMPACT_GORON_GROUND_POUND, 2, 100.0f, &this->actor.world.pos);
-                play->actorCtx.unk2 = 4; /* flips some things over like tektites and snappers */
+                play->actorCtx.unk2 = 4;
 
-                /* Somewhat unusual solution to flipping the goron switch without the pound damage type. */
-                if (bgId != BGCHECK_SCENE) {
+                if (bgId != BGCHECK_SCENE)
+                {
                     DynaPolyActor* dynaActor = DynaPoly_GetActor(&play->colCtx, bgId);
 
-                    if (dynaActor != NULL && dynaActor->actor.id == ACTOR_BG_HAKUGIN_SWITCH) {
-                        /* the cylinder collider for Bg_Hakugin_Switch is at Actor + 0x15C.
-                            the purpose of this is to be able to press it with the hammer without there being a damage type for it. */
+                    if (dynaActor != NULL && dynaActor->actor.id == ACTOR_BG_HAKUGIN_SWITCH)
+                    {
                         ColliderCylinder* hakuginSwitchCyl = (ColliderCylinder*)((void*)dynaActor + 0x15C);
                         hakuginSwitchCyl->base.acFlags |= AC_HIT;
                     }
                 }
 
-                /* Somewhat unusual solution to opening bomb grottos with the Hammer. Alternative option is to make the grotto bomb collider detect goron punch, but ignore it if you are not a human */
-                if ((nearbyGrotto = Player_FindGrottoNearPos(play, &shockwavePos, 50.0f, 10.0f)) != NULL) {
+                if ((nearbyGrotto = Player_FindGrottoNearPos(play, &shockwavePos, 50.0f, 10.0f)) != NULL)
+                {
                     u8 isBombGrotto = ((nearbyGrotto->params & 0x300) == 0x200);
-                    if (isBombGrotto) {
-                        ColliderCylinder* bombCollider = ((void*)nearbyGrotto + 0x144); /* collider is only checked if grotto is closed */
+                    if (isBombGrotto)
+                    {
+                        ColliderCylinder* bombCollider = ((void*)nearbyGrotto + 0x144);
                         bombCollider->base.acFlags |= AC_HIT;
                     }
-
                 }
             }
         }
@@ -3724,8 +3743,8 @@ s32 Player_ShowItem(PlayState* play, Player* this, PlayerAnimationHeader* anim)
 {
     if (this->exchangeItemAction == PLAYER_CUSTOM_IA_BOTTLE_RUTO_LETTER)
     {
-        this->csId = play->playerCsIds[2]; /* PLAYER_CS_ID_ITEM_BOTTLE */
-        PlayerAnimation_PlayOnce(play, &this->skelAnime, (PlayerAnimationHeader*)0x0400d4e0); /* &gPlayerAnim_link_bottle_read */
+        this->csId = play->playerCsIds[2];
+        PlayerAnimation_PlayOnce(play, &this->skelAnime, (PlayerAnimationHeader*)0x0400d4e0);
     }
     else
     {
@@ -3794,7 +3813,7 @@ u8 Player_AfterItemExchange(MessageContext* msgCtx)
         player->actor.flags &= ~ACTOR_FLAG_TALK;
         player->unk_B5E = 10;
 
-        PlayerAnimation_PlayOnce(play, &player->skelAnime, (PlayerAnimationHeader*)0x0400d4e8); /* & gPlayerAnim_link_bottle_read_end */
+        PlayerAnimation_PlayOnce(play, &player->skelAnime, (PlayerAnimationHeader*)0x0400d4e8);
         player->av2.actionVar2 = -1;
 
         return 0;
@@ -3833,7 +3852,7 @@ void Player_ExitTelescopeER(void)
     gIsEntranceOverride = 1;
 }
 
-s32 Player_ShouldSetCsAction(PlayState *play, Actor *csActor, u8 csAction)
+s32 Player_ShouldSetCsAction(PlayState* play, Actor* csActor, u8 csAction)
 {
     s32 shouldSetCsAction = true;
     if (!play || !csActor)
@@ -3850,7 +3869,7 @@ s32 Player_ShouldSetCsAction(PlayState *play, Actor *csActor, u8 csAction)
     return shouldSetCsAction;
 }
 
-s32 Player_SetCsActionHook(PlayState *play, Actor *csActor, u8 csAction)
+s32 Player_SetCsActionHook(PlayState* play, Actor* csActor, u8 csAction)
 {
     if (!Player_ShouldSetCsAction(play, csActor, csAction))
         return false;

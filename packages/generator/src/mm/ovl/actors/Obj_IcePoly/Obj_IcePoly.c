@@ -1,12 +1,8 @@
-/*
-* File: z_obj_ice_poly.c
-* Overlay: ovl_Obj_Ice_Poly
-* Description: Large Block of Meltable Ice
-*/
-
 #include "Obj_IcePoly.h"
 #include "assets/mm/objects/gameplay_keep.h"
 #include "../src/mm/actors.h"
+#include <combo/enemy_native.h>
+#include <combo/enemy_actor_layout.h>
 
 #define FLAGS (ACTOR_FLAG_UPDATE_CULLING_DISABLED)
 
@@ -20,12 +16,14 @@ void func_80931A38(ObjIcePoly* this, PlayState* play);
 void func_80931E58(ObjIcePoly* this, PlayState* play);
 void func_80931EEC(ObjIcePoly* this, PlayState* play);
 
-
-static int ObjIcePoly_IsFrozenRedead(const Actor* actor) {
-    return actor && actor->parent && actor->parent->id == ACTOR_EN_RD && (actor->parent->params & 0xff) == 4;
+static int ObjIcePoly_IsFrozenEnemy(const Actor* actor) {
+    return actor && actor->parent &&
+           ((actor->parent->id == ACTOR_EN_RD && (actor->parent->params & 0xff) == 4) ||
+            comboEnemyFrozenWallmaster(actor->parent));
 }
+
 static void ObjIcePoly_StartMelt(ObjIcePoly* this, PlayState* play) {
-    if (ObjIcePoly_IsFrozenRedead(&this->actor)) {
+    if (ObjIcePoly_IsFrozenEnemy(&this->actor)) {
         this->actor.csId = -1;
         this->unk_14A = 40;
         this->actionFunc = func_80931EEC;
@@ -36,21 +34,22 @@ static void ObjIcePoly_StartMelt(ObjIcePoly* this, PlayState* play) {
         this->actionFunc = func_80931E58;
     }
 }
+
 static int ObjIcePoly_ShouldChain(ObjIcePoly* this, PlayState* play, Actor* target) {
-    return play->sceneId == SCE_MM_TERMINA_FIELD && !ObjIcePoly_IsFrozenRedead(&this->actor) &&
-           !ObjIcePoly_IsFrozenRedead(target);
+    return play->sceneId == SCE_MM_TERMINA_FIELD && !ObjIcePoly_IsFrozenEnemy(&this->actor) &&
+           !ObjIcePoly_IsFrozenEnemy(target);
 }
 
 ActorProfile Obj_Ice_Poly_Profile = {
-    /**/ ACTOR_OBJ_ICE_POLY,
-    /**/ ACTORCAT_ITEMACTION,
-    /**/ FLAGS,
-    /**/ OBJECT_GAMEPLAY_KEEP,
-    /**/ sizeof(ObjIcePoly),
-    /**/ ObjIcePoly_Init,
-    /**/ ObjIcePoly_Destroy,
-    /**/ ObjIcePoly_Update,
-    /**/ ObjIcePoly_Draw,
+    ACTOR_OBJ_ICE_POLY,
+    ACTORCAT_ITEMACTION,
+    FLAGS,
+    OBJECT_GAMEPLAY_KEEP,
+    sizeof(ObjIcePoly),
+    ObjIcePoly_Init,
+    ObjIcePoly_Destroy,
+    ObjIcePoly_Update,
+    ObjIcePoly_Draw,
 };
 
 OVL_INFO_ACTOR(ACTOR_OBJ_ICE_POLY, Obj_Ice_Poly_Profile);
@@ -102,8 +101,8 @@ void ObjIcePoly_Init(Actor* thisx, PlayState* play) {
     ObjIcePoly* this = (ObjIcePoly*)thisx;
     s32 i;
 
-
-    int frozenStart = (u16)thisx->params == 0xff4b;
+    int frozenStart = (u16)thisx->params == 0xff4b || gEnemyFrozenWallmasterIceSpawn ||
+                      comboEnemyFrozenWallmaster(thisx->parent);
     if (frozenStart)
         thisx->csId = -1;
 
@@ -212,17 +211,17 @@ void func_80931A38(ObjIcePoly* this, PlayState* play) {
     }
 
     if (((this->colliders2[0].base.acFlags & AC_HIT) &&
-        ((this->colliders2[0].base.ac == NULL) ||
-        ((this->colliders2[0].base.ac->id != ACTOR_OBJ_AQUA) &&
-        (this->colliders2[0].elem.acHitElem->atDmgInfo.dmgFlags == 0x800)) ||
-        ((this->colliders2[0].base.ac->id == ACTOR_OBJ_AQUA) &&
-        (this->colliders2[0].base.ac->params == 1 /* AQUA_TYPE_HOT */)))) ||
+         ((this->colliders2[0].base.ac == NULL) ||
+          ((this->colliders2[0].base.ac->id != ACTOR_OBJ_AQUA) &&
+           (this->colliders2[0].elem.acHitElem->atDmgInfo.dmgFlags == 0x800)) ||
+          ((this->colliders2[0].base.ac->id == ACTOR_OBJ_AQUA) &&
+           (this->colliders2[0].base.ac->params == 1)))) ||
         ((this->colliders2[1].base.acFlags & AC_HIT) &&
-        ((this->colliders2[1].base.ac == NULL) ||
-        ((this->colliders2[1].base.ac->id != ACTOR_OBJ_AQUA) &&
-        (this->colliders2[1].elem.acHitElem->atDmgInfo.dmgFlags == 0x800)) ||
-        ((this->colliders2[1].base.ac->id == ACTOR_OBJ_AQUA) &&
-        (this->colliders2[1].base.ac->params == 1 /* AQUA_TYPE_HOT */))))) {
+         ((this->colliders2[1].base.ac == NULL) ||
+          ((this->colliders2[1].base.ac->id != ACTOR_OBJ_AQUA) &&
+           (this->colliders2[1].elem.acHitElem->atDmgInfo.dmgFlags == 0x800)) ||
+          ((this->colliders2[1].base.ac->id == ACTOR_OBJ_AQUA) &&
+           (this->colliders2[1].base.ac->params == 1))))) {
         ObjIcePoly_StartMelt(this, play);
         this->actor.focus.rot.y = this->actor.yawTowardsPlayer;
 
@@ -286,7 +285,7 @@ void func_80931A38(ObjIcePoly* this, PlayState* play) {
 }
 
 void func_80931E58(ObjIcePoly* this, PlayState* play) {
-    if (ObjIcePoly_IsFrozenRedead(&this->actor)) {
+    if (ObjIcePoly_IsFrozenEnemy(&this->actor)) {
         ObjIcePoly_StartMelt(this, play);
         return;
     }
@@ -341,7 +340,7 @@ void func_80931EEC(ObjIcePoly* this, PlayState* play) {
         sp94.z = (phi_v0 * (20.0f + (20.0f * temp_f20)) * this->actor.scale.x) + this->actor.world.pos.z;
 
         func_800B0DE0(play, &sp94, &spA0, &spAC, &D_80932378, &D_8093237C,
-                    ((Rand_ZeroOne() * 100.0f) + 350.0f) * this->actor.scale.x, this->actor.scale.x * 20.0f);
+                      ((Rand_ZeroOne() * 100.0f) + 350.0f) * this->actor.scale.x, this->actor.scale.x * 20.0f);
     }
 
     if (this->unk_14A != 0) {
@@ -352,7 +351,7 @@ void func_80931EEC(ObjIcePoly* this, PlayState* play) {
     this->unk_148 -= 6;
 
     if (this->unk_14A == 0) {
-        if (!ObjIcePoly_IsFrozenRedead(&this->actor))
+        if (!ObjIcePoly_IsFrozenEnemy(&this->actor))
             CutsceneManager_Stop(this->actor.csId);
         if (this->switchFlag != OBJICEPOLY_SWITCH_FLAG_NONE) {
             Flags_SetSwitch(play, this->switchFlag);
@@ -377,7 +376,7 @@ void ObjIcePoly_Draw(Actor* thisx, PlayState* play) {
 
     MATRIX_FINALIZE_AND_LOAD(POLY_XLU_DISP++, play->state.gfxCtx);
     gSPSegment(POLY_XLU_DISP++, 0x08,
-            Gfx_TwoTexScroll(play->state.gfxCtx, 0, 0, play->gameplayFrames % 256, 0x20, 0x10, 1, 0,
+               Gfx_TwoTexScroll(play->state.gfxCtx, 0, 0, play->gameplayFrames % 256, 0x20, 0x10, 1, 0,
                                 (play->gameplayFrames * 2) % 256, 0x40, 0x20));
     gDPSetEnvColor(POLY_XLU_DISP++, 0, 50, 100, this->unk_148);
     gSPDisplayList(POLY_XLU_DISP++, gEffIceFragment3DL);

@@ -1,10 +1,39 @@
 #include <combo.h>
+#include <combo/sfx.h>
+
+typedef struct
+{
+    Actor actor;
+    SkelAnime skelAnime;
+    ActorFunc actionFunc;
+    u8 unk_18c, unk_18d, drawDmgEffType;
+    s16 timer;
+} ShuffleDekunuts;
+
+_Static_assert(__builtin_offsetof(ShuffleDekunuts, actionFunc) == 0x188, "Deku Scrub action");
+_Static_assert(__builtin_offsetof(ShuffleDekunuts, timer) == 0x190, "Deku Scrub timer");
+
+static void EnDekunuts_SinkAfterLeave(Actor* actor, PlayState* play)
+{
+    ShuffleDekunuts* scrub = (ShuffleDekunuts*)actor;
+    scrub->timer = MIN(scrub->timer + 1, 20);
+    actor->shape.yOffset -= scrub->timer / actor->scale.y;
+    actor->shape.rot.y += 0x2000;
+    if (actor->shape.yOffset * actor->scale.y < -400.f)
+        Actor_Kill(actor);
+}
 
 static void EnDekunuts_LeaveAfterHit(Actor* actor, PlayState* play)
 {
-    SkelAnime* skel = (SkelAnime*)((u8*)actor + 0x144);
-    if (SkelAnime_Update(skel))
-        Actor_Kill(actor);
+    ShuffleDekunuts* scrub = (ShuffleDekunuts*)actor;
+    if (SkelAnime_Update(&scrub->skelAnime))
+    {
+        Actor_PlaySfx(actor, NA_SE_EN_AKINDONUTS_HIDE);
+        actor->shape.shadowAlpha = 0;
+        scrub->timer = 0;
+        scrub->actionFunc = EnDekunuts_SinkAfterLeave;
+        actor->update = EnDekunuts_SinkAfterLeave;
+    }
 }
 
 static void EnDekunuts_ShuffleHit(Actor* actor, PlayState* play)
@@ -20,13 +49,16 @@ static void EnDekunuts_ShuffleHit(Actor* actor, PlayState* play)
         return;
     collider->base.acFlags &= ~AC_HIT;
     ((void (*)(Actor*))(overlay + (0x808bdcf0 - 0x808bd1e0)))(actor);
-    *(ActorFunc*)((u8*)actor + 0x188) = EnDekunuts_LeaveAfterHit;
+    ((ShuffleDekunuts*)actor)->actionFunc = EnDekunuts_LeaveAfterHit;
+    actor->update = EnDekunuts_LeaveAfterHit;
+    collider->base.ocFlags1 &= ~OC1_ON;
     actor->flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
+    actor->flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED | ACTOR_FLAG_DRAW_CULLING_DISABLED;
 }
 
 static void EnDekunuts_ShuffleAction(Actor* actor, PlayState* play)
 {
-    ActorFunc action = *(ActorFunc*)((u8*)actor + 0x188);
+    ActorFunc action = ((ShuffleDekunuts*)actor)->actionFunc;
 
     if (actor->params != 3)
     {

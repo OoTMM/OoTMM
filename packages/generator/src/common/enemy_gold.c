@@ -7,18 +7,25 @@
 #include <combo/play.h>
 #include <combo/time.h>
 
-typedef struct {
-    u16 scene, reward, id, params, air, operation;
+#define GOLD_CHOICE_AIR    1
+#define GOLD_REWARD_GROUND 2
+
+typedef struct
+{
+    u16 scene, reward, id, params, flags, operation;
 } GoldChoice;
+
 _Static_assert(sizeof(GoldChoice) == 12, "Gold choice ABI");
-typedef struct GoldMonitor {
+
+typedef struct GoldMonitor
+{
     Actor actor;
     struct GoldMonitor* next;
     Actor* target;
     ActorFunc targetInit, targetUpdate, targetFini;
     GoldChoice choice;
     Vec3f drop;
-    u8 defeated, retry, armed, preview;
+    u8 defeated, retry, preview;
 } GoldMonitor;
 #if defined(GAME_OOT)
 _Static_assert(sizeof(GoldMonitor) <= 0x4d0, "Fits retail OoT En_Sw allocation");
@@ -91,6 +98,7 @@ static GoldMonitor* goldOwner(Actor* actor)
 static void goldTargetInit(Actor*, PlayState*);
 static void goldTargetUpdate(Actor*, PlayState*);
 static void goldTargetFini(Actor*, PlayState*);
+
 static void goldTargetBind(GoldMonitor* m)
 {
     Actor* a = m->target;
@@ -135,17 +143,7 @@ static void goldTargetUpdate(Actor* a, PlayState* play)
     a->update = update;
     if (update)
     {
-        int hadHealth = a->colChkInfo.health != 0;
         update(a, play);
-        if (m->armed != 2)
-        {
-            m->drop = a->world.pos;
-
-            if ((m->armed || hadHealth) && !a->colChkInfo.health)
-                m->armed = 2;
-            else if (a->colChkInfo.health)
-                m->armed = 1;
-        }
         if (!a->update)
             m->defeated = 1;
     }
@@ -198,6 +196,12 @@ static void goldUpdate(Actor* actor, PlayState* play)
     if (m->defeated)
     {
         Vec3f pos = m->drop;
+        if (m->choice.flags & GOLD_REWARD_GROUND)
+        {
+            if (!comboEnemyFindFloor(play, actor, &pos, 10.f, 50, 1) &&
+                !comboEnemyFindFloor(play, actor, &pos, 10.f, 150, 1))
+                pos = m->drop;
+        }
         Actor* token = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_SI, pos.x, pos.y, pos.z, 0, 0, 0, actor->params);
         if (token)
         {
@@ -217,8 +221,8 @@ static void goldUpdate(Actor* actor, PlayState* play)
         return;
 #endif
     Vec3f pos = actor->world.pos;
-    if (!comboEnemyFindFloor(play, actor, &pos, m->choice.air ? 40.f : 0.f, 50, 0) &&
-        !comboEnemyFindFloor(play, actor, &pos, m->choice.air ? 40.f : 0.f, 150, 0))
+    if (!comboEnemyFindFloor(play, actor, &pos, (m->choice.flags & GOLD_CHOICE_AIR) ? 40.f : 0.f, 50, 0) &&
+        !comboEnemyFindFloor(play, actor, &pos, (m->choice.flags & GOLD_CHOICE_AIR) ? 40.f : 0.f, 150, 0))
         pos = actor->world.pos;
     int previous = sSpawning;
     sSpawning = 1;
@@ -236,7 +240,6 @@ static void goldUpdate(Actor* actor, PlayState* play)
     sSpawning = previous;
     if (!target && gEnemySoulPreviewSerial != previewSerial)
     {
-
         m->preview = 1;
         return;
     }
@@ -248,7 +251,6 @@ static void goldUpdate(Actor* actor, PlayState* play)
     target->room = actor->room;
     Actor_ChangeCategory(play, &play->actorCtx, target, ACTORCAT_NPC);
     m->target = target;
-    m->drop = pos;
     goldTargetBind(m);
 }
 
