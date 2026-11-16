@@ -807,7 +807,7 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
       const jump = symbol?.length === 1 ? (0x08000000 | ((symbol[0] >>> 2) & 0x03ffffff)) : undefined;
       const edit = hook && patch.patches[hook.name]?.find(row =>
         row.addr <= hook.offset && hook.offset + 4 <= row.addr + row.data.length);
-      if (!traits || (traits & 256) || !hook || !edit ||
+      if ((!traits && operation !== 128) || (traits & 256) || !hook || !edit ||
         bufReadU32BE(edit.data, hook.offset - edit.addr) !== jump)
         throw Error('Missing standalone native miniboss spawn dispatch');
       const [slot, name, object] = standalone;
