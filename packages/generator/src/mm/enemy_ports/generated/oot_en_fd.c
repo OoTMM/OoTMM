@@ -851,19 +851,20 @@ void EnFd_PostLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3s* rot, 
     Collider_UpdateSpheres(limbIndex, &this->collider);
 }
 
+static Color_RGB8 sFlamePrimColors[] = {
+    { 255, 255, 200 },
+    { 200, 200, 200 },
+    { 255, 255, 0 },
+};
+static Color_RGB8 sFlameEnvColors[] = {
+    { 0, 255, 0 },
+    { 0, 0, 255 },
+    { 255, 0, 0 },
+};
+
 void EnFd_Draw(Actor* thisx, PlayState* play) {
     EnFd* this = (EnFd*)thisx;
     s32 clampedHealth;
-    Color_RGBA8 primColors[] = {
-        { 255, 255, 200, 255 },
-        { 200, 200, 200, 255 },
-        { 255, 255, 0, 255 },
-    };
-    Color_RGBA8 envColors[] = {
-        { 0, 255, 0, 255 },
-        { 0, 0, 255, 255 },
-        { 255, 0, 0, 255 },
-    };
     u32 frames;
 
     frames = play->state.frameCount;
@@ -877,10 +878,10 @@ void EnFd_Draw(Actor* thisx, PlayState* play) {
     if (this->actionFunc != EnFd_Reappear && !(this->fadeAlpha < 0.9f)) {
         Gfx_SetupDL_25Xlu(play->state.gfxCtx);
         clampedHealth = CLAMP(thisx->colChkInfo.health - 1, 0, 23) / 8;
-        gDPSetPrimColor(POLY_XLU_DISP++, 0, 128, primColors[clampedHealth].r, primColors[clampedHealth].g,
-                        primColors[clampedHealth].b, (u8)this->fadeAlpha);
-        gDPSetEnvColor(POLY_XLU_DISP++, envColors[clampedHealth].r, envColors[clampedHealth].g,
-                       envColors[clampedHealth].b, (u8)this->fadeAlpha);
+        gDPSetPrimColor(POLY_XLU_DISP++, 0, 128, sFlamePrimColors[clampedHealth].r, sFlamePrimColors[clampedHealth].g,
+                        sFlamePrimColors[clampedHealth].b, (u8)this->fadeAlpha);
+        gDPSetEnvColor(POLY_XLU_DISP++, sFlameEnvColors[clampedHealth].r, sFlameEnvColors[clampedHealth].g,
+                       sFlameEnvColors[clampedHealth].b, (u8)this->fadeAlpha);
         gSPSegment(POLY_XLU_DISP++, 0x8,
                    Gfx_TwoTexScroll(play->state.gfxCtx, G_TX_RENDERTILE, 0, 0, 0x20, 0x40, 1, 0,
                                     0xFF - (u8)(frames * 6), 8, 0x40));
@@ -985,6 +986,7 @@ void EnFd_DrawEffectsFlames(EnFd* this, PlayState* play) {
     s16 i;
     s16 idx;
     s16 materialFlag;
+    s32 color = CLAMP(this->actor.colChkInfo.health - 1, 0, 23) / 8;
     EnFdEffect* eff = this->effects;
 
     OPEN_DISPS(play->state.gfxCtx);
@@ -1000,11 +1002,13 @@ void EnFd_DrawEffectsFlames(EnFd* this, PlayState* play) {
         if (!materialFlag) {
             POLY_XLU_DISP = Gfx_SetupDL(POLY_XLU_DISP, SETUPDL_0);
             gSPDisplayList(POLY_XLU_DISP++, gFlareDancerDL_7928);
-            gDPSetEnvColor(POLY_XLU_DISP++, 255, 10, 0, (u8)((this->fadeAlpha / 255.0f) * 255));
+            gDPSetEnvColor(POLY_XLU_DISP++, sFlameEnvColors[color].r, sFlameEnvColors[color].g,
+                           sFlameEnvColors[color].b, (u8)this->fadeAlpha);
             materialFlag = true;
         }
 
-        gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, 255, 255, 0, (u8)((this->fadeAlpha / 255.0f) * 255));
+        gDPSetPrimColor(POLY_XLU_DISP++, 0, 0, sFlamePrimColors[color].r, sFlamePrimColors[color].g,
+                        sFlamePrimColors[color].b, (u8)this->fadeAlpha);
         gDPPipeSync(POLY_XLU_DISP++);
         Matrix_Translate(eff->pos.x, eff->pos.y, eff->pos.z, MTXMODE_NEW);
         Matrix_ReplaceRotation(&play->billboardMtxF);
