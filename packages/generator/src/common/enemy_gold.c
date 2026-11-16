@@ -99,6 +99,11 @@ static void goldTargetInit(Actor*, PlayState*);
 static void goldTargetUpdate(Actor*, PlayState*);
 static void goldTargetFini(Actor*, PlayState*);
 
+int comboEnemyGoldIsTarget(Actor* actor)
+{
+    return actor->update == goldTargetUpdate;
+}
+
 static void goldTargetBind(GoldMonitor* m)
 {
     Actor* a = m->target;

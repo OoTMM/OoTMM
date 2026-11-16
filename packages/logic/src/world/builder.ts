@@ -136,8 +136,10 @@ class LogicPassWorld {
   private createWorld(): World {
     this.world = this.makeDefaultWorld();
     for (const g of GAMES) {
-      if (this.state.settings.games === 'ootmm' || this.state.settings.games === g)
+      if (this.state.settings.games === 'ootmm' || this.state.settings.games === g) {
+        this.state.monitor.log(`Building ${g === 'oot' ? 'OoT' : 'MM'} world logic`);
         this.world.exprParsers[g].withMacroCache(() => this.loadGame(g));
+      }
     }
 
     if (this.state.settings.games === 'mm') {
@@ -164,7 +166,18 @@ class LogicPassWorld {
     /* Resolve flags */
     const resolvedFlags = resolveWorldFlags(this.state.settings, this.state.random);
 
-    const enemyPlan = makeEnemyPlan(this.state.settings, this.state.random, { mqDungeons: new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Spirit', 'Shadow', 'BotW', 'IC', 'GTG', 'Ganon'].filter(key => resolvedFlags.mqDungeons.has(key))) });
+    let lastMessage = '';
+    const enemyPlan = makeEnemyPlan(this.state.settings, this.state.random, {
+      mqDungeons: new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Spirit', 'Shadow', 'BotW', 'IC', 'GTG', 'Ganon'].filter(key => resolvedFlags.mqDungeons.has(key)))
+    }, (message, completed, total) => {
+      if (message !== lastMessage) {
+        this.state.monitor.log(message);
+        lastMessage = message;
+      }
+      if (completed !== undefined && total !== undefined)
+        this.state.monitor.setProgress(completed, total);
+    });
+    this.state.monitor.log('Applying enemy requirements to logic');
 
     /* Create expr parsers */
     const exprParsers = {} as ExprParsers;

@@ -6,7 +6,7 @@ import type { DecompressedRoms } from '../decompress';
 import type { PatchGroup } from './group';
 
 import { GAMES } from '@ootmm/data';
-import { Monitor } from '@ootmm/core';
+import { Monitor, enemyMemoryBuildBounds } from '@ootmm/core';
 import { isEntranceShuffle } from '@ootmm/logic';
 import { CONFIG } from '../config';
 import { Patcher } from './patcher';
@@ -155,6 +155,13 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
         const vramStart = bufReadU32BE(headerSize, 0x00);
         const vramEnd = bufReadU32BE(headerSize, 0x04);
         const type = bufReadU32BE(header, 0x00);
+        const bound = enemyMemoryBuildBounds[ov];
+        if (bound) {
+          const profile = bufReadU32BE(header, 0x08) - vramStart;
+          if (vramEnd <= vramStart || vramEnd - vramStart > bound.memory || data.length > bound.memory ||
+            profile < 0 || profile % 4 || profile + 32 > data.length || bufReadU32BE(data, profile + 12) > bound.instance)
+            throw Error(`Enemy memory facts need refreshing after overlay growth: ${ov}`);
+        }
         let vromStart: number;
         if (type === 0x04 || type === 0x05) {
           vromStart = archiveEnemyPort(p, game, bufReadU32BE(header, 0x04), data);
@@ -296,7 +303,7 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
     }
 
     patchRandomizer(world, args.logic, args.settings, p);
-    patchEnemies(args.logic.worlds[world].enemyPlan, args.roms, args.addresses, p, args.settings);
+    patchEnemies(args.logic.worlds[world].enemyPlan, args.roms, args.addresses, p, args.settings, args.monitor);
     installCompactPlayerAnimations(p, compactAnimations);
     patches.push(p);
   }

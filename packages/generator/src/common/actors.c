@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/enemy.h>
+#include <combo/enemy_gold.h>
 #include <combo/global.h>
 #include <combo/actors.h>
 
@@ -18,7 +19,8 @@ void Actor_Hyper(Actor* this, PlayState* play, ActorFunc update)
 #endif
         return;
 
-    if (this->category != ACTORCAT_BOSS && this->category != ACTORCAT_ENEMY)
+    if (this->category != ACTORCAT_BOSS && this->category != ACTORCAT_ENEMY &&
+        !(this->category == ACTORCAT_NPC && comboEnemyGoldIsTarget(this)))
         return;
 
     if (this->update == NULL)

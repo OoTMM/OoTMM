@@ -5,7 +5,7 @@ import { verifyOotGameplayMemory } from '../enemies/oot-gameplay-memory';
 import { NATIVE_LILY_FACTS } from '../enemies/extra-port-data';
 import { align, toU32Buffer } from '../util';
 import {
-  OOT_DESERT_LEEVER_SLOTS, ENEMY_GOLD_SOURCES, nativeGoldTarget, verifyMmRoomOverlaps, mmRoomOverlapStates, enemySceneMemoryReports, enemyOotSceneMemoryReports, OOT_GAMEPLAY_POLICY, enemyMemoryBuildBounds, ENEMY_MEMORY_POLICY,
+  OOT_DESERT_LEEVER_SLOTS, ENEMY_GOLD_SOURCES, nativeGoldTarget, verifyMmRoomOverlaps, mmRoomOverlapStates, enemySceneMemoryReports, enemyOotSceneMemoryReports, OOT_GAMEPLAY_POLICY, ENEMY_MEMORY_POLICY,
   enemyWeight, enemyFormWeights, ootNativeEnemyDefinitionKey, ARWING_ENEMIES,
   standaloneEnemyTransfer, ENEMIES, nativeResourceSource, nativeResourceTarget, NATIVE_ARENA_COMBAT_TARGETS,
   nativeFightRestorationSource, nativeFightRestorationRoomAllowed, nativeFightRestorationCombat, scriptedMmSource, scriptedMmTargetAllowed, BIG_OCTO_ARENA_COMBAT_TARGETS,
@@ -13,7 +13,7 @@ import {
   enemyCanRespawn, enemyShuffleExcluded, nativeEnemyOnDemandObjects, mmAquaticTarget, tentacleSlot,
   mmAquaticSlot, enemyIsCarnivorousLily, ootWaterSurfaceSlot, mmWaterSurfaceSlot, tentacleSlotAt, MM_NATIVE_SCENES, isOotEnemizerNativeExtensionChoice, ootNativeChoiceAllows,
   OOT_ENEMIZER, ENEMY_SOURCE_ADDITIONS, ootEnemizerLocationKey,
-  type EnemyDefinition, type EnemyPlan, type Settings, type BigOctoArenaCombatTargetKey, type NativeArenaCombatTargetKey, type NativeMinibossVariantKey, type OotEnemizerReplacement, type OotEnemizerChoice,
+  type EnemyDefinition, type EnemyPlan, type Settings, type Monitor, type BigOctoArenaCombatTargetKey, type NativeArenaCombatTargetKey, type NativeMinibossVariantKey, type OotEnemizerReplacement, type OotEnemizerChoice,
 } from '@ootmm/core';
 import { installDebugEnemyCatalog } from '../enemies/debug-catalog';
 import {
@@ -3015,7 +3015,8 @@ export function installSoulPreviews(roms: DecompressedRoms, patch: Patchfile, se
   patch.meta.enemySoulPreviewSources = [...proofs.values()];
 }
 
-export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses: GameAddresses, patch: Patchfile, settings: Settings) {
+export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses: GameAddresses, patch: Patchfile, settings: Settings, monitor?: Monitor) {
+  monitor?.log('Preparing enemy models and effects');
   verifyMmRoomOverlaps(roms.mm.rom);
   for (const game of ['oot', 'mm'] as const) {
     const arwing = ARWING_ENEMIES[game];
@@ -3048,7 +3049,9 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
   const supplementalEdits = new Set<string>();
   const verifyNativeActors = nativeActorPreservation(plan, roms, addresses, patch, supplementalEdits);
   const foreignTargets = prepareForeignEnemies(plan, roms, addresses, patch);
+  monitor?.log('Preparing enemy soul previews');
   installSoulPreviews(roms, patch, settings);
+  monitor?.log('Writing enemy replacements and rewards');
   const chaoticOotPools = new Map<number, NativePlacementRecord[]>();
   const chaoticMmPools = new Map<number, NativePlacementRecord[]>();
   const chaoticOotChoices = new Map(plan.filter(row => row.ootr && row.chaoticOotChoices)
@@ -3356,6 +3359,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
   installEnemySplits('mm', patch, splitChoices.mm, foreignTargets, settings);
   installEnemyRoomModels(patch, plan, foreignTargets, supplementalRooms, fieldModels);
   installMmObjectBufferBudgets(roms, addresses, patch, plan, supplementalRooms);
+  monitor?.log('Validating enemy placements and memory limits');
   const memoryReports = enemySceneMemoryReports(plan, settings);
   for (const report of memoryReports) {
     if (report.objectSavings) {
@@ -3381,15 +3385,6 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
       if (!model || model.data.length > limit)
         throw Error(`Player model exceeds enemy memory profile: ${name}`);
     }
-  }
-  for (const file of patch.newFiles) {
-    const bound = file.name && enemyMemoryBuildBounds[file.name];
-    if (!bound)
-      continue;
-    const range = file.vram?.oot ?? file.vram?.mm;
-    if (!range || range[1] - range[0] > bound.memory || file.data.length > bound.memory ||
-      bound.profileOffset + 32 > file.data.length || bufReadU32BE(file.data, bound.profileOffset + 12) > bound.instance)
-      throw Error(`Enemy memory facts need refreshing after overlay growth: ${file.name}`);
   }
   const gameplay = settings.enemyShuffleOot && settings.games !== 'mm' ? verifyOotGameplayMemory(roms.oot.rom, addresses, patch) : undefined;
   patch.meta.enemyMemoryBudget = { gameplay, version: 2, policy: ENEMY_MEMORY_POLICY, mm: memoryReports, ootPolicy: OOT_GAMEPLAY_POLICY, oot: enemyOotSceneMemoryReports(plan, settings) };

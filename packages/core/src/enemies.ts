@@ -1294,7 +1294,7 @@ function ootMemoryRooms(scene: number, mq: boolean): number[] {
   });
 }
 
-function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Settings, random: Random, locations: readonly OotEnemizerLocation[], gold: EnemyPlan = []): EnemyPlan {
+function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Settings, random: Random, locations: readonly OotEnemizerLocation[], gold: EnemyPlan = [], onProgress?: (message: string) => void): EnemyPlan {
   const rows: OotEnemizerReplacement[] = [];
   const candidates = ootEnemizerCandidatePools(defs, settings, locations);
   const roomActorCounts: Readonly<Record<string, number>> = roomCounts;
@@ -1418,6 +1418,7 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
           weight: enemyWeight(settings, 'oot', target)
         };
       })), max => random.next() % max, fits, assess, {
+        onProgress,
         positions: units.map(unit => unit.members.flatMap(location => {
           const keys = [[+location.mq, location.scene, location.room, location.setup, location.slot],
           ...(ootPlacementAliases.get(ootEnemizerLocationKey(location)) ?? []).map(parts => [0, ...parts])];
@@ -1578,7 +1579,7 @@ function repairOotGoldMemory(plan: EnemyPlan, pools: ReadonlyMap<string, readonl
 
 function makeOotEnemizerPlan(defs: readonly EnemyDefinition[], settings: Settings, random: Random, options: {
   mqDungeons?: ReadonlySet<string>;
-} = {}, gold: EnemyPlan = []): EnemyPlan {
+} = {}, gold: EnemyPlan = [], onProgress?: EnemyPlanProgress): EnemyPlan {
   if (settings.games === 'mm' || !settings.enemyShuffleOot)
     return [];
   validateOotGoldMemory(gold, settings);
@@ -1592,11 +1593,14 @@ function makeOotEnemizerPlan(defs: readonly EnemyDefinition[], settings: Setting
       scenes.set(location.scene, [location]);
   }
   const result: EnemyPlan = [];
+  let completed = 0;
   for (const [scene, locations] of scenes) {
+    onProgress?.('Placing OoT enemies', completed, scenes.size);
     let accepted = false;
     for (let attempt = 0; attempt < 1; attempt++) {
       try {
-        result.push(...makeOotEnemizerScenePlan(defs, settings, random, locations, gold));
+        result.push(...makeOotEnemizerScenePlan(defs, settings, random, locations, gold,
+          message => onProgress?.(`Placing OoT enemies: ${message}`, completed, scenes.size)));
         accepted = true;
         break;
       }
@@ -1612,6 +1616,7 @@ function makeOotEnemizerPlan(defs: readonly EnemyDefinition[], settings: Setting
     if (!accepted) {
       throw new OotEnemyResourceLimit('OoT scene ' + scene + ': bounded selected-enemy resource search exhausted');
     }
+    onProgress?.('Placing OoT enemies', ++completed, scenes.size);
   }
   return result;
 }
@@ -2477,9 +2482,10 @@ function mmGroupedNativeModelAllows(target: MmEnemy): boolean {
   return target.game !== 'mm' || target.objectId <= 3 || !!nativeEnemyOnDemandObjects('mm', target.actorId);
 }
 
-function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, random: Random, supplemental: EnemyPlan, encounterRequests: readonly (readonly MmEncounterChoice[])[] = []): EnemyPlan {
+function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, random: Random, supplemental: EnemyPlan, encounterRequests: readonly (readonly MmEncounterChoice[])[] = [], onProgress?: EnemyPlanProgress): EnemyPlan {
   if (!settings.enemyShuffleMm || settings.games === 'oot')
     return [];
+  onProgress?.('Preparing MM enemy placements', 0, MM_NATIVE_SCENES.length);
   const scriptedDinolfosScenes = new Set(MM_NATIVE_SCENES
     .filter(scene => scene.maps.some(map => map.actors.some(actor => actor.actorId === 0x19 && (((actor.raw[10] << 8) | actor.raw[11]) & 0x7f) !== 0x7f)))
     .map(scene => scene.scene));
@@ -2624,7 +2630,9 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
   const next = (max: number) => random.next() % max;
   const memoryErrors: MmSceneAllocationError[] = [];
   const problems: MmSceneProblem[] = [], emitScenes: (() => void)[] = [];
+  let completed = 0;
   for (const scene of MM_NATIVE_SCENES) {
+    onProgress?.('Preparing MM enemy placements', completed++, MM_NATIVE_SCENES.length);
     try {
       const sceneIndividual = individual && scene.scene !== 0x2d;
       const allows: MmTargetGroupAllows = (source, target, actor) => {
@@ -2734,7 +2742,8 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
       memoryErrors.push(error);
     }
   }
-  solveMmJointEncounters(problems, encounterRequests, supplemental, next, settings);
+  onProgress?.('Preparing MM enemy placements', completed, MM_NATIVE_SCENES.length);
+  solveMmJointEncounters(problems, encounterRequests, supplemental, next, settings, onProgress);
   for (const emit of emitScenes)
     emit();
   if (memoryErrors.length)
@@ -2742,7 +2751,7 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
   return output;
 }
 
-function solveMmJointEncounters(input: readonly MmSceneProblem[], requests: readonly (readonly MmEncounterChoice[])[], supplemental: EnemyPlan, next: (max: number) => number, options: EnemyMemoryOptions): void {
+function solveMmJointEncounters(input: readonly MmSceneProblem[], requests: readonly (readonly MmEncounterChoice[])[], supplemental: EnemyPlan, next: (max: number) => number, options: EnemyMemoryOptions, onProgress?: EnemyPlanProgress): void {
   const problems = [...input];
   for (const scene of MM_NATIVE_SCENES)
     if (!problems.some(p => p.scene === scene) &&
@@ -2750,7 +2759,10 @@ function solveMmJointEncounters(input: readonly MmSceneProblem[], requests: read
       problems.push({ scene, rows: [], pools: [], individual: true, positions: [], finish: () => { } });
   const uses = problems.map(problem => requests.flatMap((pool, index) => problem.scene.maps.some(map => mmEncounterRoots(problem.scene, map, pool[0].value).length) ? [index] : []));
   const remaining = new Set(problems.map((_, i) => i));
+  let completed = 0;
+  const report = (message: string) => onProgress?.(`Planning MM encounters: ${message}`, completed, problems.length);
   while (remaining.size) {
+    onProgress?.('Planning MM encounters', completed, problems.length);
     const members = new Set([remaining.values().next().value!]), bindings = new Set<number>();
     let changed = true;
     while (changed) {
@@ -2867,6 +2879,7 @@ function solveMmJointEncounters(input: readonly MmSceneProblem[], requests: read
             const localPools = global.map((g, i) => i < count ? pools[g] : pools[g].filter(p => p.value.key === values[g]!.key));
             try {
               local = solveAdaptiveMemory(localPools, next, memory.fits, memory.assess, {
+                onProgress: report,
                 positions: [...problem.positions, ...global.slice(count).map(() => [])],
                 canShare: memory.canShare,
                 canGroup: (a, b) => a < count && b < count && memory.canShare(a, b),
@@ -2920,6 +2933,7 @@ function solveMmJointEncounters(input: readonly MmSceneProblem[], requests: read
     };
     if (contexts.every(c => c.problem.individual)) {
       const solveJoint = () => solveAdaptiveMemory(pools, next, fits, selected => assessScopes(selected).sort((a, b) => b.excess - a.excess)[0] ?? { excess: 0, slots: [] }, {
+        onProgress: report,
         positions, canShare, canGroup: (a, b) => owner[a] >= 0 && owner[a] === owner[b] && canShare(a, b),
         distinctFamilies: (a, b) => owner[a] >= 0 && owner[b] >= 0 && canShare(a, b),
         jointSlots: [...encounterIndices.values()],
@@ -2960,6 +2974,8 @@ function solveMmJointEncounters(input: readonly MmSceneProblem[], requests: read
       const reverse = new Map(indices.map((g, i) => [g, i]));
       problem.finish(indices.map(g => result.selected[g]), result.groups.map(group => group.flatMap(g => reverse.has(g) ? [reverse.get(g)!] : [])).filter(g => g.length), result.protectedSlots.flatMap(g => reverse.has(g) ? [reverse.get(g)!] : []));
     }
+    completed += contexts.length;
+    onProgress?.('Planning MM encounters', completed, problems.length);
   }
 }
 
@@ -3614,9 +3630,12 @@ export function enemyCanRespawn(game: Game, actorId: number, params: number): bo
     (actorId === 0x164 && !!(params & 4));
 }
 
+export type EnemyPlanProgress = (message: string, completed?: number, total?: number) => void;
+
 export function makeEnemyPlan(settings: Settings, random: Random, layouts: {
   mqDungeons?: ReadonlySet<string>;
-} = {}): EnemyPlan {
+} = {}, onProgress?: EnemyPlanProgress): EnemyPlan {
+  const progress = settings.enemyShuffleOot || settings.enemyShuffleMm ? onProgress : undefined;
   const forced = settings.plando.enemyTargets ?? {};
   for (const [game, key] of Object.entries(forced)) {
     const target = enemyDefinition(key!);
@@ -3628,10 +3647,11 @@ export function makeEnemyPlan(settings: Settings, random: Random, layouts: {
   const constraints: SupplementalMemoryConstraint[] = [];
   for (let attempt = 0; attempt < 8; attempt++) {
     try {
+      progress?.(attempt ? `Retrying enemy placement (attempt ${attempt + 1} of 8)` : 'Choosing miniboss and reward enemies');
       const encounterRequests: MmEncounterChoice[][] = [];
       const supplemental = makeSupplementalEnemyPlan(ENEMIES, settings, random, constraints, forced.mm ? undefined : encounterRequests, resolvedMq(settings, layouts.mqDungeons));
-      plan = [...makeOotEnemizerPlan(ENEMIES, settings, random, layouts, supplemental),
-      ...makeMmEnemyPlan(ENEMIES, settings, random, supplemental, encounterRequests), ...supplemental];
+      plan = [...makeOotEnemizerPlan(ENEMIES, settings, random, layouts, supplemental, progress),
+      ...makeMmEnemyPlan(ENEMIES, settings, random, supplemental, encounterRequests, progress), ...supplemental];
       break;
     }
     catch (error) {
@@ -3641,6 +3661,7 @@ export function makeEnemyPlan(settings: Settings, random: Random, layouts: {
         constraints.push(error.acceptsSupplemental);
     }
   }
+  progress?.('Checking enemy memory limits');
   for (const report of enemyOotSceneMemoryReports(plan, settings))
     if (ootResourceExcess(report) > 0)
       throw new OotEnemyResourceLimit(`OoT scene ${report.scene}, rooms ${report.rooms}: gameplay headroom exceeded (bytes ${report.bytes}/${report.budget}, actors ${report.actors}/${report.actorBudget}, models ${report.models}/80, foreign ${report.foreign}/30, collision ${report.dynamicCollisions}/${report.collisionBudget})`);
