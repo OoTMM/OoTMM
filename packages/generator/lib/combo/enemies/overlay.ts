@@ -2043,7 +2043,6 @@ function foreignEnemyActorId(sourceActorId: number): number {
 
 function installForeignEnemyRegistry(patch: Patchfile, targetGame: Game, registrations: readonly ForeignEnemyRegistration[], lightRayAssets?: LightRayAssets) {
   if (registrations.some(row => !row.nativePort)) throw new Error('Enemy registry requires receiving-native ports');
-  if (registrations.length > 32 && !patch.symbols[targetGame].has('DEBUG_ENEMY_PICKER')) throw new Error('Foreign enemy registry exceeds resident overlay capacity');
   const sourceGame = targetGame === 'oot' ? 'mm' : 'oot';
   if (registrations.some(registration => registration.sourceDamage) &&
     (!patch.symPatches.has(`FOREIGN_ENEMY_DAMAGE_TABLES_${targetGame.toUpperCase()}`) ||

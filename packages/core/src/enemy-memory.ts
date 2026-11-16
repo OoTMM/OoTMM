@@ -558,6 +558,7 @@ export type AdaptiveMemoryAssessment = {
 };
 
 export type AdaptiveMemoryLayout<T = unknown> = {
+  onProgress?: (message: string) => void;
   positions: readonly (readonly {
     x: number;
     y: number;
@@ -1120,6 +1121,7 @@ export function solveAdaptiveMemory<T>(pools: readonly (readonly AdaptiveMemoryC
     groups: Group[];
     selected: T[];
   } | undefined => {
+    layout?.onProgress?.('grouping crowded rooms');
     const members = initial.filter(g => affected.has(g.slots[0]));
     const anchors = shuffle(members).filter(g => {
       if (layout?.jointSlots?.includes(g.slots[0]))
@@ -1136,6 +1138,7 @@ export function solveAdaptiveMemory<T>(pools: readonly (readonly AdaptiveMemoryC
         return { groups, selected };
     }
     for (let cap = 4; cap < members.length * 2; cap *= 2) {
+      layout?.onProgress?.(`trying groups of up to ${cap}`);
       let changed = true;
       while (changed) {
         changed = false;
@@ -1196,6 +1199,7 @@ export function solveAdaptiveMemory<T>(pools: readonly (readonly AdaptiveMemoryC
         for (let i = 0; i < selected.length; i++)
           if (!affected.has(i) && selected[i] !== draft[i])
             throw Error('Room-scoped grouping changed an unaffected roll');
+        layout?.onProgress?.('improving enemy variety');
         const varied = diversify(result.groups, [...selected]);
         return finish([...initial.filter(g => !affected.has(g.slots[0])), ...varied.groups], varied.selected);
       }
