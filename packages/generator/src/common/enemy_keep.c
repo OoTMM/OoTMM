@@ -181,6 +181,8 @@ static void* keepLoadEntry(u32 index, u32 depth)
         target += fix[2] - ((KeepEntry*)(sKeepMetadata + 16))[dependency].offset;
         *word = (u32)target & 0x1fffffff;
     }
+    if (row->fixupCount)
+        osWritebackDCache(data, row->size);
     state->data = data;
     state->state = 2;
     return data;
@@ -195,6 +197,24 @@ void* comboEnemyKeepAsset(u16 objectId, u32 offset)
 {
     int index;
     u8* data;
+#if defined(GAME_MM)
+    if (objectId == 0x1001 && gPlay)
+    {
+        u32 nativeOffset = 0;
+        if ((offset >= 0x529d0 && offset < 0x52ad0) || (offset >= 0x52b90 && offset < 0x53b90))
+            nativeOffset = offset + 0x2ab80;
+        else if (offset >= 0x572e0 && offset < 0x592e0)
+            nativeOffset = offset + 0x36900;
+        if (nativeOffset)
+        {
+            ObjectContext* ctx = &gPlay->objectCtx;
+            u32 slot = ctx->mainKeepIndex;
+            if (slot < ctx->num && slot < ARRAY_COUNT(ctx->slots) &&
+                ctx->slots[slot].id == OBJECT_GAMEPLAY_KEEP && ctx->slots[slot].segment)
+                return (u8*)ctx->slots[slot].segment + nativeOffset;
+        }
+    }
+#endif
     if (objectId < 0x1001 || objectId > 0x1003 || !keepLoadMetadata())
         return NULL;
     index = keepFind(objectId, offset);

@@ -1081,7 +1081,11 @@ static void Garo_InitSwords(StandaloneGaroMaster* garo, PlayState* play)
     static ColliderQuadInit sword = {
         { COL_MATERIAL_NONE, AT_ON | AT_TYPE_ENEMY, AC_NONE, OC1_NONE, OC2_NONE, COLSHAPE_QUAD },
         { ELEM_MATERIAL_UNK0,
+#if defined(GAME_OOT)
+          { 0xf7cfffff, HIT_SPECIAL_EFFECT_KNOCKBACK, 16 },
+#else
           { 0xf7cfffff, 9, 16 },
+#endif
           { 0, 0, 0 },
           ATELEM_ON | ATELEM_SFX_NORMAL | ATELEM_UNK7,
           ACELEM_NONE,
