@@ -549,12 +549,14 @@ export type AdaptiveMemoryChoice<T> = {
   family: string;
   variety?: string;
   weight: number;
+  maxGroupSize?: number;
 };
 
 export type AdaptiveMemoryAssessment = {
   excess: number;
   slots: readonly number[];
   roomCount?: number;
+  individual?: boolean;
 };
 
 export type AdaptiveMemoryLayout<T = unknown> = {
@@ -762,13 +764,16 @@ export function solveAdaptiveMemory<T>(pools: readonly (readonly AdaptiveMemoryC
       const second = other.get(first.key);
       if (!second)
         continue;
+      const maxGroupSize = Math.min(first.maxGroupSize ?? Infinity, second.maxGroupSize ?? Infinity);
+      if (a.slots.length + b.slots.length > maxGroupSize)
+        continue;
       const relative = first.weight / second.weight;
       if (first.family !== second.family || ratio !== undefined && Math.abs(relative / ratio - 1) > 1e-9) {
         mergeCache.set(key, []);
         return [];
       }
       ratio = relative;
-      choices.push({ ...first, values: [...first.values, ...second.values] });
+      choices.push({ ...first, maxGroupSize, values: [...first.values, ...second.values] });
     }
     const partial: (T | undefined)[] = Array(pools.length).fill(undefined);
     if (!choices.some(choice => {
@@ -957,6 +962,7 @@ export function solveAdaptiveMemory<T>(pools: readonly (readonly AdaptiveMemoryC
     if (!scopes.length)
       return { groups, selected };
     const picks = singletons.map((pool, i) => pool.find(c => c.values[0][1] === selected[i])!);
+    const groupBySlot = new Map(groups.flatMap(group => group.slots.map(i => [i, group] as const)));
     const species = (choice: Choice) => choice.variety ?? choice.family;
     const score = () => scopes.map(scope => {
       const counts = new Map<string, number>();
@@ -986,8 +992,13 @@ export function solveAdaptiveMemory<T>(pools: readonly (readonly AdaptiveMemoryC
       const old = changes.map(([i]) => [i, picks[i]] as const);
       for (const [i, candidate] of changes)
         picks[i] = candidate;
+      const allowed = changes.every(([i, candidate]) => {
+        const group = groupBySlot.get(i)!, limit = candidate.maxGroupSize ?? Infinity;
+        return group.slots.length <= limit ||
+          group.slots.filter(j => picks[j].key === candidate.key).length <= limit;
+      });
       const proposed = score();
-      const improves = !proposed.some((n, j) => n > previous[j]) && proposed.some((n, j) => n < previous[j]);
+      const improves = allowed && !proposed.some((n, j) => n > previous[j]) && proposed.some((n, j) => n < previous[j]);
       if (improves) {
         for (const [i, candidate] of changes)
           selected[i] = candidate.values[0][1];
@@ -1123,6 +1134,10 @@ export function solveAdaptiveMemory<T>(pools: readonly (readonly AdaptiveMemoryC
   } | undefined => {
     layout?.onProgress?.('grouping crowded rooms');
     const members = initial.filter(g => affected.has(g.slots[0]));
+    if (failures(draft).some(scope => scope.individual && scope.slots.some(i => affected.has(i)))) {
+      const selected = rollGroups(members, 2);
+      if (selected) return { groups: members, selected };
+    }
     const anchors = shuffle(members).filter(g => {
       if (layout?.jointSlots?.includes(g.slots[0]))
         return false;

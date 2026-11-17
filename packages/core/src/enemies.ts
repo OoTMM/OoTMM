@@ -670,27 +670,14 @@ export function enemyEncounterCompatible(sourceGame: Game, sourceActorId: number
   return !required || required === original || arenaCapabilities.has(required);
 }
 
-const NATIVE_RESOURCE_TARGET_FORMS: Readonly<Record<number, readonly number[]>> = {
-  0x00b: [0], 0x00c: [0, 2], 0x012: [0xffff], 0x032: [0xffff],
-  0x06c: [0], 0x109: [0], 0x15b: [0x0101], 0x204: [0],
-};
-
-const OOT_RESOURCE_TARGET_FORMS: Readonly<Record<number, readonly number[]>> = {
-  0x01b: [0, 0xffff], 0x0dd: [0], 0x0ec: [0],
-};
-
 export function nativeResourceTarget(game: Game, actorId: number, params: number): boolean {
-  const forms = game === 'mm' ? NATIVE_RESOURCE_TARGET_FORMS : OOT_RESOURCE_TARGET_FORMS;
-  return forms[actorId]?.includes(params) ?? false;
+  return !enemyNeverShuffled(game, actorId) && !enemyCanRespawn(game, actorId, params) &&
+    !enemyIsPerched(game, actorId, params) && !!nativeEnemyOnDemandObjects(game, actorId, params) &&
+    [...enemyExclusionDefinitions.values()].some(enemy => enemy.game === game && enemy.actorId === actorId && enemy.spawnParams === params &&
+      !enemy.foreignOnly && !enemy.arenaOnly && enemy.targetAllowed !== false);
 }
 
-export function nativeGoldTarget(game: Game, actorId: number, params: number): boolean {
-  if (enemyCanRespawn(game, actorId, params) || enemyIsPerched(game, actorId, params)) return false;
-  if (game === 'oot') return [0x11, 0x12, 0x13, 0x1b, 0x2d, 0x2f, 0x34, 0x38, 0x54, 0x8a, 0x90, 0xdd, 0xec, 0x113, 0x11d, 0x121, 0x1af, 0x1b0, 0x1c0].includes(actorId);
-  if (actorId === 0x15b) return params === 0x0101;
-  if (actorId === 0x1e9) return params === 0x0101;
-  return [0x0b, 0x0c, 0x12, 0x1d, 0x32, 0x3e, 0x47, 0x4c, 0x6c, 0x84, 0x8d, 0x8f, 0xec, 0xed, 0xf1, 0x109, 0x14a, 0x155, 0x164, 0x1ba, 0x204].includes(actorId);
-}
+export const nativeGoldTarget = nativeResourceTarget;
 
 export function nativeResourceSource(game: Game, actorId: number, params: number): boolean {
   if (game === 'oot')
@@ -876,7 +863,7 @@ export function nativeFightRestorationCombat(sourceKey: string, target: {
   killMacro: string;
 }): string | undefined {
   const source = nativeFightRestorationSource(sourceKey);
-  if (!source || source.game !== target.game || !/^[a-z_][a-z_0-9]*$/.test(target.killMacro))
+  if (!source || !/^[a-z_][a-z_0-9]*$/.test(target.killMacro))
     return;
   if (source.game === 'oot' && source.actorId === 0x197) return `(${target.killMacro})`;
   const soul = 'soulMacro' in source ? ` && ${source.soulMacro}` : '';
@@ -934,28 +921,48 @@ const SCRIPTED_MM_ENEMIES: readonly EnemyDefinition[] = SCRIPTED_MM_FAMILIES.map
   };
 });
 
-const FOREIGN_TERMINAL_KEYS = new Set(['oot-stalfos-foreign', 'oot-lizalfos-foreign', 'oot-club-moblin', 'oot-skull-kid']);
-
 export function scriptedMmTargetAllowed(target: EnemyDefinition, crossGame: boolean, source?: EnemyDefinition): boolean {
-  if (target.arenaOnly || target.targetAllowed === false || (target.habitat !== 'ground' && !(source?.actorId === 0x15d && target.habitat === 'air')))
+  if (target.arenaOnly || target.targetAllowed === false || enemyNeverShuffled(target.game, target.actorId) ||
+    enemyCanRespawn(target.game, target.actorId, target.spawnParams) || enemyIsPerched(target.game, target.actorId, target.spawnParams))
     return false;
-  if (source?.actorId === 0x15d) {
-    if (enemyNeverShuffled(target.game, target.actorId)) return false;
-    if (target.game === 'mm')
-      return !target.foreignOnly && (nativeResourceTarget('mm', target.actorId, target.spawnParams) ||
-        (isMinibossEnemy('mm', target.actorId, target.spawnParams) && nativeEnemyVariantTarget('mm', target.actorId, target.spawnParams)));
-    return crossGame && !target.nativeOnly && foreignEnemyRuntimeReady('oot', target.actorId, target.spawnParams) &&
-      !nativeEnemyCounterparts('oot', target.actorId, 'mm', target.spawnParams).length;
-  }
-  if (target.game === 'mm') {
-    const bombchu = target.actorId === 0x16f && target.spawnParams === 0x14;
-    if (source?.actorId === 0x43)
-      return bombchu;
-    return !target.foreignOnly && [0x0b, 0x12, 0x32].includes(target.actorId) && nativeResourceTarget('mm', target.actorId, target.spawnParams);
-  }
-  return crossGame && !target.nativeOnly && FOREIGN_TERMINAL_KEYS.has(target.key) &&
-    foreignEnemyRuntimeReady('oot', target.actorId, target.spawnParams) &&
+  if (target.game === 'mm')
+    return !target.foreignOnly && !!nativeEnemyOnDemandObjects('mm', target.actorId, target.spawnParams);
+  return crossGame && !target.nativeOnly && foreignEnemyRuntimeReady('oot', target.actorId, target.spawnParams) &&
     !nativeEnemyCounterparts('oot', target.actorId, 'mm', target.spawnParams).length;
+}
+
+function dynamicEnemyPool(settings: Settings, host: Game, sourceId: number, scene?: number | readonly number[]): EnemyDefinition[] {
+  const scenes = scene === undefined ? [] : typeof scene === 'number' ? [scene] : scene;
+  const keys = new Set(enemyShuffleRoster(host, settings.crossGameEnemies).flatMap(row => row.legacyKeys));
+  const forms = new Map<string, EnemyDefinition>();
+  for (const key of keys) {
+    const enemy = enemyDefinition(key);
+    if (enemy.arenaOnly || enemy.targetAllowed === false || enemyNeverShuffled(enemy.game, enemy.actorId) ||
+      enemyCanRespawn(enemy.game, enemy.actorId, enemy.spawnParams) || enemyIsPerched(enemy.game, enemy.actorId, enemy.spawnParams) ||
+      enemyShuffleExcluded(settings, enemy, host))
+      continue;
+    if (enemy.game === host) {
+      if (enemy.foreignOnly || !nativeEnemyOnDemandObjects(host, enemy.actorId, enemy.spawnParams)) continue;
+      if (host === 'oot' && !OOT_ENEMIZER.targets.some(row => row.actorId === enemy.actorId && row.params === enemy.spawnParams) &&
+        !OOT_NATIVE_EXTRA_VARIANTS.includes(enemy) && !NATIVE_EXTENSIONS.some(row => row.key === enemy.key) &&
+        enemy.key !== ARWING_ENEMIES.oot.key) continue;
+      if (host === 'mm' && !MM_NATIVE_ROSTER.some(row => row.actorId === enemy.actorId && row.variables.includes(enemy.spawnParams)) &&
+        !MM_NATIVE_EXTRA_VARIANTS.includes(enemy) && !mmNativeCounterpartRoster(ENEMIES).some(row =>
+          row.actorId === enemy.actorId && row.variables.includes(enemy.spawnParams)) && enemy.key !== ARWING_ENEMIES.mm.key) continue;
+      if (!scenes.every(scene => host === 'oot' ? ootNativeVariantFitsScene(enemy, scene) :
+        enemy.actorId !== 0x8d || (nativeSceneKeeps.scenes.mm as Record<number, number>)[scene] === 3)) continue;
+    } else if (!settings.crossGameEnemies || enemy.nativeOnly || !foreignEnemyRuntimeReady(enemy.game, enemy.actorId, enemy.spawnParams) ||
+      nativeEnemyCounterparts(enemy.game, enemy.actorId, host, enemy.spawnParams).length) continue;
+    if (!settings.enemyShuffleIgnoreRestrictions && (enemy.habitat === 'underwater' || enemy.habitat === 'water-surface' ||
+      rootedBioBaba(enemy.game, enemy.actorId, enemy.spawnParams) || enemyIsCarnivorousLily(enemy.game, enemy.actorId) ||
+      mmAquaticTarget(enemy.game, enemy.actorId, enemy.spawnParams))) continue;
+    if (isMinibossEnemy(enemy.game, enemy.actorId, enemy.spawnParams) && !settings.enemyShuffleMinibosses ||
+      !minibossPlacementAllowed(settings, host, sourceId, enemy)) continue;
+    const identity = `${enemy.game}/${enemy.actorId}/${enemy.spawnParams}`;
+    if (!forms.has(identity))
+      forms.set(identity, enemy);
+  }
+  return [...forms.values()];
 }
 
 export function scriptedMmSource(key: string) {
@@ -978,7 +985,7 @@ export const OOT_ENEMIZER = {
 
 type OotEnemizerTarget = typeof ootEnemizerFacts.targets[number];
 
-type OotEnemizerLocation = typeof ootEnemizerFacts.locations[number];
+type OotEnemizerLocation = typeof ootEnemizerFacts.locations[number] & { fieldSlot?: number };
 
 export type OotEnemizerChoice = {
   location: OotEnemizerLocation;
@@ -1240,6 +1247,73 @@ function ootGroupedTargetForm(def: EnemyDefinition, location: OotEnemizerLocatio
   return `${def.game}/${def.actorId}/${overrides[def.name] ?? def.spawnParams}`;
 }
 
+function enemyGroupLimit(target: Pick<EnemyDefinition, 'game' | 'actorId'>): number {
+  return target.game === 'mm' && [0x12c, 0x43, 0x65].includes(target.actorId) ? 4 : Infinity;
+}
+
+function groupedEnemyPool<T>(pool: readonly T[], copies: number, identity: (value: T) => EnemyShuffleIdentity,
+  weight: (target: EnemyShuffleIdentity) => number, next: (max: number) => number): { pool: T[]; miniboss?: T } {
+  const miniboss = (value: T) => {
+    const target = identity(value);
+    return isMinibossEnemy(target.game, target.actorId, target.spawnParams);
+  };
+  const grouped = pool.filter(value => copies <= enemyGroupLimit(identity(value)));
+  const ordinary = grouped.filter(value => !miniboss(value));
+  if (copies <= 1 || !ordinary.length || !pool.some(miniboss)) return { pool: grouped };
+  const eligible = pool.filter(value => miniboss(value) || copies <= enemyGroupLimit(identity(value)));
+  const rolled = pickEnemyWeighted(eligible, enemyFormWeights(eligible, identity, weight), next);
+  return { pool: ordinary, miniboss: miniboss(rolled) ? rolled : undefined };
+}
+
+function minibossAllocation<T>(pools: readonly (readonly T[])[], identify: (value: T) => EnemyShuffleIdentity,
+  copies: readonly number[], fits: (selected: readonly (T | undefined)[]) => boolean, fixed: readonly EnemyShuffleIdentity[] = []) {
+  const family = (target: EnemyShuffleIdentity) => isMinibossEnemy(target.game, target.actorId, target.spawnParams)
+    ? enemyVarietyFamily(target) : undefined;
+  const families = pools.map(pool => new Map(pool.map(value => [value, family(identify(value))])));
+  const fixedFamilies = new Set(fixed.flatMap(target => family(target) ?? []));
+  const ordinary: (boolean | undefined)[] = [];
+  const hasOrdinary = (i: number) => {
+    if (ordinary[i] !== undefined) return ordinary[i];
+    const partial: (T | undefined)[] = Array(pools.length);
+    return ordinary[i] = pools[i].some(value => {
+      if (families[i].get(value)) return false;
+      partial[i] = value;
+      return fits(partial);
+    });
+  };
+  const failures = (selected: readonly (T | undefined)[], stopEarly = false): AdaptiveMemoryAssessment[] => {
+    const used = new Map<string, number[]>();
+    selected.forEach((value, i) => {
+      const key = value === undefined ? undefined : families[i].get(value);
+      if (!key) return;
+      const slots = used.get(key) ?? [];
+      slots.push(i);
+      used.set(key, slots);
+    });
+    const result: AdaptiveMemoryAssessment[] = [];
+    for (const [key, slots] of used) {
+      if (!fixedFamilies.has(key) && slots.reduce((n, i) => n + copies[i], 0) <= 1) continue;
+      const avoidable = slots.some(i => {
+        if (hasOrdinary(i)) return true;
+        if (copies[i] > 1) return false;
+        const proposal = selected.slice();
+        return pools[i].some(value => {
+          const alternative = families[i].get(value);
+          if (!alternative || used.has(alternative) || fixedFamilies.has(alternative)) return false;
+          proposal[i] = value;
+          return fits(proposal);
+        });
+      });
+      if (avoidable) {
+        result.push({ excess: 1, slots, individual: true });
+        if (stopEarly) return result;
+      }
+    }
+    return result;
+  };
+  return { failures, fits: (selected: readonly (T | undefined)[]) => !failures(selected, true).length };
+}
+
 const OOT_DINOLFOS_SOURCE_SLOTS = new Set([
   '0/10/0/0/1', '0/10/0/0/2', '0/11/7/0/0', '0/11/7/0/1',
   '1/6/18/0/0', '1/6/18/0/1', '1/6/26/0/1', '1/11/7/0/0', '1/11/7/0/1', '1/13/9/0/8',
@@ -1259,6 +1333,20 @@ for (const [parts, aliases] of OOT_ENEMIZER.aliases) {
     ootPlacementAliases.set(key, aliases);
 }
 
+export const OOT_FIELD_STALCHILD_SLOTS = Array.from({ length: 2 }, (_, slot) => ({
+  key: `oot-field-stalchild-${slot}`, scene: 0x51, room: 0, slot,
+}));
+
+function ootFieldStalchildLocations(): OotEnemizerLocation[] {
+  return OOT_FIELD_STALCHILD_SLOTS.map(({ scene, room, slot }) => ({
+    mq: false, dungeon: null, scene, room, setup: 0, slot: -1 - slot, fieldSlot: slot,
+    actorId: 0x1b0,
+    choices: OOT_ENEMIZER.targets.flatMap((target, index) => target.requires.every(rule => rule === 'OUTSIDE') ? [index] : []),
+    restrictions: [], meets: ['OUTSIDE'], disallowed: [], explicit: [], varOverrides: {}, logicOverrides: {},
+    switchFlag: -1, skipRaycast: false, broken: false, position: [],
+  }));
+}
+
 export const OOT_DESERT_LEEVER_SLOTS = [
   ...Array.from({ length: 5 }, (_, slot) => ({ key: `oot-colossus-leever-${slot}`, scene: 0x5c, room: 0, slot })),
   ...Array.from({ length: 3 }, (_, slot) => ({ key: `oot-wasteland-leever-${slot}`, scene: 0x5e, room: 1, slot })),
@@ -1274,14 +1362,14 @@ function ootSupplementalMemoryRows(plan: EnemyPlan, options: EnemyMemoryOptions,
   return plan.flatMap(row => {
     if (row.ootr || row.placement) return [];
     const gold = ENEMY_GOLD_SOURCES.find(s => s.key === row.source && s.game === 'oot');
-    const desert = OOT_DESERT_LEEVER_SLOTS.find(s => s.key === row.source);
+    const desert = [...OOT_DESERT_LEEVER_SLOTS, ...OOT_FIELD_STALCHILD_SLOTS].find(s => s.key === row.source);
     const rooms = desert ? [[desert.scene, desert.room] as const] : gold ? [...new Set(gold.slots.map(s => s.room))].map(room => [gold.scene, room] as const) :
       (OOT_ENCOUNTER_MEMORY_ROOMS[row.source] ?? []).filter(([scene, room]) =>
         !isMq(scene) && nativeFightRestorationRoomAllowed(row.source, room, options));
     if (!rooms.length) return [];
     const target = enemyDefinition(row.target);
     return rooms.map(([scene, room]) => ({
-      scene, room,
+      scene, room, source: row.source, target,
       cost: enemyMemoryCost('oot', target.game, target.actorId, target.spawnParams, options)
     }));
   });
@@ -1295,12 +1383,13 @@ function ootMemoryRooms(scene: number, mq: boolean): number[] {
 }
 
 function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Settings, random: Random, locations: readonly OotEnemizerLocation[], gold: EnemyPlan = [], onProgress?: (message: string) => void): EnemyPlan {
-  const rows: OotEnemizerReplacement[] = [];
+  const rows: EnemyPlan = [];
   const candidates = ootEnemizerCandidatePools(defs, settings, locations);
   const roomActorCounts: Readonly<Record<string, number>> = roomCounts;
   const units: {
     members: OotEnemizerLocation[];
     choices: Map<OotEnemizerLocation, OotEnemizerCandidate>[];
+    miniboss?: { location: OotEnemizerLocation; candidate: OotEnemizerCandidate };
   }[] = [];
   const groups = new Map<string, OotEnemizerLocation[]>();
   for (const location of candidates.keys()) {
@@ -1322,9 +1411,13 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
       }
       return [selected];
     });
-    if (!choices.length)
+    const allocation = groupedEnemyPool(choices, members.length, value => value.get(members[0])!.def,
+      target => enemyWeight(settings, 'oot', target), max => random.next() % max);
+    if (!allocation.pool.length)
       throw Error('No shared compatible OoT enemy form for grouped placements');
-    units.push({ members, choices });
+    const location = allocation.miniboss ? members[random.next() % members.length] : undefined;
+    units.push({ members, choices: allocation.pool,
+      miniboss: location ? { location, candidate: allocation.miniboss!.get(location)! } : undefined });
   }
   const actualCost = (location: OotEnemizerLocation, row: OotEnemizerCandidate) => enemyMemoryCost('oot', row.def.game, row.def.actorId, (location.varOverrides as Readonly<Record<string, number>>)[row.def.name] ?? row.def.spawnParams, settings);
   const goldRooms = new Map<number, EnemyMemoryCost[]>();
@@ -1337,7 +1430,7 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
   const rooms = [...new Set([...ootMemoryRooms(locations[0].scene, locations[0].mq),
   ...[...candidates.keys()].map(l => l.room), ...goldRooms.keys()])];
   const roomBase = new Map(rooms.map(room => {
-    const members = [...candidates.keys()].filter(l => l.room === room);
+    const members = [...candidates.keys()].filter(l => l.room === room && l.fieldSlot === undefined);
     return [room, Math.max(0, (roomActorCounts[`${locations[0].scene}/${room}/${locations[0].mq}`] ?? 32) - members.length)];
   }));
   const choiceCosts = new WeakMap<Map<OotEnemizerLocation, OotEnemizerCandidate>, EnemyMemoryCost[]>();
@@ -1365,7 +1458,7 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
     choices: (Map<OotEnemizerLocation, OotEnemizerCandidate> | undefined)[];
     value: ReturnType<typeof evaluateMemory>;
   }>();
-  const assess = (selected: readonly (Map<OotEnemizerLocation, OotEnemizerCandidate> | undefined)[], stopEarly = false, affected?: ReadonlySet<number>, failures?: AdaptiveMemoryAssessment[]): AdaptiveMemoryAssessment => {
+  const assessMemory = (selected: readonly (Map<OotEnemizerLocation, OotEnemizerCandidate> | undefined)[], stopEarly = false, affected?: ReadonlySet<number>, failures?: AdaptiveMemoryAssessment[]): AdaptiveMemoryAssessment => {
     let worst: AdaptiveMemoryAssessment = { excess: 0, slots: [] };
     for (const state of states) {
       const { a, b, slots, roomCount, baseActors, dynamicCollisionAllowance } = state;
@@ -1398,6 +1491,17 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
     }
     return worst;
   };
+  const fixed = [...new Map(ootSupplementalMemoryRows(gold, settings, () => locations[0].mq)
+    .filter(row => row.scene === locations[0].scene).map(row => [row.source, row.target])).values()];
+  const minibosses = minibossAllocation(units.map(unit => unit.choices), value => value.values().next().value!.def,
+    units.map(unit => unit.members.length), selected => assessMemory(selected, true).excess === 0, fixed);
+  const assess: typeof assessMemory = (selected, stopEarly = false, affected, failures) => {
+    const repeated = minibosses.failures(selected, stopEarly);
+    failures?.push(...repeated);
+    if (stopEarly && repeated.length) return repeated[0];
+    const memory = assessMemory(selected, stopEarly, affected, failures);
+    return memory.excess > 0 ? memory : repeated[0] ?? memory;
+  };
   const fits = (selected: readonly (Map<OotEnemizerLocation, OotEnemizerCandidate> | undefined)[]) => assess(selected, true).excess === 0;
   let selectedUnits: Map<OotEnemizerLocation, OotEnemizerCandidate>[];
   const adaptiveGroups = new Map<OotEnemizerLocation, string>();
@@ -1415,11 +1519,12 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
         const target = { ...row.def, spawnParams: (location.varOverrides as Readonly<Record<string, number>>)[row.def.name] ?? row.def.spawnParams };
         return {
           value, key: ootGroupedTargetForm(row.def, location), family: enemyWeightFamily(target),
-          weight: enemyWeight(settings, 'oot', target)
+          weight: enemyWeight(settings, 'oot', target), maxGroupSize: enemyGroupLimit(target)
         };
       })), max => random.next() % max, fits, assess, {
         onProgress,
         positions: units.map(unit => unit.members.flatMap(location => {
+          if (location.fieldSlot !== undefined) return [];
           const keys = [[+location.mq, location.scene, location.room, location.setup, location.slot],
           ...(ootPlacementAliases.get(ootEnemizerLocationKey(location)) ?? []).map(parts => [0, ...parts])];
           return keys.map(parts => {
@@ -1449,6 +1554,23 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
   catch (error) {
     throw new OotEnemyResourceLimit(error instanceof Error ? error.message : String(error));
   }
+  const usedMinibosses = new Set([...fixed, ...selectedUnits.flatMap(unit => [...unit.values()].map(row => row.def))]
+    .filter(target => isMinibossEnemy(target.game, target.actorId, target.spawnParams)).map(enemyVarietyFamily));
+  for (const [i, unit] of units.entries()) {
+    if (!unit.miniboss) continue;
+    const { location, candidate } = unit.miniboss;
+    const family = enemyVarietyFamily(candidate.def);
+    if (usedMinibosses.has(family)) continue;
+    const previous = selectedUnits[i], proposal = new Map(previous);
+    proposal.set(location, candidate);
+    choiceCosts.set(proposal, unit.members.map(member => actualCost(member, proposal.get(member)!)));
+    selectedUnits[i] = proposal;
+    if (assessMemory(selectedUnits, true).excess > 0) selectedUnits[i] = previous;
+    else {
+      usedMinibosses.add(family);
+      protectedPicks.add(location);
+    }
+  }
   const selections = new Map(selectedUnits.flatMap(unit => [...unit]));
   for (const [location, pool] of candidates) {
     const selected = selections.get(location)!;
@@ -1457,11 +1579,14 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
     const eligible = pool.filter(row => {
       if ((adaptiveGroups.has(location) || protectedPicks.has(location)) && ootGroupedTargetForm(row.def, location) !== ootGroupedTargetForm(selected.def, location))
         return false;
+      if (isMinibossEnemy(row.def.game, row.def.actorId, row.def.spawnParams) &&
+        ootGroupedTargetForm(row.def, location) !== ootGroupedTargetForm(selected.def, location))
+        return false;
       const cost = actualCost(location, row);
       return cost.instances <= baseCost.instances && cost.actors <= baseCost.actors &&
-        Object.entries(cost.shared).every(([key, size]) => size <= (baseCost.shared[key] ?? 0));
+        (cost.dynamicCollisions ?? 0) <= (baseCost.dynamicCollisions ?? 0) && Object.entries(cost.shared).every(([key, size]) => size <= (baseCost.shared[key] ?? 0));
     });
-    const source = ootEnemizerSourceKey(defs, location);
+    const source = location.fieldSlot === undefined ? ootEnemizerSourceKey(defs, location) : OOT_FIELD_STALCHILD_SLOTS[location.fieldSlot].key;
     const target = selected.def;
     const descriptor = selected.index >= 0 ? OOT_ENEMIZER.targets[selected.index] : {
       name: target.name,
@@ -1497,7 +1622,8 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
         })
       : undefined;
     rows.push({
-      source, target: targetKey, ootr: choice, chaoticOotChoices,
+      source, target: targetKey, chaoticOotChoices,
+      ...(location.fieldSlot === undefined ? { ootr: choice } : { kind: 'field-spawner', field: choice }),
       ...(adaptiveGroups.has(location) ? { adaptiveGroup: adaptiveGroups.get(location) } : {}),
       ...(protectedPicks.has(location) ? { protectedPick: true } : {})
     });
@@ -1511,6 +1637,7 @@ export function enemyNeverShuffled(game: Game, actorId: number): boolean {
 
 export function enemySourceAllowedBySettings(game: Game, actorId: number, settings: Settings, params?: number): boolean {
   if (enemyNeverShuffled(game, actorId)) return false;
+  if (settings.erWallmasters !== 'none' && actorId === (game === 'oot' ? 0x11 : 0xa)) return false;
   if (settings.enemyShufflePreserveMinibosses && isMinibossEnemy(game, actorId, params)) return false;
 
   return game === 'oot' ? actorId !== 0x11d || settings.shufflePotsOot === 'none' :
@@ -1533,14 +1660,20 @@ function validateOotGoldMemory(plan: EnemyPlan, settings: Settings): void {
 
 function repairOotGoldMemory(plan: EnemyPlan, pools: ReadonlyMap<string, readonly EnemyDefinition[]>, settings: Settings, random: Random): void {
   const gold = plan.filter(row => pools.has(row.source));
-  const failedScenes = new Set(enemyOotSceneMemoryReports(gold, settings).filter(r => ootResourceExcess(r) > 0).map(r => r.scene));
-  for (const scene of failedScenes) {
+  const scenes = new Set(ootSupplementalMemoryRows(gold, settings, () => false).map(row => row.scene));
+  for (const scene of scenes) {
     const rows = gold.filter(row => ENEMY_GOLD_SOURCES.some(s => s.game === 'oot' && s.scene === scene && s.key === row.source) ||
       OOT_DESERT_LEEVER_SLOTS.some(s => s.scene === scene && s.key === row.source));
+    const fixedRows = ootSupplementalMemoryRows(plan.filter(row => !rows.includes(row)), settings, () => false)
+      .filter(row => row.scene === scene);
+    const fixedSources = new Set(fixedRows.map(row => row.source));
+    const fixedPlan = plan.filter(row => fixedSources.has(row.source));
     const assess = (selected: readonly (EnemyDefinition | undefined)[]): AdaptiveMemoryAssessment => {
-      const selectedPlan = rows.flatMap((row, i) => selected[i] ? [{ ...row, target: selected[i]!.key }] : []);
+      const selectedPlan = [...fixedPlan,
+        ...rows.flatMap((row, i) => selected[i] ? [{ ...row, target: selected[i]!.key }] : [])];
       let worst: AdaptiveMemoryAssessment = { excess: 0, slots: [] };
       for (const report of enemyOotSceneMemoryReports(selectedPlan, settings)) {
+        if (report.scene !== scene) continue;
         const excess = ootResourceExcess(report);
         if (excess > worst.excess) worst = {
           excess, roomCount: report.rooms.length,
@@ -1564,11 +1697,19 @@ function repairOotGoldMemory(plan: EnemyPlan, pools: ReadonlyMap<string, readonl
       const result = assess(expand(selected));
       return { ...result, slots: units.flatMap((unit, i) => unit.some(slot => result.slots.includes(slot)) ? [i] : []) };
     };
-    const result = solveAdaptiveMemory(units.map(unit => pools.get(rows[unit[0]].source)!.map(value => ({
+    const candidates = units.map(unit => pools.get(rows[unit[0]].source)!.filter(value => unit.length <= enemyGroupLimit(value)));
+    const fixed = [...new Map(fixedRows.map(row => [row.source, row.target])).values()];
+    const minibosses = minibossAllocation(candidates, value => value, units.map(unit => unit.length),
+      selected => assessUnits(selected).excess === 0, fixed);
+    const initial = units.map((unit, i) => candidates[i].find(value => value.key === rows[unit[0]].target)!);
+    if (initial.every(Boolean) && minibosses.fits(initial) && assessUnits(initial).excess === 0) continue;
+    const assessAllocation = (selected: readonly (EnemyDefinition | undefined)[]) =>
+      minibosses.failures(selected, true)[0] ?? assessUnits(selected);
+    const result = solveAdaptiveMemory(candidates.map(pool => pool.map(value => ({
       value,
-      key: value.key, family: enemyWeightFamily(value), weight: enemyWeight(settings, 'oot', value)
+      key: value.key, family: enemyWeightFamily(value), weight: enemyWeight(settings, 'oot', value), maxGroupSize: enemyGroupLimit(value)
     }))),
-      max => random.next() % max, selected => assessUnits(selected).excess === 0, assessUnits,
+      max => random.next() % max, selected => minibosses.fits(selected) && assessUnits(selected).excess === 0, assessAllocation,
       { positions: units.map(() => []), canGroup: () => false });
     const selected = expand(result.selected);
     rows.forEach((row, i) => {
@@ -1584,7 +1725,7 @@ function makeOotEnemizerPlan(defs: readonly EnemyDefinition[], settings: Setting
     return [];
   validateOotGoldMemory(gold, settings);
   const scenes = new Map<number, OotEnemizerLocation[]>();
-  for (const location of ootEnemizerLocations(resolvedMq(settings, options.mqDungeons))) {
+  for (const location of [...ootEnemizerLocations(resolvedMq(settings, options.mqDungeons)), ...ootFieldStalchildLocations()]) {
     if (!enemySourceAllowedBySettings('oot', location.actorId, settings)) continue;
     const rows = scenes.get(location.scene);
     if (rows)
@@ -1740,22 +1881,28 @@ function solveMmScene(scene: MmScene, nativeRoster: readonly MmEnemy[], targetRo
       entries.push({ actor, maps: [mi], source });
     groups.set(source.objectId, entries);
   }));
-  const rows = [...groups.values()].map(entries => ({ entries }));
-  const pools = rows.map(row => {
+  const rows = [...groups.values()].map(entries => ({ entries, copies: entries.length }));
+  const allocations = rows.map(row => {
     const sources = [...new Set(row.entries.map(e => e.source))];
-    return targetRoster.filter(target => !target.forbidTo.includes(scene.scene) && groupAllows(sources, target) &&
+    const compatible = targetRoster.filter(target => !target.forbidTo.includes(scene.scene) && groupAllows(sources, target) &&
       row.entries.every(({ actor, source }) => groupAllows([source], target, actor) &&
         (ignoreRestrictions || mmPlacementTypeAllows(source, target))));
+    const allocation = groupedEnemyPool(compatible, row.entries.length,
+      target => ({ ...target, spawnParams: target.variables[0] }), weight, next);
+    if (!allocation.pool.length && compatible.length)
+      throw new EnemyMemoryAllocationError(`MM grouped scene ${scene.scene}: no target supports a group of ${row.entries.length}`);
+    return allocation;
   });
-  const active = rows.filter((_, i) => pools[i].length);
-  const eligible = pools.filter(pool => pool.length);
+  const active = rows.flatMap((row, i) => allocations[i].pool.length
+    ? [{ ...row, miniboss: allocations[i].miniboss, minibossSlot: allocations[i].miniboss ? next(row.entries.length) : -1 }] : []);
+  const eligible = allocations.filter(allocation => allocation.pool.length).map(allocation => allocation.pool);
   const memory = mmSceneMemory(scene, active, eligible, supplemental, undefined, memoryOptions);
   const weighted = eligible.map(pool => {
     const weights = enemyFormWeights(pool, target => ({ ...target, spawnParams: target.variables[0] }), weight);
     return pool.map((value, i) => ({ value, weight: weights[i], cost: enemyMemoryTotal([enemyMemoryCost('mm', value.game, value.actorId, value.variables[0], memoryOptions)]).bytes }));
   });
   const emit = (selected: MmEnemy[]) => {
-    return active.flatMap((row, i) => row.entries.map(({ actor, maps }) => {
+    const changes: MmActorChange[] = active.flatMap((row, i) => row.entries.map(({ actor, maps }) => {
       const mapIndex = maps[0], map = scene.maps[mapIndex], target = selected[i];
       return {
         mapIndex, room: map.room, setup: map.setup, slot: actor.slot, actorOffset: actor.offset,
@@ -1763,6 +1910,35 @@ function solveMmScene(scene: MmScene, nativeRoster: readonly MmEnemy[], targetRo
         targetActorId: target.actorId, targetParams: target.variables[0]
       };
     }));
+    if (!active.some(row => row.miniboss)) return changes;
+    const slots = active.flatMap(row => row.entries.map(entry => ({ entries: [entry] })));
+    const targets = active.flatMap((row, i) => row.entries.map(() => selected[i]));
+    const splitMemory = mmSceneMemory(scene, slots, undefined, supplemental, undefined, memoryOptions);
+    const used = new Set([
+      ...targets.map(target => ({ ...target, spawnParams: target.variables[0] })),
+      ...supplemental.filter(row => scene.maps.some(map => mmEncounterRoots(scene, map, row).length)).map(row => enemyDefinition(row.target)),
+    ].filter(target => isMinibossEnemy(target.game, target.actorId, target.spawnParams)).map(enemyVarietyFamily));
+    let start = 0;
+    for (const row of active) {
+      const index = start + row.minibossSlot;
+      start += row.entries.length;
+      const target = row.miniboss;
+      if (!target) continue;
+      const family = enemyVarietyFamily({ ...target, spawnParams: target.variables[0] });
+      if (used.has(family)) continue;
+      const previous = targets[index];
+      targets[index] = target;
+      if (!splitMemory.fits(targets)) {
+        targets[index] = previous;
+        continue;
+      }
+      used.add(family);
+      Object.assign(changes[index], {
+        targetKey: target.key, targetGame: target.game, targetActorId: target.actorId,
+        targetParams: target.variables[0], protectedPick: true,
+      });
+    }
+    return changes;
   };
   if (queue) {
     const result: MmActorChange[] = [];
@@ -1771,7 +1947,7 @@ function solveMmScene(scene: MmScene, nativeRoster: readonly MmEnemy[], targetRo
         const target = { ...value, spawnParams: value.variables[0] };
         return {
           value, key: `${target.game}/${target.actorId}/${target.spawnParams}`, family: enemyWeightFamily(target),
-          variety: enemyVarietyFamily(target), weight: weight(target)
+          variety: enemyVarietyFamily(target), weight: weight(target), maxGroupSize: enemyGroupLimit(target)
         };
       })), individual: false, positions: active.map(() => []), finish: selected => {
         result.push(...emit(selected));
@@ -1805,6 +1981,7 @@ type MmMemorySlot = {
     maps: readonly number[];
   }[];
   encounter?: EnemyReplacement;
+  copies?: number;
 };
 
 type MmEncounterChoice = {
@@ -1852,10 +2029,13 @@ export type EnemySceneMemoryReport = {
   actors: number;
   objectSavings: number;
   scenarios: number;
+  resourceExcess: number;
 };
 
 function mmSupplementalCosts(scene: MmScene, plan: EnemyPlan, memoryOptions: EnemyMemoryOptions = {}): EnemyMemoryCost[][] {
   return scene.maps.map(map => plan.flatMap(row => {
+    if (row.placement?.scene === scene.scene && map.actors.some(actor => actor.offset === row.placement!.actorOffset))
+      return splitMemoryCosts('mm', row, memoryOptions);
     if (!row.kind || row.kind === 'variant')
       return [];
     const target = enemyDefinition(row.target), guards = row.kind === 'keeta-guards';
@@ -2061,7 +2241,7 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
     let pressure: AdaptiveMemoryAssessment = { excess: 0, slots: [] };
     let worst: EnemySceneMemoryReport = {
       scene: scene.scene, budget: extra + objectSavings, bytes: 0,
-      headroom: p.gameplayReserve, fragmentation: p.fragmentationReserve, actors: 0, objectSavings, scenarios: states.length
+      headroom: p.gameplayReserve, fragmentation: p.fragmentationReserve, actors: 0, objectSavings, scenarios: states.length, resourceExcess: 0
     };
     const dynamicCosts = dynamicSupplemental ? mmSupplementalCosts(scene, dynamicSupplemental(), memoryOptions) : undefined;
     const scope = preparedScope ?? scopeFor(affected);
@@ -2116,6 +2296,7 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
         if (excess > pressure.excess) pressure = scope;
       }
     }
+    worst.resourceExcess = pressure.excess;
     return { report: worst, pressure };
   };
 
@@ -2144,22 +2325,31 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
     fitCache.set(cacheKey, value);
     return lastResult = value;
   };
+  const minibosses = pools && minibossAllocation(pools, target => ({ ...target, spawnParams: target.variables[0] }),
+    slots.map(slot => slot.encounter
+      ? slot.encounter.kind === 'gold' ? 1 : Math.max(1, new Set(scene.maps.flatMap(map =>
+        mmEncounterRoots(scene, map, slot.encounter!).map(actor => actor.raw.join(',')))).size) * (slot.encounter.kind === 'keeta-guards' ? 2 : 1)
+      : slot.copies ?? 1),
+    selected => fits(selected),
+    supplemental.filter(row => !variableSources.has(row.source) &&
+      scene.maps.some(map => mmEncounterRoots(scene, map, row).length)).map(row => enemyDefinition(row.target)));
+  const uniqueMinibosses = (selected: readonly (MmEnemy | undefined)[]) => !minibosses || minibosses.fits(selected);
   return {
     measure: (selected: readonly (MmEnemy | undefined)[]) => evaluate(selected).report,
-    assess: (selected: readonly MmEnemy[]) => evaluate(selected).pressure,
+    assess: (selected: readonly MmEnemy[]) => minibosses?.failures(selected, true)[0] ?? evaluate(selected).pressure,
     assessScopes: (selected: readonly MmEnemy[]) => {
-      const failures: AdaptiveMemoryAssessment[] = [];
+      const failures: AdaptiveMemoryAssessment[] = minibosses?.failures(selected) ?? [];
       evaluate(selected, false, undefined, failures);
       return failures;
     },
-    fitsScopes: (selected: readonly (MmEnemy | undefined)[], affected: ReadonlySet<number>) => fits(selected, affected),
+    fitsScopes: (selected: readonly (MmEnemy | undefined)[], affected: ReadonlySet<number>) => uniqueMinibosses(selected) && fits(selected, affected),
     prepareFitsScopes: (affected: ReadonlySet<number>) => {
       const snapshot = new Set(affected), scope = scopeFor(snapshot);
-      return (selected: readonly (MmEnemy | undefined)[]) => fits(selected, snapshot, scope);
+      return (selected: readonly (MmEnemy | undefined)[]) => uniqueMinibosses(selected) && fits(selected, snapshot, scope);
     },
     varietyScopes: states.filter(state => state.maps.length === 1).map(state => state.indices),
     canShare: (first: number, second: number) => coexisting[first].has(second),
-    fits: (selected: readonly (MmEnemy | undefined)[]) => fits(selected),
+    fits: (selected: readonly (MmEnemy | undefined)[]) => uniqueMinibosses(selected) && fits(selected),
   };
 }
 
@@ -2221,7 +2411,7 @@ function solveMmSceneIndividual(scene: MmScene, nativeRoster: readonly MmEnemy[]
     const target = { ...value, spawnParams: value.variables[0] };
     return {
       value, key: `${target.game}/${target.actorId}/${target.spawnParams}`, family: enemyWeightFamily(target),
-      variety: enemyVarietyFamily(target), weight: weight(target, rows[i].source)
+      variety: enemyVarietyFamily(target), weight: weight(target, rows[i].source), maxGroupSize: enemyGroupLimit(target)
     };
   }));
   const positions = rows.map(row => row.entries.map(({ actor }) => {
@@ -2276,7 +2466,26 @@ function solveMmSceneIndividual(scene: MmScene, nativeRoster: readonly MmEnemy[]
   }
 }
 
+function splitMemoryCosts(host: Game, row: EnemyReplacement, options: EnemyMemoryOptions): EnemyMemoryCost[] {
+  const children = row.splitChildren ?? [];
+  const costs = children.map(key => {
+    const target = enemyDefinition(key);
+    return enemyMemoryCost(host, target.game, target.actorId, target.spawnParams,
+      { ...options, enemyShuffleBari: false, enemyShuffleEeno: false });
+  });
+  if (!row.splitPool?.length) return costs;
+  const total = enemyMemoryTotal(costs);
+  return [{
+    shared: Object.fromEntries(total.shared),
+    instances: 3 * Math.max(0, ...costs.map(cost => cost.instances)),
+    actors: 3 * Math.max(0, ...costs.map(cost => cost.actors)),
+    dynamicCollisions: 3 * Math.max(0, ...costs.map(cost => cost.dynamicCollisions ?? 0)),
+  }];
+}
+
 export function enemyOotSceneMemoryReports(plan: EnemyPlan, options: EnemyMemoryOptions = {}) {
+  if (plan.some(row => row.splitChildren))
+    options = { ...options, enemyShuffleBari: false, enemyShuffleEeno: false };
   const layouts = new Map(plan.flatMap(row => row.ootr ? [[row.ootr.location.scene, row.ootr.location.mq] as const] : []));
   for (const row of plan) {
     const gold = ENEMY_GOLD_SOURCES.find(s => s.game === 'oot' && s.key === row.source);
@@ -2297,6 +2506,7 @@ export function enemyOotSceneMemoryReports(plan: EnemyPlan, options: EnemyMemory
     for (const row of rows) {
       const choice = row.ootr!, target = enemyDefinition(row.target), room = choice.location.room;
       add(room, enemyMemoryCost('oot', target.game, target.actorId, choice.targetParams, options));
+      splitMemoryCosts('oot', row, options).forEach(cost => add(room, cost));
       count.set(room, (count.get(room) ?? 0) + 1);
     }
     for (const row of extra) if (row.scene === scene) add(row.room, row.cost);
@@ -2318,6 +2528,8 @@ export function enemyOotSceneMemoryReports(plan: EnemyPlan, options: EnemyMemory
 }
 
 export function enemySceneMemoryReports(plan: EnemyPlan, memoryOptions: EnemyMemoryOptions = {}): EnemySceneMemoryReport[] {
+  if (plan.some(row => row.splitChildren))
+    memoryOptions = { ...memoryOptions, enemyShuffleBari: false, enemyShuffleEeno: false };
   const reports: EnemySceneMemoryReport[] = [];
   for (const scene of MM_NATIVE_SCENES) {
     const placements = plan.filter(row => row.placement?.scene === scene.scene);
@@ -2363,7 +2575,8 @@ const MM_NATIVE_SOURCE_EXTENSIONS: readonly MmEnemy[] = [
   { key: 'Takkuri', actorId: 0x291, objectId: 0x22, type: 2, variables: [0] },
 ].map(row => ({ ...row, game: 'mm', stationary: false, forbidFrom: [], forbidTo: [] }));
 
-const MM_NATIVE_ROSTER: readonly MmEnemy[] = [...mmFacts.roster as MmEnemy[], ...MM_NATIVE_SOURCE_EXTENSIONS];
+const MM_NATIVE_ROSTER: readonly MmEnemy[] = [...mmFacts.roster as MmEnemy[], ...MM_NATIVE_SOURCE_EXTENSIONS]
+  .map(row => row.actorId === 0xec ? { ...row, variables: row.variables.filter(params => !(params & 0x80)) } : row);
 
 export const MM_NATIVE_SCENES: readonly MmScene[] = mmFacts.scenes;
 
@@ -2634,12 +2847,10 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
   for (const scene of MM_NATIVE_SCENES) {
     onProgress?.('Preparing MM enemy placements', completed++, MM_NATIVE_SCENES.length);
     try {
-      const sceneIndividual = individual && scene.scene !== 0x2d;
+      const sceneIndividual = individual;
       const allows: MmTargetGroupAllows = (source, target, actor) => {
         if (settings.enemyShuffleMinibosses && !source.every(row => minibossPlacementAllowed(settings, 'mm', actor?.actorId ?? row.actorId, target)))
           return false;
-        if (source.some(row => row.actorId === 0x13a) && (target.game !== 'mm' ||
-          !nativeGoldTarget('mm', target.actorId, target.variables[0]) || !nativeEnemyOnDemandObjects('mm', target.actorId) || target.variables.length !== 1)) return false;
         if (target.game === 'mm' && target.actorId === 0x19 && scriptedDinolfosScenes.has(scene.scene))
           return false;
         const sourceSlots = () => actor ? [actor] : scene.maps.flatMap(map => map.actors).filter(slot => mmSourceFormAllowed(slot) && source.some(row => row.actorId === slot.actorId));
@@ -2704,6 +2915,8 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
                   !(nativeEnemyOnDemandObjects('mm', candidate.actorId) && candidate.actorId === change.targetActorId)))
                 return [];
               return candidate.variables.flatMap(params => {
+                if (isMinibossEnemy(candidate.game, candidate.actorId, params) &&
+                  (candidate.actorId !== change.targetActorId || params !== change.targetParams)) return [];
                 const baseCost = enemyMemoryCost('mm', change.targetGame, change.targetActorId, change.targetParams, settings);
                 const alternateCost = enemyMemoryCost('mm', 'mm', candidate.actorId, params, settings);
                 if (alternateCost.instances > baseCost.instances || alternateCost.actors > baseCost.actors ||
@@ -2806,7 +3019,7 @@ function solveMmJointEncounters(input: readonly MmSceneProblem[], requests: read
         };
         return {
           value, key: `${target.game}/${target.actorId}/${target.spawnParams}`, family: enemyWeightFamily(target),
-          variety: enemyVarietyFamily(target), weight: choice.familyWeight
+          variety: enemyVarietyFamily(target), weight: choice.familyWeight, maxGroupSize: enemyGroupLimit(target)
         };
       }));
     }
@@ -3018,11 +3231,9 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
   };
   const enabled = (game: Game) => (settings.games === 'ootmm' || settings.games === game) &&
     (game === 'oot' ? settings.enemyShuffleOot : settings.enemyShuffleMm);
-  const strict = settings.enemyShuffleMinibosses && settings.enemyShuffleMinibossType !== 'anywhere';
   if (enabled('oot') && !settings.enemyShufflePreserveMinibosses) {
-    const targets = NATIVE_ARENA_COMBAT_TARGETS.map(row => defs.find(def => def.key === row.key)!)
-      .filter(enemy => !strict || isMinibossEnemy(enemy.game, enemy.actorId, enemy.spawnParams));
     for (const source of ['oot-dead-hand-encounter', 'oot-dark-link-encounter']) {
+      const targets = dynamicEnemyPool(settings, 'oot', source === 'oot-dead-hand-encounter' ? 0xa4 : 0x33, OOT_ENCOUNTER_MEMORY_ROOMS[source].map(([scene]) => scene));
       const target = choose(targets, 'oot');
       if (target)
         output.push({ source, target: target.key, kind: 'arena' });
@@ -3032,51 +3243,45 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
     if (!enabled(source.game) || !enemySourceAllowedBySettings(source.game, source.actorId, settings, source.params[0]) ||
       !nativeFightRestorationRoomAllowed(source.key, 2, settings))
       continue;
-    const targets = defs.filter(enemy => enemy.game === source.game && !enemy.foreignOnly &&
-      !enemy.arenaOnly && enemy.targetAllowed !== false && enemy.habitat === 'ground' &&
-      nativeResourceTarget(enemy.game, enemy.actorId, enemy.spawnParams) &&
-      (!strict || minibossPlacementAllowed(settings, source.game, source.actorId, enemy)));
+    const scenes = source.game === 'oot' ? OOT_ENCOUNTER_MEMORY_ROOMS[source.key].map(([scene]) => scene) :
+      MM_NATIVE_SCENES.filter(scene => scene.maps.some(map => map.actors.some(actor =>
+        actor.actorId === source.actorId && (source.params as readonly number[]).includes(actor.params)))).map(scene => scene.scene);
+    let targets = dynamicEnemyPool(settings, source.game, source.actorId, scenes);
+    if (source.game === 'oot' && OOT_ENCOUNTER_MEMORY_ROOMS[source.key]
+      .filter(([, room]) => nativeFightRestorationRoomAllowed(source.key, room, settings)).length > 1) {
+      const ordinary = targets.filter(target => !isMinibossEnemy(target.game, target.actorId, target.spawnParams) &&
+        enemyWeight(settings, 'oot', target) > 0);
+      if (ordinary.length) targets = ordinary;
+    }
     const target = choose(targets, source.game, source.game === 'mm' ? { source: source.key, kind: 'restore' } : undefined);
     if (target)
       output.push({ source: source.key, target: target.key, kind: 'restore' });
   }
   if (enabled('mm')) {
-    const guard = choose(defs.filter(enemy => enemy.game === 'mm' && !enemy.foreignOnly &&
-      [0x0b, 0x12, 0x32].includes(enemy.actorId) && nativeResourceTarget('mm', enemy.actorId, enemy.spawnParams)), 'mm', { source: KEETA_GUARDS.key, kind: 'keeta-guards' });
+    const guard = choose(dynamicEnemyPool(settings, 'mm', 0xed, 0x0c), 'mm',
+      { source: KEETA_GUARDS.key, kind: 'keeta-guards' });
     if (guard)
       output.push({ source: KEETA_GUARDS.key, target: guard.key, kind: 'keeta-guards' });
     for (const source of SCRIPTED_MM_ENEMIES) {
       if (!enemySourceAllowedBySettings(source.game, source.actorId, settings, source.spawnParams) ||
         source.actorId === 0x28f || (source.actorId === 0x15d && !settings.enemyShuffleMinibosses))
         continue;
-      const targets = defs.filter(enemy => scriptedMmTargetAllowed(enemy, settings.crossGameEnemies, source) &&
-        (!strict || isMinibossEnemy(enemy.game, enemy.actorId, enemy.spawnParams)));
+      const scenes = MM_NATIVE_SCENES.filter(scene => scene.maps.some(map => map.actors.some(actor =>
+        actor.actorId === source.actorId && enemyScriptedRootOffsets[scene.scene]?.includes(actor.offset)))).map(scene => scene.scene);
+      const targets = dynamicEnemyPool(settings, 'mm', source.actorId, scenes).filter(enemy => scriptedMmTargetAllowed(enemy, settings.crossGameEnemies, source));
       const target = choose(targets, source.game, { source: source.key, kind: 'scripted' });
       if (target)
         output.push({ source: source.key, target: target.key, kind: 'scripted' });
     }
   }
   if (settings.enemyShuffleGoldSkulltulas) {
-    const rosterKeys = new Map<Game, Set<string>>();
     for (const source of ENEMY_GOLD_SOURCES) {
       if (!enabled(source.game)) continue;
       if (source.game === 'oot' && source.scene <= 9) {
         const dungeon = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Spirit', 'Shadow', 'BotW', 'IC'][source.scene];
         if (source.slots[0].mq !== mq.has(DUNGEONS[dungeon])) continue;
       }
-      let keys = rosterKeys.get(source.game);
-      if (!keys) {
-        keys = new Set(enemyShuffleRoster(source.game, false).flatMap(row => row.legacyKeys));
-        rosterKeys.set(source.game, keys);
-      }
-      const candidates = defs.filter(enemy => enemy.game === source.game && !enemy.foreignOnly &&
-        enemy.targetAllowed !== false && !enemy.arenaOnly && nativeGoldTarget(enemy.game, enemy.actorId, enemy.spawnParams) &&
-        (enemy.habitat === 'ground' || enemy.habitat === 'air') &&
-        !!nativeEnemyOnDemandObjects(enemy.game, enemy.actorId) &&
-        (source.game !== 'mm' || enemy.actorId !== 0x8d ||
-          (nativeSceneKeeps.scenes.mm as Record<string, number>)[String(source.scene)] === 3) &&
-        (source.game !== 'oot' || ootNativeVariantFitsScene(enemy, source.scene)) &&
-        keys.has(enemy.key));
+      const candidates = dynamicEnemyPool(settings, source.game, source.game === 'oot' ? 0x95 : 0x39, source.scene);
       const target = choose(candidates, source.game, source.game === 'mm' ? { source: source.key, kind: 'gold' } : undefined);
       if (target) {
         output.push({ source: source.key, target: target.key, kind: 'gold' });
@@ -3088,14 +3293,7 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
   if (enabled('oot')) {
     for (const scene of [0x5c, 0x5e]) {
       const slots = OOT_DESERT_LEEVER_SLOTS.filter(slot => slot.scene === scene);
-      const targets = defs.filter(enemy => enemy.game === 'oot' && !enemy.foreignOnly &&
-        !enemy.arenaOnly && enemy.targetAllowed !== false &&
-        (enemy.habitat === 'ground' || enemy.habitat === 'air') &&
-        (nativeGoldTarget('oot', enemy.actorId, enemy.spawnParams) || enemy.actorId === 0x1c) &&
-        ootNativeVariantFitsScene(enemy, scene) && nativeEnemyOnDemandObjects('oot', enemy.actorId, enemy.spawnParams) &&
-        !enemyShuffleExcluded(settings, enemy, 'oot') &&
-        (!isMinibossEnemy('oot', enemy.actorId, enemy.spawnParams) || settings.enemyShuffleMinibosses &&
-          minibossPlacementAllowed(settings, 'oot', 0x1c, enemy)));
+      const targets = dynamicEnemyPool(settings, 'oot', 0x1c, scene);
       const grouped = settings.enemyShuffleOotMode === 'grouped' ? choose(targets, 'oot') : undefined;
       for (const slot of slots) {
         const target = grouped ?? choose(targets, 'oot');
@@ -3246,6 +3444,11 @@ const ENEMY_DEFINITIONS: readonly EnemyDefinition[] = [
 ];
 
 export const ENEMIES: readonly EnemyDefinition[] = [
+  ...OOT_FIELD_STALCHILD_SLOTS.map(slot => ({
+    key: slot.key, name: 'Hyrule Field Stalchild', game: 'oot' as const, actorId: 0x1b0, objectId: 0x184,
+    habitat: 'ground' as const, sourceAllowed: false, targetAllowed: false, params: [], spawnParams: 0,
+    killMacro: 'can_kill_stalchildren', logicMacros: [], soulMacro: 'soul_stalchild'
+  })),
   ...OOT_DESERT_LEEVER_SLOTS.map(slot => ({
     key: slot.key, name: 'Leever spawner', game: 'oot' as const, actorId: 0xa7, objectId: 1,
     habitat: 'ground' as const, sourceAllowed: false, targetAllowed: false,
@@ -3269,16 +3472,13 @@ type EnemyReplacement = {
   target: string;
   adaptiveGroup?: string;
   protectedPick?: boolean;
-  kind?: 'arena' | 'variant' | 'restore' | 'scripted' | 'keeta-guards' | 'gold' | 'desert-spawner';
+  kind?: 'arena' | 'variant' | 'restore' | 'scripted' | 'keeta-guards' | 'gold' | 'desert-spawner' | 'field-spawner';
   placement?: MmPlacement;
   ootr?: OotEnemizerChoice;
+  field?: OotEnemizerChoice;
   chaoticOotChoices?: readonly OotEnemizerChoice[];
   chaoticMmChoices?: readonly MmPlacement[];
-  splitChildren?: readonly [
-    string,
-    string,
-    string
-  ];
+  splitChildren?: readonly string[];
   splitPool?: readonly string[];
 };
 
@@ -3610,7 +3810,7 @@ export function enemyShuffleExcluded(settings: Settings, target: EnemyShuffleIde
 }
 
 export function enemyDefinition(key: string): EnemyDefinition {
-  const def = ENEMIES.find(e => e.key === key);
+  const def = enemyExclusionDefinitions.get(key);
   if (!def)
     throw new Error(`Unknown enemy: ${key}`);
   return def;
@@ -3632,6 +3832,80 @@ export function enemyCanRespawn(game: Game, actorId: number, params: number): bo
 
 export type EnemyPlanProgress = (message: string, completed?: number, total?: number) => void;
 
+function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): void {
+  const roots = plan.filter(row => {
+    if (!row.ootr && !row.placement) return false;
+    const target = enemyDefinition(row.target);
+    return settings.enemyShuffleBari && target.game === 'oot' && target.actorId === 0x63 ||
+      settings.enemyShuffleEeno && target.game === 'mm' && target.actorId === 0x1e6 &&
+        ((row.ootr?.targetParams ?? row.placement?.targetParams ?? target.spawnParams) & 255) === 1;
+  });
+  if (!roots.length) return;
+  roots.forEach(row => { row.splitChildren = []; });
+  const groups = new Map<string, EnemyReplacement[]>();
+  for (const row of roots) {
+    const host = row.ootr ? 'oot' : 'mm';
+    const scene = row.ootr?.location.scene ?? row.placement!.scene;
+    const key = host + '/' + scene;
+    const rows = groups.get(key) ?? [];
+    rows.push(row);
+    groups.set(key, rows);
+  }
+  for (const [key, rows] of groups) {
+    const [hostText, sceneText] = key.split('/');
+    const host = hostText as Game, scene = +sceneText;
+    const scenePlan = plan.filter(row => host === 'oot'
+      ? row.ootr?.location.scene === scene || (!row.ootr && !row.placement)
+      : row.placement?.scene === scene || !!row.kind);
+    const pools = rows.flatMap(row => {
+      const sourceId = row.ootr?.location.actorId ?? row.placement!.sourceActorId;
+      let candidates: EnemyDefinition[];
+      if (row.ootr) {
+        candidates = (ootEnemizerCandidatePools(ENEMIES, settings, [row.ootr.location]).get(row.ootr.location) ?? [])
+          .map(candidate => candidate.def);
+      } else {
+        candidates = dynamicEnemyPool(settings, host, sourceId, scene);
+      }
+      const unique = [...new Map(candidates.map(enemy => [`${enemy.game}/${enemy.actorId}/${enemy.spawnParams}`, enemy])).values()];
+      const choices = unique.map(value => ({
+        value, key: `${value.game}/${value.actorId}/${value.spawnParams}`, family: enemyWeightFamily(value),
+        weight: enemyWeight(settings, host, value), maxGroupSize: enemyGroupLimit(value),
+      }));
+      return [choices, choices, choices];
+    });
+    const apply = (selected: readonly (EnemyDefinition | undefined)[]) => rows.forEach((row, i) => {
+      row.splitChildren = selected.slice(i * 3, i * 3 + 3).flatMap(enemy => enemy ? [enemy.key] : []);
+      if (settings.logic === 'none' && settings.enemyShuffleSpawnMode === 'chaotic')
+        row.splitPool = row.splitChildren.some(key => {
+          const enemy = enemyDefinition(key);
+          return isMinibossEnemy(enemy.game, enemy.actorId, enemy.spawnParams);
+        }) ? undefined : [...new Set(row.splitChildren)];
+    });
+    const assess = (selected: readonly (EnemyDefinition | undefined)[]): AdaptiveMemoryAssessment => {
+      apply(selected);
+      const excess = host === 'oot'
+        ? Math.max(0, ...enemyOotSceneMemoryReports(scenePlan, settings).filter(report => report.scene === scene).map(ootResourceExcess))
+        : Math.max(0, ...enemySceneMemoryReports(scenePlan, settings).filter(report => report.scene === scene)
+          .map(report => report.resourceExcess));
+      return { excess, slots: pools.map((_, i) => i) };
+    };
+    const mmScene = host === 'mm' ? MM_NATIVE_SCENES.find(s => s.scene === scene) : undefined;
+    const fixed = host === 'oot'
+      ? [...scenePlan.flatMap(row => row.ootr ? [enemyDefinition(row.target)] : []),
+        ...new Map(ootSupplementalMemoryRows(scenePlan, settings, () => !!rows[0].ootr?.location.mq)
+          .filter(row => row.scene === scene).map(row => [row.source, row.target])).values()]
+      : scenePlan.filter(row => row.placement?.scene === scene ||
+        mmScene?.maps.some(map => mmEncounterRoots(mmScene, map, row).length))
+        .map(row => enemyDefinition(row.target));
+    const minibosses = minibossAllocation(pools.map(pool => pool.map(c => c.value)), value => value,
+      pools.map(() => 1), selected => assess(selected).excess <= 0, fixed);
+    const selected = solveAdaptiveMemory<EnemyDefinition>(pools, max => random.next() % max,
+      selected => minibosses.fits(selected) && assess(selected).excess <= 0,
+      selected => minibosses.failures(selected, true)[0] ?? assess(selected)).selected;
+    apply(selected);
+  }
+}
+
 export function makeEnemyPlan(settings: Settings, random: Random, layouts: {
   mqDungeons?: ReadonlySet<string>;
 } = {}, onProgress?: EnemyPlanProgress): EnemyPlan {
@@ -3652,6 +3926,7 @@ export function makeEnemyPlan(settings: Settings, random: Random, layouts: {
       const supplemental = makeSupplementalEnemyPlan(ENEMIES, settings, random, constraints, forced.mm ? undefined : encounterRequests, resolvedMq(settings, layouts.mqDungeons));
       plan = [...makeOotEnemizerPlan(ENEMIES, settings, random, layouts, supplemental, progress),
       ...makeMmEnemyPlan(ENEMIES, settings, random, supplemental, encounterRequests, progress), ...supplemental];
+      planEnemySplits(plan, settings, random);
       break;
     }
     catch (error) {
@@ -3666,78 +3941,9 @@ export function makeEnemyPlan(settings: Settings, random: Random, layouts: {
     if (ootResourceExcess(report) > 0)
       throw new OotEnemyResourceLimit(`OoT scene ${report.scene}, rooms ${report.rooms}: gameplay headroom exceeded (bytes ${report.bytes}/${report.budget}, actors ${report.actors}/${report.actorBudget}, models ${report.models}/80, foreign ${report.foreign}/30, collision ${report.dynamicCollisions}/${report.collisionBudget})`);
   for (const report of enemySceneMemoryReports(plan, settings))
-    if (report.bytes > report.budget || report.actors > ENEMY_MEMORY_POLICY.actorLimit)
+    if (report.resourceExcess > 0)
       throw Error(`MM scene ${report.scene}: scripted and placed enemies exceed the memory budget`);
-  if (!settings.enemyShuffleBari && !settings.enemyShuffleEeno)
-    return plan;
-  const safeSplitChild = (target: EnemyDefinition) => !enemyCanRespawn(target.game, target.actorId, target.spawnParams) && (target.game === 'oot' ?
-    (target.actorId === 0x13 && [0, 2, 4].includes(target.spawnParams)) ||
-    (target.actorId === 0x34 && [0, 0xffff].includes(target.spawnParams)) ||
-    (target.actorId === 0x12 && target.spawnParams === 0) ||
-    (target.actorId === 0x1b && [0, 0xffff].includes(target.spawnParams)) ||
-    (target.actorId === 0x1af && target.spawnParams === 0xff00) :
-    (target.actorId === 0x0c && [0, 2, 4].includes(target.spawnParams)) ||
-    (target.actorId === 0x109 && target.spawnParams === 0) ||
-    (target.actorId === 0x0b && [0, 1].includes(target.spawnParams)) ||
-    (target.actorId === 0x12 && [0xffff, 0xfffd].includes(target.spawnParams)) ||
-    (target.actorId === 0xec && [0, 0xff00, 0xff01].includes(target.spawnParams)));
-  const mmNativeSplitChildren = new Map<string, string>();
-  for (const enemy of ENEMIES) {
-    if (enemy.game !== 'mm' || enemy.foreignOnly || enemy.targetAllowed === false || !safeSplitChild(enemy) ||
-      enemyShuffleExcluded(settings, enemy, enemy.game) || !MM_NATIVE_ROSTER.some(target => target.actorId === enemy.actorId && target.variables.includes(enemy.spawnParams)))
-      continue;
-    mmNativeSplitChildren.set(`${enemy.actorId}/${enemy.spawnParams}`, enemy.key);
-  }
-  const available = new Map<string, Set<string>>();
-  for (const row of plan) {
-    const target = enemyDefinition(row.target);
-    const location = row.ootr?.location ?? row.placement;
-    if (!location)
-      continue;
-    const game = row.ootr ? 'oot' : 'mm';
-    if (!safeSplitChild(target) || (game === 'oot' && target.game !== 'oot'))
-      continue;
-    const key = `${game}/${location.scene}/${location.room}`;
-    const pool = available.get(key) ?? new Set<string>();
-    pool.add(target.key);
-    available.set(key, pool);
-  }
-  const ootBariLocations = plan.filter(row => row.ootr?.target.actorId === 0x63 && !row.ootr.foreign)
-    .map(row => row.ootr!.location);
-  const ootPools = ootEnemizerCandidatePools(ENEMIES, settings, ootBariLocations);
-  const ootGroundedSplitChildren = ENEMIES.filter(enemy => enemy.game === 'oot' && enemy.habitat === 'ground' &&
-    enemy.targetAllowed !== false && !enemy.foreignOnly && !enemyShuffleExcluded(settings, enemy, enemy.game) && safeSplitChild(enemy) &&
-    OOT_ENEMIZER.targets.some(target => target.actorId === enemy.actorId && target.params === enemy.spawnParams));
-  for (const row of plan) {
-    const target = enemyDefinition(row.target);
-    const location = row.ootr?.location ?? row.placement;
-    const bari = settings.enemyShuffleBari && target.game === 'oot' && target.actorId === 0x63;
-    const eeno = settings.enemyShuffleEeno && target.game === 'mm' && target.actorId === 0x1e6 &&
-      (target.spawnParams & 0xff) === 1;
-    if (!location || (!bari && !eeno))
-      continue;
-    const game = row.ootr ? 'oot' : 'mm';
-    const roomPool = available.get(`${game}/${location.scene}/${location.room}`) ?? new Set<string>();
-    const ootCandidates = row.ootr ? (ootPools.get(row.ootr.location) ?? [])
-      .map(candidate => candidate.def).filter(def => def.game === 'oot' && safeSplitChild(def)) : [];
-    if (row.ootr && !(row.ootr.location.restrictions as readonly string[]).some(rule => rule === 'UNDERWATER' || rule === 'ABOVE_WATER')) {
-      ootCandidates.push(...ootGroundedSplitChildren);
-    }
-    if (eeno && row.ootr && !(row.ootr.location.restrictions as readonly string[]).some(rule => rule === 'UNDERWATER' || rule === 'ABOVE_WATER')) {
-      ootCandidates.push(...ENEMIES.filter(enemy => enemy.game === 'oot' && enemy.habitat === 'air' &&
-        enemy.targetAllowed !== false && !enemy.foreignOnly && !enemyShuffleExcluded(settings, enemy, enemy.game) && safeSplitChild(enemy)));
-    }
-    const pool = row.ootr ? [...new Set(ootCandidates.map(def => def.key))] :
-      [...new Set([...roomPool, ...mmNativeSplitChildren.values()])].filter(key => !eeno || enemyDefinition(key).game === 'mm');
-    pool.sort();
-    if (pool.length) {
-      const weights = enemyFormWeights(pool, enemyDefinition, enemy => enemyWeight(settings, game, enemy));
-      const choose = () => pickEnemyWeighted(pool, weights, max => random.next() % max);
-      row.splitChildren = [choose(), choose(), choose()];
-      if (settings.logic === 'none' && settings.enemyShuffleSpawnMode === 'chaotic')
-        row.splitPool = pool;
-    }
-  }
+
   return plan;
 }
 

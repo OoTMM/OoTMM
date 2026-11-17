@@ -41,7 +41,26 @@ struct PlayState;
 #if defined(GAME_OOT)
 int comboEnemyNativeSoulCheck(struct PlayState*, s16, u16);
 #endif
-struct Actor* comboEnemyNativeStandaloneSpawn(struct ActorContext*, struct ActorEntry*, struct PlayState*, u32);
+struct Actor* comboEnemyDynamicSpawn(ActorContext*, ActorEntry*, PlayState*, u32 operation);
+typedef struct EnemyFamily
+{
+    u16 live;
+    u8 started, blocked, flags;
+    void (*complete)(struct EnemyFamily*, PlayState*);
+} EnemyFamily;
+
+#define ENEMY_FAMILY_GOLD 1
+#define ENEMY_FAMILY_NO_CLEAR 2
+Actor* comboEnemyFamilySpawn(EnemyFamily*, ActorContext*, ActorEntry*, PlayState*, u32);
+void comboEnemyFamilyClear(EnemyFamily*);
+void comboEnemyNativeCancelInit(Actor*, PlayState*);
+void comboEnemyFamilySpawned(Actor*);
+int comboEnemyFamilySpawning(void);
+int comboEnemyFamilyIsGold(Actor*);
+int comboEnemyFamilyDone(const EnemyFamily*);
+
+Actor* comboEnemyNativeArenaSpawn(ActorContext*, ActorEntry*, PlayState*);
+Actor* comboEnemyNativeStandaloneSpawn(struct ActorContext*, struct ActorEntry*, struct PlayState*, u32);
 int comboEnemyNativeEnter(struct PlayState* play, EnemyNativeSegments* scope, u32 required);
 void comboEnemyNativeLeave(EnemyNativeSegments* scope);
 int comboEnemyTentacleCeiling(struct PlayState*, Vec3f*);

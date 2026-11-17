@@ -2,6 +2,7 @@
 #define COMBO_ENEMY_SCRIPTED_H
 
 #include <combo.h>
+#include <combo/enemy_native.h>
 
 #define ENEMY_SCRIPTED_MM 128u
 #define ENEMY_SCRIPTED_MAGIC 0x45534131u
@@ -18,7 +19,7 @@ typedef struct {
 } EnemyScriptedBinding;
 
 int comboEnemyScriptedCapturePlacement(Actor*, PlayState*, const ActorEntry*);
-Actor* comboEnemyScriptedSpawnTarget(Actor*, PlayState*, f32, f32, f32, s16);
+Actor* comboEnemyScriptedSpawnTarget(Actor*, PlayState*, f32, f32, f32, s16, EnemyFamily*);
 void comboEnemyScriptedCancelPlacement(Actor*, PlayState*);
 int comboEnemyScriptedHoldChild(Actor* root, Actor* child);
 void comboEnemyScriptedReleaseChildren(Actor* root);

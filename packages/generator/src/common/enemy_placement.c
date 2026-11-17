@@ -55,23 +55,10 @@ typedef struct
 } NativePlacementState;
 
 #if defined(GAME_OOT)
-typedef struct
-{
-    Actor* actor;
-    ActorFunc init;
-    ActorFunc update;
-    ActorFunc fini;
-    NativePlacementState* owner;
-    Actor* ownerActor;
-    u32 generation;
-    u32 visit;
-    s16 room;
-    u8 hadHealth;
-} NativeArenaTargetState;
-
-static NativeArenaTargetState sNativeArenaTargets[64];
 static u32 sNativeArenaGeneration;
 #endif
+
+static EnemyFamily sNativeFamilies[64];
 
 #define NATIVE_PLACEMENT_STATE_CAPACITY 64
 static NativePlacementState* sNativeStates;
@@ -374,13 +361,15 @@ void comboEnemyNativePlacementSetActorList(PlayState* play, ActorEntry* list, u3
 void comboEnemyNativePlacementReset(void)
 {
     nativePlacementClearRows();
+    for (u32 i = 0; i < ARRAY_COUNT(sNativeFamilies); ++i)
+        comboEnemyFamilyClear(&sNativeFamilies[i]);
     free(sNativeStates);
     sNativeStates = NULL;
     memset(sNativeVisits, 0, sizeof(sNativeVisits));
     memset(sNativeBlockedVisits, 0, sizeof(sNativeBlockedVisits));
     sNativeScope = NULL;
 #if defined(GAME_OOT)
-    memset(sNativeArenaTargets, 0, sizeof(sNativeArenaTargets));
+
     sNativeArenaGeneration = 0;
 #endif
 }
@@ -545,121 +534,41 @@ int comboEnemyNativeArenaTarget(PlayState* play, s16* actorId, u16* params)
 #endif
 }
 
+static void nativeFamilyComplete(EnemyFamily* family, PlayState* play)
+{
+    NativePlacementState* owner = &sNativeStates[family - sNativeFamilies];
+    if (!nativePlacementCurrent(owner, play))
+        return;
+    if (owner->operation == ENEMY_NATIVE_RESOURCE)
+    {
+        if (comboEnemyFamilyDone(family))
+            comboEnemyNativeResourceDefeated(&owner->resource);
+        else
+            sNativeBlockedVisits[owner->room] = owner->visit;
+    }
 #if defined(GAME_OOT)
-static NativeArenaTargetState* nativeArenaTargetState(Actor* actor)
-{
-    for (u32 i = 0; i < ARRAY_COUNT(sNativeArenaTargets); ++i)
-        if (sNativeArenaTargets[i].actor == actor)
-            return &sNativeArenaTargets[i];
-    return NULL;
-}
-
-static int nativeArenaOwnerCurrent(NativeArenaTargetState* target, PlayState* play)
-{
-    NativePlacementState* owner = target->owner;
-    return owner && owner->actor == target->ownerActor && owner->generation == target->generation &&
-           owner->operation == ENEMY_NATIVE_ARENA && nativePlacementCurrent(owner, play);
-}
-
-static void nativeArenaTargetUpdate(Actor*, PlayState*);
-static void nativeArenaTargetFini(Actor*, PlayState*);
-
-static void nativeArenaTargetInit(Actor* actor, PlayState* play)
-{
-    NativeArenaTargetState* target = nativeArenaTargetState(actor);
-    if (!target)
+    else if (owner->operation == ENEMY_NATIVE_ARENA)
     {
-        Actor_Kill(actor);
-        return;
+        owner->arenaDefeated = comboEnemyFamilyDone(family);
+        owner->arenaBlocked = family->blocked;
     }
-    actor->init = target->init;
-    actor->update = target->update;
-    actor->fini = target->fini;
-    if (target->init)
-        target->init(actor, play);
-    target->init = NULL;
-    target->hadHealth |= actor->colChkInfo.health != 0;
-    target->update = actor->update;
-    target->fini = actor->fini;
-    actor->init = NULL;
-    if (actor->update)
-        actor->update = nativeArenaTargetUpdate;
-    else if (nativeArenaOwnerCurrent(target, play))
-        target->owner->arenaBlocked = 1;
-    actor->fini = nativeArenaTargetFini;
+#endif
 }
 
-static void nativeArenaTargetFini(Actor* actor, PlayState* play)
+#if defined(GAME_OOT)
+Actor* comboEnemyNativeArenaSpawn(ActorContext* ctx, ActorEntry* entry, PlayState* play)
 {
-    NativeArenaTargetState* target = nativeArenaTargetState(actor);
-    if (!target)
-        return;
-    if (target->room >= 0 && target->room < 32 && target->visit == sNativeVisits[target->room] &&
-        (!target->owner || target->owner->generation != target->generation || !target->owner->arenaDefeated))
-        sNativeBlockedVisits[target->room] = target->visit;
-    if (nativeArenaOwnerCurrent(target, play) && !target->owner->arenaDefeated)
-        target->owner->arenaBlocked = 1;
-    actor->fini = target->fini;
-    if (!target->init && target->fini)
-        target->fini(actor, play);
-    memset(target, 0, sizeof(*target));
-}
-
-static void nativeArenaTargetUpdate(Actor* actor, PlayState* play)
-{
-    NativeArenaTargetState* target = nativeArenaTargetState(actor);
-    if (!target)
-    {
-        Actor_Kill(actor);
-        return;
-    }
-    if (actor->colChkInfo.health)
-        target->hadHealth = 1;
-    actor->update = target->update;
-    actor->fini = target->fini;
-    if (target->update)
-        target->update(actor, play);
-    if (nativeArenaOwnerCurrent(target, play) && !target->owner->arenaBlocked && target->hadHealth &&
-        !actor->colChkInfo.health && (!actor->update || (actor->category != ACTORCAT_ENEMY && actor->category != ACTORCAT_BOSS)))
-        target->owner->arenaDefeated = 1;
-    target->update = actor->update;
-    target->fini = actor->fini;
-    if (actor->update)
-        actor->update = nativeArenaTargetUpdate;
-    actor->fini = nativeArenaTargetFini;
+    NativePlacementState* owner = sNativeScope;
+    if (!owner || owner->operation != ENEMY_NATIVE_ARENA || !nativePlacementCurrent(owner, play))
+        return NULL;
+    EnemyFamily* family = &sNativeFamilies[owner - sNativeStates];
+    family->complete = nativeFamilyComplete;
+    return comboEnemyFamilySpawn(family, ctx, entry, play, 0xffff);
 }
 
 int comboEnemyNativeArenaTrackTarget(PlayState* play, Actor* actor)
 {
-    NativePlacementState* owner = sNativeScope;
-    NativeArenaTargetState* target = NULL;
-    if (!owner || owner->operation != ENEMY_NATIVE_ARENA || !nativePlacementCurrent(owner, play) ||
-        !owner->generation || owner->arenaBlocked || owner->arenaDefeated || !actor || (!actor->update && !actor->init) ||
-        actor->id != owner->targetId || actor->room != owner->room ||
-        !((owner->targetId == 0x34 && owner->targetParams == 0) || (owner->targetId == 0x38 && owner->targetParams == 0) || (owner->targetId == 0x1b && owner->targetParams == 0xffff) ||
-          (owner->targetId == 2 && owner->targetParams == 3) ||
-          (owner->targetId == 0x113 && (owner->targetParams == 0xff82 || owner->targetParams == 0xff83))))
-        return 0;
-    for (u32 i = 0; i < ARRAY_COUNT(sNativeArenaTargets); ++i)
-    {
-        if (sNativeArenaTargets[i].actor == actor || (sNativeArenaTargets[i].actor && sNativeArenaTargets[i].owner == owner &&
-                                                      sNativeArenaTargets[i].generation == owner->generation))
-            return 0;
-        if (!sNativeArenaTargets[i].actor && !target)
-            target = &sNativeArenaTargets[i];
-    }
-    if (!target)
-    {
-        owner->arenaBlocked = 1;
-        return 0;
-    }
-    *target = (NativeArenaTargetState){ .actor = actor, .init = actor->init, .update = actor->update, .fini = actor->fini, .owner = owner, .ownerActor = owner->actor, .generation = owner->generation, .visit = owner->visit, .room = owner->room, .hadHealth = actor->colChkInfo.health != 0 };
-    if (actor->init)
-        actor->init = nativeArenaTargetInit;
-    if (actor->update)
-        actor->update = nativeArenaTargetUpdate;
-    actor->fini = nativeArenaTargetFini;
-    return 1;
+    return actor && sNativeScope && sNativeFamilies[sNativeScope - sNativeStates].started;
 }
 
 EXPORT_SYMBOL(ENEMY_NATIVE_ARENA_LIFETIME_V1, comboEnemyNativeArenaTrackTarget);
@@ -770,6 +679,7 @@ static void nativePlacementFini(Actor* actor, PlayState* play)
     if (!state)
         return;
     sNativeScope = state;
+    comboEnemyFamilyClear(&sNativeFamilies[state - sNativeStates]);
     actor->fini = state->fini;
     if (!state->init && state->fini)
         state->fini(actor, play);
@@ -792,6 +702,13 @@ static void nativePlacementFini(Actor* actor, PlayState* play)
     if (state->operation == ENEMY_NATIVE_RESOURCE && state->resource.state == ENEMY_RESOURCE_PENDING && nativePlacementCurrent(state, play))
         return;
     memset(state, 0, sizeof(*state));
+}
+
+void comboEnemyNativeCancelInit(Actor* actor, PlayState* play)
+{
+    NativePlacementState* state = nativePlacementState(actor);
+    if (state && state->init)
+        nativePlacementFini(actor, play);
 }
 
 #if defined(GAME_OOT)
@@ -1231,42 +1148,17 @@ static void nativePlacementUpdate(Actor* actor, PlayState* play)
     actor->fini = nativePlacementFini;
 }
 
-static int nativeResourceTarget(s16 id, u16 params)
-{
-#if defined(GAME_OOT)
-    switch (id)
-    {
-    case 0xdd:
-    case 0xec:
-        return params == 0;
-    case 0x1b:
-        return params == 0 || params == 0xffff;
-    default:
-        return 0;
-    }
-#else
-    switch (id)
-    {
-    case 0x00b:
-    case 0x06c:
-    case 0x109:
-    case 0x204:
-        return params == 0;
-    case 0x00c:
-        return params == 0 || params == 2;
-    case 0x012:
-    case 0x032:
-        return params == 0xffff;
-    case 0x15b:
-        return params == 0x0101;
-    default:
-        return 0;
-    }
-#endif
-}
-
 static Actor* nativePlacementPolicySpawn(ActorContext* ctx, ActorEntry* entry, PlayState* play, u32 operation)
 {
+#if defined(GAME_OOT)
+    ActorEntry adjusted;
+    if (entry->id == ACTOR_EN_MB && entry->params == 2)
+    {
+        adjusted = *entry;
+        adjusted.params = 0;
+        entry = &adjusted;
+    }
+#endif
     switch (operation)
     {
     case 0:
@@ -1328,6 +1220,126 @@ static Actor* nativePlacementPolicySpawn(ActorContext* ctx, ActorEntry* entry, P
 Actor* comboEnemyNativeStandaloneSpawn(ActorContext* ctx, ActorEntry* entry, PlayState* play, u32 operation)
 {
     return nativePlacementPolicySpawn(ctx, entry, play, operation);
+}
+
+static Actor* nativePlacementTraitsSpawn(ActorContext* ctx, ActorEntry* entry, PlayState* play, u32 operation, u32 key)
+{
+    NativePlacementState* state = NULL;
+    Actor* actor;
+    s32 room = play->roomCtx.curRoom.num;
+    if (room < 0 || room >= 32)
+        return NULL;
+    if (!sNativeStates)
+    {
+        sNativeStates = malloc(NATIVE_PLACEMENT_STATE_CAPACITY * sizeof(*sNativeStates));
+        if (!sNativeStates)
+            return NULL;
+        memset(sNativeStates, 0, NATIVE_PLACEMENT_STATE_CAPACITY * sizeof(*sNativeStates));
+    }
+    ActorEntry copy = *entry;
+    u32 traits = operation & (ENEMY_NATIVE_AIR | ENEMY_NATIVE_UPRIGHT);
+    u32 base = operation & ~(ENEMY_NATIVE_AIR | ENEMY_NATIVE_UPRIGHT | ENEMY_NATIVE_FLOOR);
+    for (u32 i = 0; i < NATIVE_PLACEMENT_STATE_COUNT; ++i)
+        if (!sNativeStates[i].actor && !sNativeStates[i].operation)
+        {
+            state = &sNativeStates[i];
+            break;
+        }
+    if (!state || sNativeVisits[room] == 0xffffffffu)
+    {
+        return NULL;
+    }
+#if defined(GAME_OOT)
+    if (operation & ENEMY_NATIVE_FLOOR)
+        comboEnemyNativeFloorEntry(play, entry, &copy);
+#endif
+    if (traits & ENEMY_NATIVE_UPRIGHT)
+    {
+#if defined(GAME_MM)
+        copy.rot.x &= 0x7f;
+        copy.rot.z &= 0x7f;
+#else
+        copy.rot.x = copy.rot.z = 0;
+#endif
+    }
+    if (traits & ENEMY_NATIVE_AIR)
+    {
+        Actor proxy;
+        memset(&proxy, 0, sizeof(proxy));
+        proxy.home.pos.x = proxy.world.pos.x = copy.pos.x;
+        proxy.home.pos.y = proxy.world.pos.y = copy.pos.y;
+        proxy.home.pos.z = proxy.world.pos.z = copy.pos.z;
+        comboEnemyAirPlacement(play, &proxy, 40.f);
+        copy.pos.y = proxy.home.pos.y;
+    }
+#if defined(GAME_MM)
+    if ((copy.id & 0x1fff) == 0x16f)
+    {
+        Actor probe = { 0 };
+        CollisionPoly* floor = NULL;
+        s32 bgId;
+        Vec3f start = { copy.pos.x, copy.pos.y + 40.f, copy.pos.z };
+        f32 y = BgCheck_EntityRaycastFloor5_2(play, &play->colCtx, &floor, &bgId, &probe, &start);
+        if (floor && y > -30000.f && y < 30000.f)
+            copy.pos.y = (s16)y + 1;
+    }
+#endif
+    state->operation = base ? base : 14;
+    state->resource.original = copy;
+    NativePlacementState* previousScope = sNativeScope;
+    if (base == ENEMY_NATIVE_DRY_AQUATIC || base == ENEMY_NATIVE_DRY_MM_AQUATIC)
+    {
+        state->room = room;
+        state->visit = sNativeVisits[room];
+        sNativeScope = state;
+    }
+    actor = nativePlacementPolicySpawn(ctx, &copy, play, base);
+    sNativeScope = previousScope;
+    if (!actor || (!actor->update && !actor->init))
+    {
+        memset(state, 0, sizeof(*state));
+        return NULL;
+    }
+    if (base == 15 && !actor->init)
+        Actor_ChangeCategory(play, &play->actorCtx, actor, ACTORCAT_ENEMY);
+#if defined(GAME_OOT)
+    if (actor->id == ACTOR_EN_TORCH2 && !actor->init)
+        Actor_ChangeCategory(play, &play->actorCtx, actor, ACTORCAT_ENEMY);
+#endif
+    state->actor = actor;
+    state->room = room;
+    state->visit = sNativeVisits[room];
+    state->splitPlacementVrom = key;
+#if defined(GAME_MM)
+    if (actor->id == 0xc)
+        actor->flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
+#else
+    if (actor->id == 0x13 || actor->id == 0xa4)
+        actor->flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
+#endif
+#if defined(GAME_MM)
+    if ((copy.id & 0x1fff) == 0x16f)
+    {
+        Actor probe = { 0 };
+        CollisionPoly* floor = NULL;
+        s32 bgId;
+        Vec3f start = { copy.pos.x, copy.pos.y + 40.f, copy.pos.z };
+        f32 y = BgCheck_EntityRaycastFloor5_2(play, &play->colCtx, &floor, &bgId, &probe, &start);
+        if (floor && y > -30000.f && y < 30000.f)
+            copy.pos.y = (s16)y + 1;
+    }
+#endif
+    state->operation = base ? base : 14;
+    state->hadHealth = (actor->colChkInfo.health != 0) | ((traits & ENEMY_NATIVE_AIR) ? 2 : 0) | ((traits & ENEMY_NATIVE_UPRIGHT) ? 4 : 0);
+    state->init = actor->init;
+    state->update = actor->update;
+    state->fini = actor->fini;
+    if (actor->init)
+        actor->init = nativePlacementInit;
+    if (actor->update)
+        actor->update = nativePlacementUpdate;
+    actor->fini = nativePlacementFini;
+    return actor;
 }
 
 int comboEnemyNativePlacementSpawn(ActorContext* ctx, ActorEntry* entry, PlayState* play)
@@ -1427,27 +1439,16 @@ retrySeed:
         record.operation == 15 || record.operation == 20 || record.operation == ENEMY_NATIVE_DRY_AQUATIC ||
         record.operation == ENEMY_NATIVE_DRY_MM_AQUATIC)
     {
-        ActorEntry copy = *entry;
-        u32 traits = record.operation & (ENEMY_NATIVE_AIR | ENEMY_NATIVE_UPRIGHT);
-        u32 base = record.operation & ~(ENEMY_NATIVE_AIR | ENEMY_NATIVE_UPRIGHT | ENEMY_NATIVE_FLOOR);
         if (Flags_GetClear(play, room))
             return 1;
-        for (u32 i = 0; i < NATIVE_PLACEMENT_STATE_COUNT; ++i)
-            if (!sNativeStates[i].actor && !sNativeStates[i].operation)
-            {
-                state = &sNativeStates[i];
-                break;
-            }
-        if (!state || sNativeVisits[room] == 0xffffffffu)
-        {
-            if (chaotic)
-                goto fallbackSeed;
-            g.roomEnemyLackSoul = 1;
-            return 1;
-        }
+        ActorEntry copy = *entry;
+        u32 operation = record.operation;
 #if defined(GAME_OOT)
-        if (record.operation & ENEMY_NATIVE_FLOOR)
+        if (operation & ENEMY_NATIVE_FLOOR)
+        {
             comboEnemyNativeFloorEntry(play, entry, &copy);
+            operation &= ~ENEMY_NATIVE_FLOOR;
+        }
         if (!comboOotEnemizerCanSpawn(play, &copy))
         {
             if (chaotic)
@@ -1455,95 +1456,13 @@ retrySeed:
             return 1;
         }
 #endif
-        if (traits & ENEMY_NATIVE_UPRIGHT)
+        actor = nativePlacementTraitsSpawn(ctx, &copy, play, operation, record.vrom);
+        if (!actor)
         {
-#if defined(GAME_MM)
-            copy.rot.x &= 0x7f;
-            copy.rot.z &= 0x7f;
-#else
-            copy.rot.x = copy.rot.z = 0;
-#endif
-        }
-        if (traits & ENEMY_NATIVE_AIR)
-        {
-            Actor proxy;
-            memset(&proxy, 0, sizeof(proxy));
-            proxy.home.pos.x = proxy.world.pos.x = copy.pos.x;
-            proxy.home.pos.y = proxy.world.pos.y = copy.pos.y;
-            proxy.home.pos.z = proxy.world.pos.z = copy.pos.z;
-            comboEnemyAirPlacement(play, &proxy, 40.f);
-            copy.pos.y = proxy.home.pos.y;
-        }
-#if defined(GAME_MM)
-        if ((copy.id & 0x1fff) == 0x16f)
-        {
-            Actor probe = { 0 };
-            CollisionPoly* floor = NULL;
-            s32 bgId;
-            Vec3f start = { copy.pos.x, copy.pos.y + 40.f, copy.pos.z };
-            f32 y = BgCheck_EntityRaycastFloor5_2(play, &play->colCtx, &floor, &bgId, &probe, &start);
-            if (floor && y > -30000.f && y < 30000.f)
-                copy.pos.y = (s16)y + 1;
-        }
-#endif
-        state->operation = base ? base : 14;
-        state->resource.original = copy;
-        NativePlacementState* previousScope = sNativeScope;
-        if (base == ENEMY_NATIVE_DRY_AQUATIC || base == ENEMY_NATIVE_DRY_MM_AQUATIC)
-        {
-            state->room = room;
-            state->visit = sNativeVisits[room];
-            sNativeScope = state;
-        }
-        actor = nativePlacementPolicySpawn(ctx, &copy, play, base);
-        sNativeScope = previousScope;
-        if (!actor || (!actor->update && !actor->init))
-        {
-            memset(state, 0, sizeof(*state));
-            if (!actor && chaotic)
+            if (chaotic)
                 goto fallbackSeed;
             g.roomEnemyLackSoul = 1;
-            return 1;
         }
-        if (base == 15 && !actor->init)
-            Actor_ChangeCategory(play, &play->actorCtx, actor, ACTORCAT_ENEMY);
-#if defined(GAME_OOT)
-        if (actor->id == ACTOR_EN_TORCH2 && !actor->init)
-            Actor_ChangeCategory(play, &play->actorCtx, actor, ACTORCAT_ENEMY);
-#endif
-        state->actor = actor;
-        state->room = room;
-        state->visit = sNativeVisits[room];
-        state->splitPlacementVrom = record.vrom;
-#if defined(GAME_MM)
-        if (actor->id == 0xc)
-            actor->flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
-#else
-        if (actor->id == 0x13 || actor->id == 0xa4)
-            actor->flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
-#endif
-#if defined(GAME_MM)
-        if ((copy.id & 0x1fff) == 0x16f)
-        {
-            Actor probe = { 0 };
-            CollisionPoly* floor = NULL;
-            s32 bgId;
-            Vec3f start = { copy.pos.x, copy.pos.y + 40.f, copy.pos.z };
-            f32 y = BgCheck_EntityRaycastFloor5_2(play, &play->colCtx, &floor, &bgId, &probe, &start);
-            if (floor && y > -30000.f && y < 30000.f)
-                copy.pos.y = (s16)y + 1;
-        }
-#endif
-        state->operation = base ? base : 14;
-        state->hadHealth = (actor->colChkInfo.health != 0) | ((traits & ENEMY_NATIVE_AIR) ? 2 : 0) | ((traits & ENEMY_NATIVE_UPRIGHT) ? 4 : 0);
-        state->init = actor->init;
-        state->update = actor->update;
-        state->fini = actor->fini;
-        if (actor->init)
-            actor->init = nativePlacementInit;
-        if (actor->update)
-            actor->update = nativePlacementUpdate;
-        actor->fini = nativePlacementFini;
         return 1;
     }
 #if defined(GAME_OOT)
@@ -1583,6 +1502,12 @@ retrySeed:
             g.roomEnemyLackSoul = 1;
         return 1;
     }
+    if (record.operation == 129)
+    {
+        if (!comboEnemyDynamicSpawn(ctx, entry, play, 0xffff))
+            g.roomEnemyLackSoul = 1;
+        return 1;
+    }
     if (record.operation == 7)
     {
         if (!comboEnemyNativeGuaySpawn(ctx, entry, play))
@@ -1609,9 +1534,9 @@ retrySeed:
         !memcmp(&record.original, &record.replacement, sizeof(*entry)))
         return 1;
     if (record.operation == ENEMY_NATIVE_RESOURCE ? (record.targetId != entry->id || record.targetParams != (u16)entry->params ||
-                                                     !nativeResourceTarget(record.targetId, record.targetParams)) :
+                                                     (record.targetId < 0 || record.targetId >= 0x1000)) :
                                                     (record.operation != ENEMY_NATIVE_ARENA || (record.original.id != 0x136 && record.original.id != 0xc8) ||
-                                                     record.targetId < 0 || record.targetId >= 0x400))
+                                                     record.targetId < 0 || record.targetId >= 0x1000))
     {
         g.roomEnemyLackSoul = 1;
         return 1;
@@ -1747,7 +1672,7 @@ retrySeed:
         return 1;
     }
     if (record.operation != ENEMY_NATIVE_RESOURCE || record.targetId != (entry->id & 0x1fff) ||
-        record.targetParams != (u16)entry->params || !nativeResourceTarget(record.targetId, record.targetParams))
+        record.targetParams != (u16)entry->params || (record.targetId < 0 || record.targetId >= 0x1000))
     {
         g.roomEnemyLackSoul = 1;
         return 1;
@@ -1778,6 +1703,20 @@ retrySeed:
             return 1;
 #endif
         NativePlacementSpawnEntry(ctx, &record.original, play);
+        return 1;
+    }
+    if (record.operation == ENEMY_NATIVE_RESOURCE)
+    {
+        state->room = room;
+        state->visit = sNativeVisits[room];
+        state->operation = ENEMY_NATIVE_RESOURCE;
+        EnemyFamily* family = &sNativeFamilies[state - sNativeStates];
+        family->complete = nativeFamilyComplete;
+        if (!comboEnemyFamilySpawn(family, ctx, entry, play, 0xffff))
+        {
+            sNativeBlockedVisits[room] = sNativeVisits[room];
+            g.roomEnemyLackSoul = 1;
+        }
         return 1;
     }
     actor = NativePlacementSpawnEntry(ctx, entry, play);
@@ -1857,7 +1796,10 @@ void comboEnemyNativePlacementUpdate(PlayState* play)
             if (!nativePlacementCurrent(state, play))
             {
                 if (!state->actor)
+                {
+                    comboEnemyFamilyClear(&sNativeFamilies[state - sNativeStates]);
                     memset(state, 0, sizeof(*state));
+                }
                 continue;
             }
             comboEnemyNativeResourceUpdate(play, &state->resource);
@@ -2264,7 +2206,7 @@ unverified:
 
 static int enemyCurrentPlacement(const EnemyPlacement* p)
 {
-    return p->room < 32 && p->visit && sRooms[p->room].visit == p->visit && sRooms[p->room].listVrom == p->listVrom;
+    return p->room < 32 && p->visit && sRooms[p->room].visit == p->visit && (!p->listVrom || sRooms[p->room].listVrom == p->listVrom);
 }
 
 #if defined(GAME_MM)
@@ -2412,90 +2354,21 @@ void comboEnemySpawnRoomEntry(ActorContext* ctx, ActorEntry* entry, PlayState* p
 }
 
 #if defined(GAME_MM)
-static EnemyPlacement enemyScriptedPlacement(const EnemyScriptedBinding* binding)
-{
-    return (EnemyPlacement){ binding->placementVrom, binding->placementVisit, binding->placementRoom, binding->placementSlot };
-}
-
 int comboEnemyScriptedCapturePlacement(Actor* monitor, PlayState* play, const ActorEntry* original)
 {
     EnemyScriptedBinding* binding = (EnemyScriptedBinding*)monitor;
-    if (!comboEnemyNativeScriptedCurrent(monitor, play) || binding->binding != ENEMY_SCRIPTED_MAGIC)
-        return 0;
     binding->placementVisit = 0;
-    if (!comboIsForeignEnemyActor(binding->targetId))
-        return 1;
-    const s32 room = play->roomCtx.curRoom.num;
-    const u32 distance = (u32)original - (u32)sRoomList;
-    if (!gForeignEnemyRegistryVrom || room < 0 || room != sListRoom || !sRoomList || sRoomCount > 255 ||
-        distance % sizeof(*original) || distance / sizeof(*original) >= sRoomCount ||
-        memcmp(original, &binding->original, sizeof(*original)))
-        return 0;
-    EnemyPlacement placement = { sRooms[room].listVrom, sRooms[room].visit, room, distance / sizeof(*original) };
-    if (!enemyCurrentPlacement(&placement))
-        return 0;
-    const u32 mask = 1u << (placement.slot & 31);
-    if (sRooms[room].remaining[placement.slot >> 5] & mask)
-        return 0;
-    binding->placementVrom = placement.listVrom;
-    binding->placementVisit = placement.visit;
-    binding->placementRoom = placement.room;
-    binding->placementSlot = placement.slot;
-    sRooms[room].remaining[placement.slot >> 5] |= mask;
-    sRooms[room].hasForeign = 1;
-    NativeEncounterUnsetTemp(play, room);
-    return 1;
+    return comboEnemyNativeScriptedCurrent(monitor, play) && binding->binding == ENEMY_SCRIPTED_MAGIC;
 }
 
-Actor* comboEnemyScriptedSpawnTarget(Actor* monitor, PlayState* play, f32 x, f32 y, f32 z, s16 yaw)
+Actor* comboEnemyScriptedSpawnTarget(Actor* monitor, PlayState* play, f32 x, f32 y, f32 z, s16 yaw, EnemyFamily* family)
 {
     EnemyScriptedBinding* binding = (EnemyScriptedBinding*)monitor;
     if (!comboEnemyNativeScriptedCurrent(monitor, play) || binding->binding != ENEMY_SCRIPTED_MAGIC)
         return NULL;
-    const int foreign = comboIsForeignEnemyActor(binding->targetId);
-    EnemyPlacement placement = enemyScriptedPlacement(binding);
-    if (foreign && (!enemyCurrentPlacement(&placement) || placement.room != play->roomCtx.curRoom.num ||
-                    !(sRooms[placement.room].remaining[placement.slot >> 5] & (1u << (placement.slot & 31)))))
-        return NULL;
-    EnemyPlacement previous = sNextPlacement;
-    s16 previousActor = sNextActor;
-    u8 previousIndex = gCurrentSpawnActorNum;
-    u32 previousSegment = gSegments[6];
-    if (foreign)
-    {
-        sNextPlacement = placement;
-        sNextActor = binding->targetId;
-    }
-    else
-        sNextActor = -1;
-    gCurrentSpawnActorNum = binding->actorIndex;
-    Actor* actor;
-    if ((binding->original.id & 0x1fff) == 0x15d &&
-        ((binding->targetId == 0x184 && binding->targetParams == 0x1fc0) ||
-         (binding->targetId == 0x1e8 && binding->targetParams == 0) ||
-         binding->targetId == ACTOR_EN_BB))
-    {
-        ActorEntry entry = { 0 };
-        entry.id = binding->targetId;
-        entry.params = binding->targetParams;
-        entry.pos = (Vec3s){ x, y, z };
-        entry.rot.x = 7;
-        entry.rot.z = 0x7f;
-        entry.rot.y = ((u16)(s16)(yaw * (360.0f / 65536.0f)) << 7) | 0x7f;
-        if (binding->targetId == ACTOR_EN_BB)
-            actor = comboEnemyNativeRenewableSpawn(&play->actorCtx, &entry, play);
-        else
-            actor = binding->targetId == 0x184 ? comboEnemyNativeEyegoreSpawn(&play->actorCtx, &entry, play) : comboEnemyNativePoeSisterSpawn(&play->actorCtx, &entry, play);
-    }
-    else
-    {
-        actor = Actor_Spawn(&play->actorCtx, play, binding->targetId, x, y, z, 0, yaw, 0, binding->targetParams);
-    }
-    gCurrentSpawnActorNum = previousIndex;
-    gSegments[6] = previousSegment;
-    sNextPlacement = previous;
-    sNextActor = previousActor;
-    return actor;
+    ActorEntry entry = { .id = binding->targetId, .params = binding->targetParams,
+        .pos = { x, y, z }, .rot = { 7, ((u16)(s16)(yaw * (360.f / 65536.f)) << 7) | 0x7f, 0x7f } };
+    return comboEnemyFamilySpawn(family, &play->actorCtx, &entry, play, 0xffff);
 }
 
 EXPORT_SYMBOL(ENEMY_SCRIPTED_MM_LEASE_V1, comboEnemyScriptedSpawnTarget);
@@ -2509,6 +2382,72 @@ int comboEnemyTakePlacement(PlayState* play, s16 actorId, EnemyPlacement* out)
     *out = sNextPlacement;
     sNextActor = -1;
     return 1;
+}
+
+static u32 sDynamicChoices __attribute__((section(".data")));
+#if defined(GAME_OOT)
+EXPORT_SYMBOL(ENEMY_DYNAMIC_CHOICES_OOT, sDynamicChoices);
+#else
+EXPORT_SYMBOL(ENEMY_DYNAMIC_CHOICES_MM, sDynamicChoices);
+#endif
+
+static u32 dynamicOperation(s16 id, u16 params)
+{
+    u32 count;
+    if (!sDynamicChoices || comboDmaLoadFilePartial(&count, sDynamicChoices, 0, 4) != 4 || count > 2048)
+        return 0;
+    u32 low = 0, high = count;
+    while (low < high)
+    {
+        u32 mid = low + (high - low) / 2;
+        u16 choice[4];
+        if (comboDmaLoadFilePartial(choice, sDynamicChoices, 4 + mid * 8, 8) != 8)
+            return 0;
+        if (choice[0] == (u16)id && choice[1] == params)
+            return choice[2];
+        if (choice[0] < (u16)id || (choice[0] == (u16)id && choice[1] < params))
+            low = mid + 1;
+        else
+            high = mid;
+    }
+    return 0;
+}
+
+Actor* comboEnemyDynamicSpawn(ActorContext* ctx, ActorEntry* entry, PlayState* play, u32 operation)
+{
+    s16 id = entry->id;
+#if defined(GAME_MM)
+    id &= 0x1fff;
+#endif
+    if (operation == 0xffff)
+        operation = dynamicOperation(id, entry->params);
+    if (!comboIsForeignEnemyActor(id))
+        return nativePlacementTraitsSpawn(ctx, entry, play, operation, 0);
+    s32 room = play->roomCtx.curRoom.num;
+    if (room < 0 || room >= 32 || !sRooms[room].visit)
+        return NULL;
+    EnemyPlacement previous = sNextPlacement;
+    s16 previousId = sNextActor;
+    u32 slot;
+    for (slot = 0; slot < 256; ++slot)
+    {
+        int used = 0;
+        for (u32 i = 0; i < ARRAY_COUNT(sEncounters); ++i)
+            if (sEncounters[i].actor && !sEncounters[i].placement.listVrom &&
+                sEncounters[i].placement.room == room && sEncounters[i].placement.visit == sRooms[room].visit &&
+                sEncounters[i].placement.slot == slot)
+                used = 1;
+        if (!used)
+            break;
+    }
+    if (slot == 256)
+        return NULL;
+    sNextPlacement = (EnemyPlacement){ 0, sRooms[room].visit, room, slot };
+    sNextActor = id;
+    Actor* actor = nativePlacementPolicySpawn(ctx, entry, play, 0);
+    sNextPlacement = previous;
+    sNextActor = previousId;
+    return actor;
 }
 
 static EnemyEncounter* enemyEncounter(Actor* actor)
@@ -2588,7 +2527,7 @@ void comboEnemyScriptedCancelPlacement(Actor* monitor, PlayState* play)
     EnemyScriptedBinding* binding = (EnemyScriptedBinding*)monitor;
     if (!comboEnemyNativeScriptedCurrent(monitor, play) || !binding->placementVisit)
         return;
-    EnemyPlacement placement = enemyScriptedPlacement(binding);
+    EnemyPlacement placement = { binding->placementVrom, binding->placementVisit, binding->placementRoom, binding->placementSlot };
     if (!enemyCurrentPlacement(&placement))
         return;
     for (u32 i = 0; i < ARRAY_COUNT(sEncounters); ++i)
@@ -2615,6 +2554,8 @@ int comboEnemyEncounterSplitPlacement(Actor* owner, EnemyPlacement* out)
 
 u32 comboEnemyEncounterSplitKey(PlayState* play, const EnemyPlacement* placement)
 {
+    if (!placement->listVrom)
+        return 0;
 #if defined(GAME_OOT)
     u32 key;
     if (ootEnemizerPlacementKey(play, placement->room, placement->slot, &key))
@@ -2625,7 +2566,7 @@ u32 comboEnemyEncounterSplitKey(PlayState* play, const EnemyPlacement* placement
 
 void comboEnemyEncounterBlock(const EnemyPlacement* p)
 {
-    if (enemyCurrentPlacement(p))
+    if (p->listVrom && enemyCurrentPlacement(p))
         sBlockedRooms |= 1u << p->room;
 }
 
@@ -2633,7 +2574,7 @@ static int enemyRegisterMember(Actor* actor, const EnemyPlacement* p, int split)
 {
     EnemyEncounter* available = NULL;
     int hasOwner = 0;
-    if (!actor || !p || !enemyCurrentPlacement(p) || !(sRooms[p->room].remaining[p->slot >> 5] & (1u << (p->slot & 31))))
+    if (!actor || !p || !enemyCurrentPlacement(p) || (p->listVrom && !(sRooms[p->room].remaining[p->slot >> 5] & (1u << (p->slot & 31)))))
         return 0;
     for (u32 i = 0; i < ARRAY_COUNT(sEncounters); ++i)
     {
@@ -2755,6 +2696,8 @@ void comboEnemyEncounterComplete(Actor* actor, PlayState* play)
         return;
     }
     entry->complete = 1;
+    if (!entry->placement.listVrom)
+        return;
     if (entry->shared)
         for (u32 i = 0; i < ARRAY_COUNT(sEncounters); ++i)
             if (sEncounters[i].actor && !sEncounters[i].complete &&
@@ -2809,7 +2752,7 @@ static s32 enemySourceRoom(s32 fallback)
     {
         EnemyEncounter* entry = enemyEncounter(actor);
         if (entry)
-            return entry->placement.room;
+            return entry->placement.listVrom ? entry->placement.room : -1;
     }
     actor = comboEnemyCurrentActor();
     return actor && actor->room >= 0 ? actor->room : fallback;
@@ -2849,7 +2792,7 @@ void enemyActorChangeCategory(PlayState* play, ActorContext* ctx, Actor* actor, 
     if (actor->id == 0xd2d && actor->params == 2 && comboEnemyCurrentCallback() == 2)
         return;
 #endif
-    if (category != ACTORCAT_ENEMY && category != ACTORCAT_BOSS)
+    if (comboEnemyCurrentCallback() != 0 && category != ACTORCAT_ENEMY && category != ACTORCAT_BOSS)
         comboEnemyEncounterComplete(actor, play);
 }
 
@@ -2868,7 +2811,7 @@ static void enemyFlagsSet(PlayState* play, s32 room, int persistent)
         if (enemyEncounter(actor))
         {
             EnemyEncounter* entry = enemyEncounter(actor);
-            if (!enemyCurrentPlacement(&entry->placement))
+            if (!entry->placement.listVrom || !enemyCurrentPlacement(&entry->placement))
                 return;
             if (comboEnemyCurrentCallback() != 0 && (comboEnemyCurrentCallback() != 1 || enemyWinningCleanup()))
             {
@@ -2916,7 +2859,7 @@ static void enemyFlagsUnset(PlayState* play, s32 room, int persistent)
         EnemyEncounter* entry = enemyEncounter(actor);
         if (!entry)
             continue;
-        if (!enemyCurrentPlacement(&entry->placement))
+        if (!entry->placement.listVrom || !enemyCurrentPlacement(&entry->placement))
             return;
         entry->complete = 0;
         sRooms[entry->placement.room].remaining[entry->placement.slot >> 5] |= 1u << (entry->placement.slot & 31);

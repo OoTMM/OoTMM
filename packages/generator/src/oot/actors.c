@@ -426,6 +426,7 @@ Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState* play, short actorId
         comboEnemyGohmaHatchedWrap(actor, play);
     if (actorId == ACTOR_EN_SW)
         comboEnemyGoldWrap(actor, play, variable);
+    comboEnemyFamilySpawned(actor);
     if (actorId == ACTOR_ARMS_HOOK && gSave.age == AGE_ADULT)
         actor->objectSlot = Object_GetSlot(&play->objectCtx, 0x14);
     return actor;
@@ -440,7 +441,7 @@ static int GetRoomClearFlagForActor(PlayState* play, int flag)
         return 0;
 #endif
 
-    if (comboEnemyGoldSpawning())
+    if (comboEnemyGoldSpawning() || comboEnemyFamilySpawning())
         return 0;
     res = Flags_GetClear(play, flag);
     if (Config_Flag(CFG_ER_WALLMASTERS) && sActorIdToSpawn == ACTOR_EN_WALLMAS)

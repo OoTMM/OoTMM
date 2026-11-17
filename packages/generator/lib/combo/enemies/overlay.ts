@@ -1587,12 +1587,14 @@ type ForeignEnemyRuntimeMetadata = {
 type ForeignEnemyArtifacts = Record<Game, ReadonlyMap<number, ForeignEnemyRuntimeMetadata>>;
 
 export function prepareForeignEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses: GameAddresses, patch: Patchfile) {
+  plan = plan.flatMap(row => [row, ...[...new Set([...(row.splitChildren ?? []), ...(row.splitPool ?? [])])]
+    .map(target => ({ ...row, target }))]);
   const targets = new Map<string, ForeignEnemyPlacement>();
   const roots: Record<Game, Map<number, ReturnType<typeof enemyDefinition>>> = { oot: new Map(), mm: new Map() };
   for (const pair of plan) {
-    if (pair.kind && pair.kind !== 'scripted') continue;
+    if (pair.kind === 'variant') continue;
     const source = enemyDefinition(pair.source), target = enemyDefinition(pair.target);
-    const exactStandalone = !!pair.ootr || !!pair.placement;
+    const exactStandalone = !!pair.ootr || !!pair.placement || !!pair.field || !!pair.kind;
     const scripted = pair.kind === 'scripted' && !!scriptedMmSource(source.key) && scriptedMmTargetAllowed(target, true, source);
     if (pair.kind === 'scripted' && !scripted) throw new Error('Unreviewed scripted MM encounter target');
     if (!exactStandalone && !scripted && !enemyEncounterCompatible(source.game, source.actorId, target.game, target.actorId))

@@ -14,7 +14,4 @@ PATCH_START 0x80b2f024
   nop
   nop
   nop
-  nop
-  nop
-  nop
 PATCH_END

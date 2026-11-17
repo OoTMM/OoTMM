@@ -627,6 +627,27 @@ static int enemyTailChildRequest(Actor* owner, s16 id, s16 rx, s16 ry, s16 rz, s
 }
 #endif
 
+static int enemyHasSoul(const ForeignEnemyRegistration* registration)
+{
+    if (!registration->soulGi)
+        return 1;
+    return
+#if defined(GAME_OOT)
+        ((registration->flags & FOREIGN_ENEMY_HOST_SOUL) ? comboHasSoulOot(registration->soulGi) : comboHasSoulMm(registration->soulGi))
+#else
+        ((registration->flags & FOREIGN_ENEMY_HOST_SOUL) ? comboHasSoulMm(registration->soulGi) : comboHasSoulOot(registration->soulGi))
+#endif
+    ;
+}
+
+int comboEnemyForeignSoulCheck(s16 actorId)
+{
+    ForeignEnemyRegistration registration;
+    if (!enemyLookupRegistration(actorId, &registration))
+        return -1;
+    return enemyHasSoul(&registration);
+}
+
 static Actor* enemySpawnRegistered(ActorContext* actorCtx, PlayState* play, s16 actorId,
                                    float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 params,
                                    u32 csId, u32 halfDays, Actor* parent, const EnemyPlacement* split, int debugSpawn, int inheritedSoul)
@@ -812,7 +833,7 @@ static Actor* enemySpawnRegistered(ActorContext* actorCtx, PlayState* play, s16 
         goto rejected;
     }
 #endif
-    if (!split && (registration.flags & FOREIGN_ENEMY_ROOT) && Flags_GetClear(play, play->roomCtx.curRoom.num))
+    if (!split && (registration.flags & FOREIGN_ENEMY_ROOT) && placement.listVrom && Flags_GetClear(play, play->roomCtx.curRoom.num))
     {
         goto rejected;
     }
@@ -824,13 +845,7 @@ static Actor* enemySpawnRegistered(ActorContext* actorCtx, PlayState* play, s16 
     }
 
     comboEnemySoulPreviewGateBegin();
-    int soulAllowed = debugSpawn || inheritedSoul || !registration.soulGi ||
-#if defined(GAME_OOT)
-        ((registration.flags & FOREIGN_ENEMY_HOST_SOUL) ? comboHasSoulOot(registration.soulGi) : comboHasSoulMm(registration.soulGi))
-#else
-        ((registration.flags & FOREIGN_ENEMY_HOST_SOUL) ? comboHasSoulMm(registration.soulGi) : comboHasSoulOot(registration.soulGi))
-#endif
-    ;
+    int soulAllowed = debugSpawn || inheritedSoul || enemyHasSoul(&registration);
     if (!comboEnemySoulPreviewGate(play, 1 - ENEMY_NATIVE_GAME, actorId - FOREIGN_ENEMY_ACTOR_BASE, params, x, y, z, ry, soulAllowed))
     {
         if (registration.flags & FOREIGN_ENEMY_ROOT)
@@ -960,6 +975,7 @@ static Actor* enemySpawnRegistered(ActorContext* actorCtx, PlayState* play, s16 
     EnemyActorInit(actor, play);
     gSegments[6] = previousSegment;
     sSpawnFlags = registration.flags;
+    comboEnemyFamilySpawned(actor);
     return actor;
 rejected:
 
@@ -1226,7 +1242,8 @@ int comboEnemyLoadSplitChildObject(PlayState*, u16);
 
 typedef struct {
     Actor* owner;
-    Actor* children[3];
+    EnemyFamily family;
+    ActorFunc fini;
     s16 scene;
     s8 room;
 } EenoSplitMonitor;
@@ -1235,11 +1252,10 @@ static EenoSplitMonitor sEenoSplits[8];
 
 static int enemySplitActorLive(PlayState* play, const Actor* target, s8 room)
 {
-    for (Actor* actor = play->actorCtx.actors[ACTORCAT_ENEMY].first; actor; actor = actor->next)
-    {
-        if (actor == target)
-            return actor->room == room && (actor->update || actor->init);
-    }
+    for (u32 category = 0; category < ARRAY_COUNT(play->actorCtx.actors); ++category)
+        for (Actor* actor = play->actorCtx.actors[category].first; actor; actor = actor->next)
+            if (actor == target)
+                return actor->room == room && (actor->update || actor->init);
     return 0;
 }
 
@@ -1250,14 +1266,39 @@ static void enemyEenoSplitUpdate(Actor* owner, PlayState* play)
         EenoSplitMonitor* monitor = &sEenoSplits[i];
         if (monitor->owner != owner)
             continue;
-        for (int j = 0; j < ARRAY_COUNT(monitor->children); ++j)
-            if (enemySplitActorLive(play, monitor->children[j], monitor->room))
-                return;
-        monitor->owner = NULL;
+        if (!comboEnemyFamilyDone(&monitor->family))
+            return;
         comboEnemyEncounterComplete(owner, play);
         Actor_Kill(owner);
         return;
     }
+}
+
+static void enemyEenoSplitFini(Actor* actor, PlayState* play)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sEenoSplits); ++i)
+        if (sEenoSplits[i].owner == actor)
+        {
+            ActorFunc fini = sEenoSplits[i].fini;
+            comboEnemyFamilyClear(&sEenoSplits[i].family);
+            memset(&sEenoSplits[i], 0, sizeof(sEenoSplits[i]));
+            actor->fini = fini;
+            if (fini)
+                fini(actor, play);
+            return;
+        }
+}
+
+static Actor* enemyDynamicChild(ActorContext* ctx, PlayState* play, s16 id, u16 params, Vec3f* pos, s16 yaw, EnemyFamily* family)
+{
+    ActorEntry entry = { .id = id, .params = params, .pos = { pos->x, pos->y, pos->z } };
+#if defined(GAME_MM)
+    entry.rot = (Vec3s){ 7, ((u16)(s16)(yaw * (360.f / 65536.f)) << 7) | 0x7f, 0x7f };
+#else
+    entry.rot.y = yaw;
+#endif
+    return family ? comboEnemyFamilySpawn(family, ctx, &entry, play, 0xffff) :
+        comboEnemyDynamicSpawn(ctx, &entry, play, 0xffff);
 }
 
 static int enemyEenoReplaceSplit(Actor* owner, PlayState* play, u32 key)
@@ -1305,39 +1346,38 @@ static int enemyEenoReplaceSplit(Actor* owner, PlayState* play, u32 key)
         s32 bgId;
         if (BgCheck_EntityLineTest1(&play->colCtx, &from, &to, &hit, &wall, 1, 0, 1, 0, &bgId))
             return 0;
-        if (!enemySplitChildPosition(play, &targets[i], &positions[i]) || comboIsForeignEnemyActor(targets[i]))
+        if (!enemySplitChildPosition(play, &targets[i], &positions[i]))
             return 0;
-#if defined(GAME_MM)
-        if (!comboEnemyLoadSplitChildObject(play, targets[i]))
-            return 0;
-#endif
     }
 
     EnemyNativeSegments scope = { 0 };
     if (!comboEnemyNativeEnter(play, &scope, ENEMY_NATIVE_KEEP_MAIN))
         return 0;
     Actor* children[3] = { 0 };
+    comboEnemyFamilyClear(&monitor->family);
     int previousLackSoul = g.roomEnemyLackSoul;
     int spawned = 0;
     for (; spawned < ARRAY_COUNT(children); ++spawned)
     {
         Vec3f* pos = &positions[spawned];
-        children[spawned] = Actor_Spawn(&play->actorCtx, play, targets[spawned], pos->x, pos->y, pos->z,
-                                        0, yaws[spawned], 0, params[spawned]);
+        children[spawned] = enemyDynamicChild(&play->actorCtx, play, targets[spawned], params[spawned], pos,
+                                            yaws[spawned], &monitor->family);
         if (!children[spawned] || (!children[spawned]->update && !children[spawned]->init))
             break;
     }
     comboEnemyNativeLeave(&scope);
     if (spawned != ARRAY_COUNT(children))
     {
-        for (int i = 0; i < ARRAY_COUNT(children); ++i)
-            if (children[i])
-                Actor_Kill(children[i]);
+        comboEnemyFamilyClear(&monitor->family);
         g.roomEnemyLackSoul = previousLackSoul;
         return 0;
     }
 
-    *monitor = (EenoSplitMonitor){ owner, { children[0], children[1], children[2] }, play->sceneId, owner->room };
+    monitor->owner = owner;
+    monitor->scene = play->sceneId;
+    monitor->room = owner->room;
+    monitor->fini = owner->fini;
+    owner->fini = enemyEenoSplitFini;
     comboEnemyEncounterComplete(owner->parent, play);
     comboEnemyEncounterComplete(owner->child, play);
     Actor_Kill(owner->parent);
@@ -1379,7 +1419,7 @@ static Actor* enemyNativeBariSplit(ActorContext* ctx, PlayState* play, s16 id,
         enemySplitChildPosition(play, &target, &pos))
     {
         int previousLackSoul = g.roomEnemyLackSoul;
-        Actor* child = Actor_Spawn(ctx, play, target, pos.x, pos.y, pos.z, rx, ry, rz, targetParams);
+        Actor* child = enemyDynamicChild(ctx, play, target, targetParams, &pos, ry, NULL);
         if (child)
             return child;
         if (g.roomEnemyLackSoul != previousLackSoul)
@@ -1476,20 +1516,14 @@ static Actor* enemyBariSplit(ActorContext* ctx, PlayState* play, s16 id,
     if (valid && enemySplitChild(play, comboEnemyEncounterSplitKey(play, &group), &target, &targetParams) &&
         enemySplitChildPosition(play, &target, &pos))
     {
-        if (comboIsForeignEnemyActor(target))
-            return enemySpawnMember(&group, play, ctx, 1, target - FOREIGN_ENEMY_ACTOR_BASE, 0,
-                                    pos.x, pos.y, pos.z, rx, ry, rz, targetParams);
-        if (comboEnemyLoadSplitChildObject(play, target))
+        int previousLackSoul = g.roomEnemyLackSoul;
+        Actor* child = enemyDynamicChild(ctx, play, target, targetParams, &pos, ry, NULL);
+        if (child)
+            return child;
+        if (g.roomEnemyLackSoul != previousLackSoul)
         {
-            int previousLackSoul = g.roomEnemyLackSoul;
-            Actor* child = Actor_Spawn(ctx, play, target, pos.x, pos.y, pos.z, rx, ry, rz, targetParams);
-            if (child)
-                return child;
-            if (g.roomEnemyLackSoul != previousLackSoul)
-            {
-                comboEnemyEncounterBlock(&group);
-                return NULL;
-            }
+            comboEnemyEncounterBlock(&group);
+            return NULL;
         }
     }
     return enemySpawnMember(&group, play, ctx, valid, id, valid, x, y, z, rx, ry, rz, params);

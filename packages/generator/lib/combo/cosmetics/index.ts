@@ -1,12 +1,11 @@
 import type { Game } from '@ootmm/data';
 import type { ColorArg, BufferPath, Options } from '@ootmm/core';
 
-import fs from 'node:fs';
 import { GAMES } from '@ootmm/data';
 import { COLORS, Monitor, Random, randString, sample } from '@ootmm/core';
 import { recolorImage } from '../image';
 import { RomBuilder } from '../rom-builder';
-import { png } from '../util/png';
+import { png, readCosmeticFile } from '#generator-platform';
 import { toU32Buffer } from '../util';
 import { enableModelOotLinkAdult, enableModelOotLinkChild } from './model';
 import { randomizeMusic } from './music';
@@ -243,7 +242,7 @@ class CosmeticsPass {
 
     if (typeof path === 'string') {
       if (!process.env.__IS_BROWSER__) {
-        return fs.promises.readFile(path);
+        return readCosmeticFile(path);
       } else {
         throw new Error(`Cannot load buffers from path`);
       }

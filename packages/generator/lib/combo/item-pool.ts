@@ -8,6 +8,29 @@ import { itemName } from './names';
 
 export type Items = {[k: string]: number};
 
+let cachedSettings = '';
+let cachedWorld: ReturnType<typeof worldState> | undefined;
+
+export function settingsWorld(settings: Settings): ReturnType<typeof worldState> {
+  const key = JSON.stringify(settings);
+  if (cachedWorld && cachedSettings === key) {
+    return cachedWorld;
+  }
+  const cosmetics = makeCosmetics({});
+  const monitor = new Monitor({ onLog: () => {}, onProgress: () => {} });
+  const random = makeRandomSettings({});
+  const pending = worldState(monitor, { settings: structuredClone(settings), cosmetics, seed: "--- INTERNAL ---", random, mode: 'create' });
+  cachedSettings = key;
+  cachedWorld = pending;
+  pending.catch(() => {
+    if (cachedWorld === pending) {
+      cachedWorld = undefined;
+      cachedSettings = '';
+    }
+  });
+  return pending;
+}
+
 function collapseBottleGroup(itemPool: Items, group: Set<Item>, replacement: Item, maxCount?: number) {
   let count = 0;
   for (const item of group) {
@@ -21,10 +44,8 @@ function collapseBottleGroup(itemPool: Items, group: Set<Item>, replacement: Ite
 }
 
 export async function itemPool(settings: Settings): Promise<Items> {
-  const cosmetics = makeCosmetics({});
-  const monitor = new Monitor({ onLog: () => {} });
-  const random = makeRandomSettings({});
-  const { pool, worlds, itemProperties } = await worldState(monitor, { settings, cosmetics, seed: "--- INTERNAL ---", random, mode: 'create' });
+  const { pool: worldPool, worlds, itemProperties } = await settingsWorld(settings);
+  const pool = new Map(worldPool);
 
   /* Extract relevant items from the pool */
   for (const pi of pool.keys()) {

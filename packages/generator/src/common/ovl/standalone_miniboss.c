@@ -1450,7 +1450,7 @@ static void Duel_Init(Actor* actor, PlayState* play)
         };
         Collider_InitJntSph(play, &keeta->bodySpheres);
         Collider_SetJntSph(play, &keeta->bodySpheres, actor, &body, keeta->bodyElements);
-        duel->shield = 6;
+        duel->shield = 1;
     }
 }
 
@@ -7843,74 +7843,6 @@ static void Gomess_Combat(StandaloneDuel* duel, PlayState* play, int finished, f
     }
 }
 
-static void Keeta_Chase(StandaloneDuel* duel, PlayState* play)
-{
-    Actor* actor = &duel->actor;
-    s16 facing = actor->yawTowardsPlayer - actor->world.rot.y;
-    if (actor->xzDistToPlayer < 200.f && fabsf(actor->yDistanceFromLink) < 20.f && facing > -0x4000 && facing < 0x4000)
-    {
-        duel->shield = 0;
-        duel->chaseHasPoint = 0;
-        actor->speed = 0.f;
-        return;
-    }
-    if (duel->walking == 2 && (Animation_OnFrame(&duel->skel, 8.f) || Animation_OnFrame(&duel->skel, 14.f)))
-        Duel_Sfx(actor, 0x3aa0);
-    f32 dx = actor->world.pos.x - duel->chasePoint.x;
-    f32 dz = actor->world.pos.z - duel->chasePoint.z;
-    if (duel->chaseHasPoint && (dx * dx + dz * dz < 25.f || (actor->bgCheckFlags & BGCHECKFLAG_WALL)))
-    {
-        duel->chaseHasPoint = 0;
-        if (!--duel->shield)
-            return;
-    }
-    if (!duel->chaseHasPoint)
-    {
-        s16 away = actor->yawTowardsPlayer + 0x8000;
-        for (int i = 0; i < 8; ++i)
-        {
-            s16 yaw = away + (i & 1 ? 1 : -1) * ((i + 1) / 2) * 0x1800;
-            Vec3f origin = actor->world.pos;
-            origin.y += 35.f;
-            Vec3f point = origin;
-            point.x += 130.f * Math_SinS(yaw);
-            point.z += 130.f * Math_CosS(yaw);
-            Vec3f hit;
-            CollisionPoly* poly = NULL;
-            s32 bgId;
-            if (BgCheck_EntityLineTest1(&play->colCtx, &origin, &point, &hit, &poly, 1, 0, 0, 0, &bgId))
-                continue;
-            for (int sample = 1; sample <= 4; ++sample)
-            {
-                f32 fraction = sample * .25f;
-                Vec3f probe = { origin.x + (point.x - origin.x) * fraction, origin.y,
-                                origin.z + (point.z - origin.z) * fraction };
-                f32 floor = BgCheck_EntityRaycastDown4(&play->colCtx, &poly, &bgId, actor, &probe);
-                if (!poly || fabsf(floor - actor->world.pos.y) > 25.f)
-                    break;
-                if (sample == 4)
-                {
-                    point.y = floor;
-                    duel->chasePoint = point;
-                    duel->chaseHasPoint = 1;
-                }
-            }
-            if (duel->chaseHasPoint)
-                break;
-        }
-        if (!duel->chaseHasPoint)
-        {
-            duel->shield = 0;
-            return;
-        }
-    }
-    s16 yaw = Math_Vec3f_Yaw(&actor->world.pos, &duel->chasePoint);
-    Math_SmoothStepToS(&actor->world.rot.y, yaw, 2, 0x2ee, 5);
-    actor->shape.rot.y = actor->world.rot.y;
-    s16 difference = yaw - actor->world.rot.y;
-    actor->speed = difference > -0x1000 && difference < 0x1000 ? 3.5f : 0.f;
-}
-
 static void Keeta_Play(StandaloneDuel* duel, u16 animation, u8 mode)
 {
     AnimationHeader* anim = Duel_Anim(animation);
@@ -8219,16 +8151,11 @@ static void Keeta_Combat(StandaloneKeeta* keeta, PlayState* play, int finished)
     actor->speed = 0.f;
     if (duel->phase == DUEL_APPROACH && duel->shield)
     {
-        if (actor->xzDistToPlayer < 380.f && fabsf(actor->yDistanceFromLink) < 85.f)
-            Keeta_Chase(duel, play);
-        if (!duel->shield)
-            Keeta_ResumeWalk(keeta);
-        else if (duel->chaseHasPoint && duel->walking != 2)
-        {
-            duel->walking = 2;
-            Keeta_Play(duel, 0xcd88, ANIMMODE_LOOP);
-        }
-        return;
+        if (actor->xzDistToPlayer >= 380.f || fabsf(actor->yDistanceFromLink) >= 85.f)
+            return;
+        duel->shield = 0;
+        duel->chaseHasPoint = 0;
+        Keeta_ResumeWalk(keeta);
     }
     if (duel->phase == DUEL_KEETA_JUMP)
     {

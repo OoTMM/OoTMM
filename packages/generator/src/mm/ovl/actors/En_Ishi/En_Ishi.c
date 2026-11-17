@@ -326,11 +326,16 @@ int EnIshi_DropCustom(EnIshi* this, PlayState* play)
 }
 
 void EnIshi_DropItem(EnIshi* this, PlayState* play) {
-    Vec3f pos = GET_PLAYER(play)->actor.world.pos;
-    pos.y += 20.0f;
+    int small = ENISHI_GET_SIZE_FLAG(&this->actor) == ISHI_SIZE_SMALL_ROCK;
+    Vec3f pos = small ? this->actor.world.pos : GET_PLAYER(play)->actor.world.pos;
+    if (!small)
+        pos.y += 20.0f;
 
     if (this->xflag != XFLAGID_NONE) {
-        EnItem00_DropCustomNoInertiaEx(play, &pos, this->xflag);
+        if (small)
+            EnItem00_DropCustomEx(play, &pos, this->xflag);
+        else
+            EnItem00_DropCustomNoInertiaEx(play, &pos, this->xflag);
         return;
     }
 

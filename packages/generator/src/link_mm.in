@@ -525,6 +525,15 @@ Collider_UpdateCylinder = 0x800E7DF8;
 
 CollisionCheck_SetAT = 0x800E2558;
 CollisionCheck_SetAC = 0x800e2740;
+FrameAdvance_IsEnabled = 0x8016a01c;
+gCollisionResetAT = 0x801ba338;
+gCollisionResetAC = 0x801ba34c;
+gCollisionResetOC = 0x801ba360;
+gCollisionHitEffects = 0x801ba3a8;
+gCollisionPairsAC = 0x801ba3bc;
+gCollisionPairsOC = 0x801ba420;
+gCollisionDamage = 0x801ba4a0;
+gCollisionLinesOC = 0x801ba4b4;
 CollisionCheck_SetOC = 0x800e2928;
 
 Map_SetAreaEntrypoint = 0x8010A2DC;

@@ -124,6 +124,7 @@ EXPORT_SYMBOL(ENEMY_NATIVE_LEEVER_V1, comboEnemyNativeLeeverSpawn);
 
 #if defined(GAME_OOT)
 #include <combo/enemy_actor_layout.h>
+#include <combo/enemy.h>
 
 typedef struct
 {
@@ -135,52 +136,34 @@ EXPORT_SYMBOL(ENEMY_DESERT_LEEVER_CHOICES, sDesertChoices);
 
 typedef struct
 {
-    Actor* actor;
+    EnemyFamily family;
     Actor* spawner;
-    ActorFunc fini;
 } DesertLeeverChild;
 
 static DesertLeeverChild sDesertChildren[8];
 
-static void desertChildFini(Actor* actor, PlayState* play)
+static void desertComplete(EnemyFamily* family, PlayState* play)
 {
-    for (u32 i = 0; i < ARRAY_COUNT(sDesertChildren); ++i)
-    {
-        DesertLeeverChild child = sDesertChildren[i];
-        if (child.actor != actor)
-            continue;
-        memset(&sDesertChildren[i], 0, sizeof(child));
-        for (Actor* parent = play->actorCtx.actors[ACTORCAT_PROP].first; parent; parent = parent->next)
+    DesertLeeverChild* child = (DesertLeeverChild*)family;
+    for (Actor* parent = play->actorCtx.actors[ACTORCAT_PROP].first; parent; parent = parent->next)
+        if (parent == child->spawner && parent->id == ACTOR_EN_ENCOUNT1 && parent->update)
         {
-            if (parent == child.spawner && parent->id == ACTOR_EN_ENCOUNT1 && parent->update)
-            {
-                EnemyNativeEncounterSpawner* spawner = (EnemyNativeEncounterSpawner*)parent;
-                if (spawner->curNumSpawn > 0)
-                    --spawner->curNumSpawn;
-                break;
-            }
+            EnemyNativeEncounterSpawner* spawner = (EnemyNativeEncounterSpawner*)parent;
+            if (spawner->curNumSpawn > 0)
+                --spawner->curNumSpawn;
+            break;
         }
-        if (child.fini)
-            child.fini(actor, play);
-        return;
-    }
+    memset(child, 0, sizeof(*child));
 }
 
 static void desertSpawnerFini(Actor* actor, PlayState* play)
 {
     for (u32 i = 0; i < ARRAY_COUNT(sDesertChildren); ++i)
-    {
-        DesertLeeverChild* child = &sDesertChildren[i];
-        if (child->spawner != actor)
-            continue;
-        if (child->actor == actor)
-            memset(child, 0, sizeof(*child));
-        else
+        if (sDesertChildren[i].spawner == actor)
         {
-            child->spawner = NULL;
-            Actor_Kill(child->actor);
+            comboEnemyFamilyClear(&sDesertChildren[i].family);
+            sDesertChildren[i].spawner = NULL;
         }
-    }
 }
 
 static Actor* desertLeeverSpawn(ActorContext* ctx, Actor* parent, PlayState* play, s16 id,
@@ -194,19 +177,21 @@ static Actor* desertLeeverSpawn(ActorContext* ctx, Actor* parent, PlayState* pla
     {
         for (int i = first; i < first + count; ++i)
         {
-            if (sDesertChildren[i].actor)
+            if (sDesertChildren[i].spawner)
                 continue;
             const DesertLeeverChoice* choice = &sDesertChoices[i];
             ActorEntry entry = { .id = choice->id, .params = choice->params, .pos = { x, y, z }, .rot = { rx, ry, rz } };
             u8 lackSoul = g.roomEnemyLackSoul;
             u32 segment = gSegments[6];
-            int missingSoul = comboEnemyNativeSoulCheck(play, choice->id, choice->params) <= 0;
-            Actor* actor = comboEnemyNativeStandaloneSpawn(ctx, &entry, play, choice->operation);
+            int missingSoul = (comboIsForeignEnemyActor(choice->id) ? comboEnemyForeignSoulCheck(choice->id) :
+                comboEnemyNativeSoulCheck(play, choice->id, choice->params)) <= 0;
+            sDesertChildren[i].family.complete = desertComplete;
+            Actor* actor = comboEnemyFamilySpawn(&sDesertChildren[i].family, ctx, &entry, play, choice->operation);
             g.roomEnemyLackSoul = lackSoul;
             gSegments[6] = segment;
             if (!actor && missingSoul)
             {
-                sDesertChildren[i] = (DesertLeeverChild){ parent, parent, NULL };
+                sDesertChildren[i].spawner = parent;
                 parent->fini = desertSpawnerFini;
                 return parent;
             }
@@ -216,8 +201,7 @@ static Actor* desertLeeverSpawn(ActorContext* ctx, Actor* parent, PlayState* pla
                 return NULL;
             }
             actor->room = parent->room;
-            sDesertChildren[i] = (DesertLeeverChild){ actor, parent, actor->fini };
-            actor->fini = desertChildFini;
+            sDesertChildren[i].spawner = parent;
             parent->fini = desertSpawnerFini;
             return actor;
         }

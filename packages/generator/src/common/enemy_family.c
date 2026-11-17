@@ -1,0 +1,228 @@
+#include <combo.h>
+#include <combo/enemy_native.h>
+
+typedef struct
+{
+    Actor* actor;
+    ActorFunc init, update, fini, draw;
+    EnemyFamily* family;
+} FamilyChild;
+
+static FamilyChild sChildren[256];
+static EnemyFamily* sFamily;
+static int sCollecting;
+
+static void familyInit(Actor*, PlayState*);
+static void familyUpdate(Actor*, PlayState*);
+static void familyFini(Actor*, PlayState*);
+static void familyDraw(Actor*, PlayState*);
+
+static FamilyChild* familyChild(Actor* actor, int vacant)
+{
+    u32 start = ((u32)actor >> 4) & (ARRAY_COUNT(sChildren) - 1);
+    FamilyChild* free = NULL;
+    for (u32 i = 0; i < ARRAY_COUNT(sChildren); ++i)
+    {
+        FamilyChild* child = &sChildren[(start + i) & (ARRAY_COUNT(sChildren) - 1)];
+        if (child->actor == actor)
+            return child;
+        if (!child->actor)
+            return vacant ? (free ? free : child) : NULL;
+        if (child->actor == (Actor*)1 && !free)
+            free = child;
+    }
+    return vacant ? free : NULL;
+}
+
+static void familyBind(FamilyChild* child)
+{
+    Actor* actor = child->actor;
+    child->init = actor->init;
+    child->update = actor->update;
+    child->fini = actor->fini;
+    child->draw = actor->draw;
+    if (actor->init)
+        actor->init = familyInit;
+    if (actor->update)
+        actor->update = familyUpdate;
+    actor->fini = familyFini;
+    if (actor->draw)
+        actor->draw = familyDraw;
+}
+
+static void familyUnbind(FamilyChild* child)
+{
+    Actor* actor = child->actor;
+    if (actor->init == familyInit)
+        actor->init = child->init;
+    if (actor->update == familyUpdate)
+        actor->update = child->update;
+    if (actor->fini == familyFini)
+        actor->fini = child->fini;
+    if (actor->draw == familyDraw)
+        actor->draw = child->draw;
+}
+
+int comboEnemyFamilySpawning(void)
+{
+    return sFamily != NULL;
+}
+
+int comboEnemyFamilyIsGold(Actor* actor)
+{
+    FamilyChild* child = familyChild(actor, 0);
+    return child && (child->family->flags & ENEMY_FAMILY_GOLD);
+}
+
+int comboEnemyFamilyDone(const EnemyFamily* family)
+{
+    return family->started && !family->live && !family->blocked;
+}
+
+void comboEnemyFamilySpawned(Actor* actor)
+{
+    if (!sFamily || !actor || actor->category == ACTORCAT_ITEMACTION || actor->id == ACTOR_EN_ELF)
+        return;
+    FamilyChild* child = familyChild(actor, 1);
+    if (!child)
+    {
+        sFamily->blocked = 1;
+        return;
+    }
+    if (child->actor == actor)
+        return;
+    *child = (FamilyChild){ .actor = actor, .family = sFamily };
+    ++sFamily->live;
+    if (!sCollecting)
+        familyBind(child);
+}
+
+static void familyRun(Actor* actor, PlayState* play, int action)
+{
+    FamilyChild* child = familyChild(actor, 0);
+    if (!child)
+        return;
+    ActorFunc callback = action == 1 ? child->init : action == 2 ? child->draw : child->update;
+    familyUnbind(child);
+    EnemyFamily* previous = sFamily;
+    sFamily = child->family;
+    if (callback)
+        callback(actor, play);
+    sFamily = previous;
+    if (action == 1)
+    {
+        actor->init = NULL;
+        if (!actor->update)
+            child->family->blocked = 1;
+    }
+    if ((child->family->flags & ENEMY_FAMILY_NO_CLEAR) &&
+        (actor->category == ACTORCAT_ENEMY || actor->category == ACTORCAT_BOSS))
+        Actor_ChangeCategory(play, &play->actorCtx, actor, ACTORCAT_NPC);
+    familyBind(child);
+}
+
+static void familyInit(Actor* actor, PlayState* play)
+{
+    familyRun(actor, play, 1);
+}
+
+static void familyUpdate(Actor* actor, PlayState* play)
+{
+    familyRun(actor, play, 0);
+}
+
+static void familyDraw(Actor* actor, PlayState* play)
+{
+    familyRun(actor, play, 2);
+}
+
+static void familyFini(Actor* actor, PlayState* play)
+{
+    FamilyChild* child = familyChild(actor, 0);
+    if (!child)
+        return;
+    EnemyFamily* family = child->family;
+    ActorFunc fini = child->fini;
+    if (actor->init || actor->update)
+        family->blocked = 1;
+    familyUnbind(child);
+    *child = (FamilyChild){ .actor = (Actor*)1 };
+    EnemyFamily* previous = sFamily;
+    sFamily = family;
+    actor->fini = fini;
+    if (fini)
+        fini(actor, play);
+    sFamily = previous;
+    if (family->live && !--family->live && family->complete)
+        family->complete(family, play);
+}
+
+void comboEnemyFamilyClear(EnemyFamily* family)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sChildren); ++i)
+    {
+        FamilyChild* child = &sChildren[i];
+        if (!child->actor || child->actor == (Actor*)1 || child->family != family)
+            continue;
+        Actor* actor = child->actor;
+        familyUnbind(child);
+        ActorFunc init = actor->init;
+        *child = (FamilyChild){ .actor = (Actor*)1 };
+        if (init)
+        {
+            comboEnemyNativeCancelInit(actor, gPlay);
+            actor->init = NULL;
+            actor->fini = NULL;
+        }
+        Actor_Kill(actor);
+    }
+    memset(family, 0, sizeof(*family));
+}
+
+Actor* comboEnemyFamilySpawn(EnemyFamily* family, ActorContext* ctx, ActorEntry* entry, PlayState* play, u32 operation)
+{
+    EnemyFamily* previous = sFamily;
+    int collecting = sCollecting;
+    if (previous)
+        family->flags |= previous->flags;
+    sFamily = family;
+    sCollecting = 1;
+    Actor* actor = comboEnemyDynamicSpawn(ctx, entry, play, operation);
+    comboEnemyFamilySpawned(actor);
+    for (u32 i = 0; i < ARRAY_COUNT(sChildren); ++i)
+        if (sChildren[i].actor && sChildren[i].actor != (Actor*)1 && sChildren[i].family == family &&
+            sChildren[i].actor->fini != familyFini)
+            familyBind(&sChildren[i]);
+    sCollecting = collecting;
+    sFamily = previous;
+    if (actor)
+        family->started = 1;
+    return actor;
+}
+
+#if defined(GAME_MM)
+static void familyActorDestroy(Actor* actor, PlayState* play)
+{
+    if (!actor->init)
+    {
+        if (actor->fini)
+        {
+            ((ActorFunc)actor->fini)(actor, play);
+            actor->fini = NULL;
+        }
+        return;
+    }
+    FamilyChild* child = familyChild(actor, 0);
+    if (!child)
+        return;
+    EnemyFamily* family = child->family;
+    family->blocked = 1;
+    familyUnbind(child);
+    *child = (FamilyChild){ .actor = (Actor*)1 };
+    comboEnemyNativeCancelInit(actor, play);
+    if (family->live && !--family->live && family->complete)
+        family->complete(family, play);
+}
+
+PATCH_FUNC(0x800b6948, familyActorDestroy);
+#endif

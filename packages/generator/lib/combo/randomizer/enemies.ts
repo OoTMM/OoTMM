@@ -5,7 +5,7 @@ import { verifyOotGameplayMemory } from '../enemies/oot-gameplay-memory';
 import { NATIVE_LILY_FACTS } from '../enemies/extra-port-data';
 import { align, toU32Buffer } from '../util';
 import {
-  OOT_DESERT_LEEVER_SLOTS, ENEMY_GOLD_SOURCES, nativeGoldTarget, verifyMmRoomOverlaps, mmRoomOverlapStates, enemySceneMemoryReports, enemyOotSceneMemoryReports, OOT_GAMEPLAY_POLICY, ENEMY_MEMORY_POLICY,
+  OOT_FIELD_STALCHILD_SLOTS, OOT_DESERT_LEEVER_SLOTS, ENEMY_GOLD_SOURCES, nativeGoldTarget, verifyMmRoomOverlaps, mmRoomOverlapStates, enemySceneMemoryReports, enemyOotSceneMemoryReports, OOT_GAMEPLAY_POLICY, ENEMY_MEMORY_POLICY,
   enemyWeight, enemyFormWeights, ootNativeEnemyDefinitionKey, ARWING_ENEMIES,
   standaloneEnemyTransfer, ENEMIES, nativeResourceSource, nativeResourceTarget, NATIVE_ARENA_COMBAT_TARGETS,
   nativeFightRestorationSource, nativeFightRestorationRoomAllowed, nativeFightRestorationCombat, scriptedMmSource, scriptedMmTargetAllowed, BIG_OCTO_ARENA_COMBAT_TARGETS,
@@ -779,7 +779,7 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
   const sorted = new Map<number, NativePlacementRecord>();
   for (const row of records) {
     const floor = !!(row.operation & 32), traits = row.operation & (256 | 512 | 1024), operation = row.operation & ~(32 | 256 | 512 | 1024);
-    if (!Number.isInteger(row.operation) || row.operation < 0 || (operation && ![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 24, 25, 28, 29, 30, 31, 64, 128].includes(operation)))
+    if (!Number.isInteger(row.operation) || row.operation < 0 || (operation && ![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 21, 24, 25, 28, 29, 30, 31, 64, 128, 129].includes(operation)))
       throw new Error('Unsupported native placement operation');
     if (traits & 1024) {
       if (patch.symbols[game].get('ENEMY_GROUND_PLACEMENT_V1')?.length !== 1)
@@ -992,12 +992,16 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
       if (game !== 'mm' || row.targetId !== 0x23f || row.targetParams !== 0 || !traits || (traits & 256))
         throw Error('Invalid native Garahna activation record');
       verifySource(`standalone/${row.targetId}`, () => verifyNativeStandaloneMm(row.targetId, rom, addresses, patch));
+    } else if (operation === 129) {
+      if (game !== 'oot' || source !== 0xa4 || row.targetId !== bufReadU16BE(row.replacement, 0) ||
+        row.targetParams !== bufReadU16BE(row.replacement, 14))
+        throw Error('Invalid Dead Hand encounter replacement');
     } else if (operation === 128) {
       if (game !== 'mm' || floor || !bufEqual(row.original, row.replacement))
         throw new Error('Invalid scripted MM source entry');
       verifyScriptedMmRecord(rom, sourceOffset, row.original, row.targetId, row.targetParams, addresses, patch);
     } else if (operation === 1) {
-      if (!nativeResourceSource(game, source & 0x1fff, params) || !nativeResourceTarget(game, row.targetId, row.targetParams) ||
+      if (!nativeResourceSource(game, source & 0x1fff, params) || !(row.targetId >= 0xc00 || nativeResourceTarget(game, row.targetId, row.targetParams)) ||
         (bufReadU16BE(row.replacement, 0) & 0x1fff) !== row.targetId || bufReadU16BE(row.replacement, 14) !== row.targetParams)
         throw new Error('Unreviewed native resource replacement');
       if ((game === 'oot' && (source & 0x1fff) === 0x197 || game === 'mm' && [0x208, 0x21d].includes(source & 0x1fff)) &&
@@ -1013,7 +1017,7 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
           !row.original.every((byte, i) => byte === Number.parseInt(BIG_OCTO_ARENA.controller.slice(i * 2, i * 2 + 2), 16))) ||
         !bufEqual(row.original, row.replacement) ||
         (source === 0xc8 ? row.targetId !== 0x34 || row.targetParams !== 0 :
-          !NATIVE_ARENA_COMBAT_TARGETS.some(target => target.actorId === row.targetId && target.spawnParams === row.targetParams)) ||
+          !(row.targetId >= 0xc00 || nativeResourceTarget(game, row.targetId, row.targetParams))) ||
         (patch.symbols.oot.get(source === 0xc8 ? 'FOREIGN_ENEMY_BIG_OCTO_ARENA_V1' : 'FOREIGN_ENEMY_DARK_LINK_ARENA_V1')?.length !== 1 ||
           patch.symbols.oot.get('ENEMY_NATIVE_ARENA_LIFETIME_V1')?.length !== 1))
         throw new Error('Missing native arena controller adapter');
@@ -1570,20 +1574,9 @@ function planNativeFightRestoration(game: Game, rom: Uint8Array, loc: NativeFigh
   const source = nativeFightRestorationSource(sourceKey);
   const arena = fighterFacts.find(arena => arena.game === game && arena.source === sourceKey && !loc.mq && arena.scene === loc.scene &&
     arena.room === loc.room && arena.setup === loc.setup && arena.start === loc.start && arena.end === loc.end);
-  if (!source || !arena || source.game !== game || target.game !== game ||
-    !nativeResourceTarget(game, target.actorId, target.spawnParams) || target.actorId === source.actorId ||
-    game === 'oot' && [0x12, 0x2f].includes(target.actorId) || arena.actorOffset + 16 > rom.length) return;
+  if (!source || !arena || source.game !== game || arena.actorOffset + 16 > rom.length) return;
   const original = rom.subarray(arena.actorOffset, arena.actorOffset + 16);
   if (!matchesRestorationRecord(original, arena.original)) return;
-  const actorEntry = CONFIG[game].actorsOvlAddr + target.actorId * 32;
-  if (actorEntry + 32 > rom.length) return;
-  const begin = bufReadU32BE(rom, actorEntry), end = bufReadU32BE(rom, actorEntry + 4), vram = bufReadU32BE(rom, actorEntry + 8);
-  const profile = begin + bufReadU32BE(rom, actorEntry + 20) - vram;
-  if (!begin || end > rom.length || profile < begin || profile + 32 > end ||
-    bufReadU16BE(rom, profile) !== target.actorId || !nativeCombatProfileCategory(rom[profile + 2], target.actorId, target.spawnParams) ||
-    bufReadU16BE(rom, profile + 8) !== target.objectId) return;
-  if (!nativeEnemyOnDemandObjects(game, target.actorId)?.includes(target.objectId) ||
-    !nativeFightRestorationCombat(sourceKey, target)) return;
   const mm = game === 'mm';
   const fields = [
     [0, (mm ? bufReadU16BE(original, 0) & 0xe000 : 0) | target.actorId],
@@ -1652,7 +1645,8 @@ function verifyScriptedMmRecord(rom: Uint8Array, sourceVrom: number, original: U
   const source = ENEMIES.find(row => scriptedMmSource(row.key)?.actorId === sourceId);
   const target = ENEMIES.find(row => row.game === (targetId >= 0xc00 ? 'oot' : 'mm') &&
     row.actorId === (targetId >= 0xc00 ? targetId - 0xc00 : targetId) && row.spawnParams === targetParams && scriptedMmTargetAllowed(row, true, source));
-  if (!source || !target) throw new Error('Unreviewed scripted MM target');
+  if (!source || !(target || targetId < 0xc00 && nativeResourceTarget('mm', targetId, targetParams)))
+    throw new Error('Unreviewed scripted MM target');
   if (targetId === 0x16f && !verifyScriptedMmNativeTarget(rom, targetId, targetParams, addresses, patch))
     throw new Error('Unverified dungeon Bombchu terminal update');
   if (targetId >= 0xc00 && !patch.symPatches.has('FOREIGN_ENEMY_REGISTRY_MM')) throw new Error('Missing scripted MM donor registry');
@@ -1781,13 +1775,13 @@ type NativeArenaCombatPlan = {
   changes: Change[];
   suppressedOriginalSlots: readonly number[];
   controllerSlot?: number;
+  replacementSlot?: number;
 };
 
 function planDeadHandArenaCombat(rom: Uint8Array, loc: DeadHandArenaLocation,
-  targetKey: NativeArenaCombatTargetKey): NativeArenaCombatPlan | undefined {
+  target: { actorId: number; spawnParams: number }): NativeArenaCombatPlan | undefined {
   const arena = DEAD_HAND_ARENAS.find(arena => !loc.mq && arena.scene === loc.scene && arena.room === loc.room &&
     arena.setup === loc.setup && arena.start === loc.start && arena.end === loc.end);
-  const target = nativeArenaCombatTarget(targetKey);
   if (!arena || !target || arena.end > rom.length) return;
   const actors = arena.start + 0x4c, objects = arena.start + 0x40;
   if (bufReadU32BE(rom, arena.start + 0x28) !== 0x0b050000 || bufReadU32BE(rom, arena.start + 0x2c) !== 0x03000040 ||
@@ -1795,29 +1789,6 @@ function planDeadHandArenaCombat(rom: Uint8Array, loc: DeadHandArenaLocation,
     bufReadU32BE(rom, arena.start + 0x34) !== 0x0300004c ||
     CRC32.buf(rom.subarray(actors, actors + arena.actorCount * 16)) >>> 0 !== arena.actorCrc32 ||
     CRC32.buf(rom.subarray(objects, objects + 10)) >>> 0 !== arena.objectCrc32) return;
-  const profileEntry = CONFIG.oot.actorsOvlAddr + target.actorId * 32;
-  if (profileEntry + 32 > rom.length) return;
-  const overlay = bufReadU32BE(rom, profileEntry), end = bufReadU32BE(rom, profileEntry + 4), vram = bufReadU32BE(rom, profileEntry + 8);
-  const profile = overlay + bufReadU32BE(rom, profileEntry + 20) - vram;
-  if (!overlay || end > rom.length || profile < overlay || profile + 32 > end ||
-    bufReadU16BE(rom, profile) !== target.actorId || !nativeCombatProfileCategory(rom[profile + 2], target.actorId, target.spawnParams) ||
-    bufReadU16BE(rom, profile + 8) !== target.objectId) return;
-  let sourceBytes = 0, targetBytes = 0;
-  for (let i = 0; i < 5; ++i) {
-    const sourceId = bufReadU16BE(rom, objects + i * 2), id = sourceId === 0xa6 ? target.objectId : sourceId;
-    const entry = CONFIG.oot.objectTableAddr + id * 8;
-    if (entry + 8 > rom.length) return;
-    const start = bufReadU32BE(rom, entry), end = bufReadU32BE(rom, entry + 4);
-    if (!start || end <= start || end > rom.length) return;
-    targetBytes += align(end - start, 16);
-    const originalEntry = CONFIG.oot.objectTableAddr + sourceId * 8;
-    const originalStart = bufReadU32BE(rom, originalEntry), originalEnd = bufReadU32BE(rom, originalEntry + 4);
-    if (!originalStart || originalEnd <= originalStart || originalEnd > rom.length) return;
-    sourceBytes += align(originalEnd - originalStart, 16);
-  }
-  const onDemand = nativeEnemyOnDemandObjects('oot', target.actorId);
-  const requiredObjectGrowth = onDemand ? 0 : Math.max(0, targetBytes - sourceBytes);
-  if (requiredObjectGrowth > 0) return;
   const retained = Array.from({ length: arena.actorCount }, (_, index) => index)
     .filter(index => bufReadU16BE(rom, actors + index * 16) !== 0xa5);
   if (retained.length !== arena.actorCount - arena.arms ||
@@ -1826,11 +1797,10 @@ function planDeadHandArenaCombat(rom: Uint8Array, loc: DeadHandArenaLocation,
   const body = retained.find(original => bufReadU16BE(rom, actors + original * 16) === 0xa4)!;
   changes.push({ offset: actors + body * 16, value: target.actorId },
     { offset: actors + body * 16 + 14, value: target.spawnParams });
-  for (let i = 0; !onDemand && i < 5; ++i) if (bufReadU16BE(rom, objects + i * 2) === 0xa6)
-    changes.push({ offset: objects + i * 2, value: target.objectId });
   return {
-    changes,
-    suppressedOriginalSlots: Array.from({ length: arena.arms }, (_, slot) => slot)
+    changes, replacementSlot: body,
+    suppressedOriginalSlots: Array.from({ length: arena.actorCount }, (_, slot) => slot)
+      .filter(slot => bufReadU16BE(rom, actors + slot * 16) === 0xa5)
   };
 }
 
@@ -1840,36 +1810,15 @@ const DARK_LINK_ARENA = {
 } as const;
 
 function planDarkLinkArenaCombat(rom: Uint8Array, loc: DeadHandArenaLocation,
-  targetKey: NativeArenaCombatTargetKey): NativeArenaCombatPlan | undefined {
-  const arena = DARK_LINK_ARENA, target = nativeArenaCombatTarget(targetKey);
+  target: { actorId: number; spawnParams: number }): NativeArenaCombatPlan | undefined {
+  const arena = DARK_LINK_ARENA;
   if (loc.mq || !target || loc.scene !== arena.scene || loc.room !== arena.room || loc.setup !== 0 ||
     loc.start !== arena.start || loc.end !== arena.end || arena.end > rom.length) return;
   if (bufReadU32BE(rom, arena.start + 0x28) !== 0x0b050000 || bufReadU32BE(rom, arena.start + 0x2c) !== 0x03000040 ||
     bufReadU32BE(rom, arena.start + 0x30) !== 0x01010000 || bufReadU32BE(rom, arena.start + 0x34) !== 0x0300004c ||
     CRC32.buf(rom.subarray(arena.start + 0x4c, arena.start + 0x5c)) >>> 0 !== arena.actorCrc32 ||
     CRC32.buf(rom.subarray(arena.start + 0x40, arena.start + 0x4a)) >>> 0 !== arena.objectCrc32) return;
-  const actorEntry = CONFIG.oot.actorsOvlAddr + target.actorId * 32;
-  if (actorEntry + 32 > rom.length) return;
-  const begin = bufReadU32BE(rom, actorEntry), end = bufReadU32BE(rom, actorEntry + 4), vram = bufReadU32BE(rom, actorEntry + 8);
-  const profile = begin + bufReadU32BE(rom, actorEntry + 20) - vram;
-  if (!begin || end > rom.length || profile < begin || profile + 32 > end ||
-    bufReadU16BE(rom, profile) !== target.actorId || !nativeCombatProfileCategory(rom[profile + 2], target.actorId, target.spawnParams) || bufReadU16BE(rom, profile + 8) !== target.objectId) return;
-  const objectSize = (id: number) => {
-    const entry = CONFIG.oot.objectTableAddr + id * 8;
-    if (entry + 8 > rom.length) return;
-    const begin = bufReadU32BE(rom, entry), end = bufReadU32BE(rom, entry + 4);
-    if (!begin || end <= begin || end > rom.length) return;
-    return align(end - begin, 16);
-  };
-  const original = objectSize(0x20), replacement = objectSize(target.objectId);
-  if (!original || !replacement) return;
-  const onDemand = nativeEnemyOnDemandObjects('oot', target.actorId);
-  const requiredObjectGrowth = onDemand ? 0 : Math.max(0, replacement - original);
-  if (requiredObjectGrowth > 0) return;
-  return {
-    controllerSlot: 0, suppressedOriginalSlots: [],
-    changes: onDemand ? [] : [{ offset: arena.start + 0x48, value: target.objectId }]
-  };
+  return { controllerSlot: 0, suppressedOriginalSlots: [], changes: [] };
 }
 
 const BIG_OCTO_ARENA = {
@@ -1919,7 +1868,7 @@ function validRoomModelId(id: number): boolean {
 }
 
 function enemyRoomModelRosters(game: Game, plan: EnemyPlan, foreign: ReadonlyMap<string, ForeignEnemyPlacement>,
-  supplemental: readonly EnemySupplementalRoom[], fieldModels: readonly number[]): EnemyRoomModelRoster[] {
+  supplemental: readonly EnemySupplementalRoom[]): EnemyRoomModelRoster[] {
   const rooms = new Map<string, { scene: number; room: number; ids: Map<number, number> }>();
   const add = (scene: number, room: number, ids: readonly number[], halfDays = 0x3ff) => {
     if (!Number.isInteger(scene) || scene < 0 || scene > 112 || !Number.isInteger(room) || room < 0 || room > 31)
@@ -1929,7 +1878,8 @@ function enemyRoomModelRosters(game: Game, plan: EnemyPlan, foreign: ReadonlyMap
     ids.forEach(id => row.ids.set(id, (row.ids.get(id) ?? 0) | halfDays));
     rooms.set(key, row);
   };
-  for (const row of plan) {
+  for (const row of plan.flatMap(row => [row, ...[...new Set([...(row.splitChildren ?? []), ...(row.splitPool ?? [])])]
+    .map(target => ({ ...row, target }))])) {
     const source = enemyDefinition(row.source), target = enemyDefinition(row.target);
     if (source.game !== game) continue;
     let ids: readonly number[];
@@ -1973,7 +1923,6 @@ function enemyRoomModelRosters(game: Game, plan: EnemyPlan, foreign: ReadonlyMap
       }
     } else throw Error('Foreign room preload requires authored physical placements');
   }
-  if (game === 'oot' && fieldModels.length) add(0x51, 0, fieldModels);
   return [...rooms.values()].sort((a, b) => a.scene - b.scene || a.room - b.room)
     .map(row => {
       const modelIds = [...row.ids.keys()].sort((a, b) => a - b);
@@ -2023,10 +1972,10 @@ export function verifyMmEnemyRoomModelSlots(rows: readonly EnemyRoomModelRoster[
 }
 
 function installEnemyRoomModels(patch: Patchfile, plan: EnemyPlan, foreign: ReadonlyMap<string, ForeignEnemyPlacement>,
-  supplemental: readonly EnemySupplementalRoom[], fieldModels: readonly number[]): void {
+  supplemental: readonly EnemySupplementalRoom[]): void {
   const staged: { game: Game; symbol: string; vrom: number; data: Uint8Array }[] = [];
   for (const game of ['oot', 'mm'] as const) {
-    const rows = enemyRoomModelRosters(game, plan, foreign, supplemental, fieldModels);
+    const rows = enemyRoomModelRosters(game, plan, foreign, supplemental);
     if (!rows.length) continue;
     const symbol = 'ENEMY_ROOM_MODELS_' + game.toUpperCase();
     const refs = patch.symbols[game].get(symbol);
@@ -2782,7 +2731,7 @@ function installEnemySplits(game: Game, patch: Patchfile, choices: ReadonlyMap<n
   const writeChild = (name: string, offset: number) => {
     const enemy = enemyDefinition(name);
     const actorId = enemy.game === game ? enemy.actorId : foreign.get(name)?.actorId;
-    if (!actorId || (enemy.game === 'oot' && enemy.actorId === 0x63)) throw new Error('Invalid enemy split target');
+    if (!actorId) throw new Error('Invalid enemy split target');
     bufWriteU16BE(data, offset, actorId | (enemy.habitat === 'ground' ? 0x8000 : 0));
     bufWriteU16BE(data, offset + 2, enemy.spawnParams);
   };
@@ -2808,37 +2757,102 @@ function installEnemySplits(game: Game, patch: Patchfile, choices: ReadonlyMap<n
   patch.addSymbolPatch(symbol, toU32Buffer([vrom]));
 }
 
-function installDesertLeeverShuffle(patch: Patchfile, plan: EnemyPlan, rooms: EnemySupplementalRoom[]): void {
+function dynamicEnemyChoice(host: Game, target: EnemyDefinition, foreign: ReadonlyMap<string, ForeignEnemyPlacement>) {
+  if (target.game !== host) {
+    const imported = foreign.get(target.key);
+    if (!imported) throw Error('Missing dynamic foreign enemy: ' + target.key);
+    return { id: imported.actorId, params: target.spawnParams, operation: 0 };
+  }
+  const id = target.actorId, params = target.spawnParams;
+  let operation = (host === 'oot' ? OOT_ACTOR_ADJUSTMENTS : MM_PLACEMENT_OPERATIONS)[id] ?? 0;
+  if (host === 'oot') {
+    if (id === 0x113) operation = 64;
+    else if (id === 0xc7 && params === 1) operation = 6;
+    else if (id === 0x69) operation = 17;
+    else if (id === 0x1d) operation = 4;
+  } else {
+    if (id === 0x50) operation = 5;
+    else if (id === 0x14) operation = 4;
+    else if (id === 0x66 && [1, 2].includes(params)) operation = 6;
+  }
+  if (host === 'oot' && ['Octorok', 'Stinger', 'Stingray'].includes(target.name)) operation = 28;
+  if (host === 'mm' && mmAquaticTarget(host, id, params)) operation = 29;
+  const attached = host === 'oot' ? [0x37, 0x95].includes(id) : [0x24, 0x50].includes(id);
+  if (!attached) operation |= 512 | (target.habitat === 'air' ? 256 : 0);
+  return { id, params, operation };
+}
+
+function installDynamicChoices(patch: Patchfile, plan: EnemyPlan, foreign: ReadonlyMap<string, ForeignEnemyPlacement>) {
+  for (const game of ['oot', 'mm'] as const) {
+    const choices = new Map<string, ReturnType<typeof dynamicEnemyChoice>>();
+    for (const row of plan) {
+      if (enemyDefinition(row.source).game !== game) continue;
+      for (const key of [row.target, ...(row.splitChildren ?? []), ...(row.splitPool ?? [])]) {
+        const choice = dynamicEnemyChoice(game, enemyDefinition(key), foreign);
+        choices.set(choice.id + '/' + choice.params, choice);
+      }
+    }
+    if (!choices.size) continue;
+    const sorted = [...choices.values()].sort((a, b) => a.id - b.id || a.params - b.params);
+    const data = new Uint8Array(4 + sorted.length * 8);
+    bufWriteU32BE(data, 0, sorted.length);
+    sorted.forEach((choice, i) => [choice.id, choice.params, choice.operation, 0]
+      .forEach((value, j) => bufWriteU16BE(data, 4 + i * 8 + j * 2, value)));
+    const vrom = allocatePlacementMetadata(patch, game, data.length, 'Dynamic enemy metadata capacity exceeded');
+    patch.addNewFile({ name: `enemy/native/${game}/dynamic-choices`, vrom, data, compressed: false });
+    patch.addSymbolPatch('ENEMY_DYNAMIC_CHOICES_' + game.toUpperCase(), toU32Buffer([vrom]));
+  }
+}
+
+function installDesertLeeverShuffle(patch: Patchfile, plan: EnemyPlan, rooms: EnemySupplementalRoom[], foreign: ReadonlyMap<string, ForeignEnemyPlacement>): void {
   const data = new Uint8Array(OOT_DESERT_LEEVER_SLOTS.length * 8);
   OOT_DESERT_LEEVER_SLOTS.forEach((slot, index) => {
     const row = plan.find(row => row.kind === 'desert-spawner' && row.source === slot.key);
     if (!row) return;
     const target = enemyDefinition(row.target);
-    const operation = target.actorId === 0x113 ? 64 : OOT_ACTOR_ADJUSTMENTS[target.actorId] ?? 0;
-    [target.actorId, target.spawnParams, operation, 1].forEach((value, field) =>
+    const choice = dynamicEnemyChoice('oot', target, foreign);
+    [choice.id, choice.params, choice.operation, 1].forEach((value, field) =>
       bufWriteU16BE(data, index * 8 + field * 2, value));
     rooms.push({ game: 'oot', source: row.source, target: row.target, scene: slot.scene, room: slot.room });
   });
   patch.addSymbolPatch('ENEMY_DESERT_LEEVER_CHOICES', data);
 }
 
-function installFieldStalchildShuffle(patch: Patchfile, settings: Settings, plan: EnemyPlan): number[] {
-  if (!settings.enemyShuffleOot || settings.games === 'mm') return [];
-  const safe = new Set(['oot-tektite', 'oot-wolfos', 'oot-lizalfos']);
-  const pool = ENEMIES.filter(enemy => safe.has(enemy.key) &&
-    !enemyShuffleExcluded(settings, enemy, 'oot') &&
-    nativeEnemyOnDemandObjects('oot', enemy.actorId));
-  if (!pool.length) return [];
-  let hash = 2166136261;
-  for (const row of plan) for (const c of row.target) hash = Math.imul(hash ^ c.charCodeAt(0), 16777619);
-  const start = (hash >>> 0) % pool.length;
-  const choices = settings.logic === 'none' && settings.enemyShuffleSpawnMode === 'chaotic'
-    ? [...pool.slice(start), ...pool.slice(0, start)] : [pool[start]];
-  const data = new Uint8Array(16);
-  bufWriteU32BE(data, 0, choices.length);
-  choices.forEach((enemy, i) => bufWriteU32BE(data, 4 + i * 4, (enemy.actorId << 16) | enemy.spawnParams));
-  patch.addSymbolPatch('ENEMY_FIELD_STALCHILD_CHOICES', data);
-  return choices.flatMap(enemy => nativeEnemyOnDemandObjects('oot', enemy.actorId, enemy.spawnParams) ?? []);
+function installFieldStalchildShuffle(patch: Patchfile, settings: Settings, plan: EnemyPlan,
+  foreign: ReadonlyMap<string, ForeignEnemyPlacement>, rooms: EnemySupplementalRoom[]): void {
+  if (!settings.enemyShuffleOot || settings.games === 'mm') return;
+  const header = new Uint8Array(OOT_FIELD_STALCHILD_SLOTS.length * 8);
+  OOT_FIELD_STALCHILD_SLOTS.forEach((slot, index) => {
+    const row = plan.find(row => row.kind === 'field-spawner' && row.source === slot.key);
+    if (!row?.field) throw Error('Missing budgeted Hyrule Field spawner slot');
+    const original = new Uint8Array(16);
+    bufWriteU16BE(original, 0, 0x1b0);
+    const unique = new Map([row.field, ...(row.chaoticOotChoices ?? [])].map(choice =>
+      [`${choice.foreign ? 'mm' : 'oot'}/${choice.target.actorId}/${choice.targetParams}`, choice]));
+    const choices = [...unique.values()];
+    const enemies = choices.map(choice => choice === row.field ? enemyDefinition(row.target) :
+      enemyDefinition(ootNativeEnemyDefinitionKey(choice.target.actorId, choice.targetParams)));
+    const weights = enemyFormWeights(enemies, enemy => enemy, enemy => enemyWeight(settings, 'oot', enemy));
+    const total = weights.reduce((a, b) => a + b, 0);
+    const data = new Uint8Array(choices.length * 8);
+    let cumulative = 0;
+    choices.forEach((choice, i) => {
+      const imported = choice.foreign ? foreign.get(row.target) : undefined;
+      if (choice.foreign && !imported) throw Error('Missing Hyrule Field foreign enemy');
+      const entry = prepareOotEnemizerActor(choice, original, choice.location, imported);
+      if (!entry) throw Error('Missing Hyrule Field spawn adapter');
+      cumulative += Math.max(1, Math.floor(weights[i] * 32768 / total));
+      [entry.targetId, entry.targetParams, entry.operation, cumulative].forEach((value, field) =>
+        bufWriteU16BE(data, i * 8 + field * 2, value));
+    });
+    const vrom = allocatePlacementMetadata(patch, 'oot', data.length, 'Field enemy metadata space exhausted');
+    patch.addNewFile({ name: `enemy/native/oot/field-${slot.slot}`, vrom, data, compressed: false });
+    bufWriteU32BE(header, index * 8, vrom);
+    bufWriteU16BE(header, index * 8 + 4, choices.length);
+    bufWriteU16BE(header, index * 8 + 6, cumulative);
+    rooms.push({ game: 'oot', source: row.source, target: row.target, scene: slot.scene, room: slot.room });
+  });
+  patch.addSymbolPatch('ENEMY_FIELD_STALCHILD_CHOICES', header);
 }
 
 function installMmEnemyDependencies(rom: Uint8Array, plan: EnemyPlan, patch: Patchfile) {
@@ -2904,7 +2918,7 @@ function installMmEnemyDependencies(rom: Uint8Array, plan: EnemyPlan, patch: Pat
   patch.addSymbolPatch('ENEMY_MM_ROOM_DEPENDENCIES_V1', new Uint8Array([vrom >>> 24, vrom >>> 16, vrom >>> 8, vrom]));
 }
 
-function installLilySourceChoices(plan: EnemyPlan, rom: Uint8Array, patch: Patchfile, rooms: EnemySupplementalRoom[]) {
+function installLilySourceChoices(plan: EnemyPlan, rom: Uint8Array, patch: Patchfile, rooms: EnemySupplementalRoom[], foreign: ReadonlyMap<string, ForeignEnemyPlacement>) {
   const selected = plan.filter(row => row.placement?.sourceActorId === 0x13a)
     .sort((a, b) => a.placement!.scene - b.placement!.scene || a.placement!.sourceParams - b.placement!.sourceParams);
   if (!selected.length) return;
@@ -2914,12 +2928,12 @@ function installLilySourceChoices(plan: EnemyPlan, rom: Uint8Array, patch: Patch
   const keys = new Set<string>();
   selected.forEach((row, i) => {
     const source = row.placement!, target = enemyDefinition(row.target), key = `${source.scene}/${source.sourceParams}`;
-    if (keys.has(key) || source.sourceParams >> 12 || target.game !== 'mm' ||
-      !nativeGoldTarget('mm', target.actorId, source.targetParams) || !nativeEnemyOnDemandObjects('mm', target.actorId) ||
+    if (keys.has(key) || source.sourceParams >> 12 ||
       !matchesMmActorEntry(rom, source.actorOffset, source.raw)) throw Error(`Unreviewed lily platform replacement: ${key} -> ${target.key}/${source.targetParams.toString(16)}`);
     keys.add(key);
     rooms.push({ game: 'mm', source: row.source, target: row.target, scene: source.scene, room: source.room });
-    [source.scene, source.sourceParams, target.actorId, source.targetParams, +(target.habitat === 'air'), MM_PLACEMENT_OPERATIONS[target.actorId] ?? 0]
+    const choice = dynamicEnemyChoice('mm', { ...target, spawnParams: source.targetParams }, foreign);
+    [source.scene, source.sourceParams, choice.id, choice.params, +(target.habitat === 'air'), choice.operation]
       .forEach((value, j) => bufWriteU16BE(data, 8 + i * 12 + j * 2, value));
   });
   const vrom = allocatePlacementMetadata(patch, 'mm', data.length, 'Lily source metadata capacity exceeded');
@@ -2928,7 +2942,7 @@ function installLilySourceChoices(plan: EnemyPlan, rom: Uint8Array, patch: Patch
   patch.addSymbolPatch('ENEMY_LILY_CHOICES_MM_V1', toU32Buffer([vrom]));
 }
 
-function installGoldSkulltulaChoices(plan: EnemyPlan, roms: DecompressedRoms, patch: Patchfile, rooms: EnemySupplementalRoom[]) {
+function installGoldSkulltulaChoices(plan: EnemyPlan, roms: DecompressedRoms, patch: Patchfile, rooms: EnemySupplementalRoom[], foreign: ReadonlyMap<string, ForeignEnemyPlacement>) {
   for (const game of ['oot', 'mm'] as const) {
     const selected = plan.filter(row => row.kind === 'gold' && enemyDefinition(row.source).game === game).sort((a, b) => {
       const x = ENEMY_GOLD_SOURCES.find(s => s.key === a.source)!;
@@ -2942,18 +2956,15 @@ function installGoldSkulltulaChoices(plan: EnemyPlan, roms: DecompressedRoms, pa
     for (let i = 0; i < selected.length; i++) {
       const row = selected[i], source = ENEMY_GOLD_SOURCES.find(s => s.key === row.source)!;
       const target = enemyDefinition(row.target);
-      if (target.game !== game || !nativeGoldTarget(game, target.actorId, target.spawnParams) ||
-        !nativeEnemyOnDemandObjects(game, target.actorId)) throw Error('Unreviewed Gold Skulltula reward target');
       for (const slot of source.slots) {
         const rom = slot.mq ? patch.newFiles.find(file => file.name === 'custom/mq_rooms')!.data : roms[game].rom;
         if (!matchesRomBytes(rom, slot.offset, slot.raw)) throw Error('Gold Skulltula source entry changed');
         rooms.push({ game, source: row.source, target: row.target, scene: source.scene, room: slot.room });
       }
-      const operation = game === 'mm' ? MM_PLACEMENT_OPERATIONS[target.actorId] ?? 0 :
-        ({ 0x1b0: 3, 0x1c0: 7, 0x113: 64, 0x11d: 15 } as Record<number, number>)[target.actorId] ?? 0;
+      const choice = dynamicEnemyChoice(game, target, foreign);
       const at = 8 + i * 12;
       const flags = +(target.habitat === 'air') | ('groundReward' in source && source.groundReward ? 2 : 0);
-      [source.scene, source.reward, target.actorId, target.spawnParams, flags, operation]
+      [source.scene, source.reward, choice.id, choice.params, flags, choice.operation]
         .forEach((v, j) => bufWriteU16BE(data, at + j * 2, v));
     }
     const vrom = allocatePlacementMetadata(patch, game, data.length, 'Gold Skulltula choice metadata capacity exceeded');
@@ -3016,6 +3027,15 @@ export function installSoulPreviews(roms: DecompressedRoms, patch: Patchfile, se
 }
 
 export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses: GameAddresses, patch: Patchfile, settings: Settings, monitor?: Monitor) {
+  for (const game of ['oot', 'mm'] as const) {
+    if (!(game === 'oot' ? settings.enemyShuffleOot : settings.enemyShuffleMm)) continue;
+    const timers = game === 'oot' ? [[0x80b25350, 0x241803ff]] :
+      [[0x80973c60, 0x241801ff], [0x80b10310, 0], [0x80b10508, 0x5000001b]];
+    for (const [vram, instruction] of timers) {
+      const address = addresses[game].fileFromRAM(vram);
+      patch.addPatch(address.name, address.offset, toU32Buffer([instruction]));
+    }
+  }
   monitor?.log('Preparing enemy models and effects');
   verifyMmRoomOverlaps(roms.mm.rom);
   for (const game of ['oot', 'mm'] as const) {
@@ -3029,16 +3049,20 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
   }
   installDebugEnemyCatalog(patch);
   const supplementalRooms: EnemySupplementalRoom[] = [];
-  installGoldSkulltulaChoices(plan, roms, patch, supplementalRooms);
-  installLilySourceChoices(plan, roms.mm.rom, patch, supplementalRooms);
-  const fieldModels = installFieldStalchildShuffle(patch, settings, plan);
-  installDesertLeeverShuffle(patch, plan, supplementalRooms);
+  const supplementalEdits = new Set<string>();
+  const verifyNativeActors = nativeActorPreservation(plan, roms, addresses, patch, supplementalEdits);
+  const foreignTargets = prepareForeignEnemies(plan, roms, addresses, patch);
+  installDynamicChoices(patch, plan, foreignTargets);
+  installGoldSkulltulaChoices(plan, roms, patch, supplementalRooms, foreignTargets);
+  installLilySourceChoices(plan, roms.mm.rom, patch, supplementalRooms, foreignTargets);
+  installDesertLeeverShuffle(patch, plan, supplementalRooms, foreignTargets);
   const guards = plan.find(row => row.kind === 'keeta-guards');
   if (guards) {
     const target = enemyDefinition(guards.target);
-    if (target.game !== 'mm' || ![0x0b, 0x12, 0x32].includes(target.actorId) || !nativeResourceTarget('mm', target.actorId, target.spawnParams))
-      throw Error('Invalid Keeta guard replacement');
-    patch.addSymbolPatch('ENEMY_MM_KEETA_GUARDS_V1', toU32Buffer([(target.actorId << 16) | target.spawnParams]));
+    const choice = dynamicEnemyChoice('mm', target, foreignTargets);
+    const data = new Uint8Array(8);
+    [choice.id, choice.params, choice.operation, 1].forEach((value, i) => bufWriteU16BE(data, i * 2, value));
+    patch.addSymbolPatch('ENEMY_MM_KEETA_GUARDS_V1', data);
     for (const room of collectEnemyRooms(roms.mm.rom, 'mm')) for (const header of room.headers) {
       if (header.scene !== 0x0c || !header.actors) continue;
       if (Array.from({ length: header.actors.count }, (_, slot) => header.actors!.offset + slot * 16)
@@ -3046,9 +3070,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
         supplementalRooms.push({ game: 'mm', source: guards.source, target: guards.target, scene: header.scene, room: header.room });
     }
   }
-  const supplementalEdits = new Set<string>();
-  const verifyNativeActors = nativeActorPreservation(plan, roms, addresses, patch, supplementalEdits);
-  const foreignTargets = prepareForeignEnemies(plan, roms, addresses, patch);
+  installFieldStalchildShuffle(patch, settings, plan, foreignTargets, supplementalRooms);
   monitor?.log('Preparing enemy soul previews');
   installSoulPreviews(roms, patch, settings);
   monitor?.log('Writing enemy replacements and rewards');
@@ -3103,7 +3125,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
         arenaReplaced: 0,
         algorithm: 'OoT weighted actor locations',
         placementMode: settings.enemyShuffleOotMode ?? 'individual',
-        plan: plan.filter(row => row.ootr),
+        plan: plan.filter(row => row.ootr || row.field),
       };
     }
     if (game === 'mm' && plan.some(row => row.placement)) {
@@ -3227,11 +3249,11 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
         for (const header of room.headers) {
           if (!nativeFightRestorationRoomAllowed(pair.source, header.room, settings)) continue;
           const restored = planNativeFightRestoration(game, rom, { ...header, start: room.start, end: room.end, mq: !!room.mq },
-            pair.source, target);
+            pair.source, { ...target, actorId: foreignTargets.get(pair.target)?.actorId ?? target.actorId });
           if (!restored) continue;
           changes.push(...restored.changes);
-          records.push(nativePlacementRecord(rom, restored.actorOffset, 1, changes, target.actorId, target.spawnParams));
-          if (nativeEnemyOnDemandObjects(game, target.actorId))
+          records.push(nativePlacementRecord(rom, restored.actorOffset, 1, changes, foreignTargets.get(pair.target)?.actorId ?? target.actorId, target.spawnParams));
+          if (foreignTargets.has(pair.target) || nativeEnemyOnDemandObjects(game, target.actorId))
             for (const alias of room.headers) supplementalRooms.push({ game, source: pair.source, target: pair.target, scene: alias.scene, room: alias.room });
           ++arenaReplaced;
           break;
@@ -3249,21 +3271,22 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
           }
           continue;
         }
-        if (game !== 'oot' || pair.kind !== 'arena' || (!nativeArenaCombatTarget(pair.target) && !BIG_OCTO_ARENA_COMBAT_TARGETS.some(target => target.key === pair.target)) || room.mq ||
+        if (game !== 'oot' || pair.kind !== 'arena' || room.mq ||
           room.headers.length !== 1 || room.protectedEntries.size || !roomUnmodified) continue;
         const header = room.headers[0], loc = { ...header, start: room.start, end: room.end, mq: !!room.mq };
-        const key = pair.target as Parameters<typeof planDeadHandArenaCombat>[2];
-        const arena = pair.source === 'oot-dead-hand-encounter' ? planDeadHandArenaCombat(rom, loc, key) :
-          pair.source === 'oot-dark-link-encounter' ? planDarkLinkArenaCombat(rom, loc, key) :
+        const target = enemyDefinition(pair.target);
+        const selected = { actorId: foreignTargets.get(pair.target)?.actorId ?? target.actorId, spawnParams: target.spawnParams };
+        const arena = pair.source === 'oot-dead-hand-encounter' ? planDeadHandArenaCombat(rom, loc, selected) :
+          pair.source === 'oot-dark-link-encounter' ? planDarkLinkArenaCombat(rom, loc, selected) :
             pair.source === 'oot-big-octo-encounter' && pair.target === 'oot-big-octo-arena-biri' ? planBigOctoArenaCombat(rom, loc, pair.target) : undefined;
         if (!arena || !header.actors) continue;
-        const target = enemyDefinition(pair.target);
-        if (nativeEnemyOnDemandObjects(game, target.actorId))
+        if (foreignTargets.has(pair.target) || nativeEnemyOnDemandObjects(game, target.actorId))
           supplementalRooms.push({ game, source: pair.source, target: pair.target, scene: header.scene, room: header.room });
         if (arena.controllerSlot !== undefined) {
-          const target = nativeArenaCombatTarget(pair.target) ?? BIG_OCTO_ARENA_COMBAT_TARGETS.find(target => target.key === pair.target)!;
-          records.push(nativePlacementRecord(rom, header.actors.offset + arena.controllerSlot * 16, 8, [], target.actorId, target.spawnParams));
+          records.push(nativePlacementRecord(rom, header.actors.offset + arena.controllerSlot * 16, 8, [], selected.actorId, selected.spawnParams));
         }
+        if (arena.replacementSlot !== undefined)
+          records.push(nativePlacementRecord(rom, header.actors.offset + arena.replacementSlot * 16, 129, arena.changes, selected.actorId, selected.spawnParams));
         for (const slot of arena.suppressedOriginalSlots)
           records.push(nativePlacementRecord(rom, header.actors.offset + slot * 16, 2, []));
         changes.push(...arena.changes);
@@ -3357,7 +3380,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
   }
   installEnemySplits('oot', patch, splitChoices.oot, foreignTargets, settings);
   installEnemySplits('mm', patch, splitChoices.mm, foreignTargets, settings);
-  installEnemyRoomModels(patch, plan, foreignTargets, supplementalRooms, fieldModels);
+  installEnemyRoomModels(patch, plan, foreignTargets, supplementalRooms);
   installMmObjectBufferBudgets(roms, addresses, patch, plan, supplementalRooms);
   monitor?.log('Validating enemy placements and memory limits');
   const memoryReports = enemySceneMemoryReports(plan, settings);
@@ -3375,7 +3398,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
         report.objectSavings = verifiedSavings;
       }
     }
-    if (report.bytes > report.budget || report.actors > ENEMY_MEMORY_POLICY.actorLimit)
+    if (report.resourceExcess > 0 || report.bytes > report.budget)
       throw Error(`Final enemy plan exceeds MM scene ${report.scene} memory/actor budget`);
   }
   if (memoryReports.length) {
@@ -3388,6 +3411,6 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
   }
   const gameplay = settings.enemyShuffleOot && settings.games !== 'mm' ? verifyOotGameplayMemory(roms.oot.rom, addresses, patch) : undefined;
   patch.meta.enemyMemoryBudget = { gameplay, version: 2, policy: ENEMY_MEMORY_POLICY, mm: memoryReports, ootPolicy: OOT_GAMEPLAY_POLICY, oot: enemyOotSceneMemoryReports(plan, settings) };
-  installMmEnemyDependencies(roms.mm.rom, plan, patch);
+  installMmEnemyDependencies(roms.mm.rom, plan.flatMap(row => [row, ...(row.splitChildren ?? []).map(target => ({ ...row, target }))]), patch);
   verifyNativeActors();
 }

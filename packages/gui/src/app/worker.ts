@@ -93,6 +93,7 @@ async function onTaskGenerate(task: WorkerTaskGenerate) {
       total,
     });
   };
+  onLog('Reading ROM files…');
   const [ootData, mmData] = await Promise.all([readFile(oot), readFile(mm)]);
   let patchData: Uint8Array | undefined;
   if (patch) {
@@ -163,7 +164,9 @@ function onMessage(event: MessageEvent<WorkerTask>) {
     onTaskCall(task);
     break;
   case 'generate':
-    onTaskGenerate(task);
+    onTaskGenerate(task).catch(error => {
+      postMessage({ type: 'generate-error', id: task.id, error });
+    });
     break;
   }
 }

@@ -1,7 +1,7 @@
 import type { Game } from '@ootmm/data';
 import type { DmaDataRecord } from './dma';
 
-import { compressFile } from './compress';
+import { compressFile } from '#generator-platform';
 import { CONFIG } from './config';
 import { DmaData } from './dma';
 import { bufReadU32BE, bufWriteU32BE } from './util/buffer';

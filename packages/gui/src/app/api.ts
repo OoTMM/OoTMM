@@ -19,6 +19,7 @@ type Resolver = {
 
 let workerTaskId = 0;
 const worker = new Worker();
+let workerError: Error | null = null;
 const resolvers = new Map<number, Resolver>();
 const resolversGenerate = new Map<number, (result: WorkerResultGenerate | WorkerResultGenerateError) => void>();
 const loggersGenerate = new Map<number, (log: string) => void>();
@@ -42,6 +43,7 @@ worker.onmessage = (event: MessageEvent<WorkerResult>) => {
     if (resolver) {
       resolversGenerate.delete(result.id);
       loggersGenerate.delete(result.id);
+      loggersProgress.delete(result.id);
       resolver(result);
     }
     break;
@@ -63,7 +65,19 @@ worker.onmessage = (event: MessageEvent<WorkerResult>) => {
   }
 };
 
+worker.onerror = (event) => {
+  const error = new Error(event.message || 'Unable to start the generator');
+  workerError = error;
+  for (const resolver of resolvers.values()) resolver.reject(error);
+  for (const [id, resolve] of resolversGenerate) resolve({ type: 'generate-error', id, error });
+  resolvers.clear();
+  resolversGenerate.clear();
+  loggersGenerate.clear();
+  loggersProgress.clear();
+};
+
 function workerCall<T>(func: string, args: any[]): Promise<T> {
+  if (workerError) return Promise.reject(workerError);
   return new Promise((resolve, reject) => {
     const id = workerTaskId++;
     resolvers.set(id, { resolve, reject });
@@ -95,6 +109,7 @@ export function initialCosmetics() {
 }
 
 export async function generate(files: { oot: File, mm: File, patch?: File }, options: OptionsInput, log: (msg: string) => void, progress: (current: number, total: number) => void) {
+  if (workerError) throw workerError;
   const result = await new Promise<WorkerResultGenerate | WorkerResultGenerateError>(resolve => {
     const id = workerTaskId++;
     resolversGenerate.set(id, result => {

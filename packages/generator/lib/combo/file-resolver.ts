@@ -1,21 +1,10 @@
 import JSZip from 'jszip';
+import { loadDataZip } from '#generator-platform';
 
 let dataZipPromise: Promise<JSZip> | null = null;
 
 async function makeDataZipPromise(): Promise<JSZip> {
-  let data: Uint8Array;
-
-  if (!process.env.__IS_BROWSER__) {
-    const fs = await import('fs/promises');
-    const path = await import('path');
-    data = await fs.readFile(path.resolve(import.meta.dirname, '..', '..', 'dist', 'data.zip'));
-  } else {
-    const dataZipUrl = new URL('../../dist/data.zip', import.meta.url).href;
-    const response = await fetch(dataZipUrl);
-    data = new Uint8Array(await response.arrayBuffer());
-  }
-
-  return JSZip.loadAsync(data);
+  return JSZip.loadAsync(await loadDataZip());
 }
 
 async function getDataZip() {

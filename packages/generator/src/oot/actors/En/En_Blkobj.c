@@ -12,9 +12,7 @@ static int sArenaSpawnFailed;
 static int En_Blkobj_ArenaBinding(PlayState* play, Actor** owner, s16* id, u16* params)
 {
     *owner = comboEnemyNativeArenaOwner(play);
-    return *owner && (*owner)->id == 0x136 && comboEnemyNativeArenaTarget(play, id, params) &&
-           ((*id == 0x38 && *params == 0) || (*id == 0x1b && *params == 0xffff) ||
-            (*id == 2 && *params == 3) || (*id == 0x113 && (*params == 0xff82 || *params == 0xff83)));
+    return *owner && (*owner)->id == 0x136 && comboEnemyNativeArenaTarget(play, id, params);
 }
 
 static Actor* En_Blkobj_Actor_Spawn_Hook(ActorContext* ctx, PlayState* play, s16 actorId,
@@ -32,10 +30,8 @@ static Actor* En_Blkobj_Actor_Spawn_Hook(ActorContext* ctx, PlayState* play, s16
     sArenaTargetId = targetId;
     sArenaSpawnAttempted = 1;
     sArenaSpawnFailed = 1;
-    sArenaTarget = Actor_Spawn(ctx, play, targetId, x, y, z, rx, ry, rz,
-                               targetId == 0x113 ? comboEnemyNativeIronKnuckleParams(targetParams) : targetParams);
-    if (targetId == 0x113)
-        comboEnemyNativeIronKnuckleActivate(sArenaTarget, play, targetParams);
+    ActorEntry entry = { .id = targetId, .params = targetParams, .pos = { x, y, z }, .rot = { rx, ry, rz } };
+    sArenaTarget = comboEnemyNativeArenaSpawn(ctx, &entry, play);
     if (sArenaTarget && (sArenaTarget->update || sArenaTarget->init) && comboEnemyNativeArenaTrackTarget(play, sArenaTarget))
         sArenaSpawnFailed = 0;
     return sArenaTarget;
