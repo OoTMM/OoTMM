@@ -21,6 +21,12 @@
   },
   "type": "module",
   "main": "lib/combo/index.ts",
+  "imports": {
+    "#generator-platform": {
+      "browser": "./lib/combo/platform/browser.ts",
+      "default": "./lib/combo/platform/node.ts"
+    }
+  },
   "sideEffects": false,
   "devDependencies": {
     "@types/lodash-es": "catalog:",

@@ -234,12 +234,17 @@ void EnIshi_SpawnDustLarge(EnIshi* this, PlayState* play) {
 
 void EnIshi_DropCollectible(EnIshi* this, PlayState* play) {
     s16 dropParams;
-    Vec3f pos = GET_PLAYER(play)->actor.world.pos;
+    int small = PARAMS_GET_U(this->actor.params, 0, 1) == ROCK_SMALL;
+    Vec3f pos = small ? this->actor.world.pos : GET_PLAYER(play)->actor.world.pos;
 
-    pos.y += 20.0f;
+    if (!small)
+        pos.y += 20.0f;
     if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustomNoInertiaEx(play, &pos, this->xflag);
+        if (small)
+            EnItem00_DropCustomEx(play, &pos, this->xflag);
+        else
+            EnItem00_DropCustomNoInertiaEx(play, &pos, this->xflag);
         return;
     }
 

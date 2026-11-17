@@ -467,7 +467,11 @@ static const char* Debug_SpawnEnemy(u32 data)
     if (actorId == 0x216)
         variantOperation = 10;
 #endif
-    if (!foreign && variantOperation)
+    int standalone = variantOperation != 0;
+#if defined(GAME_OOT)
+    standalone |= actorId == ACTOR_EN_MB;
+#endif
+    if (!foreign && standalone)
     {
         ActorEntry entry = { .id = actorId, .pos = { pos.x, pos.y, pos.z }, .params = params };
 #if defined(GAME_MM)

@@ -142,6 +142,9 @@ void comboEnemyEncounterReconcile(PlayState* play);
 void comboEnemyEncounterPostFrame(PlayState* play);
 int comboEnemyEncounterRetryAllocation(const EnemyPlacement* placement);
 int comboIsForeignEnemyActor(s16 id);
+int comboEnemyForeignSoulCheck(s16 actorId);
+int comboEnemyFamilySpawning(void);
+void comboEnemyFamilySpawned(Actor* actor);
 Actor* comboSpawnForeignEnemy(struct ActorContext* actorCtx, PlayState* play, s16 actorId,
     float x, float y, float z, s16 rx, s16 ry, s16 rz, u16 params,
     u32 csId, u32 halfDays, Actor* parent);

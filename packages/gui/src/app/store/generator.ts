@@ -28,7 +28,7 @@ export const createGeneratorSlice: StateCreator<Store, [], [], GeneratorSlice> =
     warnings: [],
   },
   generate: async () => {
-    set(state => ({ generator: { ...state.generator, isGenerating: true, archive: null, result: null, error: null, warnings: [] } }));
+    set(state => ({ generator: { ...state.generator, isGenerating: true, message: 'Preparing generator…', progress: null, archive: null, result: null, error: null, warnings: [] } }));
     const state = get();
     const { config } = state;
     const { oot, mm } = config.files;

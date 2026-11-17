@@ -11,9 +11,8 @@ _Static_assert(sizeof(LilyChoice) == 12, "Lily source metadata ABI");
 typedef struct LilySource {
     struct LilySource* next;
     Actor* platform;
-    Actor* target;
     ActorFunc init, update, fini;
-    ActorFunc targetInit, targetUpdate, targetFini;
+    EnemyFamily family;
     LilyChoice choice;
     u8 defeated, retry;
 } LilySource;
@@ -67,93 +66,32 @@ u16 comboEnemyLilyPrepare(PlayState* play, u16 params)
     return params | 0x1000;
 }
 
-static LilySource* lilyOwner(Actor* actor, int target)
+static LilySource* lilyOwner(Actor* actor)
 {
     for (LilySource* s = sSources; s; s = s->next)
-        if ((target ? s->target : s->platform) == actor)
+        if (s->platform == actor)
             return s;
     return NULL;
 }
 
-static void lilyTargetInit(Actor*, PlayState*);
-static void lilyTargetUpdate(Actor*, PlayState*);
-static void lilyTargetFini(Actor*, PlayState*);
-static void lilyBind(LilySource* s)
+static void lilyComplete(EnemyFamily* family, PlayState* play)
 {
-    Actor* a = s->target;
-    if (a->init != lilyTargetInit)
-        s->targetInit = a->init;
-    if (a->update != lilyTargetUpdate)
-        s->targetUpdate = a->update;
-    if (a->fini != lilyTargetFini)
-        s->targetFini = a->fini;
-    a->init = s->targetInit ? lilyTargetInit : NULL;
-    a->update = s->targetUpdate ? lilyTargetUpdate : NULL;
-    a->fini = lilyTargetFini;
-}
-
-static void lilyTargetInit(Actor* actor, PlayState* play)
-{
-    LilySource* s = lilyOwner(actor, 1);
-    if (!s)
-    {
-        Actor_Kill(actor);
-        return;
-    }
-    actor->init = NULL;
-    if (s->targetInit)
-        s->targetInit(actor, play);
-    s->targetInit = NULL;
-    lilyBind(s);
-}
-
-static void lilyTargetUpdate(Actor* actor, PlayState* play)
-{
-    LilySource* s = lilyOwner(actor, 1);
-    if (!s)
-    {
-        Actor_Kill(actor);
-        return;
-    }
-    actor->update = s->targetUpdate;
-    if (s->targetUpdate)
-    {
-        s->targetUpdate(actor, play);
-        if (!actor->update)
+    for (LilySource* source = sSources; source; source = source->next)
+        if (&source->family == family && comboEnemyFamilyDone(family))
         {
-            s->defeated = 1;
-            if ((s->choice.params & 0x7f) != 0x7f)
-                Flags_SetSwitch(play, s->choice.params & 0x7f);
+            source->defeated = 1;
+            if ((source->choice.params & 0x7f) != 0x7f)
+                Flags_SetSwitch(play, source->choice.params & 0x7f);
+            return;
         }
-    }
-    if (actor->update && (actor->category == ACTORCAT_ENEMY || actor->category == ACTORCAT_BOSS))
-        Actor_ChangeCategory(play, &play->actorCtx, actor, ACTORCAT_NPC);
-    lilyBind(s);
-}
-
-static void lilyTargetFini(Actor* actor, PlayState* play)
-{
-    LilySource* s = lilyOwner(actor, 1);
-    if (!s)
-        return;
-    ActorFunc fini = s->targetFini;
-    s->target = NULL;
-    if (fini)
-        fini(actor, play);
 }
 
 static void lilySourceFini(Actor* actor, PlayState* play)
 {
-    LilySource* s = lilyOwner(actor, 0);
+    LilySource* s = lilyOwner(actor);
     if (!s)
         return;
-    if (s->target)
-    {
-        s->target->init = s->targetInit;
-        s->target->update = s->targetUpdate;
-        s->target->fini = s->targetFini;
-        Actor_Kill(s->target);
-    }
+    comboEnemyFamilyClear(&s->family);
     if (!s->init && s->fini)
         s->fini(actor, play);
     LilySource** link = &sSources;
@@ -166,7 +104,7 @@ static void lilySourceFini(Actor* actor, PlayState* play)
 
 static void lilySourceUpdate(Actor* actor, PlayState* play)
 {
-    LilySource* s = lilyOwner(actor, 0);
+    LilySource* s = lilyOwner(actor);
     if (!s)
     {
         Actor_Kill(actor);
@@ -174,7 +112,7 @@ static void lilySourceUpdate(Actor* actor, PlayState* play)
     }
     if (s->update)
         s->update(actor, play);
-    if (s->defeated || s->target || actor->room != play->roomCtx.curRoom.num)
+    if (s->defeated || s->family.started || actor->room != play->roomCtx.curRoom.num)
         return;
 
     if ((gMmSave.info.weekEventReg[12] & 1) || ((s->choice.params & 0x7f) != 0x7f && Flags_GetSwitch(play, s->choice.params & 0x7f)))
@@ -198,7 +136,9 @@ static void lilySourceUpdate(Actor* actor, PlayState* play)
     ActorEntry entry = { .id = s->choice.id, .pos = { pos.x, pos.y, pos.z }, .rot = { 7, 0x7f, 0x7f }, .params = s->choice.targetParams };
     int previous = sSpawning;
     sSpawning = 1;
-    Actor* target = comboEnemyNativeStandaloneSpawn(&play->actorCtx, &entry, play, s->choice.operation);
+    s->family.flags = ENEMY_FAMILY_NO_CLEAR;
+    s->family.complete = lilyComplete;
+    Actor* target = comboEnemyFamilySpawn(&s->family, &play->actorCtx, &entry, play, s->choice.operation);
     sSpawning = previous;
     if (!target || (!target->init && !target->update))
     {
@@ -207,13 +147,12 @@ static void lilySourceUpdate(Actor* actor, PlayState* play)
     }
     target->room = actor->room;
     Actor_ChangeCategory(play, &play->actorCtx, target, ACTORCAT_NPC);
-    s->target = target;
-    lilyBind(s);
+
 }
 
 static void lilySourceInit(Actor* actor, PlayState* play)
 {
-    LilySource* s = lilyOwner(actor, 0);
+    LilySource* s = lilyOwner(actor);
     if (!s)
     {
         Actor_Kill(actor);

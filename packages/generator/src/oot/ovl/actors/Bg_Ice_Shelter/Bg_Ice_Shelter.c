@@ -95,7 +95,7 @@ void BgIceShelter_InitColliders(Actor_BgIceShelter* this, PlayState* play) {
     static s16 cylinderRadii[] = { 47, 33, 44, 41, 100 };
     static s16 cylinderHeights[] = { 80, 54, 90, 60, 200 };
 
-    if (!BGICESHELTER_ENEMY(&this->dyna.actor) && Config_Flag(CFG_OOT_BLUE_FIRE_ARROWS)) {
+    if (Config_Flag(CFG_OOT_BLUE_FIRE_ARROWS)) {
         sCylinderInit2.elem.acDmgInfo.dmgFlags = 0x4fc1eff6;
         cylinderRadii[4] = 80;
         cylinderHeights[4] = 90;
@@ -105,6 +105,10 @@ void BgIceShelter_InitColliders(Actor_BgIceShelter* this, PlayState* play) {
 
     Collider_InitCylinder(play, &this->cylinder1);
     Collider_SetCylinder(play, &this->cylinder1, &this->dyna.actor, &sCylinderInit1);
+#if defined(GAME_MM)
+    if (Config_Flag(CFG_OOT_BLUE_FIRE_ARROWS))
+        this->cylinder1.base.acFlags |= AC_TYPE_PLAYER;
+#endif
     Collider_UpdateCylinder(&this->dyna.actor, &this->cylinder1);
 
     this->cylinder1.dim.radius = cylinderRadii[type];
@@ -116,8 +120,6 @@ void BgIceShelter_InitColliders(Actor_BgIceShelter* this, PlayState* play) {
         Collider_UpdateCylinder(&this->dyna.actor, &this->cylinder2);
         this->cylinder2.dim.radius = cylinderRadii[type];
         this->cylinder2.dim.height = cylinderHeights[type];
-        if (BGICESHELTER_ENEMY(&this->dyna.actor))
-            this->cylinder2.elem.acDmgInfo.dmgFlags = 0x4FC1FFF6;
     }
 
     if (type == RED_ICE_KING_ZORA) {
@@ -317,7 +319,7 @@ void BgIceShelter_Idle(Actor_BgIceShelter* this, PlayState* play) {
         this->cylinder1.base.acFlags &= ~AC_HIT;
 
         if (this->cylinder1.base.ac != NULL && (this->cylinder1.base.ac->id == RED_ICE_BLUE_FLAME ||
-                                                (!BGICESHELTER_ENEMY(&this->dyna.actor) && Config_Flag(CFG_OOT_BLUE_FIRE_ARROWS) && this->cylinder1.base.ac->id == ACTOR_EN_ARROW && this->cylinder1.base.ac->params == 4))) {
+                                                (Config_Flag(CFG_OOT_BLUE_FIRE_ARROWS) && this->cylinder1.base.ac->id == ACTOR_EN_ARROW && this->cylinder1.base.ac->params == 4))) {
             if (type == RED_ICE_KING_ZORA || BGICESHELTER_ENEMY(&this->dyna.actor)) {
                 if (this->dyna.actor.parent != NULL) {
                     this->dyna.actor.parent->freezeTimer = 50;

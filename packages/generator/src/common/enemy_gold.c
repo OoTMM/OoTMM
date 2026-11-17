@@ -8,7 +8,6 @@
 #include <combo/time.h>
 
 #define GOLD_CHOICE_AIR    1
-#define GOLD_REWARD_GROUND 2
 
 typedef struct
 {
@@ -21,10 +20,8 @@ typedef struct GoldMonitor
 {
     Actor actor;
     struct GoldMonitor* next;
-    Actor* target;
-    ActorFunc targetInit, targetUpdate, targetFini;
+    EnemyFamily family;
     GoldChoice choice;
-    Vec3f drop;
     u8 defeated, retry, preview;
 } GoldMonitor;
 #if defined(GAME_OOT)
@@ -87,100 +84,15 @@ static int goldLookup(PlayState* play, u16 params, GoldChoice* result)
     return 0;
 }
 
-static GoldMonitor* goldOwner(Actor* actor)
-{
-    for (GoldMonitor* m = sMonitors; m; m = m->next)
-        if (m->target == actor)
-            return m;
-    return NULL;
-}
-
-static void goldTargetInit(Actor*, PlayState*);
-static void goldTargetUpdate(Actor*, PlayState*);
-static void goldTargetFini(Actor*, PlayState*);
-
 int comboEnemyGoldIsTarget(Actor* actor)
 {
-    return actor->update == goldTargetUpdate;
-}
-
-static void goldTargetBind(GoldMonitor* m)
-{
-    Actor* a = m->target;
-    if (!a)
-        return;
-    if (a->init != goldTargetInit)
-        m->targetInit = a->init;
-    if (a->update != goldTargetUpdate)
-        m->targetUpdate = a->update;
-    if (a->fini != goldTargetFini)
-        m->targetFini = a->fini;
-    a->init = m->targetInit ? goldTargetInit : NULL;
-    a->update = m->targetUpdate ? goldTargetUpdate : NULL;
-    a->fini = goldTargetFini;
-}
-
-static void goldTargetInit(Actor* a, PlayState* play)
-{
-    GoldMonitor* m = goldOwner(a);
-    if (!m)
-    {
-        Actor_Kill(a);
-        return;
-    }
-    ActorFunc init = m->targetInit;
-    a->init = NULL;
-    if (init)
-        init(a, play);
-    m->targetInit = NULL;
-    goldTargetBind(m);
-}
-
-static void goldTargetUpdate(Actor* a, PlayState* play)
-{
-    GoldMonitor* m = goldOwner(a);
-    if (!m)
-    {
-        Actor_Kill(a);
-        return;
-    }
-    ActorFunc update = m->targetUpdate;
-    a->update = update;
-    if (update)
-    {
-        update(a, play);
-        if (!a->update)
-            m->defeated = 1;
-    }
-
-    if (a->update && (a->category == ACTORCAT_ENEMY || a->category == ACTORCAT_BOSS))
-        Actor_ChangeCategory(play, &play->actorCtx, a, ACTORCAT_NPC);
-    goldTargetBind(m);
-}
-
-static void goldTargetFini(Actor* a, PlayState* play)
-{
-    GoldMonitor* m = goldOwner(a);
-    if (!m)
-        return;
-    ActorFunc fini = m->targetFini;
-    m->target = NULL;
-    if (fini)
-        fini(a, play);
+    return comboEnemyFamilyIsGold(actor);
 }
 
 static void goldFini(Actor* actor, PlayState* play)
 {
     GoldMonitor* m = (GoldMonitor*)actor;
-    if (m->target)
-    {
-        Actor* a = m->target;
-        a->init = m->targetInit;
-        a->update = m->targetUpdate;
-        a->fini = m->targetFini;
-        Actor_Kill(a);
-        m->target = NULL;
-    }
+    comboEnemyFamilyClear(&m->family);
     GoldMonitor** at = &sMonitors;
     while (*at && *at != m)
         at = &(*at)->next;
@@ -198,19 +110,12 @@ static void goldUpdate(Actor* actor, PlayState* play)
         --m->retry;
         return;
     }
-    if (m->defeated)
+    if (comboEnemyFamilyDone(&m->family))
     {
-        Vec3f pos = m->drop;
-        if (m->choice.flags & GOLD_REWARD_GROUND)
+        Vec3f pos = GET_PLAYER(play)->actor.world.pos;
+        Actor_EnItem00* item = EnItem00_DropGoldReward(play, &pos, m->choice.scene, m->choice.reward);
+        if (item)
         {
-            if (!comboEnemyFindFloor(play, actor, &pos, 10.f, 50, 1) &&
-                !comboEnemyFindFloor(play, actor, &pos, 10.f, 150, 1))
-                pos = m->drop;
-        }
-        Actor* token = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_SI, pos.x, pos.y, pos.z, 0, 0, 0, actor->params);
-        if (token)
-        {
-            token->room = actor->room;
             PlaySound(NA_SE_SY_KINSTA_MARK_APPEAR);
             Actor_Kill(actor);
         }
@@ -218,7 +123,7 @@ static void goldUpdate(Actor* actor, PlayState* play)
             m->retry = 15;
         return;
     }
-    if (m->target || m->preview)
+    if (m->family.started || m->preview)
         return;
 #if defined(GAME_OOT)
 
@@ -239,7 +144,8 @@ static void goldUpdate(Actor* actor, PlayState* play)
 #endif
     int previousLackSoul = g.roomEnemyLackSoul;
     u32 previewSerial = gEnemySoulPreviewSerial;
-    Actor* target = comboEnemyNativeStandaloneSpawn(&play->actorCtx, &entry, play, m->choice.operation);
+    m->family.flags = ENEMY_FAMILY_GOLD | ENEMY_FAMILY_NO_CLEAR;
+    Actor* target = comboEnemyFamilySpawn(&m->family, &play->actorCtx, &entry, play, m->choice.operation);
 
     g.roomEnemyLackSoul = previousLackSoul;
     sSpawning = previous;
@@ -255,8 +161,7 @@ static void goldUpdate(Actor* actor, PlayState* play)
     }
     target->room = actor->room;
     Actor_ChangeCategory(play, &play->actorCtx, target, ACTORCAT_NPC);
-    m->target = target;
-    goldTargetBind(m);
+
 }
 
 static void goldConvert(Actor* actor, PlayState* play, const GoldChoice* choice)
@@ -268,7 +173,6 @@ static void goldConvert(Actor* actor, PlayState* play, const GoldChoice* choice)
     GoldMonitor* m = (GoldMonitor*)actor;
     memset((u8*)m + sizeof(Actor), 0, sizeof(*m) - sizeof(Actor));
     m->choice = *choice;
-    m->drop = actor->world.pos;
     m->next = sMonitors;
     sMonitors = m;
     actor->init = NULL;

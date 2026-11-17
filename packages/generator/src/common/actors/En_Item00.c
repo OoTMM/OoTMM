@@ -4,6 +4,7 @@
 #include <combo/global.h>
 #include <combo/draw.h>
 #include <combo/actor.h>
+#include <combo/play.h>
 
 #if defined(GAME_OOT)
 # define DUMMY_MSG 0xb4
@@ -11,8 +12,28 @@
 # define DUMMY_MSG 0x52
 #endif
 
+static void EnItem00_ExtendedItemQuery(ComboItemQuery* q, Actor_EnItem00* this)
+{
+    if (!this->isGoldReward)
+    {
+        Xflag_ItemQuery(q, this->xflag, GI_NONE);
+        return;
+    }
+    memset(q, 0, sizeof(*q));
+    q->id = this->goldReward & 0xff;
+#if defined(GAME_OOT)
+    q->ovType = OV_GS;
+    q->gi = GI_OOT_GS_TOKEN;
+#else
+    q->ovType = OV_CHEST;
+    q->sceneId = Play_SceneKey(this->goldReward >> 8);
+    q->gi = (this->goldReward >> 8) == SCE_MM_SPIDER_HOUSE_OCEAN ? GI_MM_GS_TOKEN_OCEAN : GI_MM_GS_TOKEN_SWAMP;
+#endif
+}
+
 static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
 {
+    ComboItemQuery q;
     ComboItemOverride o;
     s16 gi;
     s16 cloakGi;
@@ -25,7 +46,8 @@ static void EnItem00_DrawXflag(Actor_EnItem00* this, PlayState* play)
     }
     else
     {
-        Xflag_ItemOverride(&o, this->xflag, GI_NONE);
+        EnItem00_ExtendedItemQuery(&q, this);
+        comboItemOverride(&o, &q);
         gi = o.gi;
         cloakGi = o.cloakGi;
         this->xflagGi = gi;
@@ -135,6 +157,7 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
     this->isExtendedCollected = 0;
     this->isExtendedMajor = 0;
     this->enemySourceQuantity = 0;
+    this->isGoldReward = 0;
 
     /* Init the xflag */
     this->xflag = Xflag_InitEx(&this->actor, play);
@@ -189,8 +212,10 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
         return;
     }
 
-    Xflag_ItemQuery(&q, this->xflag, 0);
+    EnItem00_ExtendedItemQuery(&q, this);
     comboItemOverride(&o, &q);
+    if (this->isGoldReward)
+        this->xflagGi = o.gi;
     if (!isItemFastBuy(o.gi))
     {
         PlayerDisplayTextBox(gPlay, DUMMY_MSG, NULL);
@@ -198,7 +223,17 @@ void EnItem00_AddXflag(Actor_EnItem00* this)
         this->isExtendedMajor = 1;
     }
     comboAddItemEx(gPlay, &q, this->isExtendedMajor);
-    Xflag_Set(this->xflag);
+    if (!this->isGoldReward)
+        Xflag_Set(this->xflag);
+#if defined(GAME_OOT)
+    else
+    {
+        u8 id = this->goldReward & 0xff;
+        if (id >= 0xb0)
+            id -= 0xb0;
+        BITMAP32_SET(gOotSave.info.gsFlags, id);
+    }
+#endif
 
     comboPlayItemFanfare(o.gi, 1);
     this->isExtendedCollected = 1;
@@ -263,7 +298,7 @@ Actor_EnItem00* EnItem00_DropCustomEx(PlayState* play, const Vec3f* pos, XflagID
         if (actor->id != ACTOR_EN_ITEM00)
             continue;
         item = (Actor_EnItem00*)actor;
-        if (item->xflag == id)
+        if (!item->isGoldReward && item->xflag == id)
             return NULL;
     }
 
@@ -314,5 +349,39 @@ Actor_EnItem00* EnItem00_DropCustomNoInertiaEx(PlayState* play, const Vec3f* pos
     item->actor.velocity.x = 0.f;
     item->actor.velocity.y = 0.f;
     item->actor.velocity.z = 0.f;
+    return item;
+}
+
+Actor_EnItem00* EnItem00_DropGoldReward(PlayState* play, const Vec3f* pos, u8 scene, u8 reward)
+{
+    u16 key = (scene << 8) | reward;
+    for (Actor* actor = play->actorCtx.actors[ACTORCAT_MISC].first; actor; actor = actor->next)
+    {
+        if (actor->id != ACTOR_EN_ITEM00 || !actor->update)
+            continue;
+        Actor_EnItem00* item = (Actor_EnItem00*)actor;
+        if (item->isGoldReward && item->goldReward == key)
+            return item;
+    }
+
+    int previousOverride = g.xflagOverride;
+    XflagID previousId = g.xflagId;
+    g.xflagOverride = TRUE;
+    g.xflagId = XFLAGID_NONE;
+    Actor_EnItem00* item = (Actor_EnItem00*)Item_DropCollectible(play, pos, ITEM00_RUPEE_GREEN);
+    g.xflagOverride = previousOverride;
+    g.xflagId = previousId;
+    if (!item)
+        return NULL;
+
+    item->isExtended = 1;
+    item->isGoldReward = 1;
+    item->goldReward = key;
+    item->actor.room = play->roomCtx.curRoom.num;
+    item->actor.update = EnItem00_UpdateXflagDrop;
+    item->actor.draw = EnItem00_DrawXflag;
+    item->actor.speed = 0.f;
+    item->actor.velocity = (Vec3f){ 0 };
+    item->actor.gravity = 0.f;
     return item;
 }

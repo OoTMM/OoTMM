@@ -493,7 +493,7 @@
 
 "can_kill_floormasters_lens": "has_lens && can_kill_floormasters"
 
-"can_thaw_red_ice": "has_blue_fire_in_bottle"
+"can_thaw_red_ice": "has_blue_fire"
 "can_kill_red_ice_wallmasters": "can_thaw_red_ice && can_kill_wallmasters"
 "can_kill_red_ice_redead": "can_thaw_red_ice && can_kill_redead_gibdo"
 "can_thaw_enemy": "has_fire_arrows || can_use_din || has_hot_water_enemy"

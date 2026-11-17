@@ -1,5 +1,7 @@
 #include <combo.h>
 #include <combo/enemy_native.h>
+#include <combo/enemy.h>
+#include <combo/dma.h>
 #include <combo/actor_ovl.h>
 #include <combo/actor_id.h>
 #include <combo/rand.h>
@@ -89,62 +91,107 @@ Actor* comboEnemyNativeStalchildSpawn(ActorContext* ctx, ActorEntry* entry, Play
 EXPORT_SYMBOL(ENEMY_NATIVE_STALCHILD_V1, comboEnemyNativeStalchildSpawn);
 
 typedef struct {
-    Actor* actor;
-    Actor* spawner;
-    ActorFunc fini;
-} FieldChild;
-static FieldChild sFieldChildren[4];
-static u32 sFieldStalchildChoices[4] __attribute__((section(".data")));
+    u16 id, params, operation, weight;
+} FieldChoice;
+
+typedef struct {
+    u32 vrom;
+    u16 count, weight;
+} FieldPool;
+
+static EnemyFamily sFieldFamilies[2];
+static FieldPool sFieldStalchildChoices[2] __attribute__((section(".data")));
+static Actor* sFieldSpawner;
+static ActorFunc sFieldSpawnerFini;
 EXPORT_SYMBOL(ENEMY_FIELD_STALCHILD_CHOICES, sFieldStalchildChoices);
 
-static void fieldChildFini(Actor* actor, PlayState* play)
+static void fieldComplete(EnemyFamily* family, PlayState* play)
 {
-    for (u32 i = 0; i < ARRAY_COUNT(sFieldChildren); ++i)
+    if (sFieldSpawner)
     {
-        FieldChild child = sFieldChildren[i];
-        if (child.actor != actor)
-            continue;
-        memset(&sFieldChildren[i], 0, sizeof(child));
-        for (Actor* parent = play->actorCtx.actors[ACTORCAT_PROP].first; parent; parent = parent->next)
-        {
-            if (parent == child.spawner && parent->id == ACTOR_EN_ENCOUNT1 && parent->update)
-            {
-                s16* current = &((EnemyNativeEncounterSpawner*)parent)->curNumSpawn;
-                if (*current > 0)
-                    --*current;
-                break;
-            }
-        }
-        if (child.fini)
-            child.fini(actor, play);
-        break;
+        EnemyNativeEncounterSpawner* spawner = (EnemyNativeEncounterSpawner*)sFieldSpawner;
+        if (spawner->curNumSpawn > 0)
+            --spawner->curNumSpawn;
     }
+    memset(family, 0, sizeof(*family));
+}
+
+static void fieldSpawnerFini(Actor* actor, PlayState* play)
+{
+    ActorFunc fini = sFieldSpawnerFini;
+    sFieldSpawner = NULL;
+    sFieldSpawnerFini = NULL;
+    for (u32 i = 0; i < ARRAY_COUNT(sFieldFamilies); ++i)
+        comboEnemyFamilyClear(&sFieldFamilies[i]);
+    if (fini)
+        fini(actor, play);
+}
+
+static int fieldChoice(u32 slot, FieldChoice* out)
+{
+    const FieldPool* pool = &sFieldStalchildChoices[slot];
+    if (!pool->vrom || !pool->count || !pool->weight)
+        return 0;
+    u32 roll = MIN((u32)(Rand_ZeroOne() * pool->weight), pool->weight - 1);
+    for (u32 i = 0; i < pool->count; i += 8)
+    {
+        FieldChoice choices[8];
+        u32 count = MIN(8, pool->count - i);
+        u32 size = count * sizeof(*choices);
+        if (comboDmaLoadFilePartial(choices, pool->vrom, i * sizeof(*choices), size) != size)
+            return 0;
+        for (u32 j = 0; j < count; ++j)
+            if (roll < choices[j].weight)
+            {
+                *out = choices[j];
+                return 1;
+            }
+    }
+    return 0;
 }
 
 static Actor* fieldStalchildSpawn(ActorContext* ctx, Actor* parent, PlayState* play, s16 id,
-                                  f32 x, f32 y, f32 z, s16 rx, s16 ry, s16 rz, s32 params)
+                                f32 x, f32 y, f32 z, s16 rx, s16 ry, s16 rz, s32 params)
 {
-    u32 count = sFieldStalchildChoices[0];
-    if (play->sceneId == 0x51 && id == STALCHILD_ID && count && count < ARRAY_COUNT(sFieldStalchildChoices))
+    if (play->sceneId != 0x51 || id != STALCHILD_ID || !sFieldStalchildChoices[0].vrom)
+        return Actor_SpawnAsChild(ctx, parent, play, id, x, y, z, rx, ry, rz, params);
+    if (sFieldSpawner && sFieldSpawner != parent)
+        return NULL;
+    if (!sFieldSpawner)
     {
-        for (u32 i = 0; i < ARRAY_COUNT(sFieldChildren); ++i)
-        {
-            if (sFieldChildren[i].actor)
-                continue;
-            u32 selected = MIN((u32)(Rand_ZeroOne() * count), count - 1);
-            u32 choice = sFieldStalchildChoices[selected + 1];
-            u8 lackSoul = g.roomEnemyLackSoul;
-            Actor* actor = Actor_Spawn(ctx, play, choice >> 16, x, y, z, rx, ry, rz, (u16)choice);
-            if (!actor && lackSoul == g.roomEnemyLackSoul)
-                break;
-            if (!actor || (!actor->init && !actor->update))
-                return NULL;
-            sFieldChildren[i] = (FieldChild){ actor, parent, actor->fini };
-            actor->fini = fieldChildFini;
-            return actor;
-        }
+        sFieldSpawner = parent;
+        sFieldSpawnerFini = parent->fini;
+        parent->fini = fieldSpawnerFini;
     }
-    return Actor_SpawnAsChild(ctx, parent, play, id, x, y, z, rx, ry, rz, params);
+    for (u32 i = 0; i < ARRAY_COUNT(sFieldStalchildChoices); ++i)
+    {
+        if (sFieldFamilies[i].live)
+            continue;
+        FieldChoice choice;
+        if (!fieldChoice(i, &choice))
+            return NULL;
+        ActorEntry entry = { choice.id, { x, y, z }, { rx, ry, rz }, choice.params };
+        u8 lackSoul = g.roomEnemyLackSoul;
+        u32 segment = gSegments[6];
+        int soul = comboIsForeignEnemyActor(choice.id) ? comboEnemyForeignSoulCheck(choice.id) :
+            comboEnemyNativeSoulCheck(play, choice.id, choice.params);
+        sFieldFamilies[i].complete = fieldComplete;
+        Actor* actor = comboEnemyFamilySpawn(&sFieldFamilies[i], ctx, &entry, play, choice.operation);
+        g.roomEnemyLackSoul = lackSoul;
+        gSegments[6] = segment;
+        if (!actor && !soul)
+            sFieldFamilies[i].live = 1;
+        if (!actor || (!actor->init && !actor->update))
+        {
+            if (sFieldFamilies[i].live)
+                return parent;
+            ((EnemyNativeEncounterSpawner*)parent)->fieldSpawnTimer = 30;
+            return NULL;
+        }
+        actor->room = parent->room;
+        return actor;
+    }
+    return NULL;
 }
 
 PATCH_CALL(0x8096fe90, fieldStalchildSpawn);

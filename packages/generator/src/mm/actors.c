@@ -691,6 +691,7 @@ Actor *Actor_SpawnAsChildAndCutsceneWrapper(ActorContext *actorCtx, PlayState *p
         comboEnemyGoldWrap(actor, play, variable);
     if (actorId == ACTOR_EN_RAF)
         comboEnemyLilyWrap(actor, play, originalVariable);
+    comboEnemyFamilySpawned(actor);
     return actor;
 }
 
@@ -705,7 +706,7 @@ static int GetRoomClearFlagForActor(PlayState *play, int flag)
         return 0;
 #endif
 
-    if ((comboEnemyGoldSpawning() || comboEnemyLilySpawning()))
+    if ((comboEnemyGoldSpawning() || comboEnemyLilySpawning() || comboEnemyFamilySpawning()))
         return 0;
     res = Flags_GetClear(play, flag);
     if (Config_Flag(CFG_ER_WALLMASTERS) && sActorIdToSpawn == ACTOR_EN_WALLMAS)

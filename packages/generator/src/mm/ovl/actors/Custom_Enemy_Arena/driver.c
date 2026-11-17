@@ -29,7 +29,7 @@ typedef struct EnemyScriptedArena {
     Actor* root;
     Actor* target;
     ActorFunc rootUpdate, rootDraw, rootFini;
-    ActorFunc targetInit, targetUpdate, targetFini, targetDraw;
+    EnemyFamily family;
     u32 rootFlags;
     u16 childCount;
     u8 phase, rootBound, rootHeld, rootHadHealth, targetHadHealth, targetDefeated, sourceTerminal;
@@ -267,103 +267,6 @@ static void rootUpdate(Actor* actor, PlayState* play)
     actor->fini = rootFini;
 }
 
-static EnemyScriptedArena* targetOwner(Actor* actor)
-{
-    for (EnemyScriptedArena* arena = sArenas; arena; arena = arena->next)
-        if (arena->target == actor)
-            return arena;
-    return NULL;
-}
-
-static void targetInit(Actor*, PlayState*);
-static void targetUpdate(Actor*, PlayState*);
-static void targetDraw(Actor*, PlayState*);
-static void targetFini(Actor*, PlayState*);
-
-static void targetUnwrap(EnemyScriptedArena* arena)
-{
-    Actor* actor = arena->target;
-    actor->init = arena->targetInit;
-    actor->update = arena->targetUpdate;
-    actor->fini = arena->targetFini;
-    actor->draw = arena->targetDraw;
-}
-
-static void targetWrap(EnemyScriptedArena* arena)
-{
-    Actor* actor = arena->target;
-    arena->targetInit = actor->init;
-    arena->targetUpdate = actor->update;
-    arena->targetFini = actor->fini;
-    arena->targetDraw = actor->draw;
-    if (actor->init)
-        actor->init = targetInit;
-    if (actor->update)
-        actor->update = targetUpdate;
-    actor->fini = targetFini;
-    if (actor->draw)
-        actor->draw = targetDraw;
-}
-
-static void targetFini(Actor* actor, PlayState* play)
-{
-    EnemyScriptedArena* arena = targetOwner(actor);
-    if (!arena)
-        return;
-    ActorFunc fini = arena->targetFini;
-    targetUnwrap(arena);
-    if (current(arena) && !arena->targetDefeated)
-        arena->phase = PHASE_BLOCKED;
-    arena->target = NULL;
-    if (!arena->targetInit && fini)
-        fini(actor, play);
-}
-
-static void targetInit(Actor* actor, PlayState* play)
-{
-    EnemyScriptedArena* arena = targetOwner(actor);
-    if (!arena || !current(arena))
-        return;
-    targetUnwrap(arena);
-    if (arena->targetInit)
-        arena->targetInit(actor, play);
-    actor->init = NULL;
-    arena->targetHadHealth = actor->colChkInfo.health != 0;
-    if (!actor->update)
-        arena->phase = PHASE_BLOCKED;
-    targetWrap(arena);
-}
-
-static void targetUpdate(Actor* actor, PlayState* play)
-{
-    EnemyScriptedArena* arena = targetOwner(actor);
-    if (!arena || !current(arena) || arena->phase == PHASE_BLOCKED)
-        return;
-    arena->targetHadHealth |= actor->colChkInfo.health != 0;
-    int bombchuDetonated = (arena->binding.original.id & 0x1fff) == 0x43 && arena->binding.targetId == 0x16f &&
-                           arena->binding.targetParams == 0x14 && actor->id == 0x16f && actor->params == 0 &&
-                           *(ActorFunc*)((char*)actor + 0x188) == (ActorFunc)actorAddr(0x16f, 0x80a57a9c);
-    targetUnwrap(arena);
-    comboEnemyRedeadUpdate(actor, play, arena->targetUpdate);
-    if (arena->phase == PHASE_ACTIVE && arena->targetHadHealth && !actor->colChkInfo.health &&
-        (!actor->update || (actor->category != ACTORCAT_ENEMY && actor->category != ACTORCAT_BOSS)))
-        arena->targetDefeated = 1;
-    if (arena->phase == PHASE_ACTIVE && arena->targetHadHealth && bombchuDetonated && !actor->update)
-        arena->targetDefeated = 1;
-    targetWrap(arena);
-}
-
-static void targetDraw(Actor* actor, PlayState* play)
-{
-    EnemyScriptedArena* arena = targetOwner(actor);
-    if (!arena || !current(arena))
-        return;
-    targetUnwrap(arena);
-    if (arena->targetDraw)
-        arena->targetDraw(actor, play);
-    targetWrap(arena);
-}
-
 static Actor* spawnOriginal(EnemyScriptedArena* arena, PlayState* play)
 {
     u8 index = gCurrentSpawnActorNum;
@@ -399,17 +302,7 @@ static void ArenaDestroy(Actor* actor, PlayState* play)
         if (arena->rootHeld)
             arena->root->flags = arena->rootFlags;
     }
-    if (live(play, arena->target))
-    {
-        if (arena->target->init == targetInit)
-            arena->target->init = arena->targetInit;
-        if (arena->target->update == targetUpdate)
-            arena->target->update = arena->targetUpdate;
-        if (arena->target->fini == targetFini)
-            arena->target->fini = arena->targetFini;
-        if (arena->target->draw == targetDraw)
-            arena->target->draw = arena->targetDraw;
-    }
+    comboEnemyFamilyClear(&arena->family);
     EnemyScriptedArena** link = &sArenas;
     while (*link && *link != arena)
         link = &(*link)->next;
@@ -488,7 +381,7 @@ static void ArenaUpdate(Actor* actor, PlayState* play)
     tryBegin(arena);
     if (arena->phase == PHASE_ACTIVE)
     {
-        if (!arena->target && !arena->targetDefeated)
+        if (!arena->family.started)
         {
             CollisionPoly* poly = NULL;
             s32 bgId;
@@ -502,7 +395,7 @@ static void ArenaUpdate(Actor* actor, PlayState* play)
             }
             arena->target = comboEnemyScriptedSpawnTarget(actor, play, pos.x,
                                                           floor + (arena->binding.targetId == 0x16f ? 1.f : 8.f), pos.z,
-                                                          arena->root->shape.rot.y);
+                                                          arena->root->shape.rot.y, &arena->family);
             gSegments[6] = segment;
             if (!arena->target)
                 return;
@@ -513,10 +406,9 @@ static void ArenaUpdate(Actor* actor, PlayState* play)
                 arena->phase = PHASE_BLOCKED;
                 return;
             }
-            arena->targetHadHealth = !arena->target->init && arena->target->colChkInfo.health != 0;
-            targetWrap(arena);
+
         }
-        if (arena->targetDefeated)
+        if (comboEnemyFamilyDone(&arena->family))
         {
             comboEnemyScriptedReleaseChildren(arena->root);
             arena->root->draw = arena->rootDraw;

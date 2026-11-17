@@ -1,19 +1,4 @@
-import fs from 'node:fs';
-
 import { bufWriteI8, bufWriteU16BE, bufWriteU32BE, bufWriteU32LE } from './util/buffer';
-
-export const fileExists = async (path: string) => {
-  if (!process.env.__IS_BROWSER__) {
-    try {
-      await fs.promises.access(path, fs.constants.F_OK);
-      return true;
-    } catch {
-      return false;
-    }
-  } else {
-    return false;
-  }
-}
 
 export const arrayToIndexMap = (arr: string[]) => {
   const map: {[k: string]: number} = {};

@@ -82,11 +82,16 @@ typedef struct ALIGNED(4) Actor_EnItem00
 #if defined(GAME_MM)
     s8      rupeeCollected;
 #endif
-    XflagID xflag;
+    union
+    {
+        XflagID xflag;
+        u16 goldReward;
+    };
     u8      isExtended:1;
     u8      isExtendedCollected:1;
     u8      isExtendedMajor:1;
     u8      enemySourceQuantity:1;
+    u8      isGoldReward:1;
     s16     xflagGi;
 }
 Actor_EnItem00;
@@ -112,5 +117,6 @@ Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xfl
 Actor_EnItem00* EnItem00_DropCustomEx(PlayState* play, const Vec3f* pos, XflagID id);
 Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, const Xflag* xflag);
 Actor_EnItem00* EnItem00_DropCustomNoInertiaEx(PlayState* play, const Vec3f* pos, XflagID xflag);
+Actor_EnItem00* EnItem00_DropGoldReward(PlayState* play, const Vec3f* pos, u8 scene, u8 reward);
 
 #endif

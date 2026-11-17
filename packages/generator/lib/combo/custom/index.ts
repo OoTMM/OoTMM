@@ -1,8 +1,6 @@
 import type { Game } from '@ootmm/data';
 import type { DecompressedRoms } from '../decompress';
 
-import path from 'node:path';
-import fs from 'node:fs';
 import { FILES } from '@ootmm/data';
 import { Monitor } from '@ootmm/core';
 import { concatUint8Arrays } from 'uint8array-extras';
@@ -11,9 +9,8 @@ import { DmaData } from '../dma';
 import { arrayToIndexMap, toU32Buffer } from '../util';
 import { CodeGen } from '../util/codegen';
 import { KeepFile } from './keep';
-import { png } from '../util/png';
+import { png, raw, writeCustomObject } from '#generator-platform';
 import { font } from './font';
-import { raw } from './raw';
 import { Patchfile } from '../patch-build/patchfile';
 import { grayscale } from '../image';
 import { CustomObjectsBuilder } from './custom-objects-builder';
@@ -116,11 +113,7 @@ const makeSplitObject = async (roms: DecompressedRoms, entry: CustomEntry) => {
   const obj = splitObject(buf, entry.offsets, seg.in, seg.out);
 
   if (!process.env.__IS_BROWSER__) {
-    const outDir = path.resolve('build', 'custom');
-    const outBasename = entry.name.toLowerCase();
-    const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
-    await fs.promises.mkdir(outDir, { recursive: true });
-    await fs.promises.writeFile(outFilename, obj.data);
+    await writeCustomObject(entry.name, obj.data);
   }
 
   return obj;
@@ -603,8 +596,7 @@ class CustomAssetsBuilder {
     private patch: Patchfile,
   ) {
     this.defines = new Map();
-    const cgPath = process.env.__IS_BROWSER__ ? '' : path.resolve('include', 'combo', 'custom.h');
-    this.cg = new CodeGen(cgPath, 'CUSTOM_H');
+    this.cg = new CodeGen('include/combo/custom.h', 'CUSTOM_H');
     this.vrom = 0x08000000;
     this.objectId = 0x2000;
     this.objectVroms = [];
@@ -1106,11 +1098,7 @@ class CustomAssetsBuilder {
       await this.addCustomObject(co.name, co.data, co.offsets);
 
       if (!process.env.__IS_BROWSER__) {
-        const outDir = path.resolve('build', 'custom');
-        const outBasename = co.name.toLowerCase();
-        const outFilename = path.resolve(outDir, `${outBasename}.zobj`);
-        await fs.promises.mkdir(outDir, { recursive: true });
-        await fs.promises.writeFile(outFilename, co.data);
+        await writeCustomObject(co.name, co.data);
       }
     }
 

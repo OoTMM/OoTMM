@@ -1018,7 +1018,7 @@ void EnMb_Update(Actor* thisx, PlayState* play) {
             (thisx->params == ENMB_TYPE_CLUB || this->state != ENMB_STATE_ATTACK)) {
             CollisionCheck_SetAC(play, &play->colChkCtx, &this->bodyCollider.base);
         }
-        if (this->state >= ENMB_STATE_IDLE) {
+        if (thisx->params != ENMB_TYPE_CLUB && this->state >= ENMB_STATE_IDLE) {
             CollisionCheck_SetAC(play, &play->colChkCtx, &this->frontShieldingCollider.base);
         }
         if (this->attack > ENMB_ATTACK_NONE) {

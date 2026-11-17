@@ -151,6 +151,15 @@ Actor_DrawDoorLock = 0x80026dc8;
 CollisionCheck_SetOC = 0x8004c130;
 CollisionCheck_SetAT = 0x8004bd50;
 CollisionCheck_SetAC = 0x8004bf40;
+FrameAdvance_IsEnabled = 0x8009db54;
+gCollisionResetAT = 0x800efa98;
+gCollisionResetAC = 0x800efaa8;
+gCollisionResetOC = 0x800efab8;
+gCollisionHitEffects = 0x800efafc;
+gCollisionPairsAC = 0x800efb0c;
+gCollisionPairsOC = 0x800efb4c;
+gCollisionDamage = 0x800efba8;
+gCollisionLinesOC = 0x800efbb8;
 
 func_80038A28           = 0x8002b668;
 func_80033684           = 0x8002650c;

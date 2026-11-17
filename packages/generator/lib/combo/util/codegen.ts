@@ -1,7 +1,4 @@
-import fs from 'fs';
-import path from 'path';
-
-import { fileExists } from '../util';
+import { writeGeneratedFile } from '#generator-platform';
 
 export class CodeGen {
   private data: string[] = [];
@@ -42,8 +39,6 @@ export class CodeGen {
 
   async emit() {
     if (!process.env.__IS_BROWSER__) {
-      const dir = path.dirname(this.filename);
-      await fs.promises.mkdir(dir, { recursive: true });
       const lines: string[] = [];
       if (this.guard) {
         lines.push('#ifndef ' + this.guard);
@@ -58,13 +53,7 @@ export class CodeGen {
         lines.push('#endif');
       }
       const buf = lines.join('\n') + '\n';
-      let previousBuf = undefined;
-      if (await fileExists(this.filename)) {
-        previousBuf = await fs.promises.readFile(this.filename, 'utf8');
-      }
-      if (previousBuf !== buf) {
-        await fs.promises.writeFile(this.filename, buf);
-      }
+      await writeGeneratedFile(this.filename, buf);
     }
   }
 };

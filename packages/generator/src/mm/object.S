@@ -110,8 +110,3 @@ PATCH_START 0x8097934c
 PATCH_END
 
 enemy_fragment_segment 0x80a22f14, mmIceBlockSegment, t2, 0x80a22fcc
-
-PATCH_START 0x80a22f2c
-  nop
-  nop
-PATCH_END

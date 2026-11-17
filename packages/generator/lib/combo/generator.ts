@@ -2,7 +2,7 @@ import type { Options, OptionsInput, Settings, MonitorCallbacks } from '@ootmm/c
 
 import { Monitor, Random, applyRandomSettings, options, resolveMmAgeRequirements } from '@ootmm/core';
 import { logic } from '@ootmm/logic';
-import { codegen } from './codegen';
+import { codegen } from '#generator-platform';
 import { custom } from './custom';
 import { decompressGames } from './decompress';
 import { pack } from './pack';
