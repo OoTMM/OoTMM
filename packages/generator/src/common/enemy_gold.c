@@ -131,6 +131,17 @@ static void goldUpdate(Actor* actor, PlayState* play)
         return;
 #endif
     Vec3f pos = actor->world.pos;
+#if defined(GAME_MM)
+    if (m->choice.scene == 0x28)
+    {
+        switch (m->choice.reward)
+        {
+        case 14: pos = (Vec3f){ -83.f, -98.f, -1690.f }; break;
+        case 2: pos = (Vec3f){ -810.f, 276.f, -720.f }; break;
+        case 3: pos = (Vec3f){ -780.f, 210.f, -1310.f }; break;
+        }
+    }
+#endif
     if (!comboEnemyFindFloor(play, actor, &pos, (m->choice.flags & GOLD_CHOICE_AIR) ? 40.f : 0.f, 50, 0) &&
         !comboEnemyFindFloor(play, actor, &pos, (m->choice.flags & GOLD_CHOICE_AIR) ? 40.f : 0.f, 150, 0))
         pos = actor->world.pos;

@@ -382,7 +382,7 @@ const MM_NATIVE_EXTRA_VARIANTS: readonly EnemyDefinition[] = [
   { key: 'mm-garo-native-target', name: 'Garo', game: 'mm', actorId: 0x113, objectId: 0x155, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_garo', logicMacros: [], soulItem: 'SOUL_ENEMY_GARO' },
   ...[2, 3, 0x8000, 0x8002, 0x8004].map(params => ({ key: `mm-native-keese-${params.toString(16)}`, name: params & 0x8000 ? 'Invisible Keese' : 'Keese', game: 'mm' as const, actorId: 0xc, objectId: 0xb, habitat: 'air' as const, nativeOnly: true, sourceAllowed: false, params: [], spawnParams: params, killMacro: params & 0x8000 ? 'can_kill_keese_lens' : 'can_kill_keese_close', logicMacros: [], soulMacro: 'soul_keese' })),
   ...[0x7ffe, 0x7f00, 0x7f01, 0x7f02, 0x7f03].map(params => ({ key: `mm-native-redead-${params.toString(16)}`, name: params === 0x7ffe ? 'Gibdo' : params === 0x7f03 ? 'Invisible ReDead' : 'ReDead', game: 'mm' as const, actorId: 0x4c, objectId: 0x75, habitat: 'ground' as const, nativeOnly: true, sourceAllowed: false, params: [], spawnParams: params, killMacro: params === 0x7f03 ? 'can_kill_redead_lens' : 'can_kill_redead_gibdo', logicMacros: [], soulMacro: 'soul_redead_gibdo' })),
-  { key: 'mm-native-big-deku-baba', name: 'Big Deku Baba', game: 'mm', actorId: 0x33, objectId: 0x31, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 1, killMacro: 'can_kill_baba_sticks', logicMacros: [], soulMacro: 'soul_deku_baba' },
+  { key: 'mm-native-big-deku-baba', name: 'Large Deku Baba', game: 'mm', actorId: 0x33, objectId: 0x31, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 1, killMacro: 'can_kill_baba_sticks', logicMacros: [], soulMacro: 'soul_deku_baba' },
 ];
 
 const OOT_NATIVE_EXTRA_VARIANTS: readonly EnemyDefinition[] = [
@@ -1851,12 +1851,13 @@ const MM_SKIPPED_SCENES = [0x08, 0x20, 0x24, 0x69] as const;
 
 type MmTargetGroupAllows = (source: readonly MmEnemy[], target: MmEnemy, actor?: MmActor) => boolean;
 
-export function mmPlacementTypeAllows(source: Pick<MmEnemy, 'type'>, target: Pick<MmEnemy, 'type'> & Partial<Pick<MmEnemy, 'game' | 'actorId'>>): boolean {
+export function mmPlacementTypeAllows(source: Pick<MmEnemy, 'type'> & Partial<Pick<MmEnemy, 'game' | 'actorId'>>, target: Pick<MmEnemy, 'type'> & Partial<Pick<MmEnemy, 'game' | 'actorId'>>): boolean {
   if (target.game === 'mm' && target.actorId === ARWING_ENEMIES.mm.actorId)
     return [0, 2, 3, 4].includes(source.type);
 
   return enemyIsCarnivorousLily(target.game ?? '', target.actorId ?? -1) ||
-    source.type === target.type || ((source.type === 3 || source.type === 4) && target.type === 0);
+    source.type === target.type || ((source.type === 3 || source.type === 4 ||
+      (source.game === 'mm' && source.actorId === 0x291)) && target.type === 0);
 }
 
 function solveMmScene(scene: MmScene, nativeRoster: readonly MmEnemy[], targetRoster: readonly MmEnemy[], next: (max: number) => number, groupAllows: MmTargetGroupAllows, ignoreRestrictions: boolean, weight: (target: EnemyShuffleIdentity) => number, supplemental: EnemyPlan, memoryOptions: EnemyMemoryOptions, queue?: MmSceneProblem[]): MmActorChange[] {
@@ -3656,7 +3657,7 @@ export function enemyShuffleRoster(game: Game, crossGame: boolean) {
 }
 
 export function defaultEnemyShuffleWeight(miniboss: boolean, name = ''): number {
-  return name.startsWith('Invisible ') ? 0.75 : miniboss ? 0.35 : 1;
+  return name.startsWith('Invisible ') ? 0.5 : miniboss ? 0.35 : 1;
 }
 
 function enemyWeightFamily(target: EnemyShuffleIdentity): string {

@@ -18,7 +18,14 @@ export default defineConfig({
     emptyOutDir: true,
   },
   plugins: [
-    preact(),
+    preact({
+      exclude: [
+        /node_modules/,
+        '**/packages/core/src/enemy-data.ts',
+        '**/packages/generator/lib/combo/enemies/enemy-rom-data.ts',
+        '**/packages/data/lib/enemy-audio.ts',
+      ],
+    }),
     tailwindcss(),
     //visualizer({ open: true, filename: 'bundle-visualization.html' })
   ],

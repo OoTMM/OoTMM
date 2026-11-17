@@ -1809,18 +1809,22 @@ void comboEnemyNativePlacementUpdate(PlayState* play)
     }
 }
 
+static int enemyGroundActive(Actor* actor)
+{
+    return actor && actor->update && (actor->category == ACTORCAT_ENEMY || actor->category == ACTORCAT_BOSS ||
+        (actor->category == ACTORCAT_NPC && comboEnemyFamilyIsGold(actor)));
+}
+
 static int enemyGroundLive(Actor* actor)
 {
-    return actor && comboEnemyGroundBound(actor) && actor->update &&
-           (actor->category == ACTORCAT_ENEMY || actor->category == ACTORCAT_BOSS);
+    return enemyGroundActive(actor) && comboEnemyGroundBound(actor);
 }
 
 static void enemyGroundCapture(Actor* actor, EnemyGroundStep* step, int native)
 {
     f32 gap;
     step->active = 0;
-    if (actor && comboEnemyAirBound(actor) && actor->update &&
-        (actor->category == ACTORCAT_ENEMY || actor->category == ACTORCAT_BOSS) &&
+    if (enemyGroundActive(actor) && comboEnemyAirBound(actor) &&
         actor->floorHeight > -30000.f && actor->floorHeight < 30000.f)
     {
         step->actor = actor;

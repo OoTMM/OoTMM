@@ -3156,7 +3156,7 @@ export const ENEMY_MEMORY_FACTS = {
     'ovl/oot/oot_ovl_Native_Enemy_mm_boss_04.zovlx': { 'memory': 13440, 'profileOffset': 11824, 'instance': 18648 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_boss_05.zovlx': { 'memory': 15920, 'profileOffset': 13240, 'instance': 1280 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_en_baguo.zovlx': { 'memory': 5632, 'profileOffset': 4820, 'instance': 2244 },
-    'ovl/oot/oot_ovl_Native_Enemy_mm_en_bat.zovlx': { 'memory': 6256, 'profileOffset': 5268, 'instance': 468 },
+    'ovl/oot/oot_ovl_Native_Enemy_mm_en_bat.zovlx': { 'memory': 6640, 'profileOffset': 5652, 'instance': 468 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_en_bee.zovlx': { 'memory': 3536, 'profileOffset': 3084, 'instance': 640 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_en_bigslime.zovlx': { 'memory': 39408, 'profileOffset': 32060, 'instance': 12856 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_en_bsb.zovlx': { 'memory': 9744, 'profileOffset': 8512, 'instance': 1364 },

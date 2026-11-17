@@ -386,19 +386,25 @@ static int goldFloor(PlayState* play, Actor* actor, Vec3f* position, f32 height,
             if (!safe)
                 continue;
 
-            Vec3f from = { origin.x, candidate.y + 40.f, origin.z };
-            Vec3f to = { candidate.x, candidate.y + 40.f, candidate.z }, hit;
+            f32 routeY = MAX(origin.y + 2.f, candidate.y + 40.f);
+            Vec3f from = { origin.x, routeY, origin.z };
+            Vec3f to = { candidate.x, routeY, candidate.z }, hit;
+            Vec3f feet = { candidate.x, candidate.y + 2.f, candidate.z };
             CollisionPoly* wall;
             s32 bgId;
-            if (radius && BgCheck_EntityLineTest1(&play->colCtx, &from, &to, &hit, &wall, 1, 0, 0, 0, &bgId))
+            if (radius && (BgCheck_EntityLineTest1(&play->colCtx, &from, &to, &hit, &wall, 1, 0, 0, 0, &bgId) ||
+                BgCheck_EntityLineTest1(&play->colCtx, &to, &feet, &hit, &wall, 1, 0, 1, 0, &bgId)))
                 continue;
 
-            for (int side = 0; side < 4; ++side)
+            for (int side = 0; side < 8; ++side)
             {
                 Vec3f edge = candidate;
-                edge.x += 24.f * Math_SinS(side * 0x4000);
-                edge.z += 24.f * Math_CosS(side * 0x4000);
-                if (!goldFloorAt(play, actor, &edge, height) || edge.y < candidate.y - 30.f ||
+                edge.x += 32.f * Math_SinS(side * 0x2000);
+                edge.z += 32.f * Math_CosS(side * 0x2000);
+                from = (Vec3f){ candidate.x, candidate.y + 40.f, candidate.z };
+                to = (Vec3f){ edge.x, candidate.y + 40.f, edge.z };
+                if (BgCheck_EntityLineTest1(&play->colCtx, &from, &to, &hit, &wall, 1, 0, 0, 0, &bgId) ||
+                    !goldFloorAt(play, actor, &edge, height) || edge.y < candidate.y - 30.f ||
                     edge.y > candidate.y + 30.f)
                 {
                     safe = 0;

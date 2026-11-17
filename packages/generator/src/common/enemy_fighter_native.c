@@ -29,9 +29,49 @@ typedef struct {
     f32 approach;
     u8 pad2[4];
     f32 unkFloat;
-    s16 sword, spin, keyFlag, pad3, invisible;
+    s16 sword, spin, keyFlag, color, invisible;
 } NativeFighter;
 _Static_assert(__builtin_offsetof(NativeFighter, spin) == 0x302, "fighter spin");
+_Static_assert(__builtin_offsetof(NativeFighter, color) == 0x306, "fighter color");
+
+static const Color_RGBA8 kFighterColors[] = {
+    { 140, 0, 0, 255 },
+    { 255, 130, 10, 255 },
+    { 185, 130, 210, 255 },
+    { 135, 195, 80, 255 },
+};
+
+static int fighterOverrideLimbDraw(PlayState* play, s32 limbIndex, Gfx** dList, Vec3f* pos, Vec3s* rot, void* actor)
+{
+    if (limbIndex == 3 || limbIndex == 6 || limbIndex == 11 || limbIndex == 16)
+    {
+        OverrideLimbDrawOpa original = actorAddr(FIGHTER_ID, 0x80b454cc);
+        return original(play, limbIndex, dList, pos, rot, actor);
+    }
+    const Color_RGBA8* color = &kFighterColors[((NativeFighter*)actor)->color];
+    OPEN_DISPS(play->state.gfxCtx);
+    gDPPipeSync(POLY_OPA_DISP++);
+    gDPSetEnvColor(POLY_OPA_DISP++, color->r, color->g, color->b, color->a);
+    CLOSE_DISPS();
+    return 0;
+}
+
+static void fighterDrawSkeleton(PlayState* play, void** skeleton, Vec3s* joints, s32 count, void* overrideLimbDraw, void* postLimbDraw, void* actor)
+{
+    if (sFighterSelected == actor)
+        overrideLimbDraw = fighterOverrideLimbDraw;
+    SkelAnime_DrawFlexOpa(play, skeleton, joints, count, overrideLimbDraw, postLimbDraw, actor);
+}
+PATCH_CALL(0x80b45aac, fighterDrawSkeleton);
+
+static void fighterDraw(Actor* actor, PlayState* play)
+{
+    Actor* previous = sFighterSelected;
+    ActorFunc draw = actorAddr(FIGHTER_ID, FIGHTER_DRAW);
+    sFighterSelected = actor;
+    draw(actor, play);
+    sFighterSelected = previous;
+}
 #else
 #define FIGHTER_ID 0x21d
 #define FIGHTER_PARAMS 0x1fc0
@@ -52,12 +92,15 @@ typedef struct {
     f32 dmgScale, steamScale;
     s16 textOffset, textType, eye, blink, spin, sword, exitIndex, csId;
     u8 animationsDisabled;
-    u8 pad2[0x2f8 - 0x2d9];
+    u8 pad2[0x2ec - 0x2d9];
+    s32 color;
+    u8 pad4[0x2f8 - 0x2f0];
     Vec3f swordScaleRight, swordScaleLeft;
     u8 pad3[0x420 - 0x310];
     ColliderQuad swordCollider;
 } NativeFighter;
 _Static_assert(__builtin_offsetof(NativeFighter, actionFunc) == 0x2ac, "fighter action");
+_Static_assert(__builtin_offsetof(NativeFighter, color) == 0x2ec, "fighter color");
 static int fighterCanAttack(Actor* actor, f32 range)
 {
     if (actor->xzDistToPlayer > range || fabsf(actor->yDistanceFromLink) >= 50.f)
@@ -206,14 +249,20 @@ static void fighterActivate(Actor* actor, PlayState* play)
     actor->flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED | 5;
 #if defined(GAME_OOT)
     ((NativeFighter*)actor)->invisible = 0;
+    ((NativeFighter*)actor)->color = (s16)(Rand_ZeroOne() * ARRAY_COUNT(kFighterColors));
 #else
     NativeFighter* fighter = (NativeFighter*)actor;
+    fighter->color = (s32)(Rand_ZeroOne() * 3.f);
     fighter->swordScaleRight.x = fighter->swordScaleRight.y = fighter->swordScaleRight.z = 1.f;
     fighter->swordScaleLeft = fighter->swordScaleRight;
 #endif
     ready(actor);
     gSegments[6] = previousSegment;
+#if defined(GAME_OOT)
+    actor->draw = fighterDraw;
+#else
     actor->draw = actorAddr(FIGHTER_ID, FIGHTER_DRAW);
+#endif
     actor->update = fighterUpdate;
     actor->fini = fighterFini;
 }
