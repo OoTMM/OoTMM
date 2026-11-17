@@ -13,6 +13,29 @@ typedef struct {
     f32 bestDistance;
 } EnemyFlightReturn;
 
+static inline void enemyFlightCheckWall(PlayState* play, Actor* actor, Vec3f previous)
+{
+    Vec3f from = previous;
+    Vec3f to = actor->world.pos;
+    if (from.x == to.x && from.y == to.y && from.z == to.z)
+        return;
+    f32 height = actor->shape.yOffset * actor->scale.y;
+    from.y += height;
+    to.y += height;
+    Vec3f hit;
+    CollisionPoly* wall;
+    s32 bgId;
+    if (!BgCheck_EntityLineTest1(&play->colCtx, &from, &to, &hit, &wall, 1, 0, 0, 0, &bgId))
+        return;
+    actor->world.pos = previous;
+    actor->wallPoly = wall;
+    actor->wallBgId = bgId;
+    actor->wallYaw = Math_Atan2S(wall->normal.z, wall->normal.x);
+    if ((to.x - from.x) * wall->normal.x + (to.z - from.z) * wall->normal.z > 0.f)
+        actor->wallYaw += 0x8000;
+    actor->bgCheckFlags |= BGCHECKFLAG_WALL;
+}
+
 static inline int enemyFlightClear(PlayState* play, Vec3f* from, Vec3f* to)
 {
     if (from->x == to->x && from->y == to->y && from->z == to->z)

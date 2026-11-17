@@ -18,7 +18,14 @@ export default defineConfig({
   publicDir: false,
 	plugins: [
     MultipleAssets(assetsDirs, { ssr: false }),
-    preact(),
+    preact({
+      exclude: [
+        /node_modules/,
+        '**/packages/core/src/enemy-data.ts',
+        '**/packages/generator/lib/combo/enemies/enemy-rom-data.ts',
+        '**/packages/data/lib/enemy-audio.ts',
+      ],
+    }),
     mdx(),
     tailwind(),
   ],

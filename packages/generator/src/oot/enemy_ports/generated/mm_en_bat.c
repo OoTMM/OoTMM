@@ -1,5 +1,6 @@
 #include "mm_native_compat.h"
 #include <combo/mask.h>
+#include <combo/enemy_flight.h>
 #define gBadBatSetupDL (*((Gfx (*)[1])0x060000a0))
 #define gBadBatBodyDL (*((Gfx (*)[1])0x060000c8))
 #define gBadBatWingsFrame0DL (*((Gfx (*)[1])0x060001b0))
@@ -539,7 +540,6 @@ void EnBat_UpdateDamage(EnBat* this, PlayState* play) {
 }
 
 void EnBat_Update(Actor* thisx, PlayState* play) {
-    s32 pad;
     EnBat* this = (EnBat*)thisx;
 
     if (0 == -1) {
@@ -563,8 +563,10 @@ void EnBat_Update(Actor* thisx, PlayState* play) {
             Actor_MoveWithGravity(&this->actor);
         }
 
+        Vec3f previous = this->actor.prevPos;
         Actor_UpdateBgCheckInfo(play, &this->actor, 12.0f, 15.0f, 50.0f,
                                 UPDBGCHECKINFO_FLAG_1 | UPDBGCHECKINFO_FLAG_2 | UPDBGCHECKINFO_FLAG_4);
+        enemyFlightCheckWall(play, &this->actor, previous);
 
         Actor_SetFocus(&this->actor, this->actor.shape.yOffset * 0.01f);
         this->collider.dim.worldSphere.center.x = this->actor.focus.pos.x;
