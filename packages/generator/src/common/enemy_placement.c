@@ -589,6 +589,25 @@ u32 comboEnemyNativeSplitKey(PlayState* play, s16 actorId)
 }
 
 #if defined(GAME_OOT)
+int comboEnemyShuffledDeadHand(Actor* actor, PlayState* play)
+{
+    NativePlacementState* state = actor && actor->id == ACTOR_EN_DH ? nativePlacementState(actor) : NULL;
+    return state && nativePlacementCurrent(state, play);
+}
+
+static void shuffledDeadHandBgCheck(PlayState* play, Actor* actor, f32 wallHeight, f32 wallRadius,
+                                   f32 ceilingHeight, s32 flags)
+{
+    if (comboEnemyShuffledDeadHand(actor, play))
+    {
+        wallRadius = 24.f;
+        flags &= ~(1 << 4);
+    }
+    Actor_UpdateBgCheckInfo(play, actor, wallHeight, wallRadius, ceilingHeight, flags);
+}
+
+PATCH_CALL(0x8096ce74, shuffledDeadHandBgCheck);
+
 int comboEnemyNativePlacementActive(Actor* actor)
 {
     return sNativeScope && sNativeScope->actor == actor && nativePlacementCurrent(sNativeScope, gPlay);
@@ -1504,7 +1523,9 @@ retrySeed:
     }
     if (record.operation == 129)
     {
-        if (!comboEnemyDynamicSpawn(ctx, entry, play, 0xffff))
+        if (comboIsForeignEnemyActor(entry->id))
+            NativePlacementSpawnEntry(ctx, entry, play);
+        else if (!comboEnemyDynamicSpawn(ctx, entry, play, 0xffff))
             g.roomEnemyLackSoul = 1;
         return 1;
     }
@@ -2053,6 +2074,8 @@ static void ootEnemizerCaptureKeys(PlayState* play, ActorEntry* list, u32 count)
     room = play->roomCtx.curRoom.num;
     if (room < 0 || room >= 32)
         return;
+    if (play->sceneId == 1 && room == 3)
+        comboOotEnemizerResetLizalfos();
     state = &sOotEnemizerRoomKeys[room];
     memset(state, 0, sizeof(*state));
     if (!list || !count || count > 255)

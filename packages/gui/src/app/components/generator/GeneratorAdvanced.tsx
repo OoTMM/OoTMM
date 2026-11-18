@@ -15,7 +15,8 @@ export function GeneratorAdvanced() {
   const hasSongEventPlando = settings.songEventsShuffleOot || settings.songEventsShuffleMm;
   const routes: TabViewRoute[] = [
     { name: 'Hints', icon: LuLightbulb, component: Hints },
-    { name: 'Plando', icon: LuWrench, component: Plando, disabled: isRandom }, ...(hasSongEventPlando ? [{ name: 'Song Event Plando', icon: LuMusic, component: SongEventPlando, disabled: isRandom }] : []),
+    { name: 'Plando', icon: LuWrench, component: Plando, disabled: isRandom },
+    { name: 'Song Event Plando', icon: LuMusic, component: SongEventPlando, disabled: isRandom || !hasSongEventPlando },
   ];
 
   return (

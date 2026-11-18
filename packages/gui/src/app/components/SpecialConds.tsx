@@ -3,6 +3,7 @@ import { SPECIAL_CONDS, SPECIAL_CONDS_FIELDS } from '@ootmm/generator';
 
 import { InputField, CheckboxField, Card } from './ui';
 import { useStore } from '../store';
+import { SettingAvailability } from './settings/Setting';
 
 type SpecialCondsPanelProps = {
   cond: string;
@@ -15,10 +16,6 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
   const enableCond = SPECIAL_CONDS[cond].cond || (() => true);
   const enabled = enableCond(settings);
   let max = 0;
-
-  if (!enabled) {
-    return null;
-  }
 
   for (const f in SPECIAL_CONDS_FIELDS) {
     if (c[f as keyof typeof SPECIAL_CONDS_FIELDS]) {
@@ -33,21 +30,25 @@ function SpecialCondsPanel({ cond }: SpecialCondsPanelProps) {
     max -= Object.keys(settings).filter(key => key.includes('sharedMask')).filter(x => settings[x as keyof Settings]).length;
 
   const label = `Amount (max: ${max > 0 ? max : 0})`
-  c.count = c.count > max ? max : c.count;
+  if (enabled)
+    c.count = c.count > max ? max : c.count;
 
   return (
-    <Card>
-      <h2 className="mx-auto font-bold text-xl">{SPECIAL_CONDS[cond].name}</h2>
-      {Object.keys(SPECIAL_CONDS_FIELDS).filter(key => { const cond = (SPECIAL_CONDS_FIELDS as any)[key].cond; return cond ? cond(settings) : true }).map(key =>
-        <CheckboxField
-          key={key}
-          label={(SPECIAL_CONDS_FIELDS as any)[key].name}
-          checked={(c as any)[key]}
-          onChange={x => patchSettings({ specialConds: { [cond]: { [key]: x } }} as any)}
-        />
-      )}
-      <InputField type="number" min="0" max={max} label={label} value={c.count.toString()} onChange={x => patchSettings({ specialConds: { [cond]: { count: Number(x) } }})}/>
-    </Card>
+    <SettingAvailability condition={enableCond}>
+      <Card>
+        <h2 className="mx-auto font-bold text-xl">{SPECIAL_CONDS[cond].name}</h2>
+        {Object.keys(SPECIAL_CONDS_FIELDS).map(key => (
+          <SettingAvailability key={key} condition={(SPECIAL_CONDS_FIELDS as any)[key].cond}>
+            <CheckboxField
+              label={(SPECIAL_CONDS_FIELDS as any)[key].name}
+              checked={(c as any)[key]}
+              onChange={x => patchSettings({ specialConds: { [cond]: { [key]: x } }} as any)}
+            />
+          </SettingAvailability>
+        ))}
+        <InputField type="number" min="0" max={max} label={label} value={c.count.toString()} onChange={x => patchSettings({ specialConds: { [cond]: { count: Number(x) } }})}/>
+      </Card>
+    </SettingAvailability>
   );
 }
 

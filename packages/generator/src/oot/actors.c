@@ -1,3 +1,4 @@
+#include <combo/enemy_placement.h>
 #include <combo/enemy_soul_preview.h>
 #include <combo/enemy_gold.h>
 #include <combo/enemy.h>
@@ -506,6 +507,14 @@ static int shouldActorIgnorePlayer(Actor* this, Player* link)
     }
 }
 
+static s32 (*sDeadHandGrabPlayer)(PlayState*, Player*);
+
+static s32 shuffledDeadHandGrabPlayer(PlayState* play, Player* player)
+{
+    return (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND) && player->actor.velocity.y <= 0.f &&
+        sDeadHandGrabPlayer(play, player);
+}
+
 void Actor_RunUpdate(Actor* this, PlayState* play, ActorFunc update)
 {
     int ignorePlayer;
@@ -513,6 +522,14 @@ void Actor_RunUpdate(Actor* this, PlayState* play, ActorFunc update)
     f32 xyzDistToPlayerSq;
     f32 xzDistToPlayer;
     f32 yDistanceFromLink;
+
+    int shuffledHand = this->id == ACTOR_EN_DHA && play->grabPlayer &&
+        comboEnemyShuffledDeadHand(this->parent, play);
+    if (shuffledHand)
+    {
+        sDeadHandGrabPlayer = play->grabPlayer;
+        play->grabPlayer = shuffledDeadHandGrabPlayer;
+    }
 
     ignorePlayer = shouldActorIgnorePlayer(this, GET_PLAYER(play));
     if (ignorePlayer)
@@ -539,6 +556,8 @@ void Actor_RunUpdate(Actor* this, PlayState* play, ActorFunc update)
     {
         Actor_Hyper(this, play, update);
     }
+    if (shuffledHand)
+        play->grabPlayer = sDeadHandGrabPlayer;
 }
 
 void Actor_AfterDrawAll(void)

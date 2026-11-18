@@ -9,7 +9,7 @@ import { pack } from './pack';
 import { buildPatchfiles } from './patch-build';
 import { Patchfile } from './patch-build/patchfile';
 import { makeAddresses } from './addresses';
-import { makeSpoilerLog } from './spoiler';
+import { makeEnemySpoilerLog, makeSpoilerLog } from './spoiler';
 
 const env = process.env.NODE_ENV || 'development';
 const isDev = (env !== 'production');
@@ -145,6 +145,9 @@ export class Generator {
       if (this.opts.settings.generateSpoilerLog) {
         const log = makeSpoilerLog(logicResult, this.opts);
         files.push(makeFile({ name: 'Spoiler', hash: hashFileName, data: log, mime: 'text/plain', ext: 'txt' }));
+        const enemyLog = makeEnemySpoilerLog(logicResult, this.opts);
+        if (enemyLog)
+          files.push(makeFile({ name: 'Enemy-Spoiler', hash: hashFileName, data: enemyLog, mime: 'text/plain', ext: 'txt' }));
       }
 
       /* Prepare multi stuff */

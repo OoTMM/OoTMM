@@ -1221,7 +1221,9 @@ function ootEnemizerCandidatePools(defs: readonly EnemyDefinition[], settings: S
       additions.push({ index: -1, def: ARWING_ENEMIES.oot });
     let pool = [...native, ...additions].filter(({ def }) => !enemyShuffleExcluded(settings, def, 'oot') &&
       !enemyCanRespawn(def.game, def.actorId, def.spawnParams) &&
-      !enemyIsPerched(def.game, def.actorId, def.spawnParams));
+      !enemyIsPerched(def.game, def.actorId, def.spawnParams) &&
+      (location.scene !== 0x41 || location.room !== 0 || location.actorId !== 0x13 ||
+        (def.game === 'oot' ? def.actorId !== 0x37 : def.actorId !== 0x24)));
     if (!settings.enemyShuffleMinibosses)
       pool = pool.filter(({ def }) => !isMinibossEnemy(def.game, def.actorId, def.spawnParams));
     else
@@ -1337,12 +1339,49 @@ export const OOT_FIELD_STALCHILD_SLOTS = Array.from({ length: 2 }, (_, slot) => 
   key: `oot-field-stalchild-${slot}`, scene: 0x51, room: 0, slot,
 }));
 
+export const OOT_FOREST_BOW_SLOTS = Array.from({ length: 3 }, (_, slot) => ({
+  key: `oot-forest-bow-${slot}`, scene: 3, room: 6, slot,
+}));
+
+export const OOT_BURIAL_ENEMY_SLOTS = [
+  ...Array.from({ length: 6 }, (_, slot) => ({
+    key: `oot-well-coffin-${slot}`, scene: 8, room: 2, slot, actorId: 0x13, objectId: 0x13,
+  })),
+  ...Array.from({ length: 15 }, (_, slot) => ({
+    key: `oot-graveyard-poe-${slot}`, scene: 0x53, room: 1, slot, actorId: 0xd, objectId: 9,
+  })),
+];
+
+const OOT_DYNAMIC_PLANNER_SLOTS = [...OOT_FIELD_STALCHILD_SLOTS, ...OOT_FOREST_BOW_SLOTS, ...OOT_BURIAL_ENEMY_SLOTS];
+
+function ootBurialEnemyLocations(mq: ReadonlySet<string>): OotEnemizerLocation[] {
+  const first = OOT_FIELD_STALCHILD_SLOTS.length + OOT_FOREST_BOW_SLOTS.length;
+  return OOT_BURIAL_ENEMY_SLOTS.flatMap<OotEnemizerLocation>(({ scene, room, actorId }, index) => {
+    const dungeon = scene === 8 ? 'BotW' : null;
+    if (dungeon && mq.has(dungeon)) return [];
+    const identity = { scene, room, slot: -1 - index, fieldSlot: first + index, actorId };
+    if (dungeon)
+      return [Object.assign(ootForestBowLocations()[0], identity, { dungeon })];
+    return [Object.assign(ootFieldStalchildLocations()[0], identity)];
+  });
+}
+
 function ootFieldStalchildLocations(): OotEnemizerLocation[] {
   return OOT_FIELD_STALCHILD_SLOTS.map(({ scene, room, slot }) => ({
     mq: false, dungeon: null, scene, room, setup: 0, slot: -1 - slot, fieldSlot: slot,
     actorId: 0x1b0,
     choices: OOT_ENEMIZER.targets.flatMap((target, index) => target.requires.every(rule => rule === 'OUTSIDE') ? [index] : []),
     restrictions: [], meets: ['OUTSIDE'], disallowed: [], explicit: [], varOverrides: {}, logicOverrides: {},
+    switchFlag: -1, skipRaycast: false, broken: false, position: [],
+  }));
+}
+
+function ootForestBowLocations(): OotEnemizerLocation[] {
+  return OOT_FOREST_BOW_SLOTS.map(({ scene, room, slot }) => ({
+    mq: false, dungeon: 'Forest', scene, room, setup: 0, slot: -1 - slot,
+    fieldSlot: OOT_FIELD_STALCHILD_SLOTS.length + slot, actorId: 2,
+    choices: OOT_ENEMIZER.targets.flatMap((target, index) => target.requires.length ? [] : [index]),
+    restrictions: [], meets: [], disallowed: [], explicit: [], varOverrides: {}, logicOverrides: {},
     switchFlag: -1, skipRaycast: false, broken: false, position: [],
   }));
 }
@@ -1362,7 +1401,7 @@ function ootSupplementalMemoryRows(plan: EnemyPlan, options: EnemyMemoryOptions,
   return plan.flatMap(row => {
     if (row.ootr || row.placement) return [];
     const gold = ENEMY_GOLD_SOURCES.find(s => s.key === row.source && s.game === 'oot');
-    const desert = [...OOT_DESERT_LEEVER_SLOTS, ...OOT_FIELD_STALCHILD_SLOTS].find(s => s.key === row.source);
+    const desert = [...OOT_DESERT_LEEVER_SLOTS, ...OOT_DYNAMIC_PLANNER_SLOTS].find(s => s.key === row.source);
     const rooms = desert ? [[desert.scene, desert.room] as const] : gold ? [...new Set(gold.slots.map(s => s.room))].map(room => [gold.scene, room] as const) :
       (OOT_ENCOUNTER_MEMORY_ROOMS[row.source] ?? []).filter(([scene, room]) =>
         !isMq(scene) && nativeFightRestorationRoomAllowed(row.source, room, options));
@@ -1586,7 +1625,7 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
       return cost.instances <= baseCost.instances && cost.actors <= baseCost.actors &&
         (cost.dynamicCollisions ?? 0) <= (baseCost.dynamicCollisions ?? 0) && Object.entries(cost.shared).every(([key, size]) => size <= (baseCost.shared[key] ?? 0));
     });
-    const source = location.fieldSlot === undefined ? ootEnemizerSourceKey(defs, location) : OOT_FIELD_STALCHILD_SLOTS[location.fieldSlot].key;
+    const source = location.fieldSlot === undefined ? ootEnemizerSourceKey(defs, location) : OOT_DYNAMIC_PLANNER_SLOTS[location.fieldSlot].key;
     const target = selected.def;
     const descriptor = selected.index >= 0 ? OOT_ENEMIZER.targets[selected.index] : {
       name: target.name,
@@ -1623,7 +1662,7 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
       : undefined;
     rows.push({
       source, target: targetKey, chaoticOotChoices,
-      ...(location.fieldSlot === undefined ? { ootr: choice } : { kind: 'field-spawner', field: choice }),
+      ...(location.fieldSlot === undefined ? { ootr: choice } : { kind: location.scene === 3 ? 'forest-bow' : location.scene === 0x51 ? 'field-spawner' : 'burial-spawner', field: choice }),
       ...(adaptiveGroups.has(location) ? { adaptiveGroup: adaptiveGroups.get(location) } : {}),
       ...(protectedPicks.has(location) ? { protectedPick: true } : {})
     });
@@ -1725,7 +1764,8 @@ function makeOotEnemizerPlan(defs: readonly EnemyDefinition[], settings: Setting
     return [];
   validateOotGoldMemory(gold, settings);
   const scenes = new Map<number, OotEnemizerLocation[]>();
-  for (const location of [...ootEnemizerLocations(resolvedMq(settings, options.mqDungeons)), ...ootFieldStalchildLocations()]) {
+  const mq = resolvedMq(settings, options.mqDungeons);
+  for (const location of [...ootEnemizerLocations(mq), ...ootFieldStalchildLocations(), ...(!mq.has('Forest') ? ootForestBowLocations() : []), ...ootBurialEnemyLocations(mq)]) {
     if (!enemySourceAllowedBySettings('oot', location.actorId, settings)) continue;
     const rows = scenes.get(location.scene);
     if (rows)
@@ -3445,6 +3485,17 @@ const ENEMY_DEFINITIONS: readonly EnemyDefinition[] = [
 ];
 
 export const ENEMIES: readonly EnemyDefinition[] = [
+  ...OOT_BURIAL_ENEMY_SLOTS.map(slot => ({
+    key: slot.key, name: slot.scene === 8 ? 'Coffin Keese' : 'Grave Poe',
+    game: 'oot' as const, actorId: slot.actorId, objectId: slot.objectId, habitat: 'air' as const,
+    sourceAllowed: false, targetAllowed: false, params: [], spawnParams: slot.scene === 8 ? 2 : 1,
+    killMacro: slot.scene === 8 ? 'can_kill_keese_close' : 'can_kill_poes', logicMacros: [],
+  })),
+  ...OOT_FOREST_BOW_SLOTS.map(slot => ({
+    key: slot.key, name: 'Forest Bow Stalfos', game: 'oot' as const, actorId: 2, objectId: 0x32,
+    habitat: 'ground' as const, sourceAllowed: false, targetAllowed: false, params: [], spawnParams: 3,
+    killMacro: 'can_kill_stalfos', logicMacros: [], soulMacro: 'soul_stalfos',
+  })),
   ...OOT_FIELD_STALCHILD_SLOTS.map(slot => ({
     key: slot.key, name: 'Hyrule Field Stalchild', game: 'oot' as const, actorId: 0x1b0, objectId: 0x184,
     habitat: 'ground' as const, sourceAllowed: false, targetAllowed: false, params: [], spawnParams: 0,
@@ -3473,7 +3524,7 @@ type EnemyReplacement = {
   target: string;
   adaptiveGroup?: string;
   protectedPick?: boolean;
-  kind?: 'arena' | 'variant' | 'restore' | 'scripted' | 'keeta-guards' | 'gold' | 'desert-spawner' | 'field-spawner';
+  kind?: 'arena' | 'variant' | 'restore' | 'scripted' | 'keeta-guards' | 'gold' | 'desert-spawner' | 'field-spawner' | 'forest-bow' | 'burial-spawner';
   placement?: MmPlacement;
   ootr?: OotEnemizerChoice;
   field?: OotEnemizerChoice;
@@ -3824,10 +3875,10 @@ export function enemyIsPerched(game: Game, actorId: number, params: number): boo
 }
 
 export function enemyCanRespawn(game: Game, actorId: number, params: number): boolean {
-
   if (game === 'oot')
-    return false;
-  return (actorId === 0x16f && !!(params & 0x8000)) ||
+    return actorId === 0xc7 && params !== 1;
+  return (actorId === 0x66 && params !== 1 && params !== 2) ||
+    (actorId === 0x16f && !!(params & 0x8000)) ||
     (actorId === 0x164 && !!(params & 4));
 }
 
@@ -3973,7 +4024,7 @@ export function enemyLogicMacros(macros: Readonly<Record<string, string>>, plan:
   addEnemyPlacementLogic(result, macros, plan, game, enemyDefinition);
   const requirements = new Map<string, Set<string>>();
   for (const { pair, source, target } of pairs) {
-    if (pair.ootr || pair.placement || pair.kind === 'gold' || scopedEnemyEncounter(pair))
+    if (pair.ootr || pair.placement || pair.kind === 'gold' || pair.kind === 'burial-spawner' || scopedEnemyEncounter(pair))
       continue;
     const combat = enemyPlacementCombat(result, macros, target, game);
     if (target.game === game && macros[target.killMacro] === undefined)
@@ -3998,7 +4049,7 @@ export function enemyLogicMacros(macros: Readonly<Record<string, string>>, plan:
 export function enemySoulSpecializations(macros: Readonly<Record<string, string>>, plan: EnemyPlan, game: Game) {
   const requirements = new Map<string, Set<string>>();
   for (const pair of plan) {
-    if (pair.kind === 'variant' || pair.kind === 'gold' || scopedEnemyEncounter(pair) || pair.ootr || pair.placement)
+    if (pair.kind === 'variant' || pair.kind === 'gold' || pair.kind === 'burial-spawner' || scopedEnemyEncounter(pair) || pair.ootr || pair.placement)
       continue;
     const source = enemyDefinition(pair.source), target = enemyDefinition(pair.target);
     if (source.game !== game)
@@ -4021,7 +4072,7 @@ export function enemySoulSpecializations(macros: Readonly<Record<string, string>
 }
 
 function scopedEnemyEncounter(pair: EnemyReplacement): boolean {
-  return pair.kind === 'scripted' || pair.kind === 'arena' || pair.kind === 'restore' && pair.source === 'oot-gerudo-fighter-restored';
+  return pair.kind === 'forest-bow' || pair.kind === 'scripted' || pair.kind === 'arena' || pair.kind === 'restore' && pair.source === 'oot-gerudo-fighter-restored';
 }
 
 function enemyPlacementLogicName(pair: EnemyReplacement): string | undefined {
@@ -4660,6 +4711,19 @@ export function ootEnemizerWorldLogic<T extends Record<string, any>>(game: Game,
     return rawArea;
   const name = areaName.startsWith('OOT ') ? areaName.slice(4) : areaName;
   let result = rawArea;
+  if (!mq && name === 'Forest Temple Mini-Boss 2') {
+    const fight = plan.filter(row => row.kind === 'forest-bow');
+    if (fight.length) {
+      const combat = conjunction(fight);
+      const rule = fight.length === OOT_FOREST_BOW_SLOTS.length ? combat :
+        `(${combat}) && can_use_sword && soul_enemy(SOUL_ENEMY_STALFOS)`;
+      result = {
+        ...rawArea,
+        exits: { ...rawArea.exits, 'Forest Temple Poe 2': rule },
+        locations: { ...rawArea.locations, 'Forest Temple Bow': rule },
+      };
+    }
+  }
   for (const binding of OOT_ROOM_BINDINGS[(mq ? 'mq/' : 'oot/') + name]?.rules ?? []) {
     const old = rawArea[binding.section]?.[binding.key];
     if (old === undefined)

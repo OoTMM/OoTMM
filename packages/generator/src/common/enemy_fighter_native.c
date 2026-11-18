@@ -63,6 +63,7 @@ static void fighterDrawSkeleton(PlayState* play, void** skeleton, Vec3s* joints,
     SkelAnime_DrawFlexOpa(play, skeleton, joints, count, overrideLimbDraw, postLimbDraw, actor);
 }
 PATCH_CALL(0x80b45aac, fighterDrawSkeleton);
+EXPORT_SYMBOL(ENEMY_NATIVE_FIGHTER_DRAW_V1, fighterDrawSkeleton);
 
 static void fighterDraw(Actor* actor, PlayState* play)
 {

@@ -5,7 +5,7 @@ import { verifyOotGameplayMemory } from '../enemies/oot-gameplay-memory';
 import { NATIVE_LILY_FACTS } from '../enemies/extra-port-data';
 import { align, toU32Buffer } from '../util';
 import {
-  OOT_FIELD_STALCHILD_SLOTS, OOT_DESERT_LEEVER_SLOTS, ENEMY_GOLD_SOURCES, nativeGoldTarget, verifyMmRoomOverlaps, mmRoomOverlapStates, enemySceneMemoryReports, enemyOotSceneMemoryReports, OOT_GAMEPLAY_POLICY, ENEMY_MEMORY_POLICY,
+  OOT_FIELD_STALCHILD_SLOTS, OOT_FOREST_BOW_SLOTS, OOT_BURIAL_ENEMY_SLOTS, OOT_DESERT_LEEVER_SLOTS, ENEMY_GOLD_SOURCES, nativeGoldTarget, verifyMmRoomOverlaps, mmRoomOverlapStates, enemySceneMemoryReports, enemyOotSceneMemoryReports, OOT_GAMEPLAY_POLICY, ENEMY_MEMORY_POLICY,
   enemyWeight, enemyFormWeights, ootNativeEnemyDefinitionKey, ARWING_ENEMIES,
   standaloneEnemyTransfer, ENEMIES, nativeResourceSource, nativeResourceTarget, NATIVE_ARENA_COMBAT_TARGETS,
   nativeFightRestorationSource, nativeFightRestorationRoomAllowed, nativeFightRestorationCombat, scriptedMmSource, scriptedMmTargetAllowed, BIG_OCTO_ARENA_COMBAT_TARGETS,
@@ -265,7 +265,7 @@ function needsGroundPlacement(host: Game, source: number, target: EnemyDefinitio
   return !!target && target.habitat === 'ground' &&
     !mmAquaticTarget(target.game, target.actorId, target.spawnParams) &&
     !(target.game === 'oot' ? [0x37, 0x95, 0xde].includes(target.actorId) : [0x24, 0x50].includes(target.actorId)) &&
-    elevatedEnemySources.has(`${host}/${source}`);
+    (target.game === 'mm' && target.actorId === 0x14a || elevatedEnemySources.has(`${host}/${source}`));
 }
 
 function exactMmActivationRecords(rom: Uint8Array, plan: EnemyPlan, patch: Patchfile): NativePlacementRecord[] {
@@ -456,6 +456,25 @@ function applyExactOotEnemizer(roms: DecompressedRoms, addresses: GameAddresses,
     }
   }
   if (missing.length) throw Error('Missing authored OoT enemy locations: ' + missing.map(ootActorKey).join(', '));
+  for (const mq of [false, true]) {
+    const pairs = new Map<number, OotEnemizerSwitchRecord[]>();
+    for (let slot = 0; slot < 256; ++slot) {
+      const actor = actors.get(ootActorKey({ scene: 1, room: 3, setup: 0, slot, mq }));
+      if (!actor || bufReadU16BE(actor.data, actor.offset) !== 0x25) continue;
+      const params = bufReadU16BE(actor.data, actor.offset + 14);
+      const member = params & 0xff, switchFlag = params >>> 8;
+      if (member > 1 || switchFlag >= 64) continue;
+      const pair = pairs.get(switchFlag) ?? [];
+      pair.push({ key: actor.vrom, scene: 1, room: 3, switchFlag, member });
+      pairs.set(switchFlag, pair);
+    }
+    for (const pair of pairs.values()) {
+      if (!pair.some(row => writes.has(row.key))) continue;
+      if (pair.length !== 2 || pair[0].member === pair[1].member)
+        throw Error('Invalid Dodongo’s Cavern Lizalfos pair');
+      switchRecords.push(...pair);
+    }
+  }
   const nativeWrites = [...writes.values()]
     .filter(({ resolved }) => !resolved.mq)
     .map(({ resolved, replacement }) => ({ address: addresses.oot.fileFromROM(resolved.offset), replacement }));
@@ -612,6 +631,7 @@ type OotEnemizerSwitchRecord = {
   scene: number;
   room: number;
   switchFlag: number;
+  member?: number;
 };
 
 function installOotEnemizerSwitches(records: readonly OotEnemizerSwitchRecord[], patch: Patchfile): void {
@@ -624,7 +644,7 @@ function installOotEnemizerSwitches(records: readonly OotEnemizerSwitchRecord[],
       !Number.isInteger(switchFlag) || switchFlag < 0 || switchFlag >= 64)
       throw Error('Invalid OoT kill switch record');
     const previous = rows.get(key);
-    if (previous && (previous.scene !== scene || previous.room !== room || previous.switchFlag !== switchFlag))
+    if (previous && (previous.scene !== scene || previous.room !== room || previous.switchFlag !== switchFlag || previous.member !== row.member))
       throw Error('Conflicting OoT kill switch aliases');
     rows.set(key, row);
   }
@@ -643,7 +663,7 @@ function installOotEnemizerSwitches(records: readonly OotEnemizerSwitchRecord[],
     const offset = header.length + i * recordSize;
     bufWriteU32BE(data, offset, row.key);
     bufWriteU32BE(data, offset + 4, (row.scene << 16) | row.room);
-    bufWriteU32BE(data, offset + 8, row.switchFlag);
+    bufWriteU32BE(data, offset + 8, row.switchFlag | ((row.member === undefined ? 0 : row.member + 1) << 8));
   });
   const vrom = allocatePlacementMetadata(patch, 'oot', data.length, 'OoT kill switch metadata space');
   patch.addNewFile({ name: 'enemy/native/oot/switches', vrom, data, compressed: false });
@@ -1481,7 +1501,7 @@ const nativeBubbleFacts = { 'actorId': 105, 'objectId': 93, 'table': 11923888, '
 
 const nativeEyegoreFacts = { 'mm': { 'actorId': 388, 'objectId': 397, 'table': 12879248, 'tableBytes': '00ee43e000ee8c2080a7c99080a811d00000000080a80dec0000000000000000', 'vromStart': 15614944, 'vromEnd': 15633440, 'vramStart': 2158479760, 'crc32': 3067335304, 'profileOffset': 15632444, 'profileBytes': '0184050080000035018d000000001e7080a7cd6080a7d0f080a7f35480a7ffb8', 'objectTable': 12949736, 'objectBytes': '017ad000017c01f0', 'objectStart': 24825856, 'objectEnd': 24904176, 'objectCrc32': 3039087373, 'hooks': [{ 'vrom': 15616364, 'original': '0c04f592', 'symbol': 'ENEMY_NATIVE_EYEGORE_PATH_V1' }, { 'vrom': 15615880, 'original': '0c04f5a3', 'symbol': 'ENEMY_NATIVE_EYEGORE_POINT_V1' }] } };
 
-const nativeFighterFacts = { 'oot': { 'actorId': 407, 'objectId': 361, 'table': 11933552, 'tableBytes': '00ebc84000ec1bf080b4111080b464c00000000080b45d900000000000000000', 'vromStart': 15452224, 'vromEnd': 15473648, 'vramStart': 2159284496, 'crc32': 3251889401, 'profileOffset': 15471808, 'profileBytes': '019705000000001501690000000004d480b4111c80b4134080b452e080b4588c', 'objectTable': 11991712, 'objectBytes': '0188f0000189a6f0', 'objectStart': 25751552, 'objectEnd': 25798384, 'objectCrc32': 2663731861, 'hooks': [{ 'vrom': 15462336, 'original': '0c00863b', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 15452800, 'original': '0c031a25', 'symbol': 'ENEMY_NATIVE_FIGHTER_RESTORE_V1' }, { 'vrom': 15468328, 'original': '0c031a25', 'symbol': 'ENEMY_NATIVE_FIGHTER_RESTORE_V1' }, { 'vrom': 15470724, 'original': '908e000a', 'symbol': 'ENEMY_NATIVE_FIGHTER_CAUGHT_V1' }, { 'vrom': 15462352, 'original': '0c037385', 'symbol': 'ENEMY_NATIVE_FIGHTER_TEXT_V1' }], 'patches': [{ 'vrom': 15470728, 'original': '3c028012', 'replacement': '00000000' }, { 'vrom': 15470796, 'original': 'a42b1e1a', 'replacement': '00000000' }, { 'vrom': 15470840, 'original': 'a42e1e1a', 'replacement': '00000000' }, { 'vrom': 15470856, 'original': 'a4381e1a', 'replacement': '00000000' }] }, 'mm': { 'actorId': 541, 'objectId': 516, 'table': 12884144, 'tableBytes': '00fea70000ff044080b8559080b8b2d00000000080b8ab5c0000000000000000', 'vromStart': 16688896, 'vromEnd': 16712768, 'vramStart': 2159564176, 'crc32': 3994638374, 'profileOffset': 16710860, 'profileBytes': '021d05000010001502040000000005f080b8559080b8580080b8a0a000000000', 'objectTable': 12950688, 'objectBytes': '01b7a00001b89900', 'objectStart': 28811264, 'objectEnd': 28875008, 'objectCrc32': 123701028, 'hooks': [{ 'vrom': 16707560, 'original': '0c2e2583', 'symbol': 'ENEMY_NATIVE_FIGHTER_DEATH_V1' }, { 'vrom': 16707772, 'original': '0c2e2583', 'symbol': 'ENEMY_NATIVE_FIGHTER_DEATH_V1' }, { 'vrom': 16691632, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16692272, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16692984, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16693700, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16694284, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16695064, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16696068, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16705556, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16689584, 'original': '0c068bb6', 'symbol': 'ENEMY_NATIVE_FIGHTER_RESTORE_V1' }, { 'vrom': 16694352, 'original': '0c04c1a9', 'symbol': 'ENEMY_NATIVE_FIGHTER_THROWOUT_V1' }, { 'vrom': 16691584, 'original': '0c03c6f9', 'symbol': 'ENEMY_NATIVE_FIGHTER_NEXT_V1' }, { 'vrom': 16693652, 'original': '0c03c6f9', 'symbol': 'ENEMY_NATIVE_FIGHTER_NEXT_V1' }, { 'vrom': 16705912, 'original': '0c03c6f9', 'symbol': 'ENEMY_NATIVE_FIGHTER_NEXT_V1' }, { 'vrom': 16706572, 'original': '0c03c6f9', 'symbol': 'ENEMY_NATIVE_FIGHTER_NEXT_V1' }, { 'vrom': 16706800, 'original': '0c03c6f9', 'symbol': 'ENEMY_NATIVE_FIGHTER_NEXT_V1' }, { 'vrom': 16691600, 'original': '0c03c6e9', 'symbol': 'ENEMY_NATIVE_FIGHTER_QUEUE_V1' }, { 'vrom': 16693668, 'original': '0c03c6e9', 'symbol': 'ENEMY_NATIVE_FIGHTER_QUEUE_V1' }, { 'vrom': 16705928, 'original': '0c03c6e9', 'symbol': 'ENEMY_NATIVE_FIGHTER_QUEUE_V1' }, { 'vrom': 16706588, 'original': '0c03c6e9', 'symbol': 'ENEMY_NATIVE_FIGHTER_QUEUE_V1' }, { 'vrom': 16706816, 'original': '0c03c6e9', 'symbol': 'ENEMY_NATIVE_FIGHTER_QUEUE_V1' }, { 'vrom': 16691008, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16697860, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16698496, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16699260, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16700520, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16701248, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16704168, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16705360, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16706976, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16696796, 'original': '0c2e2244', 'symbol': 'ENEMY_NATIVE_FIGHTER_SPIN_V1' }, { 'vrom': 16699540, 'original': '0c2e2244', 'symbol': 'ENEMY_NATIVE_FIGHTER_SPIN_V1' }, { 'vrom': 16701500, 'original': '0c2e2244', 'symbol': 'ENEMY_NATIVE_FIGHTER_SPIN_V1' }], 'patches': [{ 'vrom': 16712492, 'original': '440048e8', 'replacement': '00000000', 'required': true }, { 'vrom': 16712500, 'original': '440049bc', 'replacement': '00000000', 'required': true }, { 'vrom': 16711580, 'original': '44000840', 'replacement': '00000000', 'required': true }, { 'vrom': 16711860, 'original': '44002304', 'replacement': '00000000', 'required': true }, { 'vrom': 16711892, 'original': '44002580', 'replacement': '00000000', 'required': true }, { 'vrom': 16711984, 'original': '4400287c', 'replacement': '00000000', 'required': true }, { 'vrom': 16712096, 'original': '44002d68', 'replacement': '00000000', 'required': true }, { 'vrom': 16712144, 'original': '44003040', 'replacement': '00000000', 'required': true }, { 'vrom': 16712308, 'original': '44003ba8', 'replacement': '00000000', 'required': true }, { 'vrom': 16712400, 'original': '44004050', 'replacement': '00000000', 'required': true }, { 'vrom': 16712472, 'original': '440046a0', 'replacement': '00000000', 'required': true }, { 'vrom': 16711808, 'original': '44001edc', 'replacement': '00000000', 'required': true }, { 'vrom': 16712008, 'original': '44002994', 'replacement': '00000000', 'required': true }, { 'vrom': 16712164, 'original': '4400313c', 'replacement': '00000000', 'required': true }] } };
+const nativeFighterFacts = { 'oot': { 'actorId': 407, 'objectId': 361, 'table': 11933552, 'tableBytes': '00ebc84000ec1bf080b4111080b464c00000000080b45d900000000000000000', 'vromStart': 15452224, 'vromEnd': 15473648, 'vramStart': 2159284496, 'crc32': 3251889401, 'profileOffset': 15471808, 'profileBytes': '019705000000001501690000000004d480b4111c80b4134080b452e080b4588c', 'objectTable': 11991712, 'objectBytes': '0188f0000189a6f0', 'objectStart': 25751552, 'objectEnd': 25798384, 'objectCrc32': 2663731861, 'hooks': [{ 'vrom': 15471068, 'original': '0c022763', 'symbol': 'ENEMY_NATIVE_FIGHTER_DRAW_V1' }, { 'vrom': 15462336, 'original': '0c00863b', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 15452800, 'original': '0c031a25', 'symbol': 'ENEMY_NATIVE_FIGHTER_RESTORE_V1' }, { 'vrom': 15468328, 'original': '0c031a25', 'symbol': 'ENEMY_NATIVE_FIGHTER_RESTORE_V1' }, { 'vrom': 15470724, 'original': '908e000a', 'symbol': 'ENEMY_NATIVE_FIGHTER_CAUGHT_V1' }, { 'vrom': 15462352, 'original': '0c037385', 'symbol': 'ENEMY_NATIVE_FIGHTER_TEXT_V1' }], 'patches': [{ 'vrom': 15470728, 'original': '3c028012', 'replacement': '00000000' }, { 'vrom': 15470796, 'original': 'a42b1e1a', 'replacement': '00000000' }, { 'vrom': 15470840, 'original': 'a42e1e1a', 'replacement': '00000000' }, { 'vrom': 15470856, 'original': 'a4381e1a', 'replacement': '00000000' }] }, 'mm': { 'actorId': 541, 'objectId': 516, 'table': 12884144, 'tableBytes': '00fea70000ff044080b8559080b8b2d00000000080b8ab5c0000000000000000', 'vromStart': 16688896, 'vromEnd': 16712768, 'vramStart': 2159564176, 'crc32': 3994638374, 'profileOffset': 16710860, 'profileBytes': '021d05000010001502040000000005f080b8559080b8580080b8a0a000000000', 'objectTable': 12950688, 'objectBytes': '01b7a00001b89900', 'objectStart': 28811264, 'objectEnd': 28875008, 'objectCrc32': 123701028, 'hooks': [{ 'vrom': 16707560, 'original': '0c2e2583', 'symbol': 'ENEMY_NATIVE_FIGHTER_DEATH_V1' }, { 'vrom': 16707772, 'original': '0c2e2583', 'symbol': 'ENEMY_NATIVE_FIGHTER_DEATH_V1' }, { 'vrom': 16691632, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16692272, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16692984, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16693700, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16694284, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16695064, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16696068, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16705556, 'original': '0c02dca6', 'symbol': 'ENEMY_NATIVE_FIGHTER_CS_V1' }, { 'vrom': 16689584, 'original': '0c068bb6', 'symbol': 'ENEMY_NATIVE_FIGHTER_RESTORE_V1' }, { 'vrom': 16694352, 'original': '0c04c1a9', 'symbol': 'ENEMY_NATIVE_FIGHTER_THROWOUT_V1' }, { 'vrom': 16691584, 'original': '0c03c6f9', 'symbol': 'ENEMY_NATIVE_FIGHTER_NEXT_V1' }, { 'vrom': 16693652, 'original': '0c03c6f9', 'symbol': 'ENEMY_NATIVE_FIGHTER_NEXT_V1' }, { 'vrom': 16705912, 'original': '0c03c6f9', 'symbol': 'ENEMY_NATIVE_FIGHTER_NEXT_V1' }, { 'vrom': 16706572, 'original': '0c03c6f9', 'symbol': 'ENEMY_NATIVE_FIGHTER_NEXT_V1' }, { 'vrom': 16706800, 'original': '0c03c6f9', 'symbol': 'ENEMY_NATIVE_FIGHTER_NEXT_V1' }, { 'vrom': 16691600, 'original': '0c03c6e9', 'symbol': 'ENEMY_NATIVE_FIGHTER_QUEUE_V1' }, { 'vrom': 16693668, 'original': '0c03c6e9', 'symbol': 'ENEMY_NATIVE_FIGHTER_QUEUE_V1' }, { 'vrom': 16705928, 'original': '0c03c6e9', 'symbol': 'ENEMY_NATIVE_FIGHTER_QUEUE_V1' }, { 'vrom': 16706588, 'original': '0c03c6e9', 'symbol': 'ENEMY_NATIVE_FIGHTER_QUEUE_V1' }, { 'vrom': 16706816, 'original': '0c03c6e9', 'symbol': 'ENEMY_NATIVE_FIGHTER_QUEUE_V1' }, { 'vrom': 16691008, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16697860, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16698496, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16699260, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16700520, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16701248, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16704168, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16705360, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16706976, 'original': '0c2e1fdc', 'symbol': 'ENEMY_NATIVE_FIGHTER_SLASH_V1' }, { 'vrom': 16696796, 'original': '0c2e2244', 'symbol': 'ENEMY_NATIVE_FIGHTER_SPIN_V1' }, { 'vrom': 16699540, 'original': '0c2e2244', 'symbol': 'ENEMY_NATIVE_FIGHTER_SPIN_V1' }, { 'vrom': 16701500, 'original': '0c2e2244', 'symbol': 'ENEMY_NATIVE_FIGHTER_SPIN_V1' }], 'patches': [{ 'vrom': 16712492, 'original': '440048e8', 'replacement': '00000000', 'required': true }, { 'vrom': 16712500, 'original': '440049bc', 'replacement': '00000000', 'required': true }, { 'vrom': 16711580, 'original': '44000840', 'replacement': '00000000', 'required': true }, { 'vrom': 16711860, 'original': '44002304', 'replacement': '00000000', 'required': true }, { 'vrom': 16711892, 'original': '44002580', 'replacement': '00000000', 'required': true }, { 'vrom': 16711984, 'original': '4400287c', 'replacement': '00000000', 'required': true }, { 'vrom': 16712096, 'original': '44002d68', 'replacement': '00000000', 'required': true }, { 'vrom': 16712144, 'original': '44003040', 'replacement': '00000000', 'required': true }, { 'vrom': 16712308, 'original': '44003ba8', 'replacement': '00000000', 'required': true }, { 'vrom': 16712400, 'original': '44004050', 'replacement': '00000000', 'required': true }, { 'vrom': 16712472, 'original': '440046a0', 'replacement': '00000000', 'required': true }, { 'vrom': 16711808, 'original': '44001edc', 'replacement': '00000000', 'required': true }, { 'vrom': 16712008, 'original': '44002994', 'replacement': '00000000', 'required': true }, { 'vrom': 16712164, 'original': '4400313c', 'replacement': '00000000', 'required': true }] } };
 
 const nativeGaroFacts = { 'mm': { 'actorId': 275, 'objectId': 341, 'table': 12875632, 'tableBytes': '00e2059000e24200809ad8e0809b155000000000809b0f680000000000000000', 'vromStart': 14812560, 'vromEnd': 14828032, 'vramStart': 2157631712, 'crc32': 3369156211, 'profileOffset': 14826520, 'profileBytes': '01130500000000150155000000000fec809ad8e0809adb24809b02cc00000000', 'objectTable': 12949288, 'objectBytes': '0160500001610600', 'objectStart': 23089152, 'objectEnd': 23135744, 'objectCrc32': 3492899932, 'hooks': [{ 'vrom': 14813112, 'original': '0c26b71f' }], 'patches': [{ 'vrom': 14827180, 'original': '44000228', 'replacement': '00000000', 'required': true }] } };
 
@@ -3029,7 +3049,10 @@ export function installSoulPreviews(roms: DecompressedRoms, patch: Patchfile, se
 export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses: GameAddresses, patch: Patchfile, settings: Settings, monitor?: Monitor) {
   for (const game of ['oot', 'mm'] as const) {
     if (!(game === 'oot' ? settings.enemyShuffleOot : settings.enemyShuffleMm)) continue;
-    const timers = game === 'oot' ? [[0x80b25350, 0x241803ff]] :
+    const timerClear = patch.symbols.oot.get('ENEMY_OOT_ROOMTIMER_CLEAR');
+    if (game === 'oot' && timerClear?.length !== 1)
+      throw Error('Missing shuffled room timer clear callback');
+    const timers = game === 'oot' ? [[0x80b25350, 0x241803ff], [0x80b25440, 0x0c000000 | ((timerClear![0] >>> 2) & 0x03ffffff)]] :
       [[0x80973c60, 0x241801ff], [0x80b10310, 0], [0x80b10508, 0x5000001b]];
     for (const [vram, instruction] of timers) {
       const address = addresses[game].fileFromRAM(vram);
@@ -3071,6 +3094,30 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
     }
   }
   installFieldStalchildShuffle(patch, settings, plan, foreignTargets, supplementalRooms);
+  const forestBow = new Uint8Array(OOT_FOREST_BOW_SLOTS.length * 8);
+  OOT_FOREST_BOW_SLOTS.forEach((slot, i) => {
+    const row = plan.find(row => row.kind === 'forest-bow' && row.source === slot.key);
+    if (!row) return;
+    const choice = dynamicEnemyChoice('oot', enemyDefinition(row.target), foreignTargets);
+    [choice.id, choice.params, choice.operation, 1].forEach((value, field) =>
+      bufWriteU16BE(forestBow, i * 8 + field * 2, value));
+    supplementalRooms.push({ game: 'oot', source: row.source, target: row.target, scene: slot.scene, room: slot.room });
+  });
+  if (forestBow.some(value => value))
+    patch.addSymbolPatch('ENEMY_FOREST_BOW_CHOICES', forestBow);
+  const burial = new Uint8Array(OOT_BURIAL_ENEMY_SLOTS.length * 8);
+  OOT_BURIAL_ENEMY_SLOTS.forEach((slot, i) => {
+    const row = plan.find(row => row.kind === 'burial-spawner' && row.source === slot.key);
+    if (!row) return;
+    const target = enemyDefinition(row.target);
+    const choice = dynamicEnemyChoice('oot', target, foreignTargets);
+    const operation = choice.operation | (target.habitat === 'ground' ? 1024 : 0);
+    [choice.id, choice.params, operation, 1].forEach((value, field) =>
+      bufWriteU16BE(burial, i * 8 + field * 2, value));
+    supplementalRooms.push({ game: 'oot', source: row.source, target: row.target, scene: slot.scene, room: slot.room });
+  });
+  if (burial.some(value => value))
+    patch.addSymbolPatch('ENEMY_OOT_BURIAL_CHOICES', burial);
   monitor?.log('Preparing enemy soul previews');
   installSoulPreviews(roms, patch, settings);
   monitor?.log('Writing enemy replacements and rewards');

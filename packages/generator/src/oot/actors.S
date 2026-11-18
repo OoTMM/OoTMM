@@ -20,3 +20,7 @@ PATCH_END
 PATCH_START 0x80024cc4
   j Actor_AfterDrawAll
 PATCH_END
+
+PATCH_START 0x808617e0
+  addiu at, zero, -129
+PATCH_END

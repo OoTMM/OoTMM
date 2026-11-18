@@ -473,7 +473,7 @@
 "soul_shuffled_tentacle": "true"
 "can_kill_shuffled_tentacles": "can_boomerang"
 
-"can_kill_invisible_stalfos": "has_lens && can_kill_stalfos"
+"can_kill_invisible_stalfos": "can_kill_stalfos"
 "can_kill_red_bubbles": "soul_bubble && (has_explosives || can_use_bow || can_hammer || can_use_sword_master || can_use_sword_biggoron)"
 "can_kill_invisible_skulltulas": "has_lens && can_kill_skulltulas"
 "can_kill_invisible_keese": "has_lens && can_kill_keese"
