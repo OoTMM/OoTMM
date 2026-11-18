@@ -8,6 +8,7 @@ export type SelectOption<T> = {
   value: T;
   label: string;
   disabled?: boolean;
+  title?: string;
 };
 
 type SelectProps<T> = {
@@ -111,6 +112,8 @@ export function Select<T>({ id, options, value, placeholder, clearable, creatabl
           {filteredOptions.length > 0 && filteredOptions.map((opt, i) =>
               <div
                   key={i}
+                  aria-disabled={opt.disabled || undefined}
+                  title={opt.title}
                   className={clsx(
                       'p-2',
                       opt.disabled

@@ -298,7 +298,6 @@ function ItemCell({
     ) : (
       <Setting
         setting={value}
-        showDisabled
         label={label}
       />
     )}
@@ -395,7 +394,7 @@ function SimpleSection({
         <p className="mt-1 max-w-3xl text-sm leading-relaxed text-muted-foreground">{description}</p>
       </header>
       <div className="mt-5 grid grid-cols-1 items-center gap-x-6 gap-y-4 md:grid-cols-2 xl:grid-cols-3">
-        {settings.map(setting => (<Setting key={setting} setting={setting} showDisabled/>))}
+        {settings.map(setting => (<Setting key={setting} setting={setting}/>))}
       </div>
     </Card>
   );

@@ -2,8 +2,8 @@ import type { Options, TrickKey, Region, SongEventSongs } from '@ootmm/core';
 import type { PlayerItem, LogicResult, HintGossipFoolish, HintGossipPath, HintGossipItemExact, HintGossipItemRegion, AnalysisPath, SphereEntryEvent, Location } from '@ootmm/logic';
 
 import { sortBy } from 'lodash-es';
-import { ENTRANCES, hintLocations } from '@ootmm/data';
-import { SETTINGS, TRICKS, exportSettings, regionData, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS, enemyDefinition } from '@ootmm/core';
+import { ENTRANCES, hintLocations, SCENES, ENEMY_LOGIC_MM_ROOMS } from '@ootmm/data';
+import { SETTINGS, TRICKS, exportSettings, regionData, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS, enemyDefinition, ENEMY_GOLD_SOURCES, OOT_DESERT_LEEVER_SLOTS, OOT_FIELD_STALCHILD_SLOTS, OOT_FOREST_BOW_SLOTS, OOT_BURIAL_ENEMY_SLOTS, OOT_ENCOUNTER_MEMORY_ROOMS } from '@ootmm/core';
 import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from './names';
@@ -170,22 +170,6 @@ class SpoilerWriter {
     for (const location of junkLocations) {
       this.writer.write(`${location}`);
     }
-    this.writer.unindent('');
-  }
-
-  private writeEnemies() {
-    if (!this.logic.worlds.some(w => w.enemyPlan.length)) return;
-    this.writer.indent('Enemy Replacement Plans');
-    for (let i = 0; i < this.worlds; ++i) {
-      if (this.isMulti) this.writer.indent(`World ${i + 1}`);
-      for (const p of this.logic.worlds[i].enemyPlan) {
-        const source = enemyDefinition(p.source);
-        const target = enemyDefinition(p.target);
-        this.writer.write(`${source.game.toUpperCase()} ${source.name} -> ${target.name}`);
-      }
-      if (this.isMulti) this.writer.unindent('');
-    }
-    this.writer.write('Unsafe placements and replacements exceeding object memory remain vanilla.');
     this.writer.unindent('');
   }
 
@@ -638,7 +622,6 @@ class SpoilerWriter {
     this.writePreCompleted();
     this.writeEntrances();
     this.writeSongEvents();
-    this.writeEnemies();
     this.writeHints();
     this.writePaths();
     this.writePlando();
@@ -654,4 +637,75 @@ class SpoilerWriter {
 export function makeSpoilerLog(result: LogicResult, options: Options): string {
   const spoilerWriter = new SpoilerWriter(result, options);
   return spoilerWriter.run();
+}
+
+const ENEMY_SCENE_NAMES = new Map(Object.entries(SCENES).map(([key, id]) => [
+  `${key.slice(0, key.indexOf('_')).toLowerCase()}/${id}`,
+  key.slice(key.indexOf('_') + 1).toLowerCase().replaceAll('_', ' ').replace(/\b\w/g, ch => ch.toUpperCase()),
+]));
+
+ENEMY_SCENE_NAMES.set('oot/65', 'Royal Family’s Tomb');
+ENEMY_SCENE_NAMES.set('mm/86', 'Ikana Castle Throne Room');
+
+function enemyRoomLabel(game: string, scene: number, room: number, setup?: number, slot?: number) {
+  const name = ENEMY_SCENE_NAMES.get(`${game}/${scene}`);
+  const id = `0x${scene.toString(16).padStart(2, '0')}`;
+  return [name ? `${name} (${id})` : `Scene ${id}`, `room ${room}`,
+    setup === undefined ? undefined : `setup ${setup}`,
+    slot === undefined ? undefined : `slot ${slot}`].filter(Boolean).join(', ');
+}
+
+const ENEMY_SCRIPTED_ROOMS = new Map(Object.values(ENEMY_LOGIC_MM_ROOMS)
+  .flatMap(area => 'encounters' in area ? area.encounters ?? [] : [])
+  .map(encounter => [encounter.source, encounter.room]));
+
+const ENEMY_SPAWNER_SLOTS = new Map([
+  ...OOT_DESERT_LEEVER_SLOTS, ...OOT_FIELD_STALCHILD_SLOTS, ...OOT_FOREST_BOW_SLOTS, ...OOT_BURIAL_ENEMY_SLOTS,
+].map(slot => [slot.key, slot]));
+
+export function makeEnemySpoilerLog(result: LogicResult, options: Options): string | undefined {
+  if (!result.worlds.some(world => world.enemyPlan.length)) return;
+  const writer = new LogWriter();
+  writer.write(`Seed: ${options.seed}`);
+  writer.write(`Version: ${VERSION}`);
+  writer.write('');
+  writer.indent('Enemy Replacement Plans');
+
+  result.worlds.forEach((world, index) => {
+    writer.indent(`World ${index + 1} (${world.enemyPlan.length} placements)`);
+    for (const game of ['oot', 'mm'] as const) {
+      const rows = world.enemyPlan.filter(row => enemyDefinition(row.source).game === game);
+      if (!rows.length) continue;
+      writer.indent(game === 'oot' ? 'Ocarina of Time' : 'Majora’s Mask');
+      for (const row of rows) {
+        const source = enemyDefinition(row.source), target = enemyDefinition(row.target);
+        const exact = row.ootr?.location ?? row.placement;
+        const spawned = ENEMY_SPAWNER_SLOTS.get(row.source);
+        const gold = ENEMY_GOLD_SOURCES.find(slot => slot.key === row.source);
+        const scripted = ENEMY_SCRIPTED_ROOMS.get(row.source);
+        const arena = OOT_ENCOUNTER_MEMORY_ROOMS[row.source];
+        const location = exact ? enemyRoomLabel(game, exact.scene, exact.room, exact.setup, exact.slot) :
+          spawned ? enemyRoomLabel(game, spawned.scene, spawned.room, undefined, spawned.slot) :
+          gold ? `${gold.location} — ${gold.slots.map(slot => enemyRoomLabel(game, gold.scene, slot.room, slot.setup, slot.slot)).join(' / ')}` :
+          scripted ? enemyRoomLabel(game, scripted.scene, scripted.room, scripted.setup, scripted.slots.length === 1 ? scripted.slots[0] : undefined) :
+          arena ? arena.map(([scene, room]) => enemyRoomLabel(game, scene, room)).join(' / ') :
+          row.source;
+        const layout = row.ootr?.location.mq ? ' [MQ]' : '';
+        const params = row.ootr?.targetParams ?? row.placement?.targetParams ?? row.field?.targetParams ?? target.spawnParams;
+        const sourceName = row.source === 'mm-ikana-throne-scripted' ? 'Igos du Ikana' : source.name;
+        writer.write(`${location}${layout}: ${sourceName} → ${target.name} [${target.game.toUpperCase()} actor 0x${target.actorId.toString(16)}, params 0x${params.toString(16)}]`);
+        for (const [scene, room, setup, slot] of row.ootr?.aliases ?? [])
+          writer.write(`  Also applies to ${enemyRoomLabel(game, scene, room, setup, slot)}`);
+        if (row.splitChildren?.length)
+          writer.write(`  Split spawns: ${row.splitChildren.map(key => enemyDefinition(key).name).join(', ')}`);
+        const choices = row.chaoticOotChoices?.length ?? row.chaoticMmChoices?.length;
+        if (choices)
+          writer.write(`  Runtime alternatives: ${choices}`);
+      }
+      writer.unindent('');
+    }
+    writer.unindent('');
+  });
+  writer.unindent('');
+  return writer.emit();
 }

@@ -3,14 +3,13 @@ import { Setting } from './Setting';
 
 type SettingsPanelProps = {
   category: string;
-  showDisabled?: boolean;
 };
-export function SettingsPanel({ category, showDisabled = false }: SettingsPanelProps) {
+export function SettingsPanel({ category }: SettingsPanelProps) {
   const settingsData = SETTINGS.filter((s) => s.category === category);
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-center">
-      {settingsData.map(x => <Setting key={x.key} setting={x.key} showDisabled={showDisabled}/>)}
+      {settingsData.map(x => <Setting key={x.key} setting={x.key}/>)}
     </div>
   );
 };
@@ -18,12 +17,11 @@ export function SettingsPanel({ category, showDisabled = false }: SettingsPanelP
 type SettingsEditorProps = {
   name?: string;
   category: string;
-  showDisabled?: boolean;
 };
-export function SettingsEditor({ name, category, showDisabled = false }: SettingsEditorProps) {
+export function SettingsEditor({ name, category }: SettingsEditorProps) {
   return (
     <main className="p-8">
-      <SettingsPanel category={category} showDisabled={showDisabled}/>
+      <SettingsPanel category={category}/>
     </main>
   )
 }

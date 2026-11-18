@@ -5,6 +5,7 @@
 
 int comboOotEnemizerCanSpawn(PlayState*, const ActorEntry*);
 int comboEnemyActorPlacementKey(Actor*, PlayState*, u32*);
+void comboOotEnemizerResetLizalfos(void);
 void comboOotEnemizerDefeated(PlayState*, u32 placementKey);
 
 #endif

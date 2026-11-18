@@ -277,6 +277,7 @@ void EnDha_Wait(EnDha* this, PlayState* play) {
         if (player->actor.parent == &this->actor || Math_Vec3f_DistXYZ(&playerPos, &this->handPos[0]) <= 12.0f) {
             if (this->unk_1CC == 0) {
                 if (!player->actor.parent && !player->invincibilityTimer &&
+                    (player->actor.bgCheckFlags & BGCHECKFLAG_GROUND_STRICT) &&
                     EnDha_CanReachPlayer(this, play, &playerPos) && play->grabPlayer(play, player)) {
                     player->av2.actionVar2 = 0;
                     player->actor.parent = &this->actor;

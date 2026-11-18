@@ -2,6 +2,8 @@
 #include <combo/actor_ovl.h>
 #include <combo/dma.h>
 #include <combo/enemy_oot_enemizer.h>
+#include <combo/enemy.h>
+#include <combo/global.h>
 
 #ifndef NativeEnemizerKnockback
 # define NativeEnemizerKnockback ((void (*)(PlayState*, Actor*, float, s16, float))0x80022ec4)
@@ -42,6 +44,13 @@ int comboOotEnemizerReDeadSwitch(PlayState* play, int flag)
     return flag == 0x7f ? 1 : Flags_GetSwitch(play, flag);
 }
 
+static u8 sLizalfosDefeated[64];
+
+void comboOotEnemizerResetLizalfos(void)
+{
+    memset(sLizalfosDefeated, 0, sizeof(sLizalfosDefeated));
+}
+
 static u32 sOotEnemizerSwitchVrom __attribute__((section(".data"))) = 0;
 void comboOotEnemizerDefeated(PlayState* play, u32 key)
 {
@@ -57,9 +66,17 @@ void comboOotEnemizerDefeated(PlayState* play, u32 key)
     {
         if (comboDmaLoadFilePartial(row, sOotEnemizerSwitchVrom, 16 + i * 12, 12) != 12)
             return;
-        if (row[0] == key && (row[1] >> 16) == play->sceneId && row[2] < 64)
+        if (row[0] == key && (row[1] >> 16) == play->sceneId && (row[2] & 0xff) < 64 && (row[2] >> 8) <= 2)
         {
-            Flags_SetSwitch(play, row[2]);
+            u32 flag = row[2] & 0xff;
+            u32 member = row[2] >> 8;
+            if (member)
+            {
+                sLizalfosDefeated[flag] |= 1u << (member - 1);
+                if (sLizalfosDefeated[flag] != 3)
+                    return;
+            }
+            Flags_SetSwitch(play, flag);
             return;
         }
     }
@@ -82,3 +99,22 @@ void comboOotEnemizerActorKill(Actor* actor)
 }
 PATCH_FUNC(0x80020eb4, comboOotEnemizerActorKill);
 EXPORT_SYMBOL(ENEMY_OOT_ENEMIZER_KILL_V1, comboOotEnemizerActorKill);
+
+static s32 shuffledRoomTimerCleared(PlayState* play, s32 room)
+{
+    if (room < 0 || room >= 32 || room != play->roomCtx.curRoom.num ||
+        g.roomEnemyLackSoul || comboEnemyEncounterPending(room))
+        return 0;
+
+    static const u8 categories[] = { ACTORCAT_ENEMY, ACTORCAT_BOSS };
+    for (u32 i = 0; i < ARRAY_COUNT(categories); ++i)
+    {
+        u8 category = categories[i];
+        for (Actor* actor = play->actorCtx.actors[category].first; actor; actor = actor->next)
+            if (actor->update && (actor->room < 0 || actor->room == room))
+                return 0;
+    }
+    return 1;
+}
+
+EXPORT_SYMBOL(ENEMY_OOT_ROOMTIMER_CLEAR, shuffledRoomTimerCleared);

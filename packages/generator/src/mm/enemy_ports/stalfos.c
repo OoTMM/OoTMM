@@ -1702,7 +1702,7 @@ void StalfosPort_EnTest_Update(Actor* thisx, PlayState* play) {
             this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_REACT_TO_LENS;
             this->actor.shape.shadowDraw = ActorShadow_DrawFeet;
         } else {
-            this->actor.flags &= ~(ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_REACT_TO_LENS);
+            this->actor.flags &= ~ACTOR_FLAG_REACT_TO_LENS;
             this->actor.shape.shadowDraw = NULL;
         }
     }

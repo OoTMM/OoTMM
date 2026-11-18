@@ -49,8 +49,6 @@
 #define Actor_ProcessInitChain ((void (*)(Actor* actor, InitChainEntry* ichain))0x800ffadc)
 #undef Actor_SetColorFilter
 #define Actor_SetColorFilter FOREIGN_ENEMY_API_COLOR_FILTER
-#undef Actor_SetPlayerKnockbackLargeNoDamage
-#define Actor_SetPlayerKnockbackLargeNoDamage FOREIGN_ENEMY_API_KNOCKBACK_LARGE_NO_DAMAGE
 #undef Actor_UpdateBgCheckInfo
 #define Actor_UpdateBgCheckInfo ((void (*)(PlayState* play, Actor* actor, f32 wallCheckHeight, f32 wallCheckRadius, f32 ceilingCheckHeight, s32 flags))0x800b78b8)
 #undef Animation_Change
@@ -443,7 +441,6 @@ void EnDh_Attack(EnDh* this, PlayState* play) {
                 Actor* hand = player->actor.parent;
                 if (hand && hand->id == 0xca5 && hand->parent == &this->actor)
                     player->av2.actionVar2 = 100;
-                Actor_SetPlayerKnockbackLargeNoDamage(play, &this->actor, 8.0f, this->actor.shape.rot.y, 8.0f);
             }
             break;
         case 3:
@@ -615,9 +612,8 @@ void EnDh_Update(Actor* thisx, PlayState* play) {
     EnDh_CollisionCheck(this, play);
     this->actionFunc(this, play);
     Actor_MoveXZGravity(&this->actor);
-    Actor_UpdateBgCheckInfo(play, &this->actor, 20.0f, 45.0f, 45.0f,
-                            UPDBGCHECKINFO_FLAG_0 | UPDBGCHECKINFO_FLAG_2 | UPDBGCHECKINFO_FLAG_3 |
-                                UPDBGCHECKINFO_FLAG_4);
+    Actor_UpdateBgCheckInfo(play, &this->actor, 20.0f, 24.0f, 45.0f,
+                            UPDBGCHECKINFO_FLAG_0 | UPDBGCHECKINFO_FLAG_2 | UPDBGCHECKINFO_FLAG_3);
     this->actor.focus.pos = this->headPos;
     Collider_UpdateCylinder(&this->actor, &this->collider1);
     if (this->actor.colChkInfo.health > 0) {

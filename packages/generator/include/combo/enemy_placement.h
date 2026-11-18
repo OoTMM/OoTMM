@@ -18,6 +18,7 @@
 void comboEnemyRedeadUpdate(Actor*, PlayState*, ActorFunc);
 int comboEnemyNativeAirBound(Actor*);
 int comboEnemyNativePlacementActive(Actor*);
+int comboEnemyShuffledDeadHand(Actor*, PlayState*);
 int comboEnemyNativeMusicSuppressed(void);
 int comboEnemyNativePlacementOrigin(Actor*, Vec3f*);
 void comboEnemyNativePlacementReset(void);

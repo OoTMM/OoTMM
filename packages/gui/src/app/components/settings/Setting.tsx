@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import type { Settings } from '@ootmm/generator';
 import { SETTINGS } from '@ootmm/generator';
 
 import { InputField, SelectField, CheckboxField, Select, Tooltip, Label } from '@/app/components/ui';
@@ -188,26 +189,42 @@ function SettingSet({ setting, label }: { setting: string; label?: string }) {
   );
 }
 
+type SettingAvailabilityProps = {
+  condition?: (settings: Settings) => boolean;
+  children: ReactNode;
+};
+
+export function SettingAvailability({ condition, children }: SettingAvailabilityProps) {
+  const settings = useStore(state => state.settings);
+  const isDisabled = !!condition && !condition(settings);
+  const unavailableMessage = isDisabled ? explainUnavailable(condition, settings) : undefined;
+
+  return (
+    <div
+      className={isDisabled ? 'opacity-50' : undefined}
+      aria-disabled={isDisabled || undefined}
+      title={unavailableMessage}
+    >
+      <fieldset
+        disabled={isDisabled}
+        className={`m-0 min-w-0 border-0 p-0 ${isDisabled ? 'pointer-events-none' : ''}`}
+      >
+        {children}
+      </fieldset>
+    </div>
+  );
+}
+
 type SettingProps = {
   setting: string;
-  showDisabled?: boolean;
   label?: string;
 };
 
-export function Setting({ setting, showDisabled = false, label }: SettingProps) {
+export function Setting({ setting, label }: SettingProps) {
   const settings = useStore(state => state.settings);
   const patchSettings = useStore(state => state.patchSettings);
   const data = SETTINGS.find(x => x.key === setting)!;
-  const cond = (data as any).cond;
-  const isDisabled = !!cond && !cond(settings);
   const settingLabel = label ?? data.name;
-  const unavailableMessage = isDisabled
-      ? explainUnavailable(cond, settings)
-      : undefined;
-
-  if (isDisabled && !showDisabled) {
-    return null;
-  }
 
   let content: ReactNode;
 
@@ -217,7 +234,15 @@ export function Setting({ setting, showDisabled = false, label }: SettingProps) 
       <SelectField
         value={settings[data.key] as string}
         label={settingLabel}
-        options={(data as any).values.filter((x: any) => x.cond === undefined || x.cond(settings)).map((x: any) => ({ label: x.name, value: x.value }))}
+        options={(data as any).values.map((x: any) => {
+          const disabled = !!x.cond && !x.cond(settings);
+          return {
+            label: x.name,
+            value: x.value,
+            disabled,
+            title: disabled ? explainUnavailable(x.cond, settings) : undefined,
+          };
+        })}
         tooltip={data.description && <SettingTooltip setting={data.key}/>}
         onSelect={(v) => patchSettings({ [data.key]: v })}
       />
@@ -319,17 +344,8 @@ export function Setting({ setting, showDisabled = false, label }: SettingProps) 
   }
 
   return (
-    <div
-      className={isDisabled ? 'opacity-50' : undefined}
-      aria-disabled={isDisabled || undefined}
-      title={unavailableMessage}
-    >
-      <fieldset
-        disabled={isDisabled}
-        className={`m-0 min-w-0 border-0 p-0 ${isDisabled ? 'pointer-events-none' : ''}`}
-      >
-        {content}
-      </fieldset>
-    </div>
+    <SettingAvailability condition={(data as any).cond}>
+      {content}
+    </SettingAvailability>
   );
 }

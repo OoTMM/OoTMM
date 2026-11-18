@@ -1,6 +1,6 @@
-import { SETTINGS } from '@ootmm/generator';
+import { SETTINGS, type Settings } from '@ootmm/generator';
 
-type State = Record<string, any>;
+type State = Settings & Record<string, any>;
 type Cond = (settings: State) => boolean;
 type Change = { key: string; value: any };
 
