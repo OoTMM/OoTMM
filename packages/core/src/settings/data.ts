@@ -2810,7 +2810,7 @@ export const SETTINGS = [{
 }, {
   key: 'soulsEnemyLens',
   name: 'Enemy Soul Ghosts',
-  category: 'items.extensions.systems',
+  category: 'enemies',
   group: 'Enemy Souls',
   type: 'enum',
   description: 'Show inactive, lightly transparent models of enemies whose souls you have not obtained. Burrowed enemies are shown above ground. Enemies activate after obtaining their Soul and reloading the room. Requires Enemy Souls.',
