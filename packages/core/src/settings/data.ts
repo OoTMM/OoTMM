@@ -271,7 +271,7 @@ export const SETTINGS = [{
     { value: 'individual', name: 'Individual', description: 'Choose each spawn separately within the room’s placement and native model budget.' },
     { value: 'grouped', name: 'Grouped', description: 'Choose replacements by shared model bank within each scene, following the standalone MM shuffle.' },
   ],
-  default: 'grouped',
+  default: 'individual',
   cond: (s: any) => hasMM(s) && s.enemyShuffleMm,
 }, {
   key: 'enemyShuffleTerminaFieldLeevers',
@@ -361,7 +361,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Add compatible enemies missing from the receiving game. Shared enemies and their supported native variants are already available through that game’s enemy randomizer.',
   default: false,
-  cond: (s: any) => (hasOoT(s) && s.enemyShuffleOot) || (hasMM(s) && s.enemyShuffleMm),
+  cond: (s: any) => s.enemyShuffleOot || s.enemyShuffleMm,
 }, {
   key: 'songs',
   name: 'Song Shuffle',
