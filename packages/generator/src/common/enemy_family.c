@@ -81,7 +81,7 @@ int comboEnemyFamilyDone(const EnemyFamily* family)
 
 void comboEnemyFamilySpawned(Actor* actor)
 {
-    if (!sFamily || !actor || actor->category == ACTORCAT_ITEMACTION || actor->id == ACTOR_EN_ELF)
+    if (!sFamily || !actor || (actor->category == ACTORCAT_ITEMACTION && !(sFamily->flags & ENEMY_FAMILY_GOLD)) || actor->id == ACTOR_EN_ELF)
         return;
     FamilyChild* child = familyChild(actor, 1);
     if (!child)

@@ -195,7 +195,7 @@ type Resolved = {
 };
 
 function applyExactOotEnemizer(roms: DecompressedRoms, addresses: GameAddresses, patch: Patchfile, plan: EnemyPlan,
-  foreignTargets: ReadonlyMap<string, ForeignEnemyPlacement>) {
+  foreignTargets: ReadonlyMap<string, ForeignEnemyPlacement>, settings: Settings) {
   const rows = plan.filter((row): row is OotEnemizerReplacement => !!row.ootr);
   const rom = roms.oot.rom;
   verifyOotEnemySourceCorrections(rom);
@@ -286,7 +286,9 @@ function applyExactOotEnemizer(roms: DecompressedRoms, addresses: GameAddresses,
         const address = addresses.oot.fileFromROM(resolved.offset);
         const actorId = Uint8Array.from(original.subarray(0, 2));
         applyOverlappingEdits(actorId, address.offset, patch.patches[address.name] ?? []);
-        if (bufReadU16BE(actorId, 0) === 0xffff) continue;
+        if (bufReadU16BE(actorId, 0) === 0xffff) {
+          continue;
+        }
       }
       const entry = prepareOotEnemizerActor(choice, original, key, imported);
       if (!entry) continue;
@@ -2320,7 +2322,8 @@ function dynamicEnemyChoice(host: Game, target: EnemyDefinition, foreign: Readon
   if (host === 'oot') {
     if (id === 0x113) operation = 64;
     else if (id === 0xc7 && params === 1) operation = 6;
-    else if (id === 0x69) operation = 17;
+    /* Only path-following Bubble forms use the patrol adapter. */
+    else if (id === 0x69 && [0x00fd, 0x02fc, 0x02fb].includes(params)) operation = 17;
     else if (id === 0x1d) operation = 4;
   } else {
     if (id === 0x50) operation = 5;
@@ -2720,7 +2723,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
       const payloads = patch.newFiles.filter(file => file.name === 'oot/payload'), span = payloads.length === 1 ? payloads[0].vram?.oot : undefined;
       if (lifecycle?.length !== 1 || !span || lifecycle[0] < span[0] || lifecycle[0] >= span[1]) throw new Error('Missing exact OoT native object lifecycle');
       patch.addSymbolPatch('ENEMY_NATIVE_OBJECT_LIFECYCLE_OOT_V1', Uint8Array.of(1));
-      const exact = applyExactOotEnemizer(roms, addresses, patch, plan, foreignTargets);
+      const exact = applyExactOotEnemizer(roms, addresses, patch, plan, foreignTargets, settings);
       exactRecords.push(...exact.records);
       exactApplied = true;
       for (const seed of exact.records) {

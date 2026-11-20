@@ -9597,6 +9597,9 @@
     - oot-gold-58-08e
   allow:
     - all-enemies
+  deny:
+    - oot-native/Shabom
+    - mm-native/Shabom
 
 "oot/Zora Fountain GS Tree - Gold Skulltula":
   rooms:
