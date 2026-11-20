@@ -14,7 +14,7 @@ int comboEnemyOotHeadroomEnabled(void);
 u32 comboEnemyOotGameplayReserve(void);
 static inline int comboOotGameplayObject(u16 id)
 {
-    return (id >= 0x2000 && id <= 0x201d) || id == 0x2041 || id == 0x2020 || id == 0x2021 || id == 0x2022 || id == 0x2023 || id == 0x2042;
+    return (id >= 0x2000 && id <= 0x201d) || id == 0x2041 || id == 0x2020 || id == 0x2021 || id == 0x2022 || id == 0x2023 || id == 0x2042 || id == 0x11e7 || id == 0x2026;
 }
 
 #endif
