@@ -1008,8 +1008,29 @@ export function ootEnemizerLocationKey(location: OotEnemySlot): string {
   return [location.scene, location.room, location.setup, location.slot].join('/');
 }
 
-function ootEnemizerLocations(mq: ReadonlySet<string>): readonly OotEnemizerLocation[] {
-  return OOT_ENEMIZER.locations.filter(row => row.dungeon === null || row.mq === mq.has(row.dungeon));
+/* NO_BROKEN_ACTORS patches 31 OoT actor-list entries by ROM address.
+ * These 18 entries are the ones also eligible for the ordinary OoT Enemizer
+ * source roster. Other removed entries are not shuffle candidates.
+ * Keep this table in sync with src/oot/patches/broken_actors.S. The generator
+ * independently checks the patched ROM entries and errors on a missed source.
+ * Forest Temple room 0: 0x25ce078, 0x25ce088
+ * Graveyard room 1 setups 2/3: 0x202f3dc..43c, 0x202f7cc..82c
+ * Lost Woods shortcut: 0x2168090, 0x21681c8
+ */
+const OOT_BROKEN_ENEMIZER_SLOTS = new Set<string>([
+  '5/0/0/2', '5/0/0/3',
+  ...[2, 3].flatMap(setup => [2, 3, 4, 5, 6, 7, 8].map(slot => `83/1/${setup}/${slot}`)),
+  '91/3/0/2', '91/3/2/2',
+]);
+
+function ootEnemizerBrokenSlot(location: OotEnemizerLocation): boolean {
+  return !location.mq && OOT_BROKEN_ENEMIZER_SLOTS.has(ootEnemizerLocationKey(location));
+}
+
+function ootEnemizerLocations(mq: ReadonlySet<string>, settings: Settings): readonly OotEnemizerLocation[] {
+  return OOT_ENEMIZER.locations.filter(row =>
+    (row.dungeon === null || row.mq === mq.has(row.dungeon)) &&
+    (settings.restoreBrokenActors || !ootEnemizerBrokenSlot(row)));
 }
 
 function ootSpawnLocations(location: OotEnemizerLocation): EnemySpawnLocation[] {
@@ -1190,7 +1211,7 @@ function ootEnemizerCandidatePools(defs: readonly EnemyDefinition[], settings: S
   const cross = [...uniqueCross.values()];
   const candidates = new Map<OotEnemizerLocation, OotEnemizerCandidate[]>();
   for (const location of locations) {
-    if (location.broken)
+    if (location.broken || (!settings.restoreBrokenActors && ootEnemizerBrokenSlot(location)))
       continue;
     const source = ootSpawnSource(defs, location);
     const spawnLocations = ootSpawnLocations(location);
@@ -1788,7 +1809,7 @@ function makeOotEnemizerPlan(defs: readonly EnemyDefinition[], settings: Setting
   validateOotGoldMemory(gold, settings);
   const scenes = new Map<number, OotEnemizerLocation[]>();
   const mq = resolvedMq(settings, options.mqDungeons);
-  for (const location of [...ootEnemizerLocations(mq), ...ootFieldStalchildLocations(), ...(!mq.has(DUNGEONS.Forest) ? ootForestBowLocations() : []), ...ootBurialEnemyLocations(mq)]) {
+  for (const location of [...ootEnemizerLocations(mq, settings), ...ootFieldStalchildLocations(), ...(!mq.has(DUNGEONS.Forest) ? ootForestBowLocations() : []), ...ootBurialEnemyLocations(mq)]) {
     if (!enemySourceAllowedBySettings('oot', location.actorId, settings)) continue;
     const source = ootSpawnSource(defs, location);
     if (!ootSpawnLocations(location).every(where => enemySpawnSourceAllowed(settings, where, source))) continue;
