@@ -31,6 +31,12 @@ static void leeverUpdate(Actor* actor, PlayState* play)
     if (profile && profile->update)
         profile->update(actor, play);
     sLeeverActor = previous;
+
+    /* EnReeba_Die only kills actors with an En_Encount1 parent. Let its
+     * shrinking/death effect and item drop finish, then retire a standalone
+     * replacement before it can repeat the drop on the next frame. */
+    if (actor->update && !actor->parent && !actor->colChkInfo.health && actor->scale.x < 0.01f)
+        Actor_Kill(actor);
 }
 #else
 static void leeverDraw(Actor* actor, PlayState* play)

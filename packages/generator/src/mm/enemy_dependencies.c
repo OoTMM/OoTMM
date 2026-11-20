@@ -71,7 +71,7 @@ void comboEnemyDependenciesBeginRoom(PlayState* play, ActorEntry* list, u32 coun
             return;
         if (data.key < key || data.key >= key + count * sizeof(*list) || (data.key - key) % sizeof(*list))
             continue;
-        if ((data.type != 1 && data.type != 2 && data.type != 3) || data.hostSlot >= count)
+        if (data.type < 1 || data.type > 4 || data.hostSlot >= count)
             continue;
         for (u32 j = 0; j < ARRAY_COUNT(sDependencies); ++j)
         {
@@ -99,11 +99,12 @@ void comboEnemyDependenciesSpawnActors(PlayState* play)
     for (u32 i = 0; i < ARRAY_COUNT(sDependencies); ++i)
     {
         EnemyDependencyState* state = &sDependencies[i];
-        if ((state->type != 2 && state->type != 3) || state->done || state->room != (u8)play->roomCtx.curRoom.num)
+        if (state->type < 2 || state->type > 4 || state->done || state->room != (u8)play->roomCtx.curRoom.num)
             continue;
         int missingSoul = state->type == 3 && !comboHasSoulMm(GI_MM_SOUL_ENEMY_BIO_BABA);
         u16 params = state->type == 3 ? 2 : state->params;
-        Actor* dependency = Actor_Spawn(&play->actorCtx, play, state->type == 3 ? ACTOR_BOSS_05 : ACTOR_OBJ_ICE_POLY,
+        s16 id = state->type == 4 ? ACTOR_OBJ_ETCETERA : state->type == 3 ? ACTOR_BOSS_05 : ACTOR_OBJ_ICE_POLY;
+        Actor* dependency = Actor_Spawn(&play->actorCtx, play, id,
                                         state->lastPos.x, state->lastPos.y, state->lastPos.z, 0, state->yaw, 0, params);
         if (dependency && (dependency->init || dependency->update))
         {
@@ -114,6 +115,24 @@ void comboEnemyDependenciesSpawnActors(PlayState* play)
             state->done = 1;
     }
     gCurrentSpawnActorNum = saved;
+}
+
+/* A native scrub may also roll at a protected flower slot (including a
+ * chaotic choice). Its death spawn reuses the flower we made at room load. */
+Actor* comboEnemyExistingDekuFlower(PlayState* play, f32 x, f32 y, f32 z)
+{
+    for (u32 i = 0; i < ARRAY_COUNT(sDependencies); ++i)
+    {
+        EnemyDependencyState* state = &sDependencies[i];
+        if (state->type != 4 || state->room != (u8)play->roomCtx.curRoom.num ||
+            state->lastPos.x != x || state->lastPos.y != y || state->lastPos.z != z)
+            continue;
+        for (Actor* actor = play->actorCtx.actors[ACTORCAT_BG].first; actor; actor = actor->next)
+            if (actor->id == ACTOR_OBJ_ETCETERA && ((actor->params & 0xff80) >> 7) <= 1 && (actor->init || actor->update) &&
+                actor->room == state->room && actor->home.pos.x == x && actor->home.pos.y == y && actor->home.pos.z == z)
+                return actor;
+    }
+    return NULL;
 }
 
 int comboEnemyFairyHost(Actor* fairy, PlayState* play, Vec3f* pos)

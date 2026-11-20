@@ -179,15 +179,8 @@ void comboEnemyFamilyClear(EnemyFamily* family)
     memset(family, 0, sizeof(*family));
 }
 
-Actor* comboEnemyFamilySpawn(EnemyFamily* family, ActorContext* ctx, ActorEntry* entry, PlayState* play, u32 operation)
+static Actor* familyFinishSpawn(EnemyFamily* family, Actor* actor, EnemyFamily* previous, int collecting)
 {
-    EnemyFamily* previous = sFamily;
-    int collecting = sCollecting;
-    if (previous)
-        family->flags |= previous->flags;
-    sFamily = family;
-    sCollecting = 1;
-    Actor* actor = comboEnemyDynamicSpawn(ctx, entry, play, operation);
     comboEnemyFamilySpawned(actor);
     for (u32 i = 0; i < ARRAY_COUNT(sChildren); ++i)
         if (sChildren[i].actor && sChildren[i].actor != (Actor*)1 && sChildren[i].family == family &&
@@ -199,6 +192,36 @@ Actor* comboEnemyFamilySpawn(EnemyFamily* family, ActorContext* ctx, ActorEntry*
         family->started = 1;
     return actor;
 }
+
+Actor* comboEnemyFamilySpawn(EnemyFamily* family, ActorContext* ctx, ActorEntry* entry, PlayState* play, u32 operation)
+{
+    EnemyFamily* previous = sFamily;
+    int collecting = sCollecting;
+    if (previous)
+        family->flags |= previous->flags;
+    sFamily = family;
+    sCollecting = 1;
+    Actor* actor = comboEnemyDynamicSpawn(ctx, entry, play, operation);
+    return familyFinishSpawn(family, actor, previous, collecting);
+}
+
+#if defined(GAME_OOT)
+/* A preserved slot still needs a lifetime while its neighboring slots shuffle.
+ * Keep the native parent link, parameters and spawn behavior intact. */
+Actor* comboEnemyFamilySpawnVanillaChild(EnemyFamily* family, ActorContext* ctx, Actor* parent,
+                                        PlayState* play, s16 id, f32 x, f32 y, f32 z,
+                                        s16 rx, s16 ry, s16 rz, s32 params)
+{
+    EnemyFamily* previous = sFamily;
+    int collecting = sCollecting;
+    if (previous)
+        family->flags |= previous->flags;
+    sFamily = family;
+    sCollecting = 1;
+    Actor* actor = Actor_SpawnAsChild(ctx, parent, play, id, x, y, z, rx, ry, rz, params);
+    return familyFinishSpawn(family, actor, previous, collecting);
+}
+#endif
 
 #if defined(GAME_MM)
 static void familyActorDestroy(Actor* actor, PlayState* play)

@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/actor_ovl.h>
+#include <combo/data/enemy-spawn.h>
 #include <combo/dma.h>
 #include <combo/enemy_oot_enemizer.h>
 #include <combo/enemy.h>
@@ -30,13 +31,18 @@ EXPORT_SYMBOL(ENEMY_OOT_ENEMIZER_FLARE_KNOCKBACK_V1, comboOotEnemizerFlareKnockb
 
 int comboOotEnemizerCanSpawn(PlayState* play, const ActorEntry* entry)
 {
-    float delta;
     if (!play || !entry)
         return 0;
-    if (play->sceneId != 1 || play->roomCtx.curRoom.num != 3)
-        return 1;
-    delta = GET_PLAYER(play)->actor.world.pos.y - (float)entry->pos.y;
-    return delta >= -100.f && delta <= 100.f;
+    for (u32 i = 0; i < ARRAY_COUNT(kEnemyOotRuntimeSpawnRules); ++i)
+    {
+        const EnemyOotRuntimeSpawnRule* rule = &kEnemyOotRuntimeSpawnRules[i];
+        if (play->sceneId == rule->scene && play->roomCtx.curRoom.num == rule->room)
+        {
+            float delta = GET_PLAYER(play)->actor.world.pos.y - (float)entry->pos.y;
+            return delta >= -rule->maxHeightDifference && delta <= rule->maxHeightDifference;
+        }
+    }
+    return 1;
 }
 
 int comboOotEnemizerReDeadSwitch(PlayState* play, int flag)
@@ -100,9 +106,24 @@ void comboOotEnemizerActorKill(Actor* actor)
 PATCH_FUNC(0x80020eb4, comboOotEnemizerActorKill);
 EXPORT_SYMBOL(ENEMY_OOT_ENEMIZER_KILL_V1, comboOotEnemizerActorKill);
 
+/* Only authored combat timers in rooms that actually received replacements.
+ * Silver-rupee/puzzle timers retain their own temporary-clear producer. */
+static u32 sCombatTimerRooms[101] __attribute__((section(".data")));
+EXPORT_SYMBOL(ENEMY_OOT_COMBAT_TIMER_ROOMS_V1, sCombatTimerRooms);
+
+int comboEnemyOotCombatRoomTimer(PlayState* play, s32 room)
+{
+    return play && play->sceneId < ARRAY_COUNT(sCombatTimerRooms) && room >= 0 && room < 32 &&
+           (sCombatTimerRooms[play->sceneId] & (1u << room));
+}
+
 static s32 shuffledRoomTimerCleared(PlayState* play, s32 room)
 {
-    if (room < 0 || room >= 32 || room != play->roomCtx.curRoom.num ||
+    if (room < 0 || room >= 32)
+        return 0;
+    if (!comboEnemyOotCombatRoomTimer(play, room))
+        return (play->actorCtx.flags.tempClear & (1u << room)) != 0;
+    if (room != play->roomCtx.curRoom.num ||
         g.roomEnemyLackSoul || comboEnemyEncounterPending(room))
         return 0;
 

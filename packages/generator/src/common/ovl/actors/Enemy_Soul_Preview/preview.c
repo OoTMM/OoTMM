@@ -351,12 +351,24 @@ static int goldFloorAt(PlayState* play, Actor* actor, Vec3f* position, f32 heigh
 static int goldFloor(PlayState* play, Actor* actor, Vec3f* position, f32 height, u16 maxRadius, int grounded)
 {
     Vec3f origin = *position;
+    f32 searchY = origin.y;
+    if (grounded)
+    {
+        /* An authored hanging actor can sit exactly on the ceiling. Start
+         * below that surface, without lowering already-grounded entries. */
+        Vec3f below = { origin.x, origin.y - 16.f, origin.z };
+        Vec3f above = { origin.x, origin.y + 2.f, origin.z }, hit;
+        CollisionPoly* ceiling;
+        s32 bgId;
+        if (BgCheck_EntityLineTest1(&play->colCtx, &below, &above, &hit, &ceiling, 0, 0, 1, 0, &bgId))
+            searchY -= 16.f;
+    }
     for (int radius = 0; radius <= maxRadius; radius += maxRadius <= 150 ? 5 : 64)
     {
         for (int direction = 0; direction < (radius ? 16 : 1); ++direction)
         {
             s16 yaw = direction * 0x1000;
-            Vec3f candidate = { origin.x + radius * Math_SinS(yaw), origin.y, origin.z + radius * Math_CosS(yaw) };
+            Vec3f candidate = { origin.x + radius * Math_SinS(yaw), searchY, origin.z + radius * Math_CosS(yaw) };
             if (grounded)
                 candidate.y -= 78.f;
             if (!goldFloorAt(play, actor, &candidate, height))
@@ -386,7 +398,7 @@ static int goldFloor(PlayState* play, Actor* actor, Vec3f* position, f32 height,
             if (!safe)
                 continue;
 
-            f32 routeY = MAX(origin.y + 2.f, candidate.y + 40.f);
+            f32 routeY = MAX(searchY + 2.f, candidate.y + 40.f);
             Vec3f from = { origin.x, routeY, origin.z };
             Vec3f to = { candidate.x, routeY, candidate.z }, hit;
             Vec3f feet = { candidate.x, candidate.y + 2.f, candidate.z };

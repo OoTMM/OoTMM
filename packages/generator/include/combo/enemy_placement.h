@@ -35,6 +35,7 @@ void comboEnemyNativePlacementBlock(s32 room);
 void comboEnemyDependenciesReset(void);
 void comboEnemyDependenciesBeginRoom(PlayState*, ActorEntry*, u32);
 void comboEnemyDependenciesSpawnActors(PlayState*);
+Actor* comboEnemyExistingDekuFlower(PlayState*, f32, f32, f32);
 int comboEnemyFairyHost(Actor*, PlayState*, Vec3f*);
 int comboEnemyRoomSlotComplete(s32, u32);
 

@@ -85,7 +85,14 @@ export function enemyNativeActorDependencies(game: Game, id: number): Set<number
   return ids;
 }
 
-export function enemyNativeDynamicCollisionCount(game: Game, actorId: number): number {
+export function enemyNativeDynamicCollisionCount(game: Game, actorId: number, params?: number): number {
+  /* Dm_Char01's actor-wide spawn graph merges the four Woodfall scenery
+   * variants and both flower-spawning code paths. Each placed variant is
+   * narrower: water has one mesh, the cue controller has none, and the
+   * temple/ramp each own one mesh and can spawn at most one Deku Flower.
+   * Keep the broad fallback for unknown parameters/dependency traversal. */
+  if (game === 'mm' && actorId === 0x193 && params !== undefined && [0, 1, 2, 3].includes(params))
+    return [1, 0, 2, 2][params];
   const visit = (id: number, seen: readonly number[]): number => {
     if (seen.includes(id)) return 0;
     const own = ENEMY_DYNAMIC_COLLISION.actors[game].includes(id) ? 1 : 0;

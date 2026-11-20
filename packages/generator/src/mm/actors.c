@@ -1,4 +1,5 @@
 #include <combo/enemy_soul_preview.h>
+#include <combo/enemy_placement.h>
 #include <combo/enemy_gold.h>
 #include <combo/enemy.h>
 #include <combo.h>
@@ -663,6 +664,13 @@ Actor *Actor_SpawnAsChildAndCutsceneWrapper(ActorContext *actorCtx, PlayState *p
 
     if (!canSpawnActor(play, actorId, variable))
         return NULL;
+
+    if (actorId == ACTOR_OBJ_ETCETERA && ((variable & 0xff80) >> 7) <= 1)
+    {
+        Actor* flower = comboEnemyExistingDekuFlower(play, x, y, z);
+        if (flower)
+            return flower;
+    }
 
     /* Patch for gorman on donkeys */
     if (actorId == ACTOR_EN_HORSE && ((variable & 0x1fff) == 0x13 || (variable & 0x1fff) == 0x14) && !comboHasSoulMm(GI_MM_SOUL_NPC_GORMAN))

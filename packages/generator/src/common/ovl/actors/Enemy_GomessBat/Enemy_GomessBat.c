@@ -536,6 +536,31 @@ static void Bat_DeathUpdate(EnemyGomessBat* bat, PlayState* play)
     }
 }
 
+static Vec3f Bat_FormationTarget(EnemyGomessBat* bat, PlayState* play, Vec3f* center, s16 angle)
+{
+    Actor* parent = bat->actor.parent;
+    Vec3f target = parent->world.pos;
+    target.x += 60.f * Math_SinS(angle);
+    target.y += 15.f + 80.f * bat->actor.params / GOMESS_BAT_COUNT;
+    target.z += 60.f * Math_CosS(angle);
+
+    /* A shuffled arena can put a formation slot behind a wall. Regrouping
+     * must finish before fallen bats recover, so use a reachable point on
+     * the parent's side of that wall instead of waiting forever. */
+    f32 extent = MAX(fabsf(target.x - center->x), MAX(fabsf(target.y - center->y), fabsf(target.z - center->z))) + .1f;
+    Vec3f hit;
+    CollisionPoly* poly;
+    s32 bgId;
+    if (!Bat_ClearSegment(play, center, &target, extent) &&
+        BgCheck_EntityLineTest1(&play->colCtx, center, &target, &hit, &poly, 1, 1, 1, 0, &bgId))
+    {
+        target.x = center->x + (hit.x - center->x) * .8f;
+        target.y = center->y + (hit.y - center->y) * .8f;
+        target.z = center->z + (hit.z - center->z) * .8f;
+    }
+    return target;
+}
+
 static void Bat_Update(Actor* actor, PlayState* play)
 {
     EnemyGomessBat* bat = (EnemyGomessBat*)actor;
@@ -791,10 +816,7 @@ static void Bat_Update(Actor* actor, PlayState* play)
     }
     else
     {
-        target = parent->world.pos;
-        target.x += 60.f * Math_SinS(angle);
-        target.y += 15.f + 80.f * actor->params / GOMESS_BAT_COUNT;
-        target.z += 60.f * Math_CosS(angle);
+        target = Bat_FormationTarget(bat, play, &center, angle);
     }
     int crowding = !leading && !bat->gather && !bat->attackTimer && !scattering && !bat->returning;
     int inFormation = crowding && !bat->regrouping;

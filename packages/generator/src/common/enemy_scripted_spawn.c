@@ -180,9 +180,27 @@ static void fieldComplete(EnemyFamily* family, PlayState* play)
     memset(family, 0, sizeof(*family));
 }
 
+static void fieldPreservedComplete(EnemyFamily* family, PlayState* play)
+{
+    /* The native child already decrements its parent's live count. */
+    memset(family, 0, sizeof(*family));
+}
+
+static void detachSpawnerChildren(Actor* parent, PlayState* play)
+{
+    /* Native children may be destroyed after their spawner's allocation is
+     * freed. Clear those links before the deferred family cleanup. */
+    for (u32 category = 0; category < ARRAY_COUNT(play->actorCtx.actors); ++category)
+        for (Actor* child = play->actorCtx.actors[category].first; child; child = child->next)
+            if (child->parent == parent)
+                child->parent = NULL;
+    parent->child = NULL;
+}
+
 static void fieldSpawnerFini(Actor* actor, PlayState* play)
 {
     ActorFunc fini = sFieldSpawnerFini;
+    detachSpawnerChildren(actor, play);
     sFieldSpawner = NULL;
     sFieldSpawnerFini = NULL;
     for (u32 i = 0; i < ARRAY_COUNT(sFieldFamilies); ++i)
@@ -217,7 +235,10 @@ static int fieldChoice(u32 slot, FieldChoice* out)
 static Actor* fieldStalchildSpawn(ActorContext* ctx, Actor* parent, PlayState* play, s16 id,
                                 f32 x, f32 y, f32 z, s16 rx, s16 ry, s16 rz, s32 params)
 {
-    if (play->sceneId != 0x51 || id != STALCHILD_ID || !sFieldStalchildChoices[0].vrom)
+    int enabled = 0;
+    for (u32 i = 0; i < ARRAY_COUNT(sFieldStalchildChoices); ++i)
+        enabled |= sFieldStalchildChoices[i].vrom != 0;
+    if (play->sceneId != 0x51 || id != STALCHILD_ID || !enabled)
         return Actor_SpawnAsChild(ctx, parent, play, id, x, y, z, rx, ry, rz, params);
     if (sFieldSpawner && sFieldSpawner != parent)
         return NULL;
@@ -231,16 +252,19 @@ static Actor* fieldStalchildSpawn(ActorContext* ctx, Actor* parent, PlayState* p
     {
         if (sFieldFamilies[i].live)
             continue;
-        FieldChoice choice;
-        if (!fieldChoice(i, &choice))
+        int preserved = !sFieldStalchildChoices[i].vrom;
+        FieldChoice choice = { id, params, 0, 1 };
+        if (!preserved && !fieldChoice(i, &choice))
             return NULL;
         ActorEntry entry = { choice.id, { x, y, z }, { rx, ry, rz }, choice.params };
         u8 lackSoul = g.roomEnemyLackSoul;
         u32 segment = gSegments[6];
         int soul = comboIsForeignEnemyActor(choice.id) ? comboEnemyForeignSoulCheck(choice.id) :
             comboEnemyNativeSoulCheck(play, choice.id, choice.params);
-        sFieldFamilies[i].complete = fieldComplete;
-        Actor* actor = comboEnemyFamilySpawn(&sFieldFamilies[i], ctx, &entry, play, choice.operation);
+        sFieldFamilies[i].complete = preserved ? fieldPreservedComplete : fieldComplete;
+        Actor* actor = preserved
+            ? comboEnemyFamilySpawnVanillaChild(&sFieldFamilies[i], ctx, parent, play, id, x, y, z, rx, ry, rz, params)
+            : comboEnemyFamilySpawn(&sFieldFamilies[i], ctx, &entry, play, choice.operation);
         g.roomEnemyLackSoul = lackSoul;
         gSegments[6] = segment;
         if (!actor && !soul)
@@ -290,8 +314,15 @@ static void desertComplete(EnemyFamily* family, PlayState* play)
     memset(child, 0, sizeof(*child));
 }
 
+static void desertPreservedComplete(EnemyFamily* family, PlayState* play)
+{
+    /* Preserve the native Leever's counter and large-Leever bookkeeping. */
+    memset((DesertLeeverChild*)family, 0, sizeof(DesertLeeverChild));
+}
+
 static void desertSpawnerFini(Actor* actor, PlayState* play)
 {
+    detachSpawnerChildren(actor, play);
     for (u32 i = 0; i < ARRAY_COUNT(sDesertChildren); ++i)
         if (sDesertChildren[i].spawner == actor)
         {
@@ -306,21 +337,28 @@ static Actor* desertLeeverSpawn(ActorContext* ctx, Actor* parent, PlayState* pla
     EnemyNativeEncounterSpawner* spawner = (EnemyNativeEncounterSpawner*)parent;
     int first = play->sceneId == 0x5c ? 0 : 5;
     int count = first == 0 ? 5 : 3;
+    int enabled = 0;
+    for (int i = first; i < first + count; ++i)
+        enabled |= sDesertChoices[i].enabled;
     if ((play->sceneId == 0x5c || play->sceneId == 0x5e) && id == ACTOR_EN_REEBA &&
-        sDesertChoices[first].enabled)
+        enabled)
     {
         for (int i = first; i < first + count; ++i)
         {
             if (sDesertChildren[i].spawner)
                 continue;
-            const DesertLeeverChoice* choice = &sDesertChoices[i];
+            const DesertLeeverChoice original = { id, params, 0, 0 };
+            int preserved = !sDesertChoices[i].enabled;
+            const DesertLeeverChoice* choice = preserved ? &original : &sDesertChoices[i];
             ActorEntry entry = { .id = choice->id, .params = choice->params, .pos = { x, y, z }, .rot = { rx, ry, rz } };
             u8 lackSoul = g.roomEnemyLackSoul;
             u32 segment = gSegments[6];
             int missingSoul = (comboIsForeignEnemyActor(choice->id) ? comboEnemyForeignSoulCheck(choice->id) :
                 comboEnemyNativeSoulCheck(play, choice->id, choice->params)) <= 0;
-            sDesertChildren[i].family.complete = desertComplete;
-            Actor* actor = comboEnemyFamilySpawn(&sDesertChildren[i].family, ctx, &entry, play, choice->operation);
+            sDesertChildren[i].family.complete = preserved ? desertPreservedComplete : desertComplete;
+            Actor* actor = preserved
+                ? comboEnemyFamilySpawnVanillaChild(&sDesertChildren[i].family, ctx, parent, play, id, x, y, z, rx, ry, rz, params)
+                : comboEnemyFamilySpawn(&sDesertChildren[i].family, ctx, &entry, play, choice->operation);
             g.roomEnemyLackSoul = lackSoul;
             gSegments[6] = segment;
             if (!actor && missingSoul)
@@ -335,6 +373,8 @@ static Actor* desertLeeverSpawn(ActorContext* ctx, Actor* parent, PlayState* pla
                 return NULL;
             }
             actor->room = parent->room;
+            if (preserved)
+                ((EnemyNativeLeeverAim*)actor)->aimType = spawner->leeverIndex;
             sDesertChildren[i].spawner = parent;
             parent->fini = desertSpawnerFini;
             return actor;
@@ -390,7 +430,7 @@ static void guardComplete(EnemyFamily* family, PlayState* play)
 static Actor* keetaGuardSpawn(ActorContext* ctx, Actor* parent, PlayState* play, s16 id,
                               f32 x, f32 y, f32 z, s16 rx, s16 ry, s16 rz, s32 params)
 {
-    if (!sGuardTarget[3] || play->sceneId != 0x0c || !parent || parent->id != ACTOR_EN_ENCOUNT4 || id != ACTOR_EN_SKB)
+    if (!sGuardTarget[3] || play->sceneId != 0x43 || !parent || parent->id != ACTOR_EN_ENCOUNT4 || id != ACTOR_EN_SKB)
         return Actor_SpawnAsChild(ctx, parent, play, id, x, y, z, rx, ry, rz, params);
     for (u32 i = 0; i < ARRAY_COUNT(sGuards); ++i)
     {
