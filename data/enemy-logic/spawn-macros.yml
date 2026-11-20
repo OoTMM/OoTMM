@@ -1,0 +1,2076 @@
+# Reusable enemy groups and placement conditions. A name references another macro.
+# Lists mean any member; all/any/not combine groups. Enemy selectors use game,
+# actor, optional params/name/habitat. Decimal IDs match the enemy logic YAML.
+# The oot-native/mm-native aliases identify native roster forms; classification
+# groups also supply the placement solver's compatibility data during the build.
+
+"all-enemies": true
+
+"flying":
+  habitat: air
+
+"water":
+  habitat: underwater
+
+"water-surface":
+  habitat: water-surface
+
+"aquatic":
+  any:
+    - water
+    - water-surface
+
+"stationary":
+  any:
+    - game: oot
+      actor:
+        - 14
+        - 85
+        - 96
+        - 138
+    - game: mm
+      actor:
+        - 8
+        - 51
+        - 59
+        - 102
+        - 465
+    - game: mm
+      actor: 301
+      params:
+        - 0
+        - 1
+        - 2
+
+"club-moblin":
+  game: oot
+  actor: 75
+  params: 2
+
+"bio-baba-without-leaf":
+  game: mm
+  actor: 301
+  params:
+    - 1
+    - 4
+
+"wall-required":
+  any:
+    - game: oot
+      actor: 149
+    - game: mm
+      actor: 80
+
+"ceiling-source":
+  any:
+    - game: oot
+      actor:
+        - 17
+        - 55
+    - game: mm
+      actor:
+        - 10
+        - 36
+
+"elevated-source":
+  any:
+    - ceiling-source
+    - wall-required
+
+"preserves-native-height":
+  any:
+    - elevated-source
+    - game: oot
+      actor: 222
+
+"mandatory-ground":
+  game: mm
+  actor: 330
+
+"perched":
+  any:
+    - all:
+        - any:
+            - game: oot
+              actor: 19
+            - game: mm
+              actor: 12
+        - field: target.params
+          mask: 32767
+          oneOf:
+            - 1
+            - 3
+    - all:
+        - game: mm
+          actor: 347
+        - not:
+            field: target.params
+            mask: 128
+            equals: 0
+
+"respawning":
+  any:
+    - all:
+        - game: oot
+          actor: 199
+        - not:
+            params: 1
+    - all:
+        - game: mm
+          actor: 102
+        - not:
+            params:
+              - 1
+              - 2
+    - all:
+        - game: mm
+          actor: 367
+        - not:
+            field: target.params
+            mask: 32768
+            equals: 0
+    - all:
+        - game: mm
+          actor: 356
+        - not:
+            field: target.params
+            mask: 4
+            equals: 0
+
+"never-shuffled":
+  any:
+    - game: oot
+      actor:
+        - 198
+        - 222
+    - game: mm
+      actor:
+        - 424
+        - 518
+
+"carnivorous-lily":
+  game: mm
+  actor: 314
+
+"rooted-bio-baba":
+  all:
+    - game: mm
+      actor: 301
+    - field: target.params
+      mask: 255
+      oneOf:
+        - 0
+        - 1
+        - 2
+
+"mm-aquatic":
+  any:
+    - game: mm
+      actor:
+        - 384
+        - 575
+        - 518
+    - rooted-bio-baba
+
+"mm-source-form":
+  all:
+    - any:
+        - not:
+            field: source.actorId
+            equals: 80
+        - field: source.params
+          equals: 65532
+    - any:
+        - not:
+            field: source.actorId
+            equals: 301
+        - not:
+            field: source.params
+            equals: 2
+    - any:
+        - not:
+            field: source.actorId
+            equals: 657
+        - field: source.params
+          equals: 0
+    - any:
+        - not:
+            field: source.actorId
+            equals: 314
+        - field: source.params
+          mask: 61440
+          equals: 0
+
+"source-settings-allowed":
+  all:
+    - not: never-shuffled
+    - any:
+        - field: settings.erWallmasters
+          equals: none
+        - not:
+            any:
+              - game: oot
+                actor: 17
+              - game: mm
+                actor: 10
+    - any:
+        - not:
+            field: settings.enemyShufflePreserveMinibosses
+            equals: true
+        - not:
+            field: facts.miniboss
+            equals: true
+    - any:
+        - not:
+            game: oot
+            actor: 285
+        - field: settings.shufflePotsOot
+          equals: none
+    - any:
+        - not:
+            game: mm
+            actor: 141
+        - field: settings.shufflePotsMm
+          equals: none
+
+"native-resource-source":
+  any:
+    - game: oot
+      actor: 85
+      params:
+        - 0
+        - 1
+    - game: oot
+      actor: 199
+      params:
+        - 0
+        - 1
+        - 65535
+    - game: oot
+      actor: 407
+      params:
+        - 2560
+        - 3072
+        - 3584
+        - 3840
+    - game: mm
+      actor: 51
+      params: 0
+    - game: mm
+      actor: 102
+      params:
+        - 1
+        - 2
+    - game: mm
+      actor: 59
+      params:
+        - 65280
+        - 65282
+    - game: mm
+      actor: 520
+      params: 65280
+    - game: mm
+      actor: 541
+      params:
+        - 587
+        - 715
+        - 523
+
+"native-fight-room-allowed":
+  any:
+    - not:
+        field: source.key
+        equals: oot-gerudo-fighter-restored
+    - all:
+        - not:
+            field: settings.gerudoFortress
+            equals: open
+        - any:
+            - not:
+                field: settings.gerudoFortress
+                equals: single
+            - field: location.room
+              equals: 2
+
+"standalone-source-extra":
+  game: oot
+  actor:
+    - 107
+    - 199
+    - 402
+
+"dynamic-habitat-allowed":
+  any:
+    - field: settings.enemyShuffleIgnoreRestrictions
+      equals: true
+    - not:
+        any:
+          - wall-required
+          - aquatic
+          - rooted-bio-baba
+          - carnivorous-lily
+          - mm-aquatic
+
+"oot-standalone-port-slot":
+  all:
+    - not:
+        field: source.skipRaycast
+        equals: true
+    - field: source.restrictions
+      nonempty: false
+
+"oot-native-extension-source":
+  all:
+    - not:
+        field: source.broken
+        equals: true
+    - any:
+        - field: source.restrictions
+          nonempty: false
+        - all:
+            - field: settings.enemyShuffleIgnoreRestrictions
+              equals: true
+            - not:
+                field: source.skipRaycast
+                equals: true
+
+"oot-arwing-source":
+  all:
+    - not:
+        field: source.broken
+        equals: true
+    - field: source.restrictions
+      subsetOf:
+        - FLOATING
+        - ABOVE_GROUND
+        - ABOVE_WATER
+
+"oot-native-wall-source":
+  any:
+    - not:
+        actor: 149
+    - field: source.actorId
+      equals: 149
+
+"oot-relaxed-native-source":
+  all:
+    - field: settings.enemyShuffleIgnoreRestrictions
+      equals: true
+    - not:
+        field: source.broken
+        equals: true
+    - not:
+        field: source.skipRaycast
+        equals: true
+    - field: source.explicit
+      nonempty: false
+    - oot-native-wall-source
+    - not:
+        field: source.disallowed
+        containsField: target.name
+    - field: target.requires
+      subsetOfField: source.meets
+      except:
+        - ABOVE_WATER
+
+"oot-native-business-scrub":
+  any:
+    - not:
+        actor: 405
+    - field: facts.allowedActors
+      contains: 96
+
+"native-scene-keep":
+  any:
+    - not:
+        any:
+          - game: oot
+            actor: 285
+          - game: mm
+            actor: 141
+    - field: facts.sceneKeep
+      equals: 3
+
+"oot-foreign-standalone-required":
+  game: mm
+  actor:
+    - 67
+    - 349
+    - 386
+    - 300
+    - 7
+    - 101
+    - 277
+    - 655
+
+"oot-foreign-standalone-allowed":
+  any:
+    - not: oot-foreign-standalone-required
+    - oot-standalone-port-slot
+
+"oot-cross-floating":
+  actor:
+    - 265
+    - 347
+
+"oot-cross-above-ground":
+  actor: 275
+
+"oot-native-target-source":
+  any:
+    - not:
+        field: location.scene
+        equals: 65
+    - not:
+        field: location.room
+        equals: 0
+    - not:
+        field: source.actorId
+        equals: 19
+    - not:
+        any:
+          - game: oot
+            actor: 55
+          - game: mm
+            actor: 36
+
+"mm-skipped-scene":
+  field: location.scene
+  oneOf:
+    - 8
+    - 32
+    - 36
+    - 105
+
+"mm-placement-type":
+  any:
+    - all:
+        - game: mm
+          actor: 86
+        - field: source.type
+          oneOf:
+            - 0
+            - 2
+            - 3
+            - 4
+    - all:
+        - not:
+            game: mm
+            actor: 86
+        - any:
+            - carnivorous-lily
+            - field: source.type
+              equalsField: target.type
+            - all:
+                - any:
+                    - field: source.type
+                      oneOf:
+                        - 3
+                        - 4
+                    - all:
+                        - field: source.game
+                          equals: mm
+                        - field: source.actorId
+                          equals: 657
+                - field: target.type
+                  equals: 0
+
+"mm-target-form":
+  any:
+    - not:
+        actor: 301
+    - not:
+        params: 2
+
+"mm-native-roster-form":
+  any:
+    - not:
+        actor: 236
+    - field: target.params
+      mask: 128
+      equals: 0
+
+"mm-mounted-bio-baba-native":
+  all:
+    - game: mm
+      actor: 301
+    - field: source.actorId
+      equals: 301
+    - field: source.params
+      mask: 255
+      equals: 0
+    - field: target.params
+      equalsField: source.params
+
+"mm-aquatic-source":
+  any:
+    - not: mm-aquatic
+    - mm-mounted-bio-baba-native
+    - field: facts.aquaticSlot
+      equals: true
+
+"mm-native-counterpart-slot":
+  any:
+    - not:
+        actor:
+          - 25
+          - 80
+    - all:
+        - field: facts.rawLength
+          equals: 16
+        - field: facts.cutscene
+          equals: 127
+        - any:
+            - actor: 25
+            - all:
+                - field: source.actorId
+                  equals: 80
+                - field: source.params
+                  equals: 65532
+                - field: facts.rawActorId
+                  equalsField: source.actorId
+                - field: facts.rawParams
+                  equalsField: source.params
+
+"mm-scripted-scene-target":
+  any:
+    - not:
+        game: mm
+        actor: 25
+    - not:
+        field: facts.scriptedDinolfos
+        equals: true
+
+"mm-graveyard-target":
+  any:
+    - not:
+        field: location.scene
+        equals: 12
+    - field: facts.extraActors
+      max: 0
+
+"mm-chaotic-source":
+  all:
+    - not:
+        field: source.actorId
+        equals: 314
+    - not:
+        all:
+          - field: source.actorId
+            equals: 301
+          - field: source.params
+            equals: 0
+    - not:
+        field: location.scene
+        equals: 45
+
+"mm-chaotic-target":
+  all:
+    - game: mm
+    - field: target.actorId
+      max: 3071
+    - not:
+        actor: 424
+    - any:
+        - not:
+            actor: 36
+        - field: source.actorId
+          equals: 36
+
+"mm-source-object-model":
+  actor: 465
+
+"split-death-bari":
+  game: oot
+  actor: 99
+
+"split-death-eeno":
+  all:
+    - game: mm
+      actor: 486
+    - field: target.params
+      mask: 255
+      equals: 1
+
+"oot-foreign-extra-forms":
+  game: oot
+  actor:
+    - 105
+    - 29
+    - 55
+    - 138
+    - 432
+
+"mm-foreign-extra-form":
+  game: mm
+  actor: 11
+  params: 1
+
+"generator-mm-wall-slot-allowed":
+  any:
+    - not:
+        game: mm
+        actor: 80
+    - all:
+        - params: 65280
+        - field: source.csId
+          equals: 127
+        - field: source.actorId
+          equals: 80
+        - field: source.params
+          equals: 65532
+
+"oot-flare-ring-offset":
+  all:
+    - field: location.game
+      equals: oot
+    - field: location.scene
+      equals: 4
+    - field: location.room
+      oneOf:
+        - 3
+        - 24
+    - field: source.actorId
+      equals: 153
+    - not:
+        actor: 153
+
+"generator-excluded-scene":
+  any:
+    - all:
+        - field: location.game
+          equals: mm
+        - field: location.scene
+          oneOf:
+            - 8
+            - 32
+            - 36
+            - 67
+            - 105
+    - all:
+        - field: location.game
+          equals: oot
+        - field: location.scene
+          min: 17
+        - field: location.scene
+          max: 26
+
+"oot-restriction/UNDERWATER": water
+
+"oot-restriction/ABOVE_WATER":
+  all:
+    - not: water
+    - any:
+        - water-surface
+        - rooted-bio-baba
+        - oot-cross-floating
+
+"oot-restriction/ABOVE_GROUND":
+  all:
+    - not:
+        any:
+          - water
+          - water-surface
+          - rooted-bio-baba
+    - any:
+        - oot-cross-floating
+        - oot-cross-above-ground
+
+"oot-restriction/FLOATING":
+  all:
+    - not:
+        any:
+          - water
+          - water-surface
+          - rooted-bio-baba
+    - oot-cross-floating
+
+"oot-foreign-habitat":
+  any:
+    - all:
+        - field: settings.enemyShuffleIgnoreRestrictions
+          equals: true
+        - not:
+            field: source.skipRaycast
+            equals: true
+        - field: source.explicit
+          nonempty: false
+        - not:
+            field: source.disallowed
+            containsField: target.name
+    - all:
+        - field: source.restrictions
+          subsetOfField: facts.capabilities
+        - any:
+            - not: water
+            - field: source.restrictions
+              contains: UNDERWATER
+        - any:
+            - not: rooted-bio-baba
+            - field: source.restrictions
+              contains: ABOVE_WATER
+            - field: source.meets
+              contains: ABOVE_WATER
+
+"oot-foreign-water-surface":
+  any:
+    - field: settings.enemyShuffleIgnoreRestrictions
+      equals: true
+    - not: carnivorous-lily
+    - field: facts.allWaterSurfaceSlots
+      equals: true
+
+"mm-native-wall-target":
+  game: mm
+  actor: 80
+
+"mm-native-dinolfos-target":
+  game: mm
+  actor: 25
+
+"mm-scripted-dinolfos-source":
+  all:
+    - field: source.actorId
+      equals: 25
+    - not:
+        field: facts.cutscene
+        equals: 127
+
+"mm-water-surface-source":
+  any:
+    - field: settings.enemyShuffleIgnoreRestrictions
+      equals: true
+    - not: carnivorous-lily
+    - field: facts.allWaterSurfaceSlots
+      equals: true
+
+"mm-scripted-source":
+  all:
+    - not:
+        field: source.actorId
+        equals: 655
+    - any:
+        - not:
+            field: source.actorId
+            equals: 349
+        - field: settings.enemyShuffleMinibosses
+          equals: true
+
+"mm-native-base-target":
+  not:
+    actor: 80
+
+"oot-dinolfos-source":
+  all:
+    - field: source.actorId
+      equals: 37
+    - any:
+        - all:
+            - field: location.mq
+              equals: false
+            - any:
+                - all:
+                    - field: location.scene
+                      equals: 10
+                    - field: location.room
+                      equals: 0
+                    - field: location.setup
+                      equals: 0
+                    - field: location.slot
+                      oneOf:
+                        - 1
+                        - 2
+                - all:
+                    - field: location.scene
+                      equals: 11
+                    - field: location.room
+                      equals: 7
+                    - field: location.setup
+                      equals: 0
+                    - field: location.slot
+                      oneOf:
+                        - 0
+                        - 1
+        - all:
+            - field: location.mq
+              equals: true
+            - any:
+                - all:
+                    - field: location.scene
+                      equals: 6
+                    - field: location.setup
+                      equals: 0
+                    - any:
+                        - all:
+                            - field: location.room
+                              equals: 18
+                            - field: location.slot
+                              oneOf:
+                                - 0
+                                - 1
+                        - all:
+                            - field: location.room
+                              equals: 26
+                            - field: location.slot
+                              equals: 1
+                - all:
+                    - field: location.scene
+                      equals: 11
+                    - field: location.room
+                      equals: 7
+                    - field: location.setup
+                      equals: 0
+                    - field: location.slot
+                      oneOf:
+                        - 0
+                        - 1
+                - all:
+                    - field: location.scene
+                      equals: 13
+                    - field: location.room
+                      equals: 9
+                    - field: location.setup
+                      equals: 0
+                    - field: location.slot
+                      equals: 8
+
+"oot-foreign-roster-extras":
+  any:
+    - game: mm
+      actor: 275
+      params: 0
+    - game: mm
+      actor: 573
+      params: 32512
+
+"mm-gold-form":
+  any:
+    - not:
+        actor: 301
+    - not:
+        params: 2
+
+"miniboss":
+  any:
+    - all:
+        - any:
+            - game: oot
+              actor: 145
+            - game: mm
+              actor: 488
+        - field: target.params
+          mask: 768
+          equals: 0
+    - all:
+        - not:
+            any:
+              - game: oot
+                actor: 145
+              - game: mm
+                actor: 488
+        - any:
+            - field: facts.catalogMiniboss
+              equals: true
+            - game: oot
+              actor: 153
+
+"active-combat-form":
+  all:
+    - not:
+        field: target.key
+        equals: mm-placement-biobaba-inert
+    - any:
+        - not:
+            actor: 301
+        - not:
+            params: 2
+
+"split-death-source":
+  any:
+    - all:
+        - field: settings.enemyShuffleBari
+          equals: true
+        - split-death-bari
+    - all:
+        - field: settings.enemyShuffleEeno
+          equals: true
+        - split-death-eeno
+
+"combat-definition":
+  not:
+    field: target.key
+    equals: mm-placement-biobaba-inert
+
+"oot-native/Stalfos":
+  name: Stalfos
+  game: oot
+  actor: 2
+  params: 3
+  habitat: ground
+
+"oot-native/Octorok":
+  name: Octorok
+  game: oot
+  actor: 14
+  params: 0
+  habitat: water-surface
+
+"oot-native/Wallmaster":
+  name: Wallmaster
+  game: oot
+  actor: 17
+  params: 0
+  habitat: ground
+
+"oot-native/Dodongo":
+  name: Dodongo
+  game: oot
+  actor: 18
+  params: 0
+  habitat: ground
+
+"oot-native/Keese":
+  name: Keese
+  game: oot
+  actor: 19
+  params: 2
+  habitat: air
+
+"oot-native/Fire Keese":
+  name: Fire Keese
+  game: oot
+  actor: 19
+  params: 0
+  habitat: air
+
+"oot-native/Ice Keese":
+  name: Ice Keese
+  game: oot
+  actor: 19
+  params: 4
+  habitat: air
+
+"oot-native/Tektite":
+  name: Tektite
+  game: oot
+  actor: 27
+  params: 0
+  habitat: ground
+
+"oot-native/Tektite (Blue)":
+  name: Tektite (Blue)
+  game: oot
+  actor: 27
+  params: 65534
+  habitat: ground
+
+"oot-native/Peahat":
+  name: Peahat
+  game: oot
+  actor: 29
+  params: 65535
+  habitat: ground
+
+"oot-native/Flying Peahat":
+  name: Flying Peahat
+  game: oot
+  actor: 29
+  params: 0
+  habitat: ground
+
+"oot-native/Lizalfos":
+  name: Lizalfos
+  game: oot
+  actor: 37
+  params: 65408
+  habitat: ground
+
+"oot-native/Dinolfos":
+  name: Dinolfos
+  game: oot
+  actor: 37
+  params: 65534
+  habitat: ground
+
+"oot-native/Gohma Larva":
+  name: Gohma Larva
+  game: oot
+  actor: 43
+  params: 6
+  habitat: ground
+
+"oot-native/Shabom":
+  name: Shabom
+  game: oot
+  actor: 45
+  params: 0
+  habitat: air
+
+"oot-native/Baby Dodongo":
+  name: Baby Dodongo
+  game: oot
+  actor: 47
+  params: 0
+  habitat: ground
+
+"oot-native/Biri":
+  name: Biri
+  game: oot
+  actor: 52
+  params: 0
+  habitat: air
+
+"oot-native/Bari":
+  name: Bari
+  game: oot
+  actor: 99
+  params: 0
+  habitat: air
+
+"oot-native/Tailpasaran":
+  name: Tailpasaran
+  game: oot
+  actor: 53
+  params: 65535
+  habitat: ground
+
+"oot-native/Skulltula":
+  name: Skulltula
+  game: oot
+  actor: 55
+  params: 0
+  habitat: ground
+
+"oot-native/Torch Slug":
+  name: Torch Slug
+  game: oot
+  actor: 56
+  params: 0
+  habitat: ground
+
+"oot-native/Moblin":
+  name: Moblin
+  game: oot
+  actor: 75
+  params: 2
+  habitat: ground
+
+"oot-native/Moblin (Spear)":
+  name: Moblin (Spear)
+  game: oot
+  actor: 75
+  params: 65535
+  habitat: ground
+
+"oot-native/Armos":
+  name: Armos
+  game: oot
+  actor: 84
+  params: 65535
+  habitat: ground
+
+"oot-native/Deku Baba":
+  name: Deku Baba
+  game: oot
+  actor: 85
+  params: 0
+  habitat: ground
+
+"oot-native/Deku Baba (Large)":
+  name: Deku Baba (Large)
+  game: oot
+  actor: 85
+  params: 1
+  habitat: ground
+
+"oot-native/Deku Scrub":
+  name: Deku Scrub
+  game: oot
+  actor: 96
+  params: 0
+  habitat: ground
+
+"oot-native/Bubble":
+  name: Bubble
+  game: oot
+  actor: 105
+  params: 65535
+  habitat: air
+
+"oot-native/Beamos (Large)":
+  name: Beamos (Large)
+  game: oot
+  actor: 138
+  params: 1280
+  habitat: ground
+
+"oot-native/Beamos (Small)":
+  name: Beamos (Small)
+  game: oot
+  actor: 138
+  params: 1281
+  habitat: ground
+
+"oot-native/Floormaster":
+  name: Floormaster
+  game: oot
+  actor: 142
+  params: 0
+  habitat: ground
+
+"oot-native/Redead":
+  name: Redead
+  game: oot
+  actor: 144
+  params: 32514
+  habitat: ground
+
+"oot-native/Gibdo":
+  name: Gibdo
+  game: oot
+  actor: 144
+  params: 32766
+  habitat: ground
+
+"oot-native/Skullwalltula":
+  name: Skullwalltula
+  game: oot
+  actor: 149
+  params: 0
+  habitat: air
+
+"oot-native/Flare Dancer":
+  name: Flare Dancer
+  game: oot
+  actor: 153
+  params: 0
+  habitat: ground
+
+"oot-native/Shell Blade":
+  name: Shell Blade
+  game: oot
+  actor: 197
+  params: 0
+  habitat: underwater
+
+"oot-native/Like Like":
+  name: Like Like
+  game: oot
+  actor: 221
+  params: 0
+  habitat: ground
+
+"oot-native/Spike Enemy":
+  name: Spike Enemy
+  game: oot
+  actor: 236
+  params: 0
+  habitat: underwater
+
+"oot-native/Anubis Spawner":
+  name: Anubis Spawner
+  game: oot
+  actor: 246
+  params: 3
+  habitat: ground
+
+"oot-native/Iron Knuckle (Black)":
+  name: Iron Knuckle (Black)
+  game: oot
+  actor: 275
+  params:
+    - 65410
+    - 65282
+  habitat: ground
+
+"oot-native/Iron Knuckle (White)":
+  name: Iron Knuckle (White)
+  game: oot
+  actor: 275
+  params:
+    - 65411
+    - 65283
+  habitat: ground
+
+"oot-native/Skull Kid":
+  name: Skull Kid
+  game: oot
+  actor: 277
+  params: 65535
+  habitat: ground
+
+"oot-native/Freezard":
+  name: Freezard
+  game: oot
+  actor: 289
+  params: 0
+  habitat: ground
+
+"oot-native/Stinger":
+  name: Stinger
+  game: oot
+  actor: 396
+  params: 0
+  habitat: underwater
+
+"oot-native/Stingray":
+  name: Stingray
+  game: oot
+  actor: 58
+  params: 10
+  habitat: ground
+
+"oot-native/Wolfos":
+  name: Wolfos
+  game: oot
+  actor: 431
+  params: 65280
+  habitat: ground
+
+"oot-native/Wolfos (White)":
+  name: Wolfos (White)
+  game: oot
+  actor: 431
+  params: 65281
+  habitat: ground
+
+"oot-native/Guay":
+  name: Guay
+  game: oot
+  actor: 448
+  params: 0
+  habitat: air
+
+"mm-native/Octorok":
+  game: mm
+  actor: 8
+
+"mm-native/Wallmaster":
+  game: mm
+  actor: 10
+
+"mm-native/Dodongo":
+  game: mm
+  actor: 11
+
+"mm-native/Keese":
+  game: mm
+  actor: 12
+
+"mm-native/Tektite":
+  game: mm
+  actor: 18
+
+"mm-native/Peahat":
+  game: mm
+  actor: 20
+
+"mm-native/Dinolfos":
+  game: mm
+  actor: 25
+
+"mm-native/Shabom":
+  game: mm
+  actor: 29
+
+"mm-native/Skulltula":
+  game: mm
+  actor: 36
+
+"mm-native/Armos":
+  game: mm
+  actor: 50
+
+"mm-native/DekuBaba":
+  game: mm
+  actor: 51
+
+"mm-native/MadScrub":
+  game: mm
+  actor: 59
+
+"mm-native/RedBubble":
+  game: mm
+  actor: 60
+
+"mm-native/BlueBubble":
+  game: mm
+  actor: 62
+
+"mm-native/Beamos":
+  game: mm
+  actor: 71
+
+"mm-native/Floormaster":
+  game: mm
+  actor: 74
+
+"mm-native/Redead":
+  game: mm
+  actor: 76
+
+"mm-native/Shellblade":
+  game: mm
+  actor: 100
+
+"mm-native/MiniBaba":
+  game: mm
+  actor: 102
+
+"mm-native/IronKnuckle":
+  game: mm
+  actor: 132
+
+"mm-native/Freezard":
+  game: mm
+  actor: 143
+
+"mm-native/Wolfos":
+  game: mm
+  actor: 236
+
+"mm-native/Stalchild":
+  game: mm
+  actor: 237
+
+"mm-native/Guay":
+  game: mm
+  actor: 241
+
+"mm-native/Dragonfly":
+  game: mm
+  actor: 265
+
+"mm-native/BioBaba":
+  game: mm
+  actor: 301
+
+"mm-native/Chuchu":
+  game: mm
+  actor: 330
+
+"mm-native/Desbreko":
+  game: mm
+  actor: 331
+
+"mm-native/Nejiron":
+  game: mm
+  actor: 341
+
+"mm-native/BadBat":
+  game: mm
+  actor: 347
+
+"mm-native/Boe":
+  game: mm
+  actor: 356
+
+"mm-native/RealBombchu":
+  game: mm
+  actor: 367
+
+"mm-native/Snapper":
+  game: mm
+  actor: 442
+
+"mm-native/Eeno":
+  game: mm
+  actor: 486
+
+"mm-native/Hiploop":
+  game: mm
+  actor: 489
+
+"mm-native/Poe":
+  game: mm
+  actor: 499
+
+"mm-native/Hornet":
+  game: mm
+  actor: 516
+
+"placement-type/ground":
+  any:
+    - game: oot
+      actor:
+        - 2
+        - 18
+        - 29
+        - 37
+        - 43
+        - 47
+        - 51
+        - 53
+        - 56
+        - 58
+        - 75
+        - 107
+        - 138
+        - 153
+        - 164
+        - 221
+        - 246
+        - 277
+        - 432
+    - game: mm
+      actor:
+        - 7
+        - 10
+        - 11
+        - 18
+        - 20
+        - 25
+        - 45
+        - 50
+        - 51
+        - 59
+        - 60
+        - 67
+        - 71
+        - 74
+        - 76
+        - 80
+        - 101
+        - 108
+        - 132
+        - 141
+        - 143
+        - 236
+        - 237
+        - 275
+        - 277
+        - 300
+        - 314
+        - 341
+        - 349
+        - 386
+        - 388
+        - 442
+        - 465
+        - 489
+        - 534
+        - 541
+        - 655
+
+"placement-type/aquatic":
+  any:
+    - game: oot
+      actor:
+        - 236
+        - 396
+    - game: mm
+      actor:
+        - 8
+        - 100
+        - 301
+        - 331
+        - 384
+        - 575
+
+"placement-type/flying":
+  any:
+    - game: oot
+      actor:
+        - 52
+        - 55
+        - 99
+        - 105
+    - game: mm
+      actor:
+        - 12
+        - 29
+        - 86
+        - 265
+        - 347
+        - 488
+        - 499
+        - 516
+        - 520
+        - 573
+        - 657
+
+"placement-type/hanging":
+  any:
+    - game: mm
+      actor:
+        - 36
+
+"placement-type/flexible":
+  any:
+    - game: mm
+      actor:
+        - 62
+        - 102
+        - 241
+        - 330
+        - 356
+        - 367
+        - 486
+
+"placement-stationary":
+  any:
+    - game: oot
+      actor:
+        - 55
+        - 99
+        - 138
+        - 236
+        - 246
+        - 277
+    - game: mm
+      actor:
+        - 8
+        - 36
+        - 50
+        - 51
+        - 59
+        - 71
+        - 76
+        - 102
+        - 132
+        - 143
+        - 301
+
+"native-supports/UNDERWATER":
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Gohma Larva
+  - oot-native/Shabom
+  - oot-native/Biri
+  - oot-native/Bari
+  - oot-native/Skulltula
+  - oot-native/Deku Scrub
+  - oot-native/Skullwalltula
+  - oot-native/Shell Blade
+  - oot-native/Stinger
+  - oot-native/Stingray
+  - oot-native/Guay
+
+"native-supports/FLOATING":
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Biri
+  - oot-native/Skulltula
+  - oot-native/Anubis Spawner
+  - oot-native/Guay
+
+"native-supports/ABOVE_GROUND":
+  - oot-native/Stalfos
+  - oot-native/Wallmaster
+  - oot-native/Dodongo
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Tektite
+  - oot-native/Tektite (Blue)
+  - oot-native/Peahat
+  - oot-native/Flying Peahat
+  - oot-native/Lizalfos
+  - oot-native/Dinolfos
+  - oot-native/Gohma Larva
+  - oot-native/Shabom
+  - oot-native/Biri
+  - oot-native/Bari
+  - oot-native/Tailpasaran
+  - oot-native/Skulltula
+  - oot-native/Moblin
+  - oot-native/Moblin (Spear)
+  - oot-native/Armos
+  - oot-native/Floormaster
+  - oot-native/Flare Dancer
+  - oot-native/Shell Blade
+  - oot-native/Like Like
+  - oot-native/Spike Enemy
+  - oot-native/Iron Knuckle (Black)
+  - oot-native/Iron Knuckle (White)
+  - oot-native/Freezard
+  - oot-native/Wolfos
+  - oot-native/Wolfos (White)
+  - oot-native/Guay
+
+"native-supports/ABOVE_WATER":
+  - oot-native/Octorok
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Tektite (Blue)
+  - oot-native/Peahat
+  - oot-native/Flying Peahat
+  - oot-native/Shabom
+  - oot-native/Biri
+  - oot-native/Guay
+
+"native-requires/ABOVE_WATER":
+  - oot-native/Octorok
+  - oot-native/Stinger
+
+"native-requires/OUTSIDE":
+  - oot-native/Flying Peahat
+
+"oot-native-roster":
+  - oot-native/Stalfos
+  - oot-native/Octorok
+  - oot-native/Wallmaster
+  - oot-native/Dodongo
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Tektite
+  - oot-native/Tektite (Blue)
+  - oot-native/Peahat
+  - oot-native/Flying Peahat
+  - oot-native/Lizalfos
+  - oot-native/Dinolfos
+  - oot-native/Gohma Larva
+  - oot-native/Shabom
+  - oot-native/Baby Dodongo
+  - oot-native/Biri
+  - oot-native/Bari
+  - oot-native/Tailpasaran
+  - oot-native/Skulltula
+  - oot-native/Torch Slug
+  - oot-native/Moblin
+  - oot-native/Moblin (Spear)
+  - oot-native/Armos
+  - oot-native/Deku Baba
+  - oot-native/Deku Baba (Large)
+  - oot-native/Deku Scrub
+  - oot-native/Bubble
+  - oot-native/Beamos (Large)
+  - oot-native/Beamos (Small)
+  - oot-native/Floormaster
+  - oot-native/Redead
+  - oot-native/Gibdo
+  - oot-native/Skullwalltula
+  - oot-native/Flare Dancer
+  - oot-native/Shell Blade
+  - oot-native/Like Like
+  - oot-native/Spike Enemy
+  - oot-native/Anubis Spawner
+  - oot-native/Iron Knuckle (Black)
+  - oot-native/Iron Knuckle (White)
+  - oot-native/Skull Kid
+  - oot-native/Freezard
+  - oot-native/Stinger
+  - oot-native/Stingray
+  - oot-native/Wolfos
+  - oot-native/Wolfos (White)
+  - oot-native/Guay
+
+"other-roster-forms":
+  not: oot-native-roster
+
+"oot-relaxed-native-pool":
+  all:
+    - oot-native-roster
+    - field: settings.enemyShuffleIgnoreRestrictions
+      equals: true
+
+"oot-standard":
+  - oot-native/Stalfos
+  - oot-native/Wallmaster
+  - oot-native/Dodongo
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Tektite
+  - oot-native/Tektite (Blue)
+  - oot-native/Peahat
+  - oot-native/Lizalfos
+  - oot-native/Dinolfos
+  - oot-native/Gohma Larva
+  - oot-native/Shabom
+  - oot-native/Baby Dodongo
+  - oot-native/Biri
+  - oot-native/Bari
+  - oot-native/Tailpasaran
+  - oot-native/Skulltula
+  - oot-native/Torch Slug
+  - oot-native/Moblin
+  - oot-native/Moblin (Spear)
+  - oot-native/Armos
+  - oot-native/Deku Baba
+  - oot-native/Deku Baba (Large)
+  - oot-native/Deku Scrub
+  - oot-native/Bubble
+  - oot-native/Beamos (Large)
+  - oot-native/Beamos (Small)
+  - oot-native/Floormaster
+  - oot-native/Redead
+  - oot-native/Gibdo
+  - oot-native/Skullwalltula
+  - oot-native/Flare Dancer
+  - oot-native/Shell Blade
+  - oot-native/Like Like
+  - oot-native/Spike Enemy
+  - oot-native/Anubis Spawner
+  - oot-native/Iron Knuckle (Black)
+  - oot-native/Iron Knuckle (White)
+  - oot-native/Skull Kid
+  - oot-native/Freezard
+  - oot-native/Stingray
+  - oot-native/Wolfos
+  - oot-native/Wolfos (White)
+  - oot-native/Guay
+
+"oot-standard-with-water-surface":
+  - oot-native/Stalfos
+  - oot-native/Octorok
+  - oot-native/Wallmaster
+  - oot-native/Dodongo
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Tektite
+  - oot-native/Tektite (Blue)
+  - oot-native/Peahat
+  - oot-native/Lizalfos
+  - oot-native/Dinolfos
+  - oot-native/Gohma Larva
+  - oot-native/Shabom
+  - oot-native/Baby Dodongo
+  - oot-native/Biri
+  - oot-native/Bari
+  - oot-native/Tailpasaran
+  - oot-native/Skulltula
+  - oot-native/Torch Slug
+  - oot-native/Moblin
+  - oot-native/Moblin (Spear)
+  - oot-native/Armos
+  - oot-native/Deku Baba
+  - oot-native/Deku Baba (Large)
+  - oot-native/Deku Scrub
+  - oot-native/Bubble
+  - oot-native/Beamos (Large)
+  - oot-native/Beamos (Small)
+  - oot-native/Floormaster
+  - oot-native/Redead
+  - oot-native/Gibdo
+  - oot-native/Skullwalltula
+  - oot-native/Flare Dancer
+  - oot-native/Shell Blade
+  - oot-native/Like Like
+  - oot-native/Spike Enemy
+  - oot-native/Anubis Spawner
+  - oot-native/Iron Knuckle (Black)
+  - oot-native/Iron Knuckle (White)
+  - oot-native/Skull Kid
+  - oot-native/Freezard
+  - oot-native/Stinger
+  - oot-native/Stingray
+  - oot-native/Wolfos
+  - oot-native/Wolfos (White)
+  - oot-native/Guay
+
+"oot-above-water":
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Tektite (Blue)
+  - oot-native/Peahat
+  - oot-native/Shabom
+  - oot-native/Biri
+  - oot-native/Guay
+
+"oot-outdoor":
+  - oot-native/Stalfos
+  - oot-native/Wallmaster
+  - oot-native/Dodongo
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Tektite
+  - oot-native/Tektite (Blue)
+  - oot-native/Peahat
+  - oot-native/Flying Peahat
+  - oot-native/Lizalfos
+  - oot-native/Dinolfos
+  - oot-native/Gohma Larva
+  - oot-native/Shabom
+  - oot-native/Baby Dodongo
+  - oot-native/Biri
+  - oot-native/Bari
+  - oot-native/Tailpasaran
+  - oot-native/Skulltula
+  - oot-native/Torch Slug
+  - oot-native/Moblin
+  - oot-native/Moblin (Spear)
+  - oot-native/Armos
+  - oot-native/Deku Baba
+  - oot-native/Deku Baba (Large)
+  - oot-native/Deku Scrub
+  - oot-native/Bubble
+  - oot-native/Beamos (Large)
+  - oot-native/Beamos (Small)
+  - oot-native/Floormaster
+  - oot-native/Redead
+  - oot-native/Gibdo
+  - oot-native/Skullwalltula
+  - oot-native/Flare Dancer
+  - oot-native/Shell Blade
+  - oot-native/Like Like
+  - oot-native/Spike Enemy
+  - oot-native/Anubis Spawner
+  - oot-native/Iron Knuckle (Black)
+  - oot-native/Iron Knuckle (White)
+  - oot-native/Skull Kid
+  - oot-native/Freezard
+  - oot-native/Stingray
+  - oot-native/Wolfos
+  - oot-native/Wolfos (White)
+  - oot-native/Guay
+
+"oot-all-forms":
+  - oot-native/Stalfos
+  - oot-native/Octorok
+  - oot-native/Wallmaster
+  - oot-native/Dodongo
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Tektite
+  - oot-native/Tektite (Blue)
+  - oot-native/Peahat
+  - oot-native/Flying Peahat
+  - oot-native/Lizalfos
+  - oot-native/Dinolfos
+  - oot-native/Gohma Larva
+  - oot-native/Shabom
+  - oot-native/Baby Dodongo
+  - oot-native/Biri
+  - oot-native/Bari
+  - oot-native/Tailpasaran
+  - oot-native/Skulltula
+  - oot-native/Torch Slug
+  - oot-native/Moblin
+  - oot-native/Moblin (Spear)
+  - oot-native/Armos
+  - oot-native/Deku Baba
+  - oot-native/Deku Baba (Large)
+  - oot-native/Deku Scrub
+  - oot-native/Bubble
+  - oot-native/Beamos (Large)
+  - oot-native/Beamos (Small)
+  - oot-native/Floormaster
+  - oot-native/Redead
+  - oot-native/Gibdo
+  - oot-native/Skullwalltula
+  - oot-native/Flare Dancer
+  - oot-native/Shell Blade
+  - oot-native/Like Like
+  - oot-native/Spike Enemy
+  - oot-native/Anubis Spawner
+  - oot-native/Iron Knuckle (Black)
+  - oot-native/Iron Knuckle (White)
+  - oot-native/Skull Kid
+  - oot-native/Freezard
+  - oot-native/Stinger
+  - oot-native/Stingray
+  - oot-native/Wolfos
+  - oot-native/Wolfos (White)
+  - oot-native/Guay
+
+"oot-above-ground-outdoor":
+  - oot-native/Stalfos
+  - oot-native/Wallmaster
+  - oot-native/Dodongo
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Tektite
+  - oot-native/Tektite (Blue)
+  - oot-native/Peahat
+  - oot-native/Flying Peahat
+  - oot-native/Lizalfos
+  - oot-native/Dinolfos
+  - oot-native/Gohma Larva
+  - oot-native/Shabom
+  - oot-native/Biri
+  - oot-native/Bari
+  - oot-native/Tailpasaran
+  - oot-native/Skulltula
+  - oot-native/Moblin
+  - oot-native/Moblin (Spear)
+  - oot-native/Armos
+  - oot-native/Floormaster
+  - oot-native/Flare Dancer
+  - oot-native/Shell Blade
+  - oot-native/Like Like
+  - oot-native/Spike Enemy
+  - oot-native/Iron Knuckle (Black)
+  - oot-native/Iron Knuckle (White)
+  - oot-native/Freezard
+  - oot-native/Wolfos
+  - oot-native/Wolfos (White)
+  - oot-native/Guay
+
+"oot-above-water-outdoor":
+  - oot-native/Octorok
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Tektite (Blue)
+  - oot-native/Peahat
+  - oot-native/Flying Peahat
+  - oot-native/Shabom
+  - oot-native/Biri
+  - oot-native/Guay
+
+"oot-underwater-with-octorok":
+  - oot-native/Octorok
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Gohma Larva
+  - oot-native/Shabom
+  - oot-native/Biri
+  - oot-native/Bari
+  - oot-native/Skulltula
+  - oot-native/Deku Scrub
+  - oot-native/Skullwalltula
+  - oot-native/Shell Blade
+  - oot-native/Stingray
+  - oot-native/Guay
+
+"oot-above-water-with-octorok":
+  - oot-native/Octorok
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Tektite (Blue)
+  - oot-native/Peahat
+  - oot-native/Shabom
+  - oot-native/Biri
+  - oot-native/Guay
+
+"oot-floating-with-wallmaster":
+  - oot-native/Wallmaster
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Biri
+  - oot-native/Skulltula
+  - oot-native/Anubis Spawner
+  - oot-native/Guay
+
+"oot-above-ground":
+  - oot-native/Stalfos
+  - oot-native/Wallmaster
+  - oot-native/Dodongo
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Tektite
+  - oot-native/Tektite (Blue)
+  - oot-native/Peahat
+  - oot-native/Lizalfos
+  - oot-native/Dinolfos
+  - oot-native/Gohma Larva
+  - oot-native/Shabom
+  - oot-native/Biri
+  - oot-native/Bari
+  - oot-native/Tailpasaran
+  - oot-native/Skulltula
+  - oot-native/Moblin
+  - oot-native/Moblin (Spear)
+  - oot-native/Armos
+  - oot-native/Floormaster
+  - oot-native/Flare Dancer
+  - oot-native/Shell Blade
+  - oot-native/Like Like
+  - oot-native/Spike Enemy
+  - oot-native/Iron Knuckle (Black)
+  - oot-native/Iron Knuckle (White)
+  - oot-native/Freezard
+  - oot-native/Wolfos
+  - oot-native/Wolfos (White)
+  - oot-native/Guay
+
+"oot-underwater":
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Gohma Larva
+  - oot-native/Shabom
+  - oot-native/Biri
+  - oot-native/Bari
+  - oot-native/Skulltula
+  - oot-native/Deku Scrub
+  - oot-native/Skullwalltula
+  - oot-native/Shell Blade
+  - oot-native/Stingray
+  - oot-native/Guay
+
+"oot-floating":
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Biri
+  - oot-native/Skulltula
+  - oot-native/Anubis Spawner
+  - oot-native/Guay
+
+"oot-floating-with-wallmaster-and-bari":
+  - oot-native/Wallmaster
+  - oot-native/Keese
+  - oot-native/Fire Keese
+  - oot-native/Ice Keese
+  - oot-native/Biri
+  - oot-native/Bari
+  - oot-native/Skulltula
+  - oot-native/Anubis Spawner
+  - oot-native/Guay
+
+"mm-ordinary-source":
+  field: source.key
+  oneOf:
+    - mm-placement-octorok
+    - mm-placement-wallmaster
+    - mm-placement-dodongo
+    - mm-placement-keese
+    - mm-placement-tektite
+    - mm-placement-peahat
+    - mm-placement-dinolfos
+    - mm-placement-shabom
+    - mm-placement-skulltula
+    - mm-placement-deatharmos
+    - mm-placement-armos
+    - mm-placement-dekubaba
+    - mm-placement-madscrub
+    - mm-placement-redbubble
+    - mm-placement-bluebubble
+    - mm-placement-beamos
+    - mm-placement-floormaster
+    - mm-placement-redead
+    - mm-skullwalltula-native-target
+    - mm-placement-shellblade
+    - mm-placement-minibaba
+    - mm-like-like
+    - mm-placement-ironknuckle
+    - mm-placement-flyingpot
+    - mm-placement-freezard
+    - mm-placement-wolfos
+    - mm-placement-stalchild
+    - mm-placement-guay
+    - mm-placement-dragonfly
+    - mm-placement-biobaba
+    - mm-placement-biobaba-inert
+    - mm-placement-carnivorouslily
+    - mm-placement-chuchu
+    - mm-placement-desbreko
+    - mm-placement-nejiron
+    - mm-placement-badbat
+    - mm-placement-boe
+    - mm-placement-realbombchu
+    - mm-placement-skullfish
+    - mm-placement-snapper
+    - mm-placement-dexihand
+    - mm-placement-eeno
+    - mm-placement-hiploop
+    - mm-placement-poe
+    - mm-placement-hornet
+    - mm-leever-native-target
+    - mm-placement-moths
+    - mm-placement-takkuri

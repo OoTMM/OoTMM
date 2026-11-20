@@ -5,81 +5,90 @@ import { ENEMY_SOURCE_ADDITIONS } from './enemy-source-additions';
 export { ENEMY_SOURCE_ADDITIONS } from './enemy-source-additions';
 import { ENEMY_GOLD_SOURCES } from './enemy-gold-data';
 export { ENEMY_GOLD_SOURCES } from './enemy-gold-data';
-import type { Game } from '@ootmm/data';
+import type { Game, EnemyOotSpawnTemplate } from '@ootmm/data';
 import type { Settings } from './settings';
-import { ENEMY_ACTOR_CATALOG, MACROS, RAW_GI, FOREIGN_ENEMY_SOULS, ENEMY_LOGIC_MM_ROOMS as mmRoomBindings, ENEMY_LOGIC_OOT_ROOMS as ootRoomBindings, } from '@ootmm/data';
+import { ENEMY_ACTOR_CATALOG, MACROS, RAW_GI, FOREIGN_ENEMY_SOULS, ENEMY_LOGIC_MM_ROOMS as mmRoomBindings, ENEMY_LOGIC_OOT_ROOMS as ootRoomBindings, ENEMY_SPAWN_OOT_LOCATIONS, ENEMY_SPAWN_OOT_TARGETS, ENEMY_SPAWN_MM_ACTORS, ENEMY_SPAWN_ACTOR_TYPES, ENEMY_SPAWN_OOT_TEMPLATES, applyEnemyOotSpawnPolicies, applyEnemyMmSpawnPolicies } from '@ootmm/data';
 import { enemy_mm_placement_data as mmPlacementData, enemy_placement_data as placementData, enemy_mm_facts as mmFacts, enemy_oot_source_corrections as ootActorCorrections, oot_enemizer as ootEnemizerFacts, enemy_oot_resources as resourceFacts, } from './enemy-data';
 import { Random } from './random';
 import { mmRoomOverlapStates } from './enemy-room-overlap';
 import { ENEMY_OOT_POSITIONS } from './enemy-position-data';
+import { enemySpawnSourceAllowed, enemySpawnTargetAllowed, enemySpawnMacroMatches, enemySpawnMacroGroup, enemySpawnLimit, type EnemySpawnLocation, type EnemySpawnTarget } from './enemy-spawn-rules';
 import { ENEMY_MEMORY_POLICY, OOT_GAMEPLAY_POLICY, enemyMemoryCost, enemyMemoryTotal, makeEnemyMemoryEvaluator, enemyNativeActorFact, enemyObjectBytes, EnemyMemoryAllocationError, enemySceneObjectBounds, enemyScriptedRootOffsets, enemyPinnedMmActors, enemyNativeActorDependencies, enemyNativeDynamicCollisionCount, enemyOriginalRoomDynamicCollisions, enemyScriptedControllerCost, solveWeightedMemory, solveAdaptiveMemory, type AdaptiveMemoryAssessment, type AdaptiveMemoryChoice, type EnemyMemoryCost, type EnemyMemoryOptions } from './enemy-memory';
+
+const spawnActorTypes = new Map(Object.values(ENEMY_SPAWN_ACTOR_TYPES).map(row => [row.game + '/' + row.actorId, row]));
+
+function enemySpawnActorType(game: Game, actorId: number): Pick<MmEnemy, 'type' | 'stationary'> {
+  const row = spawnActorTypes.get(game + '/' + actorId);
+  if (!row) throw new Error(`Missing enemy spawn type: ${game}/${actorId}`);
+  return { type: row.type, stationary: row.stationary };
+}
 
 const MOTH_ENEMY: EnemyDefinition = {
   key: 'mm-moth-foreign', name: 'Moths', game: 'mm', actorId: 0x23d, objectId: 1, habitat: 'air',
-  foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x7f00, killMacro: 'can_kill_moths', logicMacros: [], soulMacro: 'soul_moth', soulItem: 'SOUL_ENEMY_MOTH',
+  foreignOnly: true, params: [], spawnParams: 0x7f00, killMacro: 'can_kill_moths', logicMacros: [], soulMacro: 'soul_moth', soulItem: 'SOUL_ENEMY_MOTH',
 };
 
 const FOREIGN_BOE_ENEMIES: readonly EnemyDefinition[] = [
   0x2800, 0x3200, 0x3205, 0x6404, 0x6405, 0x7800, 0x7804, 0x8c05, 0x9605, 0xc200, 0xfa00, 0xfa01, 0xff05,
 ].map(params => ({
   key: `mm-boe-foreign-${params.toString(16)}`, name: params & 1 ? 'White Boe' : 'Black Boe',
-  game: 'mm', actorId: 0x164, objectId: 0x17a, habitat: 'ground', foreignOnly: true, sourceAllowed: false,
+  game: 'mm', actorId: 0x164, objectId: 0x17a, habitat: 'ground', foreignOnly: true,
   params: [], spawnParams: params, killMacro: 'can_kill_boes', logicMacros: [], soulMacro: 'soul_boe', requiresNoCutscene: true
 }));
 
 const FOREIGN_EENO_ENEMIES: readonly EnemyDefinition[] = [1, 0xff00, 0xff01].map(params => ({
   key: `mm-eeno-foreign-${params.toString(16)}`, name: params & 1 ? 'Large Eeno' : 'Eeno', game: 'mm', actorId: 0x1e6, objectId: 0x1c4,
-  habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: params,
+  habitat: 'ground', foreignOnly: true, params: [], spawnParams: params,
   killMacro: 'can_kill_eenos', logicMacros: [], soulMacro: 'soul_eenos', soulItem: 'SOUL_ENEMY_EENO', requiresNoCutscene: true,
 }));
 
 const FOREIGN_EXTRA_NATIVE_MM_ENEMIES: readonly EnemyDefinition[] = [
-  { key: 'mm-large-dodongo-foreign', name: 'Large Dodongo', game: 'mm', actorId: 0xb, objectId: 0xa, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 1, killMacro: 'can_kill_dodongos', logicMacros: [], soulMacro: 'soul_dodongo' },
-  { key: 'mm-mini-baba-foreign', name: 'Mini Baba', game: 'mm', actorId: 0x66, objectId: 0x31, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 2, killMacro: 'can_kill_baba_nuts', logicMacros: [], soulMacro: 'soul_deku_baba', requiresNoCutscene: true },
-  { key: 'mm-carnivorous-lily-foreign', name: 'Carnivorous Lily Pad', game: 'mm', actorId: 0x13a, objectId: 0x161, habitat: 'water-surface', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x0fff, killMacro: 'can_kill_carnivorous_lilies', logicMacros: [], soulMacro: 'can_kill_carnivorous_lilies' },
-  { key: 'mm-wart-foreign', name: 'Wart', game: 'mm', actorId: 0x12c, objectId: 0x15d, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x807f, killMacro: 'can_kill_warts', logicMacros: [], soulMacro: 'can_kill_warts', soulItem: 'SOUL_ENEMY_WART' },
-  { key: 'mm-snapper-gekko-foreign', name: 'Woodfall Gekko', game: 'mm', actorId: 0x7, objectId: 0x128, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x807f, killMacro: 'can_kill_gekko_wft', logicMacros: [], soulMacro: 'can_kill_gekko_wft', soulItem: 'SOUL_ENEMY_GEKKO' },
-  { key: 'mm-big-slime-foreign', name: 'Great Bay Gekko', game: 'mm', actorId: 0x65, objectId: 0x128, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x807f, killMacro: 'can_kill_gekko_gbt', logicMacros: [], soulMacro: 'can_kill_gekko_gbt', soulItem: 'SOUL_ENEMY_GEKKO' },
-  { key: 'mm-ikana-throne-foreign', name: 'Igos du Ikana', game: 'mm', actorId: 0x115, objectId: 0x156, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x807f, killMacro: 'can_kill_igos_solo', logicMacros: [], soulMacro: 'can_kill_igos_solo' },
-  { key: 'mm-ikana-soldier-foreign', name: 'Ikana Soldier', game: 'mm', actorId: 0x115, objectId: 0x156, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x847f, killMacro: 'can_kill_igos_solo', logicMacros: [], soulMacro: 'can_kill_igos_solo' },
-  { key: 'mm-captain-keeta-foreign', name: 'Captain Keeta', game: 'mm', actorId: 0x28f, objectId: 0x268, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x807f, killMacro: 'can_kill_keeta', logicMacros: [], soulMacro: 'can_kill_keeta', soulItem: 'SOUL_ENEMY_CAPTAIN_KEETA' },
-  { key: 'mm-garo-master-foreign', name: 'Garo Master', game: 'mm', actorId: 0x182, objectId: 0x155, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x807f, killMacro: 'can_kill_garo_master', logicMacros: [], soulMacro: 'soul_garo', soulItem: 'SOUL_ENEMY_GARO' },
-  { key: 'mm-gomess-foreign', name: 'Gomess', game: 'mm', actorId: 0x43, objectId: 0x52, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x807f, killMacro: 'can_kill_gomess', logicMacros: [], soulMacro: 'soul_gomess', soulItem: 'SOUL_ENEMY_GOMESS' },
+  { key: 'mm-large-dodongo-foreign', name: 'Large Dodongo', game: 'mm', actorId: 0xb, objectId: 0xa, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 1, killMacro: 'can_kill_dodongos', logicMacros: [], soulMacro: 'soul_dodongo' },
+  { key: 'mm-mini-baba-foreign', name: 'Mini Baba', game: 'mm', actorId: 0x66, objectId: 0x31, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 2, killMacro: 'can_kill_baba_nuts', logicMacros: [], soulMacro: 'soul_deku_baba', requiresNoCutscene: true },
+  { key: 'mm-carnivorous-lily-foreign', name: 'Carnivorous Lily Pad', game: 'mm', actorId: 0x13a, objectId: 0x161, habitat: 'water-surface', foreignOnly: true, params: [], spawnParams: 0x0fff, killMacro: 'can_kill_carnivorous_lilies', logicMacros: [], soulMacro: 'can_kill_carnivorous_lilies' },
+  { key: 'mm-wart-foreign', name: 'Wart', game: 'mm', actorId: 0x12c, objectId: 0x15d, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_warts', logicMacros: [], soulMacro: 'can_kill_warts', soulItem: 'SOUL_ENEMY_WART' },
+  { key: 'mm-snapper-gekko-foreign', name: 'Woodfall Gekko', game: 'mm', actorId: 0x7, objectId: 0x128, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_gekko_wft', logicMacros: [], soulMacro: 'can_kill_gekko_wft', soulItem: 'SOUL_ENEMY_GEKKO' },
+  { key: 'mm-big-slime-foreign', name: 'Great Bay Gekko', game: 'mm', actorId: 0x65, objectId: 0x128, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_gekko_gbt', logicMacros: [], soulMacro: 'can_kill_gekko_gbt', soulItem: 'SOUL_ENEMY_GEKKO' },
+  { key: 'mm-ikana-throne-foreign', name: 'Igos du Ikana', game: 'mm', actorId: 0x115, objectId: 0x156, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_igos_solo', logicMacros: [], soulMacro: 'can_kill_igos_solo' },
+  { key: 'mm-ikana-soldier-foreign', name: 'Ikana Soldier', game: 'mm', actorId: 0x115, objectId: 0x156, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x847f, killMacro: 'can_kill_igos_solo', logicMacros: [], soulMacro: 'can_kill_igos_solo' },
+  { key: 'mm-captain-keeta-foreign', name: 'Captain Keeta', game: 'mm', actorId: 0x28f, objectId: 0x268, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_keeta', logicMacros: [], soulMacro: 'can_kill_keeta', soulItem: 'SOUL_ENEMY_CAPTAIN_KEETA' },
+  { key: 'mm-garo-master-foreign', name: 'Garo Master', game: 'mm', actorId: 0x182, objectId: 0x155, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_garo_master', logicMacros: [], soulMacro: 'soul_garo', soulItem: 'SOUL_ENEMY_GARO' },
+  { key: 'mm-gomess-foreign', name: 'Gomess', game: 'mm', actorId: 0x43, objectId: 0x52, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_gomess', logicMacros: [], soulMacro: 'soul_gomess', soulItem: 'SOUL_ENEMY_GOMESS' },
   ...[0, 1].map(ice => ({
     key: `mm-wizzrobe-${ice ? 'ice' : 'fire'}-foreign`,
     name: ice ? 'Ice Wizzrobe' : 'Fire Wizzrobe', game: 'mm' as const, actorId: 0x15d, objectId: 0x178,
-    habitat: 'ground' as const, foreignOnly: true, sourceAllowed: false, params: [],
+    habitat: 'ground' as const, foreignOnly: true, params: [],
     spawnParams: 0x807f | (ice << 8), killMacro: 'can_kill_wizzrobe_close', logicMacros: [],
     soulMacro: 'soul_wizzrobe', soulItem: 'SOUL_ENEMY_WIZZROBE' as const,
   })),
   {
     key: 'mm-skullfish-independent-foreign', name: 'Skullfish', game: 'mm', actorId: 0x180, objectId: 0x16b,
-    habitat: 'underwater', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x192,
+    habitat: 'underwater', foreignOnly: true, params: [], spawnParams: 0x192,
     killMacro: 'can_kill_skullfish', logicMacros: [], soulMacro: 'soul_skull_fish', soulItem: 'SOUL_ENEMY_SKULLFISH', requiresNoCutscene: true
   },
   {
     key: 'mm-dexihand-foreign', name: 'Dexihand', game: 'mm', actorId: 0x1d1, objectId: 0x1b5,
-    habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0,
+    habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0,
     killMacro: 'can_kill_dexihands', logicMacros: [], soulItem: 'SOUL_ENEMY_DEXIHAND', requiresNoCutscene: true
   },
   {
     key: 'mm-death-armos-foreign', name: 'Death Armos', game: 'mm', actorId: 0x2d, objectId: 0x1d,
-    habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0xff,
+    habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0xff,
     killMacro: 'can_kill_death_armoses', logicMacros: [], soulMacro: 'soul_armos', soulItem: 'SOUL_ENEMY_ARMOS', requiresNoCutscene: true
   },
   {
     key: 'mm-garahna-foreign', name: 'Garahna', game: 'mm', actorId: 0x23f, objectId: 0x15c,
-    habitat: 'underwater', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0,
+    habitat: 'underwater', foreignOnly: true, params: [], spawnParams: 0,
     killMacro: 'can_kill_garahnas', logicMacros: [], soulMacro: 'soul_garahna', soulItem: 'SOUL_ENEMY_GARAHNA', requiresNoCutscene: true
   },
   {
     key: 'mm-takkuri-foreign', name: 'Takkuri', game: 'mm', actorId: 0x291, objectId: 0x22,
-    habitat: 'air', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0,
+    habitat: 'air', foreignOnly: true, params: [], spawnParams: 0,
     killMacro: 'can_kill_takkuri', logicMacros: [], soulMacro: 'soul_takkuri', soulItem: 'SOUL_ENEMY_TAKKURI', requiresNoCutscene: true
   },
   {
     key: 'mm-eyegore-foreign', name: 'Eyegore', game: 'mm', actorId: 0x184, objectId: 0x18d,
-    habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x1fc0,
+    habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x1fc0,
     killMacro: 'can_kill_eyegore_world', logicMacros: [], soulItem: 'SOUL_ENEMY_EYEGORE', miniboss: true, requiresNoCutscene: true
   },
 ];
@@ -87,47 +96,47 @@ const FOREIGN_EXTRA_NATIVE_MM_ENEMIES: readonly EnemyDefinition[] = [
 const FOREIGN_MM_VARIANT_ENEMIES: readonly EnemyDefinition[] = [
   ...[0x0202, 0x0801, 0x0a01, 0x0c01, 0x1402, 0xff00, 0xff01, 0xff02].map(params => ({
     key: `mm-chuchu-foreign-${params.toString(16)}`, name: ['Blue ChuChu', 'Green ChuChu', 'Yellow ChuChu'][params & 0xff], game: 'mm' as const,
-    actorId: 0x14a, objectId: 0x16a, habitat: 'ground' as const, foreignOnly: true, sourceAllowed: false, params: [], spawnParams: params,
+    actorId: 0x14a, objectId: 0x16a, habitat: 'ground' as const, foreignOnly: true, params: [], spawnParams: params,
     killMacro: 'can_kill_chuchu', logicMacros: [], soulItem: 'SOUL_ENEMY_CHUCHU', requiresNoCutscene: true,
   })),
   {
     key: 'mm-desbreko-foreign-f00', name: 'Desbreko school (15)', game: 'mm', actorId: 0x14b, objectId: 0x16b, habitat: 'underwater',
-    foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0x0f00, killMacro: 'can_kill_skullfish', logicMacros: [], soulMacro: 'soul_skull_fish', requiresNoCutscene: true
+    foreignOnly: true, params: [], spawnParams: 0x0f00, killMacro: 'can_kill_skullfish', logicMacros: [], soulMacro: 'soul_skull_fish', requiresNoCutscene: true
   },
   {
     key: 'mm-masked-hiploop-foreign', name: 'Masked Hiploop', game: 'mm', actorId: 0x1e9, objectId: 0x1c6, habitat: 'ground',
-    foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_hiploops_masked', logicMacros: [], soulItem: 'SOUL_ENEMY_HIPLOOP', requiresNoCutscene: true
+    foreignOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_hiploops_masked', logicMacros: [], soulItem: 'SOUL_ENEMY_HIPLOOP', requiresNoCutscene: true
   },
   ...[0x0102, 0x0103, 0x0134, 0x019f].map(params => ({
     key: `mm-bad-bat-foreign-${params.toString(16)}`, name: params === 0x019f ? 'Perched Bad Bat' : 'Bad Bat swarm', game: 'mm' as const,
-    actorId: 0x15b, objectId: 0x172, habitat: 'air' as const, foreignOnly: true, sourceAllowed: false, params: [], spawnParams: params,
+    actorId: 0x15b, objectId: 0x172, habitat: 'air' as const, foreignOnly: true, params: [], spawnParams: params,
     killMacro: params === 0x019f ? 'can_kill_bad_bats_perched' : 'can_kill_bad_bats_cluster', logicMacros: [], soulItem: 'SOUL_ENEMY_BAD_BAT', requiresNoCutscene: true,
   })),
   ...[0x8014, 0x8023, 0x8028].map(params => ({
     key: `mm-real-bombchu-foreign-${params.toString(16)}`, name: 'Respawning Real Bombchu', game: 'mm' as const,
-    actorId: 0x16f, objectId: 0x181, habitat: 'ground' as const, foreignOnly: true, sourceAllowed: false, params: [], spawnParams: params,
+    actorId: 0x16f, objectId: 0x181, habitat: 'ground' as const, foreignOnly: true, params: [], spawnParams: params,
     killMacro: 'can_kill_real_bombchu', logicMacros: [], soulMacro: 'soul_real_bombchu', requiresNoCutscene: true,
   })),
   ...[1, 5, 0x28, 0x32, 0x3c, 0x46, 0x8c].map(params => ({
     key: `mm-real-bombchu-foreign-${params.toString(16)}`, name: 'Dungeon Real Bombchu', game: 'mm' as const,
-    actorId: 0x16f, objectId: 0x181, habitat: 'ground' as const, foreignOnly: true, sourceAllowed: false, params: [], spawnParams: params,
+    actorId: 0x16f, objectId: 0x181, habitat: 'ground' as const, foreignOnly: true, params: [], spawnParams: params,
     killMacro: 'can_kill_real_bombchu', logicMacros: [], soulMacro: 'soul_real_bombchu', requiresNoCutscene: true,
   })),
 ];
 
-const KEETA_GUARDS: EnemyDefinition = { key: 'mm-keeta-guards', name: 'Keeta chase Stalchildren', game: 'mm', actorId: 0xed, objectId: 0x142, habitat: 'ground', nativeOnly: true, sourceAllowed: false, targetAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_keeta_guards', soulMacro: 'can_kill_keeta_guards', logicMacros: ['can_kill_keeta_guards'] };
+const KEETA_GUARDS: EnemyDefinition = { key: 'mm-keeta-guards', name: 'Keeta chase Stalchildren', game: 'mm', actorId: 0xed, objectId: 0x142, habitat: 'ground', nativeOnly: true, targetAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_keeta_guards', soulMacro: 'can_kill_keeta_guards', logicMacros: ['can_kill_keeta_guards'] };
 
 const FOREIGN_MM_EXTRA_VARIANT_ENEMIES: readonly EnemyDefinition[] = [
   ...[2, 3].map(params => ({
     key: `mm-dragonfly-foreign-${params}`, name: params === 2 ? 'Temple Dragonfly' : 'Woodfall Dragonfly',
     game: 'mm' as const, actorId: 0x109, objectId: 0x14e, habitat: 'air' as const,
-    foreignOnly: true, sourceAllowed: false, params: [], spawnParams: params,
+    foreignOnly: true, params: [], spawnParams: params,
     killMacro: 'can_kill_dragonflies_distance', logicMacros: [], soulItem: 'SOUL_ENEMY_DRAGONFLY', requiresNoCutscene: true,
   })),
   ...[1, 4].map(params => ({
     key: `mm-bio-baba-foreign-${params}`, name: params === 1 ? 'Leafless Bio Deku Baba' : 'Walking Bio Deku Baba',
     game: 'mm' as const, actorId: 0x12d, objectId: 0x15e, habitat: 'ground' as const,
-    foreignOnly: true, sourceAllowed: false, params: [], spawnParams: params,
+    foreignOnly: true, params: [], spawnParams: params,
     killMacro: 'can_kill_bio_babas', logicMacros: [], soulItem: 'SOUL_ENEMY_BIO_BABA', requiresNoCutscene: true,
   })),
 ];
@@ -213,13 +222,13 @@ const NATIVE_MM_ENEMIES: readonly EnemyDefinition[] = [
   },
 ];
 
-const FOREIGN_STALFOS_VARIANTS: readonly EnemyDefinition[] = [{ key: 'oot-stalfos-invisible-foreign', name: 'Invisible Stalfos', game: 'oot', actorId: 2, objectId: 0x32, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_invisible_stalfos', logicMacros: [], soulMacro: 'soul_stalfos' }];
+const FOREIGN_STALFOS_VARIANTS: readonly EnemyDefinition[] = [{ key: 'oot-stalfos-invisible-foreign', name: 'Invisible Stalfos', game: 'oot', actorId: 2, objectId: 0x32, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_invisible_stalfos', logicMacros: [], soulMacro: 'soul_stalfos' }];
 
 const OOT_NATIVE_ENEMIES: readonly EnemyDefinition[] = [
-  { key: 'oot-stalfos-invisible-native-target', name: 'Invisible Stalfos', game: 'oot', actorId: 2, objectId: 0x32, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_invisible_stalfos', logicMacros: [], soulMacro: 'soul_stalfos' },
-  { key: 'oot-skulltula-invisible-native-target', name: 'Invisible Skulltula', game: 'oot', actorId: 0x37, objectId: 0x24, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 2, killMacro: 'can_kill_invisible_skulltulas', logicMacros: [], soulMacro: 'soul_skulltula' },
-  { key: 'oot-red-bubble-native-target', name: 'Red Bubble', game: 'oot', actorId: 0x69, objectId: 0x5d, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0xfffe, killMacro: 'can_kill_red_bubbles', logicMacros: [], soulMacro: 'soul_bubble' },
-  { key: 'oot-keese-invisible-native-target', name: 'Invisible Keese', game: 'oot', actorId: 0x13, objectId: 0x0d, habitat: 'air', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x8002, killMacro: 'can_kill_invisible_keese', logicMacros: [], soulMacro: 'soul_keese' },
+  { key: 'oot-stalfos-invisible-native-target', name: 'Invisible Stalfos', game: 'oot', actorId: 2, objectId: 0x32, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_invisible_stalfos', logicMacros: [], soulMacro: 'soul_stalfos' },
+  { key: 'oot-skulltula-invisible-native-target', name: 'Invisible Skulltula', game: 'oot', actorId: 0x37, objectId: 0x24, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 2, killMacro: 'can_kill_invisible_skulltulas', logicMacros: [], soulMacro: 'soul_skulltula' },
+  { key: 'oot-red-bubble-native-target', name: 'Red Bubble', game: 'oot', actorId: 0x69, objectId: 0x5d, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0xfffe, killMacro: 'can_kill_red_bubbles', logicMacros: [], soulMacro: 'soul_bubble' },
+  { key: 'oot-keese-invisible-native-target', name: 'Invisible Keese', game: 'oot', actorId: 0x13, objectId: 0x0d, habitat: 'air', nativeOnly: true, params: [], spawnParams: 0x8002, killMacro: 'can_kill_invisible_keese', logicMacros: [], soulMacro: 'soul_keese' },
   {
     key: 'oot-shabom', nativeOnly: true, name: 'Shabom', game: 'oot', actorId: 0x2d, objectId: 0x12,
     habitat: 'air', params: [0], spawnParams: 0, killMacro: 'can_kill_shaboms',
@@ -241,7 +250,7 @@ const OOT_NATIVE_ENEMIES: readonly EnemyDefinition[] = [
     killMacro: 'can_kill_mad_scrubs', logicMacros: ['can_kill_mad_scrubs'], soulMacro: 'soul_deku_scrub'
   },
   {
-    key: 'oot-business-scrub-combat', nativeOnly: true, sourceAllowed: false, name: 'Business Scrub', game: 'oot',
+    key: 'oot-business-scrub-combat', nativeOnly: true, name: 'Business Scrub', game: 'oot',
     actorId: 0x195, objectId: 0x168, habitat: 'ground', params: [], spawnParams: 0x4000,
     killMacro: 'can_kill_mad_scrubs', logicMacros: [], soulMacro: 'soul_deku_scrub'
   },
@@ -281,20 +290,20 @@ const NATIVE_OOT_RESOURCE_ENEMIES: readonly EnemyDefinition[] = [
 ];
 
 const NATIVE_PEAHAT_TARGETS: readonly EnemyDefinition[] = [
-  { key: 'oot-peahat-native-ground', name: 'Peahat', game: 'oot', actorId: 0x1d, objectId: 0x18, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0xffff, killMacro: 'can_kill_randomized_peahats_ground', logicMacros: [], soulMacro: 'soul_peahat' },
-  { key: 'oot-peahat-native-flying', name: 'Flying Peahat', game: 'oot', actorId: 0x1d, objectId: 0x18, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_randomized_peahats_high', logicMacros: [], soulMacro: 'soul_peahat' },
-  { key: 'mm-peahat-native-target', name: 'Peahat', game: 'mm', actorId: 0x14, objectId: 0x14, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_randomized_peahats', logicMacros: [], soulMacro: 'soul_peahat' },
+  { key: 'oot-peahat-native-ground', name: 'Peahat', game: 'oot', actorId: 0x1d, objectId: 0x18, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0xffff, killMacro: 'can_kill_randomized_peahats_ground', logicMacros: [], soulMacro: 'soul_peahat' },
+  { key: 'oot-peahat-native-flying', name: 'Flying Peahat', game: 'oot', actorId: 0x1d, objectId: 0x18, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_randomized_peahats_high', logicMacros: [], soulMacro: 'soul_peahat' },
+  { key: 'mm-peahat-native-target', name: 'Peahat', game: 'mm', actorId: 0x14, objectId: 0x14, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_randomized_peahats', logicMacros: [], soulMacro: 'soul_peahat' },
 ];
 
 const NATIVE_OOT_POE_TARGET: EnemyDefinition = {
   key: 'oot-poe-native-target', name: 'Poe', game: 'oot', actorId: 0x0d, objectId: 1, habitat: 'air',
   params: [], spawnParams: 0, killMacro: 'can_kill_poes', logicMacros: [], soulMacro: 'soul_poe',
-  sourceAllowed: false, nativeOnly: true,
+  nativeOnly: true,
 };
 
 const NATIVE_RENEWABLE_BABA_TARGETS: readonly EnemyDefinition[] = [
-  { key: 'oot-withered-baba-native-target', name: 'Withered Deku Baba', game: 'oot', actorId: 0xc7, objectId: 0x39, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 1, killMacro: 'can_kill_baba_sticks', logicMacros: [], soulMacro: 'soul_deku_baba' },
-  ...[1, 2].map(params => ({ key: `mm-mini-baba-native-target-${params}`, name: params === 1 ? 'Withered Deku Baba' : 'Mini Baba', game: 'mm' as const, actorId: 0x66, objectId: 0x31, habitat: 'ground' as const, nativeOnly: true, sourceAllowed: false, params: [], spawnParams: params, killMacro: params === 1 ? 'can_kill_baba_sticks' : 'can_kill_baba_nuts', logicMacros: [], soulMacro: 'soul_deku_baba', requiresNoCutscene: true })),
+  { key: 'oot-withered-baba-native-target', name: 'Withered Deku Baba', game: 'oot', actorId: 0xc7, objectId: 0x39, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 1, killMacro: 'can_kill_baba_sticks', logicMacros: [], soulMacro: 'soul_deku_baba' },
+  ...[1, 2].map(params => ({ key: `mm-mini-baba-native-target-${params}`, name: params === 1 ? 'Withered Deku Baba' : 'Mini Baba', game: 'mm' as const, actorId: 0x66, objectId: 0x31, habitat: 'ground' as const, nativeOnly: true, params: [], spawnParams: params, killMacro: params === 1 ? 'can_kill_baba_sticks' : 'can_kill_baba_nuts', logicMacros: [], soulMacro: 'soul_deku_baba', requiresNoCutscene: true })),
 ];
 
 const NATIVE_SKULL_KID_ENEMIES: readonly EnemyDefinition[] = [
@@ -306,14 +315,14 @@ const NATIVE_SKULL_KID_ENEMIES: readonly EnemyDefinition[] = [
   },
   {
     key: 'oot-skull-kid-native', name: 'Skull Kid', game: 'oot', actorId: 0x115,
-    objectId: 0x10a, habitat: 'ground', nativeOnly: true, sourceAllowed: false,
+    objectId: 0x10a, habitat: 'ground', nativeOnly: true,
     params: [], spawnParams: 0xffff, killMacro: 'can_kill_skull_kids', logicMacros: [],
     soulMacro: 'soul_skull_kids'
   },
 ];
 
 const NATIVE_MM_SKULLWALLTULA_TARGETS: readonly EnemyDefinition[] = [
-  { key: 'mm-skullwalltula-native-target', name: 'Skullwalltula', game: 'mm', actorId: 0x50, objectId: 0x20, habitat: 'ground', nativeOnly: true, sourceAllowed: true, params: [0xfffc], spawnParams: 0xff00, killMacro: 'can_kill_skullwalltulas', logicMacros: [], soulMacro: 'soul_skullwalltula', requiresNoCutscene: true },
+  { key: 'mm-skullwalltula-native-target', name: 'Skullwalltula', game: 'mm', actorId: 0x50, objectId: 0x20, habitat: 'ground', nativeOnly: true, params: [0xfffc], spawnParams: 0xff00, killMacro: 'can_kill_skullwalltulas', logicMacros: [], soulMacro: 'soul_skullwalltula', requiresNoCutscene: true },
 ];
 
 type NativeTargetOverride = Pick<EnemyDefinition, 'spawnParams'> & Partial<Pick<EnemyDefinition, 'targetAllowed' | 'requiresNoCutscene'>>;
@@ -337,12 +346,12 @@ const NATIVE_SKULLTULA_TARGET_VARIANTS: readonly EnemyDefinition[] = [
   {
     key: 'mm-skulltula-visible-target', name: 'Skulltula', game: 'mm', actorId: 0x24, objectId: 0x20, habitat: 'air',
     params: [], spawnParams: 0x3f, killMacro: 'can_kill_skulltulas', logicMacros: [], soulMacro: 'soul_skulltula',
-    sourceAllowed: false, nativeOnly: true, requiresNoCutscene: true
+    nativeOnly: true, requiresNoCutscene: true
   },
   {
     key: 'mm-skulltula-lens-target', name: 'Invisible Skulltula', game: 'mm', actorId: 0x24, objectId: 0x20, habitat: 'air',
     params: [], spawnParams: 0x7f, killMacro: 'can_kill_skulltulas_lens', logicMacros: [], soulMacro: 'soul_skulltula',
-    sourceAllowed: false, nativeOnly: true, requiresNoCutscene: true
+    nativeOnly: true, requiresNoCutscene: true
   },
 ];
 
@@ -353,78 +362,78 @@ const NATIVE_WALLMASTER_TARGETS: readonly EnemyDefinition[] = [
     killMacro: 'can_kill_wallmasters', logicMacros: ['can_kill_wallmasters'], soulMacro: 'soul_wallmaster'
   },
   {
-    key: 'mm-wallmaster', nativeOnly: true, sourceAllowed: false, name: 'Wallmaster', game: 'mm',
+    key: 'mm-wallmaster', nativeOnly: true, name: 'Wallmaster', game: 'mm',
     actorId: 0xa, objectId: 9, habitat: 'ground', params: [], spawnParams: 1,
     killMacro: 'can_kill_wallmasters', logicMacros: [], soulMacro: 'soul_wallmaster', requiresNoCutscene: true
   },
 ];
 
 const MM_NATIVE_EXTRA_VARIANTS: readonly EnemyDefinition[] = [
-  { key: 'mm-frozen-wallmaster-native-target', name: 'Frozen Wallmaster', game: 'mm', actorId: 0xa, objectId: 0x9, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x7f81, killMacro: 'can_kill_frozen_wallmasters', logicMacros: [], soulMacro: 'soul_wallmaster', requiresNoCutscene: true },
-  { key: 'mm-red-ice-wallmaster-native-target', name: 'Red-Ice Wallmaster', game: 'mm', actorId: 0xa, objectId: 0x9, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x7e81, killMacro: 'can_kill_red_ice_wallmasters', logicMacros: [], soulMacro: 'soul_wallmaster', requiresNoCutscene: true },
-  { key: 'mm-frozen-redead-native-target', name: 'Frozen ReDead', game: 'mm', actorId: 0x4c, objectId: 0x75, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x7f04, killMacro: 'can_kill_frozen_redead', logicMacros: [], soulMacro: 'soul_redead_gibdo' },
-  { key: 'mm-red-ice-redead-native-target', name: 'Red-Ice ReDead', game: 'mm', actorId: 0x4c, objectId: 0x75, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x7e04, killMacro: 'can_kill_red_ice_redead', logicMacros: [], soulMacro: 'soul_redead_gibdo' },
-  { key: 'mm-floormaster-invisible-native-target', name: 'Invisible Floormaster', game: 'mm', actorId: 0x4a, objectId: 0x9, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x8000, killMacro: 'can_kill_floormasters_lens', logicMacros: [], soulMacro: 'soul_floormaster' },
-  { key: 'mm-leever-large-native-target', name: 'Large Leever', game: 'mm', actorId: 0x216, objectId: 0x201, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x8000, killMacro: 'can_kill_leevers', logicMacros: [], soulMacro: 'soul_leever' },
-  { key: 'mm-guay-mega-native-target', name: 'Mega Guay', game: 'mm', actorId: 0xf1, objectId: 0x6, habitat: 'air', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x1, killMacro: 'can_kill_guays', logicMacros: [], soulMacro: 'soul_guay' },
+  { key: 'mm-frozen-wallmaster-native-target', name: 'Frozen Wallmaster', game: 'mm', actorId: 0xa, objectId: 0x9, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x7f81, killMacro: 'can_kill_frozen_wallmasters', logicMacros: [], soulMacro: 'soul_wallmaster', requiresNoCutscene: true },
+  { key: 'mm-red-ice-wallmaster-native-target', name: 'Red-Ice Wallmaster', game: 'mm', actorId: 0xa, objectId: 0x9, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x7e81, killMacro: 'can_kill_red_ice_wallmasters', logicMacros: [], soulMacro: 'soul_wallmaster', requiresNoCutscene: true },
+  { key: 'mm-frozen-redead-native-target', name: 'Frozen ReDead', game: 'mm', actorId: 0x4c, objectId: 0x75, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x7f04, killMacro: 'can_kill_frozen_redead', logicMacros: [], soulMacro: 'soul_redead_gibdo' },
+  { key: 'mm-red-ice-redead-native-target', name: 'Red-Ice ReDead', game: 'mm', actorId: 0x4c, objectId: 0x75, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x7e04, killMacro: 'can_kill_red_ice_redead', logicMacros: [], soulMacro: 'soul_redead_gibdo' },
+  { key: 'mm-floormaster-invisible-native-target', name: 'Invisible Floormaster', game: 'mm', actorId: 0x4a, objectId: 0x9, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x8000, killMacro: 'can_kill_floormasters_lens', logicMacros: [], soulMacro: 'soul_floormaster' },
+  { key: 'mm-leever-large-native-target', name: 'Large Leever', game: 'mm', actorId: 0x216, objectId: 0x201, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x8000, killMacro: 'can_kill_leevers', logicMacros: [], soulMacro: 'soul_leever' },
+  { key: 'mm-guay-mega-native-target', name: 'Mega Guay', game: 'mm', actorId: 0xf1, objectId: 0x6, habitat: 'air', nativeOnly: true, params: [], spawnParams: 0x1, killMacro: 'can_kill_guays', logicMacros: [], soulMacro: 'soul_guay' },
   {
     key: 'mm-business-scrub-combat', name: 'Business Scrub', game: 'mm', actorId: 0x3b, objectId: 0x40,
-    habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0xff03,
+    habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0xff03,
     killMacro: 'can_kill_scrubs_anywhere', logicMacros: [], soulMacro: 'soul_deku_scrub'
   },
   { ...MOTH_ENEMY, key: 'mm-moth-native-target', foreignOnly: false, nativeOnly: true },
-  ...['Meg', 'Joelle', 'Beth', 'Amy'].map((name, type) => ({ key: `mm-poe-sister-native-${type}`, name, game: 'mm' as const, actorId: 0x1e8, objectId: 0x1c5, habitat: 'air' as const, miniboss: type === 0, nativeOnly: true, sourceAllowed: false, params: [], spawnParams: type << 8, killMacro: 'can_kill_poe_sisters', logicMacros: [], soulMacro: 'soul_poe' })),
+  ...['Meg', 'Joelle', 'Beth', 'Amy'].map((name, type) => ({ key: `mm-poe-sister-native-${type}`, name, game: 'mm' as const, actorId: 0x1e8, objectId: 0x1c5, habitat: 'air' as const, miniboss: type === 0, nativeOnly: true, params: [], spawnParams: type << 8, killMacro: 'can_kill_poe_sisters', logicMacros: [], soulMacro: 'soul_poe' })),
   ...FOREIGN_EXTRA_NATIVE_MM_ENEMIES.map(row => ({ ...row, key: row.key.replace('-foreign', '-native-target'), nativeOnly: true, foreignOnly: false })),
-  { key: 'mm-pirate-fighter-native-target', name: 'Pirate Fighter', game: 'mm', actorId: 0x21d, objectId: 0x204, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x1fc0, killMacro: 'can_fight_pirates', logicMacros: [], soulMacro: 'soul_thief_fighter' },
-  { key: 'mm-big-poe-native-target', name: 'Big Poe', game: 'mm', actorId: 0x208, objectId: 0x1f1, habitat: 'air', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0xff00, killMacro: 'can_kill_big_poes', logicMacros: [], soulMacro: 'soul_poe' },
-  { key: 'mm-flying-pot-native-target', name: 'Flying Pot', game: 'mm', actorId: 0x8d, objectId: 3, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x3fff, killMacro: 'can_kill_flying_pots', logicMacros: [], soulMacro: 'soul_flying_pot' },
-  { key: 'mm-leever-native-target', name: 'Leever', game: 'mm', actorId: 0x216, objectId: 0x201, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_leevers', logicMacros: [], soulMacro: 'soul_leever' },
-  { key: 'mm-garo-native-target', name: 'Garo', game: 'mm', actorId: 0x113, objectId: 0x155, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_garo', logicMacros: [], soulItem: 'SOUL_ENEMY_GARO' },
-  ...[2, 3, 0x8000, 0x8002, 0x8004].map(params => ({ key: `mm-native-keese-${params.toString(16)}`, name: params & 0x8000 ? 'Invisible Keese' : 'Keese', game: 'mm' as const, actorId: 0xc, objectId: 0xb, habitat: 'air' as const, nativeOnly: true, sourceAllowed: false, params: [], spawnParams: params, killMacro: params & 0x8000 ? 'can_kill_keese_lens' : 'can_kill_keese_close', logicMacros: [], soulMacro: 'soul_keese' })),
-  ...[0x7ffe, 0x7f00, 0x7f01, 0x7f02, 0x7f03].map(params => ({ key: `mm-native-redead-${params.toString(16)}`, name: params === 0x7ffe ? 'Gibdo' : params === 0x7f03 ? 'Invisible ReDead' : 'ReDead', game: 'mm' as const, actorId: 0x4c, objectId: 0x75, habitat: 'ground' as const, nativeOnly: true, sourceAllowed: false, params: [], spawnParams: params, killMacro: params === 0x7f03 ? 'can_kill_redead_lens' : 'can_kill_redead_gibdo', logicMacros: [], soulMacro: 'soul_redead_gibdo' })),
-  { key: 'mm-native-big-deku-baba', name: 'Large Deku Baba', game: 'mm', actorId: 0x33, objectId: 0x31, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 1, killMacro: 'can_kill_baba_sticks', logicMacros: [], soulMacro: 'soul_deku_baba' },
+  { key: 'mm-pirate-fighter-native-target', name: 'Pirate Fighter', game: 'mm', actorId: 0x21d, objectId: 0x204, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x1fc0, killMacro: 'can_fight_pirates', logicMacros: [], soulMacro: 'soul_thief_fighter' },
+  { key: 'mm-big-poe-native-target', name: 'Big Poe', game: 'mm', actorId: 0x208, objectId: 0x1f1, habitat: 'air', nativeOnly: true, params: [], spawnParams: 0xff00, killMacro: 'can_kill_big_poes', logicMacros: [], soulMacro: 'soul_poe' },
+  { key: 'mm-flying-pot-native-target', name: 'Flying Pot', game: 'mm', actorId: 0x8d, objectId: 3, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x3fff, killMacro: 'can_kill_flying_pots', logicMacros: [], soulMacro: 'soul_flying_pot' },
+  { key: 'mm-leever-native-target', name: 'Leever', game: 'mm', actorId: 0x216, objectId: 0x201, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_leevers', logicMacros: [], soulMacro: 'soul_leever' },
+  { key: 'mm-garo-native-target', name: 'Garo', game: 'mm', actorId: 0x113, objectId: 0x155, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_garo', logicMacros: [], soulItem: 'SOUL_ENEMY_GARO' },
+  ...[2, 3, 0x8000, 0x8002, 0x8004].map(params => ({ key: `mm-native-keese-${params.toString(16)}`, name: params & 0x8000 ? 'Invisible Keese' : 'Keese', game: 'mm' as const, actorId: 0xc, objectId: 0xb, habitat: 'air' as const, nativeOnly: true, params: [], spawnParams: params, killMacro: params & 0x8000 ? 'can_kill_keese_lens' : 'can_kill_keese_close', logicMacros: [], soulMacro: 'soul_keese' })),
+  ...[0x7ffe, 0x7f00, 0x7f01, 0x7f02, 0x7f03].map(params => ({ key: `mm-native-redead-${params.toString(16)}`, name: params === 0x7ffe ? 'Gibdo' : params === 0x7f03 ? 'Invisible ReDead' : 'ReDead', game: 'mm' as const, actorId: 0x4c, objectId: 0x75, habitat: 'ground' as const, nativeOnly: true, params: [], spawnParams: params, killMacro: params === 0x7f03 ? 'can_kill_redead_lens' : 'can_kill_redead_gibdo', logicMacros: [], soulMacro: 'soul_redead_gibdo' })),
+  { key: 'mm-native-big-deku-baba', name: 'Large Deku Baba', game: 'mm', actorId: 0x33, objectId: 0x31, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 1, killMacro: 'can_kill_baba_sticks', logicMacros: [], soulMacro: 'soul_deku_baba' },
 ];
 
 const OOT_NATIVE_EXTRA_VARIANTS: readonly EnemyDefinition[] = [
-  { key: 'oot-frozen-wallmaster-native-target', name: 'Frozen Wallmaster', game: 'oot', actorId: 0x11, objectId: 0xb, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x7f80, killMacro: 'can_kill_frozen_wallmasters', logicMacros: [], soulMacro: 'soul_wallmaster' },
-  { key: 'oot-red-ice-wallmaster-native-target', name: 'Red-Ice Wallmaster', game: 'oot', actorId: 0x11, objectId: 0xb, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x7e80, killMacro: 'can_kill_red_ice_wallmasters', logicMacros: [], soulMacro: 'soul_wallmaster' },
-  { key: 'oot-small-beamos-native-target', name: 'Small Beamos', game: 'oot', actorId: 0x8a, objectId: 0x8b, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x601, killMacro: 'can_kill_beamos', logicMacros: [], soulMacro: 'soul_beamos' },
-  { key: 'oot-frozen-redead-native-target', name: 'Frozen ReDead', game: 'oot', actorId: 0x90, objectId: 0x98, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x7f04, killMacro: 'can_kill_frozen_redead', logicMacros: [], soulMacro: 'soul_redead_gibdo' },
-  { key: 'oot-red-ice-redead-native-target', name: 'Red-Ice ReDead', game: 'oot', actorId: 0x90, objectId: 0x98, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x7e04, killMacro: 'can_kill_red_ice_redead', logicMacros: [], soulMacro: 'soul_redead_gibdo' },
-  { key: 'oot-floormaster-invisible-native-target', name: 'Invisible Floormaster', game: 'oot', actorId: 0x8e, objectId: 0xb, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x8000, killMacro: 'can_kill_floormasters_lens', logicMacros: [], soulMacro: 'soul_floormaster' },
-  { key: 'oot-leever-large-native-target', name: 'Large Leever', game: 'oot', actorId: 0x1c, objectId: 0x17, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x1, killMacro: 'can_kill_leevers', logicMacros: [], soulMacro: 'soul_leever' },
-  { key: 'oot-guay-mega-native-target', name: 'Mega Guay', game: 'oot', actorId: 0x1c0, objectId: 0x8, habitat: 'air', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x1, killMacro: 'can_kill_guays', logicMacros: [], soulMacro: 'soul_guay' },
-  { key: 'oot-stalchild-large-5-native-target', name: 'Large Stalchild', game: 'oot', actorId: 0x1b0, objectId: 0x184, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0x5, killMacro: 'can_kill_stalchildren', logicMacros: [], soulMacro: 'soul_stalchild' },
-  { key: 'oot-stalchild-large-10-native-target', name: 'Large Stalchild', game: 'oot', actorId: 0x1b0, objectId: 0x184, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0xa, killMacro: 'can_kill_stalchildren', logicMacros: [], soulMacro: 'soul_stalchild' },
+  { key: 'oot-frozen-wallmaster-native-target', name: 'Frozen Wallmaster', game: 'oot', actorId: 0x11, objectId: 0xb, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x7f80, killMacro: 'can_kill_frozen_wallmasters', logicMacros: [], soulMacro: 'soul_wallmaster' },
+  { key: 'oot-red-ice-wallmaster-native-target', name: 'Red-Ice Wallmaster', game: 'oot', actorId: 0x11, objectId: 0xb, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x7e80, killMacro: 'can_kill_red_ice_wallmasters', logicMacros: [], soulMacro: 'soul_wallmaster' },
+  { key: 'oot-small-beamos-native-target', name: 'Small Beamos', game: 'oot', actorId: 0x8a, objectId: 0x8b, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x601, killMacro: 'can_kill_beamos', logicMacros: [], soulMacro: 'soul_beamos' },
+  { key: 'oot-frozen-redead-native-target', name: 'Frozen ReDead', game: 'oot', actorId: 0x90, objectId: 0x98, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x7f04, killMacro: 'can_kill_frozen_redead', logicMacros: [], soulMacro: 'soul_redead_gibdo' },
+  { key: 'oot-red-ice-redead-native-target', name: 'Red-Ice ReDead', game: 'oot', actorId: 0x90, objectId: 0x98, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x7e04, killMacro: 'can_kill_red_ice_redead', logicMacros: [], soulMacro: 'soul_redead_gibdo' },
+  { key: 'oot-floormaster-invisible-native-target', name: 'Invisible Floormaster', game: 'oot', actorId: 0x8e, objectId: 0xb, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x8000, killMacro: 'can_kill_floormasters_lens', logicMacros: [], soulMacro: 'soul_floormaster' },
+  { key: 'oot-leever-large-native-target', name: 'Large Leever', game: 'oot', actorId: 0x1c, objectId: 0x17, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x1, killMacro: 'can_kill_leevers', logicMacros: [], soulMacro: 'soul_leever' },
+  { key: 'oot-guay-mega-native-target', name: 'Mega Guay', game: 'oot', actorId: 0x1c0, objectId: 0x8, habitat: 'air', nativeOnly: true, params: [], spawnParams: 0x1, killMacro: 'can_kill_guays', logicMacros: [], soulMacro: 'soul_guay' },
+  { key: 'oot-stalchild-large-5-native-target', name: 'Large Stalchild', game: 'oot', actorId: 0x1b0, objectId: 0x184, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x5, killMacro: 'can_kill_stalchildren', logicMacros: [], soulMacro: 'soul_stalchild' },
+  { key: 'oot-stalchild-large-10-native-target', name: 'Large Stalchild', game: 'oot', actorId: 0x1b0, objectId: 0x184, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0xa, killMacro: 'can_kill_stalchildren', logicMacros: [], soulMacro: 'soul_stalchild' },
   ...[5, 6, 7].map(type => ({
     key: `oot-dancing-redead-${type}`, name: 'Dancing ReDead', game: 'oot' as const,
     actorId: 0x90, objectId: 0x98, habitat: 'ground' as const, nativeOnly: true,
-    sourceAllowed: false, params: [], spawnParams: 0x7f00 | type,
+    params: [], spawnParams: 0x7f00 | type,
     killMacro: 'can_kill_redead_gibdo', logicMacros: [], soulMacro: 'soul_redead_gibdo',
   })),
-  ...[0x7f00, 0x7f01, 0x7f03].map(params => ({ key: `oot-native-redead-${params.toString(16)}`, name: params === 0x7f03 ? 'Invisible ReDead' : params === 0x7f00 ? 'ReDead (mourns when stationary)' : 'Standing ReDead', game: 'oot' as const, actorId: 0x90, objectId: 0x98, habitat: 'ground' as const, nativeOnly: true, sourceAllowed: false, params: [], spawnParams: params, killMacro: params === 0x7f03 ? 'can_kill_redead_lens' : 'can_kill_redead_gibdo', logicMacros: [], soulMacro: 'soul_redead_gibdo' })),
-  ...[0x8000, 0x8004].map(params => ({ key: `oot-native-keese-${params.toString(16)}`, name: params === 0x8000 ? 'Invisible Fire Keese' : 'Invisible Ice Keese', game: 'oot' as const, actorId: 0x13, objectId: 0xd, habitat: 'air' as const, nativeOnly: true, sourceAllowed: false, params: [], spawnParams: params, killMacro: 'can_kill_keese_lens', logicMacros: [], soulMacro: 'soul_keese' })),
-  { key: 'oot-dark-link-native-target', name: 'Dark Link', game: 'oot', actorId: 0x33, objectId: 0x20, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_dark_link', logicMacros: [], soulMacro: 'soul_dark_link', soulItem: 'SOUL_ENEMY_DARK_LINK' },
-  { key: 'oot-dead-hand-native-target', name: 'Dead Hand', game: 'oot', actorId: 0xa4, objectId: 0xa6, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_dead_hand', logicMacros: [], soulMacro: 'soul_dead_hand', soulItem: 'SOUL_ENEMY_DEAD_HAND' },
-  ...['Meg', 'Joelle', 'Beth', 'Amy'].map((name, type) => ({ key: `oot-poe-sister-native-${type}`, name, game: 'oot' as const, actorId: 0x91, objectId: 0x99, habitat: 'air' as const, miniboss: type === 0, nativeOnly: true, sourceAllowed: false, params: [], spawnParams: type << 8, killMacro: type === 0 ? 'can_kill_poe_meg' : 'can_kill_poe_sisters', logicMacros: [], soulMacro: 'soul_poe' })),
-  { key: 'oot-gerudo-fighter-native-target', name: 'Gerudo Fighter', game: 'oot', actorId: 0x197, objectId: 0x169, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_gerudo_fighter', logicMacros: [], soulMacro: 'soul_thief_fighter' },
-  ...[{ params: 0x00fd, name: 'White Bubble' }, { params: 0x02fc, name: 'Green Bubble' }, { params: 0x02fb, name: 'Big Green Bubble' }].map(row => ({ key: `oot-bubble-patrol-native-${row.params.toString(16)}`, name: row.name, game: 'oot' as const, actorId: 0x69, objectId: 0x5d, habitat: 'air' as const, nativeOnly: true, sourceAllowed: false, params: [], spawnParams: row.params, killMacro: 'can_kill_bubbles', logicMacros: [], soulMacro: 'soul_bubble' })),
-  { key: 'oot-big-poe-native-target', name: 'Big Poe', game: 'oot', actorId: 0x175, objectId: 0x6d, habitat: 'air', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 1, killMacro: 'can_kill_poes', logicMacros: [], soulMacro: 'soul_poe' },
-  { key: 'oot-flying-pot-native-target', name: 'Flying Pot', game: 'oot', actorId: 0x11d, objectId: 3, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0xffff, killMacro: 'can_kill_flying_pots', logicMacros: [], soulMacro: 'soul_flying_pot' },
-  { key: 'oot-leever-native-target', name: 'Leever', game: 'oot', actorId: 0x1c, objectId: 0x17, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_leevers', logicMacros: [], soulMacro: 'soul_leever' },
-  { key: 'oot-iron-knuckle-silver-native-target', name: 'Silver Iron Knuckle', game: 'oot', actorId: 0x113, objectId: 0x106, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0xff81, killMacro: 'can_kill_iron_knuckles', logicMacros: [], soulMacro: 'soul_iron_knuckle' },
-  { key: 'oot-skulltula-large-native-target', name: 'Big Skulltula', game: 'oot', actorId: 0x37, objectId: 0x24, habitat: 'air', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 1, killMacro: 'can_kill_skulltulas', logicMacros: [], soulMacro: 'soul_skulltula' },
+  ...[0x7f00, 0x7f01, 0x7f03].map(params => ({ key: `oot-native-redead-${params.toString(16)}`, name: params === 0x7f03 ? 'Invisible ReDead' : params === 0x7f00 ? 'ReDead (mourns when stationary)' : 'Standing ReDead', game: 'oot' as const, actorId: 0x90, objectId: 0x98, habitat: 'ground' as const, nativeOnly: true, params: [], spawnParams: params, killMacro: params === 0x7f03 ? 'can_kill_redead_lens' : 'can_kill_redead_gibdo', logicMacros: [], soulMacro: 'soul_redead_gibdo' })),
+  ...[0x8000, 0x8004].map(params => ({ key: `oot-native-keese-${params.toString(16)}`, name: params === 0x8000 ? 'Invisible Fire Keese' : 'Invisible Ice Keese', game: 'oot' as const, actorId: 0x13, objectId: 0xd, habitat: 'air' as const, nativeOnly: true, params: [], spawnParams: params, killMacro: 'can_kill_keese_lens', logicMacros: [], soulMacro: 'soul_keese' })),
+  { key: 'oot-dark-link-native-target', name: 'Dark Link', game: 'oot', actorId: 0x33, objectId: 0x20, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_dark_link', logicMacros: [], soulMacro: 'soul_dark_link', soulItem: 'SOUL_ENEMY_DARK_LINK' },
+  { key: 'oot-dead-hand-native-target', name: 'Dead Hand', game: 'oot', actorId: 0xa4, objectId: 0xa6, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_dead_hand', logicMacros: [], soulMacro: 'soul_dead_hand', soulItem: 'SOUL_ENEMY_DEAD_HAND' },
+  ...['Meg', 'Joelle', 'Beth', 'Amy'].map((name, type) => ({ key: `oot-poe-sister-native-${type}`, name, game: 'oot' as const, actorId: 0x91, objectId: 0x99, habitat: 'air' as const, miniboss: type === 0, nativeOnly: true, params: [], spawnParams: type << 8, killMacro: type === 0 ? 'can_kill_poe_meg' : 'can_kill_poe_sisters', logicMacros: [], soulMacro: 'soul_poe' })),
+  { key: 'oot-gerudo-fighter-native-target', name: 'Gerudo Fighter', game: 'oot', actorId: 0x197, objectId: 0x169, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_gerudo_fighter', logicMacros: [], soulMacro: 'soul_thief_fighter' },
+  ...[{ params: 0x00fd, name: 'White Bubble' }, { params: 0x02fc, name: 'Green Bubble' }, { params: 0x02fb, name: 'Big Green Bubble' }].map(row => ({ key: `oot-bubble-patrol-native-${row.params.toString(16)}`, name: row.name, game: 'oot' as const, actorId: 0x69, objectId: 0x5d, habitat: 'air' as const, nativeOnly: true, params: [], spawnParams: row.params, killMacro: 'can_kill_bubbles', logicMacros: [], soulMacro: 'soul_bubble' })),
+  { key: 'oot-big-poe-native-target', name: 'Big Poe', game: 'oot', actorId: 0x175, objectId: 0x6d, habitat: 'air', nativeOnly: true, params: [], spawnParams: 1, killMacro: 'can_kill_poes', logicMacros: [], soulMacro: 'soul_poe' },
+  { key: 'oot-flying-pot-native-target', name: 'Flying Pot', game: 'oot', actorId: 0x11d, objectId: 3, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0xffff, killMacro: 'can_kill_flying_pots', logicMacros: [], soulMacro: 'soul_flying_pot' },
+  { key: 'oot-leever-native-target', name: 'Leever', game: 'oot', actorId: 0x1c, objectId: 0x17, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_leevers', logicMacros: [], soulMacro: 'soul_leever' },
+  { key: 'oot-iron-knuckle-silver-native-target', name: 'Silver Iron Knuckle', game: 'oot', actorId: 0x113, objectId: 0x106, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0xff81, killMacro: 'can_kill_iron_knuckles', logicMacros: [], soulMacro: 'soul_iron_knuckle' },
+  { key: 'oot-skulltula-large-native-target', name: 'Big Skulltula', game: 'oot', actorId: 0x37, objectId: 0x24, habitat: 'air', nativeOnly: true, params: [], spawnParams: 1, killMacro: 'can_kill_skulltulas', logicMacros: [], soulMacro: 'soul_skulltula' },
 ];
 
 const FOREIGN_OOT_ROSTER_VARIANTS: readonly EnemyDefinition[] = [
   ...OOT_NATIVE_EXTRA_VARIANTS.filter(e => e.actorId === 0x69 && [0xfd, 0x2fc, 0x2fb].includes(e.spawnParams) || e.actorId === 0x37 && e.spawnParams === 1 || e.actorId === 0x1b0 && [5, 10].includes(e.spawnParams)),
   NATIVE_PEAHAT_TARGETS.find(e => e.key === 'oot-peahat-native-flying')!,
-  { key: 'oot-small-beamos', name: 'Small Beamos', game: 'oot', actorId: 0x8a, objectId: 0x8b, habitat: 'ground', sourceAllowed: false, params: [], spawnParams: 0x601, killMacro: 'can_kill_beamos', logicMacros: [], soulMacro: 'soul_beamos' } as EnemyDefinition,
-].map(e => ({ ...e, key: e.key + '-foreign', nativeOnly: false, foreignOnly: true, sourceAllowed: false, params: [], logicMacros: [] }));
+  { key: 'oot-small-beamos', name: 'Small Beamos', game: 'oot', actorId: 0x8a, objectId: 0x8b, habitat: 'ground', params: [], spawnParams: 0x601, killMacro: 'can_kill_beamos', logicMacros: [], soulMacro: 'soul_beamos' } as EnemyDefinition,
+].map(e => ({ ...e, key: e.key + '-foreign', nativeOnly: false, foreignOnly: true, params: [], logicMacros: [] }));
 
-const MM_FOREIGN_DEAD_HAND: EnemyDefinition = { key: 'oot-dead-hand-foreign', name: 'Dead Hand', game: 'oot', actorId: 0xa4, objectId: 0xa6, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_dead_hand', logicMacros: [], soulMacro: 'soul_dead_hand', soulItem: 'SOUL_ENEMY_DEAD_HAND' };
+const MM_FOREIGN_DEAD_HAND: EnemyDefinition = { key: 'oot-dead-hand-foreign', name: 'Dead Hand', game: 'oot', actorId: 0xa4, objectId: 0xa6, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_dead_hand', logicMacros: [], soulMacro: 'soul_dead_hand', soulItem: 'SOUL_ENEMY_DEAD_HAND' };
 
-const MM_FOREIGN_DARK_LINK: EnemyDefinition = { key: 'oot-dark-link-foreign', name: 'Dark Link', game: 'oot', actorId: 0x33, objectId: 0x20, habitat: 'ground', foreignOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_dark_link', logicMacros: [], soulMacro: 'soul_dark_link', soulItem: 'SOUL_ENEMY_DARK_LINK' };
+const MM_FOREIGN_DARK_LINK: EnemyDefinition = { key: 'oot-dark-link-foreign', name: 'Dark Link', game: 'oot', actorId: 0x33, objectId: 0x20, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_dark_link', logicMacros: [], soulMacro: 'soul_dark_link', soulItem: 'SOUL_ENEMY_DARK_LINK' };
 
 export const isEnemyEncounter = (actor: typeof ENEMY_ACTOR_CATALOG[number]) =>
   !(actor.game === 'oot' && [0xb6, 0xdf].includes(actor.actorId)) &&
@@ -467,9 +476,10 @@ export function enemyActorSpecies(game: Game, actorId: number, params?: number):
 }
 
 export function nativeEnemyCounterparts(sourceGame: Game, sourceActorId: number, targetGame: Game, params?: number) {
-  if (sourceGame === 'oot' && targetGame === 'mm' && params !== undefined &&
-    [0x69, 0x1d, 0x37, 0x8a, 0x1b0].includes(sourceActorId) && additionalForeignEnemyTarget(sourceGame, sourceActorId, params)) return [];
-  if (sourceGame === 'mm' && targetGame === 'oot' && sourceActorId === 0xb && params === 1) return [];
+  if (targetGame !== sourceGame && params !== undefined &&
+    ((enemySpawnMacroMatches('oot-foreign-extra-forms', { target: { game: sourceGame, actorId: sourceActorId, params } }) &&
+      additionalForeignEnemyTarget(sourceGame, sourceActorId, params)) ||
+      enemySpawnMacroMatches('mm-foreign-extra-form', { target: { game: sourceGame, actorId: sourceActorId, params } }))) return [];
   const species = enemyActorSpecies(sourceGame, sourceActorId, params);
   return ENEMY_ACTOR_CATALOG.filter(actor => actor.game === targetGame && isEnemyEncounter(actor) &&
     enemyActorSpecies(targetGame, actor.actorId).some(s => species.includes(s)));
@@ -612,7 +622,7 @@ export function standaloneEnemyTarget(game: Game, actorId: number, params?: numb
 }
 
 function standaloneEnemySource(game: Game, actorId: number): boolean {
-  return standaloneEnemyTarget(game, actorId) || (game === 'oot' && [0x06b, 0x0c7, 0x192].includes(actorId));
+  return standaloneEnemyTarget(game, actorId) || enemySpawnMacroMatches('standalone-source-extra', { target: { game, actorId } });
 }
 
 export function standaloneEnemyDonorParams(game: Game, actorId: number, params: number): number {
@@ -680,12 +690,7 @@ export function nativeResourceTarget(game: Game, actorId: number, params: number
 export const nativeGoldTarget = nativeResourceTarget;
 
 export function nativeResourceSource(game: Game, actorId: number, params: number): boolean {
-  if (game === 'oot')
-    return actorId === 0x55 && [0, 1].includes(params) || actorId === 0xc7 && [0, 1, 0xffff].includes(params) ||
-      actorId === 0x197 && [0x0a00, 0x0c00, 0x0e00, 0x0f00].includes(params);
-  return game === 'mm' && (actorId === 0x33 && params === 0 || actorId === 0x66 && [1, 2].includes(params) ||
-    actorId === 0x3b && [0xff00, 0xff02].includes(params) ||
-    actorId === 0x208 && params === 0xff00 || actorId === 0x21d && [0x024b, 0x02cb, 0x020b].includes(params));
+  return enemySpawnMacroMatches('native-resource-source', { target: { game, actorId, params } });
 }
 
 class OotEnemyResourceLimit extends EnemyMemoryAllocationError {
@@ -808,7 +813,7 @@ const NATIVE_ARENA_ENEMIES: readonly EnemyDefinition[] = [
     return {
       key: key + '-encounter', name: key, game: 'oot' as const, actorId: contract.actorId,
       objectId: contract.objectId, habitat: 'ground' as const, params: [], spawnParams: 0,
-      sourceAllowed: false, targetAllowed: false, nativeOnly: true, arenaOnly: true,
+      targetAllowed: false, nativeOnly: true, arenaOnly: true,
       killMacro: contract.killMacro, logicMacros: [contract.killMacro],
       soulMacro: key === 'oot-dead-hand' ? 'soul_dead_hand' : key === 'oot-dark-link' ? 'soul_dark_link' : 'soul_octorok',
       soulItem: key === 'oot-dead-hand' ? 'SOUL_ENEMY_DEAD_HAND' : key === 'oot-dark-link' ? 'SOUL_ENEMY_DARK_LINK' : 'SOUL_ENEMY_OCTOROK'
@@ -816,19 +821,19 @@ const NATIVE_ARENA_ENEMIES: readonly EnemyDefinition[] = [
   }),
   ...[...NATIVE_ARENA_COMBAT_TARGETS, ...BIG_OCTO_ARENA_COMBAT_TARGETS].map(target => ({
     ...target, name: target.key,
-    habitat: 'ground' as const, params: [], sourceAllowed: false, nativeOnly: true, arenaOnly: true,
+    habitat: 'ground' as const, params: [], nativeOnly: true, arenaOnly: true,
     logicMacros: []
   })),
   {
     key: 'mm-wizzrobe-encounter', name: 'Wizzrobe arena', game: 'mm', actorId: 0x15d, objectId: 0x178,
-    habitat: 'ground', params: [], spawnParams: 0, sourceAllowed: false, targetAllowed: false,
+    habitat: 'ground', params: [], spawnParams: 0, targetAllowed: false,
     nativeOnly: true, arenaOnly: true, killMacro: 'can_kill_wizzrobe_close', logicMacros: [],
     soulMacro: 'can_kill_wizzrobe_close'
   },
   ...NATIVE_MINIBOSS_VARIANTS.map(variant => ({
     key: variant.key, name: variant.key, game: variant.game,
     actorId: variant.actorId, objectId: variant.objectId, habitat: 'ground' as const, params: [],
-    spawnParams: variant.type << 8, sourceAllowed: false, nativeOnly: true, arenaOnly: true,
+    spawnParams: variant.type << 8, nativeOnly: true, arenaOnly: true,
     killMacro: variant.killMacro, logicMacros: []
   })),
 ];
@@ -854,8 +859,7 @@ export function nativeFightRestorationSource(key: string) {
 
 export function nativeFightRestorationRoomAllowed(sourceKey: string, room: number,
   settings: { gerudoFortress?: Settings['gerudoFortress'] }): boolean {
-  return sourceKey !== 'oot-gerudo-fighter-restored' ||
-    settings.gerudoFortress !== 'open' && (settings.gerudoFortress !== 'single' || room === 2);
+  return enemySpawnMacroMatches('native-fight-room-allowed', { source: { key: sourceKey }, location: { room }, settings });
 }
 
 export function nativeFightRestorationCombat(sourceKey: string, target: {
@@ -873,7 +877,7 @@ export function nativeFightRestorationCombat(sourceKey: string, target: {
 const NATIVE_RESTORED_FIGHT_ENEMIES: readonly EnemyDefinition[] = NATIVE_FIGHT_RESTORATION_SOURCES.map(source => ({
   key: source.key, name: source.key, game: source.game, actorId: source.actorId, objectId: source.objectId,
   habitat: source.actorId === 0x208 ? 'air' as const : 'ground' as const,
-  params: [...source.params], spawnParams: source.params[0], sourceAllowed: false, targetAllowed: false,
+  params: [...source.params], spawnParams: source.params[0], targetAllowed: false,
   nativeOnly: true, arenaOnly: true, killMacro: source.killMacro, logicMacros: [source.killMacro],
   soulMacro: source.actorId === 0x208 ? 'soul_poe' : 'soul_thief_fighter',
 }));
@@ -881,12 +885,9 @@ const NATIVE_RESTORED_FIGHT_ENEMIES: readonly EnemyDefinition[] = NATIVE_FIGHT_R
 const MINIBOSS_ACTORS = new Set(ENEMY_ACTOR_CATALOG.filter(actor => actor.role === 'miniboss')
   .map(actor => `${actor.game}/${actor.actorId}`));
 
-MINIBOSS_ACTORS.add('oot/153');
-
 export function isMinibossEnemy(game: Game, actorId: number, params?: number): boolean {
-  if ((game === 'oot' && actorId === 0x91) || (game === 'mm' && actorId === 0x1e8))
-    return params !== undefined && (params & 0x300) === 0;
-  return MINIBOSS_ACTORS.has(`${game}/${actorId}`);
+  return enemySpawnMacroMatches('miniboss', { target: { game, actorId, params },
+    facts: { catalogMiniboss: MINIBOSS_ACTORS.has(`${game}/${actorId}`) } });
 }
 
 export function requiresMinibossReplacement(settings: Partial<Settings>, game: Game, actorId: number): boolean {
@@ -913,7 +914,7 @@ const SCRIPTED_MM_ENEMIES: readonly EnemyDefinition[] = SCRIPTED_MM_FAMILIES.map
   return {
     key: key + '-scripted', name: key, game: 'mm', actorId: contract.actorId, objectId: contract.objectId,
     habitat: 'ground', params: [], spawnParams: 0, nativeOnly: true, arenaOnly: true,
-    sourceAllowed: false, targetAllowed: false, killMacro: contract.killMacro,
+    targetAllowed: false, killMacro: contract.killMacro,
     logicMacros: key === 'mm-eyegore' ? [contract.killMacro, 'can_kill_eyegore_distance', 'can_kill_eyegore_world'] :
       key === 'mm-garo-master' ? [contract.killMacro, 'can_kill_garo_master_world', 'can_kill_garo_master_shrine'] :
         key === 'mm-wart' ? [contract.killMacro, 'can_kill_warts_shrine'] : [contract.killMacro],
@@ -949,13 +950,13 @@ function dynamicEnemyPool(settings: Settings, host: Game, sourceId: number, scen
       if (host === 'mm' && !MM_NATIVE_ROSTER.some(row => row.actorId === enemy.actorId && row.variables.includes(enemy.spawnParams)) &&
         !MM_NATIVE_EXTRA_VARIANTS.includes(enemy) && !mmNativeCounterpartRoster(ENEMIES).some(row =>
           row.actorId === enemy.actorId && row.variables.includes(enemy.spawnParams)) && enemy.key !== ARWING_ENEMIES.mm.key) continue;
-      if (!scenes.every(scene => host === 'oot' ? ootNativeVariantFitsScene(enemy, scene) :
-        enemy.actorId !== 0x8d || (nativeSceneKeeps.scenes.mm as Record<number, number>)[scene] === 3)) continue;
+      if (!scenes.every(scene => enemySpawnMacroMatches('native-scene-keep', { target: enemy,
+        facts: { sceneKeep: (nativeSceneKeeps.scenes[host] as Record<number, number>)[scene] } }))) continue;
     } else if (!settings.crossGameEnemies || enemy.nativeOnly || !foreignEnemyRuntimeReady(enemy.game, enemy.actorId, enemy.spawnParams) ||
       nativeEnemyCounterparts(enemy.game, enemy.actorId, host, enemy.spawnParams).length) continue;
-    if (!settings.enemyShuffleIgnoreRestrictions && (enemy.habitat === 'underwater' || enemy.habitat === 'water-surface' ||
-      rootedBioBaba(enemy.game, enemy.actorId, enemy.spawnParams) || enemyIsCarnivorousLily(enemy.game, enemy.actorId) ||
-      mmAquaticTarget(enemy.game, enemy.actorId, enemy.spawnParams))) continue;
+    /* Supplemental encounters (including Gold Skulltula rewards) place their
+     * replacements on the floor. They do not retain an authored wall transform. */
+    if (!enemySpawnMacroMatches('dynamic-habitat-allowed', { target: { ...enemy, params: enemy.spawnParams }, settings })) continue;
     if (isMinibossEnemy(enemy.game, enemy.actorId, enemy.spawnParams) && !settings.enemyShuffleMinibosses ||
       !minibossPlacementAllowed(settings, host, sourceId, enemy)) continue;
     const identity = `${enemy.game}/${enemy.actorId}/${enemy.spawnParams}`;
@@ -969,10 +970,12 @@ export function scriptedMmSource(key: string) {
   return SCRIPTED_MM_ENEMIES.find(row => row.key === key);
 }
 
+const ootSpawnFacts = applyEnemyOotSpawnPolicies(ootEnemizerFacts, ENEMY_SOURCE_ADDITIONS.locations, ENEMY_SPAWN_OOT_LOCATIONS, ENEMY_SPAWN_OOT_TARGETS);
+
 export const OOT_ENEMIZER = {
-  targets: ootEnemizerFacts.targets,
+  targets: ootSpawnFacts.targets,
   aliases: [...ootEnemizerFacts.aliases, ...ENEMY_SOURCE_ADDITIONS.aliases] as readonly (readonly [readonly number[], readonly (readonly number[])[]])[],
-  locations: [...ootEnemizerFacts.locations, ...ENEMY_SOURCE_ADDITIONS.locations as OotEnemizerLocation[]].map(location => {
+  locations: ootSpawnFacts.locations.map(location => {
     const row = ootActorCorrections.find(row => row.mq === location.mq && row.scene === location.scene && row.room === location.room &&
       row.setup === location.setup && row.slot === location.slot);
     if (!row)
@@ -983,9 +986,9 @@ export const OOT_ENEMIZER = {
   }),
 };
 
-type OotEnemizerTarget = typeof ootEnemizerFacts.targets[number];
+type OotEnemizerTarget = typeof ootSpawnFacts.targets[number];
 
-type OotEnemizerLocation = typeof ootEnemizerFacts.locations[number] & { fieldSlot?: number };
+type OotEnemizerLocation = typeof ootSpawnFacts.locations[number] & { fieldSlot?: number };
 
 export type OotEnemizerChoice = {
   location: OotEnemizerLocation;
@@ -1009,6 +1012,18 @@ function ootEnemizerLocations(mq: ReadonlySet<string>): readonly OotEnemizerLoca
   return OOT_ENEMIZER.locations.filter(row => row.dungeon === null || row.mq === mq.has(row.dungeon));
 }
 
+function ootSpawnLocations(location: OotEnemizerLocation): EnemySpawnLocation[] {
+  return [{ ...location, game: 'oot' }, ...(ootPlacementAliases.get(ootEnemizerLocationKey(location)) ?? [])
+    .map(([scene, room, setup, slot]) => ({ game: 'oot' as const, scene, room, setup, slot, mq: false }))];
+}
+
+function ootSpawnSource(defs: readonly EnemyDefinition[], location: OotEnemizerLocation) {
+  const key = location.fieldSlot === undefined
+    ? location.broken ? undefined : ootEnemizerSourceKey(defs, location)
+    : OOT_DYNAMIC_PLANNER_SLOTS[location.fieldSlot].key;
+  return { ...location, key };
+}
+
 const { sceneKeeps: nativeSceneKeeps, roomCounts } = placementData;
 
 const { foreignActorIds, ootObjectIds, nativeCounterparts } = mmPlacementData;
@@ -1026,20 +1041,20 @@ const NATIVE_EXTENSIONS = [
 ] as const;
 
 function ootStandalonePortSlot(location: OotEnemizerLocation): boolean {
-  return !location.skipRaycast && location.restrictions.length === 0;
+  return enemySpawnMacroMatches('oot-standalone-port-slot', { source: location });
 }
 
 function ootNativeExtensions(location: OotEnemizerLocation) {
-  return NATIVE_EXTENSIONS.filter(form => form.actorId !== 0x195 ||
-    location.choices.some(index => OOT_ENEMIZER.targets[index].actorId === 0x60));
+  const allowedActors = location.choices.map(index => OOT_ENEMIZER.targets[index].actorId);
+  return NATIVE_EXTENSIONS.filter(form => enemySpawnMacroMatches('oot-native-business-scrub', { target: form, facts: { allowedActors } }));
 }
 
 function ootNativeVariantFitsScene(def: EnemyDefinition, scene: number): boolean {
-  return def.actorId !== 0x11d || (nativeSceneKeeps.scenes.oot as Record<number, number>)[scene] === 3;
+  return enemySpawnMacroMatches('native-scene-keep', { target: def, facts: { sceneKeep: (nativeSceneKeeps.scenes.oot as Record<number, number>)[scene] } });
 }
 
 function ootCombinedNativeTargets(defs: readonly EnemyDefinition[], location: OotEnemizerLocation, ignoreRestrictions = false): EnemyDefinition[] {
-  if (location.broken || (location.restrictions.length && (!ignoreRestrictions || location.skipRaycast)))
+  if (!enemySpawnMacroMatches('oot-native-extension-source', { source: location, settings: { enemyShuffleIgnoreRestrictions: ignoreRestrictions } }))
     return [];
   const targets = ootNativeExtensions(location).map(form => {
     const rows = defs.filter(def => def.key === form.key && def.game === 'oot' &&
@@ -1059,7 +1074,7 @@ export function isOotEnemizerNativeExtensionChoice(choice: OotEnemizerChoice): b
   if (!location || location.broken)
     return false;
   const target = choice.target;
-  if (location.restrictions.length && (!choice.ignoreRestrictions || location.skipRaycast) &&
+  if (!enemySpawnMacroMatches('oot-native-extension-source', { source: location, settings: { enemyShuffleIgnoreRestrictions: choice.ignoreRestrictions } }) &&
     !(target.actorId === ARWING_ENEMIES.oot.actorId && ootArwingSlot(location)))
     return false;
   const forms = [
@@ -1111,7 +1126,7 @@ function ootEnemizerDefinitions(base: readonly EnemyDefinition[]): EnemyDefiniti
     return {
       ...original, key: ootNativeEnemyDefinitionKey(target.actorId, params), name: target.name,
       soulMacro: original.soulMacro ?? 'soul_' + original.key.split('-')[1], params: [], spawnParams: params,
-      nativeOnly: true, foreignOnly: false, sourceAllowed: false, targetAllowed: true,
+      nativeOnly: true, foreignOnly: false, targetAllowed: true,
       preserveNativeResource: false, arenaOnly: false, requiresNoCutscene: false, requiresNoScriptedPeers: false,
     };
   });
@@ -1122,15 +1137,7 @@ export type OotEnemizerReplacement = EnemyReplacement & {
 };
 
 function crossRestrictions(target: EnemyDefinition): readonly string[] {
-  if (target.habitat === 'underwater')
-    return ['UNDERWATER'];
-  if (target.habitat === 'water-surface' || rootedBioBaba(target.game, target.actorId, target.spawnParams))
-    return ['ABOVE_WATER'];
-  if ([0x109, 0x15b].includes(target.actorId))
-    return ['FLOATING', 'ABOVE_GROUND', 'ABOVE_WATER'];
-  if (target.actorId === 0x113)
-    return ['ABOVE_GROUND'];
-  return [];
+  return enemySpawnMacroGroup('oot-restriction', { target: { ...target, params: target.spawnParams } });
 }
 
 function resolvedMq(settings: Settings, provided?: ReadonlySet<string>): ReadonlySet<string> {
@@ -1140,19 +1147,16 @@ function resolvedMq(settings: Settings, provided?: ReadonlySet<string>): Readonl
 }
 
 function ootArwingSlot(location: OotEnemizerLocation): boolean {
-  return !location.broken &&
-    location.restrictions.every(rule => ['FLOATING', 'ABOVE_GROUND', 'ABOVE_WATER'].includes(rule));
+  return enemySpawnMacroMatches('oot-arwing-source', { source: location });
 }
 
 export function ootNativeChoiceAllows(location: OotEnemizerLocation, index: number, ignoreRestrictions = false): boolean {
   if (location.choices.includes(index))
     return true;
   const target = OOT_ENEMIZER.targets[index];
-  if (!ignoreRestrictions || !target || location.broken || location.skipRaycast || location.explicit.length ||
-    (target.actorId === 0x95 && location.actorId !== 0x95) ||
-    (location.disallowed as readonly string[]).includes(target.name))
-    return false;
-  return target.requires.every(rule => (location.meets as readonly string[]).includes(rule) || rule === 'ABOVE_WATER');
+  return !!target && enemySpawnMacroMatches('oot-relaxed-native-source', {
+    source: location, target, settings: { enemyShuffleIgnoreRestrictions: ignoreRestrictions },
+  });
 }
 
 type OotEnemizerCandidate = {
@@ -1163,7 +1167,7 @@ type OotEnemizerCandidate = {
 
 function ootForeignTargets(defs: readonly EnemyDefinition[]) {
   return defs.filter(d => d.game === 'mm' && !d.nativeOnly && d.targetAllowed !== false && !d.arenaOnly &&
-    (mmFacts.roster.some(row => row.actorId === d.actorId && row.variables.includes(d.spawnParams)) || d.actorId === 0x113 && d.spawnParams === 0 || d.actorId === 0x23d && d.spawnParams === 0x7f00 || FOREIGN_EXTRA_NATIVE_MM_ENEMIES.some(row => row.key === d.key)) &&
+    (mmFacts.roster.some(row => row.actorId === d.actorId && row.variables.includes(d.spawnParams)) || enemySpawnMacroMatches('oot-foreign-roster-extras', { target: { ...d, params: d.spawnParams } }) || FOREIGN_EXTRA_NATIVE_MM_ENEMIES.some(row => row.key === d.key)) &&
     foreignEnemyRuntimeReady('mm', d.actorId, d.spawnParams) && !nativeEnemyCounterparts('mm', d.actorId, 'oot', d.spawnParams).length);
 }
 
@@ -1188,12 +1192,14 @@ function ootEnemizerCandidatePools(defs: readonly EnemyDefinition[], settings: S
   for (const location of locations) {
     if (location.broken)
       continue;
+    const source = ootSpawnSource(defs, location);
+    const spawnLocations = ootSpawnLocations(location);
     const ignoreRestrictions = settings.enemyShuffleIgnoreRestrictions;
     const nativeIndices = ignoreRestrictions
       ? [...location.choices, ...OOT_ENEMIZER.targets.flatMap((_, index) => !location.choices.includes(index) && ootNativeChoiceAllows(location, index, true) ? [index] : [])]
       : location.choices;
     const native = nativeIndices
-      .filter(index => OOT_ENEMIZER.targets[index].actorId !== 0x95 || location.actorId === 0x95)
+      .filter(index => enemySpawnMacroMatches('oot-native-wall-source', { source: location, target: OOT_ENEMIZER.targets[index] }))
       .map(index => {
         const { actorId, params } = OOT_ENEMIZER.targets[index];
         const key = ootNativeEnemyDefinitionKey(actorId, params);
@@ -1202,17 +1208,15 @@ function ootEnemizerCandidatePools(defs: readonly EnemyDefinition[], settings: S
           throw new Error('Unregistered native OoT target form');
         return { index, def };
       });
-    const relaxHabitat = ignoreRestrictions && !location.skipRaycast && !location.explicit.length;
-    const foreign = cross.filter(target => (![0x43, 0x15d, 0x182, 0x12c, 0x7, 0x65, 0x115, 0x28f].includes(target.actorId) ||
-      ootStandalonePortSlot(location)) &&
-      (ignoreRestrictions || !enemyIsCarnivorousLily(target.game, target.actorId) ||
-        (ootWaterSurfaceSlot(location) && (ootPlacementAliases.get(ootEnemizerLocationKey(location)) ?? [])
-          .every(([scene, room, setup, slot]) => ootWaterSurfaceSlot({ mq: false, scene, room, setup, slot })))) &&
-      ((relaxHabitat && !(location.disallowed as readonly string[]).includes(target.name)) ||
-        (location.restrictions.every(rule => crossRestrictions(target).includes(rule)) &&
-          (target.habitat !== 'underwater' || (location.restrictions as readonly string[]).includes('UNDERWATER')) &&
-          (!(rootedBioBaba(target.game, target.actorId, target.spawnParams)) ||
-            (location.restrictions as readonly string[]).includes('ABOVE_WATER') || (location.meets as readonly string[]).includes('ABOVE_WATER')))));
+    const foreign = cross.filter(target => {
+      const context = { source: location, target: { ...target, params: target.spawnParams }, settings,
+        facts: { capabilities: crossRestrictions(target), allWaterSurfaceSlots: !!ootWaterSurfaceSlot(location) &&
+          (ootPlacementAliases.get(ootEnemizerLocationKey(location)) ?? []).every(([scene, room, setup, slot]) =>
+            !!ootWaterSurfaceSlot({ mq: false, scene, room, setup, slot })) } };
+      return enemySpawnMacroMatches('oot-foreign-standalone-allowed', context) &&
+        enemySpawnMacroMatches('oot-foreign-water-surface', context) &&
+        enemySpawnMacroMatches('oot-foreign-habitat', context);
+    });
     const additions = [
       ...ootCombinedNativeTargets(defs, location, ignoreRestrictions),
       ...foreign,
@@ -1220,10 +1224,11 @@ function ootEnemizerCandidatePools(defs: readonly EnemyDefinition[], settings: S
     if (ootArwingSlot(location))
       additions.push({ index: -1, def: ARWING_ENEMIES.oot });
     let pool = [...native, ...additions].filter(({ def }) => !enemyShuffleExcluded(settings, def, 'oot') &&
+      spawnLocations.every(where => enemySpawnTargetAllowed(where, source,
+        { ...def, spawnParams: (location.varOverrides as Readonly<Record<string, number>>)[def.name] ?? def.spawnParams }, settings)) &&
       !enemyCanRespawn(def.game, def.actorId, def.spawnParams) &&
       !enemyIsPerched(def.game, def.actorId, def.spawnParams) &&
-      (location.scene !== 0x41 || location.room !== 0 || location.actorId !== 0x13 ||
-        (def.game === 'oot' ? def.actorId !== 0x37 : def.actorId !== 0x24)));
+      enemySpawnMacroMatches('oot-native-target-source', { location, source: location, target: def }));
     if (!settings.enemyShuffleMinibosses)
       pool = pool.filter(({ def }) => !isMinibossEnemy(def.game, def.actorId, def.spawnParams));
     else
@@ -1250,7 +1255,7 @@ function ootGroupedTargetForm(def: EnemyDefinition, location: OotEnemizerLocatio
 }
 
 function enemyGroupLimit(target: Pick<EnemyDefinition, 'game' | 'actorId'>): number {
-  return target.game === 'mm' && [0x12c, 0x43, 0x65].includes(target.actorId) ? 4 : Infinity;
+  return enemySpawnLimit('group-size', { target });
 }
 
 function groupedEnemyPool<T>(pool: readonly T[], copies: number, identity: (value: T) => EnemyShuffleIdentity,
@@ -1316,13 +1321,8 @@ function minibossAllocation<T>(pools: readonly (readonly T[])[], identify: (valu
   return { failures, fits: (selected: readonly (T | undefined)[]) => !failures(selected, true).length };
 }
 
-const OOT_DINOLFOS_SOURCE_SLOTS = new Set([
-  '0/10/0/0/1', '0/10/0/0/2', '0/11/7/0/0', '0/11/7/0/1',
-  '1/6/18/0/0', '1/6/18/0/1', '1/6/26/0/1', '1/11/7/0/0', '1/11/7/0/1', '1/13/9/0/8',
-]);
-
 function ootEnemizerSourceKey(defs: readonly EnemyDefinition[], location: OotEnemizerLocation): string {
-  if (location.actorId === 0x25 && OOT_DINOLFOS_SOURCE_SLOTS.has([+location.mq, ootEnemizerLocationKey(location)].join('/')))
+  if (enemySpawnMacroMatches('oot-dinolfos-source', { source: location, location }))
     return 'oot-dinolfos';
   return baseDefinition(defs, location.actorId).key;
 }
@@ -1356,33 +1356,37 @@ const OOT_DYNAMIC_PLANNER_SLOTS = [...OOT_FIELD_STALCHILD_SLOTS, ...OOT_FOREST_B
 
 function ootBurialEnemyLocations(mq: ReadonlySet<string>): OotEnemizerLocation[] {
   const first = OOT_FIELD_STALCHILD_SLOTS.length + OOT_FOREST_BOW_SLOTS.length;
-  return OOT_BURIAL_ENEMY_SLOTS.flatMap<OotEnemizerLocation>(({ scene, room, actorId }, index) => {
+  return OOT_BURIAL_ENEMY_SLOTS.flatMap<OotEnemizerLocation>(({ key, scene, room, actorId }, index) => {
     const dungeon = scene === 8 ? 'BotW' : null;
-    if (dungeon && mq.has(dungeon)) return [];
-    const identity = { scene, room, slot: -1 - index, fieldSlot: first + index, actorId };
-    if (dungeon)
-      return [Object.assign(ootForestBowLocations()[0], identity, { dungeon })];
-    return [Object.assign(ootFieldStalchildLocations()[0], identity)];
+    if (dungeon && mq.has(DUNGEONS[dungeon])) return [];
+    return [{ mq: false, dungeon, scene, room, setup: 0, slot: -1 - index,
+      fieldSlot: first + index, actorId, ...ootSpawnTemplate(key), switchFlag: -1 }];
   });
 }
 
+function ootSpawnTemplate(name: string) {
+  const template = (ENEMY_SPAWN_OOT_TEMPLATES as Readonly<Record<string, EnemyOotSpawnTemplate>>)[name];
+  if (!template) throw new Error('Missing enemy spawn point: ' + name);
+  return { ...template, choices: template.choices.map(name => {
+    const index = OOT_ENEMIZER.targets.findIndex(target => target.name === name);
+    if (index < 0) throw new Error('Unknown enemy spawn template target: ' + name);
+    return index;
+  }) };
+}
+
 function ootFieldStalchildLocations(): OotEnemizerLocation[] {
-  return OOT_FIELD_STALCHILD_SLOTS.map(({ scene, room, slot }) => ({
+  return OOT_FIELD_STALCHILD_SLOTS.map(({ key, scene, room, slot }) => ({
     mq: false, dungeon: null, scene, room, setup: 0, slot: -1 - slot, fieldSlot: slot,
     actorId: 0x1b0,
-    choices: OOT_ENEMIZER.targets.flatMap((target, index) => target.requires.every(rule => rule === 'OUTSIDE') ? [index] : []),
-    restrictions: [], meets: ['OUTSIDE'], disallowed: [], explicit: [], varOverrides: {}, logicOverrides: {},
-    switchFlag: -1, skipRaycast: false, broken: false, position: [],
+    ...ootSpawnTemplate(key), switchFlag: -1,
   }));
 }
 
 function ootForestBowLocations(): OotEnemizerLocation[] {
-  return OOT_FOREST_BOW_SLOTS.map(({ scene, room, slot }) => ({
+  return OOT_FOREST_BOW_SLOTS.map(({ key, scene, room, slot }) => ({
     mq: false, dungeon: 'Forest', scene, room, setup: 0, slot: -1 - slot,
     fieldSlot: OOT_FIELD_STALCHILD_SLOTS.length + slot, actorId: 2,
-    choices: OOT_ENEMIZER.targets.flatMap((target, index) => target.requires.length ? [] : [index]),
-    restrictions: [], meets: [], disallowed: [], explicit: [], varOverrides: {}, logicOverrides: {},
-    switchFlag: -1, skipRaycast: false, broken: false, position: [],
+    ...ootSpawnTemplate(key), switchFlag: -1,
   }));
 }
 
@@ -1412,6 +1416,20 @@ function ootSupplementalMemoryRows(plan: EnemyPlan, options: EnemyMemoryOptions,
       cost: enemyMemoryCost('oot', target.game, target.actorId, target.spawnParams, options)
     }));
   });
+}
+
+function ootPreservedSpawnMemoryRows(plannedSources: ReadonlySet<string>, options: EnemyMemoryOptions, scene: number, mq: boolean) {
+  if (mq && scene <= 9) return [];
+  return [...OOT_DYNAMIC_PLANNER_SLOTS, ...OOT_DESERT_LEEVER_SLOTS]
+    .filter(slot => slot.scene === scene && !plannedSources.has(slot.key))
+    .map(slot => {
+      const target = enemyDefinition(OOT_DESERT_LEEVER_SLOTS.some(source => source.key === slot.key)
+        ? 'oot-leever-native-target' : slot.key);
+      return {
+        scene, room: slot.room, source: slot.key, target,
+        cost: enemyMemoryCost('oot', 'oot', target.actorId, target.spawnParams, options),
+      };
+    });
 }
 
 function ootMemoryRooms(scene: number, mq: boolean): number[] {
@@ -1459,8 +1477,15 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
       miniboss: location ? { location, candidate: allocation.miniboss!.get(location)! } : undefined });
   }
   const actualCost = (location: OotEnemizerLocation, row: OotEnemizerCandidate) => enemyMemoryCost('oot', row.def.game, row.def.actorId, (location.varOverrides as Readonly<Record<string, number>>)[row.def.name] ?? row.def.spawnParams, settings);
+  const plannedSources = new Set(gold.map(row => row.source));
+  for (const location of candidates.keys())
+    if (location.fieldSlot !== undefined) plannedSources.add(OOT_DYNAMIC_PLANNER_SLOTS[location.fieldSlot].key);
+  const fixedRows = [
+    ...ootSupplementalMemoryRows(gold, settings, () => locations[0].mq),
+    ...ootPreservedSpawnMemoryRows(plannedSources, settings, locations[0].scene, locations[0].mq),
+  ];
   const goldRooms = new Map<number, EnemyMemoryCost[]>();
-  for (const { scene, room, cost } of ootSupplementalMemoryRows(gold, settings, () => locations[0].mq)) {
+  for (const { scene, room, cost } of fixedRows) {
     if (scene !== locations[0].scene) continue;
     const costs = goldRooms.get(room) ?? [];
     costs.push(cost);
@@ -1530,7 +1555,7 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
     }
     return worst;
   };
-  const fixed = [...new Map(ootSupplementalMemoryRows(gold, settings, () => locations[0].mq)
+  const fixed = [...new Map(fixedRows
     .filter(row => row.scene === locations[0].scene).map(row => [row.source, row.target])).values()];
   const minibosses = minibossAllocation(units.map(unit => unit.choices), value => value.values().next().value!.def,
     units.map(unit => unit.members.length), selected => assessMemory(selected, true).excess === 0, fixed);
@@ -1671,16 +1696,11 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
 }
 
 export function enemyNeverShuffled(game: Game, actorId: number): boolean {
-  return game === 'oot' ? [0xc6, 0xde].includes(actorId) : [0x1a8, 0x206].includes(actorId);
+  return enemySpawnMacroMatches('never-shuffled', { target: { game, actorId } });
 }
 
 export function enemySourceAllowedBySettings(game: Game, actorId: number, settings: Settings, params?: number): boolean {
-  if (enemyNeverShuffled(game, actorId)) return false;
-  if (settings.erWallmasters !== 'none' && actorId === (game === 'oot' ? 0x11 : 0xa)) return false;
-  if (settings.enemyShufflePreserveMinibosses && isMinibossEnemy(game, actorId, params)) return false;
-
-  return game === 'oot' ? actorId !== 0x11d || settings.shufflePotsOot === 'none' :
-    actorId !== 0x8d || settings.shufflePotsMm === 'none';
+  return enemySpawnMacroMatches('source-settings-allowed', { target: { game, actorId, params }, settings, facts: { miniboss: isMinibossEnemy(game, actorId, params) } });
 }
 
 function ootResourceExcess(report: ReturnType<typeof enemyOotSceneMemoryReports>[number]): number {
@@ -1691,14 +1711,17 @@ function ootResourceExcess(report: ReturnType<typeof enemyOotSceneMemoryReports>
 
 function validateOotGoldMemory(plan: EnemyPlan, settings: Settings): void {
   const gold = plan.filter(row => ENEMY_GOLD_SOURCES.some(s => s.game === 'oot' && s.key === row.source));
-
-  for (const report of enemyOotSceneMemoryReports(gold, settings))
+  const plannedSources = new Set([...plan.map(row => row.source), ...OOT_DYNAMIC_PLANNER_SLOTS.map(slot => slot.key)]);
+  for (const report of enemyOotSceneMemoryReports(gold, settings, plannedSources))
     if (ootResourceExcess(report) > 0)
       throw new OotEnemyResourceLimit(`OoT scene ${report.scene}: Gold Skulltula replacements exceed the room reserve`);
 }
 
 function repairOotGoldMemory(plan: EnemyPlan, pools: ReadonlyMap<string, readonly EnemyDefinition[]>, settings: Settings, random: Random): void {
   const gold = plan.filter(row => pools.has(row.source));
+  /* Exact room placements are planned after the supplemental choices. Their
+   * dynamic slots must not look preserved while this search is still partial. */
+  const plannedSources = new Set([...plan.map(row => row.source), ...OOT_DYNAMIC_PLANNER_SLOTS.map(slot => slot.key)]);
   const scenes = new Set(ootSupplementalMemoryRows(gold, settings, () => false).map(row => row.scene));
   for (const scene of scenes) {
     const rows = gold.filter(row => ENEMY_GOLD_SOURCES.some(s => s.game === 'oot' && s.scene === scene && s.key === row.source) ||
@@ -1711,7 +1734,7 @@ function repairOotGoldMemory(plan: EnemyPlan, pools: ReadonlyMap<string, readonl
       const selectedPlan = [...fixedPlan,
         ...rows.flatMap((row, i) => selected[i] ? [{ ...row, target: selected[i]!.key }] : [])];
       let worst: AdaptiveMemoryAssessment = { excess: 0, slots: [] };
-      for (const report of enemyOotSceneMemoryReports(selectedPlan, settings)) {
+      for (const report of enemyOotSceneMemoryReports(selectedPlan, settings, plannedSources)) {
         if (report.scene !== scene) continue;
         const excess = ootResourceExcess(report);
         if (excess > worst.excess) worst = {
@@ -1765,8 +1788,10 @@ function makeOotEnemizerPlan(defs: readonly EnemyDefinition[], settings: Setting
   validateOotGoldMemory(gold, settings);
   const scenes = new Map<number, OotEnemizerLocation[]>();
   const mq = resolvedMq(settings, options.mqDungeons);
-  for (const location of [...ootEnemizerLocations(mq), ...ootFieldStalchildLocations(), ...(!mq.has('Forest') ? ootForestBowLocations() : []), ...ootBurialEnemyLocations(mq)]) {
+  for (const location of [...ootEnemizerLocations(mq), ...ootFieldStalchildLocations(), ...(!mq.has(DUNGEONS.Forest) ? ootForestBowLocations() : []), ...ootBurialEnemyLocations(mq)]) {
     if (!enemySourceAllowedBySettings('oot', location.actorId, settings)) continue;
+    const source = ootSpawnSource(defs, location);
+    if (!ootSpawnLocations(location).every(where => enemySpawnSourceAllowed(settings, where, source))) continue;
     const rows = scenes.get(location.scene);
     if (rows)
       rows.push(location);
@@ -1810,8 +1835,6 @@ type MmEnemy = {
   type: number;
   stationary: boolean;
   variables: number[];
-  forbidFrom: number[];
-  forbidTo: number[];
 };
 
 type MmActor = {
@@ -1823,10 +1846,7 @@ type MmActor = {
 };
 
 function mmSourceFormAllowed(actor: Pick<MmActor, 'actorId' | 'params'>): boolean {
-
-  return (actor.actorId !== 0x50 || actor.params === 0xfffc) && (actor.actorId !== 0x12d || actor.params !== 2) &&
-    (actor.actorId !== 0x291 || actor.params === 0) &&
-    (actor.actorId !== 0x13a || (actor.params >> 12) === 0);
+  return enemySpawnMacroMatches('mm-source-form', { source: actor });
 }
 
 type MmMap = {
@@ -1847,6 +1867,32 @@ type MmScene = {
   scene: number;
   maps: MmMap[];
 };
+
+function mmSpawnLocations(scene: MmScene, actor: MmActor): EnemySpawnLocation[] {
+  return scene.maps.flatMap(map => map.actors.filter(alias => alias.offset === actor.offset)
+    .map(alias => ({ game: 'mm' as const, scene: scene.scene, room: map.room, setup: map.setup, slot: alias.slot })));
+}
+
+function mmSpawnSource(actor: MmActor, key?: string) {
+  return { ...actor, key: actor.actorId === 0x12d && actor.params === 2 ? MM_BIO_BABA_LILY_PAD_KEY : key };
+}
+
+function mmSpawnSourceAllowed(settings: Settings, scene: MmScene, actor: MmActor, key?: string): boolean {
+  const source = mmSpawnSource(actor, key);
+  return enemySourceAllowedBySettings('mm', actor.actorId, settings) &&
+    mmSpawnLocations(scene, actor).every(where => enemySpawnSourceAllowed(settings, where, source));
+}
+
+function mmSpawnTargetAllowed(scene: MmScene, actor: MmActor, target: EnemySpawnTarget, settings: Settings, key?: string): boolean {
+  const source = mmSpawnSource(actor, key);
+  return mmSpawnLocations(scene, actor).every(where => enemySpawnTargetAllowed(where, source, target, settings));
+}
+
+function mmAquaticSpawnAllowed(actor: MmActor, target: Pick<EnemySpawnTarget, 'game' | 'actorId' | 'spawnParams'>): boolean {
+  /* Mounted Bio Babas are authored above their leaves, not at an underwater
+   * raycast slot. Their unchanged native form already supports that position. */
+  return enemySpawnMacroMatches('mm-aquatic-source', { source: actor, target: { ...target, params: target.spawnParams }, facts: { aquaticSlot: !!mmAquaticSlot(actor.offset) } });
+}
 
 type MmActorChange = {
   adaptiveGroup?: string;
@@ -1887,21 +1933,18 @@ export function nativeEnemyOnDemandObjects(game: Game, actorId: number, params?:
   return ids && redIce ? [...ids, game === 'oot' ? 0x6b : 0x106b] : ids;
 }
 
-const MM_SKIPPED_SCENES = [0x08, 0x20, 0x24, 0x69] as const;
+function mmSceneSkipped(scene: number): boolean {
+  return enemySpawnMacroMatches('mm-skipped-scene', { location: { scene } });
+}
 
 type MmTargetGroupAllows = (source: readonly MmEnemy[], target: MmEnemy, actor?: MmActor) => boolean;
 
 export function mmPlacementTypeAllows(source: Pick<MmEnemy, 'type'> & Partial<Pick<MmEnemy, 'game' | 'actorId'>>, target: Pick<MmEnemy, 'type'> & Partial<Pick<MmEnemy, 'game' | 'actorId'>>): boolean {
-  if (target.game === 'mm' && target.actorId === ARWING_ENEMIES.mm.actorId)
-    return [0, 2, 3, 4].includes(source.type);
-
-  return enemyIsCarnivorousLily(target.game ?? '', target.actorId ?? -1) ||
-    source.type === target.type || ((source.type === 3 || source.type === 4 ||
-      (source.game === 'mm' && source.actorId === 0x291)) && target.type === 0);
+  return enemySpawnMacroMatches('mm-placement-type', { source, target });
 }
 
-function solveMmScene(scene: MmScene, nativeRoster: readonly MmEnemy[], targetRoster: readonly MmEnemy[], next: (max: number) => number, groupAllows: MmTargetGroupAllows, ignoreRestrictions: boolean, weight: (target: EnemyShuffleIdentity) => number, supplemental: EnemyPlan, memoryOptions: EnemyMemoryOptions, queue?: MmSceneProblem[]): MmActorChange[] {
-  if ((MM_SKIPPED_SCENES as readonly number[]).includes(scene.scene))
+function solveMmScene(scene: MmScene, nativeRoster: readonly MmEnemy[], targetRoster: readonly MmEnemy[], next: (max: number) => number, groupAllows: MmTargetGroupAllows, ignoreRestrictions: boolean, weight: (target: EnemyShuffleIdentity) => number, supplemental: EnemyPlan, memoryOptions: Settings, queue?: MmSceneProblem[]): MmActorChange[] {
+  if (mmSceneSkipped(scene.scene))
     return [];
   const objects = new Set(scene.maps.flatMap(map => map.objects.map(o => o.objectId)));
   const groups = new Map<number, {
@@ -1911,8 +1954,8 @@ function solveMmScene(scene: MmScene, nativeRoster: readonly MmEnemy[], targetRo
   }[]>();
   scene.maps.forEach((map, mi) => map.actors.forEach(actor => {
     const source = nativeRoster.find(e => e.actorId === actor.actorId && mmSourceFormAllowed(actor) &&
-      !e.forbidFrom.includes(scene.scene) && (e.objectId <= 3 || objects.has(e.objectId)));
-    if (!source)
+      (e.objectId <= 3 || objects.has(e.objectId)));
+    if (!source || !mmSpawnSourceAllowed(memoryOptions, scene, actor, source.key))
       return;
     const entries = groups.get(source.objectId) ?? [];
     const existing = entries.find(e => e.actor.offset === actor.offset);
@@ -1925,7 +1968,7 @@ function solveMmScene(scene: MmScene, nativeRoster: readonly MmEnemy[], targetRo
   const rows = [...groups.values()].map(entries => ({ entries, copies: entries.length }));
   const allocations = rows.map(row => {
     const sources = [...new Set(row.entries.map(e => e.source))];
-    const compatible = targetRoster.filter(target => !target.forbidTo.includes(scene.scene) && groupAllows(sources, target) &&
+    const compatible = targetRoster.filter(target => groupAllows(sources, target) &&
       row.entries.every(({ actor, source }) => groupAllows([source], target, actor) &&
         (ignoreRestrictions || mmPlacementTypeAllows(source, target))));
     const allocation = groupedEnemyPool(compatible, row.entries.length,
@@ -2136,7 +2179,7 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
     const [a, b = a] = maps, first = scene.maps[a], second = scene.maps[b];
     for (let day = 0; day < 10; day++) {
       const mask = (1 << day) | (day < 9 ? 1 << (day + 1) : 0);
-      const indices: number[] = [], original: MmActor[] = [], retained: MmActor[] = [];
+      const indices: number[] = [], original: MmActor[] = [], retained: MmActor[] = [], flowers: MmActor[] = [];
       for (const mi of maps)
         for (const actor of scene.maps[mi].actors) {
           if (!(days(actor) & mask))
@@ -2147,6 +2190,8 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
           else {
             indices.push(index);
 
+            if (actor.actorId === 0x3b && [0, 2].includes(actor.params & 0xff)) flowers.push(actor);
+
             if (actor.actorId === 0x13a || actor.actorId === 0x12d && actor.params === 0) retained.push(actor);
             else original.push(actor);
           }
@@ -2155,6 +2200,9 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
       const sourceCosts: EnemyMemoryCost[] = retained
         .filter(actor => actor.actorId === 0x13a && maps.some(mi => rowByMap[mi].has(actor.offset)))
         .map(() => ({ shared: {}, instances: 128, actors: 0 }));
+      /* Scrub flowers exist independently of the replacement, including
+       * before it dies. Account for their actor, overlay and dyna slot. */
+      sourceCosts.push(...flowers.map(() => enemyMemoryCost('mm', 'mm', 0x183, 0)));
       slots.forEach((slot, index) => {
         if (!slot.encounter)
           return;
@@ -2191,7 +2239,7 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
       }
       const budget = extra + credit + (setup === 0 ? objectSavings : 0);
       const dynamicCollisionAllowance = Math.max(0, p.dynamicCollisionLimit - p.dynamicCollisionReserve -
-        retained.reduce((count, actor) => count + enemyNativeDynamicCollisionCount('mm', actor.actorId), 0));
+        retained.reduce((count, actor) => count + enemyNativeDynamicCollisionCount('mm', actor.actorId, actor.params), 0));
       const signature = JSON.stringify([indices, budget, retained.length, dynamicCollisionAllowance, sourceCosts, [...prepaid].sort(), extraCosts, dynamicSupplemental ? maps : []]);
       if (unique.has(signature))
         continue;
@@ -2394,8 +2442,8 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
   };
 }
 
-function solveMmSceneIndividual(scene: MmScene, nativeRoster: readonly MmEnemy[], targets: readonly MmEnemy[], next: (max: number) => number, allows: MmTargetGroupAllows, ignoreRestrictions: boolean, weight: (target: EnemyShuffleIdentity, source: MmEnemy) => number, keepEmpty: (source: MmEnemy) => boolean, supplemental: EnemyPlan, memoryOptions: EnemyMemoryOptions, queue?: MmSceneProblem[]): MmActorChange[] {
-  if ((MM_SKIPPED_SCENES as readonly number[]).includes(scene.scene))
+function solveMmSceneIndividual(scene: MmScene, nativeRoster: readonly MmEnemy[], targets: readonly MmEnemy[], next: (max: number) => number, allows: MmTargetGroupAllows, ignoreRestrictions: boolean, weight: (target: EnemyShuffleIdentity, source: MmEnemy) => number, keepEmpty: (source: MmEnemy) => boolean, supplemental: EnemyPlan, memoryOptions: Settings, queue?: MmSceneProblem[]): MmActorChange[] {
+  if (mmSceneSkipped(scene.scene))
     return [];
   type Slot = {
     actor: MmActor;
@@ -2404,8 +2452,8 @@ function solveMmSceneIndividual(scene: MmScene, nativeRoster: readonly MmEnemy[]
   };
   const slots = new Map<number, Slot>();
   scene.maps.forEach((map, mi) => map.actors.forEach(actor => {
-    const source = nativeRoster.find(e => e.actorId === actor.actorId && mmSourceFormAllowed(actor) && !e.forbidFrom.includes(scene.scene) && (e.objectId <= 3 || map.objects.some(o => o.objectId === e.objectId)));
-    if (!source)
+    const source = nativeRoster.find(e => e.actorId === actor.actorId && mmSourceFormAllowed(actor) && (e.objectId <= 3 || map.objects.some(o => o.objectId === e.objectId)));
+    if (!source || !mmSpawnSourceAllowed(memoryOptions, scene, actor, source.key))
       return;
     const old = slots.get(actor.offset);
     if (old) {
@@ -2435,8 +2483,7 @@ function solveMmSceneIndividual(scene: MmScene, nativeRoster: readonly MmEnemy[]
     return entries.map(entry => ({ ...entry, entries: [entry] }));
   });
   const pools = rows.map(row => {
-    const pool = targets.filter(target => !target.forbidTo.includes(scene.scene) &&
-      (ignoreRestrictions || mmPlacementTypeAllows(row.source, target)) &&
+    const pool = targets.filter(target => (ignoreRestrictions || mmPlacementTypeAllows(row.source, target)) &&
       row.entries.every(entry => allows([entry.source], target, entry.actor)));
     if (!pool.length) {
       if (keepEmpty(row.source))
@@ -2524,7 +2571,8 @@ function splitMemoryCosts(host: Game, row: EnemyReplacement, options: EnemyMemor
   }];
 }
 
-export function enemyOotSceneMemoryReports(plan: EnemyPlan, options: EnemyMemoryOptions = {}) {
+export function enemyOotSceneMemoryReports(plan: EnemyPlan, options: EnemyMemoryOptions = {},
+  plannedSources: ReadonlySet<string> = new Set(plan.map(row => row.source))) {
   if (plan.some(row => row.splitChildren))
     options = { ...options, enemyShuffleBari: false, enemyShuffleEeno: false };
   const layouts = new Map(plan.flatMap(row => row.ootr ? [[row.ootr.location.scene, row.ootr.location.mq] as const] : []));
@@ -2551,6 +2599,7 @@ export function enemyOotSceneMemoryReports(plan: EnemyPlan, options: EnemyMemory
       count.set(room, (count.get(room) ?? 0) + 1);
     }
     for (const row of extra) if (row.scene === scene) add(row.room, row.cost);
+    for (const row of ootPreservedSpawnMemoryRows(plannedSources, options, scene, mq)) add(row.room, row.cost);
     const rooms = [...new Set([...ootMemoryRooms(scene, mq), ...byRoom.keys()])];
     const baseline = (room: number) => Math.max(0, (roomCounts as Readonly<Record<string, number>>)[`${scene}/${room}/${mq}`] ?? 32) - (count.get(room) ?? 0);
     return rooms.flatMap((a, i) => rooms.slice(i).map(b => {
@@ -2586,7 +2635,7 @@ export function enemySceneMemoryReports(plan: EnemyPlan, memoryOptions: EnemyMem
       const target = enemyDefinition(row.target);
       return {
         key: target.key, game: target.game,
-        actorId: target.actorId, objectId: target.objectId, variables: [row.placement!.targetParams], type: 0, stationary: false, forbidFrom: [], forbidTo: []
+        actorId: target.actorId, objectId: target.objectId, variables: [row.placement!.targetParams], type: 0, stationary: false
       };
     });
     reports.push(mmSceneMemory(scene, rows, undefined, plan, undefined, memoryOptions).measure(selected));
@@ -2607,17 +2656,17 @@ type MmEnemyReplacement = EnemyReplacement & {
 };
 
 const MM_NATIVE_SOURCE_EXTENSIONS: readonly MmEnemy[] = [
-  { key: 'CarnivorousLily', actorId: 0x13a, objectId: 0x161, type: 0, variables: [0x0fff] },
-  { key: 'DeathArmos', actorId: 0x2d, objectId: 0x1d, type: 0, variables: [0xff] },
-  { key: 'FlyingPot', actorId: 0x8d, objectId: 3, type: 0, variables: [0x3fff] },
-  { key: 'Skullfish', actorId: 0x180, objectId: 0x16b, type: 1, variables: [0x192] },
-  { key: 'Dexihand', actorId: 0x1d1, objectId: 0x1b5, type: 0, variables: [0] },
-  { key: 'Moths', actorId: 0x23d, objectId: 1, type: 2, variables: [0x7f00] },
-  { key: 'Takkuri', actorId: 0x291, objectId: 0x22, type: 2, variables: [0] },
-].map(row => ({ ...row, game: 'mm', stationary: false, forbidFrom: [], forbidTo: [] }));
+  { key: 'CarnivorousLily', actorId: 0x13a, objectId: 0x161, variables: [0x0fff] },
+  { key: 'DeathArmos', actorId: 0x2d, objectId: 0x1d, variables: [0xff] },
+  { key: 'FlyingPot', actorId: 0x8d, objectId: 3, variables: [0x3fff] },
+  { key: 'Skullfish', actorId: 0x180, objectId: 0x16b, variables: [0x192] },
+  { key: 'Dexihand', actorId: 0x1d1, objectId: 0x1b5, variables: [0] },
+  { key: 'Moths', actorId: 0x23d, objectId: 1, variables: [0x7f00] },
+  { key: 'Takkuri', actorId: 0x291, objectId: 0x22, variables: [0] },
+].map(row => ({ ...row, game: 'mm', ...enemySpawnActorType('mm', row.actorId) }));
 
-const MM_NATIVE_ROSTER: readonly MmEnemy[] = [...mmFacts.roster as MmEnemy[], ...MM_NATIVE_SOURCE_EXTENSIONS]
-  .map(row => row.actorId === 0xec ? { ...row, variables: row.variables.filter(params => !(params & 0x80)) } : row);
+const MM_NATIVE_ROSTER: readonly MmEnemy[] = [...applyEnemyMmSpawnPolicies(mmFacts.roster, ENEMY_SPAWN_MM_ACTORS), ...MM_NATIVE_SOURCE_EXTENSIONS]
+  .map(row => ({ ...row, game: 'mm' as const, variables: row.variables.filter(params => enemySpawnMacroMatches('mm-native-roster-form', { target: { ...row, params } })) }));
 
 export const MM_NATIVE_SCENES: readonly MmScene[] = mmFacts.scenes;
 
@@ -2648,7 +2697,7 @@ function mmEnemyDefinitions(base: readonly EnemyDefinition[]): EnemyDefinition[]
       objectId: row.objectId, params: row.variables, spawnParams: row.variables[0],
       soulMacro: original.soulMacro ?? `soul_${original.key.split('-')[1]}`,
       logicMacros: original.logicMacros.length ? original.logicMacros : [original.killMacro],
-      nativeOnly: true, foreignOnly: false, sourceAllowed: true, targetAllowed: true,
+      nativeOnly: true, foreignOnly: false, targetAllowed: true,
       arenaOnly: false, preserveNativeResource: false, requiresNoCutscene: false, requiresNoScriptedPeers: false
     };
   });
@@ -2661,16 +2710,8 @@ function mmEnemyDefinitions(base: readonly EnemyDefinition[]): EnemyDefinition[]
   return result;
 }
 
-const OOT_TYPES: Readonly<Record<number, [
-  number,
-  boolean
-]>> = {
-  0x69: [2, false], 0x1d: [0, false], 0x37: [2, true], 0x8a: [0, true], 0x1b0: [0, false],
-  0x33: [0, false], 0xa4: [0, false], 0x6b: [0, false],
-  0x02: [0, false], 0x25: [0, false], 0x4b: [0, false], 0x115: [0, true], 0xf6: [0, true], 0x99: [0, false],
-  0x35: [0, false], 0x2b: [0, false], 0x3a: [0, false], 0x18c: [1, false], 0xec: [1, true],
-  0x63: [2, true], 0x34: [2, false], 0xdd: [0, false], 0x12: [0, false], 0x2f: [0, false], 0x38: [0, false],
-};
+const OOT_TYPES = new Map(Object.values(ENEMY_SPAWN_ACTOR_TYPES).filter(row => row.game === 'oot')
+  .map(row => [row.actorId, [row.type, row.stationary] as const]));
 
 function mmForeignRoster(defs: readonly EnemyDefinition[]): MmEnemy[] {
   const result: MmEnemy[] = [];
@@ -2679,7 +2720,7 @@ function mmForeignRoster(defs: readonly EnemyDefinition[]): MmEnemy[] {
       !foreignEnemyRuntimeReady('oot', def.actorId, def.spawnParams) ||
       nativeEnemyCounterparts('oot', def.actorId, 'mm', def.spawnParams).length)
       continue;
-    const descriptor = OOT_TYPES[def.actorId];
+    const descriptor = OOT_TYPES.get(def.actorId);
     if (!descriptor)
       throw new Error(`Missing MM cross-pool descriptor: ${def.key}`);
     if (!ootObjectIds.includes(def.objectId))
@@ -2695,7 +2736,7 @@ function mmForeignRoster(defs: readonly EnemyDefinition[]): MmEnemy[] {
     const [type, stationary] = descriptor;
     result.push({
       key: def.key, game: 'oot', actorId: def.actorId, objectId: def.objectId,
-      type, stationary, variables: [def.spawnParams], forbidFrom: [], forbidTo: [],
+      type, stationary, variables: [def.spawnParams],
     });
   }
   return result;
@@ -2708,28 +2749,25 @@ function mmNativeCounterpartRoster(defs: readonly EnemyDefinition[]): MmEnemy[] 
     if (!def)
       throw new Error('Missing receiving-native MM counterpart definition: ' + key);
     return {
-      key, game: 'mm', actorId, objectId, type: 0, stationary: false,
-      variables: [def.spawnParams], forbidFrom: [], forbidTo: [],
+      key, game: 'mm', actorId, objectId, ...enemySpawnActorType('mm', actorId),
+      variables: [def.spawnParams],
     };
   });
 }
 
-function mmNativeCounterpartSlotAllows(actorId: number, params: number, raw: readonly number[], targetActorId: number): boolean {
-  if (targetActorId !== 0x19 && targetActorId !== 0x50)
-    return true;
-  if (raw.length !== 16 || (((raw[10] << 8) | raw[11]) & 0x7f) !== 0x7f)
-    return false;
-  if (targetActorId === 0x19)
-    return true;
-  return actorId === 0x50 && params === 0xfffc &&
-    (((raw[0] << 8) | raw[1]) & 0xfff) === actorId && ((raw[14] << 8) | raw[15]) === params;
+export function enemyMmCounterpartSlotAllowed(actorId: number, params: number, raw: readonly number[], targetActorId: number): boolean {
+  return enemySpawnMacroMatches('mm-native-counterpart-slot', {
+    source: { actorId, params }, target: { actorId: targetActorId },
+    facts: { rawLength: raw.length, cutscene: ((raw[10] << 8) | raw[11]) & 0x7f,
+      rawActorId: ((raw[0] << 8) | raw[1]) & 0xfff, rawParams: (raw[14] << 8) | raw[15] },
+  });
 }
 
 function mmNativeCounterpartGroupAllows(scene: MmScene, source: readonly MmEnemy[], target: MmEnemy): boolean {
-  if (target.game !== 'mm' || target.actorId !== 0x50)
+  if (!enemySpawnMacroMatches('mm-native-wall-target', { target }))
     return true;
   return scene.maps.some(map => map.actors.some(actor => source.some(old => old.actorId === actor.actorId) &&
-    mmNativeCounterpartSlotAllows(actor.actorId, actor.params, actor.raw, target.actorId)));
+    enemyMmCounterpartSlotAllowed(actor.actorId, actor.params, actor.raw, target.actorId)));
 }
 
 function mmGroupedNativeModelAllows(target: MmEnemy): boolean {
@@ -2741,32 +2779,17 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
     return [];
   onProgress?.('Preparing MM enemy placements', 0, MM_NATIVE_SCENES.length);
   const scriptedDinolfosScenes = new Set(MM_NATIVE_SCENES
-    .filter(scene => scene.maps.some(map => map.actors.some(actor => actor.actorId === 0x19 && (((actor.raw[10] << 8) | actor.raw[11]) & 0x7f) !== 0x7f)))
+    .filter(scene => scene.maps.some(map => map.actors.some(actor => enemySpawnMacroMatches('mm-scripted-dinolfos-source', { source: actor, facts: { cutscene: ((actor.raw[10] << 8) | actor.raw[11]) & 0x7f } }))))
     .map(scene => scene.scene));
   const counterparts = mmNativeCounterpartRoster(defs);
   const wall = counterparts.find(row => row.actorId === 0x50)!;
-  const coastScenes = [0x37, 0x38];
-  const likeLike: MmEnemy = {
-    ...counterparts.find(row => row.actorId === 0x6c)!,
-    forbidFrom: MM_NATIVE_SCENES.filter(scene => !coastScenes.includes(scene.scene)).map(scene => scene.scene),
-  };
+  const likeLike = counterparts.find(row => row.actorId === 0x6c)!;
   const leever: MmEnemy = {
     key: 'mm-leever-native-target', game: 'mm', actorId: 0x216, objectId: 0x201,
-    type: 0, stationary: false, variables: [0],
-    forbidFrom: MM_NATIVE_SCENES.filter(scene => scene.scene !== 0x2d && !coastScenes.includes(scene.scene)).map(scene => scene.scene),
-    forbidTo: [],
+    ...enemySpawnActorType('mm', 0x216), variables: [0],
   };
   const native = [
-    ...MM_NATIVE_ROSTER.map(e => ({
-      ...e, key: mmNativeRosterKey(e.key),
-      forbidFrom: !enemySourceAllowedBySettings('mm', e.actorId, settings) ? MM_NATIVE_SCENES.map(scene => scene.scene) : e.forbidFrom.filter(scene => !((e.actorId === 0x14 && scene === 7) ||
-
-        ([0x33, 0x164, 0x1ba].includes(e.actorId) && scene === 0x1b) ||
-        (e.actorId === 0x24 && [0x1b, 0x28, 0x49].includes(scene)) ||
-        (e.actorId === 0x3b && scene === 0x46) || (e.actorId === 0x1f3 && scene === 0x18) ||
-        (e.actorId === 0x12d && scene === 0x49) ||
-        (e.actorId === 0x19 && scene === 0x21)))
-    })),
+    ...MM_NATIVE_ROSTER.map(e => ({ ...e, key: mmNativeRosterKey(e.key) })),
     { ...wall, key: 'mm-skullwalltula-native-target', variables: [0xfffc] },
     leever,
     likeLike,
@@ -2782,13 +2805,12 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
   const variants = MM_NATIVE_EXTRA_VARIANTS.map(def => {
     const descriptor = nativeByActor.get(def.actorId) ?? {
       game: 'mm' as const, actorId: def.actorId, objectId: def.objectId,
-      type: def.habitat === 'air' ? 2 : def.habitat === 'underwater' ? 1 : 0,
-      stationary: def.actorId === 0x1d1, forbidFrom: [], forbidTo: [],
+      ...enemySpawnActorType('mm', def.actorId),
     };
     return { ...descriptor, key: def.key, variables: [def.spawnParams] };
   });
-  const nativeTargets: MmEnemy[] = native.filter(row => row.actorId !== 0x50)
-    .map(row => ({ ...row, variables: row.variables.filter(params => row.actorId !== 0x12d || params !== 2) }));
+  const nativeTargets: MmEnemy[] = native.filter(target => enemySpawnMacroMatches('mm-native-base-target', { target }))
+    .map(row => ({ ...row, variables: row.variables.filter(params => enemySpawnMacroMatches('mm-target-form', { target: { ...row, params } })) }));
   for (const row of [...variants, ...counterparts]) {
     const existing = nativeTargets.find(target => target.actorId === row.actorId && target.objectId === row.objectId);
     if (existing) {
@@ -2805,7 +2827,7 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
     const arwing = ARWING_ENEMIES.mm;
     nativeTargets.push({
       key: arwing.key, game: arwing.game, actorId: arwing.actorId, objectId: arwing.objectId,
-      type: 2, stationary: false, forbidFrom: [], forbidTo: [], variables: [0]
+      ...enemySpawnActorType(arwing.game, arwing.actorId), variables: [0]
     });
   }
   const targets: readonly MmEnemy[] = [...nativeTargets, ...(settings.crossGameEnemies ? mmForeignRoster(defs) : [])]
@@ -2818,7 +2840,8 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
         key: target.game === 'mm' ? MM_NATIVE_EXTRA_VARIANTS.find(def => def.actorId === target.actorId && def.spawnParams === spawnParams)?.key ?? target.key : target.key,
         variables: [spawnParams]
       })));
-  const isGraveyardExpandingTarget = (scene: number, game: Game, id: number, params: number) => scene === 0x0c && foreignEnemyExtraActors(game, id, params) > 0;
+  const isGraveyardExpandingTarget = (scene: number, game: Game, id: number, params: number) =>
+    !enemySpawnMacroMatches('mm-graveyard-target', { location: { scene }, facts: { extraActors: foreignEnemyExtraActors(game, id, params) } });
   const forced = settings.plando.enemyTargets?.mm;
   if (forced) {
     const selected = defs.find(d => d.key === forced);
@@ -2831,20 +2854,21 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
       throw new Error(`Forced target outside MM pool: ${forced}`);
     const output: MmEnemyReplacement[] = [];
     for (const scene of MM_NATIVE_SCENES) {
-      if ((MM_SKIPPED_SCENES as readonly number[]).includes(scene.scene))
+      if (mmSceneSkipped(scene.scene))
         continue;
       if (isGraveyardExpandingTarget(scene.scene, selected.game, selected.actorId, selected.spawnParams))
         continue;
-      if (selected.game === 'mm' && selected.actorId === 0x19 && scriptedDinolfosScenes.has(scene.scene))
+      if (!enemySpawnMacroMatches('mm-scripted-scene-target', { target: selected, facts: { scriptedDinolfos: scriptedDinolfosScenes.has(scene.scene) } }))
         continue;
-      if (selected.game === 'mm' && selected.actorId === 0x8d && (nativeSceneKeeps.scenes.mm as Record<string, number>)[String(scene.scene)] !== 3)
+      if (!enemySpawnMacroMatches('native-scene-keep', { target: selected, facts: { sceneKeep: (nativeSceneKeeps.scenes.mm as Record<number, number>)[scene.scene] } }))
         throw new Error('Forced flying pot requires receiving native dungeon keep');
       const objects = new Set(scene.maps.flatMap(map => map.objects.map(o => o.objectId)));
       const changes: MmActorChange[] = [];
       scene.maps.forEach((map, mapIndex) => map.actors.forEach(actor => {
-        const source = native.find(e => e.actorId === actor.actorId && mmSourceFormAllowed(actor) && !e.forbidFrom.includes(scene.scene) && (e.objectId <= 3 || objects.has(e.objectId)));
-        if (!source || (settings.enemyShuffleMinibosses && !minibossPlacementAllowed(settings, 'mm', actor.actorId, selected)) || selected.game === 'mm' && selected.actorId === 0x19 && !mmNativeCounterpartSlotAllows(actor.actorId, actor.params, actor.raw, 0x19) ||
-          !settings.enemyShuffleIgnoreRestrictions && ((mmAquaticTarget(selected.game, selected.actorId, selected.spawnParams) && !mmAquaticSlot(actor.offset)) ||
+        const source = native.find(e => e.actorId === actor.actorId && mmSourceFormAllowed(actor) && (e.objectId <= 3 || objects.has(e.objectId)));
+        if (!source || !mmSpawnSourceAllowed(settings, scene, actor, source.key) || !mmSpawnTargetAllowed(scene, actor, selected, settings, source.key)) return;
+        if (!source || (settings.enemyShuffleMinibosses && !minibossPlacementAllowed(settings, 'mm', actor.actorId, selected)) || enemySpawnMacroMatches('mm-native-dinolfos-target', { target: selected }) && !enemyMmCounterpartSlotAllowed(actor.actorId, actor.params, actor.raw, selected.actorId) ||
+          !settings.enemyShuffleIgnoreRestrictions && (!mmAquaticSpawnAllowed(actor, selected) ||
             (enemyIsCarnivorousLily(selected.game, selected.actorId) && !mmWaterSurfaceSlot(actor.offset))))
           return;
         changes.push({
@@ -2853,7 +2877,7 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
           targetGame: selected.game, targetActorId: selected.actorId, targetParams: selected.spawnParams
         });
       }));
-      if (selected.game === 'mm' && selected.actorId === 0x50 && changes.some(c => !mmNativeCounterpartSlotAllows(c.sourceActorId, c.sourceParams, scene.maps[c.mapIndex].actors.find(a => a.offset === c.actorOffset)!.raw, 0x50)))
+      if (enemySpawnMacroMatches('mm-native-wall-target', { target: selected }) && changes.some(c => !enemyMmCounterpartSlotAllowed(c.sourceActorId, c.sourceParams, scene.maps[c.mapIndex].actors.find(a => a.offset === c.actorOffset)!.raw, selected.actorId)))
         continue;
       const forcedRows = finalMmActorChanges(changes).map(change => ({
         entries: scene.maps.flatMap((map, mi) => {
@@ -2890,25 +2914,28 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
     try {
       const sceneIndividual = individual;
       const allows: MmTargetGroupAllows = (source, target, actor) => {
+        if (actor && !mmSpawnTargetAllowed(scene, actor, { ...enemyDefinition(target.key), spawnParams: target.variables[0] }, settings,
+          source.find(row => row.actorId === actor.actorId)?.key))
+          return false;
         if (settings.enemyShuffleMinibosses && !source.every(row => minibossPlacementAllowed(settings, 'mm', actor?.actorId ?? row.actorId, target)))
           return false;
-        if (target.game === 'mm' && target.actorId === 0x19 && scriptedDinolfosScenes.has(scene.scene))
+        if (!enemySpawnMacroMatches('mm-scripted-scene-target', { target, facts: { scriptedDinolfos: scriptedDinolfosScenes.has(scene.scene) } }))
           return false;
         const sourceSlots = () => actor ? [actor] : scene.maps.flatMap(map => map.actors).filter(slot => mmSourceFormAllowed(slot) && source.some(row => row.actorId === slot.actorId));
-        if (!settings.enemyShuffleIgnoreRestrictions && mmAquaticTarget(target.game, target.actorId, target.variables[0]) && !sourceSlots().every(slot => !!mmAquaticSlot(slot.offset)))
+        if (!settings.enemyShuffleIgnoreRestrictions && !sourceSlots().every(slot => mmAquaticSpawnAllowed(slot, { ...target, spawnParams: target.variables[0] })))
           return false;
-        if (!settings.enemyShuffleIgnoreRestrictions && enemyIsCarnivorousLily(target.game, target.actorId) &&
-          !sourceSlots().every(slot => !!mmWaterSurfaceSlot(slot.offset)))
+        if (!enemySpawnMacroMatches('mm-water-surface-source', { target, settings,
+          facts: { allWaterSurfaceSlots: sourceSlots().every(slot => !!mmWaterSurfaceSlot(slot.offset)) } }))
           return false;
-        if (target.game === 'mm' && target.actorId === 0x8d && (nativeSceneKeeps.scenes.mm as Record<string, number>)[String(scene.scene)] !== 3)
+        if (!enemySpawnMacroMatches('native-scene-keep', { target, facts: { sceneKeep: (nativeSceneKeeps.scenes.mm as Record<number, number>)[scene.scene] } }))
           return false;
         if (actor)
-          return target.game !== 'mm' || mmNativeCounterpartSlotAllows(actor.actorId, actor.params, actor.raw, target.actorId);
+          return target.game !== 'mm' || enemyMmCounterpartSlotAllowed(actor.actorId, actor.params, actor.raw, target.actorId);
         return (sceneIndividual || mmGroupedNativeModelAllows(target)) && mmNativeCounterpartGroupAllows(scene, source, target);
       };
-      const sceneTargets = scene.scene === 0x0c ? targets.map(target => ({
+      const sceneTargets = targets.map(target => ({
         ...target, variables: target.variables.filter(params => !isGraveyardExpandingTarget(scene.scene, target.game, target.actorId, params)),
-      })).filter(target => target.variables.length) : targets;
+      })).filter(target => target.variables.length);
       const actorChanges = sceneIndividual
         ? solveMmSceneIndividual(scene, native, sceneTargets, next, allows, settings.enemyShuffleIgnoreRestrictions, target => enemyWeight(settings, 'mm', target), source => requiresMinibossReplacement(settings, 'mm', source.actorId), supplemental, settings, problems)
         : solveMmScene(scene, native, sceneTargets, next, allows, settings.enemyShuffleIgnoreRestrictions, target => enemyWeight(settings, 'mm', target), supplemental, settings, problems);
@@ -2942,14 +2969,12 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
             dryAquatic: isDryAquatic(change.targetGame, change.targetActorId, actor.offset) || undefined
           };
           let chaoticMmChoices: MmPlacement[] | undefined;
-          if (chaotic && actor.actorId !== 0x13a && !(actor.actorId === 0x12d && actor.params === 0) && scene.scene !== 0x2d && !change.adaptiveGroup && !change.protectedPick && change.targetGame === 'mm' && change.targetActorId < 0xc00) {
+          if (chaotic && enemySpawnMacroMatches('mm-chaotic-source', { source: actor, location: scene }) && !change.adaptiveGroup && !change.protectedPick && change.targetGame === 'mm' && change.targetActorId < 0xc00) {
             const source = nativeByActor.get(actor.actorId)!;
             const aliases = scene.maps.map((other, index) => ({ other, index }))
               .filter(({ other }) => other.actors.some(entry => entry.offset === actor.offset));
             chaoticMmChoices = sceneTargets.flatMap(candidate => {
-              if (candidate.game !== 'mm' || candidate.actorId >= 0xc00 || candidate.forbidTo.includes(scene.scene) ||
-                candidate.actorId === 0x1a8 ||
-                (candidate.actorId === 0x24 && actor.actorId !== 0x24) ||
+              if (!enemySpawnMacroMatches('mm-chaotic-target', { source: actor, target: candidate }) ||
                 (!settings.enemyShuffleIgnoreRestrictions && !mmPlacementTypeAllows(source, candidate)) ||
                 !allows([source], candidate, actor) ||
                 (candidate.objectId > 3 && aliases.some(({ index }) => !resident[index].has(candidate.objectId)) &&
@@ -3056,7 +3081,7 @@ function solveMmJointEncounters(input: readonly MmSceneProblem[], requests: read
         const target = enemyDefinition(choice.value.target);
         const value: MmEnemy = {
           key: target.key, game: target.game, actorId: target.actorId, objectId: target.objectId,
-          variables: [target.spawnParams], type: 0, stationary: false, forbidFrom: [], forbidTo: []
+          variables: [target.spawnParams], type: 0, stationary: false
         };
         return {
           value, key: `${target.game}/${target.actorId}/${target.spawnParams}`, family: enemyWeightFamily(target),
@@ -3216,7 +3241,13 @@ function solveMmJointEncounters(input: readonly MmSceneProblem[], requests: read
         }
         return pool.map(c => ({ value: c.value, weight: c.weight / counts.get(c.family)!.size, cost: 0 }));
       });
-      result = { selected: solveWeightedMemory(weighted, next, fits), groups: pools.map((_, i) => [i]), protectedSlots: [] };
+      try {
+        result = { selected: solveWeightedMemory(weighted, next, fits), groups: pools.map((_, i) => [i]), protectedSlots: [] };
+      } catch (error) {
+        if (error instanceof EnemyMemoryAllocationError)
+          throw new EnemyMemoryAllocationError(`MM scenes ${contexts.map(context => context.problem.scene.scene).join(', ')}: ${error.message}`);
+        throw error;
+      }
     }
     if (!fits(result.selected))
       throw Error('Joint MM encounter plan lost its memory invariant');
@@ -3251,6 +3282,39 @@ function mmAllocationError(message: string, scene: MmScene, rows: readonly MmMem
   });
 }
 
+export function enemyGoldTargetPool(settings: Settings, source: typeof ENEMY_GOLD_SOURCES[number]): EnemyDefinition[] {
+  const locations = source.slots.map(slot => ({ ...slot, game: source.game, scene: source.scene }));
+  if (!locations.every(where => enemySpawnSourceAllowed(settings, where, { ...where, key: source.key }))) return [];
+  return dynamicEnemyPool(settings, source.game, source.game === 'oot' ? 0x95 : 0x39, source.scene)
+    .filter(target => locations.every(where => enemySpawnTargetAllowed(where, { ...where, key: source.key }, target, settings)));
+}
+
+function supplementalEnemyTargets(settings: Settings, binding: Pick<EnemyReplacement, 'source' | 'kind'>,
+  targets: readonly EnemyDefinition[], mq: ReadonlySet<string>): EnemyDefinition[] {
+  const source = enemyDefinition(binding.source);
+  const points: { location: EnemySpawnLocation; source: { key: string; actorId: number; params: number } }[] = source.game === 'mm'
+    ? MM_NATIVE_SCENES.flatMap(scene => scene.maps.flatMap(map => (binding.kind === 'keeta-guards' && scene.scene === 0x43
+      ? map.actors.filter(actor => actor.actorId === 0x11b || actor.actorId === 0x28f)
+      : mmEncounterRoots(scene, map, { ...binding, target: source.key }))
+      .map(actor => ({
+        location: { game: 'mm' as const, scene: scene.scene, room: map.room, setup: map.setup, slot: actor.slot },
+        source: { key: source.key, actorId: source.actorId, params: binding.kind === 'keeta-guards' ? source.spawnParams : actor.params },
+      }))))
+    : (OOT_ENCOUNTER_MEMORY_ROOMS[source.key] ?? []).filter(([scene, room]) => {
+      const dungeon = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Spirit', 'Shadow', 'BotW', 'IC'][scene];
+      return (!dungeon || !mq.has(DUNGEONS[dungeon])) && nativeFightRestorationRoomAllowed(source.key, room, settings);
+    }).map(([scene, room]) => ({
+      /* These encounters are keyed by their controller, rather than a normal
+       * shuffled actor-list slot. Keep their room selectors as well as the key. */
+      location: { game: 'oot' as const, scene, room, setup: 0, mq: false },
+      source: { key: source.key, actorId: source.actorId, params: source.spawnParams },
+    }));
+  if (!points.length)
+    points.push({ location: { game: source.game }, source: { key: source.key, actorId: source.actorId, params: source.spawnParams } });
+  if (!points.every(point => enemySpawnSourceAllowed(settings, point.location, point.source))) return [];
+  return targets.filter(target => points.every(point => enemySpawnTargetAllowed(point.location, point.source, target, settings)));
+}
+
 function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, random: Random, constraints: readonly SupplementalMemoryConstraint[] = [], jointRequests?: MmEncounterChoice[][], mq: ReadonlySet<string> = new Set()): EnemyPlan {
   const output: EnemyPlan = [];
   const ootGoldPools = new Map<string, readonly EnemyDefinition[]>();
@@ -3274,7 +3338,8 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
     (game === 'oot' ? settings.enemyShuffleOot : settings.enemyShuffleMm);
   if (enabled('oot') && !settings.enemyShufflePreserveMinibosses) {
     for (const source of ['oot-dead-hand-encounter', 'oot-dark-link-encounter']) {
-      const targets = dynamicEnemyPool(settings, 'oot', source === 'oot-dead-hand-encounter' ? 0xa4 : 0x33, OOT_ENCOUNTER_MEMORY_ROOMS[source].map(([scene]) => scene));
+      const targets = supplementalEnemyTargets(settings, { source, kind: 'arena' },
+        dynamicEnemyPool(settings, 'oot', source === 'oot-dead-hand-encounter' ? 0xa4 : 0x33, OOT_ENCOUNTER_MEMORY_ROOMS[source].map(([scene]) => scene)), mq);
       const target = choose(targets, 'oot');
       if (target)
         output.push({ source, target: target.key, kind: 'arena' });
@@ -3287,7 +3352,8 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
     const scenes = source.game === 'oot' ? OOT_ENCOUNTER_MEMORY_ROOMS[source.key].map(([scene]) => scene) :
       MM_NATIVE_SCENES.filter(scene => scene.maps.some(map => map.actors.some(actor =>
         actor.actorId === source.actorId && (source.params as readonly number[]).includes(actor.params)))).map(scene => scene.scene);
-    let targets = dynamicEnemyPool(settings, source.game, source.actorId, scenes);
+    let targets = supplementalEnemyTargets(settings, { source: source.key, kind: 'restore' },
+      dynamicEnemyPool(settings, source.game, source.actorId, scenes), mq);
     if (source.game === 'oot' && OOT_ENCOUNTER_MEMORY_ROOMS[source.key]
       .filter(([, room]) => nativeFightRestorationRoomAllowed(source.key, room, settings)).length > 1) {
       const ordinary = targets.filter(target => !isMinibossEnemy(target.game, target.actorId, target.spawnParams) &&
@@ -3299,17 +3365,18 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
       output.push({ source: source.key, target: target.key, kind: 'restore' });
   }
   if (enabled('mm')) {
-    const guard = choose(dynamicEnemyPool(settings, 'mm', 0xed, 0x0c), 'mm',
-      { source: KEETA_GUARDS.key, kind: 'keeta-guards' });
+    const guardBinding = { source: KEETA_GUARDS.key, kind: 'keeta-guards' as const };
+    const guard = choose(supplementalEnemyTargets(settings, guardBinding, dynamicEnemyPool(settings, 'mm', 0xed, 0x43), mq), 'mm', guardBinding);
     if (guard)
       output.push({ source: KEETA_GUARDS.key, target: guard.key, kind: 'keeta-guards' });
     for (const source of SCRIPTED_MM_ENEMIES) {
       if (!enemySourceAllowedBySettings(source.game, source.actorId, settings, source.spawnParams) ||
-        source.actorId === 0x28f || (source.actorId === 0x15d && !settings.enemyShuffleMinibosses))
+        !enemySpawnMacroMatches('mm-scripted-source', { source, settings }))
         continue;
       const scenes = MM_NATIVE_SCENES.filter(scene => scene.maps.some(map => map.actors.some(actor =>
         actor.actorId === source.actorId && enemyScriptedRootOffsets[scene.scene]?.includes(actor.offset)))).map(scene => scene.scene);
-      const targets = dynamicEnemyPool(settings, 'mm', source.actorId, scenes).filter(enemy => scriptedMmTargetAllowed(enemy, settings.crossGameEnemies, source));
+      const targets = supplementalEnemyTargets(settings, { source: source.key, kind: 'scripted' },
+        dynamicEnemyPool(settings, 'mm', source.actorId, scenes).filter(enemy => scriptedMmTargetAllowed(enemy, settings.crossGameEnemies, source)), mq);
       const target = choose(targets, source.game, { source: source.key, kind: 'scripted' });
       if (target)
         output.push({ source: source.key, target: target.key, kind: 'scripted' });
@@ -3322,7 +3389,7 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
         const dungeon = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Spirit', 'Shadow', 'BotW', 'IC'][source.scene];
         if (source.slots[0].mq !== mq.has(DUNGEONS[dungeon])) continue;
       }
-      const candidates = dynamicEnemyPool(settings, source.game, source.game === 'oot' ? 0x95 : 0x39, source.scene);
+      const candidates = enemyGoldTargetPool(settings, source);
       const target = choose(candidates, source.game, source.game === 'mm' ? { source: source.key, kind: 'gold' } : undefined);
       if (target) {
         output.push({ source: source.key, target: target.key, kind: 'gold' });
@@ -3333,14 +3400,23 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
   }
   if (enabled('oot')) {
     for (const scene of [0x5c, 0x5e]) {
-      const slots = OOT_DESERT_LEEVER_SLOTS.filter(slot => slot.scene === scene);
+      const points = OOT_DESERT_LEEVER_SLOTS.filter(slot => slot.scene === scene).map(slot => ({
+        slot,
+        location: { game: 'oot' as const, scene, room: slot.room, mq: false },
+        source: { key: slot.key, actorId: 0x1c, params: 0 },
+      })).filter(point => enemySpawnSourceAllowed(settings, point.location, point.source));
       const targets = dynamicEnemyPool(settings, 'oot', 0x1c, scene);
-      const grouped = settings.enemyShuffleOotMode === 'grouped' ? choose(targets, 'oot') : undefined;
-      for (const slot of slots) {
-        const target = grouped ?? choose(targets, 'oot');
+      const grouped = settings.enemyShuffleOotMode === 'grouped';
+      const groupedTargets = grouped ? targets.filter(target => points.every(point =>
+        enemySpawnTargetAllowed(point.location, point.source, target, settings))) : [];
+      const groupTarget = grouped ? choose(groupedTargets, 'oot') : undefined;
+      for (const point of points) {
+        const candidates = grouped ? groupedTargets : targets.filter(target =>
+          enemySpawnTargetAllowed(point.location, point.source, target, settings));
+        const target = grouped ? groupTarget : choose(candidates, 'oot');
         if (!target) continue;
-        output.push({ source: slot.key, target: target.key, kind: 'desert-spawner' });
-        ootGoldPools.set(slot.key, targets);
+        output.push({ source: point.slot.key, target: target.key, kind: 'desert-spawner' });
+        ootGoldPools.set(point.slot.key, candidates);
       }
     }
   }
@@ -3379,7 +3455,6 @@ export type EnemyDefinition = {
   targetAllowed?: boolean;
   nativeOnly?: boolean;
   foreignOnly?: boolean;
-  sourceAllowed?: boolean;
   preserveNativeResource?: boolean;
   arenaOnly?: boolean;
   sourceFormsIndependent?: boolean;
@@ -3397,56 +3472,56 @@ export type EnemyDefinition = {
 export const ARWING_ENEMIES: Readonly<Record<Game, EnemyDefinition>> = {
   oot: {
     key: 'oot-arwing', name: 'Arwing', game: 'oot', actorId: 0x73, objectId: 1,
-    habitat: 'air', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0,
+    habitat: 'air', nativeOnly: true, params: [], spawnParams: 0,
     killMacro: 'can_kill_arwing', logicMacros: [], soulMacro: 'soul_arwing', soulItem: 'SOUL_ENEMY_ARWING'
   },
   mm: {
     key: 'mm-arwing', name: 'Arwing', game: 'mm', actorId: 0x56, objectId: 1,
-    habitat: 'air', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0,
+    habitat: 'air', nativeOnly: true, params: [], spawnParams: 0,
     killMacro: 'can_kill_arwing', logicMacros: [], soulMacro: 'soul_arwing', soulItem: 'SOUL_ENEMY_ARWING'
   },
 };
 
 const ENEMY_DEFINITIONS: readonly EnemyDefinition[] = [
   ...Object.values(ARWING_ENEMIES), ...FOREIGN_OOT_ROSTER_VARIANTS,
-  { ...NATIVE_FLOOR_TILE_ENEMIES[0], key: 'oot-flying-floor-tile-foreign', nativeOnly: false, foreignOnly: true, sourceAllowed: false, logicMacros: [] },
+  { ...NATIVE_FLOOR_TILE_ENEMIES[0], key: 'oot-flying-floor-tile-foreign', nativeOnly: false, foreignOnly: true, logicMacros: [] },
   ...NATIVE_MM_ENEMIES, ...NATIVE_PEAHAT_TARGETS, ...NATIVE_RENEWABLE_BABA_TARGETS, ...NATIVE_MM_SKULLWALLTULA_TARGETS,
-  { key: 'oot-stalchild-native-target', name: 'Stalchild', game: 'oot', actorId: 0x1b0, objectId: 0x184, habitat: 'ground', nativeOnly: true, sourceAllowed: false, params: [], spawnParams: 0, killMacro: 'can_kill_stalchildren', logicMacros: [], soulMacro: 'soul_stalchild' }, NATIVE_OOT_POE_TARGET, ...FOREIGN_MM_VARIANT_ENEMIES, ...FOREIGN_MM_EXTRA_VARIANT_ENEMIES, ...FOREIGN_BOE_ENEMIES, ...FOREIGN_EENO_ENEMIES, ...NATIVE_SKULLTULA_TARGET_VARIANTS, ...MM_NATIVE_EXTRA_VARIANTS, ...FOREIGN_EXTRA_NATIVE_MM_ENEMIES, MOTH_ENEMY, ...OOT_NATIVE_EXTRA_VARIANTS, MM_FOREIGN_DARK_LINK, MM_FOREIGN_DEAD_HAND, ...OOT_NATIVE_ENEMIES, ...SCRIPTED_MM_ENEMIES,
+  { key: 'oot-stalchild-native-target', name: 'Stalchild', game: 'oot', actorId: 0x1b0, objectId: 0x184, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_stalchildren', logicMacros: [], soulMacro: 'soul_stalchild' }, NATIVE_OOT_POE_TARGET, ...FOREIGN_MM_VARIANT_ENEMIES, ...FOREIGN_MM_EXTRA_VARIANT_ENEMIES, ...FOREIGN_BOE_ENEMIES, ...FOREIGN_EENO_ENEMIES, ...NATIVE_SKULLTULA_TARGET_VARIANTS, ...MM_NATIVE_EXTRA_VARIANTS, ...FOREIGN_EXTRA_NATIVE_MM_ENEMIES, MOTH_ENEMY, ...OOT_NATIVE_EXTRA_VARIANTS, MM_FOREIGN_DARK_LINK, MM_FOREIGN_DEAD_HAND, ...OOT_NATIVE_ENEMIES, ...SCRIPTED_MM_ENEMIES,
   ...NATIVE_ARENA_ENEMIES, ...NATIVE_SKULL_KID_ENEMIES, ...NATIVE_OOT_RESOURCE_ENEMIES, ...NATIVE_RESTORED_FIGHT_ENEMIES, ...NATIVE_WALLMASTER_TARGETS, ...NATIVE_FLOOR_TILE_ENEMIES,
-  { key: 'mm-garo', name: 'Garo', game: 'mm', actorId: 0x113, objectId: 0x155, habitat: 'ground', params: [], spawnParams: 0, killMacro: 'can_kill_garo', logicMacros: [], soulMacro: 'soul_garo', foreignOnly: true, sourceAllowed: false },
-  { key: 'oot-stalfos-foreign', foreignOnly: true, sourceAllowed: false, name: 'Stalfos', game: 'oot', actorId: 2, objectId: 0x32, habitat: 'ground', params: [], spawnParams: 3, killMacro: 'can_kill_stalfos', logicMacros: [], soulMacro: 'soul_stalfos' }, ...FOREIGN_STALFOS_VARIANTS,
-  { key: 'oot-lizalfos-foreign', foreignOnly: true, sourceAllowed: false, name: 'Lizalfos', game: 'oot', actorId: 0x25, objectId: 0x1b, habitat: 'ground', params: [], spawnParams: 0xff80, killMacro: 'can_kill_lizalfos', logicMacros: [], soulMacro: 'soul_lizalfos' },
-  { key: 'oot-club-moblin', foreignOnly: true, sourceAllowed: false, name: 'Club Moblin', game: 'oot', actorId: 0x4b, objectId: 0x30, habitat: 'ground', params: [], spawnParams: 2, killMacro: 'can_kill_moblins', logicMacros: [], soulMacro: 'soul_moblins' },
-  { key: 'oot-skull-kid', foreignOnly: true, sourceAllowed: false, name: 'Skull Kid', game: 'oot', actorId: 0x115, objectId: 0x10a, habitat: 'ground', params: [], spawnParams: 3, killMacro: 'can_kill_skull_kids', logicMacros: [], soulMacro: 'soul_skull_kids' },
-  { key: 'oot-anubis', foreignOnly: true, sourceAllowed: false, name: 'Anubis', game: 'oot', actorId: 0xf6, objectId: 1, habitat: 'ground', params: [], spawnParams: 3, killMacro: 'can_kill_anubis', logicMacros: [], soulItem: 'SOUL_ENEMY_ANUBIS' },
-  { key: 'oot-flare-dancer', foreignOnly: true, sourceAllowed: false, name: 'Flare Dancer', game: 'oot', actorId: 0x99, objectId: 0x9e, habitat: 'ground', params: [], spawnParams: 0, killMacro: 'can_kill_flare_dancer', logicMacros: [], soulItem: 'SOUL_ENEMY_FLARE_DANCER', miniboss: true },
-  { key: 'mm-bio-baba', foreignOnly: true, sourceAllowed: false, name: 'Bio Deku Baba', game: 'mm', actorId: 0x12d, objectId: 0x15e, habitat: 'ground', params: [], spawnParams: 0, killMacro: 'can_kill_bio_babas', logicMacros: [], soulItem: 'SOUL_ENEMY_BIO_BABA', requiresNoCutscene: true },
-  { key: 'mm-chuchu-foreign', foreignOnly: true, sourceAllowed: false, name: 'Red ChuChu', game: 'mm', actorId: 0x14a, objectId: 0x16a, habitat: 'ground', params: [], spawnParams: 0xff03, killMacro: 'can_kill_chuchu', logicMacros: [], soulItem: 'SOUL_ENEMY_CHUCHU', requiresNoCutscene: true },
+  { key: 'mm-garo', name: 'Garo', game: 'mm', actorId: 0x113, objectId: 0x155, habitat: 'ground', params: [], spawnParams: 0, killMacro: 'can_kill_garo', logicMacros: [], soulMacro: 'soul_garo', foreignOnly: true },
+  { key: 'oot-stalfos-foreign', foreignOnly: true, name: 'Stalfos', game: 'oot', actorId: 2, objectId: 0x32, habitat: 'ground', params: [], spawnParams: 3, killMacro: 'can_kill_stalfos', logicMacros: [], soulMacro: 'soul_stalfos' }, ...FOREIGN_STALFOS_VARIANTS,
+  { key: 'oot-lizalfos-foreign', foreignOnly: true, name: 'Lizalfos', game: 'oot', actorId: 0x25, objectId: 0x1b, habitat: 'ground', params: [], spawnParams: 0xff80, killMacro: 'can_kill_lizalfos', logicMacros: [], soulMacro: 'soul_lizalfos' },
+  { key: 'oot-club-moblin', foreignOnly: true, name: 'Club Moblin', game: 'oot', actorId: 0x4b, objectId: 0x30, habitat: 'ground', params: [], spawnParams: 2, killMacro: 'can_kill_moblins', logicMacros: [], soulMacro: 'soul_moblins' },
+  { key: 'oot-skull-kid', foreignOnly: true, name: 'Skull Kid', game: 'oot', actorId: 0x115, objectId: 0x10a, habitat: 'ground', params: [], spawnParams: 3, killMacro: 'can_kill_skull_kids', logicMacros: [], soulMacro: 'soul_skull_kids' },
+  { key: 'oot-anubis', foreignOnly: true, name: 'Anubis', game: 'oot', actorId: 0xf6, objectId: 1, habitat: 'ground', params: [], spawnParams: 3, killMacro: 'can_kill_anubis', logicMacros: [], soulItem: 'SOUL_ENEMY_ANUBIS' },
+  { key: 'oot-flare-dancer', foreignOnly: true, name: 'Flare Dancer', game: 'oot', actorId: 0x99, objectId: 0x9e, habitat: 'ground', params: [], spawnParams: 0, killMacro: 'can_kill_flare_dancer', logicMacros: [], soulItem: 'SOUL_ENEMY_FLARE_DANCER', miniboss: true },
+  { key: 'mm-bio-baba', foreignOnly: true, name: 'Bio Deku Baba', game: 'mm', actorId: 0x12d, objectId: 0x15e, habitat: 'ground', params: [], spawnParams: 0, killMacro: 'can_kill_bio_babas', logicMacros: [], soulItem: 'SOUL_ENEMY_BIO_BABA', requiresNoCutscene: true },
+  { key: 'mm-chuchu-foreign', foreignOnly: true, name: 'Red ChuChu', game: 'mm', actorId: 0x14a, objectId: 0x16a, habitat: 'ground', params: [], spawnParams: 0xff03, killMacro: 'can_kill_chuchu', logicMacros: [], soulItem: 'SOUL_ENEMY_CHUCHU', requiresNoCutscene: true },
   { key: 'mm-dragonfly', name: 'Dragonfly', game: 'mm', actorId: 0x109, objectId: 0x14e, habitat: 'air', params: [0, 2, 3], spawnParams: 0, killMacro: 'can_kill_dragonflies_distance', logicMacros: ['can_kill_dragonflies', 'can_kill_dragonflies_distance'], soulItem: 'SOUL_ENEMY_DRAGONFLY', requiresNoCutscene: true },
   { key: 'mm-eeno', name: 'Small Eeno', game: 'mm', actorId: 0x1e6, objectId: 0x1c4, habitat: 'ground', params: [0, 0xff00], spawnParams: 0, killMacro: 'can_kill_eenos', logicMacros: ['can_kill_eenos'], soulMacro: 'soul_eenos', soulItem: 'SOUL_ENEMY_EENO', requiresNoCutscene: true },
   { key: 'mm-hiploop', name: 'Hiploop', game: 'mm', actorId: 0x1e9, objectId: 0x1c6, habitat: 'ground', params: [0, 0x0101], spawnParams: 0x0101, killMacro: 'can_kill_hiploops', logicMacros: ['can_kill_hiploops', 'can_kill_hiploops_masked'], soulItem: 'SOUL_ENEMY_HIPLOOP', requiresNoCutscene: true },
   { key: 'mm-snapper', name: 'Snapper', game: 'mm', actorId: 0x1ba, objectId: 0x1a6, habitat: 'ground', params: [0], spawnParams: 0, killMacro: 'can_kill_snappers_any', logicMacros: ['can_kill_snappers_any', 'can_kill_snappers_flowers'], soulItem: 'SOUL_ENEMY_SNAPPER', requiresNoCutscene: true },
   { key: 'mm-desbreko', name: 'Desbreko', game: 'mm', actorId: 0x14b, objectId: 0x16b, habitat: 'underwater', params: [0x0300, 0x0f00], spawnParams: 0x0300, killMacro: 'can_kill_skullfish', logicMacros: ['can_kill_skullfish'], soulMacro: 'soul_skull_fish', requiresNoCutscene: true },
   { key: 'mm-chuchu', nativeOnly: true, name: 'Red ChuChu', game: 'mm', actorId: 0x14a, objectId: 0x16a, habitat: 'ground', params: [0xff03, 0x0103, 0x0203], spawnParams: 0xff03, killMacro: 'can_kill_chuchu', logicMacros: ['can_kill_chuchu'], soulItem: 'SOUL_ENEMY_CHUCHU', requiresNoCutscene: true, targetAllowed: false },
-  { key: 'mm-poe', nativeOnly: true, name: 'Poe', game: 'mm', actorId: 0x1f3, objectId: 0x1c3, habitat: 'air', params: [], spawnParams: 0x00ff, killMacro: 'can_kill_poes', logicMacros: [], soulMacro: 'soul_poe', sourceAllowed: false, requiresNoCutscene: true },
-  { key: 'mm-stalchild', name: 'Stalchild', game: 'mm', actorId: 0xed, objectId: 0x142, habitat: 'ground', params: [], spawnParams: 0, killMacro: 'can_kill_stalchildren', logicMacros: [], soulMacro: 'soul_stalchild', sourceAllowed: false },
+  { key: 'mm-poe', nativeOnly: true, name: 'Poe', game: 'mm', actorId: 0x1f3, objectId: 0x1c3, habitat: 'air', params: [], spawnParams: 0x00ff, killMacro: 'can_kill_poes', logicMacros: [], soulMacro: 'soul_poe', requiresNoCutscene: true },
+  { key: 'mm-stalchild', name: 'Stalchild', game: 'mm', actorId: 0xed, objectId: 0x142, habitat: 'ground', params: [], spawnParams: 0, killMacro: 'can_kill_stalchildren', logicMacros: [], soulMacro: 'soul_stalchild' },
   { key: 'oot-peahat', name: 'Adult Peahat', game: 'oot', actorId: 0x1d, objectId: 0x18, habitat: 'ground', params: [0xffff, 0], spawnParams: 0xffff, killMacro: 'can_kill_peahats_ground', logicMacros: ['can_kill_peahats_ground', 'can_kill_peahats_high'], soulMacro: 'soul_peahat', targetAllowed: false },
   { key: 'mm-peahat', name: 'Adult Peahat', game: 'mm', actorId: 0x14, objectId: 0x14, habitat: 'ground', params: [0], spawnParams: 0, killMacro: 'can_kill_peahats', logicMacros: ['can_kill_peahats'], soulMacro: 'soul_peahat', targetAllowed: false },
   { key: 'oot-lizalfos', name: 'Lizalfos', game: 'oot', actorId: 0x25, objectId: 0x1b, habitat: 'ground', params: [0xffff], spawnParams: 0xffff, killMacro: 'can_kill_lizalfos', logicMacros: ['can_kill_lizalfos'], soulMacro: 'soul_lizalfos' },
   { key: 'oot-dinolfos', name: 'Dinolfos', game: 'oot', actorId: 0x25, objectId: 0x1b, habitat: 'ground', params: [0xfffe], spawnParams: 0xfffe, killMacro: 'can_kill_dinolfos', logicMacros: ['can_kill_dinolfos'], soulMacro: 'soul_dinolfos' },
   { key: 'mm-dinolfos', name: 'Dinolfos', game: 'mm', actorId: 0x19, objectId: 0x17, habitat: 'ground', params: [0, 0xffff], spawnParams: 0, killMacro: 'can_kill_dinolfos', logicMacros: ['can_kill_dinolfos'], soulMacro: 'soul_dinolfos', requiresNoCutscene: true, requiresNoScriptedPeers: true },
-  { key: 'oot-moblin', name: 'Spear Moblin', game: 'oot', actorId: 0x4b, objectId: 0x30, habitat: 'ground', params: [], spawnParams: 0xffff, killMacro: 'can_kill_moblins', logicMacros: [], soulMacro: 'soul_moblins', sourceAllowed: false },
+  { key: 'oot-moblin', name: 'Spear Moblin', game: 'oot', actorId: 0x4b, objectId: 0x30, habitat: 'ground', params: [], spawnParams: 0xffff, killMacro: 'can_kill_moblins', logicMacros: [], soulMacro: 'soul_moblins' },
   { key: 'oot-octorok', name: 'Octorok', game: 'oot', actorId: 0x0e, objectId: 0x07, habitat: 'water-surface', params: Array.from({ length: 256 }, (_, shots) => shots << 8), spawnParams: 0, killMacro: 'can_kill_octoroks', logicMacros: ['can_kill_octoroks', 'can_kill_octoroks_distance'], soulMacro: 'soul_octorok' },
   { key: 'mm-octorok', name: 'Octorok', game: 'mm', actorId: 0x08, objectId: 0x05, habitat: 'water-surface', params: Array.from({ length: 256 }, (_, shots) => shots << 8), spawnParams: 0, killMacro: 'can_kill_octoroks', logicMacros: ['can_kill_octoroks'], soulMacro: 'soul_octorok' },
   { key: 'mm-skullfish', name: 'Skullfish', game: 'mm', actorId: 0x180, objectId: 0x16b, habitat: 'underwater', params: [0, ...Array.from({ length: 256 }, (_, range) => (range << 4) | 2)], spawnParams: 0x142, killMacro: 'can_kill_skullfish', logicMacros: ['can_kill_skullfish'], soulMacro: 'soul_skull_fish' },
   { key: 'oot-tailpasaran', name: 'Tailpasaran', game: 'oot', actorId: 0x35, objectId: 0x22, habitat: 'ground', params: [0xffff], spawnParams: 0xffff, killMacro: 'can_kill_tailpasarans', logicMacros: ['can_kill_tailpasarans'], soulMacro: 'soul_tailpasarans' },
-  { key: 'oot-gohma-larva', name: 'Gohma Larva', game: 'oot', actorId: 0x2b, objectId: 0x1e, habitat: 'ground', params: [], spawnParams: 6, killMacro: 'can_kill_larvae_hatched', logicMacros: [], soulMacro: 'soul_gohma_larvae', sourceAllowed: false },
-  { key: 'oot-gohma-larva-hatched', name: 'Hatched Gohma Larva', game: 'oot', actorId: 0x2b, objectId: 0x1e, habitat: 'ground', params: [], spawnParams: 0x4006, killMacro: 'can_kill_larvae_hatched', logicMacros: [], soulMacro: 'soul_gohma_larvae', sourceAllowed: false },
+  { key: 'oot-gohma-larva', name: 'Gohma Larva', game: 'oot', actorId: 0x2b, objectId: 0x1e, habitat: 'ground', params: [], spawnParams: 6, killMacro: 'can_kill_larvae_hatched', logicMacros: [], soulMacro: 'soul_gohma_larvae' },
+  { key: 'oot-gohma-larva-hatched', name: 'Hatched Gohma Larva', game: 'oot', actorId: 0x2b, objectId: 0x1e, habitat: 'ground', params: [], spawnParams: 0x4006, killMacro: 'can_kill_larvae_hatched', logicMacros: [], soulMacro: 'soul_gohma_larvae' },
   { key: 'oot-ground-stinger', name: 'Ground Stinger', game: 'oot', actorId: 0x3a, objectId: 0x26, habitat: 'ground', params: [10], spawnParams: 10, killMacro: 'can_kill_stingers', logicMacros: ['can_kill_stingers'], soulMacro: 'soul_stingers' },
   { key: 'oot-water-stinger', name: 'Water Stinger', game: 'oot', actorId: 0x18c, objectId: 0x26, habitat: 'underwater', params: [0], spawnParams: 0, killMacro: 'can_kill_stingers_underwater', logicMacros: ['can_kill_stingers_underwater'], soulMacro: 'soul_stingers' },
   { key: 'oot-underwater-spike', name: 'Underwater Spike', game: 'oot', actorId: 0xec, objectId: 0xe5, habitat: 'underwater', params: [0], spawnParams: 0, killMacro: 'can_kill_spike_enemies_underwater', logicMacros: ['can_kill_spike_enemies', 'can_kill_spike_enemies_underwater'], soulMacro: 'soul_spike_enemy' },
   { key: 'oot-shell-blade', name: 'Shell Blade', game: 'oot', actorId: 0xc5, objectId: 0xb5, habitat: 'underwater', params: [0xffff], spawnParams: 0, killMacro: 'can_kill_shell_blades_underwater', logicMacros: ['can_kill_shell_blades', 'can_kill_shell_blades_underwater'], soulMacro: 'soul_shell_blade' },
-  { key: 'mm-shell-blade', name: 'Shell Blade', game: 'mm', actorId: 0x64, objectId: 0x8e, habitat: 'underwater', params: [], spawnParams: 0, killMacro: 'can_kill_shell_blades_underwater', logicMacros: [], soulMacro: 'soul_shell_blade', sourceAllowed: false },
+  { key: 'mm-shell-blade', name: 'Shell Blade', game: 'mm', actorId: 0x64, objectId: 0x8e, habitat: 'underwater', params: [], spawnParams: 0, killMacro: 'can_kill_shell_blades_underwater', logicMacros: [], soulMacro: 'soul_shell_blade' },
   { key: 'mm-real-bombchu', name: 'Real Bombchu', game: 'mm', actorId: 0x16f, objectId: 0x181, habitat: 'ground', params: [0, 0xff, 0x05, 0x14, 0x28, 0x32, 0x3c, 0x46, 0x8c], spawnParams: 0x14, killMacro: 'can_kill_real_bombchu', logicMacros: ['can_kill_real_bombchu'], soulMacro: 'soul_real_bombchu' },
   { key: 'oot-bari', name: 'Bari', game: 'oot', actorId: 0x63, objectId: 0x56, habitat: 'air', params: [0, 0xffff], spawnParams: 0, killMacro: 'can_kill_bari', logicMacros: ['can_kill_bari'], soulMacro: 'soul_bari', soulItem: 'SOUL_ENEMY_BARI' },
   { key: 'oot-biri', name: 'Biri', game: 'oot', actorId: 0x34, objectId: 0x21, habitat: 'air', params: [0xffff], spawnParams: 0, killMacro: 'can_kill_biri', logicMacros: ['can_kill_biri'], soulMacro: 'soul_biri', soulItem: 'SOUL_ENEMY_BIRI' },
@@ -3471,7 +3546,7 @@ const ENEMY_DEFINITIONS: readonly EnemyDefinition[] = [
   { key: 'oot-baby-dodongo', name: 'Baby Dodongo', game: 'oot', actorId: 0x2f, objectId: 0x1f, habitat: 'ground', params: [0, 0xffff], spawnParams: 0, killMacro: 'can_kill_baby_dodongos', logicMacros: ['can_kill_baby_dodongos'], soulMacro: 'soul_baby_dodongo' },
   { key: 'oot-torch-slug', name: 'Torch Slug', game: 'oot', actorId: 0x38, objectId: 0x25, habitat: 'ground', params: [0, 0xffff], spawnParams: 0, killMacro: 'can_kill_torch_slugs', logicMacros: ['can_kill_torch_slugs'], soulMacro: 'soul_torch_slug' },
   { key: 'mm-boe', name: 'Black Boe', game: 'mm', actorId: 0x164, objectId: 0x17a, habitat: 'ground', params: [0, 1, 0xff00, 0xff01], spawnParams: 0xff00, killMacro: 'can_kill_boes', logicMacros: ['can_kill_boes'], soulMacro: 'soul_boe' },
-  { key: 'mm-white-boe', name: 'White Boe', game: 'mm', actorId: 0x164, objectId: 0x17a, habitat: 'ground', params: [], spawnParams: 0xff01, killMacro: 'can_kill_boes', logicMacros: [], soulMacro: 'soul_boe', sourceAllowed: false, requiresNoCutscene: true },
+  { key: 'mm-white-boe', name: 'White Boe', game: 'mm', actorId: 0x164, objectId: 0x17a, habitat: 'ground', params: [], spawnParams: 0xff01, killMacro: 'can_kill_boes', logicMacros: [], soulMacro: 'soul_boe', requiresNoCutscene: true },
   { key: 'mm-bad-bat', name: 'Bad Bat', game: 'mm', actorId: 0x15b, objectId: 0x172, habitat: 'air', params: [0x0101, 0x0102, 0x0103, 0x0134, 0x019f], spawnParams: 0x0101, killMacro: 'can_kill_bad_bats_single', logicMacros: ['can_kill_bad_bats_single', 'can_kill_bad_bats_cluster'], soulMacro: 'soul_bad_bat', soulItem: 'SOUL_ENEMY_BAD_BAT', requiresNoCutscene: true },
   { key: 'oot-dodongo', name: 'Dodongo', game: 'oot', actorId: 0x12, objectId: 0x0c, habitat: 'ground', params: [0, 1], spawnParams: 0, killMacro: 'can_kill_dodongos', logicMacros: ['can_kill_dodongos'] },
   { key: 'oot-tektite', name: 'Red Tektite', game: 'oot', actorId: 0x1b, objectId: 0x16, habitat: 'ground', params: [0xffff], spawnParams: 0xffff, killMacro: 'can_kill_tektites', logicMacros: ['can_kill_tektites', 'can_kill_tektites_distance'] },
@@ -3488,36 +3563,36 @@ export const ENEMIES: readonly EnemyDefinition[] = [
   ...OOT_BURIAL_ENEMY_SLOTS.map(slot => ({
     key: slot.key, name: slot.scene === 8 ? 'Coffin Keese' : 'Grave Poe',
     game: 'oot' as const, actorId: slot.actorId, objectId: slot.objectId, habitat: 'air' as const,
-    sourceAllowed: false, targetAllowed: false, params: [], spawnParams: slot.scene === 8 ? 2 : 1,
+    targetAllowed: false, params: [], spawnParams: slot.scene === 8 ? 2 : 1,
     killMacro: slot.scene === 8 ? 'can_kill_keese_close' : 'can_kill_poes', logicMacros: [],
   })),
   ...OOT_FOREST_BOW_SLOTS.map(slot => ({
     key: slot.key, name: 'Forest Bow Stalfos', game: 'oot' as const, actorId: 2, objectId: 0x32,
-    habitat: 'ground' as const, sourceAllowed: false, targetAllowed: false, params: [], spawnParams: 3,
+    habitat: 'ground' as const, targetAllowed: false, params: [], spawnParams: 3,
     killMacro: 'can_kill_stalfos', logicMacros: [], soulMacro: 'soul_stalfos',
   })),
   ...OOT_FIELD_STALCHILD_SLOTS.map(slot => ({
     key: slot.key, name: 'Hyrule Field Stalchild', game: 'oot' as const, actorId: 0x1b0, objectId: 0x184,
-    habitat: 'ground' as const, sourceAllowed: false, targetAllowed: false, params: [], spawnParams: 0,
+    habitat: 'ground' as const, targetAllowed: false, params: [], spawnParams: 0,
     killMacro: 'can_kill_stalchildren', logicMacros: [], soulMacro: 'soul_stalchild'
   })),
   ...OOT_DESERT_LEEVER_SLOTS.map(slot => ({
     key: slot.key, name: 'Leever spawner', game: 'oot' as const, actorId: 0xa7, objectId: 1,
-    habitat: 'ground' as const, sourceAllowed: false, targetAllowed: false,
+    habitat: 'ground' as const, targetAllowed: false,
     params: [], spawnParams: 0, killMacro: 'can_kill_leevers', logicMacros: [], soulMacro: 'soul_leever',
   })),
   KEETA_GUARDS,
   ...ENEMY_GOLD_SOURCES.map(row => ({
     key: row.key, name: 'Gold Skulltula', game: row.game,
     actorId: row.game === 'oot' ? 0x95 : 0x50, objectId: row.game === 'oot' ? 0x24 : 0x20,
-    habitat: 'ground' as const, nativeOnly: true, sourceAllowed: false, targetAllowed: false,
+    habitat: 'ground' as const, nativeOnly: true, targetAllowed: false,
     params: [], spawnParams: 0, killMacro: 'can_kill_skulltulas', soulMacro: 'soul_gs', logicMacros: []
   })),
   ...ENEMY_DEFINITIONS.map(enemy => NATIVE_TARGET_FORM_OVERRIDES[enemy.key] ? { ...enemy, ...NATIVE_TARGET_FORM_OVERRIDES[enemy.key], nativeOnly: true } : enemy),
   ...mmEnemyDefinitions(ENEMY_DEFINITIONS),
   ...ootEnemizerDefinitions(ENEMY_DEFINITIONS),
 ].map(enemy => enemyNeverShuffled(enemy.game, enemy.actorId) ?
-  { ...enemy, sourceAllowed: false, targetAllowed: false } : enemy);
+  { ...enemy, targetAllowed: false } : enemy);
 
 type EnemyReplacement = {
   source: string;
@@ -3626,7 +3701,7 @@ const enemyExclusionDefinitions = new Map(ENEMIES.map(enemy => [enemy.key, enemy
 const enemyExclusionForms = new Map<string, EnemyDefinition>();
 
 for (const enemy of ENEMIES) {
-  if (enemy.targetAllowed === false || enemy.key === MM_BIO_BABA_LILY_PAD_KEY)
+  if (enemy.targetAllowed === false || !enemySpawnMacroMatches('combat-definition', { target: enemy }))
     continue;
   const key = enemyExclusionIdentity(enemy);
   const existing = enemyExclusionForms.get(key);
@@ -3640,7 +3715,7 @@ const additionalMmForms: EnemyDefinition[] = [];
 for (const row of MM_NATIVE_ROSTER) {
   const base = enemyExclusionDefinitions.get(mmNativeRosterKey(row.key))!;
   for (const spawnParams of row.variables) {
-    if (row.actorId === 0x12d && spawnParams === 2)
+    if (!enemySpawnMacroMatches('active-combat-form', { target: { ...row, params: spawnParams } }))
       continue;
     const key = `${base.key}-${spawnParams.toString(16)}`;
     const form = { ...base, key, spawnParams, params: [] };
@@ -3689,7 +3764,7 @@ export function enemyShuffleRoster(game: Game, crossGame: boolean) {
     legacyKeys: string[];
   }>();
   for (const enemy of [...ENEMIES.filter(enemy => enemy.game === game && !enemy.foreignOnly &&
-    enemy.targetAllowed !== false && enemy.key !== MM_BIO_BABA_LILY_PAD_KEY && !(enemy.actorId === 0x12d && enemy.spawnParams === 2)),
+    enemy.targetAllowed !== false && enemySpawnMacroMatches('active-combat-form', { target: { ...enemy, params: enemy.spawnParams } })),
   ...(game === 'mm' ? additionalMmForms : []), ...foreign]) {
     if (enemyNeverShuffled(enemy.game, enemy.actorId) || enemyCanRespawn(enemy.game, enemy.actorId, enemy.spawnParams) || enemyIsPerched(enemy.game, enemy.actorId, enemy.spawnParams))
       continue;
@@ -3869,17 +3944,31 @@ export function enemyDefinition(key: string): EnemyDefinition {
 }
 
 export function enemyIsPerched(game: Game, actorId: number, params: number): boolean {
-  if ((game === 'oot' && actorId === 0x13) || (game === 'mm' && actorId === 0xc))
-    return [1, 3].includes(params & 0x7fff);
-  return game === 'mm' && actorId === 0x15b && !!(params & 0x80);
+  return enemySpawnMacroMatches('perched', { target: { game, actorId, params } });
+}
+
+export function enemyRequiresWall(game: Game, actorId: number): boolean {
+  return enemySpawnMacroMatches('wall-required', { target: { game, actorId } });
+}
+
+export function enemyIsElevatedSource(game: Game, actorId: number): boolean {
+  return enemySpawnMacroMatches('elevated-source', { target: { game, actorId } });
+}
+
+export function enemyIsCeilingSource(game: Game, actorId: number): boolean {
+  return enemySpawnMacroMatches('ceiling-source', { target: { game, actorId } });
+}
+
+export function enemyPreservesNativeHeight(game: Game, actorId: number): boolean {
+  return enemySpawnMacroMatches('preserves-native-height', { target: { game, actorId } });
+}
+
+export function enemyRequiresGroundPlacement(game: Game, actorId: number): boolean {
+  return enemySpawnMacroMatches('mandatory-ground', { target: { game, actorId } });
 }
 
 export function enemyCanRespawn(game: Game, actorId: number, params: number): boolean {
-  if (game === 'oot')
-    return actorId === 0xc7 && params !== 1;
-  return (actorId === 0x66 && params !== 1 && params !== 2) ||
-    (actorId === 0x16f && !!(params & 0x8000)) ||
-    (actorId === 0x164 && !!(params & 4));
+  return enemySpawnMacroMatches('respawning', { target: { game, actorId, params } });
 }
 
 export type EnemyPlanProgress = (message: string, completed?: number, total?: number) => void;
@@ -3888,9 +3977,8 @@ function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): v
   const roots = plan.filter(row => {
     if (!row.ootr && !row.placement) return false;
     const target = enemyDefinition(row.target);
-    return settings.enemyShuffleBari && target.game === 'oot' && target.actorId === 0x63 ||
-      settings.enemyShuffleEeno && target.game === 'mm' && target.actorId === 0x1e6 &&
-        ((row.ootr?.targetParams ?? row.placement?.targetParams ?? target.spawnParams) & 255) === 1;
+    return enemySpawnMacroMatches('split-death-source', { settings,
+      target: { ...target, params: row.ootr?.targetParams ?? row.placement?.targetParams ?? target.spawnParams } });
   });
   if (!roots.length) return;
   roots.forEach(row => { row.splitChildren = []; });
@@ -3909,6 +3997,7 @@ function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): v
     const scenePlan = plan.filter(row => host === 'oot'
       ? row.ootr?.location.scene === scene || (!row.ootr && !row.placement)
       : row.placement?.scene === scene || !!row.kind);
+    const mmScene = host === 'mm' ? MM_NATIVE_SCENES.find(s => s.scene === scene) : undefined;
     const pools = rows.flatMap(row => {
       const sourceId = row.ootr?.location.actorId ?? row.placement!.sourceActorId;
       let candidates: EnemyDefinition[];
@@ -3916,7 +4005,10 @@ function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): v
         candidates = (ootEnemizerCandidatePools(ENEMIES, settings, [row.ootr.location]).get(row.ootr.location) ?? [])
           .map(candidate => candidate.def);
       } else {
-        candidates = dynamicEnemyPool(settings, host, sourceId, scene);
+        const sourceActor = mmScene!.maps[row.placement!.mapIndex].actors.find(actor => actor.offset === row.placement!.actorOffset)!;
+        const locations = mmSpawnLocations(mmScene!, sourceActor);
+        candidates = dynamicEnemyPool(settings, host, sourceId, scene).filter(target => locations.every(location =>
+          enemySpawnTargetAllowed(location, { ...sourceActor, key: row.source }, target, settings)));
       }
       const unique = [...new Map(candidates.map(enemy => [`${enemy.game}/${enemy.actorId}/${enemy.spawnParams}`, enemy])).values()];
       const choices = unique.map(value => ({
@@ -3941,7 +4033,6 @@ function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): v
           .map(report => report.resourceExcess));
       return { excess, slots: pools.map((_, i) => i) };
     };
-    const mmScene = host === 'mm' ? MM_NATIVE_SCENES.find(s => s.scene === scene) : undefined;
     const fixed = host === 'oot'
       ? [...scenePlan.flatMap(row => row.ootr ? [enemyDefinition(row.target)] : []),
         ...new Map(ootSupplementalMemoryRows(scenePlan, settings, () => !!rows[0].ootr?.location.mq)
@@ -4609,7 +4700,7 @@ export function tentacleSlotAt(game: Game, offset: number) {
 }
 
 export function enemyIsCarnivorousLily(game: string, actorId: number): boolean {
-  return game === 'mm' && actorId === 0x13a;
+  return enemySpawnMacroMatches('carnivorous-lily', { target: { game, actorId } });
 }
 
 type WaterSurfaceSlot = { original: string; surfaceY: number; collisionRanges: readonly (readonly number[])[] };
@@ -4625,12 +4716,11 @@ export function mmWaterSurfaceSlot(offset: number): WaterSurfaceSlot | undefined
 const aquaticFacts = placementData.aquatic;
 
 function rootedBioBaba(game: string, actorId: number, params?: number): boolean {
-  return game === 'mm' && actorId === 0x12d && params !== undefined && [0, 1, 2].includes(params & 0xff);
+  return enemySpawnMacroMatches('rooted-bio-baba', { target: { game, actorId, params } });
 }
 
 export function mmAquaticTarget(game: string, actorId: number, params?: number): boolean {
-  return game === 'mm' && (actorId === 0x180 || actorId === 0x23f || actorId === 0x206 ||
-    rootedBioBaba(game, actorId, params));
+  return enemySpawnMacroMatches('mm-aquatic', { target: { game, actorId, params } });
 }
 
 export function mmAquaticSlot(offset: number) {

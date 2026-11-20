@@ -586,8 +586,9 @@ static int enemyHiploopFragment(ActorContext* ctx, PlayState* play, Actor* paren
 {
     Actor* owner = comboEnemyCurrentActor();
     int fragment = params == 8 || params == 10 || params == 13 || params == 17 || params == 23 || params == 26;
+    /* The native port spawns its cosmetic death pieces in Update. */
     return fragment && !split && !parent && owner && owner->id == 0xde9 && (owner->params == 1 || owner->params == 2) &&
-           *(s16*)((u8*)owner + 0x2c0) == 11 && comboEnemyCurrentCallback() == 3 && play && ctx == &play->actorCtx && owner->room == play->roomCtx.curRoom.num;
+           *(s16*)((u8*)owner + 0x2c0) == 11 && comboEnemyCurrentCallback() == 2 && play && ctx == &play->actorCtx && owner->room == play->roomCtx.curRoom.num;
 }
 
 static int enemyEenoSnowball(ActorContext* ctx, PlayState* play, Actor* parent, u16 params, const EnemyPlacement* split)

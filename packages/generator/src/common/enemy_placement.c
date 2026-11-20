@@ -975,6 +975,11 @@ static void nativeDarkLinkUpdate(Actor* actor, PlayState* play, void (*update)(A
     sDarkLinkPlayerUpdate = NULL;
     sStandaloneDarkLink = NULL;
 
+    /* The standalone draw always uses XLU, even after the native combat alpha
+     * reaches 255. Route its damage/stun fog to that same display list. */
+    if (actor->colorFilterTimer)
+        actor->colorFilterParams |= COLORFILTER_BUFFLAG_XLU;
+
     if (preserveRecoil)
         link->speedXZ = -18.f;
 
@@ -1419,8 +1424,11 @@ retrySeed:
     {
         Vec3f pos = { entry->pos.x, entry->pos.y, entry->pos.z };
         adjusted = *entry;
+        /* Hanging sources can overhang a wall or a narrow ledge. Keep the
+         * nearby search first, then widen it with the same safety checks. */
         if (comboEnemyFindFloor(play, NULL, &pos, 0.f, 50, 1) ||
-            comboEnemyFindFloor(play, NULL, &pos, 0.f, 150, 1))
+            comboEnemyFindFloor(play, NULL, &pos, 0.f, 150, 1) ||
+            comboEnemyFindFloor(play, NULL, &pos, 0.f, 512, 1))
             adjusted.pos = (Vec3s){ pos.x, pos.y, pos.z };
 
 #if defined(GAME_MM)

@@ -1,4 +1,5 @@
 #include "mm_native_compat.h"
+#include <combo/enemy_flight.h>
 #define gDragonflyAttackAnim (*(AnimationHeader*)0x0600066c)
 #define gDragonflyDeadAnim (*(AnimationHeader*)0x060008d4)
 #define gDragonflyFallAnim (*(AnimationHeader*)0x060009e0)
@@ -1025,6 +1026,7 @@ void EnGrasshopper_UpdateDamage(EnGrasshopper* this, PlayState* play) {
 
 void EnGrasshopper_Update(Actor* thisx, PlayState* play) {
     EnGrasshopper* this = (EnGrasshopper*)thisx;
+    Vec3f previous = this->actor.world.pos;
 
     SkelAnime_Update(&this->skelAnime);
     EnGrasshopper_UpdateDamage(this, play);
@@ -1045,10 +1047,13 @@ void EnGrasshopper_Update(Actor* thisx, PlayState* play) {
     Math_ApproachZeroF(&this->damagedVelocity.x, 1.0f, 2.0f);
     Math_ApproachZeroF(&this->damagedVelocity.y, 1.0f, 2.0f);
     Math_ApproachZeroF(&this->damagedVelocity.z, 1.0f, 2.0f);
-    if ((this->action != DRAGONFLY_ACTION_FALL) && (this->type != DRAGONFLY_TYPE_WOODFALL)) {
+    if (this->action != DRAGONFLY_ACTION_FALL) {
         Actor_UpdateBgCheckInfo(play, &this->actor, 35.0f, 60.0f, 60.0f,
                                 UPDBGCHECKINFO_FLAG_1 | UPDBGCHECKINFO_FLAG_4 | UPDBGCHECKINFO_FLAG_8 |
                                     UPDBGCHECKINFO_FLAG_10);
+        /* Woodfall's open-air shortcut is unsafe in shuffled rooms. Also
+         * sweep the whole movement, including action/knockback offsets. */
+        enemyFlightCheckWall(play, &this->actor, previous);
     }
 
     this->actor.shape.rot.z = this->actor.world.rot.z;

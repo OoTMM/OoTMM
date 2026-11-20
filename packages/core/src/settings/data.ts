@@ -274,6 +274,14 @@ export const SETTINGS = [{
   default: 'grouped',
   cond: (s: any) => hasMM(s) && s.enemyShuffleMm,
 }, {
+  key: 'enemyShuffleTerminaFieldLeevers',
+  name: 'Shuffle Termina Field Leevers',
+  category: 'enemies',
+  type: 'boolean',
+  description: 'Shuffle the Leevers near the beach entrance in Termina Field. Leave this off to keep their original behavior and reduce the load from shuffled enemies in the field.',
+  default: false,
+  cond: (s: any) => hasMM(s) && s.enemyShuffleMm,
+}, {
   key: 'enemyShuffleGoldSkulltulas',
   name: 'Gold Skulltula Enemy Shuffle',
   category: 'enemies',
@@ -353,7 +361,7 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Add compatible enemies missing from the receiving game. Shared enemies and their supported native variants are already available through that game’s enemy randomizer.',
   default: false,
-  cond: (s: any) => s.games === 'ootmm' && (s.enemyShuffleOot || s.enemyShuffleMm),
+  cond: (s: any) => (hasOoT(s) && s.enemyShuffleOot) || (hasMM(s) && s.enemyShuffleMm),
 }, {
   key: 'songs',
   name: 'Song Shuffle',

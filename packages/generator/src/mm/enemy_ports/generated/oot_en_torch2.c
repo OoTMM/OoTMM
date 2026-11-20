@@ -456,7 +456,8 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
             fighter->invincibilityTimer = 0;
             fighter->linearVelocity = actor->speed = 0.f;
             actor->colChkInfo.damage = 0;
-            Actor_SetColorFilter(actor, 0, 255, enemy->alpha == 255 ? 0 : 0x2000, 80);
+            /* DarkLink_Draw always renders through POLY_XLU_DISP. */
+            Actor_SetColorFilter(actor, COLORFILTER_COLORFLAG_BLUE, 255, COLORFILTER_BUFFLAG_XLU, 80);
         } else if (canTakeHit && actor->colChkInfo.damage) {
             Actor_ApplyDamage(actor);
             AudioSfx_PlaySfx(NA_SE_PL_DAMAGE, &actor->projectedPos, 4, &sDarkLinkSfxFrequency,
@@ -487,7 +488,7 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
                 PlayerAnimation_PlayOnce(play, &fighter->skelAnime, (PlayerAnimationHeader*)0x0400dc78);
             } else {
                 actor->flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
-                Actor_SetColorFilter(actor, 0x4000, 255, enemy->alpha == 255 ? 0 : 0x2000, 12);
+                Actor_SetColorFilter(actor, COLORFILTER_COLORFLAG_RED, 255, COLORFILTER_BUFFLAG_XLU, 12);
                 enemySetOotDropFlag(actor, &enemy->body.elem, true);
                 enemy->recovery = 64;
                 DarkLink_PlayOotVoice(actor, 0x6805);

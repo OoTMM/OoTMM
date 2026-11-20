@@ -1,4 +1,5 @@
 #include <combo/enemy_placement.h>
+#include <combo/enemy_oot_enemizer.h>
 #include <combo/enemy_soul_preview.h>
 #include <combo/enemy_gold.h>
 #include <combo/enemy.h>
@@ -361,6 +362,9 @@ Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState* play, short actorId
 
     if (actorId < 0 || !canSpawnActor(play, actorId, variable))
         return NULL;
+
+    if (actorId == ACTOR_OBJ_ROOMTIMER && comboEnemyOotCombatRoomTimer(play, play->roomCtx.curRoom.num))
+        variable |= 0x3ff;
 
     comboEnemySoulPreviewGateBegin();
 #if defined(DEBUG)

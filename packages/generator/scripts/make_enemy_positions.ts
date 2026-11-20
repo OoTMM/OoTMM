@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
-import { oot_enemizer } from '../../core/src/enemy-data';
+import { OOT_ENEMIZER as oot_enemizer } from '@ootmm/core';
 
 const root = fileURLToPath(new URL('../../../', import.meta.url));
 

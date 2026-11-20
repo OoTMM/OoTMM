@@ -1,4 +1,6 @@
 import { soulPreviewSources, storeSoulPreview } from '../enemies/soul-preview-storage';
+import { ootCombatTimerRooms, type OotTimerRoom } from '../enemies/room-timers';
+import { ootFlareReplacementPosition } from '../enemies/flare-placement';
 import { ENEMY_SOUL_PREVIEW_MEMORY, ENEMY_UTILITY_MODULE_BYTES } from '../../../../core/src/enemy-soul-preview-memory-data';
 import { bakeSoulPreview, buildSoulPreviewMeshes } from '../enemies/soul-preview';
 import { verifyOotGameplayMemory } from '../enemies/oot-gameplay-memory';
@@ -6,24 +8,22 @@ import { NATIVE_LILY_FACTS } from '../enemies/extra-port-data';
 import { align, toU32Buffer } from '../util';
 import {
   OOT_FIELD_STALCHILD_SLOTS, OOT_FOREST_BOW_SLOTS, OOT_BURIAL_ENEMY_SLOTS, OOT_DESERT_LEEVER_SLOTS, ENEMY_GOLD_SOURCES, nativeGoldTarget, verifyMmRoomOverlaps, mmRoomOverlapStates, enemySceneMemoryReports, enemyOotSceneMemoryReports, OOT_GAMEPLAY_POLICY, ENEMY_MEMORY_POLICY,
-  enemyWeight, enemyFormWeights, ootNativeEnemyDefinitionKey, ARWING_ENEMIES,
-  standaloneEnemyTransfer, ENEMIES, nativeResourceSource, nativeResourceTarget, NATIVE_ARENA_COMBAT_TARGETS,
+  enemyWeight, enemyFormWeights, ootNativeEnemyDefinitionKey, ARWING_ENEMIES, enemySpawnMacroMatches,
+  ENEMIES, nativeResourceSource, nativeResourceTarget, NATIVE_ARENA_COMBAT_TARGETS,
   nativeFightRestorationSource, nativeFightRestorationRoomAllowed, nativeFightRestorationCombat, scriptedMmSource, scriptedMmTargetAllowed, BIG_OCTO_ARENA_COMBAT_TARGETS,
-  nativeMinibossVariant, nativeArenaCombatTarget, enemyDefinition, assertForeignEnemyExclusive, enemyEncounterCompatible,
-  enemyCanRespawn, enemyShuffleExcluded, nativeEnemyOnDemandObjects, mmAquaticTarget, tentacleSlot,
+  nativeMinibossVariant, nativeArenaCombatTarget, enemyDefinition,
+  enemyCanRespawn, enemyShuffleExcluded, enemyGoldTargetPool, nativeEnemyOnDemandObjects, mmAquaticTarget, tentacleSlot,
+  enemyIsElevatedSource, enemyPreservesNativeHeight, enemyRequiresGroundPlacement,
   mmAquaticSlot, enemyIsCarnivorousLily, ootWaterSurfaceSlot, mmWaterSurfaceSlot, tentacleSlotAt, MM_NATIVE_SCENES, isOotEnemizerNativeExtensionChoice, ootNativeChoiceAllows,
   OOT_ENEMIZER, ENEMY_SOURCE_ADDITIONS, ootEnemizerLocationKey,
   type EnemyDefinition, type EnemyPlan, type Settings, type Monitor, type BigOctoArenaCombatTargetKey, type NativeArenaCombatTargetKey, type NativeMinibossVariantKey, type OotEnemizerReplacement, type OotEnemizerChoice,
 } from '@ootmm/core';
 import { installDebugEnemyCatalog } from '../enemies/debug-catalog';
 import {
-  verifyOotEnemySourceCorrections, validateNativePeahatPlacement, reviewedNativeLayoutFile, installedEnemyDependency, readOverlayLayout, nativeCombatProfileCategory, verifyNativeEnemyPortSource, verifyEnemyRoomEntryHook, installOotEnemyNativeArena, nativeEnemyObjectDependencies, prepareForeignEnemies,
+  verifyOotEnemySourceCorrections, validateNativePeahatPlacement, reviewedNativeLayoutFile, installedEnemyDependency, readOverlayLayout, nativeCombatProfileCategory, verifyNativeEnemyPortSource, verifyEnemyRoomEntryHook, installOotEnemyNativeArena, prepareForeignEnemies,
   type ForeignEnemyPlacement, type ForeignEnemyProgram, type NativeEnemyPort,
 } from '../enemies/overlay';
 import {
-  oot_placement as oot,
-  mm_placement as mm,
-  oot_placement_adapters as adapters,
   oot_enemizer_runtime as ootRuntimeFacts,
   native_flying_pot as flyingPotFacts,
   native_iron_knuckle as nativeIronKnuckleFacts,
@@ -35,7 +35,6 @@ import {
   native_big_octo_activation as nativeBigOctoFacts,
   fighter_restoration as fighterFacts,
   scripted_mm_arenas as scriptedArenaFacts,
-  keep_assets as keepFacts,
   native_extra_mm_sources as sources,
   native_extra_mm_facts as standaloneFacts,
   native_ports as nativePorts,
@@ -55,153 +54,6 @@ type Change = { offset: number; value: number };
 type EnemyRoomLocation = { scene: number; room: number; setup: number };
 
 type Actor = Pick<EnemyDefinition, 'game' | 'actorId' | 'spawnParams'>;
-
-const ootRooms: Readonly<Record<string, Readonly<Record<number, readonly number[]>>>> = oot.rooms;
-
-function ootPlacementSlot(mq: boolean, loc: EnemyRoomLocation, slot: number, source: number) {
-  const row = ootRooms[`${mq ? 'mq' : 'base'}/${loc.scene}/${loc.room}/${loc.setup}`]?.[slot];
-  return row?.[0] === source ? row : undefined;
-}
-
-type SceneRules = Readonly<Record<number, readonly number[]>>;
-
-const mmSourceScenes: SceneRules = mm.sourceScenes;
-
-const mmTargetScenes: SceneRules = mm.targetScenes;
-
-const mmSensitive: SceneRules = mm.sensitiveSources;
-
-const mmPairs: Readonly<Record<number, SceneRules>> = mm.blockedPairs;
-
-const mmRoomCaps: Readonly<Record<number, number>> = {
-  0x0b: 2, 0x0c: 3, 0x47: 1, 0x109: 2, 0x14b: 1,
-};
-
-function mmClearCombatant(id: number, params: number) {
-  switch (id) {
-    case 0x0b: return params === 0;
-    case 0x0c: return params === 0 || params === 2 || params === 3 || params === 0x8002 || params === 0x8003;
-    case 0x12: return params === 0xffff || params === 0xfffd;
-    case 0x66: return params === 1 || params === 2;
-    case 0x50: return params === 0xff00;
-    default: return false;
-  }
-}
-
-const mmKeepSource: Readonly<Record<number, readonly number[]>> = {
-  0x08: [0x13, 0x49], 0x14: [0x07], 0x19: [0x1b, 0x21, 0x60, 0x66],
-  0x1d: [0x69], 0x24: [0x1b, 0x27, 0x28, 0x49], 0x33: [0x1b], 0x3b: [0x46],
-  0x4c: [0x4b, 0x13], 0xed: [0x43, 0x28], 0x12d: [0x49], 0x14a: [0x49],
-  0x164: [0x1b], 0x1ba: [0x1b], 0x1f3: [0x16, 0x18], 0x204: [0x23],
-};
-
-const mmBlockTarget: Readonly<Record<number, readonly number[]>> = {
-  0x19: [0x0c], 0x14a: [0x00],
-};
-
-const mmFairies: Readonly<Record<string, readonly number[]>> = {
-  '22/1': [2], '24/1': [3, 1], '27/1': [4, 34], '27/3': [3], '27/5': [22],
-  '33/11': [2, 3], '73/8': [7],
-};
-
-const mmClearRooms: Readonly<Record<number, readonly number[]>> = {
-  0x0c: [1, 2, 4], 0x07: [7, 13, 8], 0x16: [4, 7, 10], 0x18: [4],
-  0x1b: [4, 6, 7, 8, 9], 0x1d: [5], 0x21: [1, 2, 5, 6, 9, 12],
-  0x23: [0, 1, 2], 0x42: [0, 1], 0x49: [3, 5, 7], 0x4b: [12], 0x4f: [1],
-  0x60: [2, 3, 4, 5], 0x66: [1, 2, 3],
-};
-
-function enemySlotAllows(game: Game, mq: boolean, loc: EnemyRoomLocation, slot: number, source: number, target: Actor, params?: number, csId?: number): boolean {
-  if (enemyCanRespawn(target.game, target.actorId, target.spawnParams)) return false;
-  if (game !== target.game && !standaloneEnemyTransfer({ game, actorId: source }, target)) return false;
-  if (game === 'mm') {
-    if (!nativeMmSkullwalltulaSlotAllows(source, target, params, csId)) return false;
-    if (!nativeMmSkulltulaSlotAllows(source, target, params, csId)) return false;
-    const scene = loc.scene;
-    if (mmKeepSource[source]?.includes(scene) || mmSourceScenes[source]?.includes(scene) ||
-      mmSourceScenes[source]?.includes(-1) || mmFairies[`${scene}/${loc.room}`]?.includes(slot)) return false;
-    if (mmSensitive[scene]?.includes(source)) return false;
-    if (mmClearRooms[scene]?.includes(loc.room)) {
-      if (![0x16, 0x18, 0x1b, 0x21, 0x49].includes(scene) || csId !== 0x7f ||
-        params === undefined || target.game !== 'mm' || !mmClearCombatant(source, params) ||
-        !mmClearCombatant(target.actorId, target.spawnParams)) return false;
-    }
-    if (target.game !== 'mm') return true;
-    return !mmBlockTarget[target.actorId]?.includes(scene) && !mmTargetScenes[target.actorId]?.includes(scene) &&
-      !mmPairs[scene]?.[source]?.includes(target.actorId);
-  }
-  if (!nativeOotSlotAllows(mq, loc, slot, source, target, params)) return false;
-  if (target.game === 'mm' && target.actorId === 0x15b && target.spawnParams === 0x019f &&
-    (source !== 0x13 || params !== 0)) return false;
-  const row = ootPlacementSlot(mq, loc, slot, source);
-  if (!row) return false;
-  if ((source === 0xc5 || source === 0xec) && row[2] !== 1) return false;
-  const policy = oot.policies[row[1]];
-  return target.game === 'oot' ? policy.native.includes(`${target.actorId}/${target.spawnParams}`) || nativeOotStalchildPolicyAllows(policy, target) || nativeOotPoePolicyAllows(policy, target) || nativeOotRenewableBabaPolicyAllows(policy, target) : policy.foreignOrdinary;
-}
-
-const ootPositionAdapters = new Map<string, readonly number[]>();
-
-if (adapters.version !== 1) throw new Error('Unknown pinned OoT position adapter version');
-
-for (const row of adapters.rows) {
-  if (row.length !== 11 || row.some(n => !Number.isInteger(n)) || row[0] !== 0 ||
-    ![0, 1].includes(row[1]) || row[7] < 1 || row[7] & ~31 || (row[7] & 4 && row[7] & 16) ||
-    row.slice(8).some(n => n < -32768 || n > 32767)) throw new Error('Invalid pinned OoT position adapter');
-  const key = row.slice(1, 7).join('/');
-  if (ootPositionAdapters.has(key)) throw new Error('Duplicate pinned OoT position adapter');
-  ootPositionAdapters.set(key, row);
-}
-
-type OotPlacementAdapter = {
-  floorOperation: 0 | 32;
-  flags: number;
-  position: readonly [number, number, number];
-};
-
-type OotPlacementAlias = { mq: boolean; loc: EnemyRoomLocation; slot: number; source: number };
-
-function ootPlacementAdapter(mq: boolean, loc: EnemyRoomLocation, slot: number, source: number): OotPlacementAdapter | undefined {
-  const owner = ootPlacementSlot(mq, loc, slot, source);
-  if (!owner) return;
-  const policy = oot.policies[owner[1]];
-  if (!policy.native.length && !policy.foreignOrdinary) return;
-  const row = ootPositionAdapters.get([Number(mq), loc.scene, loc.room, loc.setup, slot, source].join('/'));
-  const flags = row?.[7] ?? 0;
-  const position = (row?.slice(8) ?? [0, 0, 0]) as [number, number, number];
-  return { floorOperation: flags & 1 ? 0 : 32, flags, position };
-}
-
-function ootPlacementAdaptersAgree(aliases: readonly OotPlacementAlias[]): boolean {
-  const first = aliases[0];
-  if (!first) return false;
-  const reference = ootPlacementAdapter(first.mq, first.loc, first.slot, first.source);
-  return !!reference && aliases.every(({ mq, loc, slot, source }, index) => {
-    if (index === 0) return true;
-    const adapter = ootPlacementAdapter(mq, loc, slot, source);
-    return !!adapter && adapter.flags === reference.flags &&
-      adapter.position.every((value, axis) => value === reference.position[axis]);
-  });
-}
-
-function ootPlacementPositionChanges(rom: Uint8Array, offset: number, mq: boolean,
-  loc: EnemyRoomLocation, slot: number, source: number): { changes: Change[]; floorOperation: 0 | 32 } | undefined {
-  const fact = ootPlacementAdapter(mq, loc, slot, source);
-  if (!fact) return;
-  if (!Number.isSafeInteger(offset) || offset < 0 || offset + 16 > rom.length || bufReadU16BE(rom, offset) !== source)
-    throw new Error('OoT numeric position source drift');
-  const changes: Change[] = [];
-  for (let axis = 0; axis < 3; ++axis) {
-    const at = offset + 2 + axis * 2;
-    const signed = bufReadI16BE(rom, at);
-    const value = fact.flags & (2 << axis)
-      ? fact.position[axis]
-      : axis === 1 && (fact.flags & 16) ? signed + fact.position[1] : signed;
-    if (value < -32768 || value > 32767) throw new Error('OoT numeric position exceeds actor coordinates');
-    if ((value & 0xffff) !== (signed & 0xffff)) changes.push({ offset: at, value: value & 0xffff });
-  }
-  return { changes, floorOperation: fact.floorOperation };
-}
 
 function matchesMmActorEntry(rom: Uint8Array, actorOffset: number, raw: readonly number[]): boolean {
   return actorOffset >= 0 && actorOffset + 16 <= rom.length && raw.length === 16 &&
@@ -258,14 +110,12 @@ const MM_PLACEMENT_OPERATIONS: Readonly<Partial<Record<number, number>>> = {
 const elevatedEnemySources = new Set(ENEMIES.filter(enemy => enemy.habitat === 'air')
   .map(enemy => `${enemy.game}/${enemy.actorId}`));
 
-for (const [game, ids] of [['oot', [0x37, 0x95]], ['mm', [0x24, 0x50]]] as const)
-  for (const id of ids) elevatedEnemySources.add(`${game}/${id}`);
-
 function needsGroundPlacement(host: Game, source: number, target: EnemyDefinition | undefined): boolean {
   return !!target && target.habitat === 'ground' &&
     !mmAquaticTarget(target.game, target.actorId, target.spawnParams) &&
-    !(target.game === 'oot' ? [0x37, 0x95, 0xde].includes(target.actorId) : [0x24, 0x50].includes(target.actorId)) &&
-    (target.game === 'mm' && target.actorId === 0x14a || elevatedEnemySources.has(`${host}/${source}`));
+    !enemyPreservesNativeHeight(target.game, target.actorId) &&
+    (enemyRequiresGroundPlacement(target.game, target.actorId) || enemyIsElevatedSource(host, source) ||
+      elevatedEnemySources.has(`${host}/${source}`));
 }
 
 function exactMmActivationRecords(rom: Uint8Array, plan: EnemyPlan, patch: Patchfile): NativePlacementRecord[] {
@@ -428,6 +278,16 @@ function applyExactOotEnemizer(roms: DecompressedRoms, addresses: GameAddresses,
         continue;
       }
       const original = resolved.data.subarray(resolved.offset, resolved.offset + 16);
+      if (!resolved.mq) {
+        /* Setting patches (notably NO_BROKEN_ACTORS) run before the shuffle.
+         * Do not restore an actor they removed by copying its original ROM
+         * entry back over the deletion. Check the composed ID so split or
+         * overlapping patches have the same semantics as the final ROM. */
+        const address = addresses.oot.fileFromROM(resolved.offset);
+        const actorId = Uint8Array.from(original.subarray(0, 2));
+        applyOverlappingEdits(actorId, address.offset, patch.patches[address.name] ?? []);
+        if (bufReadU16BE(actorId, 0) === 0xffff) continue;
+      }
       const entry = prepareOotEnemizerActor(choice, original, key, imported);
       if (!entry) continue;
       const previous = writes.get(resolved.vrom);
@@ -537,6 +397,13 @@ function prepareOotEnemizerActor(choice: OotEnemizerChoice, original: Uint8Array
     const offset = axis === 'x' ? 2 : axis === 'y' ? 4 : 6;
     const signed = bufReadI16BE(out, offset);
     bufWriteU16BE(out, offset, (mode === 'add' ? signed + amount : amount) & 0xffff);
+  }
+  /* Keep the flame circle, but place ordinary replacements outside it. This
+   * runs for each chaotic choice, so native Flare Dancers keep their center. */
+  const flarePosition = ootFlareReplacementPosition(original, id, key);
+  if (flarePosition) {
+    bufWriteU16BE(out, 2, flarePosition.x & 0xffff);
+    bufWriteU16BE(out, 6, flarePosition.z & 0xffff);
   }
   const target = ENEMIES.find(enemy => enemy.game === (imported ? 'mm' : 'oot') &&
     enemy.actorId === choice.target.actorId && enemy.spawnParams === (imported ? choice.target.params : params));
@@ -686,7 +553,6 @@ type NativePlacementRecord = {
   weight?: number;
   ootPlacement?: { choice: OotEnemizerChoice; key: OotEnemizerPhysicalKey };
   sourceVrom?: number;
-  placementAliases?: readonly OotPlacementAlias[];
   mq?: Pick<EnemyRoomLocation, 'scene' | 'room'> & { slot: number; offset: number; source: Uint8Array };
   original: Uint8Array;
   replacement: Uint8Array;
@@ -884,10 +750,7 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
         throw new Error('OoT selected placement bytes mismatch');
     }
     if (floor) {
-      if (game !== 'oot' || patch.symbols.oot.get('ENEMY_NATIVE_FLOOR_V1')?.length !== 1 ||
-        (!row.ootPlacement && (!row.placementAliases || !ootPlacementAdaptersAgree(row.placementAliases) ||
-          row.placementAliases.some(alias => alias.source !== bufReadU16BE(row.original, 0) ||
-            ootPlacementAdapter(alias.mq, alias.loc, alias.slot, alias.source)?.floorOperation !== 32))))
+      if (game !== 'oot' || !row.ootPlacement || patch.symbols.oot.get('ENEMY_NATIVE_FLOOR_V1')?.length !== 1)
         throw new Error('Missing certified native floor placement adapter');
     }
     if (!Number.isInteger(row.vrom) || row.vrom < 0 || (!row.mq && row.vrom % 4) || sourceOffset < 0 || sourceOffset + 16 > sourceData.length ||
@@ -1266,9 +1129,11 @@ function validateNativeSkullwalltulaPlacement(game: 'mm', row: NativePlacementRe
     throw new Error('Invalid selected native Skullwalltula placement');
 }
 
-function nativeMmSkullwalltulaSlotAllows(source: number, target: { game: Game; actorId: number; spawnParams: number }, params?: number, csId?: number): boolean {
-  if (target.game !== 'mm' || target.actorId !== 0x50) return true;
-  return target.spawnParams === 0xff00 && csId === 0x7f && source === 0x50 && params !== undefined && params === 0xfffc && ((params >>> 8) & 0xff) === 0xff;
+function nativeMmSkullwalltulaSlotAllows(source: number, target: Actor, params?: number, csId?: number): boolean {
+  return enemySpawnMacroMatches('generator-mm-wall-slot-allowed', {
+    source: { game: 'mm', actorId: source, params, csId },
+    target: { ...target, params: target.spawnParams },
+  });
 }
 
 function verifyNativeRenewableBabaSource(game: Game, rom: Uint8Array, addresses?: GameAddresses, patch?: Patchfile) {
@@ -1328,10 +1193,6 @@ function validateNativeRenewableBabaPlacement(game: Game, row: NativePlacementRe
     throw new Error('Invalid selected native renewable Baba placement');
 }
 
-function nativeOotRenewableBabaPolicyAllows(policy: { foreignOrdinary: boolean }, target: { game: Game; actorId: number; spawnParams: number }): boolean {
-  return target.game === 'oot' && target.actorId === 0xc7 && target.spawnParams === 1 && policy.foreignOrdinary;
-}
-
 function verifyOotCounterpart(facts: Pick<typeof guayFacts, 'vromStart' | 'vromEnd' | 'crc32' | 'objectStart' | 'objectEnd' | 'objectCrc32' | 'table' | 'tableBytes' | 'objectEntry' | 'objectEntryBytes'>, rom: Uint8Array, addresses?: GameAddresses, patch?: Patchfile): boolean {
   try {
     for (const [start, end, crc] of [[facts.vromStart, facts.vromEnd, facts.crc32], [facts.objectStart, facts.objectEnd, facts.objectCrc32]]) {
@@ -1379,29 +1240,7 @@ function validateNativeStalchildPlacement(game: Game, row: NativePlacementRecord
     row.replacement[0] * 256 + row.replacement[1] !== stalchildFacts.actorId || bufReadU16BE(row.replacement, 14) !== row.targetParams) throw new Error('Invalid selected native Stalchild placement');
 }
 
-function nativeOotStalchildPolicyAllows(policy: { foreignOrdinary: boolean }, target: { game: string; actorId: number; spawnParams: number }): boolean {
-  return target.game === 'oot' && target.actorId === stalchildFacts.actorId && [0, 5, 10].includes(target.spawnParams) && policy.foreignOrdinary;
-}
-
-function nativeOotPoeTarget(target: { game: Game; actorId: number; spawnParams: number }): boolean {
-  return target.game === 'oot' && target.actorId === poeFacts.actorId && target.spawnParams === poeFacts.params;
-}
-
-function nativeOotPoePolicyAllows(policy: { foreignOrdinary: boolean }, target: { game: Game; actorId: number; spawnParams: number }): boolean {
-  return nativeOotPoeTarget(target) && policy.foreignOrdinary;
-}
-
-function nativeOotPoeTargetObjects(target: { game: Game; actorId: number; spawnParams: number }): ReadonlySet<number> | undefined {
-  return nativeOotPoeTarget(target) ? new Set([poeFacts.modelObject]) : undefined;
-}
-
 const verifyNativeOotPoe = (rom: Uint8Array, addresses: GameAddresses, patch: Patchfile) => !!addresses && !!patch && verifyOotCounterpart(poeFacts, rom, addresses, patch);
-
-function nativeMmSkulltulaSlotAllows(source: number, target: { game: Game; actorId: number; spawnParams: number },
-  params?: number, csId?: number): boolean {
-  if (target.game !== 'mm' || target.actorId !== 0x24) return true;
-  return source === 0x24 && (params === 0x3f || params === 0x7f) && (target.spawnParams === 0x3f || target.spawnParams === 0x7f) && csId === 0x7f;
-}
 
 function verifyNativeBigOctoSource(rom: Uint8Array, addresses?: GameAddresses, patch?: Patchfile) {
   verifyNativeActivationSource('Big Octo', 'mm', nativeBigOctoFacts, rom);
@@ -1470,29 +1309,6 @@ function verifyNativeBigOctoRecord(rom: Uint8Array, offset: number, original: Ui
   bufWriteU16BE(expected, 14, slot.targetParams);
   if (!bufEqual(replacement, expected))
     throw new Error('Invalid MM Big Octo replacement actor record');
-}
-
-type NativeTarget = { game: Game; actorId: number; spawnParams: number };
-
-function nativeOotSlotAllows(mq: boolean, loc: EnemyRoomLocation, slot: number,
-  source: number, target: NativeTarget, params?: number): boolean {
-  if (source === 0x6b && (mq || loc.scene !== 4 || ![18, 19].includes(loc.room) || loc.setup !== 0 ||
-    slot < 1 || slot > (loc.room === 18 ? 5 : 8))) return false;
-  if (source === 0xc7 && ![0, 1, 0xffff].includes(params ?? -1)) return false;
-  if (source === 0x192 && (mq || loc.scene !== 0 || loc.room !== 1 || loc.setup !== 0 ||
-    slot !== 0 || params !== 0x1a00)) return false;
-  if (source === 0x37 && params !== 0 && params !== 1) return false;
-  if (source === 0x95 && params !== 0) return false;
-  if (source === 0x60 && (params === undefined || !Number.isInteger(params) || params < 0 || params > 0xff00 || (params & 0xff))) return false;
-  if (source === 0x99 && params !== 0) return false;
-  if (source === 0x2d && params !== 0) return false;
-  if (target.game !== 'oot') return true;
-  if (target.actorId === 0x95) return false;
-  if (target.actorId === 0x1c0) return [0, 1].includes(target.spawnParams);
-  if (target.actorId === 0x115) return target.spawnParams === 0xffff;
-  if (target.actorId === 0xf6) return target.spawnParams === 3;
-  if ([0x2d, 0x37, 0x60, 0x99].includes(target.actorId)) return target.spawnParams === 0;
-  return true;
 }
 
 const nativeBigPoeFacts = { 'oot': { 'actorId': 373, 'objectId': 109, 'table': 11932464, 'tableBytes': '00e7504000e78a2080af7d6080afb7d00000000080afb2300000000000000000', 'vromStart': 15159360, 'vromEnd': 15174176, 'vramStart': 2158984544, 'crc32': 3702485317, 'profileOffset': 15172880, 'profileBytes': '0175050000001035006d0000000002cc80af7d6080af7f6880afa6ec80afab30', 'objectTable': 11989696, 'objectBytes': '018c8000018cea40', 'objectStart': 25985024, 'objectEnd': 26012224, 'objectCrc32': 1935558971, 'hooks': [{ 'vrom': 15167848, 'original': '0c008134' }, { 'vrom': 15167800, 'original': '0c01bf73', 'symbol': 'EnPoField_Item_Give' }, { 'vrom': 15167824, 'original': '0c01bf73', 'symbol': 'EnPoField_Item_Give' }] }, 'mm': { 'actorId': 520, 'objectId': 497, 'table': 12883472, 'tableBytes': '00fc676000fca64080b615e080b654c00000000080b64ff00000000000000000', 'vromStart': 16541536, 'vromEnd': 16557632, 'vramStart': 2159416800, 'crc32': 2202291957, 'profileOffset': 16556400, 'profileBytes': '020805000000121501f100000000039880b615e080b6186c80b63ed400000000', 'objectTable': 12950536, 'objectBytes': '01aff00001b04c20', 'objectStart': 28307456, 'objectEnd': 28331040, 'objectCrc32': 215781870, 'hooks': [], 'patches': [{ 'vrom': 16549580, 'original': '0c05e565468053204600040d4408800000000000', 'replacement': '0000000000000000000000000000000024080008' }, { 'vrom': 16549092, 'original': '240600ba', 'replacement': (0x24060000 | GI.MM_SCOOP.index).toString(16) }] } };
@@ -2168,33 +1984,6 @@ function installMmObjectBufferBudgets(roms: DecompressedRoms, addresses: GameAdd
   patch.meta.enemyObjectBufferBudgets = { setup: 0, alternateSetups: 'vanilla', verified, skipped };
 }
 
-function foreignKeepFootprint(source: Game) {
-  return keepFacts.games[source].entries.reduce((bytes, entry) =>
-    bytes + align(entry.size, 16) + 48 + entry.fixups.length * 12, 16);
-}
-
-const FOREIGN_KEEP_BYTES = { oot: foreignKeepFootprint('mm'), mm: foreignKeepFootprint('oot') };
-
-function fitsEnemyObjectBudget(game: Game, objects: ReadonlyMap<number, number>): boolean {
-  const nativeSlots = game === 'oot' ? 19 : 35;
-  const heapSize = game === 'oot' ? 0x100000 : 0x40000;
-  let bytes = 0;
-  let slots = 0;
-  for (const [id, size] of objects) {
-    if (!Number.isInteger(id) || !(id > 0x1000 && id < 0x2000 || game === 'oot' && id >= 0x2000 && id < 0x2080) ||
-      !Number.isSafeInteger(size) || size <= 0 || size % 16)
-      throw new Error('Invalid extended enemy object footprint');
-    if (id >= 0x1001 && id <= 0x1003) {
-      if (size !== 16) throw new Error('Whole foreign keep residency is forbidden');
-    } else {
-      ++slots;
-      bytes += size + 16;
-    }
-  }
-  const keepBytes = objects.size ? FOREIGN_KEEP_BYTES[game] : 0;
-  return slots <= 128 - nativeSlots && bytes + keepBytes <= heapSize;
-}
-
 const SCENE_TABLES = {
   oot: { address: 0xb71440, count: 101, stride: 0x14 },
   mm: { address: 0xc5a1e0, count: 113, stride: 0x10 },
@@ -2206,22 +1995,15 @@ const MM_EXTRA_SETUPS: Readonly<Record<number, number>> = {
   0x2bfe000: 1, 0x2c09000: 1, 0x2da7000: 1, 0x2e1d000: 1,
 };
 
-const MM_EXCLUDED_SCENES = new Set([0x08, 0x20, 0x24, 0x43, 0x69]);
-
 type List = { offset: number; count: number };
 
 type Header = { actors?: List; objects?: List; objectCommand?: number; rooms?: List; alternates?: number };
 
 type Room = {
   start: number; end: number; headers: (Header & EnemyRoomLocation)[]; mq?: boolean;
-  scriptedPeers?: readonly ReadonlySet<number>[];
-  sceneActors?: Set<number>;
   excluded?: boolean;
-  residentObjects?: ReadonlySet<number>;
   protectedEntries?: ReadonlySet<number>;
 };
-
-type SceneObjects = Map<number, ReadonlyMap<number, number>>;
 
 function range(rom: Uint8Array, offset: number, length: number, start = 0, end = rom.length) {
   if (!Number.isSafeInteger(offset) || offset < start || length < 0 || offset + length > end || end > rom.length)
@@ -2277,263 +2059,22 @@ function readHeaders(rom: Uint8Array, start: number, end: number, segment: numbe
   return headers;
 }
 
-function profileObject(rom: Uint8Array, game: Game, actorId: number): number | undefined {
-  const config = CONFIG[game];
-  if (actorId >= config.actorsOvlCount) return undefined;
-  const entry = config.actorsOvlAddr + actorId * 0x20;
-  const vrom = bufReadU32BE(rom, entry);
-  const vram = bufReadU32BE(rom, entry + 8);
-  const profile = bufReadU32BE(rom, entry + 0x14);
-  if (!vrom || !vram || profile < vram) return undefined;
-  const address = vrom + profile - vram;
-  range(rom, address, 0x20, vrom, bufReadU32BE(rom, entry + 4));
-  return bufReadU16BE(rom, address + 8);
-}
-
-function planRoomEnemies(rom: Uint8Array, game: Game, room: Room, plan: EnemyPlan, metadataRom: Uint8Array, foreignTargets: ReadonlyMap<string, ForeignEnemyPlacement>, sceneObjects: SceneObjects): Change[] {
-  const pairs = plan.filter(p => !p.kind).map(p => ({ source: enemyDefinition(p.source), target: enemyDefinition(p.target) }))
-    .filter(p => p.source.game === game && p.source.sourceAllowed !== false && p.target.targetAllowed !== false && p.source.key !== p.target.key &&
-      enemyEncounterCompatible(p.source.game, p.source.actorId, p.target.game, p.target.actorId));
-  const foreign = (target: EnemyDefinition) => target.game === game ? undefined : foreignTargets.get(target.key);
-  for (const { source, target } of pairs) {
-    if (target.game === game) continue;
-    if (!standaloneEnemyTransfer(source, target))
-      throw new Error('Cross-game replacement is outside the standalone enemy shuffle pools');
-    assertForeignEnemyExclusive(target.game, target.actorId, game, target.spawnParams);
-    if (target.nativeOnly) throw new Error('Enemy variant is verified for native placements only');
-    const imported = foreign(target);
-    if (!imported || imported.sourceGame !== target.game || imported.targetGame !== game || imported.sourceActorId !== target.actorId ||
-      imported.sourceObjectId !== target.objectId || imported.actorId !== 0xc00 + target.actorId || imported.objectId !== (0x1000 | target.objectId) ||
-      imported.objects.pinned.get(imported.objectId) !== imported.objectSize || !Number.isInteger(imported.objectSize) || imported.objectSize <= 0 || imported.objectSize % 16)
-      throw new Error('Foreign overlays require a matching ABI adapter before scene patching');
-  }
-  const mask = game === 'mm' ? 0x1fff : 0xffff;
-  const actorOffsets = new Set<number>();
-  const setups = room.headers.map(header => {
-    const actors = new Set<number>(), entries: number[] = [], objects: number[] = [];
-    if (header.actors) for (let i = 0; i < header.actors.count; ++i) {
-      const offset = header.actors.offset + i * 16;
-      actorOffsets.add(offset);
-      entries.push(offset);
-      actors.add(bufReadU16BE(rom, offset) & mask);
-    }
-    if (header.objects) for (let i = 0; i < header.objects.count; ++i) {
-      const offset = header.objects.offset + i * 2;
-      objects.push(offset);
-    }
-    return { header, actors, entries, objects };
-  });
-  const accepted = new Map<number, { source: EnemyDefinition; target: EnemyDefinition; entries: Set<number> }>();
-  if (room.excluded) return [];
-  for (const pair of pairs) {
-    const { source, target } = pair;
-    if (source.habitat !== target.habitat) continue;
-    if (source.preserveNativeResource && (target.game !== game || !nativeResourceTarget(game, target.actorId, target.spawnParams))) continue;
-    if (enemyCanRespawn(target.game, target.actorId, target.spawnParams)) continue;
-    const grouped = [source, target].filter(enemy => enemy.game === game && enemy.requiresNoScriptedPeers);
-    if (grouped.length && (!room.scriptedPeers?.length || grouped.some(enemy =>
-      room.scriptedPeers!.some(scene => scene.has(enemy.actorId))))) continue;
-    const matching = [...actorOffsets].filter(a => (bufReadU16BE(rom, a) & mask) === source.actorId);
-    const rotationMask = game === 'mm' ? 0xff80 : 0xffff;
-    if (!matching.length) continue;
-    const entries = new Set(matching.filter(a => {
-      if (room.protectedEntries?.has(a)) return false;
-      if ((bufReadU16BE(rom, a + 8) & rotationMask) || (bufReadU16BE(rom, a + 12) & rotationMask) ||
-        !source.params.includes(bufReadU16BE(rom, a + 14))) return false;
-      if (game !== 'mm') return true;
-      if ((source.requiresNoCutscene || target.requiresNoCutscene || foreign(target)) && (bufReadU16BE(rom, a + 10) & 0x7f) !== 0x7f) return false;
-      if (!foreign(target) && !source.preserveNativeResource) return true;
-      const days = ((bufReadU16BE(rom, a + 8) & 7) << 7) | (bufReadU16BE(rom, a + 12) & 0x7f);
-      return days === 0 || days === 0x3ff;
-    }));
-    if (game === 'oot' && !source.sourceFormsIndependent && entries.size !== matching.length) continue;
-    if (!entries.size) continue;
-    if (profileObject(metadataRom, game, source.actorId) !== source.objectId || (!foreign(target) && profileObject(metadataRom, game, target.actorId) !== target.objectId))
-      throw new Error(`Enemy profile/object mismatch: ${source.key} -> ${target.key}`);
-    if (game === 'oot' && source.objectId !== 1 && !room.residentObjects?.has(source.objectId) && setups.some(setup => setup.actors.has(source.actorId) &&
-      !setup.objects.some(off => bufReadU16BE(rom, off) === source.objectId))) continue;
-    for (const setup of setups) {
-      const ownsModel = source.objectId === 1 || !!room.residentObjects?.has(source.objectId) || setup.objects.some(off => bufReadU16BE(rom, off) === source.objectId);
-      for (const [slot, offset] of setup.entries.entries()) {
-        if (entries.has(offset) && (!ownsModel || !enemySlotAllows(game, !!room.mq, setup.header, slot,
-          source.actorId, target, bufReadU16BE(rom, offset + 14), bufReadU16BE(rom, offset + 10) & 0x7f)))
-          entries.delete(offset);
-      }
-    }
-    if (game === 'oot') for (const offset of entries) {
-      const aliases = setups.filter(setup => setup.entries.includes(offset)).map(setup => ({
-        mq: !!room.mq,
-        loc: setup.header, slot: setup.entries.indexOf(offset), source: source.actorId
-      }));
-      if (!ootPlacementAdaptersAgree(aliases)) entries.delete(offset);
-    }
-    if (entries.size) accepted.set(source.actorId, { ...pair, entries });
-  }
-  if (!accepted.size) return [];
-  const dependencies = new Map<number, ReadonlySet<number> | undefined>();
-  const requiredObjects = (actorId: number) => {
-    if (!dependencies.has(actorId)) dependencies.set(actorId,
-      nativeEnemyObjectDependencies(game, actorId, id => profileObject(metadataRom, game, id)));
-    return dependencies.get(actorId);
-  };
-  while (accepted.size) {
-    const additionsByScene = new Map<number, Map<number, number>>();
-    let reject: number | undefined;
-    for (const setup of setups) {
-      const counts = new Map<number, number>(), additions = new Map<number, number>();
-      for (const offset of setup.entries) {
-        const original = bufReadU16BE(rom, offset) & mask, pair = accepted.get(original);
-        const target = pair?.entries.has(offset) ? pair.target : undefined;
-        if ((target?.game ?? game) !== 'mm') continue;
-        const id = target?.actorId ?? original;
-        if (mmRoomCaps[id] === undefined) continue;
-        counts.set(id, (counts.get(id) ?? 0) + 1);
-        if (pair && target && (target.game !== game || id !== original))
-          additions.set(id, pair.source.objectId);
-      }
-      for (const [id, incoming] of additions) {
-        if (counts.get(id)! > mmRoomCaps[id]) {
-          reject = incoming;
-          break;
-        }
-      }
-      if (reject !== undefined) break;
-      const available = new Set<number>(room.residentObjects ?? [1]);
-      for (const offset of setup.objects) available.add(bufReadU16BE(rom, offset));
-      for (const offset of setup.entries) {
-        const actor = bufReadU16BE(rom, offset) & mask, pair = accepted.get(actor);
-        if (pair?.entries.has(offset)) {
-          const imported = foreign(pair.target);
-          if (imported) {
-            const scene = setup.header.scene;
-            if (!Number.isInteger(scene) || scene < 0 || scene >= SCENE_TABLES[game].count)
-              throw new Error('Foreign enemy placement requires a receiving scene');
-            let held = additionsByScene.get(scene);
-            if (!held) {
-              held = new Map(sceneObjects.get(scene));
-              additionsByScene.set(scene, held);
-            }
-            for (const [id, size] of imported.objects.pinned) {
-              if (held.has(id) && held.get(id) !== size) throw new Error('Conflicting enemy object sizes');
-              held.set(id, size);
-            }
-            const missingChild = [...imported.objects.nativeChildren].some(id => {
-              const needed = requiredObjects(id);
-              return !needed || [...needed].some(object => !available.has(object));
-            });
-            if (missingChild || !fitsEnemyObjectBudget(game, held)) {
-              reject = pair.source.objectId;
-              break;
-            }
-            continue;
-          }
-          const onDemand = !room.mq && nativeEnemyOnDemandObjects(game, pair.target.actorId);
-          const needed = nativeOotPoeTargetObjects(pair.target) ?? requiredObjects(pair.target.actorId);
-          if (!needed || [...needed].some(id => !available.has(id) && !(onDemand && onDemand.includes(id))))
-            reject = pair.source.objectId;
-        }
-        if (reject !== undefined) break;
-      }
-      if (reject !== undefined) break;
-    }
-    if (reject === undefined) {
-      for (const [scene, held] of additionsByScene) sceneObjects.set(scene, held);
-      break;
-    }
-    for (const [actor, pair] of accepted) {
-      if (pair.source.objectId === reject) accepted.delete(actor);
-    }
-  }
-  const changes: Change[] = [];
-  for (const a of actorOffsets) {
-    const raw = bufReadU16BE(rom, a);
-    const pair = [...accepted.values()].find(p => p.entries.has(a));
-    if (!pair) continue;
-    changes.push({ offset: a, value: (raw & ~mask) | (foreign(pair.target)?.actorId ?? pair.target.actorId) });
-    changes.push({ offset: a + 14, value: pair.target.spawnParams });
-    if (game === 'oot') {
-      const owner = setups.find(setup => setup.entries.includes(a))!;
-      const position = ootPlacementPositionChanges(rom, a, !!room.mq, owner.header, owner.entries.indexOf(a), pair.source.actorId);
-      if (position) changes.push(...position.changes);
-    }
-  }
-  return changes;
-}
-
-function patchMqEnemies(data: Uint8Array, metadataRom: Uint8Array, plan: EnemyPlan, foreignTargets: ReadonlyMap<string, ForeignEnemyPlacement>, sceneObjects: SceneObjects, nativeRecords: NativePlacementRecord[]) {
-  const copy = new Uint8Array(data);
-  range(copy, 0, 0x20);
-  const count = bufReadU32BE(copy, 0);
-  range(copy, 0x20, count * 0x20);
-  let replaced = 0;
-  for (let i = 0; i < count; ++i) {
-    const header = 0x20 + i * 0x20;
-    const size = bufReadU32BE(copy, header);
-    const start = bufReadU32BE(copy, header + 4);
-    const end = start + size;
-    range(copy, start, size, 0x20 + count * 0x20);
-    const actors = { offset: start + bufReadU16BE(copy, header + 0x0c), count: bufReadU16BE(copy, header + 0x0a) };
-    const objects = { offset: start + bufReadU16BE(copy, header + 0x10), count: bufReadU16BE(copy, header + 0x0e) };
-    range(copy, actors.offset, actors.count * 16, start, end);
-    range(copy, objects.offset, objects.count * 2, start, end);
-    const dungeon = copy[header + 8];
-    if (dungeon > 11) throw new Error('Unknown MQ enemy dungeon');
-    const scene = dungeon === 11 ? 0x0d : dungeon === 10 ? 0x0b : dungeon;
-    const owner = { actors, objects, scene, room: copy[header + 9], setup: 0 };
-    const changes = planRoomEnemies(copy, 'oot', { start, end, mq: true, headers: [owner] }, plan, metadataRom, foreignTargets, sceneObjects);
-    for (let slot = 0; slot < actors.count; ++slot) {
-      const offset = actors.offset + slot * 16, actorChange = changes.find(change => change.offset === offset);
-      if (!actorChange) continue;
-      const source = bufReadU16BE(data, offset), target = actorChange.value;
-      const params = changes.find(change => change.offset === offset + 14)!.value;
-      let operation = nativeResourceSource('oot', source, bufReadU16BE(data, offset + 14)) ? 1 :
-        target === 0x1b0 && [0, 5, 10].includes(params) ? 3 : target === 0x1c0 && [0, 1].includes(params) ? 7 : target === 0xc7 && params === 1 ? 6 : target === 0x1d && [0, 0xffff].includes(params) ? 4 : target === 0x115 ? 16 : target === 0x113 && [0xff82, 0xff83].includes(params) ? 64 : 0;
-      const aliases: OotPlacementAlias[] = [{ mq: true, loc: owner, slot, source }];
-      if (ootPlacementAdaptersAgree(aliases) && ootPlacementAdapter(true, owner, slot, source)?.floorOperation) operation |= 32;
-      if (!operation) continue;
-      const entryChanges = changes.filter(change => change.offset >= offset && change.offset < offset + 16)
-        .map(change => ({ ...change, offset: change.offset - offset }));
-      const record = nativePlacementRecord(data.subarray(offset, offset + 16), 0, operation, entryChanges, target, params);
-      record.vrom = mqActorVrom(scene, owner.room, slot);
-      record.mq = { scene, room: owner.room, slot, offset, source: data };
-      record.placementAliases = aliases;
-      nativeRecords.push(record);
-    }
-    for (const c of changes) {
-      bufWriteU16BE(copy, c.offset, c.value);
-      if (c.offset >= actors.offset && c.offset < actors.offset + actors.count * 16 && (c.offset - actors.offset) % 16 === 0) ++replaced;
-    }
-  }
-  return { data: copy, replaced, nativePlacements: nativeRecords };
-}
-
 function collectEnemyRooms(rom: Uint8Array, game: Game): Room[] {
   const table = SCENE_TABLES[game], rooms = new Map<number, Room>();
   for (let scene = 0; scene < table.count; ++scene) {
-    const excluded = game === 'mm' ? MM_EXCLUDED_SCENES.has(scene) : scene >= 0x11 && scene <= 0x1a;
+    const excluded = enemySpawnMacroMatches('generator-excluded-scene', { location: { game, scene } });
     const entry = table.address + scene * table.stride;
     const sceneStart = bufReadU32BE(rom, entry), sceneEnd = bufReadU32BE(rom, entry + 4);
     if (!sceneStart) continue;
     const extraCount = game === 'oot' ? 3 : MM_EXTRA_SETUPS[sceneStart] || 0;
-    const sceneRooms = new Set<Room>(), scripted = new Set<number>(), sceneActors = new Set<number>();
-    const addScripted = (header: Header) => {
-      if (game !== 'mm' || !header.actors) return;
-      for (let i = 0; i < header.actors.count; i++) {
-        const actor = header.actors.offset + i * 16;
-        if ((bufReadU16BE(rom, actor + 10) & 0x7f) !== 0x7f) scripted.add(bufReadU16BE(rom, actor) & 0x1fff);
-      }
-    };
     for (const header of readHeaders(rom, sceneStart, sceneEnd, 2, extraCount)) {
-      addScripted(header);
-      if (header.actors) for (let i = 0; i < header.actors.count; ++i)
-        sceneActors.add(bufReadU16BE(rom, header.actors.offset + i * 16) & (game === 'mm' ? 0x1fff : 0xffff));
       if (!header.rooms) continue;
       for (let index = 0; index < header.rooms.count; index++) {
         const field = header.rooms.offset + index * 8, start = bufReadU32BE(rom, field), end = bufReadU32BE(rom, field + 4);
         if (!start) continue;
         let room = rooms.get(start);
         if (!room) {
-          room = { start, end, headers: [], scriptedPeers: [] };
+          room = { start, end, headers: [] };
           rooms.set(start, room);
         }
         if (room.end !== end) throw new Error('Shared enemy room has conflicting file bounds');
@@ -2541,17 +2082,8 @@ function collectEnemyRooms(rom: Uint8Array, game: Game): Room[] {
         for (const setup of setups) {
           if (!room.headers.some(h => h.scene === scene && h.room === index && h.setup === setup.setup))
             room.headers.push({ ...setup, scene, room: index });
-          addScripted(setup);
         }
         room.excluded ||= excluded;
-        sceneRooms.add(room);
-      }
-    }
-    for (const room of sceneRooms) {
-      room.scriptedPeers = [...room.scriptedPeers!, scripted];
-      if (sceneActors.size) {
-        room.sceneActors ??= new Set();
-        for (const actor of sceneActors) room.sceneActors.add(actor);
       }
     }
   }
@@ -2844,7 +2376,8 @@ function installFieldStalchildShuffle(patch: Patchfile, settings: Settings, plan
   const header = new Uint8Array(OOT_FIELD_STALCHILD_SLOTS.length * 8);
   OOT_FIELD_STALCHILD_SLOTS.forEach((slot, index) => {
     const row = plan.find(row => row.kind === 'field-spawner' && row.source === slot.key);
-    if (!row?.field) throw Error('Missing budgeted Hyrule Field spawner slot');
+    if (!row) return;
+    if (!row.field) throw Error('Missing budgeted Hyrule Field spawner slot');
     const original = new Uint8Array(16);
     bufWriteU16BE(original, 0, 0x1b0);
     const unique = new Map([row.field, ...(row.chaoticOotChoices ?? [])].map(choice =>
@@ -2899,6 +2432,13 @@ function installMmEnemyDependencies(rom: Uint8Array, plan: EnemyPlan, patch: Pat
         const replacement = replacements.get(source)!;
         target = replacement.targetActorId + (replacement.targetGame === 'oot' ? 0xc00 : 0);
         type = 1;
+      } else if (id === 0x3b && [0, 2].includes(params & 0xff) && replacements.has(at)) {
+        /* Keep the original home position even if its replacement moves or
+         * falls from the platform. This also covers Woodfall's Mad Scrubs. */
+        target = 0; /* Pink Deku Flower, without the death-spawn bounce. */
+        hostSlot = slot;
+        yaw = (bufReadU16BE(rom, at + 10) >>> 7) * 0x10000 / 360;
+        type = 4;
       } else if (id === 0x12d && params === 0 && replacements.has(at)) {
         const replacement = replacements.get(at)!;
         if (replacement.targetGame === 'mm' && replacement.targetActorId === 0x12d && replacement.targetParams === 0) continue;
@@ -2962,7 +2502,7 @@ function installLilySourceChoices(plan: EnemyPlan, rom: Uint8Array, patch: Patch
   patch.addSymbolPatch('ENEMY_LILY_CHOICES_MM_V1', toU32Buffer([vrom]));
 }
 
-function installGoldSkulltulaChoices(plan: EnemyPlan, roms: DecompressedRoms, patch: Patchfile, rooms: EnemySupplementalRoom[], foreign: ReadonlyMap<string, ForeignEnemyPlacement>) {
+function installGoldSkulltulaChoices(plan: EnemyPlan, roms: DecompressedRoms, patch: Patchfile, rooms: EnemySupplementalRoom[], foreign: ReadonlyMap<string, ForeignEnemyPlacement>, settings: Settings) {
   for (const game of ['oot', 'mm'] as const) {
     const selected = plan.filter(row => row.kind === 'gold' && enemyDefinition(row.source).game === game).sort((a, b) => {
       const x = ENEMY_GOLD_SOURCES.find(s => s.key === a.source)!;
@@ -2976,6 +2516,11 @@ function installGoldSkulltulaChoices(plan: EnemyPlan, roms: DecompressedRoms, pa
     for (let i = 0; i < selected.length; i++) {
       const row = selected[i], source = ENEMY_GOLD_SOURCES.find(s => s.key === row.source)!;
       const target = enemyDefinition(row.target);
+      if (enemyShuffleExcluded(settings, target, game))
+        throw Error(`Excluded Gold Skulltula replacement: ${source.key} -> ${target.key}`);
+      if (!enemyGoldTargetPool(settings, source).some(candidate => candidate.game === target.game &&
+        candidate.actorId === target.actorId && candidate.spawnParams === target.spawnParams))
+        throw Error(`Invalid Gold Skulltula replacement for this source/settings: ${source.key} -> ${target.key}`);
       for (const slot of source.slots) {
         const rom = slot.mq ? patch.newFiles.find(file => file.name === 'custom/mq_rooms')!.data : roms[game].rom;
         if (!matchesRomBytes(rom, slot.offset, slot.raw)) throw Error('Gold Skulltula source entry changed');
@@ -3046,19 +2591,50 @@ export function installSoulPreviews(roms: DecompressedRoms, patch: Patchfile, se
   patch.meta.enemySoulPreviewSources = [...proofs.values()];
 }
 
-export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses: GameAddresses, patch: Patchfile, settings: Settings, monitor?: Monitor) {
-  for (const game of ['oot', 'mm'] as const) {
-    if (!(game === 'oot' ? settings.enemyShuffleOot : settings.enemyShuffleMm)) continue;
-    const timerClear = patch.symbols.oot.get('ENEMY_OOT_ROOMTIMER_CLEAR');
-    if (game === 'oot' && timerClear?.length !== 1)
-      throw Error('Missing shuffled room timer clear callback');
-    const timers = game === 'oot' ? [[0x80b25350, 0x241803ff], [0x80b25440, 0x0c000000 | ((timerClear![0] >>> 2) & 0x03ffffff)]] :
-      [[0x80973c60, 0x241801ff], [0x80b10310, 0], [0x80b10508, 0x5000001b]];
-    for (const [vram, instruction] of timers) {
-      const address = addresses[game].fileFromRAM(vram);
-      patch.addPatch(address.name, address.offset, toU32Buffer([instruction]));
+function installOotCombatRoomTimers(plan: EnemyPlan, rom: Uint8Array, addresses: GameAddresses, patch: Patchfile) {
+  const placements = plan.flatMap(row => row.ootr ? [row.ootr.location,
+    ...row.ootr.aliases.map(([scene, room, setup]) => ({ mq: false, scene, room, setup }))] : []);
+  if (!placements.length) return;
+  const rooms: OotTimerRoom[] = [];
+  const add = (data: Uint8Array, offset: number, count: number, location: Omit<OotTimerRoom, 'actors'>) => {
+    range(data, offset, count * 16);
+    rooms.push({ ...location, actors: Array.from({ length: count }, (_, slot) => ({
+      actorId: bufReadU16BE(data, offset + slot * 16), params: bufReadU16BE(data, offset + slot * 16 + 14),
+    })) });
+  };
+  for (const room of collectEnemyRooms(rom, 'oot')) for (const header of room.headers) {
+    if (header.actors) add(rom, header.actors.offset, header.actors.count,
+      { mq: false, scene: header.scene, room: header.room, setup: header.setup });
+  }
+  const mq = patch.newFiles.find(file => file.name === 'custom/mq_rooms')?.data;
+  if (mq) {
+    range(mq, 0, 0x20);
+    const count = bufReadU32BE(mq, 0);
+    range(mq, 0x20, count * 0x20);
+    for (let i = 0; i < count; ++i) {
+      const header = 0x20 + i * 0x20, start = bufReadU32BE(mq, header + 4);
+      const end = start + bufReadU32BE(mq, header), dungeon = mq[header + 8];
+      const offset = start + bufReadU16BE(mq, header + 12), actorCount = bufReadU16BE(mq, header + 10);
+      if (dungeon > 11) throw Error('Invalid MQ room timer dungeon');
+      range(mq, start, end - start, 0x20 + count * 0x20);
+      range(mq, offset, actorCount * 16, start, end);
+      add(mq, offset, actorCount, { mq: true, scene: mqDungeonScene(dungeon), room: mq[header + 9], setup: 0 });
     }
   }
+  const masks = ootCombatTimerRooms(placements, rooms);
+  if (!masks.some(mask => mask !== 0)) return;
+  const timerClear = patch.symbols.oot.get('ENEMY_OOT_ROOMTIMER_CLEAR');
+  if (timerClear?.length !== 1 || patch.symbols.oot.get('ENEMY_OOT_COMBAT_TIMER_ROOMS_V1')?.length !== 1)
+    throw Error('Missing shuffled combat room timer runtime');
+  patch.addSymbolPatch('ENEMY_OOT_COMBAT_TIMER_ROOMS_V1', toU32Buffer(masks));
+  const address = addresses.oot.fileFromRAM(0x80b25440);
+  patch.addPatch(address.name, address.offset, toU32Buffer([0x0c000000 | ((timerClear[0] >>> 2) & 0x03ffffff)]));
+}
+
+export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses: GameAddresses, patch: Patchfile, settings: Settings, monitor?: Monitor) {
+  if (plan.some(row => !row.kind && !row.ootr && !row.placement))
+    throw new Error('Enemy plan entry is missing its placement point');
+  installOotCombatRoomTimers(plan, roms.oot.rom, addresses, patch);
   monitor?.log('Preparing enemy models and effects');
   verifyMmRoomOverlaps(roms.mm.rom);
   for (const game of ['oot', 'mm'] as const) {
@@ -3076,7 +2652,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
   const verifyNativeActors = nativeActorPreservation(plan, roms, addresses, patch, supplementalEdits);
   const foreignTargets = prepareForeignEnemies(plan, roms, addresses, patch);
   installDynamicChoices(patch, plan, foreignTargets);
-  installGoldSkulltulaChoices(plan, roms, patch, supplementalRooms, foreignTargets);
+  installGoldSkulltulaChoices(plan, roms, patch, supplementalRooms, foreignTargets, settings);
   installLilySourceChoices(plan, roms.mm.rom, patch, supplementalRooms, foreignTargets);
   installDesertLeeverShuffle(patch, plan, supplementalRooms, foreignTargets);
   const guards = plan.find(row => row.kind === 'keeta-guards');
@@ -3087,7 +2663,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
     [choice.id, choice.params, choice.operation, 1].forEach((value, i) => bufWriteU16BE(data, i * 2, value));
     patch.addSymbolPatch('ENEMY_MM_KEETA_GUARDS_V1', data);
     for (const room of collectEnemyRooms(roms.mm.rom, 'mm')) for (const header of room.headers) {
-      if (header.scene !== 0x0c || !header.actors) continue;
+      if (header.scene !== 0x43 || !header.actors) continue;
       if (Array.from({ length: header.actors.count }, (_, slot) => header.actors!.offset + slot * 16)
         .some(at => (bufReadU16BE(roms.mm.rom, at) & 0x1fff) === 0x11b))
         supplementalRooms.push({ game: 'mm', source: guards.source, target: guards.target, scene: header.scene, room: header.room });
@@ -3210,7 +2786,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
         plan: plan.filter(row => row.placement),
       };
     }
-    const supplementalPlan = exactApplied ? plan.filter(row => row.kind && enemyDefinition(row.source).game === game) : plan;
+    const supplementalPlan = plan.filter(row => row.kind && enemyDefinition(row.source).game === game);
     if (game === 'oot') {
       const relocations = patch.meta.enemyRoomRelocations ?? [];
       for (const row of exactRecords) {
@@ -3232,16 +2808,6 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
     const rom = roms[game].rom;
     const records: NativePlacementRecord[] = [];
     const scriptedLayoutProof = sourceLayoutProof;
-    const sceneObjects: SceneObjects = new Map();
-    if (exactApplied) for (const row of plan) {
-      const imported = foreignTargets.get(row.target), location = row.placement ?? row.ootr?.location;
-      if (!imported || imported.targetGame !== game || !location) continue;
-      for (const scene of new Set([location.scene, ...(row.ootr?.aliases.map(alias => alias[0]) ?? [])])) {
-        const held = new Map(sceneObjects.get(scene));
-        for (const [id, size] of imported.objects.pinned) held.set(id, size);
-        sceneObjects.set(scene, held);
-      }
-    }
     let replaced = 0, arenaReplaced = 0;
     for (const room of collectEnemyRooms(rom, game)) {
       const hasScriptedSource = game === 'mm' && supplementalPlan.some(pair => pair.kind === 'scripted' && room.headers.some(header =>
@@ -3251,7 +2817,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
       for (const header of room.headers) if (header.actors)
         for (let i = 0; i < header.actors.count; ++i) actorOffsets.add(header.actors.offset + i * 16);
       room.protectedEntries = new Set([...actorOffsets].filter(offset => nativeEntryProtected(game, offset, addresses, patch)));
-      const changes = planRoomEnemies(rom, game, room, supplementalPlan, rom, foreignTargets, sceneObjects);
+      const changes: Change[] = [];
       const stageRoomEdits = (candidate: typeof patch, edits: readonly Change[]) => {
         for (const { offset, value } of edits) {
           const address = addresses[game].fileFromROM(offset), data = new Uint8Array(2);
@@ -3345,18 +2911,10 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
         const target = changes.find(change => change.offset === offset)!.value & (game === 'mm' ? 0x1fff : 0xffff);
         const params = changes.find(change => change.offset === offset + 14)?.value ?? bufReadU16BE(rom, offset + 14);
         const previous = records.find(row => row.vrom === offset);
-        let operation = previous?.operation ?? (nativeResourceSource(game, source, bufReadU16BE(rom, offset + 14)) ? 1 :
+        const operation = previous?.operation ?? (nativeResourceSource(game, source, bufReadU16BE(rom, offset + 14)) ? 1 :
           (game === 'oot' && target === 0x1b0 && [0, 5, 10].includes(params)) ? 3 : (game === 'mm' && target === 0x50 && params === 0xff00) ? 5 : (game === 'oot' && target === 0x1c0 && [0, 1].includes(params)) ? 7 : ((game === 'oot' && target === 0xc7 && params === 1) || (game === 'mm' && target === 0x66 && [1, 2].includes(params))) ? 6 : ((game === 'oot' && target === 0x1d && [0, 0xffff].includes(params)) || (game === 'mm' && target === 0x14 && params === 0)) ? 4 : game === 'oot' && target === 0x115 ? 16 : game === 'oot' && target === 0x113 && [0xff82, 0xff83].includes(params) ? 64 : 0);
-        let aliases: OotPlacementAlias[] | undefined;
-        if (game === 'oot') {
-          aliases = room.headers.filter(header => header.actors && offset >= header.actors.offset && offset < header.actors.offset + header.actors.count * 16)
-            .map(header => ({ mq: false, loc: header, slot: (offset - header.actors!.offset) / 16, source }));
-          if (ootPlacementAdaptersAgree(aliases) && ootPlacementAdapter(false, aliases[0].loc, aliases[0].slot, source)?.floorOperation)
-            operation |= 32;
-        }
         if (!operation) continue;
         const record = nativePlacementRecord(rom, offset, operation, changes, target, params);
-        record.placementAliases = aliases;
         if (previous) records[records.indexOf(previous)] = record; else records.push(record);
       }
       for (const record of records) if (record.operation === 2 && actorOffsets.has(record.sourceVrom ?? record.vrom))
@@ -3380,21 +2938,6 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
           throw Error('Supplemental encounter overlaps an exact standalone placement');
 
       }
-      for (const pair of supplementalPlan) {
-        if (pair.kind || room.mq) continue;
-        const source = enemyDefinition(pair.source), target = enemyDefinition(pair.target);
-        if (source.game !== game || target.game !== game || !nativeEnemyOnDemandObjects(game, target.actorId))
-          continue;
-        const mask = game === 'mm' ? 0x1fff : 0xffff;
-        const offsets = changes.filter(change => actorOffsets.has(change.offset) &&
-          (bufReadU16BE(rom, change.offset) & mask) === source.actorId &&
-          (change.value & mask) === target.actorId).map(change => change.offset);
-        for (const header of room.headers) {
-          const list = header.actors;
-          if (list && offsets.some(offset => offset >= list.offset && offset < list.offset + list.count * 16))
-            supplementalRooms.push({ game, source: pair.source, target: pair.target, scene: header.scene, room: header.room });
-        }
-      }
       const edits = new Map<number, number>();
       for (const change of changes) {
         if (edits.has(change.offset) && edits.get(change.offset) !== change.value) throw new Error('Conflicting native enemy arena edits');
@@ -3408,14 +2951,6 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
     patch.meta.enemyShuffle ??= {};
     const exactMeta = exactApplied ? patch.meta.enemyShuffle[game] : undefined;
     patch.meta.enemyShuffle[game] = { ...exactMeta, replaced: (exactMeta?.replaced ?? 0) + replaced, arenaReplaced, plan: plan.filter(p => enemyDefinition(p.source).game === game) };
-    if (game === 'oot' && !exactApplied) {
-      const index = patch.newFiles.findIndex(f => f.name === 'custom/mq_rooms');
-      if (index >= 0) {
-        const file = patch.newFiles[index], mq = patchMqEnemies(file.data, rom, supplementalPlan, foreignTargets, sceneObjects, records);
-        patch.newFiles[index] = { ...file, data: mq.data };
-        patch.meta.enemyShuffle.oot.mqReplaced = mq.replaced;
-      }
-    }
     installNativePlacements(game, rom, patch, [...exactRecords, ...records], addresses);
   }
   installChaoticPlacements('oot', patch, chaoticOotPools);
