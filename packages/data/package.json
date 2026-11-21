@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@types/lodash-es": "catalog:",
-    "csv": "^6.6.3",
+    "csv": "catalog:",
     "fast-xml-parser": "catalog:",
     "type-fest": "catalog:",
     "yaml": "catalog:"

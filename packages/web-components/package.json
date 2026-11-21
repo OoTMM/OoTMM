@@ -16,7 +16,9 @@
       "build": {
         "inputs": [
           "{projectRoot}/**/*",
-          { "env": "VERSION" }
+          {
+            "env": "VERSION"
+          }
         ],
         "outputs": [
           "{projectRoot}/dist/**/*"

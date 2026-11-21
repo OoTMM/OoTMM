@@ -9,19 +9,19 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/typography": "catalog:",
     "preact": "catalog:",
-    "preact-iso": "^2.12.2",
+    "preact-iso": "catalog:",
     "react-icons": "catalog:",
-    "reset-css": "^5.0.2",
+    "reset-css": "catalog:",
     "tailwindcss": "catalog:"
   },
   "devDependencies": {
-    "@mdx-js/rollup": "^3.1.1",
+    "@mdx-js/rollup": "catalog:",
     "@ootmm/web-components": "workspace:*",
     "@preact/preset-vite": "catalog:",
     "@tailwindcss/vite": "catalog:",
-    "vite-multiple-assets": "^2.2.6"
+    "vite-multiple-assets": "catalog:"
   },
   "nx": {
     "targets": {

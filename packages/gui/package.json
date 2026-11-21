@@ -24,15 +24,15 @@
   "dependencies": {
     "@ootmm/core": "workspace:*",
     "@ootmm/generator": "workspace:*",
-    "clsx": "^2.1.1",
-    "jszip": "^3.10.2",
+    "clsx": "catalog:",
+    "jszip": "catalog:",
     "lodash-es": "catalog:",
     "preact": "catalog:",
-    "react-ga4": "^3.0.1",
+    "react-ga4": "catalog:",
     "react-icons": "catalog:",
-    "tailwind-merge": "^3.7.0",
+    "tailwind-merge": "catalog:",
     "tailwindcss": "catalog:",
-    "zustand": "^5.0.15"
+    "zustand": "catalog:"
   },
   "devDependencies": {
     "@preact/preset-vite": "catalog:",

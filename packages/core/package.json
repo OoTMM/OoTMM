@@ -14,12 +14,12 @@
   "dependencies": {
     "@ootmm/data": "workspace:*",
     "lodash-es": "catalog:",
-    "pako": "^3.0.2",
-    "uint8array-extras": "^1.5.0"
+    "pako": "catalog:",
+    "uint8array-extras": "catalog:"
   },
   "devDependencies": {
     "@types/lodash-es": "catalog:",
-    "csv": "^6.6.3",
+    "csv": "catalog:",
     "fast-xml-parser": "catalog:",
     "type-fest": "catalog:",
     "yaml": "catalog:"

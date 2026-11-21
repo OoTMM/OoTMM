@@ -12,21 +12,21 @@
     "@ootmm/data": "workspace:*",
     "@ootmm/logic": "workspace:*",
     "@ootmm/tools": "workspace:*",
-    "crc-32": "^1.2.2",
-    "jszip": "^3.10.2",
+    "crc-32": "catalog:",
+    "jszip": "catalog:",
     "lodash-es": "catalog:",
-    "pngjs": "^7.0.0",
-    "uint8array-extras": "^1.5.0",
-    "yaz0": "4.0.2"
+    "pngjs": "catalog:",
+    "uint8array-extras": "catalog:",
+    "yaz0": "catalog:"
   },
   "type": "module",
   "main": "lib/combo/index.ts",
   "sideEffects": false,
   "devDependencies": {
     "@types/lodash-es": "catalog:",
-    "@types/pngjs": "^6.0.5",
+    "@types/pngjs": "catalog:",
     "fast-xml-parser": "catalog:",
-    "gl-matrix": "^3.4.4",
+    "gl-matrix": "catalog:",
     "type-fest": "catalog:",
     "yaml": "catalog:"
   },

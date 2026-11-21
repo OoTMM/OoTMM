@@ -9,7 +9,7 @@
   "author": "Nax",
   "license": "MIT",
   "devDependencies": {
-    "@neutralinojs/neu": "^11.7.2",
+    "@neutralinojs/neu": "catalog:",
     "@ootmm/gui": "workspace:*"
   },
   "nx": {
