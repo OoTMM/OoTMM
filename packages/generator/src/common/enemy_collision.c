@@ -367,9 +367,8 @@ static u8 enemyMmAttackPower(Actor* attacker, ColliderElement* attack)
 {
     u8 power = comboEnemyAttackDamage(attack);
     u32 flags = attack->atDmgInfo.dmgFlags;
-    /* MM damage tables multiply the projectile's base power. OoT arrows
-     * carry 1 here (their native tables supply the damage), while MM arrows
-     * carry 2. Keep seeds/nuts and already-converted hits unchanged. */
+    if (flags == DMG_DEKU_NUT && power == 0)
+        return 1;
     if (attacker && attacker->id == ACTOR_EN_ARROW && power == 1 &&
         (flags == DMG_ARROW_NORMAL || flags == DMG_ARROW_FIRE ||
          flags == DMG_ARROW_ICE || flags == DMG_ARROW_LIGHT))
