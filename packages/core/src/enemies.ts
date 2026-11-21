@@ -1721,6 +1721,10 @@ export function enemyNeverShuffled(game: Game, actorId: number): boolean {
 }
 
 export function enemySourceAllowedBySettings(game: Game, actorId: number, settings: Settings, params?: number): boolean {
+  /* Wallmaster Shuffle owns natural Wallmaster source slots: they must stay
+   * in place so their authored entrance-shuffle warp destinations still work. */
+  if (settings.erWallmasters !== 'none' && (game === 'oot' ? actorId === 0x11 : actorId === 0x0a))
+    return false;
   return enemySpawnMacroMatches('source-settings-allowed', { target: { game, actorId, params }, settings, facts: { miniboss: isMinibossEnemy(game, actorId, params) } });
 }
 

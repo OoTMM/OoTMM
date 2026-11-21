@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/entrance.h>
+#include <combo/enemy_placement.h>
 
 #define SET_HANDLER(a, h) do { *(void**)(((char*)(a)) + 0x180) = (h); } while (0)
 
@@ -22,7 +23,7 @@ static int EnWallmas_GetDestEr(Actor* this, PlayState* play)
         case 0x05: return ENTR_OOT_WALLMASTER_SPIRIT_STATUE;
         case 0x08: return ENTR_OOT_WALLMASTER_SPIRIT_CHILD_SUN;
         case 0x0f: return ENTR_OOT_WALLMASTER_SPIRIT_ADULT_CLIMB;
-        default: UNREACHABLE();
+        default: return ENTR_INVALID;
         }
     case SCE_OOT_BOTTOM_OF_THE_WELL:
         switch (room)
@@ -30,7 +31,7 @@ static int EnWallmas_GetDestEr(Actor* this, PlayState* play)
         case 0x00: return ENTR_OOT_WALLMASTER_BOTW_MAIN;
         case 0x01: return ENTR_OOT_WALLMASTER_BOTW_BASEMENT;
         case 0x03: return ENTR_OOT_WALLMASTER_BOTW_PIT;
-        default: UNREACHABLE();
+        default: return ENTR_INVALID;
         }
     case SCE_OOT_GERUDO_TRAINING_GROUND:
         return ENTR_OOT_WALLMASTER_GTG;
@@ -41,14 +42,21 @@ static int EnWallmas_GetDestEr(Actor* this, PlayState* play)
         default: return ENTR_OOT_WALLMASTER_GANON_SPIRIT;
         }
     default:
-        UNREACHABLE();
+        return ENTR_INVALID;
     }
 }
 
 void EnWallmas_TakePlayerEr(PlayState* play, Actor* this)
 {
+    int destination = comboEnemyNativePlacementIsShuffled(this) ? ENTR_INVALID : EnWallmas_GetDestEr(this, play);
+    if (destination == ENTR_INVALID)
+    {
+        gIsEntranceOverride = 0;
+        comboTransition(play, gLastEntrance);
+        return;
+    }
     comboClearCustomRespawn(CUSTOM_RESPAWN_MODE_DUNGEON_ENTRANCE);
-    play->nextEntrance = EnWallmas_GetDestEr(this, play);
+    play->nextEntrance = destination;
     play->transitionTrigger = TRANS_TRIGGER_START;
     play->transitionType = TRANS_GFX_BLACK;
     gIsEntranceOverride = 1;

@@ -433,6 +433,10 @@ static NativePlacementState* nativePlacementState(Actor* actor)
             return &sNativeStates[i];
     return NULL;
 }
+int comboEnemyNativePlacementIsShuffled(Actor* actor)
+{
+    return actor != NULL && nativePlacementState(actor) != NULL;
+}
 #if defined(GAME_MM)
 static void shuffledDexihandThrow(PlayState* play, Actor* actor, f32 speed, s16 yaw, f32 lift, u32 damage)
 {

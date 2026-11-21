@@ -21,6 +21,7 @@ int comboEnemyNativePlacementActive(Actor*);
 int comboEnemyShuffledDeadHand(Actor*, PlayState*);
 int comboEnemyNativeMusicSuppressed(void);
 int comboEnemyNativePlacementOrigin(Actor*, Vec3f*);
+int comboEnemyNativePlacementIsShuffled(Actor*);
 void comboEnemyNativePlacementReset(void);
 void comboEnemyNativePlacementBeginRoom(PlayState*);
 void comboEnemyNativePlacementSetActorList(PlayState*, ActorEntry*, u32);

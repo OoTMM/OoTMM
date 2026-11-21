@@ -51,6 +51,8 @@ typedef struct EnemyFamily
 
 #define ENEMY_FAMILY_GOLD 1
 #define ENEMY_FAMILY_NO_CLEAR 2
+#define ENEMY_FAMILY_FIELD_STALCHILD 4
+#define ENEMY_FAMILY_DESERT_LEEVER 8
 Actor* comboEnemyFamilySpawn(EnemyFamily*, ActorContext*, ActorEntry*, PlayState*, u32);
 #if defined(GAME_OOT)
 Actor* comboEnemyFamilySpawnVanillaChild(EnemyFamily*, ActorContext*, Actor*, PlayState*, s16,
