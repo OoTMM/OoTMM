@@ -353,7 +353,7 @@ void EnRaf_Init(Actor* thisx, PlayState* play) {
 void EnRaf_Destroy(Actor* thisx, PlayState* play) {
     EnRaf* this = (EnRaf*)thisx;
     Player* player = GET_PLAYER(play);
-    if (player->actor.parent == thisx) {
+    if (player != NULL && player->actor.parent == thisx) {
         player->actor.parent = NULL;
         player->actor.freezeTimer = 0;
         player->av2.actionVar2 = 1000;

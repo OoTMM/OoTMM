@@ -5814,7 +5814,8 @@ static void Slime_Rise(StandaloneSlime* slime)
     Actor* actor = &duel->actor;
     actor->velocity.y = 0.f;
     if (slime->riseCounter >= 10 &&
-        fabsf(actor->world.pos.y - (slime->ceiling - 1000.f * Slime_RiseHeightScale(slime))) < 1.f)
+        (fabsf(actor->world.pos.y - (slime->ceiling - 1000.f * Slime_RiseHeightScale(slime))) < 1.f ||
+         (actor->bgCheckFlags & BGCHECKFLAG_CEILING)))
     {
         duel->phase = SLIME_CEILING;
         slime->ceilingMoveTimer = 320;
@@ -5870,6 +5871,8 @@ static void Slime_ConstrainHeight(StandaloneSlime* slime, PlayState* play)
     Actor* actor = &duel->actor;
     if (duel->phase < SLIME_RISE || duel->phase > SLIME_FROZEN || duel->phase == SLIME_GRAB)
         return;
+    if (duel->phase == SLIME_CEILING || (duel->phase == SLIME_FALL && slime->dropWarningActive))
+        return;
     f32 lower = Slime_RiseHeightScale(slime) * 1000.f;
     f32 upper = lower;
     if (duel->phase == SLIME_FROZEN)
@@ -5896,6 +5899,8 @@ static void Slime_ConstrainHeight(StandaloneSlime* slime, PlayState* play)
         slime->shellGrounded = 0;
         actor->bgCheckFlags &= ~BGCHECKFLAG_GROUND;
     }
+    if (duel->phase == SLIME_FALL)
+        return;
     Vec3f end = actor->world.pos;
     end.y += upper;
     Vec3f hit;
@@ -5904,6 +5909,8 @@ static void Slime_ConstrainHeight(StandaloneSlime* slime, PlayState* play)
     if (upper > 0.f && BgCheck_EntityLineTest1(&play->colCtx, &actor->world.pos, &end, &hit, &poly, 0, 0, 1, 0, &bgId))
     {
         actor->world.pos.y = MAX(actor->floorPoly ? floor + lower : hit.y - upper, hit.y - upper);
+        if (duel->phase == SLIME_RISE && hit.y - 2.f < slime->ceiling)
+            slime->ceiling = MAX(slime->riseStart + 2.f, hit.y - 2.f);
         actor->bgCheckFlags |= BGCHECKFLAG_CEILING;
         if (actor->velocity.y > 0.f)
             actor->velocity.y = 0.f;
@@ -6452,9 +6459,14 @@ static void Slime_RegisterShell(StandaloneSlime* slime, PlayState* play)
     f32 sizeXZ = slime->shellScaleXZ;
     f32 sizeY = slime->shellScaleY;
     f32 height = slime->shellOffsetY;
-    int clipped = Slime_ClipWallVertices(play, actor, vertices, height, sizeXZ, sizeY);
+    int clipWorld = (duel->phase == SLIME_GROUND && !squishing) ||
+                    (duel->phase == SLIME_FROZEN && slime->frozenOnGround);
+    int clipped = clipWorld ? Slime_ClipWallVertices(play, actor, vertices, height, sizeXZ, sizeY) : 0;
+    int fallNearFloor = dropping && actor->floorPoly &&
+        actor->world.pos.y - 1000.f * sizeY <= actor->floorHeight + 8.f;
     if (sizeY > .001f &&
-        (rising || duel->phase == SLIME_CEILING || duel->phase == SLIME_FALL || duel->phase == SLIME_FROZEN))
+        (rising || duel->phase == SLIME_CEILING || warning || fallNearFloor ||
+         duel->phase == SLIME_FROZEN))
     {
         f32 originY = actor->world.pos.y + height;
         f32 upper = (slime->ceiling - originY) / sizeY;
@@ -6467,22 +6479,31 @@ static void Slime_RegisterShell(StandaloneSlime* slime, PlayState* play)
             *y = bounded;
         }
     }
-    if (clipped || waving || dropping || rising || wide || duel->phase == SLIME_THROW || duel->phase == SLIME_GRAB ||
-        duel->phase == SLIME_FROZEN)
+    int fastShell = dropping || warning || grabbing || squishing || duel->phase == SLIME_THROW;
+    if (!fastShell &&
+        (clipped || waving || rising || wide || duel->phase == SLIME_FROZEN))
         Slime_UpdateMeshNormals(vertices);
     if (forming)
         return;
-    Vec3f world[ARRAY_COUNT(sGekkoSlimeVertices)];
-    for (int i = 0; i < ARRAY_COUNT(world); ++i)
-    {
-        world[i] = (Vec3f){
-            actor->world.pos.x + vertices[i].n.ob[0] * sizeXZ,
-            actor->world.pos.y + height + vertices[i].n.ob[1] * sizeY,
-            actor->world.pos.z + vertices[i].n.ob[2] * sizeXZ,
-        };
-    }
     Slime_RegisterRingColliders(slime, play);
-    Slime_PushPlayer(slime, play, world);
+    if (rising || duel->phase == SLIME_CEILING || duel->phase == SLIME_FALL ||
+        grabbing || duel->phase == SLIME_THROW)
+        return;
+    Player* nearbyPlayer = GET_PLAYER(play);
+    if (nearbyPlayer && !nearbyPlayer->actor.parent && nearbyPlayer->cylinder.dim.radius > 0 &&
+        actor->xzDistToPlayer <= MAX(200.f, sizeXZ * 1000.f + nearbyPlayer->cylinder.dim.radius))
+    {
+        Vec3f world[ARRAY_COUNT(sGekkoSlimeVertices)];
+        for (int i = 0; i < ARRAY_COUNT(world); ++i)
+        {
+            world[i] = (Vec3f){
+                actor->world.pos.x + vertices[i].n.ob[0] * sizeXZ,
+                actor->world.pos.y + height + vertices[i].n.ob[1] * sizeY,
+                actor->world.pos.z + vertices[i].n.ob[2] * sizeXZ,
+            };
+        }
+        Slime_PushPlayer(slime, play, world);
+    }
     if (duel->phase == SLIME_GROUND && slime->squishRecovery && !duel->timer)
     {
         slime->squishRecovery = 0;
@@ -6701,30 +6722,9 @@ static void Slime_ShakeFrozenGround(StandaloneSlime* slime, PlayState* play)
 static void Slime_MoveUnderCeiling(StandaloneSlime* slime, PlayState* play, f32 speed)
 {
     Actor* actor = &slime->duel.actor;
-    Vec3f next = actor->world.pos;
-    next.x += speed * Math_SinS(actor->world.rot.y);
-    next.z += speed * Math_CosS(actor->world.rot.y);
-    CollisionPoly* floor = NULL;
-    s32 bgId;
-    f32 height = BgCheck_EntityRaycastDown4(&play->colCtx, &floor, &bgId, actor, &next);
-    if (!floor || (actor->floorPoly && fabsf(height - actor->floorHeight) > 45.f))
-        return;
-    Vec3f start = { next.x, height + 2.f, next.z };
-    Vec3f end = { next.x, height + SLIME_OPEN_AIR_HEIGHT, next.z };
-    Vec3f hit;
-    CollisionPoly* roof;
-    f32 ceiling =
-        BgCheck_EntityLineTest1(&play->colCtx, &start, &end, &hit, &roof, 0, 0, 1, 0, &bgId) ? hit.y - 2.f : end.y;
-    if (ceiling - height < 48.f)
-        return;
-    f32 extent = MIN(1000.f * slime->riseScaleY, (ceiling - height) * .5f);
-    next.y = ceiling - extent;
-    if (fabsf(next.y - actor->world.pos.y) <= 25.f && enemyFlightClear(play, &actor->world.pos, &next))
-    {
-        actor->world.pos = next;
-        slime->ceiling = ceiling;
-        slime->riseStart = height;
-    }
+    (void)play;
+    actor->world.pos.x += speed * Math_SinS(actor->world.rot.y);
+    actor->world.pos.z += speed * Math_CosS(actor->world.rot.y);
 }
 
 static void Slime_StartDefeat(StandaloneSlime* slime, PlayState* play)
@@ -9750,7 +9750,13 @@ static void Duel_Update(Actor* actor, PlayState* play)
             f32 wallRadius = 32.f;
             if (DUEL_FIXED_FORM == DUEL_SNAPPER)
                 wallRadius = ((StandaloneSnapper*)duel)->wallHit == 1 ? 3.f : 15.f;
-            Actor_UpdateBgCheckInfo(play, actor, 24.f, wallRadius, 65.f, 5);
+            u32 bgFlags = 5;
+            if (DUEL_FIXED_FORM == DUEL_SLIME)
+            {
+                if (duel->phase == SLIME_CEILING || duel->phase == SLIME_FALL)
+                    bgFlags = 4;
+            }
+            Actor_UpdateBgCheckInfo(play, actor, 24.f, wallRadius, 65.f, bgFlags);
         }
         if (DUEL_FIXED_FORM == DUEL_IGOS)
         {
@@ -11254,7 +11260,11 @@ static void Duel_Draw(Actor* actor, PlayState* play)
                 .3f,  .1f, .45f, .5f, .6f, .2f,  .4f,  .25f, .35f, .65f, .25f, .55f, .3f, .1f,
                 .45f, .5f, .6f,  .2f, .4f, .15f, .35f, .65f, .25f, .3f,  .15f, .45f, .3f, .25f,
             };
-            for (int i = 0; i < ARRAY_COUNT(bubbleOffsets); ++i)
+            int bubbleStep = (duel->phase >= SLIME_FORM && duel->phase <= SLIME_FALL) ? 2 :
+                             (duel->phase == SLIME_GROUND && slime->squishRecovery) ? 4 : 1;
+            int bubbleCount = (duel->phase == SLIME_FALL || duel->phase == SLIME_GRAB ||
+                               duel->phase == SLIME_THROW) ? 0 : ARRAY_COUNT(bubbleOffsets);
+            for (int i = 0; i < bubbleCount; i += bubbleStep)
             {
                 const s16* point = vertices[MIN(i * 6, SLIME_VERTEX_COUNT - 1)].n.ob;
                 f32 offset = bubbleOffsets[i];

@@ -705,7 +705,7 @@ static Actor* enemySpawnRegistered(ActorContext* actorCtx, PlayState* play, s16 
     if ((actorId == 0xd80 && params != 0x192 && (params < 10 || params > 14)) ||
         (actorId == 0xdd1 && params != 0) || (actorId == 0xc2d && params != 0xff) ||
         ((actorId == 0xe3f || actorId == 0xe91) && params != 0) ||
-        (actorId == 0xe3d && params != 0x7f00) || (actorId == 0xd84 && params != 0x1fc0))
+        (actorId == 0xe3d && params != 0x14) || (actorId == 0xd84 && params != 0x1fc0))
     {
         g.roomEnemyLackSoul = 1;
         goto rejected;
