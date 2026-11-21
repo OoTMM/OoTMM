@@ -15,8 +15,7 @@ ASSERT_OFFSET(ScriptedWiz, introState, 0x3cb);
 int ScriptedWiz_Ready(Actor* actor, PlayState* play)
 {
     ScriptedWiz* wiz = (ScriptedWiz*)actor;
-    return actor->id == 0x15d && !actor->init && actor->colChkInfo.health && wiz->introState == 7 && wiz->action == 9 &&
-           wiz->actionFunc == (ActorFunc)actorAddr(0x15d, 0x80a46764);
+    return actor->id == 0x15d && !actor->init && actor->colChkInfo.health && wiz->introState == 7 && wiz->action != 5 && wiz->action != 6;
 }
 
 void ScriptedWiz_Begin(Actor* actor, PlayState* play) {}

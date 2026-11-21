@@ -12244,3 +12244,12 @@
                 - 67
                 - 101
         maximum: 4
+
+"Water surface replacements":
+  when:
+    all:
+      - field: settings.enemyShuffleIgnoreRestrictions
+        equals: false
+      - field: source.habitat
+        equals: water-surface
+  allow: water-surface
