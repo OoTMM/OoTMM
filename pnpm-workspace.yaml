@@ -28,7 +28,7 @@ catalog:
   "@tailwindcss/vite": ^4.3.3
   "@types/lodash-es": ^4.17.12
   "@types/microtime": ^2.1.2
-  "@types/node": ^26.6.1
+  "@types/node": ^26.6.6
   "@types/pngjs": ^6.0.5
   clsx: ^2.1.1
   crc-32: ^1.2.2
@@ -47,16 +47,16 @@ catalog:
   react-ga4: ^3.0.1
   react-icons: ^5.7.0
   reset-css: ^5.0.2
-  tailwind-merge: ^3.7.0
+  tailwind-merge: ^3.7.1
   tailwindcss: ^4.3.3
-  tslib: ^2.8.1
-  tsx: ^4.23.13
+  tslib: ^2.9.1
+  tsx: ^4.23.15
   type-fest: ^5.10.0
   typescript: ^7.0.2
   uint8array-extras: ^1.5.0
-  vite: ^8.3.0
+  vite: ^8.3.8
   vite-multiple-assets: ^2.2.6
-  vitest: ^5.0.1
+  vitest: ^5.1.1
   yaml: ^2.9.1
   yaz0: 4.0.2
   zustand: ^5.0.15
