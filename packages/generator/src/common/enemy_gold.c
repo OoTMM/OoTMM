@@ -105,19 +105,27 @@ static void goldUpdate(Actor* actor, PlayState* play)
     GoldMonitor* m = (GoldMonitor*)actor;
     if (actor->room != play->roomCtx.curRoom.num)
         return;
+    if (m->defeated)
+    {
+        if (!m->family.live)
+            Actor_Kill(actor);
+        return;
+    }
     if (m->retry)
     {
         --m->retry;
         return;
     }
-    if (comboEnemyFamilyDone(&m->family))
+    if (comboEnemyFamilyRewardReady(&m->family))
     {
         Vec3f pos = GET_PLAYER(play)->actor.world.pos;
         Actor_EnItem00* item = EnItem00_DropGoldReward(play, &pos, m->choice.scene, m->choice.reward);
         if (item)
         {
             PlaySound(NA_SE_SY_KINSTA_MARK_APPEAR);
-            Actor_Kill(actor);
+            m->defeated = 1;
+            if (!m->family.live)
+                Actor_Kill(actor);
         }
         else
             m->retry = 15;
@@ -145,6 +153,15 @@ static void goldUpdate(Actor* actor, PlayState* play)
     if (!comboEnemyFindFloor(play, actor, &pos, (m->choice.flags & GOLD_CHOICE_AIR) ? 40.f : 0.f, 50, 0) &&
         !comboEnemyFindFloor(play, actor, &pos, (m->choice.flags & GOLD_CHOICE_AIR) ? 40.f : 0.f, 150, 0))
         pos = actor->world.pos;
+    if (!(m->choice.flags & GOLD_CHOICE_AIR))
+    {
+        Actor probe = { 0 };
+        probe.world.pos = probe.prevPos = pos;
+        probe.scale = (Vec3f){ 1.f, 1.f, 1.f };
+        Actor_UpdateBgCheckInfo(play, &probe, 40.f, 32.f, 0.f, UPDBGCHECKINFO_FLAG_WALL);
+        pos.x = probe.world.pos.x;
+        pos.z = probe.world.pos.z;
+    }
     int previous = sSpawning;
     sSpawning = 1;
     ActorEntry entry = { .id = m->choice.id, .pos = { pos.x, pos.y, pos.z }, .params = m->choice.params };

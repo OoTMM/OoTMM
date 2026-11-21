@@ -1042,7 +1042,7 @@ function ootSpawnSource(defs: readonly EnemyDefinition[], location: OotEnemizerL
   const key = location.fieldSlot === undefined
     ? location.broken ? undefined : ootEnemizerSourceKey(defs, location)
     : OOT_DYNAMIC_PLANNER_SLOTS[location.fieldSlot].key;
-  return { ...location, key };
+  return { ...location, key, habitat: key ? enemyDefinition(key).habitat : undefined };
 }
 
 const { sceneKeeps: nativeSceneKeeps, roomCounts } = placementData;
@@ -1899,7 +1899,8 @@ function mmSpawnLocations(scene: MmScene, actor: MmActor): EnemySpawnLocation[] 
 }
 
 function mmSpawnSource(actor: MmActor, key?: string) {
-  return { ...actor, key: actor.actorId === 0x12d && actor.params === 2 ? MM_BIO_BABA_LILY_PAD_KEY : key };
+  const habitat = ENEMIES.find(enemy => enemy.game === 'mm' && enemy.actorId === actor.actorId)?.habitat;
+  return { ...actor, habitat, key: actor.actorId === 0x12d && actor.params === 2 ? MM_BIO_BABA_LILY_PAD_KEY : key };
 }
 
 function mmSpawnSourceAllowed(settings: Settings, scene: MmScene, actor: MmActor, key?: string): boolean {
@@ -2939,14 +2940,14 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
     try {
       const sceneIndividual = individual;
       const allows: MmTargetGroupAllows = (source, target, actor) => {
-        if (actor && !mmSpawnTargetAllowed(scene, actor, { ...enemyDefinition(target.key), spawnParams: target.variables[0] }, settings,
-          source.find(row => row.actorId === actor.actorId)?.key))
+        const sourceSlots = () => actor ? [actor] : scene.maps.flatMap(map => map.actors).filter(slot => mmSourceFormAllowed(slot) && source.some(row => row.actorId === slot.actorId));
+        if (!sourceSlots().every(slot => mmSpawnTargetAllowed(scene, slot, { ...enemyDefinition(target.key), spawnParams: target.variables[0] }, settings,
+          source.find(row => row.actorId === slot.actorId)?.key)))
           return false;
         if (settings.enemyShuffleMinibosses && !source.every(row => minibossPlacementAllowed(settings, 'mm', actor?.actorId ?? row.actorId, target)))
           return false;
         if (!enemySpawnMacroMatches('mm-scripted-scene-target', { target, facts: { scriptedDinolfos: scriptedDinolfosScenes.has(scene.scene) } }))
           return false;
-        const sourceSlots = () => actor ? [actor] : scene.maps.flatMap(map => map.actors).filter(slot => mmSourceFormAllowed(slot) && source.some(row => row.actorId === slot.actorId));
         if (!settings.enemyShuffleIgnoreRestrictions && !sourceSlots().every(slot => mmAquaticSpawnAllowed(slot, { ...target, spawnParams: target.variables[0] })))
           return false;
         if (!enemySpawnMacroMatches('mm-water-surface-source', { target, settings,
@@ -3317,13 +3318,13 @@ export function enemyGoldTargetPool(settings: Settings, source: typeof ENEMY_GOL
 function supplementalEnemyTargets(settings: Settings, binding: Pick<EnemyReplacement, 'source' | 'kind'>,
   targets: readonly EnemyDefinition[], mq: ReadonlySet<string>): EnemyDefinition[] {
   const source = enemyDefinition(binding.source);
-  const points: { location: EnemySpawnLocation; source: { key: string; actorId: number; params: number } }[] = source.game === 'mm'
+  const points: { location: EnemySpawnLocation; source: { key: string; actorId: number; params: number; habitat: EnemyDefinition['habitat'] } }[] = source.game === 'mm'
     ? MM_NATIVE_SCENES.flatMap(scene => scene.maps.flatMap(map => (binding.kind === 'keeta-guards' && scene.scene === 0x43
       ? map.actors.filter(actor => actor.actorId === 0x11b || actor.actorId === 0x28f)
       : mmEncounterRoots(scene, map, { ...binding, target: source.key }))
       .map(actor => ({
         location: { game: 'mm' as const, scene: scene.scene, room: map.room, setup: map.setup, slot: actor.slot },
-        source: { key: source.key, actorId: source.actorId, params: binding.kind === 'keeta-guards' ? source.spawnParams : actor.params },
+        source: { key: source.key, actorId: source.actorId, habitat: source.habitat, params: binding.kind === 'keeta-guards' ? source.spawnParams : actor.params },
       }))))
     : (OOT_ENCOUNTER_MEMORY_ROOMS[source.key] ?? []).filter(([scene, room]) => {
       const dungeon = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Spirit', 'Shadow', 'BotW', 'IC'][scene];
@@ -3332,10 +3333,10 @@ function supplementalEnemyTargets(settings: Settings, binding: Pick<EnemyReplace
       /* These encounters are keyed by their controller, rather than a normal
        * shuffled actor-list slot. Keep their room selectors as well as the key. */
       location: { game: 'oot' as const, scene, room, setup: 0, mq: false },
-      source: { key: source.key, actorId: source.actorId, params: source.spawnParams },
+      source: { key: source.key, actorId: source.actorId, habitat: source.habitat, params: source.spawnParams },
     }));
   if (!points.length)
-    points.push({ location: { game: source.game }, source: { key: source.key, actorId: source.actorId, params: source.spawnParams } });
+    points.push({ location: { game: source.game }, source: { key: source.key, actorId: source.actorId, habitat: source.habitat, params: source.spawnParams } });
   if (!points.every(point => enemySpawnSourceAllowed(settings, point.location, point.source))) return [];
   return targets.filter(target => points.every(point => enemySpawnTargetAllowed(point.location, point.source, target, settings)));
 }

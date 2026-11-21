@@ -6,6 +6,7 @@ typedef struct
     Actor* actor;
     ActorFunc init, update, fini, draw;
     EnemyFamily* family;
+    u8 hadHealth, defeated;
 } FamilyChild;
 
 static FamilyChild sChildren[256];
@@ -79,10 +80,30 @@ int comboEnemyFamilyDone(const EnemyFamily* family)
     return family->started && !family->live && !family->blocked;
 }
 
+int comboEnemyFamilyRewardReady(const EnemyFamily* family)
+{
+    if (!family->started || family->blocked)
+        return 0;
+    for (u32 i = 0; i < ARRAY_COUNT(sChildren); ++i)
+    {
+        const FamilyChild* child = &sChildren[i];
+        if (child->actor && child->actor != (Actor*)1 && child->family == family && !child->defeated)
+            return 0;
+    }
+    return 1;
+}
+
 void comboEnemyFamilySpawned(Actor* actor)
 {
     if (!sFamily || !actor || (actor->category == ACTORCAT_ITEMACTION && !(sFamily->flags & ENEMY_FAMILY_GOLD)) || actor->id == ACTOR_EN_ELF)
         return;
+#if defined(GAME_OOT)
+    if (actor->id == 0x60 && actor->params == 10)
+        return;
+#else
+    if ((actor->id == 0xc60 && actor->params == 10) || (actor->id == 0x183 && actor->params == 0x80))
+        return;
+#endif
     FamilyChild* child = familyChild(actor, 1);
     if (!child)
     {
@@ -118,6 +139,20 @@ static void familyRun(Actor* actor, PlayState* play, int action)
     if ((child->family->flags & ENEMY_FAMILY_NO_CLEAR) &&
         (actor->category == ACTORCAT_ENEMY || actor->category == ACTORCAT_BOSS))
         Actor_ChangeCategory(play, &play->actorCtx, actor, ACTORCAT_NPC);
+    if (action != 2)
+    {
+        child->hadHealth |= actor->colChkInfo.health != 0;
+#if defined(GAME_OOT)
+        int terminalHealth = actor->id == 0x90 || actor->id == 0xc4c ||
+            actor->id == 0xa4 || actor->id == 0xdd || actor->id == 0xc6c;
+#else
+        int terminalHealth = actor->id == 0x4c || actor->id == 0xc90 ||
+            actor->id == 0xca4 || actor->id == 0x6c || actor->id == 0xcdd;
+#endif
+        if (terminalHealth && (child->family->flags & ENEMY_FAMILY_GOLD) && child->hadHealth &&
+            !actor->colChkInfo.health && !(actor->flags & ACTOR_FLAG_ATTENTION_ENABLED))
+            child->defeated = 1;
+    }
     familyBind(child);
 }
 

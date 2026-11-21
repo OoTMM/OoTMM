@@ -10,7 +10,7 @@ export type EnemySpawnLocation = {
   mq?: boolean;
 };
 
-export type EnemySpawnSource = { actorId: number; params?: number; key?: string };
+export type EnemySpawnSource = { actorId: number; params?: number; key?: string; habitat?: EnemySpawnHabitat };
 export type EnemySpawnTarget = { game: Game; actorId: number; spawnParams: number; habitat: EnemySpawnHabitat };
 export type EnemySpawnContext = {
   source?: object;

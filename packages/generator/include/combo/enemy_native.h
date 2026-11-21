@@ -64,6 +64,7 @@ void comboEnemyFamilySpawned(Actor*);
 int comboEnemyFamilySpawning(void);
 int comboEnemyFamilyIsGold(Actor*);
 int comboEnemyFamilyDone(const EnemyFamily*);
+int comboEnemyFamilyRewardReady(const EnemyFamily*);
 
 Actor* comboEnemyNativeArenaSpawn(ActorContext*, ActorEntry*, PlayState*);
 Actor* comboEnemyNativeStandaloneSpawn(struct ActorContext*, struct ActorEntry*, struct PlayState*, u32);
