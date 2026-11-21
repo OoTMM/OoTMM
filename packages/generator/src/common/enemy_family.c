@@ -126,8 +126,35 @@ static void familyInit(Actor* actor, PlayState* play)
     familyRun(actor, play, 1);
 }
 
+#if defined(GAME_OOT)
+static int familyScriptedChildOutOfRange(Actor* actor, PlayState* play)
+{
+    FamilyChild* child = familyChild(actor, 0);
+    if (!child || !child->family || !play)
+        return 0;
+    u8 flags = child->family->flags;
+    if (!(flags & (ENEMY_FAMILY_FIELD_STALCHILD | ENEMY_FAMILY_DESERT_LEEVER)))
+        return 0;
+    Player* player = GET_PLAYER(play);
+    if (!player)
+        return 0;
+    const Vec3f* pos = flags & ENEMY_FAMILY_FIELD_STALCHILD ? &actor->home.pos : &actor->world.pos;
+    f32 dx = pos->x - player->actor.world.pos.x;
+    f32 dz = pos->z - player->actor.world.pos.z;
+    f32 radius = flags & ENEMY_FAMILY_FIELD_STALCHILD ? 800.f : 400.f;
+    return dx * dx + dz * dz > radius * radius;
+}
+#endif
+
 static void familyUpdate(Actor* actor, PlayState* play)
 {
+#if defined(GAME_OOT)
+    if (familyScriptedChildOutOfRange(actor, play))
+    {
+        Actor_Kill(actor);
+        return;
+    }
+#endif
     familyRun(actor, play, 0);
 }
 

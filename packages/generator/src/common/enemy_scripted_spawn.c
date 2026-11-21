@@ -261,6 +261,7 @@ static Actor* fieldStalchildSpawn(ActorContext* ctx, Actor* parent, PlayState* p
         u32 segment = gSegments[6];
         int soul = comboIsForeignEnemyActor(choice.id) ? comboEnemyForeignSoulCheck(choice.id) :
             comboEnemyNativeSoulCheck(play, choice.id, choice.params);
+        sFieldFamilies[i].flags = preserved ? 0 : ENEMY_FAMILY_FIELD_STALCHILD;
         sFieldFamilies[i].complete = preserved ? fieldPreservedComplete : fieldComplete;
         Actor* actor = preserved
             ? comboEnemyFamilySpawnVanillaChild(&sFieldFamilies[i], ctx, parent, play, id, x, y, z, rx, ry, rz, params)
@@ -296,6 +297,7 @@ typedef struct
 {
     EnemyFamily family;
     Actor* spawner;
+    Actor* spawned;
 } DesertLeeverChild;
 
 static DesertLeeverChild sDesertChildren[8];
@@ -309,6 +311,8 @@ static void desertComplete(EnemyFamily* family, PlayState* play)
             EnemyNativeEncounterSpawner* spawner = (EnemyNativeEncounterSpawner*)parent;
             if (spawner->curNumSpawn > 0)
                 --spawner->curNumSpawn;
+            if (spawner->bigLeever == child->spawned)
+                spawner->bigLeever = NULL;
             break;
         }
     memset(child, 0, sizeof(*child));
@@ -355,6 +359,7 @@ static Actor* desertLeeverSpawn(ActorContext* ctx, Actor* parent, PlayState* pla
             u32 segment = gSegments[6];
             int missingSoul = (comboIsForeignEnemyActor(choice->id) ? comboEnemyForeignSoulCheck(choice->id) :
                 comboEnemyNativeSoulCheck(play, choice->id, choice->params)) <= 0;
+            sDesertChildren[i].family.flags = preserved ? 0 : ENEMY_FAMILY_DESERT_LEEVER;
             sDesertChildren[i].family.complete = preserved ? desertPreservedComplete : desertComplete;
             Actor* actor = preserved
                 ? comboEnemyFamilySpawnVanillaChild(&sDesertChildren[i].family, ctx, parent, play, id, x, y, z, rx, ry, rz, params)
@@ -376,6 +381,7 @@ static Actor* desertLeeverSpawn(ActorContext* ctx, Actor* parent, PlayState* pla
             if (preserved)
                 ((EnemyNativeLeeverAim*)actor)->aimType = spawner->leeverIndex;
             sDesertChildren[i].spawner = parent;
+            sDesertChildren[i].spawned = actor;
             parent->fini = desertSpawnerFini;
             return actor;
         }
