@@ -173,6 +173,7 @@ static int enemyDropTranslate(u32 source, EnemyDrop* drop)
         drop->params[1] = drop->params[2] = flags | ITEM00_ARROWS_10;
         break;
     case 0x0b: item = ITEM00_BOMBS_5; break;
+    case 0x0c: item = ITEM00_NUT; break;
     case 0x0d: item = ITEM00_STICK; break;
     case 0x0e: item = ITEM00_MAGIC_LARGE; break;
     case 0x0f: item = ITEM00_MAGIC_SMALL; break;
@@ -215,6 +216,8 @@ static Actor* enemyDrop(PlayState* play, Vec3f* position, u32 source,
     for (u32 i = 0; i < drop.count; ++i)
     {
         last = spawn(play, position, (s16)drop.params[i]);
+        if (last && (source & 0xff) == 0x0c && last->id == ACTOR_EN_ITEM00 && last->params == ITEM00_NUT)
+            ((Actor_EnItem00*)last)->enemySourceQuantity = 1;
         if (!i)
             first = last;
     }
