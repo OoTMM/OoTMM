@@ -74,9 +74,14 @@ void EnAnubiceTag_ManageAnubis(EnAnubiceTag* this, PlayState* play) {
     EnAnubice* anubis;
     Vec3f offset;
 
-    Actor* child = play->actorCtx.actors[ACTORCAT_ENEMY].first;
-    while (child && child != (Actor*)this->anubis) {
-        child = child->next;
+    Actor* child = NULL;
+    for (int category = 0; category < ARRAY_COUNT(play->actorCtx.actors) && !child; ++category) {
+        for (Actor* candidate = play->actorCtx.actors[category].first; candidate; candidate = candidate->next) {
+            if (candidate == (Actor*)this->anubis) {
+                child = candidate;
+                break;
+            }
+        }
     }
     if (!child || child->id != 0xce0 || !child->update || child->parent != &this->actor) {
         this->anubis = NULL;

@@ -452,3 +452,15 @@ void enemyFootSparkle(PlayState* play, Vec3f* pos)
     enemySmallSparkles(play, pos, &velocity, &acceleration, &prim, &env);
 }
 EXPORT_LINKABLE_SYMBOL(FOREIGN_ENEMY_API_FOOT_SPARKLE, enemyFootSparkle);
+
+#if defined(GAME_OOT)
+static u8 enemyFreezardDamage(Actor* actor)
+{
+    if (actor->colChkInfo.damageEffect == 2 && actor->colChkInfo.damage)
+        actor->colChkInfo.damage = actor->colChkInfo.health;
+    return Actor_ApplyDamage(actor);
+}
+
+PATCH_CALL(0x80a7a82c, enemyFreezardDamage);
+PATCH_CALL(0x80a7a910, enemyFreezardDamage);
+#endif
