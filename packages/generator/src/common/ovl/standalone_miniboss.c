@@ -2480,7 +2480,10 @@ enum {
     IGOS_BACKJUMP,
     IGOS_STRAFE,
     IGOS_STUN,
-    IGOS_RETREAT
+    IGOS_RETREAT,
+    IGOS_MARCH_WAIT,
+    IGOS_MARCH,
+    IGOS_MARCH_END
 };
 enum {
     IGOS_HEAD_ATTACHED,
@@ -3554,6 +3557,44 @@ static void Igos_Combat(StandaloneDuel* duel, PlayState* play, int finished, f32
                                  : duel->walking == IGOS_WAIT || duel->walking == IGOS_TURN ||
                                        duel->walking == IGOS_ADVANCE || duel->walking == IGOS_BLOCK || breathing ||
                                        duel->walking == IGOS_RETREAT;
+#if defined(GAME_MM)
+    if (!king && duel->phase == DUEL_APPROACH)
+    {
+        int marching = !!(player->stateFlags3 & 0x20000000);
+        if (retreatAllowed && marching)
+            Igos_Action(duel, IGOS_MARCH_WAIT, 65 + (u8)(Rand_ZeroOne() * 10.f), 0x40e0, ANIMMODE_LOOP);
+        if (duel->walking >= IGOS_MARCH_WAIT && duel->walking <= IGOS_MARCH_END)
+        {
+            igos->neckYaw = 0;
+            if (duel->walking == IGOS_MARCH_WAIT)
+            {
+                Math_ApproachS(&actor->world.rot.y, actor->yawTowardsPlayer, 2, 0x500);
+                Math_StepToF(&actor->speed, 0.f, 1.f);
+                if (!duel->timer && ((s32 (*)(void))0x801a46f8)())
+                    Igos_Action(duel, IGOS_MARCH, 200, 0xddcc, ANIMMODE_LOOP);
+            }
+            else
+            {
+                if (duel->walking == IGOS_MARCH)
+                {
+                    actor->speed = 1.f;
+                    actor->world.rot.y += (u16)actor->params == 0x817f ? 0x100 : -0x100;
+                }
+                if (Animation_OnFrame(&duel->skel, 1.f) || Animation_OnFrame(&duel->skel, 11.f))
+                    Duel_Sfx(actor, (u16)actor->params == 0x817f ? 0x3a28 : 0x3a27);
+                if (duel->walking == IGOS_MARCH_END && !duel->timer)
+                    Igos_Action(duel, IGOS_WAIT, 20, 0x40e0, ANIMMODE_LOOP);
+            }
+            if (duel->walking != IGOS_MARCH_END && (!marching || (duel->walking == IGOS_MARCH && !duel->timer)))
+            {
+                duel->walking = IGOS_MARCH_END;
+                duel->timer = 10;
+            }
+            Math_ApproachS(&actor->shape.rot.y, actor->world.rot.y, 5, 0x500);
+            return;
+        }
+    }
+#endif
     int beamActive = retreatAllowed && !igos->headTarget && Igos_BeamActive(play);
     int beamThreat = beamActive && distance <= 300.f;
     if (duel->phase == DUEL_HURT)

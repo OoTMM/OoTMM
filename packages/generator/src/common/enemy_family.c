@@ -95,7 +95,7 @@ int comboEnemyFamilyRewardReady(const EnemyFamily* family)
 
 void comboEnemyFamilySpawned(Actor* actor)
 {
-    if (!sFamily || !actor || (actor->category == ACTORCAT_ITEMACTION && !(sFamily->flags & ENEMY_FAMILY_GOLD)) || actor->id == ACTOR_EN_ELF)
+    if (!sFamily || !actor || (actor->category == ACTORCAT_ITEMACTION && !(sFamily->flags & ENEMY_FAMILY_GOLD)) || actor->id == ACTOR_EN_ELF || actor->id == ACTOR_EN_ITEM00)
         return;
 #if defined(GAME_OOT)
     if (actor->id == 0x60 && actor->params == 10)
