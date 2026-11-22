@@ -566,7 +566,9 @@ void EnBat_Update(Actor* thisx, PlayState* play) {
         Vec3f previous = this->actor.prevPos;
         Actor_UpdateBgCheckInfo(play, &this->actor, 12.0f, 15.0f, 50.0f,
                                 UPDBGCHECKINFO_FLAG_1 | UPDBGCHECKINFO_FLAG_2 | UPDBGCHECKINFO_FLAG_4);
-        enemyFlightCheckWall(play, &this->actor, previous);
+        if ((this->actor.colChkInfo.health != 0) && (this->actionFunc != EnBat_Stunned)) {
+            enemyFlightCheckWall(play, &this->actor, previous);
+        }
 
         Actor_SetFocus(&this->actor, this->actor.shape.yOffset * 0.01f);
         this->collider.dim.worldSphere.center.x = this->actor.focus.pos.x;

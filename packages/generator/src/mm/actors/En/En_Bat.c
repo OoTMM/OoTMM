@@ -6,7 +6,8 @@ static void EnBat_UpdateBgCheck(PlayState* play, Actor* actor, f32 wallHeight, f
     Vec3f previous = actor->prevPos;
     Actor_UpdateBgCheckInfo(play, actor, wallHeight, wallRadius, ceilingHeight,
         flags | UPDBGCHECKINFO_FLAG_MM_1 | UPDBGCHECKINFO_FLAG_MM_2 | UPDBGCHECKINFO_FLAG_MM_4);
-    enemyFlightCheckWall(play, actor, previous);
+    if (actor->colChkInfo.health != 0)
+        enemyFlightCheckWall(play, actor, previous);
 }
 
 PATCH_VROM_U32(0xeae094, 0);
