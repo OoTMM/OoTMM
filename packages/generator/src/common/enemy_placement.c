@@ -324,6 +324,10 @@ void comboEnemyNativePlacementSetActorList(PlayState* play, ActorEntry* list, u3
         if (!start || finish < start || offset > finish - start || count * sizeof(*list) > finish - start - offset)
             return;
         first = start + offset;
+#if defined(GAME_MM)
+        if (play->sceneId == SCE_MM_GROTTOS && room == 4 && (gGrottoData & 0x1f) >= 0x13)
+            first = 0xe0000000u + ((gGrottoData & 0x1f) - 0x13) * 0x10000 + offset;
+#endif
         last = first + (count - 1) * sizeof(*list);
     }
     if (last < first || last == 0xffffffffu || last - first != (count - 1) * stride || !nativePlacementHeader(&tableCount))
@@ -1376,6 +1380,8 @@ int comboEnemyNativePlacementSpawn(ActorContext* ctx, ActorEntry* entry, PlaySta
     NativePlacement seedRecord;
     ActorEntry* seedEntry = entry;
     ActorEntry adjusted;
+    ActorEntry instanceEntry;
+    int instancePlacement = 0;
 #if defined(GAME_OOT)
     u32 mqKey;
 #endif
@@ -1400,18 +1406,35 @@ int comboEnemyNativePlacementSpawn(ActorContext* ctx, ActorEntry* entry, PlaySta
         return 0;
     start = (u32)files[room].vromStart;
     end = (u32)files[room].vromEnd;
-    if (!start || end <= start || end - start < sizeof(*entry) || address - segment > end - start - sizeof(*entry) ||
-        !nativePlacementLookup(start + address - segment, &record))
+    if (!start || end <= start || end - start < sizeof(*entry) || address - segment > end - start - sizeof(*entry))
+        return 0;
+#if defined(GAME_MM)
+    u32 grotto = gGrottoData & 0x1f;
+    if (play->sceneId == SCE_MM_GROTTOS && room == 4 && grotto >= 0x13)
+    {
+        instancePlacement = 1;
+        if (!nativePlacementLookup(0xe0000000u + (grotto - 0x13) * 0x10000 + address - segment, &record))
+            return 0;
+    }
+    else
+#endif
+    if (!nativePlacementLookup(start + address - segment, &record))
         return 0;
 #if defined(GAME_OOT)
 selected:
 #endif
-    if (memcmp(entry, &record.replacement, sizeof(*entry)))
+    if (memcmp(entry, instancePlacement ? &record.original : &record.replacement, sizeof(*entry)))
     {
         if (!comboIsForeignEnemyActor(entry->id & 0x1fff))
             return 0;
         g.roomEnemyLackSoul = 1;
         return 1;
+    }
+    if (instancePlacement)
+    {
+        instanceEntry = record.replacement;
+        entry = &instanceEntry;
+        seedEntry = entry;
     }
     int chaotic = chaoticPlacementChoose(&record, &seedRecord) &&
                   (record.operation != seedRecord.operation || memcmp(&record.replacement, &seedRecord.replacement, sizeof(*entry)));

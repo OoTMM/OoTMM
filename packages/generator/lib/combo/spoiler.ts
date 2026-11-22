@@ -3,7 +3,7 @@ import type { PlayerItem, LogicResult, HintGossipFoolish, HintGossipPath, HintGo
 
 import { sortBy } from 'lodash-es';
 import { ENTRANCES, hintLocations, SCENES, ENEMY_LOGIC_MM_ROOMS } from '@ootmm/data';
-import { SETTINGS, TRICKS, exportSettings, regionData, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS, enemyDefinition, ENEMY_GOLD_SOURCES, OOT_DESERT_LEEVER_SLOTS, OOT_FIELD_STALCHILD_SLOTS, OOT_FOREST_BOW_SLOTS, OOT_BURIAL_ENEMY_SLOTS, OOT_ENCOUNTER_MEMORY_ROOMS } from '@ootmm/core';
+import { SETTINGS, TRICKS, MM_GENERIC_GROTTOS, exportSettings, regionData, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS, enemyDefinition, ENEMY_GOLD_SOURCES, OOT_DESERT_LEEVER_SLOTS, OOT_FIELD_STALCHILD_SLOTS, OOT_FOREST_BOW_SLOTS, OOT_BURIAL_ENEMY_SLOTS, OOT_ENCOUNTER_MEMORY_ROOMS } from '@ootmm/core';
 import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from './names';
@@ -690,7 +690,7 @@ export function makeEnemySpoilerLog(result: LogicResult, options: Options): stri
           scripted ? enemyRoomLabel(game, scripted.scene, scripted.room, scripted.setup, scripted.slots.length === 1 ? scripted.slots[0] : undefined) :
           arena ? arena.map(([scene, room]) => enemyRoomLabel(game, scene, room)).join(' / ') :
           row.source;
-        const layout = row.ootr?.location.mq ? ' [MQ]' : '';
+        const layout = row.ootr?.location.mq ? ' [MQ]' : row.placement?.grotto !== undefined ? ' [' + MM_GENERIC_GROTTOS.find(grotto => grotto.id === row.placement!.grotto)!.name + ' Generic Grotto]' : '';
         const params = row.ootr?.targetParams ?? row.placement?.targetParams ?? row.field?.targetParams ?? target.spawnParams;
         const sourceName = row.source === 'mm-ikana-throne-scripted' ? 'Igos du Ikana' : source.name;
         writer.write(`${location}${layout}: ${sourceName} → ${target.name} [${target.game.toUpperCase()} actor 0x${target.actorId.toString(16)}, params 0x${params.toString(16)}]`);

@@ -1,15 +1,16 @@
 import type { Game } from '@ootmm/data';
-import type { Settings, SongEventSongs } from '@ootmm/core';
+import type { Settings, SongEventSongs, EnemyPlanCompatibility } from '@ootmm/core';
 import type { World, WorldArea, ExprMap, ExprParsers } from './types';
 import type { Expr } from '../expr';
 
 import { cloneDeep, mapValues } from 'lodash-es';
 import { gameId, MACROS, WORLD, REGIONS, CHECKS, GAMES, GOSSIPS_BY_LOCATION } from '@ootmm/data';
-import { Monitor, Random, SONG_EVENT_SONG_IDS, makeEnemyPlan, enemyLogicMacros, enemySoulSpecializations, enemyPlacementAreaEvents, enemyGoldLocationLogic } from '@ootmm/core';
+import { Monitor, Random, SONG_EVENT_SONG_IDS, makeEnemyPlan, enemyDefinition, enemyPlacementLogicName, enemyLogicMacros, enemySoulSpecializations, enemyPlacementAreaEvents, enemyGoldLocationLogic } from '@ootmm/core';
 import { itemByID, ItemHelpers } from '../items';
 import { ExprParser, exprTrue, MM_TIME_SLICES } from '../expr';
 import { defaultPrices } from '../price';
 import { ootEnemizerWorldLogic, mmEnemyAreaLogic } from '../../../core/src/enemies';
+import type { ResolvedWorldFlags } from './flags';
 import { resolveWorldFlags } from './flags';
 
 export const BOSS_INDEX_BY_DUNGEON = {
@@ -112,6 +113,8 @@ type LogicPassWorldState = {
   monitor: Monitor,
   settings: Settings,
   random: Random;
+  enemyCompatibility?: readonly EnemyPlanCompatibility[];
+  resolvedWorldFlags?: readonly ResolvedWorldFlags[];
 };
 
 class LogicPassWorld {
@@ -127,14 +130,14 @@ class LogicPassWorld {
     this.state.monitor.log('Logic: World Building');
 
     for (let i = 0; i < this.state.settings.players; ++i) {
-      worlds.push(this.createWorld());
+      worlds.push(this.createWorld(i));
     }
 
     return { worlds };
   }
 
-  private createWorld(): World {
-    this.world = this.makeDefaultWorld();
+  private createWorld(worldId: number): World {
+    this.world = this.makeDefaultWorld(worldId);
     for (const g of GAMES) {
       if (this.state.settings.games === 'ootmm' || this.state.settings.games === g) {
         this.state.monitor.log(`Building ${g === 'oot' ? 'OoT' : 'MM'} world logic`);
@@ -162,12 +165,14 @@ class LogicPassWorld {
     return this.world;
   }
 
-  private makeDefaultWorld(): World {
+  private makeDefaultWorld(worldId: number): World {
     /* Resolve flags */
-    const resolvedFlags = resolveWorldFlags(this.state.settings, this.state.random);
+    const rolledFlags = resolveWorldFlags(this.state.settings, this.state.random);
+    const resolvedFlags = this.state.resolvedWorldFlags?.[worldId] ?? rolledFlags;
 
     let lastMessage = '';
     const enemyPlan = makeEnemyPlan(this.state.settings, this.state.random, {
+      compatibility: this.state.enemyCompatibility?.[worldId],
       mqDungeons: new Set(['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Spirit', 'Shadow', 'BotW', 'IC', 'GTG', 'Ganon'].filter(key => resolvedFlags.mqDungeons.has(key)))
     }, (message, completed, total) => {
       if (message !== lastMessage) {
@@ -185,6 +190,11 @@ class LogicPassWorld {
       const parser = new ExprParser(this.state.settings, resolvedFlags, g);
       const macros = { ...MACROS.common, ...MACROS[g] };
       this.loadMacrosFile(parser, enemyLogicMacros(macros, enemyPlan, g));
+      if (this.state.settings.logic === 'allLocations') for (const row of enemyPlan) {
+        const name = enemyPlacementLogicName(row);
+        if (name && enemyDefinition(row.source).game === g)
+          parser.addEnemyMacro(name, row.target);
+      }
       for (const specialization of enemySoulSpecializations(macros, enemyPlan, g))
         parser.addMacroSpecialization(specialization.name, specialization.args, specialization.buffer);
       exprParsers[g] = parser;

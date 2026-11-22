@@ -3,7 +3,7 @@ import type { Expr } from '../expr';
 import type { World } from './types';
 
 import { makePlayerItem } from '../items';
-import { exprAnd, exprFalse, exprOr, exprTrue } from '../expr';
+import { exprEnemy, exprAnd, exprFalse, exprOr, exprTrue } from '../expr';
 
 function exprTransformSingle(expr: Expr, cb: (x: Expr) => Expr | null): Expr {
   const transformed = cb(expr);
@@ -15,6 +15,7 @@ function exprTransformSingle(expr: Expr, cb: (x: Expr) => Expr | null): Expr {
 
 function exprTransform(expr: Expr, cb: (x: Expr) => Expr | null): Expr {
   switch (expr.type) {
+    case 'enemy': return exprTransformSingle(exprEnemy(expr.name, expr.target, exprTransform(expr.expr, cb)), cb);
     case 'and': return exprTransformSingle(exprAnd(expr.exprs.map(e => exprTransform(e, cb))), cb);
     case 'or': return exprTransformSingle(exprOr(expr.exprs.map(e => exprTransform(e, cb))), cb);
     default: return exprTransformSingle(expr, cb);

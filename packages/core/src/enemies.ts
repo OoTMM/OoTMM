@@ -1244,7 +1244,7 @@ function ootEnemizerCandidatePools(defs: readonly EnemyDefinition[], settings: S
     ].map(def => ({ index: -1, def }));
     if (ootArwingSlot(location))
       additions.push({ index: -1, def: ARWING_ENEMIES.oot });
-    let pool = [...native, ...additions].filter(({ def }) => !enemyShuffleExcluded(settings, def, 'oot') &&
+    let pool = [...native, ...additions].filter(({ def }) => enemyTargetCompatible(settings, `enemy_oot_${location.scene}_${location.room}_${location.setup}_${location.slot}`, { ...def, spawnParams: (location.varOverrides as Readonly<Record<string, number>>)[def.name] ?? def.spawnParams }) && !enemyShuffleExcluded(settings, def, 'oot') &&
       spawnLocations.every(where => enemySpawnTargetAllowed(where, source,
         { ...def, spawnParams: (location.varOverrides as Readonly<Record<string, number>>)[def.name] ?? def.spawnParams }, settings)) &&
       !enemyCanRespawn(def.game, def.actorId, def.spawnParams) &&
@@ -1258,6 +1258,8 @@ function ootEnemizerCandidatePools(defs: readonly EnemyDefinition[], settings: S
       pool = pool.filter(row => row.def.key === forced || (row.index >= 0 &&
         forcedOotForms.some(def => def.actorId === row.def.actorId && def.spawnParams === row.def.spawnParams)));
     }
+    if (!pool.length && enemyCompatibilityRule(settings, `enemy_oot_${location.scene}_${location.room}_${location.setup}_${location.slot}`))
+      throw new Error(`No compatible weighted enemy for OoT scene ${location.scene}, room ${location.room}, slot ${location.slot}`);
     if (pool.length) {
       const weights = enemyFormWeights(pool, row => row.def, target => enemyWeight(settings, 'oot', target));
       candidates.set(location, pool.map((row, index) => ({ ...row, weight: weights[index] })));
@@ -1890,6 +1892,7 @@ type MmMap = {
 
 type MmScene = {
   scene: number;
+  grotto?: number;
   maps: MmMap[];
 };
 
@@ -1909,9 +1912,14 @@ function mmSpawnSourceAllowed(settings: Settings, scene: MmScene, actor: MmActor
     mmSpawnLocations(scene, actor).every(where => enemySpawnSourceAllowed(settings, where, source));
 }
 
+function mmSpawnLogicName(scene: MmScene, actor: MmActor): string {
+  return `enemy_mm_${scene.scene}_${actor.offset}${scene.grotto === undefined ? '' : '_' + scene.grotto}`;
+}
+
 function mmSpawnTargetAllowed(scene: MmScene, actor: MmActor, target: EnemySpawnTarget, settings: Settings, key?: string): boolean {
   const source = mmSpawnSource(actor, key);
-  return mmSpawnLocations(scene, actor).every(where => enemySpawnTargetAllowed(where, source, target, settings));
+  return enemyTargetCompatible(settings, mmSpawnLogicName(scene, actor), target) &&
+    mmSpawnLocations(scene, actor).every(where => enemySpawnTargetAllowed(where, source, target, settings));
 }
 
 function mmAquaticSpawnAllowed(actor: MmActor, target: Pick<EnemySpawnTarget, 'game' | 'actorId' | 'spawnParams'>): boolean {
@@ -1997,6 +2005,8 @@ function solveMmScene(scene: MmScene, nativeRoster: readonly MmEnemy[], targetRo
     const compatible = targetRoster.filter(target => groupAllows(sources, target) &&
       row.entries.every(({ actor, source }) => groupAllows([source], target, actor) &&
         (ignoreRestrictions || mmPlacementTypeAllows(source, target))));
+    if (!compatible.length && row.entries.some(entry => enemyCompatibilityRule(memoryOptions, mmSpawnLogicName(scene, entry.actor))))
+      throw new Error(`No compatible weighted enemy for MM scene ${scene.scene}`);
     const allocation = groupedEnemyPool(compatible, row.entries.length,
       target => ({ ...target, spawnParams: target.variables[0] }), weight, next);
     if (!allocation.pool.length && compatible.length)
@@ -2132,6 +2142,7 @@ function mmEncounterRoots(scene: MmScene, map: MmMap, row: EnemyReplacement): Mm
 
 export type EnemySceneMemoryReport = {
   scene: number;
+  grotto?: number;
   budget: number;
   bytes: number;
   headroom: number;
@@ -2144,7 +2155,7 @@ export type EnemySceneMemoryReport = {
 
 function mmSupplementalCosts(scene: MmScene, plan: EnemyPlan, memoryOptions: EnemyMemoryOptions = {}): EnemyMemoryCost[][] {
   return scene.maps.map(map => plan.flatMap(row => {
-    if (row.placement?.scene === scene.scene && map.actors.some(actor => actor.offset === row.placement!.actorOffset))
+    if (row.placement?.scene === scene.scene && row.placement.grotto === scene.grotto && map.actors.some(actor => actor.offset === row.placement!.actorOffset))
       return splitMemoryCosts('mm', row, memoryOptions);
     if (!row.kind || row.kind === 'variant')
       return [];
@@ -2355,7 +2366,7 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
   const evaluate = (selected: readonly (MmEnemy | undefined)[], stopEarly = false, affected?: ReadonlySet<number>, failures?: AdaptiveMemoryAssessment[], preparedScope?: Scope) => {
     let pressure: AdaptiveMemoryAssessment = { excess: 0, slots: [] };
     let worst: EnemySceneMemoryReport = {
-      scene: scene.scene, budget: extra + objectSavings, bytes: 0,
+      scene: scene.scene, grotto: scene.grotto, budget: extra + objectSavings, bytes: 0,
       headroom: p.gameplayReserve, fragmentation: p.fragmentationReserve, actors: 0, objectSavings, scenarios: states.length, resourceExcess: 0
     };
     const dynamicCosts = dynamicSupplemental ? mmSupplementalCosts(scene, dynamicSupplemental(), memoryOptions) : undefined;
@@ -2512,6 +2523,8 @@ function solveMmSceneIndividual(scene: MmScene, nativeRoster: readonly MmEnemy[]
     const pool = targets.filter(target => (ignoreRestrictions || mmPlacementTypeAllows(row.source, target)) &&
       row.entries.every(entry => allows([entry.source], target, entry.actor)));
     if (!pool.length) {
+      if (row.entries.some(entry => enemyCompatibilityRule(memoryOptions, mmSpawnLogicName(scene, entry.actor))))
+        throw new Error(`No compatible weighted enemy for MM scene ${scene.scene}`);
       if (keepEmpty(row.source))
         return [];
       throw new Error('MM individual scene ' + scene.scene + ': empty slot pool');
@@ -2647,8 +2660,8 @@ export function enemySceneMemoryReports(plan: EnemyPlan, memoryOptions: EnemyMem
   if (plan.some(row => row.splitChildren))
     memoryOptions = { ...memoryOptions, enemyShuffleBari: false, enemyShuffleEeno: false };
   const reports: EnemySceneMemoryReport[] = [];
-  for (const scene of MM_NATIVE_SCENES) {
-    const placements = plan.filter(row => row.placement?.scene === scene.scene);
+  for (const scene of MM_ENEMY_SCENES) {
+    const placements = plan.filter(row => row.placement?.scene === scene.scene && row.placement.grotto === scene.grotto);
     if (!placements.length && !mmSupplementalCosts(scene, plan, memoryOptions).some(costs => costs.length))
       continue;
     const rows = placements.map(row => ({
@@ -2671,6 +2684,7 @@ export function enemySceneMemoryReports(plan: EnemyPlan, memoryOptions: EnemyMem
 
 type MmPlacement = MmActorChange & {
   scene: number;
+  grotto?: number;
   roomStart: number;
   roomEnd: number;
   raw: number[];
@@ -2695,6 +2709,17 @@ const MM_NATIVE_ROSTER: readonly MmEnemy[] = [...applyEnemyMmSpawnPolicies(mmFac
   .map(row => ({ ...row, game: 'mm' as const, variables: row.variables.filter(params => enemySpawnMacroMatches('mm-native-roster-form', { target: { ...row, params } })) }));
 
 export const MM_NATIVE_SCENES: readonly MmScene[] = mmFacts.scenes;
+
+export const MM_GENERIC_GROTTOS = [
+  'Path to Snowhead', 'Ikana Valley', 'Zora Cape', 'Road to Ikana', 'Great Bay Coast',
+  'Ikana Graveyard', 'Twin Islands', 'Termina Field Pillar', 'Mountain Village',
+  'Woods of Mystery', 'Southern Swamp', 'Road to Southern Swamp', 'Termina Field Tall Grass',
+].map((name, index) => ({ id: 0x13 + index, name }));
+
+export const MM_ENEMY_SCENES: readonly MmScene[] = MM_NATIVE_SCENES.flatMap(scene => scene.scene !== 7 ? [scene] : [
+  { ...scene, maps: scene.maps.filter(map => map.room !== 4) },
+  ...MM_GENERIC_GROTTOS.map(grotto => ({ ...scene, grotto: grotto.id, maps: scene.maps.filter(map => map.room === 4) })),
+]);
 
 const MM_NATIVE_ENEMY_KEY_PREFIX = 'mm-placement-';
 
@@ -2803,7 +2828,7 @@ function mmGroupedNativeModelAllows(target: MmEnemy): boolean {
 function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, random: Random, supplemental: EnemyPlan, encounterRequests: readonly (readonly MmEncounterChoice[])[] = [], onProgress?: EnemyPlanProgress): EnemyPlan {
   if (!settings.enemyShuffleMm || settings.games === 'oot')
     return [];
-  onProgress?.('Preparing MM enemy placements', 0, MM_NATIVE_SCENES.length);
+  onProgress?.('Preparing MM enemy placements', 0, MM_ENEMY_SCENES.length);
   const scriptedDinolfosScenes = new Set(MM_NATIVE_SCENES
     .filter(scene => scene.maps.some(map => map.actors.some(actor => enemySpawnMacroMatches('mm-scripted-dinolfos-source', { source: actor, facts: { cutscene: ((actor.raw[10] << 8) | actor.raw[11]) & 0x7f } }))))
     .map(scene => scene.scene));
@@ -2879,7 +2904,7 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
     if (!target)
       throw new Error(`Forced target outside MM pool: ${forced}`);
     const output: MmEnemyReplacement[] = [];
-    for (const scene of MM_NATIVE_SCENES) {
+    for (const scene of MM_ENEMY_SCENES) {
       if (mmSceneSkipped(scene.scene))
         continue;
       if (isGraveyardExpandingTarget(scene.scene, selected.game, selected.actorId, selected.spawnParams))
@@ -2920,7 +2945,7 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
           source: sourceKey(change),
           target: placementTargetKey(change),
           placement: {
-            ...change, scene: scene.scene, roomStart: map.start, roomEnd: map.end, raw: actor.raw,
+            ...change, scene: scene.scene, ...(scene.grotto !== undefined ? { grotto: scene.grotto } : {}), roomStart: map.start, roomEnd: map.end, raw: actor.raw,
             ...(isDryAquatic(change.targetGame, change.targetActorId, actor.offset) ? { dryAquatic: true } : {})
           }
         });
@@ -2935,8 +2960,8 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
   const memoryErrors: MmSceneAllocationError[] = [];
   const problems: MmSceneProblem[] = [], emitScenes: (() => void)[] = [];
   let completed = 0;
-  for (const scene of MM_NATIVE_SCENES) {
-    onProgress?.('Preparing MM enemy placements', completed++, MM_NATIVE_SCENES.length);
+  for (const scene of MM_ENEMY_SCENES) {
+    onProgress?.('Preparing MM enemy placements', completed++, MM_ENEMY_SCENES.length);
     try {
       const sceneIndividual = individual;
       const allows: MmTargetGroupAllows = (source, target, actor) => {
@@ -2991,7 +3016,7 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
         changes.forEach(change => {
           const map = scene.maps[change.mapIndex], actor = map.actors.find(a => a.offset === change.actorOffset)!;
           const placement = {
-            ...change, scene: scene.scene, roomStart: map.start, roomEnd: map.end, raw: actor.raw,
+            ...change, scene: scene.scene, ...(scene.grotto !== undefined ? { grotto: scene.grotto } : {}), roomStart: map.start, roomEnd: map.end, raw: actor.raw,
             dryAquatic: isDryAquatic(change.targetGame, change.targetActorId, actor.offset) || undefined
           };
           let chaoticMmChoices: MmPlacement[] | undefined;
@@ -3047,7 +3072,7 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
       memoryErrors.push(error);
     }
   }
-  onProgress?.('Preparing MM enemy placements', completed, MM_NATIVE_SCENES.length);
+  onProgress?.('Preparing MM enemy placements', completed, MM_ENEMY_SCENES.length);
   solveMmJointEncounters(problems, encounterRequests, supplemental, next, settings, onProgress);
   for (const emit of emitScenes)
     emit();
@@ -3058,7 +3083,7 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
 
 function solveMmJointEncounters(input: readonly MmSceneProblem[], requests: readonly (readonly MmEncounterChoice[])[], supplemental: EnemyPlan, next: (max: number) => number, options: EnemyMemoryOptions, onProgress?: EnemyPlanProgress): void {
   const problems = [...input];
-  for (const scene of MM_NATIVE_SCENES)
+  for (const scene of MM_ENEMY_SCENES)
     if (!problems.some(p => p.scene === scene) &&
       requests.some(pool => scene.maps.some(map => mmEncounterRoots(scene, map, pool[0].value).length)))
       problems.push({ scene, rows: [], pools: [], individual: true, positions: [], finish: () => { } });
@@ -3311,8 +3336,11 @@ function mmAllocationError(message: string, scene: MmScene, rows: readonly MmMem
 export function enemyGoldTargetPool(settings: Settings, source: typeof ENEMY_GOLD_SOURCES[number]): EnemyDefinition[] {
   const locations = source.slots.map(slot => ({ ...slot, game: source.game, scene: source.scene }));
   if (!locations.every(where => enemySpawnSourceAllowed(settings, where, { ...where, key: source.key }))) return [];
-  return dynamicEnemyPool(settings, source.game, source.game === 'oot' ? 0x95 : 0x39, source.scene)
-    .filter(target => locations.every(where => enemySpawnTargetAllowed(where, { ...where, key: source.key }, target, settings)));
+  const targets = dynamicEnemyPool(settings, source.game, source.game === 'oot' ? 0x95 : 0x39, source.scene)
+    .filter(target => enemyTargetCompatible(settings, source.key.replaceAll('-', '_'), target) && locations.every(where => enemySpawnTargetAllowed(where, { ...where, key: source.key }, target, settings)));
+  if (!targets.length && enemyCompatibilityRule(settings, source.key.replaceAll('-', '_')))
+    throw new Error('No compatible weighted enemy for ' + source.location);
+  return targets;
 }
 
 function supplementalEnemyTargets(settings: Settings, binding: Pick<EnemyReplacement, 'source' | 'kind'>,
@@ -3338,7 +3366,11 @@ function supplementalEnemyTargets(settings: Settings, binding: Pick<EnemyReplace
   if (!points.length)
     points.push({ location: { game: source.game }, source: { key: source.key, actorId: source.actorId, habitat: source.habitat, params: source.spawnParams } });
   if (!points.every(point => enemySpawnSourceAllowed(settings, point.location, point.source))) return [];
-  return targets.filter(target => points.every(point => enemySpawnTargetAllowed(point.location, point.source, target, settings)));
+  const name = enemyPlacementLogicName({ ...binding, target: source.key });
+  const eligible = targets.filter(target => enemyTargetCompatible(settings, name, target) && points.every(point => enemySpawnTargetAllowed(point.location, point.source, target, settings)));
+  if (!eligible.length && enemyCompatibilityRule(settings, name))
+    throw new Error('No compatible weighted enemy for ' + binding.source);
+  return eligible;
 }
 
 function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, random: Random, constraints: readonly SupplementalMemoryConstraint[] = [], jointRequests?: MmEncounterChoice[][], mq: ReadonlySet<string> = new Set()): EnemyPlan {
@@ -3997,6 +4029,26 @@ export function enemyCanRespawn(game: Game, actorId: number, params: number): bo
   return enemySpawnMacroMatches('respawning', { target: { game, actorId, params } });
 }
 
+export type EnemyPlanCompatibility = ReadonlyMap<string, (target: EnemyDefinition) => boolean>;
+const enemyCompatibility = Symbol('enemyCompatibility');
+
+function enemyCompatibilityRule(settings: Settings, name: string | undefined) {
+  return settings.logic === 'allLocations' && name
+    ? (settings as Settings & { [enemyCompatibility]?: EnemyPlanCompatibility })[enemyCompatibility]?.get(name)
+    : undefined;
+}
+
+function enemyTargetCompatible(settings: Settings, name: string | undefined, target: EnemySpawnTarget): boolean {
+  const rule = enemyCompatibilityRule(settings, name);
+  if (!rule) return true;
+  const key = (target as Partial<EnemyDefinition>).key;
+  const definition = key && enemyDefinition(key).spawnParams === target.spawnParams ? enemyDefinition(key) :
+    ENEMIES.find(enemy => enemy.game === target.game && enemy.actorId === target.actorId && enemy.spawnParams === target.spawnParams) ??
+    ENEMIES.find(enemy => enemy.game === target.game && enemy.actorId === target.actorId);
+  if (!definition) throw new Error('Missing enemy compatibility target');
+  return rule({ ...definition, spawnParams: target.spawnParams });
+}
+
 export type EnemyPlanProgress = (message: string, completed?: number, total?: number) => void;
 
 function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): void {
@@ -4012,18 +4064,19 @@ function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): v
   for (const row of roots) {
     const host = row.ootr ? 'oot' : 'mm';
     const scene = row.ootr?.location.scene ?? row.placement!.scene;
-    const key = host + '/' + scene;
+    const key = host + '/' + scene + '/' + (row.placement?.grotto ?? '');
     const rows = groups.get(key) ?? [];
     rows.push(row);
     groups.set(key, rows);
   }
   for (const [key, rows] of groups) {
-    const [hostText, sceneText] = key.split('/');
+    const [hostText, sceneText, grottoText] = key.split('/');
+    const grotto = grottoText ? +grottoText : undefined;
     const host = hostText as Game, scene = +sceneText;
     const scenePlan = plan.filter(row => host === 'oot'
       ? row.ootr?.location.scene === scene || (!row.ootr && !row.placement)
-      : row.placement?.scene === scene || !!row.kind);
-    const mmScene = host === 'mm' ? MM_NATIVE_SCENES.find(s => s.scene === scene) : undefined;
+      : row.placement?.scene === scene && row.placement.grotto === grotto || !!row.kind);
+    const mmScene = host === 'mm' ? MM_ENEMY_SCENES.find(s => s.scene === scene && s.grotto === grotto) : undefined;
     const pools = rows.flatMap(row => {
       const sourceId = row.ootr?.location.actorId ?? row.placement!.sourceActorId;
       let candidates: EnemyDefinition[];
@@ -4033,7 +4086,7 @@ function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): v
       } else {
         const sourceActor = mmScene!.maps[row.placement!.mapIndex].actors.find(actor => actor.offset === row.placement!.actorOffset)!;
         const locations = mmSpawnLocations(mmScene!, sourceActor);
-        candidates = dynamicEnemyPool(settings, host, sourceId, scene).filter(target => locations.every(location =>
+        candidates = dynamicEnemyPool(settings, host, sourceId, scene).filter(target => enemyTargetCompatible(settings, enemyPlacementLogicName(row), target) && locations.every(location =>
           enemySpawnTargetAllowed(location, { ...sourceActor, key: row.source }, target, settings)));
       }
       const unique = [...new Map(candidates.map(enemy => [`${enemy.game}/${enemy.actorId}/${enemy.spawnParams}`, enemy])).values()];
@@ -4063,7 +4116,7 @@ function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): v
       ? [...scenePlan.flatMap(row => row.ootr ? [enemyDefinition(row.target)] : []),
         ...new Map(ootSupplementalMemoryRows(scenePlan, settings, () => !!rows[0].ootr?.location.mq)
           .filter(row => row.scene === scene).map(row => [row.source, row.target])).values()]
-      : scenePlan.filter(row => row.placement?.scene === scene ||
+      : scenePlan.filter(row => row.placement?.scene === scene && row.placement.grotto === grotto ||
         mmScene?.maps.some(map => mmEncounterRoots(mmScene, map, row).length))
         .map(row => enemyDefinition(row.target));
     const minibosses = minibossAllocation(pools.map(pool => pool.map(c => c.value)), value => value,
@@ -4077,7 +4130,9 @@ function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): v
 
 export function makeEnemyPlan(settings: Settings, random: Random, layouts: {
   mqDungeons?: ReadonlySet<string>;
+  compatibility?: EnemyPlanCompatibility;
 } = {}, onProgress?: EnemyPlanProgress): EnemyPlan {
+  settings = Object.assign({}, settings, { [enemyCompatibility]: layouts.compatibility });
   const progress = settings.enemyShuffleOot || settings.enemyShuffleMm ? onProgress : undefined;
   const forced = settings.plando.enemyTargets ?? {};
   for (const [game, key] of Object.entries(forced)) {
@@ -4192,7 +4247,7 @@ function scopedEnemyEncounter(pair: EnemyReplacement): boolean {
   return pair.kind === 'forest-bow' || pair.kind === 'scripted' || pair.kind === 'arena' || pair.kind === 'restore' && pair.source === 'oot-gerudo-fighter-restored';
 }
 
-function enemyPlacementLogicName(pair: EnemyReplacement): string | undefined {
+export function enemyPlacementLogicName(pair: EnemyReplacement): string | undefined {
   if (pair.kind === 'gold') return pair.source.replaceAll('-', '_');
   if (scopedEnemyEncounter(pair)) return 'fight_' + pair.source.replace(/-(?:scripted|arena|restored)$/, '').replaceAll('-', '_');
   if (pair.ootr) {
@@ -4200,7 +4255,7 @@ function enemyPlacementLogicName(pair: EnemyReplacement): string | undefined {
     return `enemy_oot_${l.scene}_${l.room}_${l.setup}_${l.slot}`;
   }
   if (pair.placement)
-    return `enemy_mm_${pair.placement.scene}_${pair.placement.actorOffset}`;
+    return `enemy_mm_${pair.placement.scene}_${pair.placement.actorOffset}${pair.placement.grotto === undefined ? '' : '_' + pair.placement.grotto}`;
   return undefined;
 }
 

@@ -316,6 +316,10 @@ EXPORT_LINKABLE_SYMBOL(FOREIGN_ENEMY_API_PLAY_IN_CS_MODE, comboEnemyPlayInCsMode
 
 void comboEnemyKnockbackLarge(PlayState* play, Actor* actor, float speed, s16 yaw, float yVelocity, u32 damage)
 {
+#if defined(GAME_OOT)
+    if (actor && actor->id == 0xd3a)
+        speed *= 2.f;
+#endif
     EnemyNativeKnockbackLarge(play, actor, speed, yaw, yVelocity, damage);
 }
 

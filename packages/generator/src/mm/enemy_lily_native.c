@@ -26,6 +26,13 @@ void comboEnemyNativeLilyCategory(PlayState* play, ActorContext* ctx, Actor* act
         ((void (*)(PlayState*, ActorContext*, Actor*, u8))0x800bc154)(play, ctx, actor, category);
 }
 
+void comboEnemyNativeLilyThrow(PlayState* play, Actor* actor, f32 speed, s16 yaw, f32 yVelocity, u32 damage)
+{
+    if (actor == sSelectedLily)
+        speed *= 2.f;
+    ((void (*)(PlayState*, Actor*, f32, s16, f32, u32))0x800b8d50)(play, actor, speed, yaw, yVelocity, damage);
+}
+
 static u8 lilyBegin(void)
 {
     u8 previous = gMmSave.info.weekEventReg[12] & 1;
@@ -130,3 +137,6 @@ EXPORT_SYMBOL(ENEMY_NATIVE_LILY_CATEGORY_V1, comboEnemyNativeLilyCategory);
 
 PATCH_CALL(0x80a17c10, comboEnemyNativeLilyCategory);
 PATCH_CALL(0x80a17ca4, comboEnemyNativeLilyCategory);
+
+EXPORT_SYMBOL(ENEMY_NATIVE_LILY_THROW_V1, comboEnemyNativeLilyThrow);
+PATCH_CALL(0x80a1794c, comboEnemyNativeLilyThrow);

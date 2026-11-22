@@ -18,6 +18,10 @@ const EXPR_TIME_OOT_DAY = compileExpr({ type: 'time-oot', flag: OOT_TIME.DAY });
 const EXPR_TIME_OOT_NIGHT = compileExpr({ type: 'time-oot', flag: OOT_TIME.NIGHT });
 const EXPR_TIME_OOT_DUSK = compileExpr({ type: 'time-oot', flag: OOT_TIME.DUSK });
 
+export function exprEnemy(name: string, target: string, expr: Expr): Expr {
+  return compileExpr({ type: 'enemy', name, target, expr });
+}
+
 export function exprFalse() {
   return EXPR_FALSE;
 }

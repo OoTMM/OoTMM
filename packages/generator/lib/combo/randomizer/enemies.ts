@@ -73,7 +73,7 @@ function planExactMmPlacements(rom: Uint8Array, plan: EnemyPlan, foreign: Readon
   addresses: GameAddresses, patch: Patchfile): Change[] {
   const writes = new Map<number, number>();
   for (const { placement, target } of plan) {
-    if (!placement || placement.sourceActorId === 0x13a) continue;
+    if (!placement || placement.grotto !== undefined || placement.sourceActorId === 0x13a) continue;
     const { actorOffset, raw, targetGame, targetActorId, targetParams, dryAquatic } = placement;
     if (!matchesMmActorEntry(rom, actorOffset, raw))
       throw new Error('MM original actor entry mismatch at ' + actorOffset.toString(16));
@@ -135,9 +135,9 @@ function exactMmActivationRecords(rom: Uint8Array, plan: EnemyPlan, patch: Patch
     const base = imported ? 0 : dryAquatic ? 29 : skullwall ? 5 : peahat ? 4 : MM_PLACEMENT_OPERATIONS[targetActorId] ?? 0;
     const grounded = !dryAquatic && needsGroundPlacement('mm', sourceActorId, definition);
     const operation = base | (imported ? 0 : (air ? 256 : 0) | (attached ? 0 : 512)) | (grounded ? 1024 : 0);
-    if (imported && !grounded) return [];
+    if (imported && !grounded && placement.grotto === undefined) return [];
     const runtimeId = targetActorId + (imported ? 0xc00 : 0);
-    if (!operation && !row.chaoticMmChoices?.length) return [];
+    if (!operation && !row.chaoticMmChoices?.length && placement.grotto === undefined) return [];
     if (!matchesMmActorEntry(rom, actorOffset, raw))
       throw new Error('MM activation original actor entry mismatch');
     if (skullwall) verifyMmSkullwalltulaSlot(rom, placement);
@@ -155,6 +155,11 @@ function exactMmActivationRecords(rom: Uint8Array, plan: EnemyPlan, patch: Patch
       changes.push({ offset: actorOffset + 4, value: mmAquaticPlacementY(rom, actorOffset) & 0xffff });
 
     const record = nativePlacementRecord(rom, actorOffset, operation, changes, runtimeId, targetParams);
+    if (placement.grotto !== undefined) {
+      record.instanceSource = actorOffset;
+      record.vrom = mmGrottoPlacementKey(placement);
+      return [record];
+    }
     const remapped = remapRelocatedRoomKey(record.vrom, relocations);
     if (remapped !== record.vrom) {
       record.sourceVrom = record.vrom;
@@ -555,6 +560,7 @@ type NativePlacementRecord = {
   weight?: number;
   ootPlacement?: { choice: OotEnemizerChoice; key: OotEnemizerPhysicalKey };
   sourceVrom?: number;
+  instanceSource?: number;
   mq?: Pick<EnemyRoomLocation, 'scene' | 'room'> & { slot: number; offset: number; source: Uint8Array };
   original: Uint8Array;
   replacement: Uint8Array;
@@ -578,6 +584,11 @@ function nativePlacementRecord(rom: Uint8Array, offset: number, operation: numbe
     vrom: offset, operation, original, replacement,
     targetId: targetId ?? (bufReadU16BE(replacement, 0) & 0x1fff), targetParams: targetParams ?? bufReadU16BE(replacement, 14)
   };
+}
+
+function mmGrottoPlacementKey(placement: NonNullable<EnemyPlan[number]['placement']>): number {
+  return placement.grotto === undefined ? placement.actorOffset :
+    0xe0000000 + (placement.grotto - 0x13) * 0x10000 + placement.actorOffset - placement.roomStart;
 }
 
 const NATIVE_PLACEMENT_RECORD_SIZE = 44;
@@ -705,7 +716,11 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
         throw Error('Wrong standalone native miniboss object');
     }
     if (game === 'mm' && row.targetId === 0x23d) verifySource(`standalone/${row.targetId}`, () => verifyNativeStandaloneMm(row.targetId, rom, addresses, patch));
-    const sourceData = row.mq?.source ?? rom, sourceOffset = row.mq?.offset ?? row.sourceVrom ?? row.vrom;
+    const sourceData = row.mq?.source ?? rom, sourceOffset = row.mq?.offset ?? row.instanceSource ?? row.sourceVrom ?? row.vrom;
+    if (row.instanceSource !== undefined && (game !== 'mm' || !MM_NATIVE_SCENES.some(scene => scene.scene === 7 &&
+      scene.maps.some(map => map.room === 4 && map.actors.some(actor => actor.offset === row.instanceSource) &&
+        Array.from({ length: 13 }, (_, i) => 0xe0000000 + i * 0x10000 + row.instanceSource! - map.start).includes(row.vrom)))))
+      throw Error('Invalid generic grotto enemy placement');
     if (row.sourceVrom !== undefined) {
       const relocations = patch.meta.enemyRoomRelocations;
       const matches = Array.isArray(relocations) ? relocations.filter((r: any) => r.game === game &&
@@ -1709,7 +1724,7 @@ function enemyRoomModelRosters(game: Game, plan: EnemyPlan, foreign: ReadonlyMap
   supplemental: readonly EnemySupplementalRoom[]): EnemyRoomModelRoster[] {
   const rooms = new Map<string, { scene: number; room: number; ids: Map<number, number> }>();
   const add = (scene: number, room: number, ids: readonly number[], halfDays = 0x3ff) => {
-    if (!Number.isInteger(scene) || scene < 0 || scene > 112 || !Number.isInteger(room) || room < 0 || room > 31)
+    if (!Number.isInteger(scene) || scene < 0 || scene > 112 || !Number.isInteger(room) || room < 0 || (room > 31 && (game !== 'mm' || scene !== 7 || room < 0x113 || room > 0x11f)))
       throw Error('Invalid enemy room model placement');
     const key = scene + '/' + room;
     const row = rooms.get(key) ?? { scene, room, ids: new Map<number, number>() };
@@ -1748,10 +1763,10 @@ function enemyRoomModelRosters(game: Game, plan: EnemyPlan, foreign: ReadonlyMap
       const halfDays = (((raw[9] & 7) << 7) | (raw[13] & 0x7f)) || 0x3ff;
       if (placement.sourceActorId === 0x12d && placement.sourceParams === 0)
         ids = [...ids, 0x15e];
-      add(placement.scene, placement.room, ids, halfDays);
+      add(placement.scene, placement.grotto === undefined ? placement.room : 0x100 | placement.grotto, ids, halfDays);
       const scene = MM_NATIVE_SCENES.find(candidate => candidate.scene === placement.scene);
       for (const map of scene?.maps ?? []) {
-        if (map.room !== placement.room && map.actors.some(actor => actor.offset === placement.actorOffset))
+        if (placement.grotto === undefined && map.room !== placement.room && map.actors.some(actor => actor.offset === placement.actorOffset))
           add(scene!.scene, map.room, ids, halfDays);
       }
     } else if (row.kind || target.game === game) {
@@ -1779,7 +1794,7 @@ function encodeEnemyRoomModels(game: Game, rows: readonly EnemyRoomModelRoster[]
   let cursor = 0;
   rows.forEach((row, index) => {
     if (!Number.isInteger(row.scene) || row.scene < 0 || row.scene > 112 ||
-      !Number.isInteger(row.room) || row.room < 0 || row.room > 31 ||
+      !Number.isInteger(row.room) || row.room < 0 || (row.room > 31 && (game !== 'mm' || row.scene !== 7 || row.room < 0x113 || row.room > 0x11f)) ||
       row.modelIds.length > maxModels || row.halfDays.length !== row.modelIds.length ||
       row.halfDays.some(days => !Number.isInteger(days) || days < 1 || days > 0x3ff) ||
       row.modelIds.some((id, j) => !validRoomModelId(id) || (j > 0 && row.modelIds[j - 1] >= id)))
@@ -1798,13 +1813,16 @@ function encodeEnemyRoomModels(game: Game, rows: readonly EnemyRoomModelRoster[]
 
 export function verifyMmEnemyRoomModelSlots(rows: readonly EnemyRoomModelRoster[]): void {
   for (const scene of new Set(rows.map(row => row.scene))) {
-    const rooms = rows.filter(row => row.scene === scene);
-
-    const maps = rooms.map(row => ({ room: row.room, setup: 0 }));
-    for (const state of mmRoomOverlapStates(scene, maps)) {
-      const ids = new Set(state.maps.flatMap(index => rooms[index].modelIds));
-      if (ids.size > 128 - 35)
-        throw Error(`MM scene ${scene} overlapping rooms exceed enemy model slots`);
+    const sceneRows = rows.filter(row => row.scene === scene);
+    const instances = sceneRows.filter(row => row.room >= 0x100);
+    for (const instance of instances.length ? instances : [undefined]) {
+      const rooms = sceneRows.filter(row => row.room < 0x100 || row === instance);
+      const maps = rooms.map(row => ({ room: row.room >= 0x100 ? 4 : row.room, setup: 0 }));
+      for (const state of mmRoomOverlapStates(scene, maps)) {
+        const ids = new Set(state.maps.flatMap(index => rooms[index].modelIds));
+        if (ids.size > 128 - 35)
+          throw Error(`MM scene ${scene} overlapping rooms exceed enemy model slots`);
+      }
     }
   }
 }
@@ -2759,10 +2777,10 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
       const activationRecords = exactMmActivationRecords(roms.mm.rom, plan, patch);
       exactRecords.push(...activationRecords);
       exactApplied = true;
-      const byOffset = new Map(activationRecords.map(record => [record.sourceVrom ?? record.vrom, record]));
+      const byOffset = new Map(activationRecords.map(record => [record.instanceSource === undefined ? record.sourceVrom ?? record.vrom : record.vrom, record]));
       for (const row of plan) {
         if (!row.placement || !row.chaoticMmChoices?.length) continue;
-        const seed = byOffset.get(row.placement.actorOffset);
+        const seed = byOffset.get(mmGrottoPlacementKey(row.placement));
         if (!seed) continue;
         const alternatives = exactMmActivationRecords(roms.mm.rom,
           row.chaoticMmChoices.map(placement => ({ ...row, target: placement.targetKey, placement })), patch);
@@ -2960,7 +2978,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
   installChaoticPlacements('mm', patch, chaoticMmPools);
   for (const row of plan) {
     if (!row.splitChildren || !row.placement) continue;
-    const key = remapRelocatedRoomKey(row.placement.actorOffset, patch.meta.enemyRoomRelocations ?? []);
+    const key = row.placement.grotto === undefined ? remapRelocatedRoomKey(row.placement.actorOffset, patch.meta.enemyRoomRelocations ?? []) : mmGrottoPlacementKey(row.placement);
     splitChoices.mm.set(key, { seeded: row.splitChildren, pool: row.splitPool });
   }
   installEnemySplits('oot', patch, splitChoices.oot, foreignTargets, settings);

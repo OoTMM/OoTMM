@@ -18,3 +18,10 @@ export class LogicSeedError extends LogicError {
     this.name = "LogicSeedError";
   }
 };
+
+export class EnemyCompatibilityError extends Error {
+  constructor(readonly failures: import('./pathfind').EnemyCompatibilityFailure[], readonly worlds: import('./world').World[]) {
+    super('Enemy replacements are incompatible with All Locations logic');
+    this.name = 'EnemyCompatibilityError';
+  }
+}
