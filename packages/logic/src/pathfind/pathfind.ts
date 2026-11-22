@@ -7,7 +7,7 @@ import type { Item, ItemsCount, PlayerItems } from '../items';
 
 import { countMapAdd } from '@ootmm/core';
 import { ItemHelpers, Items } from '../items';
-import { MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL } from '../expr';
+import { exprEnemy, exprAnd, exprOr, MM_TIME_SLICES, OOT_TIME, OOT_TIME_ALL } from '../expr';
 import { AGE_ADULT, AGE_CHILD, AGES } from '../age';
 import { isLocationLicenseGranting, isLocationRenewable, locationData, makeLocation } from '../locations';
 import { ANALYSIS_EVENTS } from '../analysis';
@@ -178,7 +178,15 @@ const cloneAreaData = (a: AreaData): AreaData => ({
   flagsOff: a.flagsOff,
 });
 
+export type EnemyCompatibilityFailure = {
+  world: number;
+  name: string;
+  target: string;
+  allows: (candidate: Expr) => boolean;
+};
+
 type PathfinderOptions = {
+  ignoreEnemyCombat?: boolean;
   assumedItems?: PlayerItems;
   items?: ItemPlacement;
   recursive?: boolean;
@@ -404,12 +412,12 @@ export class Pathfinder {
     }
   }
 
-  private evalExpr(worldId: number, expr: Expr, age: Age, area: string) {
+  private evalExpr(worldId: number, expr: Expr, age: Age, area: string, ignoredEnemies?: ReadonlySet<string>) {
     const world = this.worlds[worldId];
     const ws = this.state.ws[worldId];
     const as = ws.ages[age];
     const areaData = as.areas.get(area)!;
-    const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events, evalCache: this.evalCaches[worldId][age] };
+    const state = { settings: this.settings, world, areaData, items: ws.items, renewables: ws.renewables, licenses: ws.licenses, age, events: ws.events, evalCache: ignoredEnemies ? undefined : this.evalCaches[worldId][age], ignoreEnemyCombat: ignoredEnemies ?? this.opts.ignoreEnemyCombat };
 
     const deps: ExprDependencies = {
       items: [],
@@ -417,6 +425,54 @@ export class Pathfinder {
     }
     const result = expr.eval(state, deps);
     return { result, deps };
+  }
+
+  enemyCompatibilityFailures(): EnemyCompatibilityFailure[] {
+    if (this.settings.logic !== 'allLocations') return [];
+    const failures: EnemyCompatibilityFailure[] = [];
+    const empty = new Set<string>();
+    let actual: PathfinderState | undefined;
+    for (let world = 0; world < this.worlds.length; ++world) {
+      const ws = this.state.ws[world];
+      for (const [area, data] of Object.entries(this.worlds[world].areas)) {
+        for (const section of ['locations', 'events', 'exits'] as const) for (const [key, rule] of Object.entries(data[section])) {
+          const enemies = new Map<string, string>();
+          const visit = (expr: Expr): void => {
+            if (expr.type === 'enemy') enemies.set(expr.name, expr.target);
+            else if (expr.type === 'and' || expr.type === 'or') expr.exprs.forEach(visit);
+          };
+          visit(rule);
+          if (!enemies.size) continue;
+          const ignored = new Set(enemies.keys());
+          const ages = AGES.filter(age => ws.ages[age].areas.has(area) && this.evalExpr(world, rule, age, area, ignored).result.result);
+          if (!ages.length) continue;
+          const possible = (expr: Expr, relaxed: ReadonlySet<string>) => ages.some(age => this.evalExpr(world, expr, age, area, relaxed).result.result);
+          if (possible(rule, empty)) continue;
+          if (section === 'locations' && ws.locations.has(key)) {
+            actual ??= new Pathfinder(this.worlds, this.settings, this.startingItems).run(null, {
+              assumedItems: this.opts.assumedItems, recursive: true,
+            });
+            if (actual.ws[world].locations.has(key)) continue;
+          }
+          for (const name of enemies.keys()) {
+            ignored.delete(name);
+            if (!possible(rule, ignored)) ignored.add(name);
+          }
+          for (const name of ignored) {
+            const relaxed = new Set(ignored);
+            relaxed.delete(name);
+            const replace = (expr: Expr, candidate: Expr): Expr => {
+              if (expr.type === 'enemy') return expr.name === name ? exprEnemy(name, expr.target, candidate) : expr;
+              if (expr.type === 'and') return exprAnd(expr.exprs.map(child => replace(child, candidate)));
+              if (expr.type === 'or') return exprOr(expr.exprs.map(child => replace(child, candidate)));
+              return expr;
+            };
+            failures.push({ world, name, target: enemies.get(name)!, allows: candidate => possible(replace(rule, candidate), relaxed) });
+          }
+        }
+      }
+    }
+    return failures;
   }
 
   private dependenciesLookup<T>(set: PathfinderDependencySet<T>, dependency: T, areaFrom: string) {

@@ -6,6 +6,7 @@ type ExprNodeTrue = { readonly type: 'true' };
 type ExprNodeFalse = { readonly type: 'false' };
 type ExprNodeOr = { readonly type: 'or'; readonly exprs: Expr[] };
 type ExprNodeAnd = { readonly type: 'and'; readonly exprs: Expr[] };
+type ExprNodeEnemy = { readonly type: 'enemy'; readonly name: string; readonly target: string; readonly expr: Expr };
 type ExprNodeAge = { readonly type: 'age'; readonly age: Age };
 type ExprNodeItem = { readonly type: 'item'; readonly item: Item; readonly count: number };
 type ExprNodeRenewable = { readonly type: 'renewable'; readonly item: Item };
@@ -26,6 +27,7 @@ export type ExprNode =
   | ExprNodeFalse
   | ExprNodeOr
   | ExprNodeAnd
+  | ExprNodeEnemy
   | ExprNodeAge
   | ExprNodeItem
   | ExprNodeRenewable
@@ -61,6 +63,7 @@ export type ExprState = {
   world: ExprStateWorld;
 
   evalCache?: ExprEvalCache;
+  ignoreEnemyCombat?: boolean | ReadonlySet<string>;
 };
 
 export type ExprDependencies = {

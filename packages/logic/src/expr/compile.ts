@@ -277,6 +277,10 @@ function makeEvalFunc(expr: ExprNode): ExprFunc {
     case 'false': return () => RESULT_FALSE;
     case 'or': return (state, deps) => evalOr(expr.exprs, state, deps);
     case 'and': return (state, deps) => evalAnd(expr.exprs, state, deps);
+    case 'enemy': return (state, deps) => {
+      if (state.ignoreEnemyCombat === true || state.ignoreEnemyCombat && state.ignoreEnemyCombat.has(expr.name)) return RESULT_TRUE;
+      return expr.expr.eval(state, deps);
+    };
     case 'age': return (state) => (state.age === expr.age) ? RESULT_TRUE : RESULT_FALSE;
     case 'item': return (state, deps) => evalItem(state.items, expr.item, expr.count, deps);
     case 'license': return (state, deps) => evalItem(state.licenses, expr.item, 1, deps);
@@ -300,6 +304,7 @@ function areaMask(expr: ExprNode): number {
     case 'time-oot': return 1;
     case 'time-mm': return 2;
     case 'flag-on': case 'flag-off': return 4;
+    case 'enemy': return exprAreaMasks[expr.expr.id];
     case 'and': case 'or': return expr.exprs.reduce((mask, child) => mask | exprAreaMasks[child.id], 0);
     default: return 0;
   }

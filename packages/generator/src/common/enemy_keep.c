@@ -350,7 +350,7 @@ static int roomModelsLoad(void)
     for (u32 i = 0; i < count; ++i)
     {
         RoomModelRow* row = &rows[i];
-        if (row->scene > 112 || row->room > 31 || row->first != first ||
+        if (row->scene > 112 || (row->room > 31 && (ROOM_MODELS_GAME != 1 || row->scene != 7 || row->room < 0x113 || row->room > 0x11f)) || row->first != first ||
             row->count > 128 - OBJECT_EXCHANGE_BANK_MAX || row->count > modelCount - first ||
             (i && (rows[i - 1].scene > row->scene || (rows[i - 1].scene == row->scene && rows[i - 1].room >= row->room))))
             goto invalid;
@@ -389,6 +389,10 @@ static const RoomModelRow* roomModelRowFor(PlayState* play, s32 room, const u32*
     if (!play || room < 0 || room > 31 ||
         sRoomModelsVrom < 0x08000000 || !roomModelsLoad())
         return NULL;
+#if defined(GAME_MM)
+    if (play->sceneId == SCE_MM_GROTTOS && room == 4 && (gGrottoData & 0x1f) >= 0x13)
+        room = 0x100 | (gGrottoData & 0x1f);
+#endif
     rows = (RoomModelRow*)(sRoomModelMetadata + 4);
     *modelsOut = (u32*)(rows + sRoomModelCount);
     high = sRoomModelCount;

@@ -6,6 +6,7 @@ export function exprMemoKey(expr: ExprNode): string {
     case 'false': return 'FALSE';
     case 'or': return `OR:${expr.exprs.map(x => x.id).sort().join(',')}`;
     case 'and': return `AND:${expr.exprs.map(x => x.id).sort().join(',')}`;
+    case 'enemy': return `ENEMY:${expr.name}:${expr.target}:${expr.expr.id}`;
     case 'age': return `AGE:${expr.age}`;
     case 'item': return `ITEM:${expr.item.id}:${expr.count}`;
     case 'renewable': return `RENEWABLE:${expr.item.id}`;

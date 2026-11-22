@@ -8,6 +8,7 @@ import { itemByID } from '../items';
 
 import {
   exprTrue,
+  exprEnemy,
   exprFalse,
   exprAnd,
   exprOr,
@@ -62,6 +63,12 @@ export class ExprParser {
   private macroSpecializations = new Map<string, string>();
   private parsedMacros = new Map<string, Expr>();
   private macroCacheDepth = 0;
+  private enemyMacros = new Map<string, string>();
+
+  addEnemyMacro(name: string, target: string) {
+    this.parsedMacros.clear();
+    this.enemyMacros.set(name, target);
+  }
 
   withMacroCache<T>(parse: () => T): T {
     if (!this.macroCacheDepth) this.parsedMacros.clear();
@@ -504,8 +511,10 @@ export class ExprParser {
     }
     this.expect('EOF');
     this.ctx.pop();
-    this.parsedMacros.set(cacheKey, expr);
-    return expr;
+    const target = this.enemyMacros.get(name);
+    const result = target === undefined ? expr : exprEnemy(name, target, expr);
+    this.parsedMacros.set(cacheKey, result);
+    return result;
   }
 
   private parseExprSingle(): Expr | undefined {

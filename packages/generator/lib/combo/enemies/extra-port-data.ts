@@ -523,6 +523,7 @@ export const NATIVE_LILY_FACTS = {
   'objectEnd': 23942208,
   'objectCrc32': 3355588367,
   'hooks': [
+    { 'vrom': 15210204, 'original': '0c02e354', 'symbol': 'ENEMY_NATIVE_LILY_THROW_V1' },
     { 'vrom': 15210912, 'original': '0c02f055', 'symbol': 'ENEMY_NATIVE_LILY_CATEGORY_V1' },
     { 'vrom': 15211060, 'original': '0c02f055', 'symbol': 'ENEMY_NATIVE_LILY_CATEGORY_V1' },
   ],

@@ -10,7 +10,7 @@ import { exprAnd, exprEvent, exprOr, exprTrue } from '../expr';
 import { BOSS_INDEX_BY_DUNGEON, cloneWorld, DUNGEONS_REGIONS } from '../world';
 import { BOSS_METADATA_BY_ENTRANCE } from '../data';
 import { Pathfinder } from '../pathfind';
-import { LogicEntranceError, LogicError } from '../error';
+import { EnemyCompatibilityError, LogicEntranceError, LogicError } from '../error';
 import { makeLocation } from '../locations';
 import { logicPassSolverValidate } from './solve';
 
@@ -384,7 +384,7 @@ class WorldShuffler {
 
     /* Run the pathfinder */
     const pathfinder = new Pathfinder(worlds, this.settings, this.startingItems);
-    const pathfinderState = pathfinder.run(null, { singleWorld: this.worldId, assumedItems: this.allItems, recursive: true });
+    const pathfinderState = pathfinder.run(null, { singleWorld: this.worldId, assumedItems: this.allItems, recursive: true, ignoreEnemyCombat: this.settings.logic === 'allLocations' });
 
     if (!pathfinderState.goal) {
       return false;
@@ -867,7 +867,8 @@ class WorldShuffler {
     this.worldChanged = false;
   }
 
-  run() {
+  run(fixed?: ReadonlyMap<string, string>) {
+    if (fixed) return { world: this.changedWorld(Object.fromEntries(fixed) as EntranceOverrides), changed: true };
     this.overrides = {};
 
     /* Connect the games */
@@ -901,6 +902,7 @@ class WorldShuffler {
 
 type LogicPassEntranceState = {
   worlds: World[];
+  enemyEntranceOverrides?: readonly ReadonlyMap<string, string>[];
   settings: Settings;
   random: Random;
   monitor: Monitor;
@@ -1054,9 +1056,17 @@ class LogicPassEntrances {
 
     for (let i = 0; i < this.input.worlds.length; ++i) {
       const shuffler = new WorldShuffler(this.input.random, i, this.input.worlds, this.input.settings, this.input.startingItems, this.input.allItems);
-      const result = shuffler.run();
+      const result = shuffler.run(this.input.enemyEntranceOverrides?.[i]);
       this.worlds.push(result.world);
       changed = changed || result.changed;
+    }
+
+    if (this.input.settings.logic === 'allLocations' && this.worlds.some(world => world.enemyPlan.length)) {
+      this.input.monitor.log('Checking enemy fight compatibility');
+      const pathfinder = new Pathfinder(this.worlds, this.input.settings, this.input.startingItems);
+      pathfinder.run(null, { assumedItems: this.input.allItems, recursive: true, ignoreEnemyCombat: true });
+      const failures = pathfinder.enemyCompatibilityFailures();
+      if (failures.length) throw new EnemyCompatibilityError(failures, this.worlds);
     }
 
     /* Validate */
