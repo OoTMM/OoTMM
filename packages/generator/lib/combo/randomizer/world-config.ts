@@ -20,7 +20,7 @@ export function worldConfig(world: LogicResultWorld, settings: Settings): Set<Co
     MM_PROGRESSIVE_SWORDS: settings.progressiveSwordsMm === 'progressive',
     MM_PROGRESSIVE_CHILD_SWORDS: settings.progressiveChildSwordsMm === 'progressive',
     MM_PROGRESSIVE_SWORDS_GORON: settings.progressiveSwordsMm === 'goron',
-    MM_CYCLE_REPAIR_GIANTS_KNIFE: settings.cycleRepairGiantsKnife,
+    MM_GIANTS_KNIFE_CYCLE_REPAIR: settings.giantsKnifeCycleRepair,
     MM_MASTER_SWORD: settings.masterSwordMm,
     MM_GORON_SWORDS: settings.goronSwordsMm,
     MM_HYLIAN_SHIELD: settings.hylianShieldMm,
