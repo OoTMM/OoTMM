@@ -243,7 +243,9 @@ void KaleidoScope_BeforeUpdateCustomMm(PlayState* play)
     u16 press = play->state.input[0].press.button;
     u16 slot;
     s32 equipType;
-    u16 cycleButtons;
+    s32 equipped;
+    s32 keepFormSword;
+    Player* player;
 
     if (pauseCtx->state != 0)
         KaleidoScope_BeginQuestEquipProxy(play);
@@ -274,12 +276,23 @@ void KaleidoScope_BeforeUpdateCustomMm(PlayState* play)
     }
 
     pauseCtx->cursorColorIndex = 4;
-    if (equipType == MM_QUEST_EQUIP_SHIELD && (press & L_TRIG))
+    if (press & L_TRIG)
     {
-        if (MmShield_GetEquipped() != MM_SHIELD_NONE)
+        equipped = (equipType == MM_QUEST_EQUIP_SWORD) ? (MmSword_GetEquipped() != MM_SWORD_NONE) : (MmShield_GetEquipped() != MM_SHIELD_NONE);
+        if (equipped)
         {
-            KaleidoScope_EndQuestEquipProxy();
-            MmShield_Unequip(play);
+            player = GET_PLAYER(play);
+            keepFormSword = equipType == MM_QUEST_EQUIP_SWORD && player && player->transformation == MM_PLAYER_FORM_FIERCE_DEITY;
+            if (!keepFormSword)
+                KaleidoScope_EndQuestEquipProxy();
+            if (equipType == MM_QUEST_EQUIP_SWORD)
+            {
+                gSharedCustomSave.mm.humanAgeLoadouts[gMmSave.linkAge].sword = MM_SWORD_NONE;
+                if (!keepFormSword)
+                    MmSword_RefreshNativeEquip(play);
+            }
+            else
+                MmShield_Unequip(play);
             KaleidoScope_BeginQuestEquipProxy(play);
             KaleidoScope_InvalidateNamedItem(play);
             PlaySound(0x4808);
@@ -292,11 +305,10 @@ void KaleidoScope_BeforeUpdateCustomMm(PlayState* play)
         return;
     }
 
-    cycleButtons = (equipType == MM_QUEST_EQUIP_SWORD) ? (L_TRIG | U_CBUTTONS) : U_CBUTTONS;
-    if (press & cycleButtons)
+    if (press & U_CBUTTONS)
     {
         KaleidoScope_CycleQuestEquip(play, equipType);
-        play->state.input[0].press.button &= ~cycleButtons;
+        play->state.input[0].press.button &= ~U_CBUTTONS;
         return;
     }
 

@@ -700,6 +700,7 @@ func_800B12F0 = 0x800b12f0;
 WaterBox_GetSurface1 = 0x800ca1ac;
 Rumble_Request = 0x8013ece0;
 func_800B0DE0 = 0x800b0de0;
+Matrix_ToMtx = 0x80181a18;
 Matrix_Finalize = 0x80181a40;
 Flags_GetClear = 0x800b5cc4;
 Actor_SpawnIceEffects = 0x800bf7cc;

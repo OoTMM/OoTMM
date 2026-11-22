@@ -2002,6 +2002,53 @@ int Player_OverrideLimbWrapper(PlayState* play, s32 limbIndex, Gfx** dList, Vec3
                 *dList = Player_CustomEquipment(0, obj, sheathDlist);
                 return FALSE;
             }
+
+            if (comboIsLinkAdult() && sword >= MM_SWORD_KOKIRI && sword <= MM_SWORD_GILDED)
+            {
+                static const u32 sSwordSheaths[][4] = {
+                    { CUSTOM_OBJECT_MM_ADULT_LINK_7, CUSTOM_OBJECT_MM_ADULT_LINK_10, 0x0601bd40, 0x0601bf28 },
+                    { CUSTOM_OBJECT_MM_ADULT_LINK_8, CUSTOM_OBJECT_MM_ADULT_LINK_11, 0x0601bd80, 0x0601bf88 },
+                    { CUSTOM_OBJECT_MM_ADULT_LINK_9, CUSTOM_OBJECT_MM_ADULT_LINK_12, 0x0601bd40, 0x0601bee8 },
+                };
+                static const Vec3f sSheathOffsets[] = {
+                    { -155.0f, -71.0f, 36.0f },
+                    { -122.0f, -75.0f, -4.0f },
+                    { -48.0f, -72.0f, 36.0f },
+                };
+                s32 swordIndex = sword - MM_SWORD_KOKIRI;
+                const u32* sheath = sSwordSheaths[swordIndex];
+                const Vec3f* offset = &sSheathOffsets[swordIndex];
+                s32 result;
+                s32 sheathed;
+
+                result = sPlayerOverrideLimb(play, limbIndex, dList, pos, rot, unk);
+                sheathed = (u32)*dList == sheath[0];
+                if (!result && (sheathed || (u32)*dList == sheath[1]))
+                {
+                    Mtx* mtx = GRAPH_ALLOC(play->state.gfxCtx, sizeof(Mtx));
+                    Gfx* d = GRAPH_ALLOC(play->state.gfxCtx, sizeof(Gfx) * (sheathed ? 7 : 4));
+                    if (mtx && d)
+                    {
+                        Vec3s rot = { sword == MM_SWORD_RAZOR ? 0 : 655, 0, 0 };
+                        Matrix_Push();
+                        Matrix_SetTranslateRotateYXZ(offset->x, offset->y, offset->z, &rot);
+                        Matrix_ToMtx(mtx);
+                        Matrix_Pop();
+                        *dList = d;
+                        if (sheathed)
+                        {
+                            gSPMatrix(d++, sheath[2], G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+                            gSPDisplayList(d++, sheath[3]);
+                            gSPPopMatrix(d++, G_MTX_MODELVIEW);
+                        }
+                        gSPMatrix(d++, mtx, G_MTX_PUSH | G_MTX_MUL | G_MTX_MODELVIEW);
+                        gSPDisplayList(d++, sheath[1]);
+                        gSPPopMatrix(d++, G_MTX_MODELVIEW);
+                        gSPEndDisplayList(d++);
+                    }
+                }
+                return result;
+            }
         }
 
         if (limbIndex == PLAYER_LIMB_RIGHT_HAND)

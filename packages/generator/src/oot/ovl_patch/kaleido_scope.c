@@ -21,7 +21,11 @@ static void removeButtonItem(OotItemEquips* equips, u16 itemId)
     }
 }
 
-static int KaleidoScope_CycleEquipVariant(PlayState* play)
+void ReloadSword(PlayState* play);
+
+#define OOT_PAUSE_EQUIP_TIMER_ADDR 0x808296f4
+
+static int KaleidoScope_HandleEquipShortcut(PlayState* play)
 {
     PauseContext* p = &play->pauseCtx;
     Input* input = &play->state.input[0];
@@ -29,13 +33,43 @@ static int KaleidoScope_CycleEquipVariant(PlayState* play)
     u8 owned;
     u8 current;
     u8 next;
+    s16 item;
+    s32 sword;
+    s16* equipTimer;
 
     if (!buttons || p->state != PAUSE_STATE_MAIN || p->mainState != PAUSE_MAIN_STATE_IDLE || p->pageIndex != PAUSE_EQUIP || p->cursorSpecialPos != 0)
         return 0;
 
-    switch (p->cursorItem[PAUSE_EQUIP])
+    item = p->cursorItem[PAUSE_EQUIP];
+    switch (item)
     {
     case ITEM_OOT_SWORD_KOKIRI:
+    case ITEM_OOT_SWORD_MASTER:
+    case ITEM_OOT_SWORD_KNIFE_BIGGORON:
+    case ITEM_OOT_SWORD_KNIFE_BROKEN:
+        if (buttons & L_TRIG)
+        {
+            sword = (item == ITEM_OOT_SWORD_KNIFE_BROKEN) ? 3 : item - ITEM_OOT_SWORD_KOKIRI + 1;
+            input->press.button &= ~(L_TRIG | U_CBUTTONS | A_BUTTON);
+            if (gSave.info.equips.equipment.swords != sword)
+            {
+                PlaySound(0x4806);
+                return 1;
+            }
+
+            gSave.info.equips.equipment.swords = 0;
+            if (sword == 1)
+                gOotChildSwordEquippedVariant = 0xff;
+            EV_OOT_SET_SWORDLESS();
+            item = gSave.info.equips.buttonItems[0];
+            if ((item >= ITEM_OOT_SWORD_KOKIRI && item <= ITEM_OOT_SWORD_KNIFE_BIGGORON) || item == ITEM_OOT_SWORD_KNIFE_BROKEN)
+                ReloadSword(play);
+
+            break;
+        }
+        if (item != ITEM_OOT_SWORD_KOKIRI)
+            return 0;
+
         owned = OotChildSword_GetOwnedMask() & 0x07;
         current = OotChildSword_GetVariant();
         next = current;
@@ -53,7 +87,20 @@ static int KaleidoScope_CycleEquipVariant(PlayState* play)
         break;
 
     case ITEM_OOT_SHIELD_DEKU:
-        if (!(buttons & U_CBUTTONS) || (buttons & L_TRIG))
+    case ITEM_OOT_SHIELD_HYLIAN:
+    case ITEM_OOT_SHIELD_MIRROR:
+        if (buttons & L_TRIG)
+        {
+            if (gSave.info.equips.equipment.shields != item - ITEM_OOT_SHIELD_DEKU + 1)
+                return 0;
+
+            input->press.button &= ~(L_TRIG | U_CBUTTONS | A_BUTTON);
+            if (item == ITEM_OOT_SHIELD_DEKU)
+                gOotChildShieldEquippedVariant = 0xff;
+            gSave.info.equips.equipment.shields = 0;
+            break;
+        }
+        if (item != ITEM_OOT_SHIELD_DEKU)
             return 0;
         owned = gSharedCustomSave.ootChildShields;
         if (popcount(owned) <= 1)
@@ -68,6 +115,15 @@ static int KaleidoScope_CycleEquipVariant(PlayState* play)
     default:
         return 0;
     }
+    if (buttons & L_TRIG)
+    {
+        equipTimer = OverlayAddr(OOT_PAUSE_EQUIP_TIMER_ADDR);
+        *equipTimer = 11;
+        p->mainState = 7;
+        PlaySound(0x4809);
+        return 1;
+    }
+
     input->press.button &= ~buttons;
     if (next != current)
     {
@@ -116,7 +172,7 @@ static int checkItemToggle(PlayState* play)
         else if (itemId == ITEM_OOT_SHIELD_DEKU)
             ret = popcount(gSharedCustomSave.ootChildShields) > 1;
 
-        if (KaleidoScope_CycleEquipVariant(play))
+        if (KaleidoScope_HandleEquipShortcut(play))
             return 1;
     }
 
@@ -198,16 +254,7 @@ static int checkItemToggle(PlayState* play)
     }
 
     if (itemId >= ITEM_OOT_SHIELD_DEKU && itemId <= ITEM_OOT_SHIELD_MIRROR && gSave.info.equips.equipment.shields == ((itemId - ITEM_OOT_SHIELD_DEKU) + 1))
-    {
         ret = 1;
-        if (play->state.input[0].press.button & L_TRIG)
-        {
-            if (itemId == ITEM_OOT_SHIELD_DEKU)
-                gOotChildShieldEquippedVariant = 0xff;
-            gSave.info.equips.equipment.shields = 0;
-            actionPerformed = 1;
-        }
-    }
 
     if (actionPerformed)
         PlaySound(0x4809);
@@ -827,7 +874,7 @@ void KaleidoScope_BeforeUpdate(PlayState* play)
     InterfaceContext* interfaceCtx = &play->interfaceCtx;
     MessageContext* msgCtx = &play->msgCtx;
     Input* input = &play->state.input[0];
-    KaleidoScope_CycleEquipVariant(play);
+    KaleidoScope_HandleEquipShortcut(play);
     if (pauseCtx->state == PAUSE_STATE_MAIN && pauseCtx->mainState == PAUSE_MAIN_STATE_IDLE && pauseCtx->pageIndex == PAUSE_EQUIP && pauseCtx->cursorSpecialPos == 0 && (input->press.button & A_BUTTON))
     {
         switch (pauseCtx->cursorItem[PAUSE_EQUIP])
