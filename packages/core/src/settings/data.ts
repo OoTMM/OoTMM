@@ -3554,7 +3554,7 @@ export const SETTINGS = [{
   default: false,
   cond: hasMM,
 }, {
-  key: 'giantsKnifecycleRepair',
+  key: 'giantsKnifeCycleRepair',
   name: 'Giants Knife new cycle repair',
   category: 'items.extensions.mm',
   type: 'boolean',
