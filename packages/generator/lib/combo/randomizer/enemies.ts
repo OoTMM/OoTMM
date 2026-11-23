@@ -2979,7 +2979,8 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
           (game === 'oot' && target === 0x1b0 && [0, 5, 10].includes(params)) ? 3 : (game === 'mm' && target === 0x50 && params === 0xff00) ? 5 : (game === 'oot' && target === 0x1c0 && [0, 1].includes(params)) ? 7 : ((game === 'oot' && target === 0xc7 && params === 1) || (game === 'mm' && target === 0x66 && [1, 2].includes(params))) ? 6 : ((game === 'oot' && target === 0x1d && [0, 0xffff].includes(params)) || (game === 'mm' && target === 0x14 && params === 0)) ? 4 : game === 'oot' && target === 0x115 ? 16 : game === 'oot' && target === 0x113 && [0xff82, 0xff83].includes(params) ? 64 : 0);
         if (!operation) {
           if (target === (game === 'oot' ? 0x11d : 0x8d)) operation = 15;
-          else if (game === 'oot' && target === 0x6b) operation = 512;
+          else if ((game === 'oot' && target === 0x6b) || (game === 'mm' && target === 0x84)) operation = 512;
+          else if (game === 'oot' && target === 0x113 && params === 0xff81) operation = 64;
           else continue;
         }
         const record = nativePlacementRecord(rom, offset, operation, changes, target, params);
