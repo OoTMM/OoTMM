@@ -1,4 +1,5 @@
 #include <combo.h>
+#include <combo/enemy_placement.h>
 #include <assets/mm/objects/object_ik.h>
 
 #include "En_Ik.h"
@@ -389,6 +390,10 @@ void EnIk_Idle(Actor_EnIk* this, PlayState* play) {
         if (this->timer == 0) {
             EnIk_CheckActions(this, play);
         }
+    } else if (this->actor.hintId != TATL_HINT_ID_IRON_KNUCKLE &&
+               comboEnemyNativePlacementIsShuffled(&this->actor)) {
+        this->actor.hintId = TATL_HINT_ID_IRON_KNUCKLE;
+        EnIk_SetupWalk(this);
     } else if (this->colliderCylinder.base.acFlags & AC_HIT) {
         Actor_PlaySfx(&this->actor, NA_SE_EN_IRONNACK_ARMOR_HIT);
         this->actor.hintId = TATL_HINT_ID_IRON_KNUCKLE;
