@@ -1670,7 +1670,7 @@ retrySeed:
     if (record.operation == ENEMY_SCRIPTED_MM)
     {
         const u16 id = record.original.id & 0x1fff;
-        if ((id != 7 && id != 0x65 && id != 0x115 && id != 0x12c && id != 0x182 && id != 0x184 && id != 0x43 && id != 0x28f) ||
+        if ((id != 7 && id != 0x65 && id != 0x115 && id != 0x12c && id != 0x182 && id != 0x184 && id != 0x43 && id != 0x28f && id != 0x15d) ||
             memcmp(&record.original, &record.replacement, sizeof(*entry)) || record.targetId < 0 || record.targetId >= 0x1000)
         {
             g.roomEnemyLackSoul = 1;
@@ -2412,10 +2412,15 @@ void comboEnemySpawnRoomEntry(ActorContext* ctx, ActorEntry* entry, PlayState* p
         u32 end = (u32)files[room].vromEnd;
         u32 offset = (u32)entry - segment;
         NativePlacement record;
+        u32 key = start + offset;
+        int grottoInstance = play->sceneId == SCE_MM_GROTTOS && room == 4 &&
+                             (gGrottoData & 0x1f) >= 0x13;
+        if (grottoInstance)
+            key = 0xe0000000u + ((gGrottoData & 0x1f) - 0x13) * 0x10000 + offset;
         if (segment && (u32)entry >= segment && end > start &&
             end - start >= sizeof(*entry) && offset <= end - start - sizeof(*entry) &&
-            nativePlacementLookup(start + offset, &record) &&
-            !memcmp(entry, &record.replacement, sizeof(*entry)))
+            nativePlacementLookup(key, &record) &&
+            !memcmp(entry, grottoInstance ? &record.original : &record.replacement, sizeof(*entry)))
             defer = 1;
     }
 

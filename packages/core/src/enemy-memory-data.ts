@@ -3167,7 +3167,7 @@ export const ENEMY_MEMORY_FACTS = {
     'ovl/oot/oot_ovl_Enemy_Minislime.zovlx': { 'memory': 10528, 'profileOffset': 9292, 'instance': 872 },
     'ovl/oot/oot_ovl_Enemy_SnapperMount.zovlx': { 'memory': 8256, 'profileOffset': 7084, 'instance': 1488 },
     'ovl/oot/oot_ovl_Enemy_WizReflectedBolt.zovlx': { 'memory': 1712, 'profileOffset': 1488, 'instance': 520 },
-    'ovl/oot/oot_ovl_Native_Enemy_mm_boss_04.zovlx': { 'memory': 13440, 'profileOffset': 11824, 'instance': 18648 },
+    'ovl/oot/oot_ovl_Native_Enemy_mm_boss_04.zovlx': { 'memory': 13456, 'profileOffset': 11840, 'instance': 18648 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_boss_05.zovlx': { 'memory': 15920, 'profileOffset': 13240, 'instance': 1280 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_en_baguo.zovlx': { 'memory': 5632, 'profileOffset': 4820, 'instance': 2244 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_en_bat.zovlx': { 'memory': 6672, 'profileOffset': 5684, 'instance': 468 },
