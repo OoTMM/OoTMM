@@ -1915,6 +1915,32 @@ static __attribute__((noinline)) int Garo_FindLanding(Actor* actor, PlayState* p
     }
     return landing->y >= player->world.pos.y + 102.f;
 }
+static int Garo_FindLandingFallback(Actor* actor, PlayState* play, Vec3f* landing)
+{
+    Actor* player = &GET_PLAYER(play)->actor;
+    CollisionContext* ctx = &play->colCtx;
+    CollisionPoly* floor = player->floorPoly;
+    s32 bgId = player->floorBgId;
+    if (actor->room != play->roomCtx.curRoom.num || !floor ||
+        (player->bgCheckFlags & (BGCHECKFLAG_GROUND | BGCHECKFLAG_WATER)) != BGCHECKFLAG_GROUND ||
+        floor->normal.y < 28000 || SurfaceType_GetMaterial(ctx, floor, bgId) == SURFACE_MATERIAL_LAVA ||
+        SurfaceType_GetSceneExitIndex(ctx, floor, bgId))
+        return 0;
+
+    Vec3f from = player->world.pos;
+    from.y += 60.f;
+    for (f32 height = 180.f; height >= 120.f; height -= 20.f)
+    {
+        Vec3f candidate = player->world.pos;
+        candidate.y += height;
+        if (!Garo_Blocked(play, &from, &candidate) && !BgCheck_SphVsFirstPoly(ctx, &candidate, 32.f))
+        {
+            *landing = candidate;
+            return 1;
+        }
+    }
+    return 0;
+}
 #endif
 
 static void Garo_SetKnockback(StandaloneGaroMaster* garo, f32 strength)
@@ -2416,7 +2442,10 @@ static void Garo_Combat(StandaloneDuel* duel, PlayState* play, int finished)
             if (!duel->timer)
             {
                 Vec3f landing;
-                if (Garo_FindLanding(actor, play, &landing))
+                int hasLanding = Garo_FindLanding(actor, play, &landing);
+                if (!hasLanding)
+                    hasLanding = Garo_FindLandingFallback(actor, play, &landing);
+                if (hasLanding)
                 {
                     actor->world.pos = actor->prevPos = landing;
                     duel->weapon.base.atFlags &= ~(AT_HIT | AT_BOUNCED);
