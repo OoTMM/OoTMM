@@ -1,4 +1,5 @@
 #include "En_Tubo_Trap.h"
+#include <combo/enemy_placement.h>
 #include <assets/mm/objects/gameplay_dangeon_keep.h>
 
 #define FLAGS 0x00000000
@@ -220,7 +221,8 @@ void EnTuboTrap_HandleImpact(EnTuboTrap* this, PlayState* play) {
         }
     }
 
-    if ((this->actor.bgCheckFlags & BGCHECKFLAG_WALL) || (this->actor.bgCheckFlags & BGCHECKFLAG_GROUND)) {
+    if ((this->actor.bgCheckFlags & BGCHECKFLAG_WALL) || (this->actor.bgCheckFlags & BGCHECKFLAG_GROUND) ||
+        (comboEnemyNativePlacementIsShuffled(&this->actor) && (this->actor.bgCheckFlags & BGCHECKFLAG_CEILING))) {
         EnTuboTrap_SpawnEffectsOnLand(this, play);
         SoundSource_PlaySfxAtFixedWorldPos(play, &this->actor.world.pos, 40, NA_SE_EV_POT_BROKEN);
         EnTuboTrap_DropCollectible(this, play);
@@ -237,9 +239,9 @@ void EnTuboTrap_Idle(EnTuboTrap* this, PlayState* play) {
     f32 transformationHeight;
     s16 startingRotation;
 
-    if ((this->actor.xzDistToPlayer < 200.0f) && (this->actor.world.pos.y <= player->actor.world.pos.y)) {
+    if (comboEnemyNativePlacementIsShuffled(&this->actor) ? comboEnemyFlyingAttackInRange(&this->actor, play, 200.f) : ((this->actor.xzDistToPlayer < 200.0f) && (this->actor.world.pos.y <= player->actor.world.pos.y))) {
         startingRotation = this->actor.home.rot.z;
-        if ((startingRotation == 0) || (this->actor.yDistanceFromLink <= (startingRotation * 10.0f))) {
+        if (comboEnemyNativePlacementIsShuffled(&this->actor) || (startingRotation == 0) || (this->actor.yDistanceFromLink <= (startingRotation * 10.0f))) {
             Actor_ChangeCategory(play, &play->actorCtx, &this->actor, ACTORCAT_ENEMY);
             currentHeight = this->actor.world.pos.y;
             this->actor.flags |=
@@ -252,6 +254,8 @@ void EnTuboTrap_Idle(EnTuboTrap* this, PlayState* play) {
                 this->targetHeight = currentHeight;
                 this->targetHeight += transformationHeight;
             }
+            if (comboEnemyNativePlacementIsShuffled(&this->actor))
+                this->targetHeight = this->actor.world.pos.y + 30.f;
             this->originPos = this->actor.world.pos;
             Actor_PlaySfx(&this->actor, NA_SE_EV_POT_MOVE_START);
             this->actionFunc = EnTuboTrap_Levitate;
@@ -266,6 +270,8 @@ void EnTuboTrap_Levitate(EnTuboTrap* this, PlayState* play) {
     if (fabsf(this->actor.world.pos.y - this->targetHeight) < 10.0f) {
         this->actor.speed = 10.0f;
         this->actor.world.rot.y = this->actor.yawTowardsPlayer;
+        if (comboEnemyNativePlacementIsShuffled(&this->actor))
+            comboEnemyFlyingAttackAim(&this->actor, play, 1);
         this->actionFunc = EnTuboTrap_FlyAtPlayer;
     }
 }
@@ -274,6 +280,9 @@ void EnTuboTrap_FlyAtPlayer(EnTuboTrap* this, PlayState* play) {
     f32 dX = this->originPos.x - this->actor.world.pos.x;
     f32 dY = this->originPos.y - this->actor.world.pos.y;
     f32 dZ = this->originPos.z - this->actor.world.pos.z;
+
+    if (comboEnemyNativePlacementIsShuffled(&this->actor))
+        comboEnemyFlyingAttackAim(&this->actor, play, 0);
 
     Actor_PlaySfx(&this->actor, NA_SE_EN_TUBOOCK_FLY - SFX_FLAG);
 

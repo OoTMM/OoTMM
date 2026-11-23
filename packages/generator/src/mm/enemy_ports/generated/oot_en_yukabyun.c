@@ -1,4 +1,5 @@
 #include "oot_compat.h"
+#include <combo/enemy_placement.h>
 #include "types/en_yukabyun.h"
 #undef ACTOR_EN_YUKABYUN
 #define ACTOR_EN_YUKABYUN 0x0c6b
@@ -112,6 +113,8 @@ void EnYukabyun_Destroy(Actor* thisx, PlayState* play) {
 }
 
 void func_80B43A94(EnYukabyun* this, PlayState* play) {
+    if (!comboEnemyFlyingAttackInRange(&this->actor, play, 400.f))
+        return;
     if (this->unk_150 != 0) {
         this->unk_150--;
     }
@@ -127,6 +130,7 @@ void func_80B43AD4(EnYukabyun* this, PlayState* play) {
     if (this->unk_150 >= 0x2000) {
         this->actor.world.rot.y = this->actor.yawTowardsPlayer;
         this->actor.speed = 10.0f;
+        comboEnemyFlyingAttackAim(&this->actor, play, 1);
         this->actionfunc = func_80B43B6C;
     }
     Math_StepToF(&this->actor.world.pos.y, this->actor.home.pos.y + 30.0f, 1.0f);
@@ -134,6 +138,7 @@ void func_80B43AD4(EnYukabyun* this, PlayState* play) {
 }
 
 void func_80B43B6C(EnYukabyun* this, PlayState* play) {
+    comboEnemyFlyingAttackAim(&this->actor, play, 0);
     this->actor.shape.rot.y += this->unk_150;
     if (this->actor.xzDistToPlayer > 5000.0f) {
         Actor_Kill(&this->actor);
@@ -153,7 +158,7 @@ void EnYukabyun_Update(Actor* thisx, PlayState* play) {
 
     if (((this->collider.base.atFlags & AT_HIT) || (this->collider.base.acFlags & AC_HIT) ||
          ((this->collider.base.ocFlags1 & OC1_HIT) && !(this->collider.base.oc->id == ACTOR_EN_YUKABYUN))) ||
-        ((this->actionfunc == func_80B43B6C) && (this->actor.bgCheckFlags & BGCHECKFLAG_WALL))) {
+        ((this->actionfunc == func_80B43B6C) && (this->actor.bgCheckFlags & (BGCHECKFLAG_WALL | BGCHECKFLAG_GROUND | BGCHECKFLAG_CEILING)))) {
         this->collider.base.atFlags &= ~AT_HIT;
         this->collider.base.acFlags &= ~AC_HIT;
         this->collider.base.ocFlags1 &= ~OC1_HIT;
@@ -166,7 +171,7 @@ void EnYukabyun_Update(Actor* thisx, PlayState* play) {
     Actor_MoveXZGravity(&this->actor);
 
     if (!(this->actionfunc == func_80B43A94 || this->actionfunc == EnYukabyun_Break)) {
-        Actor_UpdateBgCheckInfo(play, &this->actor, 5.0f, 20.0f, 8.0f, UPDBGCHECKINFO_FLAG_0 | UPDBGCHECKINFO_FLAG_2);
+        Actor_UpdateBgCheckInfo(play, &this->actor, 5.0f, 20.0f, 8.0f, UPDBGCHECKINFO_FLAG_WALL | UPDBGCHECKINFO_FLAG_FLOOR | UPDBGCHECKINFO_FLAG_CEILING);
         Collider_UpdateCylinder(&this->actor, &this->collider);
 
         this->actor.flags |= ACTOR_FLAG_SFX_FOR_PLAYER_BODY_HIT;

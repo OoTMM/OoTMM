@@ -5402,8 +5402,7 @@
         - 4
         - 6
         - 7
-  allow:
-    - all-enemies
+  allow: water-surface
 
 "mm/overworld/Peahat Grotto - Adult Peahat":
   rooms:
@@ -5666,8 +5665,7 @@
       setup: 0
       slots:
         - 15
-  allow:
-    - all-enemies
+  preserve: true
 
 "mm/ST/Stone Tower Temple West - Temple Dragonfly":
   rooms:
@@ -5845,8 +5843,7 @@
       setup: 0
       slots:
         - 11
-  allow:
-    - all-enemies
+  preserve: true
 
 "mm/Temple Stone Tower Inverted/Room 1/Setup 0 - Flying Pot":
   rooms:
@@ -6868,8 +6865,7 @@
       slots:
         - 23
         - 24
-  allow:
-    - all-enemies
+  preserve: true
 
 "mm/overworld/Deku Palace Main - Business Scrub - Room 2 Setup 0":
   rooms:
@@ -6880,8 +6876,7 @@
       slots:
         - 23
         - 24
-  allow:
-    - all-enemies
+  preserve: true
 
 "mm/overworld/Termina Field - Large Eeno":
   rooms:
@@ -7123,6 +7118,7 @@
         - 53
   allow:
     - all-enemies
+  preserveUnless: enemyShuffleLaggySpawns
 
 "mm/Great Bay Coast/Room 0/Setup 1 - Like Like":
   rooms:
@@ -7169,6 +7165,7 @@
         - 127
   allow:
     - all-enemies
+  preserveUnless: enemyShuffleLaggySpawns
 
 "mm/Zora Cape/Room 0/Setup 0 - Like Like":
   rooms:
@@ -8397,6 +8394,7 @@
         - 27
   allow:
     - all-enemies
+  preserveUnless: enemyShuffleLaggySpawns
 
 "mm/overworld/Snowhead Near Fairy Fountain - Wolfos - Room 0 Setup 1":
   rooms:
@@ -12054,7 +12052,7 @@
   when:
     field: source.actorId
     equals: 534
-  preserveUnless: enemyShuffleTerminaFieldLeevers
+  preserveUnless: enemyShuffleLaggySpawns
 
 "mm/Mounted Bio Baba native form":
   rooms:
@@ -12235,6 +12233,10 @@
   limits:
     group-size:
       - when:
+          game: mm
+          actor: 575
+        maximum: 2
+      - when:
           all:
             - field: target.game
               equals: mm
@@ -12248,8 +12250,19 @@
 "Water surface replacements":
   when:
     all:
-      - field: settings.enemyShuffleIgnoreRestrictions
-        equals: false
+      - true
       - field: source.habitat
         equals: water-surface
   allow: water-surface
+
+"Eyegore bridge replacements":
+  rooms:
+    - game: mm
+  when:
+    field: source.actorId
+    equals: 388
+  deny:
+    - game: mm
+      actor: 275
+    - game: mm
+      actor: 386

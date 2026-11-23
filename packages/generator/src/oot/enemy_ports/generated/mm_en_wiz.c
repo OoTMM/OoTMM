@@ -253,15 +253,15 @@ static void Wiz_BeginAppear(StandaloneWiz* wiz) {
 
 static int Wiz_TestWaypoint(StandaloneWiz* wiz, PlayState* play, int index, Vec3f* result) {
     Actor* actor = &wiz->actor;
-    f32 radius = index < 8 ? 320.f : 105.f;
+    f32 radius = index < 8 ? 640.f : index < 16 ? 320.f : index < 24 ? 192.f : 105.f;
     s16 yaw = (index & 7) * 0x2000;
     Vec3f pos = actor->home.pos;
     pos.x += Math_SinS(yaw) * radius;
     pos.z += Math_CosS(yaw) * radius;
-    pos.y += 45.f;
+    pos.y += 384.f;
     CollisionPoly* floor = NULL;
     f32 y = Wiz_Floor(&play->colCtx, &floor, &pos);
-    if (!floor || fabsf(y - actor->home.pos.y) > 24.f)
+    if (!floor || fabsf(y - actor->home.pos.y) > 384.f || floor->normal.y < 0x6000)
         return 0;
 
     Vec3f from = actor->world.pos;
@@ -283,8 +283,8 @@ static int Wiz_TestWaypoint(StandaloneWiz* wiz, PlayState* play, int index, Vec3
 static int Wiz_FindEscape(StandaloneWiz* wiz, PlayState* play, Vec3f* result) {
     Vec3f* playerPos = &GET_PLAYER(play)->actor.world.pos;
     int first = wiz->teleport + 1;
-    for (int i = 0; i < 16; ++i) {
-        int index = (i & 8) | ((first + i) & 7);
+    for (int i = 0; i < 32; ++i) {
+        int index = (i & 24) | ((first + i) & 7);
         Vec3f pos;
         if (!Wiz_TestWaypoint(wiz, play, index, &pos))
             continue;
@@ -313,12 +313,17 @@ static void Wiz_Reposition(StandaloneWiz* wiz, PlayState* play) {
     }
     int found = 0;
     int first = wiz->teleport + 1;
-    for (int i = 0; i < 16; ++i) {
-        int index = (i & 8) | ((first + i) & 7);
+    for (int i = 0; i < 32; ++i) {
+        int index = (i & 24) | ((first + i) & 7);
         Vec3f pos;
         if (!Wiz_TestWaypoint(wiz, play, index, &pos))
             continue;
         if (found) {
+            Vec3f from = pos, to = wiz->warpTo;
+            from.y += 35.f;
+            to.y += 35.f;
+            if (!Wiz_ClearLine(play, &from, &to))
+                continue;
             int slot = wiz->decoyCount++;
             wiz->decoys[slot] = wiz->decoyTargets[slot] = pos;
             wiz->decoyRoute[slot] = slot;
@@ -331,7 +336,7 @@ static void Wiz_Reposition(StandaloneWiz* wiz, PlayState* play) {
         wiz->warpFrom = actor->world.pos;
         wiz->warpTo = pos;
         wiz->decoyTargets[ARRAY_COUNT(wiz->decoys)] = pos;
-        wiz->warpTimer = 20;
+        wiz->warpTimer = 40;
         wiz->action = WIZ_DASH;
         actor->flags |= ACTOR_FLAG_LOCK_ON_DISABLED;
         Animation_PlayLoop(&wiz->skel, WIZ_RUN);
@@ -755,7 +760,7 @@ static void Wiz_AdvanceDecoy(StandaloneWiz* wiz, PlayState* play, int slot) {
     int platform = ARRAY_COUNT(wiz->decoys);
     Vec3f from = wiz->decoys[slot];
     from.y += 35.f;
-    for (int hop = 0; hop < wiz->decoyCount; ++hop) {
+    for (int hop = 0; hop <= wiz->decoyCount; ++hop) {
         index = index == platform ? wiz->decoyCount - 1 : index ? index - 1 : platform;
         Vec3f to = wiz->decoyTargets[index];
         to.y += 35.f;
@@ -800,8 +805,9 @@ static __attribute__((noinline)) void Wiz_UpdateDecoys(StandaloneWiz* wiz, PlayS
             continue;
         Vec3f* target = &wiz->decoyTargets[wiz->decoyRoute[i]];
         f32 dx = pos->x - target->x;
+        f32 dy = pos->y - target->y;
         f32 dz = pos->z - target->z;
-        if (dx * dx + dz * dz < 30.f * 30.f) {
+        if (dx * dx + dy * dy + dz * dz < 30.f * 30.f) {
             Wiz_AdvanceDecoy(wiz, play, i);
             target = &wiz->decoyTargets[wiz->decoyRoute[i]];
         }

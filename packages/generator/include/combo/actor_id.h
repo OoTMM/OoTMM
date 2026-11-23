@@ -5,6 +5,7 @@
 #define ACTOR_PLAYER                0x000
 #define ACTOR_BG_ICEFLOE            0x001
 #define ACTOR_EN_TEST               0x002
+#define ACTOR_ENEMY_POE_ENCOUNTER   0x003
 #define ACTOR_EN_GIRLA              0x004
 #define ACTOR_CUSTOM_WARP           0x005
 #define ACTOR_EN_PART               0x007
@@ -480,6 +481,7 @@
 #define ACTOR_EN_MINIFROG                 0x022
 #define ACTOR_CUSTOM_WARP                 0x023
 #define ACTOR_EN_ST                       0x024
+#define ACTOR_ENEMY_POE_ENCOUNTER         0x025
 #define ACTOR_EN_A_OBJ                    0x026
 #define ACTOR_OBJ_WTURN                   0x027
 #define ACTOR_EN_RIVER_SOUND              0x028

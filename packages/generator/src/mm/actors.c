@@ -640,7 +640,7 @@ s16 comboEnemyMmStandaloneMinibossSlot(s16 actorId, u16 params)
 {
     if (actorId == ACTOR_EN_WIZ && (params == 0x807f || params == 0x817f))
         return 0x127;
-    if (params != 0x807f && !(actorId == ACTOR_EN_KNIGHT && (params == 0x817f || params == 0x827f || params == 0x837f || params == 0x847f)))
+    if (params != 0x807f && !(actorId == ACTOR_EN_KNIGHT && (params == 0x817f || params == 0x827f || params == 0x837f || params == 0x847f || params == 0x907f)))
         return actorId;
     switch (actorId)
     {

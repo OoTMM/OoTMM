@@ -215,7 +215,7 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
           /* Delete the old overlay if possible */
           const oldHeader = rom.subarray(gc.actorsOvlAddr + actorId * 0x20, gc.actorsOvlAddr + actorId * 0x20 + 0x20);
           const oldVramStart = bufReadU32BE(oldHeader, 0x08);
-          if ((gomessBat || ov.startsWith('ovl/mm/mm_ovl_Standalone_')) && (oldVramStart || bufReadU32BE(oldHeader, 0x14)))
+          if ((gomessBat || ov.endsWith('_ovl_Enemy_Poe_Encounter.zovlx') || ov.startsWith('ovl/mm/mm_ovl_Standalone_')) && (oldVramStart || bufReadU32BE(oldHeader, 0x14)))
             throw new Error('Standalone enemy overlay requires an unused actor slot: ' + ov);
           if (oldVramStart !== 0) {
             const oldFile = args.addresses[game].fileFromRAM(oldVramStart);

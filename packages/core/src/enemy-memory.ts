@@ -34,6 +34,7 @@ const facts = ENEMY_MEMORY_FACTS as {
   foreign: Record<string, {
     code: number;
     instance: number;
+    children?: Record<string, number>;
   }>;
   objects: Record<Game, Record<string, number>>;
   children: Record<string, Record<string, number>>;
@@ -153,6 +154,20 @@ export function enemyMemoryCost(host: Game, game: Game, actorId: number, params:
     costs.set(cacheKey, cost);
     return cost;
   };
+  if (game === 'mm' && actorId === 0x23d && params === 0x14) {
+    const swarm = facts.helpers[`${host}/MothSwarm`];
+    shared['code/mm/573'] = swarm.code;
+    if (host !== game) shared['foreign/mm/573'] = 0;
+    return finish({ shared, instances: swarm.instance, actors: 1, dynamicCollisions: 0 });
+  }
+  if (game === host && actorId === (game === 'oot' ? 0x91 : 0x1e8) && params === 0x4000) {
+    const meg = enemyMemoryCost(host, game, actorId, 0, options);
+    const controller = facts.helpers[`${host}/PoeEncounter`];
+    return finish({ ...meg,
+      shared: { ...meg.shared, [`code/${host}/helper/PoeEncounter`]: controller.code },
+      instances: meg.instances + controller.instance, actors: meg.actors + 1,
+    });
+  }
   let instances = 0, actors = 0, dynamicCollisions = 0;
   const add = (id: number, count: number, ancestors: readonly number[]) => {
     const key = `${game}/${id}`, row = facts.actors[key];
@@ -168,7 +183,7 @@ export function enemyMemoryCost(host: Game, game: Game, actorId: number, params:
     instances += count * (Math.max(row.instance, align(port?.instance ?? 0) + 16) + (foreign ? 128 : 0));
     actors += count;
     if (ENEMY_DYNAMIC_COLLISION.actors[game].includes(id)) dynamicCollisions += count;
-    for (const [child, n] of Object.entries(facts.children[key] ?? {}))
+    for (const [child, n] of Object.entries(port?.children ?? facts.children[key] ?? {}))
       if (!ancestors.includes(+child) && +child !== id && !(redIce && game === 'mm' && id === actorId && +child === 0x8e))
         add(+child, count * n, [...ancestors, id]);
   };
@@ -201,14 +216,17 @@ export function enemyMemoryCost(host: Game, game: Game, actorId: number, params:
       actors += child[1];
     }
     if (standaloneName === 'Igos') {
-      instances += port.instance;
-      actors++;
+      const members = params === 0x907f ? 2 : 1;
+      instances += members * port.instance;
+      actors += members;
     }
     instances += 0x3000;
     actors++;
     return finish({ shared, instances, actors, dynamicCollisions });
   }
   let count = 1;
+  if (game === 'mm' && actorId === 0x23f && params === 0)
+    count = 11;
   if ((game === 'oot' && actorId === 0x91 || game === 'mm' && actorId === 0x1e8) && ((params >>> 8) & 3) === 0)
     count += 3;
   if (game === 'oot' && [0x35, 0xde].includes(actorId))

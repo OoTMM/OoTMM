@@ -102,132 +102,14 @@ static u32 sNativeFirstKey;
 static u32 sNativeLastKey;
 static u8 sNativeRowsValid;
 static int nativePlacementHeader(u32* count);
-static s32 nativePlacementLowerBound(u32 key, u32 count);
-
-static int chaoticPlacementOperation(u32 operation)
+typedef struct
 {
-    u32 base = operation & ~(ENEMY_NATIVE_FLOOR | ENEMY_NATIVE_AIR | ENEMY_NATIVE_UPRIGHT | ENEMY_NATIVE_GROUND);
-    switch (base)
-    {
-    case 0:
-    case 16:
-    case 64:
-    case 4:
-    case 6:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 15:
-#if defined(GAME_OOT)
-    case 3:
-    case 7:
-    case 17:
-    case 20:
-    case ENEMY_NATIVE_DRY_AQUATIC:
-#else
-    case 5:
-    case 9:
-    case 18:
-    case 19:
-    case 21:
-    case 25:
-    case ENEMY_NATIVE_GARAHNA:
-    case ENEMY_NATIVE_DRY_MM_AQUATIC:
-#endif
-        return 1;
-    default:
-        return 0;
-    }
-}
+    ALIGNED(16) NativePlacement rows[16];
+    u32 first;
+    u32 count;
+} NativePlacementReadWindow;
 
-static int chaoticPlacementChoose(NativePlacement* seed, NativePlacement* choice)
-{
-    static u32 cachedVrom, poolCount, fileSize, version;
-    u32 vrom = sChaoticPlacementVrom;
-    if (!vrom || !chaoticPlacementOperation(seed->operation))
-        return 0;
-    if (cachedVrom != vrom)
-    {
-        DmaEntry file;
-        u32 header[4];
-        cachedVrom = vrom;
-        poolCount = 0;
-        if (!comboDmaLookup(&file, vrom) || file.vstart != vrom || file.pend ||
-            file.vend < vrom || file.vend - vrom < sizeof(header) ||
-            comboDmaLoadFilePartial(header, vrom, 0, sizeof(header)) != sizeof(header) ||
-            header[0] != 0x454e5043u || (header[1] != 2 && header[1] != 3) || header[2] != NATIVE_PLACEMENT_GAME ||
-            header[3] > 0x10000 || header[3] > (file.vend - vrom - sizeof(header)) / 12)
-            return 0;
-        version = header[1];
-        fileSize = file.vend - vrom;
-        poolCount = header[3];
-    }
-    u32 low = 0;
-    u32 high = poolCount;
-    while (low < high)
-    {
-        u32 mid = low + (high - low) / 2;
-        u32 pool[3];
-        if (comboDmaLoadFilePartial(pool, vrom, 16 + mid * sizeof(pool), sizeof(pool)) != sizeof(pool))
-            return 0;
-        if (pool[0] < seed->vrom)
-        {
-            low = mid + 1;
-            continue;
-        }
-        if (pool[0] > seed->vrom)
-        {
-            high = mid;
-            continue;
-        }
-        u32 offset = pool[1];
-        u32 count = pool[2];
-
-        struct
-        {
-            u32 operation;
-            ActorEntry replacement;
-        } alternative;
-
-        _Static_assert(sizeof(alternative) == 20, "Chaotic placement record size");
-        u32 stride = version == 3 ? 24 : sizeof(alternative);
-        if (offset < 16 + poolCount * sizeof(pool) || offset > fileSize || (offset & 3) ||
-            !count || count > (fileSize - offset) / stride)
-            return 0;
-        u32 selected = (u32)(Rand_ZeroOne() * count);
-        if (version == 3)
-        {
-            u32 roll = (u32)(Rand_ZeroOne() * 0x1000000);
-            u32 first = 0, end = count;
-            while (first < end)
-            {
-                u32 mid = first + (end - first) / 2;
-                u32 threshold;
-                if (comboDmaLoadFilePartial(&threshold, vrom, offset + mid * stride + 20, 4) != 4)
-                    return 0;
-                if (roll < threshold)
-                    end = mid;
-                else
-                    first = mid + 1;
-            }
-            selected = first;
-        }
-        if (selected >= count)
-            selected = count - 1;
-        if (comboDmaLoadFilePartial(&alternative, vrom, offset + selected * stride, sizeof(alternative)) !=
-                sizeof(alternative) ||
-            !chaoticPlacementOperation(alternative.operation))
-            return 0;
-        *choice = *seed;
-        choice->operation = alternative.operation;
-        choice->replacement = alternative.replacement;
-        choice->targetId = alternative.replacement.id & 0x1fff;
-        choice->targetParams = (u16)alternative.replacement.params;
-        return 1;
-    }
-    return 0;
-}
+static s32 nativePlacementLowerBound(u32 key, u32 count, NativePlacementReadWindow* window);
 
 static int nativePlacementLookup(u32 vrom, NativePlacement* out)
 {
@@ -252,9 +134,16 @@ static int nativePlacementLookup(u32 vrom, NativePlacement* out)
     }
     if (!nativePlacementHeader(&count))
         return 0;
-    s32 index = nativePlacementLowerBound(vrom, count);
-    return index >= 0 && (u32)index < count &&
-           comboDmaLoadFilePartial(out, sNativePlacementVrom, 16 + index * sizeof(*out), sizeof(*out)) == sizeof(*out) && out->vrom == vrom;
+    NativePlacementReadWindow window;
+    window.first = window.count = 0;
+    s32 index = nativePlacementLowerBound(vrom, count, &window);
+    if (index < 0 || (u32)index >= count)
+        return 0;
+    if ((u32)index >= window.first && (u32)index - window.first < window.count)
+        *out = window.rows[index - window.first];
+    else if (comboDmaLoadFilePartial(out, sNativePlacementVrom, 16 + index * sizeof(*out), sizeof(*out)) != sizeof(*out))
+        return 0;
+    return out->vrom == vrom;
 }
 
 static int nativePlacementHeader(u32* count)
@@ -271,16 +160,29 @@ static int nativePlacementHeader(u32* count)
     return 1;
 }
 
-static s32 nativePlacementLowerBound(u32 key, u32 count)
+static s32 nativePlacementLowerBound(u32 key, u32 count, NativePlacementReadWindow* window)
 {
-    NativePlacement row;
     u32 low = 0, high = count;
     while (low < high)
     {
         u32 mid = low + (high - low) / 2;
-        if (comboDmaLoadFilePartial(&row, sNativePlacementVrom, 16 + mid * sizeof(row), sizeof(row)) != sizeof(row))
-            return -1;
-        if (row.vrom < key)
+        if (mid < window->first || mid - window->first >= window->count)
+        {
+            /* Read the remaining candidates together once the search narrows. */
+            u32 first = mid;
+            u32 rows = 1;
+            if (high - low <= ARRAY_COUNT(window->rows))
+            {
+                first = low;
+                rows = high - low;
+            }
+            u32 bytes = rows * sizeof(*window->rows);
+            if (comboDmaLoadFilePartial(window->rows, sNativePlacementVrom, 16 + first * sizeof(*window->rows), bytes) != bytes)
+                return -1;
+            window->first = first;
+            window->count = rows;
+        }
+        if (window->rows[mid - window->first].vrom < key)
             low = mid + 1;
         else
             high = mid;
@@ -332,8 +234,10 @@ void comboEnemyNativePlacementSetActorList(PlayState* play, ActorEntry* list, u3
     }
     if (last < first || last == 0xffffffffu || last - first != (count - 1) * stride || !nativePlacementHeader(&tableCount))
         return;
-    begin = nativePlacementLowerBound(first, tableCount);
-    end = nativePlacementLowerBound(last + 1, tableCount);
+    NativePlacementReadWindow window;
+    window.first = window.count = 0;
+    begin = nativePlacementLowerBound(first, tableCount, &window);
+    end = nativePlacementLowerBound(last + 1, tableCount, &window);
     if (begin < 0 || end < begin || (u32)(end - begin) > count)
         return;
     u32 found = end - begin;
@@ -437,6 +341,49 @@ static NativePlacementState* nativePlacementState(Actor* actor)
             return &sNativeStates[i];
     return NULL;
 }
+int comboEnemyFlyingAttackInRange(Actor* actor, PlayState* play, f32 range)
+{
+    Vec3f* player = &GET_PLAYER(play)->actor.world.pos;
+    f32 dx = player->x - actor->world.pos.x;
+    f32 dy = player->y - actor->world.pos.y;
+    f32 dz = player->z - actor->world.pos.z;
+    return dx * dx + dy * dy + dz * dz < range * range;
+}
+
+void comboEnemyFlyingAttackAim(Actor* actor, PlayState* play, int launch)
+{
+    Vec3f* player = &GET_PLAYER(play)->actor.world.pos;
+    f32 dx = player->x - actor->world.pos.x;
+    f32 dy = player->y + 30.f - actor->world.pos.y;
+    f32 dz = player->z - actor->world.pos.z;
+    f32 xz = sqrtf(dx * dx + dz * dz);
+    f32 distance = sqrtf(dx * dx + dy * dy + dz * dz);
+    if (!launch)
+    {
+        f32 hx = actor->world.pos.x - actor->home.pos.x;
+        f32 hy = actor->world.pos.y - actor->home.pos.y;
+        f32 hz = actor->world.pos.z - actor->home.pos.z;
+        if (hx * hx + hy * hy + hz * hz > 240.f * 240.f)
+            return;
+    }
+    if (distance < 1.f)
+        return;
+    f32 speed = 10.f * xz / distance;
+    f32 lift = 10.f * dy / distance;
+    if (launch)
+    {
+        actor->world.rot.y = actor->yawTowardsPlayer;
+        actor->speed = speed;
+        actor->velocity.y = lift;
+    }
+    else
+    {
+        Math_SmoothStepToS(&actor->world.rot.y, actor->yawTowardsPlayer, 4, 0x300, 0);
+        Math_ApproachF(&actor->speed, speed, 0.2f, 0.5f);
+        Math_ApproachF(&actor->velocity.y, lift, 0.2f, 0.5f);
+    }
+}
+
 int comboEnemyNativePlacementIsShuffled(Actor* actor)
 {
     return actor != NULL && nativePlacementState(actor) != NULL;
@@ -522,6 +469,16 @@ PATCH_CALL(0x80a741f8, nativeDrySkullfishBg);
 PATCH_CALL(0x80a75780, nativeDrySkullfishBg);
 PATCH_CALL(0x80a750c4, nativeDrySkullfishWater);
 PATCH_CALL(0x80a7547c, nativeDrySkullfishWater);
+
+static s32 shuffledHiploopWater(PlayState* play, CollisionContext* col, f32 x, f32 z, f32* y, WaterBox** box)
+{
+    if (sNativeScope && sNativeScope->actor && sNativeScope->actor->id == ACTOR_EN_PP)
+        return 0;
+    return WaterBox_GetSurface1(play, col, x, z, y, box);
+}
+
+/* EnPp_Update uses this query to trigger instant death below the surface. */
+PATCH_CALL(0x80b20c7c, shuffledHiploopWater);
 #endif
 int comboEnemyNativeArenaCurrent(PlayState* play)
 {
@@ -646,6 +603,10 @@ int comboEnemyNativeAirBound(Actor* actor)
 #endif
 
 static void nativePlacementUpdate(Actor*, PlayState*);
+static void nativePlacementDefeated(Actor*, PlayState*);
+#if defined(GAME_MM)
+static Actor* nativePlacementForeignSpawn(ActorContext*, ActorEntry*, PlayState*);
+#endif
 static void nativePlacementFini(Actor*, PlayState*);
 
 static void nativePlacementInit(Actor* actor, PlayState* play)
@@ -1095,6 +1056,45 @@ static void nativeResourceCheckDefeat(Actor* actor, PlayState* play, NativePlace
         comboEnemyNativeResourceDefeated(&state->resource);
 }
 
+#if defined(GAME_OOT)
+typedef struct
+{
+    Actor actor;
+    ActorFunc action;
+    s16 spin;
+} NativeFlyingTile;
+
+_Static_assert(__builtin_offsetof(NativeFlyingTile, action) == 0x13c, "tile action");
+
+static void nativeFlyingTileUpdate(Actor* actor, PlayState* play, ActorFunc update)
+{
+    NativeFlyingTile* tile = (NativeFlyingTile*)actor;
+    ActorOvl* ovl = actor->ovl;
+    if (!ovl || !ovl->data || ovl->vramStart > 0x809189ec || ovl->vramEnd <= 0x80918b24)
+    {
+        update(actor, play);
+        return;
+    }
+    ActorFunc wait = (void*)((u8*)ovl->data + 0x809189ec - ovl->vramStart);
+    ActorFunc fly = (void*)((u8*)ovl->data + 0x80918ac4 - ovl->vramStart);
+    ActorFunc action = tile->action;
+    if (action == wait && !comboEnemyFlyingAttackInRange(actor, play, 400.f))
+        return;
+    if (action == fly)
+        comboEnemyFlyingAttackAim(actor, play, 0);
+    update(actor, play);
+    if (actor->update && tile->action == fly)
+    {
+        if (action != fly)
+            comboEnemyFlyingAttackAim(actor, play, 1);
+        Actor_UpdateBgCheckInfo(play, actor, 5.f, 20.f, 8.f,
+            UPDBGCHECKINFO_FLAG_WALL | UPDBGCHECKINFO_FLAG_FLOOR | UPDBGCHECKINFO_FLAG_CEILING);
+        if (actor->bgCheckFlags & (BGCHECKFLAG_GROUND | BGCHECKFLAG_CEILING))
+            tile->action = (void*)((u8*)ovl->data + 0x80918b24 - ovl->vramStart);
+    }
+}
+#endif
+
 static void nativePlacementUpdate(Actor* actor, PlayState* play)
 {
     NativePlacementState* state = nativePlacementState(actor);
@@ -1152,7 +1152,12 @@ static void nativePlacementUpdate(Actor* actor, PlayState* play)
 #if defined(GAME_MM)
         int largeEeno = actor->id == 0x1e6 && actor->params == 1;
 #endif
-        comboEnemyRedeadUpdate(actor, play, state->update);
+#if defined(GAME_OOT)
+        if (actor->id == 0x6b)
+            nativeFlyingTileUpdate(actor, play, state->update);
+        else
+#endif
+            comboEnemyRedeadUpdate(actor, play, state->update);
 #if defined(GAME_MM)
         if (largeEeno && actor->params == 2 && actor->update)
         {
@@ -1173,6 +1178,8 @@ static void nativePlacementUpdate(Actor* actor, PlayState* play)
 #endif
     sNativeScope = previous;
     nativeResourceCheckDefeat(actor, play, state);
+    if (state->operation == 13 && !actor->update && (state->hadHealth & 1))
+        nativePlacementDefeated(actor, play);
     state->update = actor->update;
     state->fini = actor->fini;
     if (actor->update)
@@ -1436,8 +1443,7 @@ selected:
         entry = &instanceEntry;
         seedEntry = entry;
     }
-    int chaotic = chaoticPlacementChoose(&record, &seedRecord) &&
-                  (record.operation != seedRecord.operation || memcmp(&record.replacement, &seedRecord.replacement, sizeof(*entry)));
+    int chaotic = 0;
     int hadLackSoul = g.roomEnemyLackSoul;
     if (chaotic)
     {
@@ -1468,7 +1474,7 @@ retrySeed:
 #if defined(GAME_MM)
     if (!record.operation && comboIsForeignEnemyActor(entry->id & 0x1fff))
     {
-        if (!NativePlacementSpawnEntry(ctx, entry, play))
+        if (!nativePlacementForeignSpawn(ctx, entry, play))
             g.roomEnemyLackSoul = 1;
         return 1;
     }
@@ -1489,6 +1495,18 @@ retrySeed:
         }
         memset(sNativeStates, 0, NATIVE_PLACEMENT_STATE_CAPACITY * sizeof(*sNativeStates));
     }
+#if defined(GAME_MM)
+    if (!record.operation && (entry->id & 0x1fff) == ACTOR_EN_PP)
+    {
+        if (!nativePlacementTraitsSpawn(ctx, entry, play, 0, record.vrom))
+        {
+            if (chaotic)
+                goto fallbackSeed;
+            g.roomEnemyLackSoul = 1;
+        }
+        return 1;
+    }
+#endif
     if (record.operation & (ENEMY_NATIVE_AIR | ENEMY_NATIVE_UPRIGHT) || record.operation == 9 || record.operation == 10 ||
         record.operation == 15 || record.operation == 20 || record.operation == ENEMY_NATIVE_DRY_AQUATIC ||
         record.operation == ENEMY_NATIVE_DRY_MM_AQUATIC)
@@ -2073,6 +2091,27 @@ static u32 sBlockedRooms;
 static u32 sPersistentRequests;
 static s32 sCompletingRoom = -1;
 
+#if defined(GAME_MM)
+static Actor* nativePlacementForeignSpawn(ActorContext* ctx, ActorEntry* entry, PlayState* play)
+{
+    s32 room = play->roomCtx.curRoom.num;
+    u32 slot = gCurrentSpawnActorNum;
+    if (room < 0 || room >= 32 || room != sListRoom || slot >= sRoomCount ||
+        !sRooms[room].listVrom || !sRooms[room].visit)
+        return NULL;
+    EnemyPlacement previous = sNextPlacement;
+    s16 previousId = sNextActor;
+    sRooms[room].hasForeign = 1;
+    sRooms[room].remaining[slot >> 5] |= 1u << (slot & 31);
+    sNextPlacement = (EnemyPlacement){ sRooms[room].listVrom, sRooms[room].visit, room, slot };
+    sNextActor = entry->id & 0x1fff;
+    Actor* actor = NativePlacementSpawnEntry(ctx, entry, play);
+    sNextPlacement = previous;
+    sNextActor = previousId;
+    return actor;
+}
+#endif
+
 int comboEnemyDefeatTransitionValid(const EnemyDefeatTransition* t, u32 root, u32 privateEnd, u32 profileOffset)
 {
     if (!t->field && !t->from && !t->to)
@@ -2151,6 +2190,19 @@ int comboEnemyActorPlacementKey(Actor* actor, PlayState* play, u32* out)
     return sOotEnemizerRoomKeys[actor->room].list[actor->actorIndex].id == actor->id;
 }
 #endif
+
+static void nativePlacementDefeated(Actor* actor, PlayState* play)
+{
+    NativePlacementState* state = nativePlacementState(actor);
+    if (!state || !nativePlacementCurrent(state, play) || actor->init || actor->update || comboEnemyFamilyNoClear(actor))
+        return;
+#if defined(GAME_OOT)
+    u32 key = state->splitPlacementVrom;
+    if (key || comboEnemyActorPlacementKey(actor, play, &key))
+        comboOotEnemizerDefeated(play, key);
+#endif
+    sPendingRooms |= 1u << state->room;
+}
 
 void comboEnemyEncounterReset(void)
 {

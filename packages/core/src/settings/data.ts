@@ -240,7 +240,15 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Shuffle ordinary enemies and compatible miniboss encounters in Ocarina of Time. Dungeon bosses use the separate boss shuffle.',
   default: false,
-  cond: hasOoT,
+  cond: (s: any) => hasOoT(s) && !s.enemyShuffleOotMinibossOnly,
+}, {
+  key: 'enemyShuffleOotMinibossOnly',
+  name: 'OoT Mini Boss Only',
+  category: 'enemies',
+  type: 'boolean',
+  description: 'Shuffle only miniboss encounters, including vanilla Iron Knuckle fights, with weighted miniboss replacements. Cross-game minibosses are always included. Ordinary enemies remain unchanged.',
+  default: false,
+  cond: (s: any) => hasOoT(s) && !s.enemyShuffleOot,
 }, {
   key: 'enemyShuffleOotMode',
   name: 'Enemy Placement (OoT)',
@@ -260,7 +268,15 @@ export const SETTINGS = [{
   type: 'boolean',
   description: 'Shuffle ordinary enemies and compatible miniboss encounters in Majora’s Mask. Dungeon bosses use the separate boss shuffle.',
   default: false,
-  cond: hasMM,
+  cond: (s: any) => hasMM(s) && !s.enemyShuffleMmMinibossOnly,
+}, {
+  key: 'enemyShuffleMmMinibossOnly',
+  name: 'MM Mini Boss Only',
+  category: 'enemies',
+  type: 'boolean',
+  description: 'Shuffle only miniboss encounters, including vanilla Iron Knuckle fights, with weighted miniboss replacements. Cross-game minibosses are always included. Ordinary enemies remain unchanged.',
+  default: false,
+  cond: (s: any) => hasMM(s) && !s.enemyShuffleMm,
 }, {
   key: 'enemyShuffleMmMode',
   name: 'Enemy Placement (MM)',
@@ -274,11 +290,11 @@ export const SETTINGS = [{
   default: 'individual',
   cond: (s: any) => hasMM(s) && s.enemyShuffleMm,
 }, {
-  key: 'enemyShuffleTerminaFieldLeevers',
-  name: 'Shuffle Termina Field Leevers',
+  key: 'enemyShuffleLaggySpawns',
+  name: 'Shuffle Laggy Enemy Spawns',
   category: 'enemies',
   type: 'boolean',
-  description: 'Shuffle the Leevers near the beach entrance in Termina Field. Leave this off to keep their original behavior and reduce the load from shuffled enemies in the field.',
+  description: 'Shuffle Termina Field and Great Bay Coast Leevers and the Boes outside Snowhead Temple. Leave this off to keep these dense spawn groups vanilla and reduce performance problems.',
   default: false,
   cond: (s: any) => hasMM(s) && s.enemyShuffleMm,
 }, {
@@ -319,18 +335,6 @@ export const SETTINGS = [{
   default: 'anywhere',
   cond: (s: any) => s.enemyShuffleMinibosses && ((hasOoT(s) && s.enemyShuffleOot) || (hasMM(s) && s.enemyShuffleMm)),
 }, {
-  key: 'enemyShuffleSpawnMode',
-  name: 'Enemy Spawn Mode',
-  category: 'enemies',
-  type: 'enum',
-  description: 'Keep replacements consistent for the seed or reroll each eligible spawn. Chaotic spawns are only available with No Logic (Chaotic spawns are not tested and may still lead to memory issues!).',
-  values: [
-    { value: 'seeded', name: 'Seeded', description: 'Each spawn uses its replacement from the seed.' },
-    { value: 'chaotic', name: 'Chaotic', description: 'Reroll eligible replacements at spawn time.' },
-  ],
-  default: 'seeded',
-  cond: (s: any) => s.logic === 'none' && ((hasOoT(s) && s.enemyShuffleOot) || (hasMM(s) && s.enemyShuffleMm)),
-}, {
   key: 'enemyShuffleBari',
   name: 'Bari Shuffle',
   category: 'enemies',
@@ -346,14 +350,6 @@ export const SETTINGS = [{
   description: 'Randomize the three enemies spawned when a shuffled Large Eeno splits. With this off, it splits into three small Eenos.',
   default: false,
   cond: (s: any) => (hasOoT(s) && s.enemyShuffleOot) || (hasMM(s) && s.enemyShuffleMm),
-}, {
-  key: 'enemyShuffleIgnoreRestrictions',
-  name: 'Remove Spawn Restrictions',
-  category: 'enemies',
-  type: 'boolean',
-  description: 'Allow enemies to replace spawns outside their usual habitat, including aquatic enemies in dry rooms. Only available with No Logic.',
-  default: false,
-  cond: (s: any) => s.logic === 'none' && ((hasOoT(s) && s.enemyShuffleOot) || (hasMM(s) && s.enemyShuffleMm)),
 }, {
   key: 'crossGameEnemies',
   name: 'Cross-Game Enemies',

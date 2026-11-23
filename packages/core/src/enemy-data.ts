@@ -17827,7 +17827,7 @@ export const enemy_mm_facts = {
 };
 
 export const enemy_mm_placement_data = {
-  'foreignActorIds': [2, 7, 29, 37, 43, 47, 51, 52, 53, 55, 56, 58, 75, 99, 105, 107, 138, 153, 163, 164, 171, 222, 224, 225, 236, 246, 277, 278, 396, 432],
+  'foreignActorIds': [2, 7, 29, 37, 43, 47, 51, 52, 53, 55, 56, 58, 75, 99, 105, 107, 138, 153, 163, 164, 171, 222, 224, 225, 236, 246, 277, 278, 396, 407, 432],
   'nativeCounterparts': [
     { 'actorId': 108, 'objectId': 171 },
     { 'actorId': 80, 'objectId': 32 },

@@ -453,25 +453,7 @@ static const char* Debug_SpawnEnemy(u32 data)
     gDebugEnemyWater = dryAquatic;
     gDebugEnemyWaterSurface = water;
     Actor* enemy;
-    u32 variantOperation = 0;
-#if defined(GAME_OOT)
-    if (actorId == 0x1c0)
-        variantOperation = 7;
-    if (actorId == 0x1b0)
-        variantOperation = 3;
-    if (actorId == 0x1c)
-        variantOperation = 10;
-#else
-    if (actorId == 0xf1 || actorId == ACTOR_EN_BB)
-        variantOperation = 30;
-    if (actorId == 0x216)
-        variantOperation = 10;
-#endif
-    int standalone = variantOperation != 0;
-#if defined(GAME_OOT)
-    standalone |= actorId == ACTOR_EN_MB;
-#endif
-    if (!foreign && standalone)
+    if (!foreign)
     {
         ActorEntry entry = { .id = actorId, .pos = { pos.x, pos.y, pos.z }, .params = params };
 #if defined(GAME_MM)
@@ -480,18 +462,10 @@ static const char* Debug_SpawnEnemy(u32 data)
 #else
         entry.rot.y = yaw + 0x8000;
 #endif
-        enemy = comboEnemyNativeStandaloneSpawn(&play->actorCtx, &entry, play, variantOperation);
+        enemy = comboEnemyDynamicSpawn(&play->actorCtx, &entry, play, 0xffff);
     }
     else
-#if defined(GAME_MM)
-        if (actorId == 0x184 && params == 0x1fc0)
-    {
-        ActorEntry entry = { actorId, { pos.x, pos.y, pos.z }, { 7, 0x7f, 0x7f }, params };
-        enemy = comboEnemyNativeEyegoreSpawn(&play->actorCtx, &entry, play);
-    }
-    else
-#endif
-        enemy = foreign ? comboDebugSpawnForeignEnemy(play, actorId, params, &pos, yaw + 0x8000) : Actor_Spawn(&play->actorCtx, play, actorId, pos.x, pos.y, pos.z, 0, yaw + 0x8000, 0, params);
+        enemy = comboDebugSpawnForeignEnemy(play, actorId, params, &pos, yaw + 0x8000);
 #if defined(GAME_OOT)
     void comboDebugTrackOotDarkLink(Actor*);
     comboDebugTrackOotDarkLink(enemy);
@@ -529,7 +503,7 @@ static void DebugHandler_Enemies(int trigger)
         if (sDebugEnemyEntries || !sDebugEnemyTableVrom)
             return;
         u32 size = comboDmaLoadFile(NULL, sDebugEnemyTableVrom);
-        if (size < 16 || size > 0x1000)
+        if (size < 16 || size > 0x4000)
             return;
         DebugMenuEntry* entries = malloc(size);
         if (!entries)

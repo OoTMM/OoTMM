@@ -46,7 +46,7 @@ function EnemyTable({ game }: { game: Game }) {
   const settings = useStore(state => state.settings);
   const patchSettings = useStore(state => state.patchSettings);
   const enabled = (settings.games === 'ootmm' || settings.games === game) &&
-    (game === 'oot' ? settings.enemyShuffleOot : settings.enemyShuffleMm);
+    (game === 'oot' ? settings.enemyShuffleOot || settings.enemyShuffleOotMinibossOnly : settings.enemyShuffleMm || settings.enemyShuffleMmMinibossOnly);
   const otherRoster = rosters[game === 'oot' ? 'mm' : 'oot'];
   const legacyPrefix = game + ':';
 
@@ -75,8 +75,9 @@ function EnemyTable({ game }: { game: Game }) {
             </thead>
             <tbody>
               {rosters[game].map(row => {
-                const disabled = !enabled || (row.donor !== game && !settings.crossGameEnemies) ||
-                  (row.miniboss && !settings.enemyShuffleMinibosses);
+                const disabled = !enabled || (row.donor !== game && !settings.crossGameEnemies && !(game === 'oot' ? settings.enemyShuffleOotMinibossOnly : settings.enemyShuffleMmMinibossOnly)) ||
+                  (row.miniboss && !settings.enemyShuffleMinibosses && !(game === 'oot' ? settings.enemyShuffleOotMinibossOnly : settings.enemyShuffleMmMinibossOnly)) ||
+                  (!row.miniboss && (game === 'oot' ? settings.enemyShuffleOotMinibossOnly : settings.enemyShuffleMmMinibossOnly));
                 const keys = settings.enemyShuffleExcluded.filter(key =>
                   key === row.key || row.legacyKeys.includes(key) ||
                   (key.startsWith(legacyPrefix) && row.legacyKeys.includes(key.slice(legacyPrefix.length))),

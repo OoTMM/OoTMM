@@ -21,6 +21,33 @@ static Collider* sCollidersAT[COLLIDER_CAPACITY];
 static Collider* sCollidersAC[COLLIDER_CAPACITY];
 static Collider* sCollidersOC[COLLIDER_CAPACITY];
 
+#if defined(GAME_MM)
+static int sEnemyCombatActive;
+
+static int enemyCombatActive(PlayState* play)
+{
+    for (int category = 0; category < ACTORCAT_MAX; ++category)
+        for (Actor* actor = play->actorCtx.actors[category].first; actor; actor = actor->next)
+            if (actor->update && actor->room == play->roomCtx.curRoom.num &&
+                (actor->flags & ACTOR_FLAG_HOSTILE) && actor->isTargeted)
+                return 1;
+    for (int i = 0; i < play->colChkCtx.colATCount && i < COLLIDER_CAPACITY; ++i) {
+        Collider* col = sCollidersAT[i];
+        Actor* actor = col ? col->actor : NULL;
+        if (actor && actor->update && actor->room == play->roomCtx.curRoom.num &&
+            (col->atFlags & AT_ON) && (col->atFlags & AT_TYPE_ENEMY) &&
+            actor->xyzDistToPlayerSq < 160000.f)
+            return 1;
+    }
+    return 0;
+}
+
+int comboEnemyCombatActive(PlayState* play)
+{
+    return sEnemyCombatActive || enemyCombatActive(play);
+}
+#endif
+
 static Collider** collisionList(PlayState* play, CollisionCheckContext* ctx, Collider** native, Collider** extended)
 {
     return ctx == &play->colChkCtx ? extended : native;
@@ -30,6 +57,10 @@ void comboCollisionClear(PlayState* play, CollisionCheckContext* ctx)
 {
     if (ctx->sacFlags & SAC_ON)
         return;
+#if defined(GAME_MM)
+    if (ctx == &play->colChkCtx)
+        sEnemyCombatActive = enemyCombatActive(play);
+#endif
     ctx->colATCount = 0;
     ctx->colACCount = 0;
     ctx->colOCCount = 0;

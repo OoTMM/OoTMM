@@ -129,7 +129,6 @@ static int enemyLookupRegistration(s16 id, ForeignEnemyRegistration* out)
     u32 low;
     u32 high;
     u32 mid;
-    u32 offset;
     u32 stride;
 
     if (!gForeignEnemyRegistryVrom || !enemyMetadataFile(gForeignEnemyRegistryVrom, &entry) ||
@@ -145,12 +144,27 @@ static int enemyLookupRegistration(s16 id, ForeignEnemyRegistration* out)
         return 0;
     low = 0;
     high = header[3];
+    /* Batch the final candidates; this lookup also runs for repeat spawns. */
+    enum { REGISTRATION_WINDOW = 16 };
+    ALIGNED(16) u8 window[REGISTRATION_WINDOW * sizeof(*out)];
+    u32 windowFirst = 0, windowCount = 0;
     while (low < high)
     {
         mid = low + (high - low) / 2;
-        offset = sizeof(header) + mid * stride;
-        if (comboDmaLoadFilePartial(out, gForeignEnemyRegistryVrom, offset, stride) != stride)
-            return 0;
+        if (mid < windowFirst || mid - windowFirst >= windowCount)
+        {
+            windowFirst = mid;
+            windowCount = 1;
+            if (high - low <= REGISTRATION_WINDOW)
+            {
+                windowFirst = low;
+                windowCount = high - low;
+            }
+            u32 bytes = windowCount * stride;
+            if (comboDmaLoadFilePartial(window, gForeignEnemyRegistryVrom, sizeof(header) + windowFirst * stride, bytes) != bytes)
+                return 0;
+        }
+        memcpy(out, window + (mid - windowFirst) * stride, stride);
         if (out->actorId == id)
             return !(out->flags & ~(FOREIGN_ENEMY_ROOT | FOREIGN_ENEMY_PART | FOREIGN_ENEMY_KEEP_MAIN | FOREIGN_ENEMY_KEEP_FIELD | FOREIGN_ENEMY_KEEP_DUNGEON | FOREIGN_ENEMY_SOURCE_DAMAGE | FOREIGN_ENEMY_SOURCE_AUDIO | FOREIGN_ENEMY_NATIVE_PORT | FOREIGN_ENEMY_GROUND_BOUND | FOREIGN_ENEMY_AIR_BOUND | FOREIGN_ENEMY_HOST_SOUL)) &&
                    (out->flags & FOREIGN_ENEMY_NATIVE_PORT) &&
@@ -587,7 +601,7 @@ static int enemyHiploopFragment(ActorContext* ctx, PlayState* play, Actor* paren
     Actor* owner = comboEnemyCurrentActor();
     int fragment = params == 8 || params == 10 || params == 13 || params == 17 || params == 23 || params == 26;
     /* The native port spawns its cosmetic death pieces in Update. */
-    return fragment && !split && !parent && owner && owner->id == 0xde9 && (owner->params == 1 || owner->params == 2) &&
+    return fragment && !split && !parent && owner && owner->id == 0xde9 && (u16)owner->params <= 2 &&
            *(s16*)((u8*)owner + 0x2c0) == 11 && comboEnemyCurrentCallback() == 2 && play && ctx == &play->actorCtx && owner->room == play->roomCtx.curRoom.num;
 }
 
@@ -709,6 +723,12 @@ static Actor* enemySpawnRegistered(ActorContext* actorCtx, PlayState* play, s16 
     {
         g.roomEnemyLackSoul = 1;
         goto rejected;
+    }
+    if (actorId == 0xe3f && parent && parent->id == actorId)
+    {
+        if (split || params != 0 || comboEnemyCurrentActor() != parent || comboEnemyCurrentCallback() != 2)
+            goto rejected;
+        registration.flags &= ~FOREIGN_ENEMY_ROOT;
     }
     if (actorId == 0xd15 && (params == 0x817f || params == 0x827f || params == 0x837f))
     {
@@ -1839,12 +1859,18 @@ EXPORT_LINKABLE_SYMBOL(FOREIGN_ENEMY_API_FIND_NEARBY, comboEnemyActorFindNearby)
 
 u32 comboEnemyCrc32(const u8* data, u32 size)
 {
+    static const u32 table[16] = {
+        0x00000000, 0x1db71064, 0x3b6e20c8, 0x26d930ac,
+        0x76dc4190, 0x6b6b51f4, 0x4db26158, 0x5005713c,
+        0xedb88320, 0xf00f9344, 0xd6d6a3e8, 0xcb61b38c,
+        0x9b64c2b0, 0x86d3d2d4, 0xa00ae278, 0xbdbdf21c,
+    };
     u32 crc = 0xffffffff;
     for (u32 i = 0; i < size; ++i)
     {
         crc ^= data[i];
-        for (u32 bit = 0; bit < 8; ++bit)
-            crc = (crc >> 1) ^ (0xedb88320 & (0 - (crc & 1)));
+        crc = (crc >> 4) ^ table[crc & 0xf];
+        crc = (crc >> 4) ^ table[crc & 0xf];
     }
     return ~crc;
 }

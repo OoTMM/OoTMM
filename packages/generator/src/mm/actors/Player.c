@@ -73,12 +73,17 @@ static void Player_HandleBurningDekuShield(Player* this, PlayState* play)
 {
     int shouldBurn;
 
+    if (this->transformation != MM_PLAYER_FORM_HUMAN || MmShield_GetEquipped() != MM_SHIELD_DEKU)
+        return;
+
     shouldBurn = 0;
     if (this->isBurning)
         shouldBurn = 1;
-    else if ((this->shieldCylinder.base.acFlags & AC_HIT) && this->shieldCylinder.elem.acHitElem->atDmgInfo.effect == 1)
+    else if ((this->shieldCylinder.base.acFlags & AC_HIT) && this->shieldCylinder.elem.acHitElem &&
+        this->shieldCylinder.elem.acHitElem->atDmgInfo.effect == 1)
         shouldBurn = 1;
-    else if ((this->shieldQuad.base.acFlags & AC_HIT) && this->shieldQuad.elem.acHitElem->atDmgInfo.effect == 1)
+    else if ((this->shieldQuad.base.acFlags & AC_HIT) && this->shieldQuad.elem.acHitElem &&
+        this->shieldQuad.elem.acHitElem->atDmgInfo.effect == 1)
         shouldBurn = 1;
 
     if (shouldBurn)

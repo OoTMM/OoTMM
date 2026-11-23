@@ -1,23 +1,13 @@
-import { ARWING_ENEMIES, ENEMIES, nativeEnemyVariantTarget, ENEMY_GOLD_SOURCES, additionalForeignEnemyTarget, foreignEnemyForms, foreignEnemyRuntimeReady, standaloneEnemyTarget } from '@ootmm/core';
+import { ENEMIES, enemyShuffleTargets } from '@ootmm/core';
 import type { Patchfile } from '../patch-build/patchfile';
 
 type Game = 'oot' | 'mm';
 
 export function debugEnemyForms(game: Game) {
-  const rewardSources = new Set<string>(ENEMY_GOLD_SOURCES.map(source => source.key));
-  return ENEMIES.flatMap(enemy => {
-    if (rewardSources.has(enemy.key)) return [];
-    const foreign = enemy.game !== game;
-    const nativeClubMoblin = !foreign && enemy.key === 'oot-club-moblin';
-    if (foreign ? enemy.nativeOnly : enemy.foreignOnly && !nativeClubMoblin) return [];
-    const params = nativeClubMoblin ? 0 : enemy.spawnParams;
-    if (foreign) {
-      if (!foreignEnemyForms(enemy.game, enemy.actorId, game).includes(params) ||
-        !foreignEnemyRuntimeReady(enemy.game, enemy.actorId, params)) return [];
-    } else if (!nativeClubMoblin && enemy.key !== ARWING_ENEMIES[game].key && !standaloneEnemyTarget(enemy.game, enemy.actorId, params) &&
-      !additionalForeignEnemyTarget(enemy.game, enemy.actorId, params) && !nativeEnemyVariantTarget(game, enemy.actorId, params)) return [];
-    return [{ enemy, foreign, params }];
-  });
+  const club = ENEMIES.find(enemy => enemy.key === 'oot-club-moblin')!;
+  const targets = enemyShuffleTargets(game, true);
+  if (game === 'oot') targets.push({ ...club, spawnParams: 0 });
+  return targets.map(enemy => ({ enemy, foreign: enemy.game !== game, params: enemy.spawnParams }));
 }
 
 export function installDebugEnemyCatalog(patch: Patchfile) {
@@ -48,8 +38,8 @@ export function installDebugEnemyCatalog(patch: Patchfile) {
       data.set(encoder.encode(row.name), offset);
       offset += row.name.length + 1;
     });
-    const vrom = game === 'oot' ? 0xd9000000 : 0xd9001000;
-    if (data.length > 0x1000) throw new Error('Debug enemy catalog exceeds its ROM allocation');
+    const vrom = game === 'oot' ? 0xd9000000 : 0xd9004000;
+    if (data.length > 0x4000) throw new Error('Debug enemy catalog exceeds its ROM allocation');
     patch.addNewFile({ name: `debug/${game}/enemies`, vrom, data, compressed: false });
     const pointer = new Uint8Array(4);
     new DataView(pointer.buffer).setUint32(0, vrom);

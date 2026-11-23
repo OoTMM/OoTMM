@@ -15,6 +15,8 @@
 #define ENEMY_NATIVE_UPRIGHT        512u
 #define ENEMY_NATIVE_GROUND         1024u
 #define ENEMY_NATIVE_IRON_KNUCKLE   64u
+int comboEnemyFlyingAttackInRange(Actor*, PlayState*, f32);
+void comboEnemyFlyingAttackAim(Actor*, PlayState*, int);
 void comboEnemyRedeadUpdate(Actor*, PlayState*, ActorFunc);
 int comboEnemyNativeAirBound(Actor*);
 int comboEnemyNativePlacementActive(Actor*);
