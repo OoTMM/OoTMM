@@ -205,6 +205,8 @@ typedef struct {
     u8 retreatShield;
     u8 blockFromRetreat;
     u8 lightRayTimer;
+    u8 knightEncounter;
+    u8 knightsSpawned;
     Vec3f footPos[2];
     u32 footPoseFrame;
     u8 footPoseMask;
@@ -1205,6 +1207,14 @@ static void Duel_Init(Actor* actor, PlayState* play)
         actor->colChkInfo.health = 1;
         Igos_InitHead((IgosFlyingHead*)actor, play);
         return;
+    }
+    if (DUEL_FIXED_FORM == DUEL_IGOS) {
+        StandaloneIgos* igos = (StandaloneIgos*)actor;
+        igos->knightEncounter = (u16)actor->params == 0x907f;
+        if (igos->knightEncounter)
+            actor->params = 0x807f;
+        else if ((u16)actor->params == 0x847f)
+            actor->params = 0x817f;
     }
     StandaloneDuel* duel = (StandaloneDuel*)actor;
     const DuelForm* form = &sForms[DUEL_FIXED_FORM];
@@ -8966,6 +8976,58 @@ static void Wart_DrawLimb(PlayState* play, s32 limb, Gfx** dList, Vec3s* rot, vo
     wart->collisionPoseValid = 1;
 }
 
+static int Igos_WaitForKnights(StandaloneIgos* igos, PlayState* play)
+{
+    if (!igos->knightEncounter)
+        return 0;
+    Actor* actor = &igos->duel.actor;
+    for (int i = 0; i < 2; ++i) {
+        if (igos->knightsSpawned & (1 << i))
+            continue;
+        s16 yaw = actor->shape.rot.y + (i ? 0x2000 : -0x2000);
+        Vec3f pos = actor->world.pos;
+        pos.x += Math_SinS(yaw) * 70.f;
+        pos.z += Math_CosS(yaw) * 70.f;
+        pos.y += 60.f;
+        CollisionPoly* floor = NULL;
+#if defined(GAME_OOT)
+        f32 y = BgCheck_EntityRaycastDown1(&play->colCtx, &floor, &pos);
+#else
+        f32 y = BgCheck_EntityRaycastFloor1(&play->colCtx, &floor, &pos);
+#endif
+        if (floor && fabsf(y - actor->world.pos.y) < 100.f)
+            pos.y = y;
+        else
+            pos = actor->world.pos;
+        Actor* knight = Actor_Spawn(&play->actorCtx, play, actor->id, pos.x, pos.y, pos.z, 0,
+            actor->shape.rot.y, 0, i ? 0x827f : 0x817f);
+        if (knight) {
+            knight->parent = actor;
+            knight->room = actor->room;
+            igos->knightsSpawned |= 1 << i;
+        }
+    }
+    int alive = igos->knightsSpawned != 3;
+    for (int category = 0; category < ACTORCAT_MAX; ++category)
+        for (Actor* knight = play->actorCtx.actors[category].first; knight; knight = knight->next)
+            if (knight->parent == actor && knight->id == actor->id &&
+                ((u16)knight->params == 0x817f || (u16)knight->params == 0x827f))
+                alive = 1;
+    if (!alive) {
+        igos->knightEncounter = 0;
+        actor->flags |= ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE;
+        return 0;
+    }
+    actor->flags &= ~(ACTOR_FLAG_ATTENTION_ENABLED | ACTOR_FLAG_HOSTILE);
+    actor->speed = 0.f;
+    igos->duel.body.base.acFlags &= ~AC_HIT;
+    igos->bodySpheres.base.acFlags &= ~AC_HIT;
+    Actor_MoveWithGravity(actor);
+    Actor_UpdateBgCheckInfo(play, actor, 24.f, 32.f, 65.f, 5);
+    SkelAnime_Update(&igos->duel.skel);
+    return 1;
+}
+
 static void Duel_Update(Actor* actor, PlayState* play)
 {
     if (DUEL_FIXED_FORM == DUEL_IGOS && (u16)actor->params == 0x837f)
@@ -8993,6 +9055,8 @@ static void Duel_Update(Actor* actor, PlayState* play)
         }
         return;
     }
+    if (DUEL_FIXED_FORM == DUEL_IGOS && Igos_WaitForKnights((StandaloneIgos*)actor, play))
+        return;
     StandaloneDuel* duel = (StandaloneDuel*)actor;
     const DuelForm* form = &sForms[DUEL_FIXED_FORM];
     int wallStunned = DUEL_FIXED_FORM == DUEL_SNAPPER &&
@@ -10174,6 +10238,14 @@ static int Igos_HeadDetached(const StandaloneDuel* duel)
 static s32 Igos_OverrideLimb(PlayState* play, s32 limb, Gfx** dList, Vec3f* pos, Vec3s* rot, void* arg)
 {
     StandaloneDuel* duel = arg;
+    if ((u16)duel->actor.params == 0x827f) {
+        if (limb == 15)
+            *dList = (Gfx*)0x06013020;
+        else if (limb == 18)
+            *dList = (Gfx*)0x06012db0;
+        else if (limb == 19)
+            *dList = (Gfx*)0x06012400;
+    }
     if (limb == 15)
         rot->x += ((StandaloneIgos*)duel)->neckYaw;
     if (Igos_HeadDetached(duel) && (limb == 18 || limb == 19))

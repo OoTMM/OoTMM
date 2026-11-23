@@ -520,8 +520,8 @@ Gfx ovl_En_Tanron1_DL_001900[] = {
 void EnTanron1_Init(Actor* thisx, PlayState* play) {
     EnTanron1* this = (EnTanron1*)thisx;
 
-    this->standalone = this->actor.params == ENEMY_MOTH_STANDALONE;
-    this->mothCapacity = this->standalone ? 20 : 200;
+    this->standalone = this->actor.params == 0x14 || this->actor.params == ENEMY_MOTH_STANDALONE;
+    this->mothCapacity = this->standalone ? 1 + (s16)Rand_ZeroFloat(10.f) : 200;
     this->unk_160 = EnemyMothAlloc(sizeof(*this->unk_160) * this->mothCapacity);
     if (!this->unk_160) {
         this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
@@ -531,7 +531,7 @@ void EnTanron1_Init(Actor* thisx, PlayState* play) {
     }
     memset(this->unk_160, 0, sizeof(*this->unk_160) * this->mothCapacity);
     if (this->standalone) {
-        this->actor.params = 20;
+        this->actor.params = this->mothCapacity;
         this->actor.colChkInfo.health = 1;
         Collider_InitCylinder(play, &this->standaloneCollider);
         Collider_SetCylinder(play, &this->standaloneCollider, thisx, &sEnemyMothCollider);

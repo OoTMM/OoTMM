@@ -1813,6 +1813,7 @@ function bombRules(source: Game, target: Game): EnemyNativeSpawn[] {
 function enemyPortSpawnActors(game: Game, actorId: number): readonly string[] {
   const actor = enemyCatalogActor(game, actorId);
   if (!actor) throw Error(`Missing enemy port dependency catalog: ${game}/${actorId.toString(16)}`);
+  if (game === 'oot' && actorId === 0x197 || game === 'mm' && actorId === 0x21d) return [];
   if (game === 'mm' && [0x43, 0x15d, 0x182, 0x12c, 0x7, 0x65, 0x115, 0x28f].includes(actorId)) return [];
 
   if (game === 'oot' && actorId === 0x69) return actor.spawnActors.filter(name => name !== 'ACTOR_EN_BB');
@@ -2314,6 +2315,11 @@ type ClearTagCall = { paramsAt: number; call: number; fields: readonly number[];
 type ClearTagCaller = { actorId: number; crc32: number; sites: readonly ClearTagCall[] };
 
 const CLEAR_TAG_CALLERS: readonly ClearTagCaller[] = [
+  {
+    actorId: 0x21d, crc32: 3994638374, sites: [
+      { paramsAt: 0x494c, call: 0x4968, fields: [0x492c, 0x493c, 0x4944] },
+    ]
+  },
   {
     actorId: 0x0b, crc32: 0x4dfdaf2a, sites: [
       { paramsAt: 0x5d0, call: 0x620, fields: [0x5dc, 0x5e0, 0x600] },

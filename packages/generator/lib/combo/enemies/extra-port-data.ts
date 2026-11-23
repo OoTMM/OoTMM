@@ -3,6 +3,89 @@ export const EXTRA_COMBAT_PORTS = {
   'actors': [
     {
       'sourceGame': 'oot',
+      'sourceActorId': 407,
+      'sourceObjectId': 361,
+      'actor': 'En_GeldB',
+      'program': 'oot-en-geldb.json',
+      'soul': 'OOT_SOUL_ENEMY_THIEVES',
+      'sourceSounds': [
+        'NA_SE_EN_GERUDOFT_ATTACK',
+        'NA_SE_EN_GERUDOFT_BREATH',
+        'NA_SE_EN_GERUDOFT_DAMAGE',
+        'NA_SE_EN_GERUDOFT_DEAD',
+        'NA_SE_EN_GOMA_JR_FREEZE',
+        'NA_SE_EN_MUSI_LAND',
+        'NA_SE_EN_RIZA_DOWN',
+        'NA_SE_EN_STAL_JUMP',
+        'NA_SE_EN_TWINROBA_YOUNG_LAUGH',
+        'NA_SE_SY_TRE_BOX_APPEAR'
+      ],
+      'nativePort': {
+        'version': 1,
+        'prefix': 'FOREIGN_ENEMY_PORT_OOT_EN_GELDB',
+        'overlay': 'Native_Enemy_oot_en_geldb',
+        'objectVrom': 25751552,
+        'objectSize': 46832,
+        'objectCrc32': 2663731861,
+        'requiredRuntimeExports': [
+          'FOREIGN_ENEMY_API_KILL',
+          'FOREIGN_ENEMY_API_COLLISION_AC',
+          'FOREIGN_ENEMY_API_COLLISION_AT',
+          'FOREIGN_ENEMY_API_COLLISION_OC',
+          'FOREIGN_ENEMY_API_SFX_ACTOR',
+          'FOREIGN_ENEMY_API_COLOR_FILTER'
+        ]
+      }
+    },
+    {
+      'sourceGame': 'mm',
+      'sourceActorId': 541,
+      'sourceObjectId': 516,
+      'actor': 'En_Kaizoku',
+      'program': 'mm-en-kaizoku.json',
+      'soul': 'MM_SOUL_ENEMY_THIEVES',
+      'sourceSounds': [
+        'NA_SE_EN_BOSU_SWORD',
+        'NA_SE_EN_COMMON_FREEZE',
+        'NA_SE_EN_GERUDOFT_DOWN',
+        'NA_SE_EN_GERUDOFT_WALK',
+        'NA_SE_EN_LAST2_SHOUT',
+        'NA_SE_EN_PIRATE_ATTACK',
+        'NA_SE_EN_PIRATE_BREATH',
+        'NA_SE_EN_PIRATE_DAMAGE',
+        'NA_SE_EN_PIRATE_DAMM_BREATH',
+        'NA_SE_EN_PIRATE_DEAD',
+        'NA_SE_EN_PIRATE_ONGND',
+        'NA_SE_EN_PIRATE_SHOUT',
+        'NA_SE_EN_TEKU_JUMP',
+        'NA_SE_IT_SHIELD_BOUND'
+      ],
+      'nativePort': {
+        'version': 1,
+        'prefix': 'FOREIGN_ENEMY_PORT_MM_EN_KAIZOKU',
+        'overlay': 'Native_Enemy_mm_en_kaizoku',
+        'objectVrom': 28811264,
+        'objectSize': 63744,
+        'objectCrc32': 123701028,
+        'requiredRuntimeExports': [
+        'FOREIGN_ENEMY_API_KNOCKBACK_LARGE_NO_DAMAGE',
+          'FOREIGN_ENEMY_API_KILL',
+          'FOREIGN_ENEMY_API_COLLISION_AC',
+          'FOREIGN_ENEMY_API_COLLISION_AT',
+          'FOREIGN_ENEMY_API_COLLISION_OC',
+          'FOREIGN_ENEMY_API_SFX_ACTOR',
+          'FOREIGN_ENEMY_API_COLOR_FILTER',
+          'FOREIGN_ENEMY_API_MATRIX_MULT_ZERO',
+          'FOREIGN_ENEMY_API_TRANSFORM_FLEX_OPA',
+          'FOREIGN_ENEMY_API_DAMAGE_EFFECTS',
+          'FOREIGN_ENEMY_API_ICE_SHATTER',
+          'FOREIGN_ENEMY_API_SPAWN'
+        ],
+        'damageEffects': true
+      }
+    },
+    {
+      'sourceGame': 'oot',
       'sourceActorId': 107,
       'sourceObjectId': 95,
       'actor': 'En_Yukabyun',
@@ -407,6 +490,48 @@ export const EXTRA_COMBAT_PORTS = {
     },
   ],
   'programs': {
+    'oot-en-geldb.json': {
+      'version': 1,
+      'sourceGame': 'oot',
+      'sourceActorId': 407,
+      'sourceObjectId': 361,
+      'actorIds': [
+        [
+          407,
+          3479
+        ]
+      ],
+      'runtimeImports': [],
+      'manifest': {
+        'sourceVrom': 15452224,
+        'fileSize': 21424,
+        'vramStart': 2159284496,
+        'memorySize': 21424,
+        'profileOffset': 19584,
+        'sourceCrc32': 3251889401
+      }
+    },
+    'mm-en-kaizoku.json': {
+      'version': 1,
+      'sourceGame': 'mm',
+      'sourceActorId': 541,
+      'sourceObjectId': 516,
+      'actorIds': [
+        [
+          541,
+          3613
+        ]
+      ],
+      'runtimeImports': [],
+      'manifest': {
+        'sourceVrom': 16688896,
+        'fileSize': 23872,
+        'vramStart': 2159564176,
+        'memorySize': 23872,
+        'profileOffset': 21964,
+        'sourceCrc32': 3994638374
+      }
+    },
     'oot-en-yukabyun.json': {
       'version': 1,
       'sourceGame': 'oot',

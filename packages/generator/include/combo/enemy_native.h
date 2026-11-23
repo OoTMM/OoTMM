@@ -54,15 +54,14 @@ typedef struct EnemyFamily
 #define ENEMY_FAMILY_FIELD_STALCHILD 4
 #define ENEMY_FAMILY_DESERT_LEEVER 8
 Actor* comboEnemyFamilySpawn(EnemyFamily*, ActorContext*, ActorEntry*, PlayState*, u32);
-#if defined(GAME_OOT)
 Actor* comboEnemyFamilySpawnVanillaChild(EnemyFamily*, ActorContext*, Actor*, PlayState*, s16,
                                         f32, f32, f32, s16, s16, s16, s32);
-#endif
 void comboEnemyFamilyClear(EnemyFamily*);
 void comboEnemyNativeCancelInit(Actor*, PlayState*);
 void comboEnemyFamilySpawned(Actor*);
 int comboEnemyFamilySpawning(void);
 int comboEnemyFamilyIsGold(Actor*);
+int comboEnemyFamilyNoClear(Actor*);
 int comboEnemyFamilyDone(const EnemyFamily*);
 int comboEnemyFamilyRewardReady(const EnemyFamily*);
 

@@ -1,5 +1,159 @@
 export const animation_audit = {
   'objects': [
+    {
+      'game': 'oot',
+      'objectId': 361,
+      'vrom': 25751552,
+      'size': 46832,
+      'crc32': 2663731861,
+      'skeletons': [
+        {
+          'offset': 42072,
+          'jointCount': 24,
+          'type': 'Flex',
+          'limbType': 'Standard'
+        }
+      ],
+      'animations': [
+        {
+          'offset': 44536,
+          'jointCount': 24
+        },
+        {
+          'offset': 46804,
+          'jointCount': 24
+        },
+        {
+          'offset': 43028,
+          'jointCount': 24
+        },
+        {
+          'offset': 5008,
+          'jointCount': 24
+        },
+        {
+          'offset': 9448,
+          'jointCount': 24
+        },
+        {
+          'offset': 972,
+          'jointCount': 24
+        },
+        {
+          'offset': 3932,
+          'jointCount': 24
+        },
+        {
+          'offset': 8832,
+          'jointCount': 24
+        },
+        {
+          'offset': 7696,
+          'jointCount': 24
+        },
+        {
+          'offset': 5496,
+          'jointCount': 24
+        },
+        {
+          'offset': 45180,
+          'jointCount': 24
+        }
+      ]
+    },
+    {
+      'game': 'mm',
+      'objectId': 516,
+      'vrom': 28811264,
+      'size': 63744,
+      'crc32': 123701028,
+      'skeletons': [
+        {
+          'offset': 55336,
+          'jointCount': 24,
+          'type': 'Flex',
+          'limbType': 'Standard'
+        }
+      ],
+      'animations': [
+        {
+          'offset': 972,
+          'jointCount': 24
+        },
+        {
+          'offset': 3932,
+          'jointCount': 24
+        },
+        {
+          'offset': 5008,
+          'jointCount': 24
+        },
+        {
+          'offset': 5496,
+          'jointCount': 24
+        },
+        {
+          'offset': 7836,
+          'jointCount': 24
+        },
+        {
+          'offset': 10032,
+          'jointCount': 24
+        },
+        {
+          'offset': 11168,
+          'jointCount': 24
+        },
+        {
+          'offset': 14908,
+          'jointCount': 24
+        },
+        {
+          'offset': 17380,
+          'jointCount': 24
+        },
+        {
+          'offset': 18528,
+          'jointCount': 24
+        },
+        {
+          'offset': 22084,
+          'jointCount': 24
+        },
+        {
+          'offset': 22712,
+          'jointCount': 24
+        },
+        {
+          'offset': 56292,
+          'jointCount': 24
+        },
+        {
+          'offset': 57800,
+          'jointCount': 24
+        },
+        {
+          'offset': 59580,
+          'jointCount': 24
+        },
+        {
+          'offset': 60700,
+          'jointCount': 24
+        },
+        {
+          'offset': 61340,
+          'jointCount': 24
+        },
+        {
+          'offset': 62088,
+          'jointCount': 24
+        },
+        {
+          'offset': 63716,
+          'jointCount': 24
+        }
+      ]
+    },
     { 'game': 'mm', 'objectId': 1, 'vrom': 17346560, 'size': 599520, 'crc32': 547435790, 'skeletons': [], 'animations': [] },
     {
       'game': 'mm',
@@ -894,6 +1048,16 @@ export const animation_audit = {
     },
   ],
   'actors': [
+    {
+      'game': 'oot',
+      'actorId': 407,
+      'objectId': 361
+    },
+    {
+      'game': 'mm',
+      'actorId': 541,
+      'objectId': 516
+    },
     { 'game': 'mm', 'actorId': 301, 'objectId': 350 },
     { 'game': 'mm', 'actorId': 341, 'objectId': 369 },
     { 'game': 'mm', 'actorId': 347, 'objectId': 370 },

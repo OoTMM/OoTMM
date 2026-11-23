@@ -75,6 +75,12 @@ int comboEnemyFamilyIsGold(Actor* actor)
     return child && (child->family->flags & ENEMY_FAMILY_GOLD);
 }
 
+int comboEnemyFamilyNoClear(Actor* actor)
+{
+    FamilyChild* child = familyChild(actor, 0);
+    return child && (child->family->flags & ENEMY_FAMILY_NO_CLEAR);
+}
+
 int comboEnemyFamilyDone(const EnemyFamily* family)
 {
     return family->started && !family->live && !family->blocked;
@@ -267,9 +273,6 @@ Actor* comboEnemyFamilySpawn(EnemyFamily* family, ActorContext* ctx, ActorEntry*
     return familyFinishSpawn(family, actor, previous, collecting);
 }
 
-#if defined(GAME_OOT)
-/* A preserved slot still needs a lifetime while its neighboring slots shuffle.
- * Keep the native parent link, parameters and spawn behavior intact. */
 Actor* comboEnemyFamilySpawnVanillaChild(EnemyFamily* family, ActorContext* ctx, Actor* parent,
                                         PlayState* play, s16 id, f32 x, f32 y, f32 z,
                                         s16 rx, s16 ry, s16 rz, s32 params)
@@ -283,7 +286,6 @@ Actor* comboEnemyFamilySpawnVanillaChild(EnemyFamily* family, ActorContext* ctx,
     Actor* actor = Actor_SpawnAsChild(ctx, parent, play, id, x, y, z, rx, ry, rz, params);
     return familyFinishSpawn(family, actor, previous, collecting);
 }
-#endif
 
 #if defined(GAME_MM)
 static void familyActorDestroy(Actor* actor, PlayState* play)

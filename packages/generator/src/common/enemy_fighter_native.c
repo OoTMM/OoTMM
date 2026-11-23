@@ -101,6 +101,7 @@ typedef struct {
     ColliderQuad swordCollider;
 } NativeFighter;
 _Static_assert(__builtin_offsetof(NativeFighter, actionFunc) == 0x2ac, "fighter action");
+_Static_assert(__builtin_offsetof(NativeFighter, animationsDisabled) == 0x2d8, "fighter animation state");
 _Static_assert(__builtin_offsetof(NativeFighter, color) == 0x2ec, "fighter color");
 static int fighterCanAttack(Actor* actor, f32 range)
 {
@@ -254,6 +255,7 @@ static void fighterActivate(Actor* actor, PlayState* play)
 #else
     NativeFighter* fighter = (NativeFighter*)actor;
     fighter->color = (s32)(Rand_ZeroOne() * 3.f);
+    fighter->animationsDisabled = 0;
     fighter->swordScaleRight.x = fighter->swordScaleRight.y = fighter->swordScaleRight.z = 1.f;
     fighter->swordScaleLeft = fighter->swordScaleRight;
 #endif

@@ -1441,8 +1441,6 @@ void EnPp_UpdateDamage(EnPp* this, PlayState* play) {
 
 void EnPp_Update(Actor* thisx, PlayState* play) {
     EnPp* this = (EnPp*)thisx;
-    WaterBox* waterBox;
-    f32 waterSurface;
 
     DECR(this->timer);
 
@@ -1474,14 +1472,6 @@ void EnPp_Update(Actor* thisx, PlayState* play) {
             this->bodyCollider.elements[0].dim.modelSphere.center.x = 400;
             this->bodyCollider.elements[0].dim.modelSphere.center.y = -400;
         }
-    }
-
-    if ((this->action < EN_PP_ACTION_DEAD) &&
-        (BgCheck_GetWaterSurfaceNoBgIdAlt(play, &play->colCtx, this->actor.world.pos.x, this->actor.world.pos.z,
-                                          &waterSurface, &waterBox)) &&
-        (this->actor.world.pos.y < waterSurface)) {
-        EnPp_SetupDead(this, play);
-        return;
     }
 
     if (this->action != EN_PP_ACTION_BODY_PART_MOVE) {

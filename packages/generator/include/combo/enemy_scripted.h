@@ -21,16 +21,5 @@ typedef struct {
 int comboEnemyScriptedCapturePlacement(Actor*, PlayState*, const ActorEntry*);
 Actor* comboEnemyScriptedSpawnTarget(Actor*, PlayState*, f32, f32, f32, s16, EnemyFamily*);
 void comboEnemyScriptedCancelPlacement(Actor*, PlayState*);
-int comboEnemyScriptedHoldChild(Actor* root, Actor* child);
-void comboEnemyScriptedReleaseChildren(Actor* root);
-void comboEnemyScriptedBlock(Actor* root);
-int comboEnemyScriptedRoomComplete(PlayState*);
-typedef struct {
-    s16 sourceId;
-    int (*ready)(Actor*, PlayState*);
-    void (*begin)(Actor*, PlayState*);
-    void (*complete)(Actor*, PlayState*);
-    int (*completed)(PlayState*, const ActorEntry*);
-} EnemyScriptedDescriptor;
 
 #endif

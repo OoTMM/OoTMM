@@ -321,31 +321,45 @@ void EnTanron3_Init(Actor* thisx, PlayState* play) {
     if (enemyGarahnaBoss(this) == NULL) {
         WaterBox* water;
         f32 radius, edge;
+        EnTanron3* owner = thisx->parent && thisx->parent->id == thisx->id ? (EnTanron3*)thisx->parent : NULL;
         if (thisx->params != 0 ||
-            !enemyGarahnaWater(play, this->actor.home.pos.x, this->actor.home.pos.z, &this->waterSurfaceYPos, &water)) {
+            (!owner && !enemyGarahnaWater(play, this->actor.home.pos.x, this->actor.home.pos.z, &this->waterSurfaceYPos, &water))) {
             Actor_Kill(thisx);
             return;
         }
-        radius = this->actor.home.pos.x - water->xMin;
-        edge = water->xMin + water->xLength - this->actor.home.pos.x;
-        if (edge < radius)
-            radius = edge;
-        edge = this->actor.home.pos.z - water->zMin;
-        if (edge < radius)
-            radius = edge;
-        edge = water->zMin + water->zLength - this->actor.home.pos.z;
-        if (edge < radius)
-            radius = edge;
-        radius -= 20.0f;
-        if (radius < 20.0f)
-            radius = 20.0f;
-        if (radius > 700.0f)
-            radius = 700.0f;
+        if (owner) {
+            this->waterSurfaceYPos = owner->waterSurfaceYPos;
+            radius = owner->standaloneRadius;
+        } else {
+            radius = this->actor.home.pos.x - water->xMin;
+            edge = water->xMin + water->xLength - this->actor.home.pos.x;
+            if (edge < radius)
+                radius = edge;
+            edge = this->actor.home.pos.z - water->zMin;
+            if (edge < radius)
+                radius = edge;
+            edge = water->zMin + water->zLength - this->actor.home.pos.z;
+            if (edge < radius)
+                radius = edge;
+            radius -= 20.0f;
+            if (radius < 20.0f)
+                radius = 20.0f;
+            if (radius > 700.0f)
+                radius = 700.0f;
+        }
         this->standaloneRadius = radius;
         this->targetPos = this->actor.home.pos;
         if (this->actor.world.pos.y >= this->waterSurfaceYPos)
             this->actor.world.pos.y = this->waterSurfaceYPos - 30.0f;
         this->actor.flags |= ACTOR_FLAG_ATTENTION_ENABLED;
+        if (!owner) {
+            this->swarmOwner = 1;
+            this->swarm.flags = ENEMY_FAMILY_NO_CLEAR;
+            this->actor.colChkInfo.health = 1;
+            this->actor.draw = NULL;
+            this->actor.flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
+            this->actor.flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED;
+        }
 #if defined(GAME_MM)
         ((void (*)(PlayState*, ActorContext*, Actor*, u8))0x800bc154)(play, &play->actorCtx, thisx, ACTORCAT_ENEMY);
 #endif
@@ -353,6 +367,14 @@ void EnTanron3_Init(Actor* thisx, PlayState* play) {
 }
 
 void EnTanron3_Destroy(Actor* thisx, PlayState* play) {
+    if (((EnTanron3*)thisx)->swarmOwner) {
+        for (s32 category = 0; category < ACTORCAT_MAX; ++category)
+            for (Actor* child = play->actorCtx.actors[category].first; child; child = child->next)
+                if (child->parent == thisx && child->id == thisx->id)
+                    child->parent = NULL;
+        thisx->child = NULL;
+        comboEnemyFamilyClear(&((EnTanron3*)thisx)->swarm);
+    }
     Actor* boss = enemyGarahnaBoss((EnTanron3*)thisx);
     if (boss != NULL)
         (*(s8*)((u8*)boss + 0x252))--;
@@ -616,6 +638,33 @@ void EnTanron3_Update(Actor* thisx, PlayState* play) {
     EnTanron3* this = (EnTanron3*)thisx;
     s16 i;
     Vec3f splashPos;
+
+    if (this->swarmOwner) {
+        if (this->swarmRetry) {
+            --this->swarmRetry;
+            return;
+        }
+        while (this->swarmSpawned < 10) {
+            s16 yaw = this->swarmSpawned * (0x10000 / 10);
+            f32 radius = MIN(this->standaloneRadius * .25f, 30.f);
+            Vec3f pos = this->actor.home.pos;
+            pos.x += radius * Math_SinS(yaw);
+            pos.z += radius * Math_CosS(yaw);
+            pos.y = MIN(pos.y, this->waterSurfaceYPos - 30.f);
+            if (!comboEnemyFamilySpawnVanillaChild(&this->swarm, &play->actorCtx, thisx, play,
+                    thisx->id, pos.x, pos.y, pos.z, 0, yaw, 0, 0)) {
+                this->swarm.blocked = 0;
+                this->swarmRetry = 15;
+                return;
+            }
+            ++this->swarmSpawned;
+        }
+        if (comboEnemyFamilyDone(&this->swarm)) {
+            this->actor.colChkInfo.health = 0;
+            Actor_Kill(thisx);
+        }
+        return;
+    }
 
     if (KREG(63) == 0) {
         this->timer++;

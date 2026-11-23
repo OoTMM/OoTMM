@@ -1783,7 +1783,7 @@ class LogicPassWorldTransform {
       const foreignTargets = new Set<string>();
       for (const row of world.enemyPlan) {
         const host = row.ootr ? 'oot' : row.placement ? 'mm' : enemyDefinition(row.source).game;
-        if (!(host === 'oot' ? settings.enemyShuffleOot && settings.soulsEnemyOot : settings.enemyShuffleMm && settings.soulsEnemyMm)) continue;
+        if (!(host === 'oot' ? (settings.enemyShuffleOot || settings.enemyShuffleOotMinibossOnly) && settings.soulsEnemyOot : (settings.enemyShuffleMm || settings.enemyShuffleMmMinibossOnly) && settings.soulsEnemyMm)) continue;
         for (const key of [row.target, ...(row.splitChildren ?? []), ...(row.splitPool ?? [])])
           if (enemyDefinition(key).game !== host) foreignTargets.add(key);
       }

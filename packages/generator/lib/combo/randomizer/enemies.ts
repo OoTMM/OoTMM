@@ -8,7 +8,7 @@ import { NATIVE_LILY_FACTS } from '../enemies/extra-port-data';
 import { align, toU32Buffer } from '../util';
 import {
   OOT_FIELD_STALCHILD_SLOTS, OOT_FOREST_BOW_SLOTS, OOT_BURIAL_ENEMY_SLOTS, OOT_DESERT_LEEVER_SLOTS, ENEMY_GOLD_SOURCES, nativeGoldTarget, verifyMmRoomOverlaps, mmRoomOverlapStates, enemySceneMemoryReports, enemyOotSceneMemoryReports, OOT_GAMEPLAY_POLICY, ENEMY_MEMORY_POLICY,
-  enemyWeight, enemyFormWeights, ootNativeEnemyDefinitionKey, ARWING_ENEMIES, enemySpawnMacroMatches,
+  enemyKeepsNativeEncounter, mmScriptedReleasedObjects, enemyWeight, enemyFormWeights, ootNativeEnemyDefinitionKey, ARWING_ENEMIES, enemySpawnMacroMatches,
   ENEMIES, nativeResourceSource, nativeResourceTarget, NATIVE_ARENA_COMBAT_TARGETS,
   nativeFightRestorationSource, nativeFightRestorationRoomAllowed, nativeFightRestorationCombat, scriptedMmSource, scriptedMmTargetAllowed, BIG_OCTO_ARENA_COMBAT_TARGETS,
   nativeMinibossVariant, nativeArenaCombatTarget, enemyDefinition,
@@ -18,7 +18,7 @@ import {
   OOT_ENEMIZER, ENEMY_SOURCE_ADDITIONS, ootEnemizerLocationKey,
   type EnemyDefinition, type EnemyPlan, type Settings, type Monitor, type BigOctoArenaCombatTargetKey, type NativeArenaCombatTargetKey, type NativeMinibossVariantKey, type OotEnemizerReplacement, type OotEnemizerChoice,
 } from '@ootmm/core';
-import { installDebugEnemyCatalog } from '../enemies/debug-catalog';
+import { debugEnemyForms, installDebugEnemyCatalog } from '../enemies/debug-catalog';
 import {
   verifyOotEnemySourceCorrections, validateNativePeahatPlacement, reviewedNativeLayoutFile, installedEnemyDependency, readOverlayLayout, nativeCombatProfileCategory, verifyNativeEnemyPortSource, verifyEnemyRoomEntryHook, installOotEnemyNativeArena, prepareForeignEnemies,
   type ForeignEnemyPlacement, type ForeignEnemyProgram, type NativeEnemyPort,
@@ -283,6 +283,8 @@ function applyExactOotEnemizer(roms: DecompressedRoms, addresses: GameAddresses,
         continue;
       }
       const original = resolved.data.subarray(resolved.offset, resolved.offset + 16);
+      if (enemyKeepsNativeEncounter('oot', bufReadU16BE(original, 0), bufReadU16BE(original, 14),
+        { ...enemyDefinition(row.target), spawnParams: choice.targetParams })) continue;
       if (!resolved.mq) {
         /* Setting patches (notably NO_BROKEN_ACTORS) run before the shuffle.
          * Do not restore an actor they removed by copying its original ROM
@@ -853,7 +855,7 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
         throw new Error('Missing native fighter combat adapter');
       verifySource('Fighter', () => verifyNativeActivationSource('Fighter', game, nativeFighterFacts[game], rom, addresses, patch));
     } else if (operation === 13) {
-      if (row.targetId !== (game === 'oot' ? 0x91 : 0x1e8) || ![0, 0x100, 0x200, 0x300].includes(row.targetParams) ||
+      if (row.targetId !== (game === 'oot' ? 0x91 : 0x1e8) || ![0, 0x100, 0x200, 0x300, 0x4000].includes(row.targetParams) ||
         (bufReadU16BE(row.replacement, 0) & 0x1fff) !== row.targetId || bufReadU16BE(row.replacement, 14) !== row.targetParams ||
         patch.symbols[game].get('ENEMY_NATIVE_POE_SISTER_V1')?.length !== 1)
         throw new Error('Missing native Poe Sister combat adapter');
@@ -2365,6 +2367,13 @@ function installDynamicChoices(patch: Patchfile, plan: EnemyPlan, foreign: Reado
         choices.set(choice.id + '/' + choice.params, choice);
       }
     }
+    if (patch.symbols[game].has('DEBUG_ENEMY_PICKER')) {
+      for (const { enemy, foreign: imported } of debugEnemyForms(game)) {
+        if (imported) continue;
+        const choice = dynamicEnemyChoice(game, enemy, foreign);
+        choices.set(choice.id + '/' + choice.params, choice);
+      }
+    }
     if (!choices.size) continue;
     const sorted = [...choices.values()].sort((a, b) => a.id - b.id || a.params - b.params);
     const data = new Uint8Array(4 + sorted.length * 8);
@@ -2393,7 +2402,7 @@ function installDesertLeeverShuffle(patch: Patchfile, plan: EnemyPlan, rooms: En
 
 function installFieldStalchildShuffle(patch: Patchfile, settings: Settings, plan: EnemyPlan,
   foreign: ReadonlyMap<string, ForeignEnemyPlacement>, rooms: EnemySupplementalRoom[]): void {
-  if (!settings.enemyShuffleOot || settings.games === 'mm') return;
+  if (!(settings.enemyShuffleOot || settings.enemyShuffleOotMinibossOnly) || settings.games === 'mm') return;
   const header = new Uint8Array(OOT_FIELD_STALCHILD_SLOTS.length * 8);
   OOT_FIELD_STALCHILD_SLOTS.forEach((slot, index) => {
     const row = plan.find(row => row.kind === 'field-spawner' && row.source === slot.key);
@@ -2850,7 +2859,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
         const source = scriptedMmSource(pair.source), target = enemyDefinition(pair.target);
         if (!source || !scriptedMmTargetAllowed(target, true, source) || !verifyScriptedMmNativeSource(rom, source.actorId, addresses, patch)) continue;
 
-        if (source.actorId === 0x15d && target.game === 'mm' && target.actorId === 0x15d) continue;
+        if (enemyKeepsNativeEncounter('mm', source.actorId, source.spawnParams, target)) continue;
         const imported = target.game === 'mm' ? undefined : foreignTargets.get(target.key);
         if (target.game !== 'mm' && !imported) throw new Error('Missing scripted MM foreign target');
         const arenaFacts = SCRIPTED_MM_ARENAS.filter(row => row.roomStart === room.start && row.roomEnd === room.end &&
@@ -2867,8 +2876,39 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
 
           if (!imported && !nativeEnemyOnDemandObjects(game, target.actorId)) continue;
           records.push(nativePlacementRecord(rom, offset, 128, [], imported?.actorId ?? target.actorId, target.spawnParams));
+          supplementalEdits.add(`mm/${offset}`);
           if (imported || nativeEnemyOnDemandObjects(game, target.actorId)) for (const alias of aliases) supplementalRooms.push({ game, source: pair.source, target: pair.target, scene: alias.scene, room: alias.room });
           ++arenaReplaced;
+        }
+      }
+      if (game === 'mm') {
+        const staged = new Set(records.filter(row => row.operation === 128 && actorOffsets.has(row.vrom)).map(row => (row.original[0] << 8 | row.original[1]) & 0x1fff));
+        const scripted = supplementalPlan.filter(row => row.kind === 'scripted' && staged.has(enemyDefinition(row.source).actorId));
+        const lists = new Map<number, { count: number; commands: Set<number>; removed: Set<number> }>();
+        for (const header of room.headers) {
+          if (!header.objects || header.objectCommand === undefined) continue;
+          const map = MM_NATIVE_SCENES.find(scene => scene.scene === header.scene)?.maps.find(map =>
+            map.start === room.start && map.room === header.room && map.setup === header.setup);
+          const removed = new Set(map ? mmScriptedReleasedObjects(header.scene, map, scripted) : []);
+          const previous = lists.get(header.objects.offset);
+          if (previous) {
+            previous.commands.add(header.objectCommand);
+            previous.removed = previous.count === header.objects.count
+              ? new Set([...previous.removed].filter(id => removed.has(id))) : new Set();
+          } else {
+            lists.set(header.objects.offset, { count: header.objects.count, commands: new Set([header.objectCommand]), removed });
+          }
+        }
+        for (const [offset, list] of lists) {
+          if (!list.removed.size) continue;
+          const objects = Array.from({ length: list.count }, (_, i) => bufReadU16BE(rom, offset + i * 2))
+            .filter(id => !list.removed.has(id));
+          for (let i = 0; i < objects.length; ++i)
+            changes.push({ offset: offset + i * 2, value: objects[i] });
+          for (const command of list.commands) {
+            const address = addresses.mm.fileFromROM(command + 1);
+            patch.addPatch(address.name, address.offset, Uint8Array.of(objects.length));
+          }
         }
       }
       let roomUnmodified = false;
@@ -2886,7 +2926,8 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
             pair.source, { ...target, actorId: foreignTargets.get(pair.target)?.actorId ?? target.actorId });
           if (!restored) continue;
           changes.push(...restored.changes);
-          records.push(nativePlacementRecord(rom, restored.actorOffset, 1, changes, foreignTargets.get(pair.target)?.actorId ?? target.actorId, target.spawnParams));
+          const operation = 1 | (needsGroundPlacement(game, bufReadU16BE(rom, restored.actorOffset) & 0x1fff, target) ? 1024 : 0);
+          records.push(nativePlacementRecord(rom, restored.actorOffset, operation, changes, foreignTargets.get(pair.target)?.actorId ?? target.actorId, target.spawnParams));
           if (foreignTargets.has(pair.target) || nativeEnemyOnDemandObjects(game, target.actorId))
             for (const alias of room.headers) supplementalRooms.push({ game, source: pair.source, target: pair.target, scene: alias.scene, room: alias.room });
           ++arenaReplaced;
@@ -2909,6 +2950,8 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
           room.headers.length !== 1 || room.protectedEntries.size || !roomUnmodified) continue;
         const header = room.headers[0], loc = { ...header, start: room.start, end: room.end, mq: !!room.mq };
         const target = enemyDefinition(pair.target);
+        const source = enemyDefinition(pair.source);
+        if (enemyKeepsNativeEncounter('oot', source.actorId, source.spawnParams, target)) continue;
         const selected = { actorId: foreignTargets.get(pair.target)?.actorId ?? target.actorId, spawnParams: target.spawnParams };
         const arena = pair.source === 'oot-dead-hand-encounter' ? planDeadHandArenaCombat(rom, loc, selected) :
           pair.source === 'oot-dark-link-encounter' ? planDarkLinkArenaCombat(rom, loc, selected) :
@@ -3012,7 +3055,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
         throw Error(`Player model exceeds enemy memory profile: ${name}`);
     }
   }
-  const gameplay = settings.enemyShuffleOot && settings.games !== 'mm' ? verifyOotGameplayMemory(roms.oot.rom, addresses, patch) : undefined;
+  const gameplay = (settings.enemyShuffleOot || settings.enemyShuffleOotMinibossOnly) && settings.games !== 'mm' ? verifyOotGameplayMemory(roms.oot.rom, addresses, patch) : undefined;
   patch.meta.enemyMemoryBudget = { gameplay, version: 2, policy: ENEMY_MEMORY_POLICY, mm: memoryReports, ootPolicy: OOT_GAMEPLAY_POLICY, oot: enemyOotSceneMemoryReports(plan, settings) };
   installMmEnemyDependencies(roms.mm.rom, plan.flatMap(row => [row, ...(row.splitChildren ?? []).map(target => ({ ...row, target }))]), patch);
   verifyNativeActors();

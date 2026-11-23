@@ -1,7 +1,7 @@
 import type { Game } from './game';
 
 export type EnemySpawnHabitat = 'ground' | 'air' | 'water-surface' | 'underwater';
-export type EnemySpawnSetting = 'restoreBrokenActors' | 'enemyShuffleTerminaFieldLeevers';
+export type EnemySpawnSetting = 'restoreBrokenActors' | 'enemyShuffleLaggySpawns';
 export type EnemySpawnScalar = string | number | boolean | null;
 export type EnemySpawnPredicate = boolean | string |
   { all: EnemySpawnPredicate[] } | { any: EnemySpawnPredicate[] } | { not: EnemySpawnPredicate } |
@@ -272,7 +272,7 @@ export function parseEnemySpawnRules(value: unknown): EnemySpawnRules {
         integer(value.maximum, 0xffff, name + ': maximum');
       }
     }
-    if (rule.preserveUnless !== undefined && !['restoreBrokenActors', 'enemyShuffleTerminaFieldLeevers'].includes(rule.preserveUnless as string))
+    if (rule.preserveUnless !== undefined && !['restoreBrokenActors', 'enemyShuffleLaggySpawns'].includes(rule.preserveUnless as string))
       fail(name + ': unknown preservation setting');
     if (rule.allow === undefined && rule.deny === undefined && rule.preserve === undefined &&
       rule.preserveUnless === undefined && rule.maxHeightDifference === undefined && rule.limits === undefined) fail(name + ': missing action');

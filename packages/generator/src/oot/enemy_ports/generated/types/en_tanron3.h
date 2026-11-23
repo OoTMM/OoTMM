@@ -2,6 +2,7 @@
 #define COMBO_ENEMY_NATIVE_TYPES_MM_EN_TANRON3_H
 
 #include <combo.h>
+#include <combo/enemy_native.h>
 
 #ifndef GYORG_LIMB_BODY_ROOT
 #define GYORG_LIMB_BODY_ROOT 3
@@ -129,6 +130,8 @@ typedef struct EnTanron3 {
     EnTanron3ActionFunc actionFunc;
     f32 standaloneRadius;
     u8 bossOwned;
+    EnemyFamily swarm;
+    u8 swarmOwner, swarmSpawned, swarmRetry;
 } EnTanron3;
 
 #endif

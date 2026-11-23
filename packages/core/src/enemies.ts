@@ -9,7 +9,7 @@ import type { Game, EnemyOotSpawnTemplate } from '@ootmm/data';
 import type { Settings } from './settings';
 import { ENEMY_ACTOR_CATALOG, MACROS, RAW_GI, FOREIGN_ENEMY_SOULS, ENEMY_LOGIC_MM_ROOMS as mmRoomBindings, ENEMY_LOGIC_OOT_ROOMS as ootRoomBindings, ENEMY_SPAWN_OOT_LOCATIONS, ENEMY_SPAWN_OOT_TARGETS, ENEMY_SPAWN_MM_ACTORS, ENEMY_SPAWN_ACTOR_TYPES, ENEMY_SPAWN_OOT_TEMPLATES, applyEnemyOotSpawnPolicies, applyEnemyMmSpawnPolicies } from '@ootmm/data';
 import { enemy_mm_placement_data as mmPlacementData, enemy_placement_data as placementData, enemy_mm_facts as mmFacts, enemy_oot_source_corrections as ootActorCorrections, oot_enemizer as ootEnemizerFacts, enemy_oot_resources as resourceFacts, } from './enemy-data';
-import { Random } from './random';
+import { Random, shuffle } from './random';
 import { mmRoomOverlapStates } from './enemy-room-overlap';
 import { ENEMY_OOT_POSITIONS } from './enemy-position-data';
 import { enemySpawnSourceAllowed, enemySpawnTargetAllowed, enemySpawnMacroMatches, enemySpawnMacroGroup, enemySpawnLimit, type EnemySpawnLocation, type EnemySpawnTarget } from './enemy-spawn-rules';
@@ -50,7 +50,9 @@ const FOREIGN_EXTRA_NATIVE_MM_ENEMIES: readonly EnemyDefinition[] = [
   { key: 'mm-snapper-gekko-foreign', name: 'Woodfall Gekko', game: 'mm', actorId: 0x7, objectId: 0x128, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_gekko_wft', logicMacros: [], soulMacro: 'can_kill_gekko_wft', soulItem: 'SOUL_ENEMY_GEKKO' },
   { key: 'mm-big-slime-foreign', name: 'Great Bay Gekko', game: 'mm', actorId: 0x65, objectId: 0x128, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_gekko_gbt', logicMacros: [], soulMacro: 'can_kill_gekko_gbt', soulItem: 'SOUL_ENEMY_GEKKO' },
   { key: 'mm-ikana-throne-foreign', name: 'Igos du Ikana', game: 'mm', actorId: 0x115, objectId: 0x156, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_igos_solo', logicMacros: [], soulMacro: 'can_kill_igos_solo' },
-  { key: 'mm-ikana-soldier-foreign', name: 'Ikana Soldier', game: 'mm', actorId: 0x115, objectId: 0x156, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x847f, killMacro: 'can_kill_igos_solo', logicMacros: [], soulMacro: 'can_kill_igos_solo' },
+  { key: 'mm-ikana-trio-foreign', name: 'Igos du Ikana', game: 'mm', actorId: 0x115, objectId: 0x156, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x907f, killMacro: 'can_kill_igos_solo', logicMacros: [], soulMacro: 'can_kill_igos_solo' },
+  { key: 'mm-ikana-soldier-foreign', name: 'Ikana Soldier', game: 'mm', actorId: 0x115, objectId: 0x156, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x817f, killMacro: 'can_kill_igos_solo', logicMacros: [], soulMacro: 'can_kill_igos_solo' },
+  { key: 'mm-ikana-soldier-wide-foreign', name: 'Ikana Soldier', game: 'mm', actorId: 0x115, objectId: 0x156, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x827f, killMacro: 'can_kill_igos_solo', logicMacros: [], soulMacro: 'can_kill_igos_solo' },
   { key: 'mm-captain-keeta-foreign', name: 'Captain Keeta', game: 'mm', actorId: 0x28f, objectId: 0x268, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_keeta', logicMacros: [], soulMacro: 'can_kill_keeta', soulItem: 'SOUL_ENEMY_CAPTAIN_KEETA' },
   { key: 'mm-garo-master-foreign', name: 'Garo Master', game: 'mm', actorId: 0x182, objectId: 0x155, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_garo_master', logicMacros: [], soulMacro: 'soul_garo', soulItem: 'SOUL_ENEMY_GARO' },
   { key: 'mm-gomess-foreign', name: 'Gomess', game: 'mm', actorId: 0x43, objectId: 0x52, habitat: 'ground', foreignOnly: true, params: [], spawnParams: 0x807f, killMacro: 'can_kill_gomess', logicMacros: [], soulMacro: 'soul_gomess', soulItem: 'SOUL_ENEMY_GOMESS' },
@@ -142,13 +144,17 @@ const FOREIGN_MM_EXTRA_VARIANT_ENEMIES: readonly EnemyDefinition[] = [
 ];
 
 function additionalForeignEnemyParams(game: Game, actorId: number): readonly number[] {
+  if (game === 'oot' && actorId === 0x197)
+    return [0];
+  if (game === 'mm' && actorId === 0x21d)
+    return [0x1fc0];
   if (game === 'mm' && actorId === 0xb) return [1];
   if (game === 'oot' && [0x69, 0x1d, 0x37, 0x8a, 0x1b0].includes(actorId))
     return ({ 0x69: [0xfd, 0x2fc, 0x2fb], 0x1d: [0], 0x37: [1], 0x8a: [0x601], 0x1b0: [5, 10] } as Record<number, number[]>)[actorId];
   if (game === 'oot' && (actorId === 0xa4 || actorId === 0x33))
     return [0];
   if (game === 'mm' && actorId === 0x115)
-    return [0x807f, 0x847f];
+    return [0x807f, 0x907f, 0x817f, 0x827f];
   if (game === 'mm' && [0x43, 0x182, 0x12c, 0x7, 0x65, 0x28f].includes(actorId))
     return [0x807f];
   if (game === 'mm' && actorId === 0x15d)
@@ -383,8 +389,9 @@ const MM_NATIVE_EXTRA_VARIANTS: readonly EnemyDefinition[] = [
   },
   { ...MOTH_ENEMY, key: 'mm-moth-native-target', foreignOnly: false, nativeOnly: true },
   ...['Meg', 'Joelle', 'Beth', 'Amy'].map((name, type) => ({ key: `mm-poe-sister-native-${type}`, name, game: 'mm' as const, actorId: 0x1e8, objectId: 0x1c5, habitat: 'air' as const, miniboss: type === 0, nativeOnly: true, params: [], spawnParams: type << 8, killMacro: 'can_kill_poe_sisters', logicMacros: [], soulMacro: 'soul_poe' })),
+  { key: 'mm-poe-sisters-encounter-native-target', name: 'Meg', game: 'mm', actorId: 0x1e8, objectId: 0x1c5, habitat: 'air', miniboss: true, nativeOnly: true, params: [], spawnParams: 0x4000, killMacro: 'can_kill_poe_sisters', logicMacros: [], soulMacro: 'soul_poe' },
   ...FOREIGN_EXTRA_NATIVE_MM_ENEMIES.map(row => ({ ...row, key: row.key.replace('-foreign', '-native-target'), nativeOnly: true, foreignOnly: false })),
-  { key: 'mm-pirate-fighter-native-target', name: 'Pirate Fighter', game: 'mm', actorId: 0x21d, objectId: 0x204, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x1fc0, killMacro: 'can_fight_pirates', logicMacros: [], soulMacro: 'soul_thief_fighter' },
+  { key: 'mm-pirate-fighter-native-target', name: 'Pirate Fighter', game: 'mm', actorId: 0x21d, objectId: 0x204, habitat: 'ground', params: [], spawnParams: 0x1fc0, killMacro: 'can_fight_pirates', logicMacros: [], soulMacro: 'soul_thief_fighter' },
   { key: 'mm-big-poe-native-target', name: 'Big Poe', game: 'mm', actorId: 0x208, objectId: 0x1f1, habitat: 'air', nativeOnly: true, params: [], spawnParams: 0xff00, killMacro: 'can_kill_big_poes', logicMacros: [], soulMacro: 'soul_poe' },
   { key: 'mm-flying-pot-native-target', name: 'Flying Pot', game: 'mm', actorId: 0x8d, objectId: 3, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0x3fff, killMacro: 'can_kill_flying_pots', logicMacros: [], soulMacro: 'soul_flying_pot' },
   { key: 'mm-leever-native-target', name: 'Leever', game: 'mm', actorId: 0x216, objectId: 0x201, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_leevers', logicMacros: [], soulMacro: 'soul_leever' },
@@ -416,7 +423,8 @@ const OOT_NATIVE_EXTRA_VARIANTS: readonly EnemyDefinition[] = [
   { key: 'oot-dark-link-native-target', name: 'Dark Link', game: 'oot', actorId: 0x33, objectId: 0x20, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_dark_link', logicMacros: [], soulMacro: 'soul_dark_link', soulItem: 'SOUL_ENEMY_DARK_LINK' },
   { key: 'oot-dead-hand-native-target', name: 'Dead Hand', game: 'oot', actorId: 0xa4, objectId: 0xa6, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_dead_hand', logicMacros: [], soulMacro: 'soul_dead_hand', soulItem: 'SOUL_ENEMY_DEAD_HAND' },
   ...['Meg', 'Joelle', 'Beth', 'Amy'].map((name, type) => ({ key: `oot-poe-sister-native-${type}`, name, game: 'oot' as const, actorId: 0x91, objectId: 0x99, habitat: 'air' as const, miniboss: type === 0, nativeOnly: true, params: [], spawnParams: type << 8, killMacro: type === 0 ? 'can_kill_poe_meg' : 'can_kill_poe_sisters', logicMacros: [], soulMacro: 'soul_poe' })),
-  { key: 'oot-gerudo-fighter-native-target', name: 'Gerudo Fighter', game: 'oot', actorId: 0x197, objectId: 0x169, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0, killMacro: 'can_kill_gerudo_fighter', logicMacros: [], soulMacro: 'soul_thief_fighter' },
+  { key: 'oot-poe-sisters-encounter-native-target', name: 'Meg', game: 'oot', actorId: 0x91, objectId: 0x99, habitat: 'air', miniboss: true, nativeOnly: true, params: [], spawnParams: 0x4000, killMacro: 'can_kill_poe_meg', logicMacros: [], soulMacro: 'soul_poe' },
+  { key: 'oot-gerudo-fighter-native-target', name: 'Gerudo Fighter', game: 'oot', actorId: 0x197, objectId: 0x169, habitat: 'ground', params: [], spawnParams: 0, killMacro: 'can_kill_gerudo_fighter', logicMacros: [], soulMacro: 'soul_thief_fighter' },
   ...[{ params: 0x00fd, name: 'White Bubble' }, { params: 0x02fc, name: 'Green Bubble' }, { params: 0x02fb, name: 'Big Green Bubble' }].map(row => ({ key: `oot-bubble-patrol-native-${row.params.toString(16)}`, name: row.name, game: 'oot' as const, actorId: 0x69, objectId: 0x5d, habitat: 'air' as const, nativeOnly: true, params: [], spawnParams: row.params, killMacro: 'can_kill_bubbles', logicMacros: [], soulMacro: 'soul_bubble' })),
   { key: 'oot-big-poe-native-target', name: 'Big Poe', game: 'oot', actorId: 0x175, objectId: 0x6d, habitat: 'air', nativeOnly: true, params: [], spawnParams: 1, killMacro: 'can_kill_poes', logicMacros: [], soulMacro: 'soul_poe' },
   { key: 'oot-flying-pot-native-target', name: 'Flying Pot', game: 'oot', actorId: 0x11d, objectId: 3, habitat: 'ground', nativeOnly: true, params: [], spawnParams: 0xffff, killMacro: 'can_kill_flying_pots', logicMacros: [], soulMacro: 'soul_flying_pot' },
@@ -459,7 +467,7 @@ const SPECIES: Readonly<Record<string, readonly string[]>> = {
   'oot/En_Dekunuts': ['mad-scrub'],
   'mm/En_Dekunuts': ['mad-scrub'],
   'oot/En_GeldB': ['gerudo-fighter'],
-  'mm/En_Kaizoku': ['gerudo-fighter'],
+  'mm/En_Kaizoku': ['pirate-fighter'],
   'oot/En_Zf': ['lizalfos', 'dinolfos'],
   'mm/En_Dinofos': ['dinolfos'],
 };
@@ -501,6 +509,7 @@ export function assertForeignEnemyExclusive(sourceGame: Game, sourceActorId: num
 
 const FORMS: Record<Game, Readonly<Record<number, readonly number[]>>> = {
   oot: {
+    0x197: [0],
     0x69: [0xfd, 0x2fc, 0x2fb], 0x1d: [0], 0x37: [1], 0x8a: [0x601], 0x1b0: [5, 10],
     0x33: [0], 0xa4: [0], 0x6b: [0xffff],
     0x002: [3, 0], 0x025: [0xff80], 0x02b: [6, 0x4006], 0x02f: [0], 0x034: [0], 0x035: [0xffff],
@@ -508,7 +517,8 @@ const FORMS: Record<Game, Readonly<Record<number, readonly number[]>>> = {
     0x0f6: [3], 0x115: [3], 0x18c: [0],
   },
   mm: {
-    0xb: [1], 0x12c: [0x807f], 0x7: [0x807f], 0x65: [0x807f], 0x115: [0x807f, 0x847f], 0x28f: [0x807f], 0x43: [0x807f], 0x182: [0x807f], 0x15d: [0x807f, 0x817f], 0x23d: [0x14],
+    0x21d: [0x1fc0],
+    0xb: [1], 0x12c: [0x807f], 0x7: [0x807f], 0x65: [0x807f], 0x115: [0x807f, 0x907f, 0x817f, 0x827f], 0x28f: [0x807f], 0x43: [0x807f], 0x182: [0x807f], 0x15d: [0x807f, 0x817f], 0x23d: [0x14],
     0x66: [2], 0x13a: [0x0fff], 0x113: [0], 0x180: [0x192], 0x1d1: [0], 0x2d: [0xff], 0x23f: [0], 0x291: [0], 0x184: [0x1fc0],
     0x14a: [0x0202, 0x0801, 0x0a01, 0x0c01, 0x1402, 0xff00, 0xff01, 0xff02, 0xff03], 0x109: [0, 2, 3], 0x12d: [0, 1, 4], 0x14b: [0x0300, 0x0f00], 0x155: [0], 0x15b: [0x0101, 0x0102, 0x0103, 0x0134, 0x019f],
     0x164: [0x2800, 0x3200, 0x3205, 0x6404, 0x6405, 0x7800, 0x7804, 0x8c05, 0x9605, 0xc200, 0xfa00, 0xfa01, 0xff00, 0xff01, 0xff05], 0x16f: [1, 5, 0x14, 0x28, 0x32, 0x3c, 0x46, 0x8c, 0x8014, 0x8023, 0x8028], 0x1ba: [0], 0x1e6: [0, 1, 0xff00, 0xff01], 0x1e9: [0, 0x0101], 0x204: [0],
@@ -587,7 +597,7 @@ const targetParams: Record<Game, Readonly<Record<number, readonly number[]>>> = 
     0x084: [0xff01, 0xff02, 0xff03],
     0x08f: [0x0002, 0x100f, 0x2001, 0x300f],
     0x0ec: [0xff00, 0xff01, 0xff81],
-    0x0ed: [0x0022, 0x0032, 0x0042],
+    0x0ed: [0x0022, 0x0032],
     0x0f1: [0x0000],
     0x109: [0x0000, 0x0002, 0x0003],
     0x13a: [0x0fff],
@@ -705,14 +715,16 @@ if (OOT_SELECTED_ENEMY_RESOURCE_ENVELOPE !== OOT_GAMEPLAY_POLICY.selectedEnemyBy
 const ENEMY_ROOM_ACTOR_TARGET = 32;
 
 function foreignEnemyExtraActors(game: Game, actorId: number, params: number): number {
+  if (game === 'mm' && actorId === 0x23f && params === 0)
+    return 10;
   if ((game === 'oot' && actorId === 0x91 || game === 'mm' && actorId === 0x1e8) && ((params >>> 8) & 3) === 0)
     return 3;
   if (game === 'oot' && (actorId === 0x35 || actorId === 0xde))
     return 7;
   if (game === 'mm' && actorId === 0x180)
     return 5;
-  if (game === 'mm' && actorId === 0x115 && params === 0x807f)
-    return 2;
+  if (game === 'mm' && actorId === 0x115 && (params === 0x807f || params === 0x907f))
+    return params === 0x907f ? 3 : 2;
   if (game === 'oot' && actorId === 0x63)
     return 3;
   if (game === 'mm' && actorId === 0x14b)
@@ -890,15 +902,38 @@ export function isMinibossEnemy(game: Game, actorId: number, params?: number): b
     facts: { catalogMiniboss: MINIBOSS_ACTORS.has(`${game}/${actorId}`) } });
 }
 
+function minibossOnly(settings: Partial<Settings>, game: Game): boolean {
+  return !!(game === 'oot' ? settings.enemyShuffleOotMinibossOnly : settings.enemyShuffleMmMinibossOnly);
+}
+
+export function enemyKeepsNativeEncounter(game: Game, actorId: number, params: number | undefined,
+  target: Pick<EnemyDefinition, 'game' | 'actorId' | 'spawnParams'>): boolean {
+  return target.game === game && target.actorId === actorId &&
+    (game === 'mm' && actorId === 0x184 || isMinibossEnemy(game, actorId, params) &&
+      isMinibossEnemy(target.game, target.actorId, target.spawnParams));
+}
+
+export function isMinibossEncounter(game: Game, actorId: number, params?: number): boolean {
+  return enemySpawnMacroMatches('miniboss-encounter', { target: { game, actorId, params },
+    facts: { miniboss: isMinibossEnemy(game, actorId, params) } });
+}
+
 export function requiresMinibossReplacement(settings: Partial<Settings>, game: Game, actorId: number): boolean {
-  return !!settings.enemyShuffleMinibosses && !!settings.enemyShuffleMinibossType &&
-    settings.enemyShuffleMinibossType !== 'anywhere' && isMinibossEnemy(game, actorId);
+  return (minibossOnly(settings, game) || !!settings.enemyShuffleMinibosses && !!settings.enemyShuffleMinibossType &&
+    settings.enemyShuffleMinibossType !== 'anywhere') && isMinibossEncounter(game, actorId);
 }
 
 function minibossPlacementAllowed(settings: Settings, host: Game, sourceActorId: number, target: Pick<EnemyDefinition, 'game' | 'actorId'> & {
   spawnParams?: number;
   variables?: readonly number[];
 }): boolean {
+  const params = 'spawnParams' in target ? target.spawnParams : target.variables?.[0];
+  if (target.game === host && target.actorId === (host === 'oot' ? 0x91 : 0x1e8) && (params === 0 || params === 0x4000) &&
+    (params === 0x4000) !== isMinibossEncounter(host, sourceActorId))
+    return false;
+  if (target.game === 'mm' && target.actorId === 0x115 && (params === 0x807f || params === 0x907f) &&
+    (params === 0x907f) !== isMinibossEncounter(host, sourceActorId))
+    return false;
   if (requiresMinibossReplacement(settings, host, sourceActorId))
     return isMinibossEnemy(target.game, target.actorId, 'spawnParams' in target ? target.spawnParams : target.variables?.[0]);
   return settings.enemyShuffleMinibossType !== 'rooms' || !isMinibossEnemy(target.game, target.actorId, 'spawnParams' in target ? target.spawnParams : target.variables?.[0]);
@@ -957,7 +992,7 @@ function dynamicEnemyPool(settings: Settings, host: Game, sourceId: number, scen
     /* Supplemental encounters (including Gold Skulltula rewards) place their
      * replacements on the floor. They do not retain an authored wall transform. */
     if (!enemySpawnMacroMatches('dynamic-habitat-allowed', { target: { ...enemy, params: enemy.spawnParams }, settings })) continue;
-    if (isMinibossEnemy(enemy.game, enemy.actorId, enemy.spawnParams) && !settings.enemyShuffleMinibosses ||
+    if (isMinibossEnemy(enemy.game, enemy.actorId, enemy.spawnParams) && !settings.enemyShuffleMinibosses && !minibossOnly(settings, host) ||
       !minibossPlacementAllowed(settings, host, sourceId, enemy)) continue;
     const identity = `${enemy.game}/${enemy.actorId}/${enemy.spawnParams}`;
     if (!forms.has(identity))
@@ -1215,10 +1250,8 @@ function ootEnemizerCandidatePools(defs: readonly EnemyDefinition[], settings: S
       continue;
     const source = ootSpawnSource(defs, location);
     const spawnLocations = ootSpawnLocations(location);
-    const ignoreRestrictions = settings.enemyShuffleIgnoreRestrictions;
-    const nativeIndices = ignoreRestrictions
-      ? [...location.choices, ...OOT_ENEMIZER.targets.flatMap((_, index) => !location.choices.includes(index) && ootNativeChoiceAllows(location, index, true) ? [index] : [])]
-      : location.choices;
+    const ignoreRestrictions = false;
+    const nativeIndices = location.choices;
     const native = nativeIndices
       .filter(index => enemySpawnMacroMatches('oot-native-wall-source', { source: location, target: OOT_ENEMIZER.targets[index] }))
       .map(index => {
@@ -1250,7 +1283,7 @@ function ootEnemizerCandidatePools(defs: readonly EnemyDefinition[], settings: S
       !enemyCanRespawn(def.game, def.actorId, def.spawnParams) &&
       !enemyIsPerched(def.game, def.actorId, def.spawnParams) &&
       enemySpawnMacroMatches('oot-native-target-source', { location, source: location, target: def }));
-    if (!settings.enemyShuffleMinibosses)
+    if (!settings.enemyShuffleMinibosses && !minibossOnly(settings, 'oot'))
       pool = pool.filter(({ def }) => !isMinibossEnemy(def.game, def.actorId, def.spawnParams));
     else
       pool = pool.filter(({ def }) => minibossPlacementAllowed(settings, 'oot', location.actorId, def));
@@ -1694,22 +1727,14 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
       location,
       target: descriptor,
       targetIndex: selected.index,
-      ...(settings.enemyShuffleIgnoreRestrictions ? { ignoreRestrictions: true } : {}),
       targetParams: params,
       killLogic: logic ?? (target.game === 'oot' && target.actorId === 0x25 ? target.killMacro : descriptor.killLogic),
       dropLogic: logic !== undefined ? null : descriptor.dropLogic,
       aliases: ootPlacementAliases.get(ootEnemizerLocationKey(location)) ?? [],
       foreign: target.game !== 'oot',
     };
-    const chaoticOotChoices = settings.logic === 'none' && settings.enemyShuffleSpawnMode === 'chaotic'
-      ? eligible.filter(candidate => candidate.index >= 0 && candidate.def.game === 'oot' && extra(candidate, location) <= extra(selected, location))
-        .map(candidate => {
-          const target = OOT_ENEMIZER.targets[candidate.index];
-          return { ...choice, target, targetIndex: candidate.index, targetParams: overrides[target.name] ?? target.params, foreign: false };
-        })
-      : undefined;
     rows.push({
-      source, target: targetKey, chaoticOotChoices,
+      source, target: targetKey,
       ...(location.fieldSlot === undefined ? { ootr: choice } : { kind: location.scene === 3 ? 'forest-bow' : location.scene === 0x51 ? 'field-spawner' : 'burial-spawner', field: choice }),
       ...(adaptiveGroups.has(location) ? { adaptiveGroup: adaptiveGroups.get(location) } : {}),
       ...(protectedPicks.has(location) ? { protectedPick: true } : {})
@@ -1725,9 +1750,11 @@ export function enemyNeverShuffled(game: Game, actorId: number): boolean {
 export function enemySourceAllowedBySettings(game: Game, actorId: number, settings: Settings, params?: number): boolean {
   /* Wallmaster Shuffle owns natural Wallmaster source slots: they must stay
    * in place so their authored entrance-shuffle warp destinations still work. */
+  if (minibossOnly(settings, game) && !isMinibossEncounter(game, actorId, params))
+    return false;
   if (settings.erWallmasters !== 'none' && (game === 'oot' ? actorId === 0x11 : actorId === 0x0a))
     return false;
-  return enemySpawnMacroMatches('source-settings-allowed', { target: { game, actorId, params }, settings, facts: { miniboss: isMinibossEnemy(game, actorId, params) } });
+  return enemySpawnMacroMatches('source-settings-allowed', { target: { game, actorId, params }, settings, facts: { miniboss: !minibossOnly(settings, game) && isMinibossEnemy(game, actorId, params) } });
 }
 
 function ootResourceExcess(report: ReturnType<typeof enemyOotSceneMemoryReports>[number]): number {
@@ -1810,7 +1837,7 @@ function repairOotGoldMemory(plan: EnemyPlan, pools: ReadonlyMap<string, readonl
 function makeOotEnemizerPlan(defs: readonly EnemyDefinition[], settings: Settings, random: Random, options: {
   mqDungeons?: ReadonlySet<string>;
 } = {}, gold: EnemyPlan = [], onProgress?: EnemyPlanProgress): EnemyPlan {
-  if (settings.games === 'mm' || !settings.enemyShuffleOot)
+  if (settings.games === 'mm' || !(settings.enemyShuffleOot || settings.enemyShuffleOotMinibossOnly))
     return [];
   validateOotGoldMemory(gold, settings);
   const scenes = new Map<number, OotEnemizerLocation[]>();
@@ -1948,12 +1975,14 @@ const nativeEnemyDemandObjects: Record<Game, Readonly<Record<number, readonly nu
   oot: {
     0x02: [0x32], 0x0d: [0x09, 0x6e], 0x0e: [0x07], 0x11: [0x0b], 0x12: [0x0c], 0x13: [0x0d], 0x1b: [0x16],
     0x1c: [0x17], 0x1d: [0x18], 0x25: [0x1b], 0x2b: [0x1e], 0x2d: [0x12], 0x2f: [0x1f], 0x33: [0x20], 0x34: [0x21], 0x35: [0x22], 0x37: [0x24], 0x38: [0x25], 0x3a: [0x26], 0x4b: [0x30], 0x54: [0x38], 0x55: [0x39], 0x60: [0x4a], 0x63: [0x56], 0x6b: [0x5f], 0x69: [0x5d], 0x8a: [0x8b], 0x8e: [0x0b], 0x90: [0x98], 0x91: [0x99], 0x95: [0x24], 0x99: [0x9e], 0xa4: [0xa6],
+    0x73: [0x2026],
     0xc5: [0xb5], 0xc7: [0x39], 0xdd: [0xd4], 0xde: [0xd5], 0xec: [0xe5], 0x113: [0x106], 0x11d: [], 0x115: [0x10a], 0x121: [0x114], 0x175: [0x6d], 0x195: [0x168],
     0x18c: [0x26], 0x197: [0x169], 0x1af: [0x183], 0x1c0: [0x08], 0x1b0: [0x184],
   },
   mm: {
     0x07: [0x128], 0x08: [0x05], 0x0a: [0x09], 0x0b: [0x0a], 0x0c: [0x0b], 0x12: [0x12], 0x14: [0x14], 0x19: [0x17], 0x1d: [0x0e], 0x24: [0x20], 0x2d: [0x1d],
     0x32: [0x30], 0x33: [0x31], 0x3b: [0x40], 0x3c: [0x51], 0x3e: [0x51], 0x43: [0x52], 0x47: [0x6a], 0x50: [0x20],
+    0x56: [0x2026],
     0x4a: [0x09], 0x4c: [0x75], 0x64: [0x8e], 0x65: [0x128], 0x66: [0x31], 0x6c: [0xab],
     0x84: [0xd8], 0x8d: [], 0x8f: [0xe4], 0xec: [0x141], 0xed: [0x142], 0xf1: [0x06], 0x109: [0x14e], 0x113: [0x155], 0x115: [0x156], 0x12c: [0x15d], 0x12d: [0x15e], 0x13a: [0x161], 0x14a: [0x16a, 0x167], 0x14b: [0x16b], 0x155: [0x171], 0x15b: [0x172], 0x15d: [0x178], 0x164: [0x17a],
     0x16f: [0x181], 0x180: [0x16b], 0x182: [0x155], 0x184: [0x18d], 0x1ba: [0x1a6], 0x1d1: [0x1b5], 0x1e6: [0x1c4], 0x1e8: [0x1c5], 0x1e9: [0x1c6], 0x1f3: [0x1c3], 0x204: [0x1eb], 0x208: [0x1f1], 0x216: [0x201], 0x21d: [0x204], 0x23f: [0x15c], 0x28f: [0x268], 0x291: [0x22],
@@ -2153,6 +2182,28 @@ export type EnemySceneMemoryReport = {
   resourceExcess: number;
 };
 
+export function mmScriptedReleasedObjects(scene: number, map: MmMap, plan: EnemyPlan): number[] {
+  const scripted = plan.filter(row => row.kind === 'scripted' &&
+    !enemyKeepsNativeEncounter('mm', enemyDefinition(row.source).actorId, enemyDefinition(row.source).spawnParams, enemyDefinition(row.target)));
+  const roots = scripted.flatMap(row => mmEncounterRoots({ scene } as MmScene, map, row));
+  const offsets = new Set(roots.map(root => root.offset));
+  const retained = map.actors.filter(actor => !offsets.has(actor.offset));
+  const objects = new Set(roots.filter(root => root.actorId !== 0x115).map(root => enemyNativeActorFact('mm', root.actorId)?.object));
+  return map.objects.flatMap(({ objectId }) => {
+    if (!objects.has(objectId) || objectId <= 3 || retained.some(actor => {
+      const fact = enemyNativeActorFact('mm', actor.actorId);
+      return !fact || fact.object === objectId || [...enemyNativeActorDependencies('mm', actor.actorId)].some(id => enemyNativeActorFact('mm', id)?.object === objectId);
+    }) || scripted.some(row => enemyMemoryCost('mm', enemyDefinition(row.target).game,
+      enemyDefinition(row.target).actorId, enemyDefinition(row.target).spawnParams).shared[`model/mm/${objectId}`] !== undefined))
+      return [];
+    return [objectId];
+  });
+}
+
+const SCRIPTED_NATIVE_CHILDREN: Readonly<Record<number, readonly (readonly [number, number])[]>> = {
+  7: [[0x144, 1]], 0x65: [[0xd9, 10]], 0x12c: [[0x23e, 83]], 0x43: [[0x44, 20]], 0x115: [[0x115, 2]],
+};
+
 function mmSupplementalCosts(scene: MmScene, plan: EnemyPlan, memoryOptions: EnemyMemoryOptions = {}): EnemyMemoryCost[][] {
   return scene.maps.map(map => plan.flatMap(row => {
     if (row.placement?.scene === scene.scene && row.placement.grotto === scene.grotto && map.actors.some(actor => actor.offset === row.placement!.actorOffset))
@@ -2160,7 +2211,7 @@ function mmSupplementalCosts(scene: MmScene, plan: EnemyPlan, memoryOptions: Ene
     if (!row.kind || row.kind === 'variant')
       return [];
     const target = enemyDefinition(row.target), guards = row.kind === 'keeta-guards';
-    if (row.kind === 'scripted' && enemyDefinition(row.source).actorId === 0x15d && target.game === 'mm' && target.actorId === 0x15d) return [];
+    if (row.kind === 'scripted' && enemyKeepsNativeEncounter('mm', enemyDefinition(row.source).actorId, enemyDefinition(row.source).spawnParams, target)) return [];
     const roots = mmEncounterRoots(scene, map, row);
     return roots.flatMap(() => {
       const child = enemyMemoryCost('mm', target.game, target.actorId, target.spawnParams, memoryOptions);
@@ -2211,6 +2262,10 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
     supplemental: EnemyMemoryCost[];
     maps: number[];
   };
+  const scripted = [...supplemental.filter(row => !(row.kind === 'scripted' && enemyKeepsNativeEncounter('mm', enemyDefinition(row.source).actorId, enemyDefinition(row.source).spawnParams, enemyDefinition(row.target)))),
+    ...slots.flatMap(slot => slot.encounter ? [slot.encounter] : [])].filter(row => row.kind === 'scripted');
+  const removedRoots = new Set(scene.maps.flatMap(map => scripted.flatMap(row => mmEncounterRoots(scene, map, row)).map(actor => actor.offset)));
+  const releasedObjects = scene.maps.map(map => new Set(mmScriptedReleasedObjects(scene.scene, map, scripted)));
   const states: State[] = [], unique = new Set<string>();
   for (const { setup, maps } of mmRoomOverlapStates(scene.scene, scene.maps)) {
     const [a, b = a] = maps, first = scene.maps[a], second = scene.maps[b];
@@ -2222,8 +2277,10 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
           if (!(days(actor) & mask))
             continue;
           const index = rowByMap[mi].get(actor.offset);
-          if (index === undefined)
-            retained.push(actor);
+          if (index === undefined) {
+            if (removedRoots.has(actor.offset)) original.push(actor);
+            else retained.push(actor);
+          }
           else {
             indices.push(index);
 
@@ -2248,16 +2305,19 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
             indices.push(index);
             if (slot.encounter.kind === 'keeta-guards')
               indices.push(index);
-            if (slot.encounter.kind === 'scripted' && enemyDefinition(slot.encounter.source).actorId !== 0x15d)
-              extraCosts.push(enemyScriptedControllerCost());
+
           }
       });
       if (!indices.length && !extraCosts.length)
         continue;
       const prepaid = new Set<string>(enemyPinnedMmActors.map(id => `code/mm/${id}`));
       for (const { objectId: id } of first.objects)
-        if (a === b || second.objects.some(o => o.objectId === id))
+        if ((a === b || second.objects.some(o => o.objectId === id)) &&
+          !maps.every(mi => releasedObjects[mi].has(id)))
           prepaid.add(`model/mm/${id}`);
+      for (const row of scripted)
+        if (enemyDefinition(row.source).actorId === 0x115 && maps.some(mi => mmEncounterRoots(scene, scene.maps[mi], row).length))
+          prepaid.add('model/mm/342');
       const liveIds = new Set(retained.map(actor => actor.actorId));
       for (const id of liveIds)
         prepaid.add(`code/mm/${id}`);
@@ -2274,6 +2334,15 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
           credit += fact.code;
         }
       }
+      for (const root of original.filter(actor => removedRoots.has(actor.offset)))
+        for (const [child, count] of SCRIPTED_NATIVE_CHILDREN[root.actorId] ?? []) {
+          const fact = enemyNativeActorFact('mm', child);
+          credit += count * fact.instance;
+          if (!retainedDependencies.has(child) && !releasedCode.has(child)) {
+            releasedCode.add(child);
+            credit += fact.code;
+          }
+        }
       const budget = extra + credit + (setup === 0 ? objectSavings : 0);
       const dynamicCollisionAllowance = Math.max(0, p.dynamicCollisionLimit - p.dynamicCollisionReserve -
         retained.reduce((count, actor) => count + enemyNativeDynamicCollisionCount('mm', actor.actorId, actor.params), 0));
@@ -2286,8 +2355,8 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
   }
   const minimum = pools?.map((pool, i) => {
     const encounter = slots[i].encounter;
-    if (encounter?.kind === 'scripted' && enemyDefinition(encounter.source).actorId === 0x15d &&
-      pool.some(target => target.game === 'mm' && target.actorId === 0x15d))
+    if (encounter?.kind === 'scripted' && pool.some(target => enemyKeepsNativeEncounter('mm',
+      enemyDefinition(encounter.source).actorId, enemyDefinition(encounter.source).spawnParams, { ...target, spawnParams: target.variables[0] })))
       return { shared: {}, instances: 0, actors: 0 };
     const costs = pool.map(target => enemyMemoryCost('mm', target.game, target.actorId, target.variables[0], memoryOptions));
     return { shared: {}, instances: Math.min(...costs.map(c => c.instances)), actors: Math.min(...costs.map(c => c.actors)) };
@@ -2316,7 +2385,7 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
     if (old && old.game === target.game && old.id === target.actorId && old.params === params) return old;
     const cost = enemyMemoryCost('mm', target.game, target.actorId, params, memoryOptions);
 
-    const identity = `${+(target.game === 'mm' && target.actorId === 0x15d)}:${costSignature(cost)}`;
+    const identity = `${target.game}/${target.actorId}/${params}:${costSignature(cost)}`;
     let key = targetIds.get(identity);
     if (key === undefined) {
 
@@ -2332,7 +2401,7 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
     targetCache.set(target, value);
     return value;
   };
-  const wizards = slots.map(slot => slot.encounter?.kind === 'scripted' && enemyDefinition(slot.encounter.source).actorId === 0x15d);
+  const scriptedSources = slots.map(slot => slot.encounter?.kind === 'scripted' ? enemyDefinition(slot.encounter.source) : undefined);
 
   type Scope = { key: string; states: State[]; indices: number[] };
   const fullScope: Scope = { key: '*', states, indices: [...new Set(states.flatMap(state => state.indices))] };
@@ -2381,11 +2450,22 @@ function mmSceneMemory(scene: MmScene, slots: readonly MmMemorySlot[], pools?: r
       if (!total) {
         const costs: EnemyMemoryCost[] = [];
         for (const i of state.indices) {
-          const target = selected[i], wizard = wizards[i];
-          if (wizard && target?.game === 'mm' && target.actorId === 0x15d) continue;
+          const target = selected[i], source = scriptedSources[i];
+          if (source && target && enemyKeepsNativeEncounter('mm', source.actorId, source.spawnParams, { ...target, spawnParams: target.variables[0] })) {
+            const shared: Record<string, number> = {};
+            let instances = 0, actors = 0;
+            for (const [id, count] of [[source.actorId, 1] as const, ...(SCRIPTED_NATIVE_CHILDREN[source.actorId] ?? [])]) {
+              const fact = enemyNativeActorFact('mm', id);
+              shared[`code/mm/${id}`] = fact.code;
+              instances += count * fact.instance;
+              actors += count;
+            }
+            costs.push({ shared, instances, actors });
+            continue;
+          }
           if (target) costs.push(prepared[i]!.cost);
           else if (minimum) costs.push(minimum[i]);
-          if (wizard && target) costs.push(enemyScriptedControllerCost());
+          if (source && target) costs.push(enemyScriptedControllerCost());
         }
         costs.push(...state.sourceCosts);
         if (dynamicCosts) for (const mi of state.maps) costs.push(...dynamicCosts[mi]);
@@ -2706,7 +2786,7 @@ const MM_NATIVE_SOURCE_EXTENSIONS: readonly MmEnemy[] = [
 ].map(row => ({ ...row, game: 'mm', ...enemySpawnActorType('mm', row.actorId) }));
 
 const MM_NATIVE_ROSTER: readonly MmEnemy[] = [...applyEnemyMmSpawnPolicies(mmFacts.roster, ENEMY_SPAWN_MM_ACTORS), ...MM_NATIVE_SOURCE_EXTENSIONS]
-  .map(row => ({ ...row, game: 'mm' as const, variables: row.variables.filter(params => enemySpawnMacroMatches('mm-native-roster-form', { target: { ...row, params } })) }));
+  .map(row => ({ ...row, game: 'mm' as const, variables: row.variables.filter(params => enemySpawnMacroMatches('mm-native-roster-form', { target: { ...row, game: 'mm', params } })) }));
 
 export const MM_NATIVE_SCENES: readonly MmScene[] = mmFacts.scenes;
 
@@ -2826,7 +2906,7 @@ function mmGroupedNativeModelAllows(target: MmEnemy): boolean {
 }
 
 function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, random: Random, supplemental: EnemyPlan, encounterRequests: readonly (readonly MmEncounterChoice[])[] = [], onProgress?: EnemyPlanProgress): EnemyPlan {
-  if (!settings.enemyShuffleMm || settings.games === 'oot')
+  if (!(settings.enemyShuffleMm || settings.enemyShuffleMmMinibossOnly) || settings.games === 'oot')
     return [];
   onProgress?.('Preparing MM enemy placements', 0, MM_ENEMY_SCENES.length);
   const scriptedDinolfosScenes = new Set(MM_NATIVE_SCENES
@@ -2852,7 +2932,7 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
   }
   const sourceKey = ({ sourceActorId, sourceParams }: MmActorChange) => sourceActorId === 0x12d && sourceParams === 2 ? MM_BIO_BABA_LILY_PAD_KEY : nativeByActor.get(sourceActorId)!.key;
   const placementTargetKey = ({ targetGame, targetActorId, targetParams, targetKey }: MmActorChange) => targetGame === 'mm' && targetActorId === 0x12d && targetParams === 2 ? MM_BIO_BABA_LILY_PAD_KEY : targetKey;
-  const isDryAquatic = (game: Game, actorId: number, offset: number) => settings.enemyShuffleIgnoreRestrictions && mmAquaticTarget(game, actorId) && !mmAquaticSlot(offset);
+  const isDryAquatic = (game: Game, actorId: number, offset: number) => false && mmAquaticTarget(game, actorId) && !mmAquaticSlot(offset);
   const variants = MM_NATIVE_EXTRA_VARIANTS.map(def => {
     const descriptor = nativeByActor.get(def.actorId) ?? {
       game: 'mm' as const, actorId: def.actorId, objectId: def.objectId,
@@ -2884,7 +2964,7 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
   const targets: readonly MmEnemy[] = [...nativeTargets, ...(settings.crossGameEnemies ? mmForeignRoster(defs) : [])]
     .flatMap(target => target.variables.filter(spawnParams => !enemyCanRespawn(target.game, target.actorId, spawnParams) &&
       !enemyIsPerched(target.game, target.actorId, spawnParams) &&
-      (settings.enemyShuffleMinibosses || !isMinibossEnemy(target.game, target.actorId, spawnParams)) &&
+      (settings.enemyShuffleMinibosses || minibossOnly(settings, 'mm') || !isMinibossEnemy(target.game, target.actorId, spawnParams)) &&
       !enemyShuffleExcluded(settings, { ...target, spawnParams }, 'mm'))
       .map(spawnParams => ({
         ...target,
@@ -2918,8 +2998,8 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
       scene.maps.forEach((map, mapIndex) => map.actors.forEach(actor => {
         const source = native.find(e => e.actorId === actor.actorId && mmSourceFormAllowed(actor) && (e.objectId <= 3 || objects.has(e.objectId)));
         if (!source || !mmSpawnSourceAllowed(settings, scene, actor, source.key) || !mmSpawnTargetAllowed(scene, actor, selected, settings, source.key)) return;
-        if (!source || (settings.enemyShuffleMinibosses && !minibossPlacementAllowed(settings, 'mm', actor.actorId, selected)) || enemySpawnMacroMatches('mm-native-dinolfos-target', { target: selected }) && !enemyMmCounterpartSlotAllowed(actor.actorId, actor.params, actor.raw, selected.actorId) ||
-          !settings.enemyShuffleIgnoreRestrictions && (!mmAquaticSpawnAllowed(actor, selected) ||
+        if (!source || ((settings.enemyShuffleMinibosses || minibossOnly(settings, 'mm')) && !minibossPlacementAllowed(settings, 'mm', actor.actorId, selected)) || enemySpawnMacroMatches('mm-native-dinolfos-target', { target: selected }) && !enemyMmCounterpartSlotAllowed(actor.actorId, actor.params, actor.raw, selected.actorId) ||
+          (!mmAquaticSpawnAllowed(actor, selected) ||
             (enemyIsCarnivorousLily(selected.game, selected.actorId) && !mmWaterSurfaceSlot(actor.offset))))
           return;
         changes.push({
@@ -2955,7 +3035,6 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
   }
   const output: MmEnemyReplacement[] = [];
   const individual = settings.enemyShuffleMmMode === 'individual';
-  const chaotic = settings.logic === 'none' && settings.enemyShuffleSpawnMode === 'chaotic';
   const next = (max: number) => random.next() % max;
   const memoryErrors: MmSceneAllocationError[] = [];
   const problems: MmSceneProblem[] = [], emitScenes: (() => void)[] = [];
@@ -2969,11 +3048,11 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
         if (!sourceSlots().every(slot => mmSpawnTargetAllowed(scene, slot, { ...enemyDefinition(target.key), spawnParams: target.variables[0] }, settings,
           source.find(row => row.actorId === slot.actorId)?.key)))
           return false;
-        if (settings.enemyShuffleMinibosses && !source.every(row => minibossPlacementAllowed(settings, 'mm', actor?.actorId ?? row.actorId, target)))
+        if ((settings.enemyShuffleMinibosses || minibossOnly(settings, 'mm')) && !source.every(row => minibossPlacementAllowed(settings, 'mm', actor?.actorId ?? row.actorId, target)))
           return false;
         if (!enemySpawnMacroMatches('mm-scripted-scene-target', { target, facts: { scriptedDinolfos: scriptedDinolfosScenes.has(scene.scene) } }))
           return false;
-        if (!settings.enemyShuffleIgnoreRestrictions && !sourceSlots().every(slot => mmAquaticSpawnAllowed(slot, { ...target, spawnParams: target.variables[0] })))
+        if (!sourceSlots().every(slot => mmAquaticSpawnAllowed(slot, { ...target, spawnParams: target.variables[0] })))
           return false;
         if (!enemySpawnMacroMatches('mm-water-surface-source', { target, settings,
           facts: { allWaterSurfaceSlots: sourceSlots().every(slot => !!mmWaterSurfaceSlot(slot.offset)) } }))
@@ -2988,8 +3067,8 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
         ...target, variables: target.variables.filter(params => !isGraveyardExpandingTarget(scene.scene, target.game, target.actorId, params)),
       })).filter(target => target.variables.length);
       const actorChanges = sceneIndividual
-        ? solveMmSceneIndividual(scene, native, sceneTargets, next, allows, settings.enemyShuffleIgnoreRestrictions, target => enemyWeight(settings, 'mm', target), source => requiresMinibossReplacement(settings, 'mm', source.actorId), supplemental, settings, problems)
-        : solveMmScene(scene, native, sceneTargets, next, allows, settings.enemyShuffleIgnoreRestrictions, target => enemyWeight(settings, 'mm', target), supplemental, settings, problems);
+        ? solveMmSceneIndividual(scene, native, sceneTargets, next, allows, false, target => enemyWeight(settings, 'mm', target), source => requiresMinibossReplacement(settings, 'mm', source.actorId), supplemental, settings, problems)
+        : solveMmScene(scene, native, sceneTargets, next, allows, false, target => enemyWeight(settings, 'mm', target), supplemental, settings, problems);
       emitScenes.push(() => {
         for (const change of actorChanges)
           if (change.targetGame === 'oot' && change.targetActorId === 2) {
@@ -3012,56 +3091,18 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
           change.targetKey = form.key;
         }
         const changes = finalMmActorChanges(actorChanges);
-        const resident = chaotic ? scene.maps.map(map => new Set(map.objects.map(object => object.objectId))) : [];
         changes.forEach(change => {
           const map = scene.maps[change.mapIndex], actor = map.actors.find(a => a.offset === change.actorOffset)!;
           const placement = {
             ...change, scene: scene.scene, ...(scene.grotto !== undefined ? { grotto: scene.grotto } : {}), roomStart: map.start, roomEnd: map.end, raw: actor.raw,
             dryAquatic: isDryAquatic(change.targetGame, change.targetActorId, actor.offset) || undefined
           };
-          let chaoticMmChoices: MmPlacement[] | undefined;
-          if (chaotic && enemySpawnMacroMatches('mm-chaotic-source', { source: actor, location: scene }) && !change.adaptiveGroup && !change.protectedPick && change.targetGame === 'mm' && change.targetActorId < 0xc00) {
-            const source = nativeByActor.get(actor.actorId)!;
-            const aliases = scene.maps.map((other, index) => ({ other, index }))
-              .filter(({ other }) => other.actors.some(entry => entry.offset === actor.offset));
-            chaoticMmChoices = sceneTargets.flatMap(candidate => {
-              if (!enemySpawnMacroMatches('mm-chaotic-target', { source: actor, target: candidate }) ||
-                (!settings.enemyShuffleIgnoreRestrictions && !mmPlacementTypeAllows(source, candidate)) ||
-                !allows([source], candidate, actor) ||
-                (candidate.objectId > 3 && aliases.some(({ index }) => !resident[index].has(candidate.objectId)) &&
-                  !(nativeEnemyOnDemandObjects('mm', candidate.actorId) && candidate.actorId === change.targetActorId)))
-                return [];
-              return candidate.variables.flatMap(params => {
-                if (isMinibossEnemy(candidate.game, candidate.actorId, params) &&
-                  (candidate.actorId !== change.targetActorId || params !== change.targetParams)) return [];
-                const baseCost = enemyMemoryCost('mm', change.targetGame, change.targetActorId, change.targetParams, settings);
-                const alternateCost = enemyMemoryCost('mm', 'mm', candidate.actorId, params, settings);
-                if (alternateCost.instances > baseCost.instances || alternateCost.actors > baseCost.actors ||
-                  Object.entries(alternateCost.shared).some(([key, size]) => size > (baseCost.shared[key] ?? 0)))
-                  return [];
-                if ((candidate.actorId === change.targetActorId && params === change.targetParams) ||
-                  aliases.some(({ other }) => enemyPlacementDensityCost('mm', candidate.actorId, params, other.actors.length, true) >
-                    enemyPlacementDensityCost('mm', change.targetActorId, change.targetParams, other.actors.length, true)))
-                  return [];
-                const targetKey = candidate.actorId === 0x3b && params === 0xff03 ? 'mm-business-scrub-combat' :
-                  candidate.actorId === 0x15d ? MM_NATIVE_EXTRA_VARIANTS.find(def => def.actorId === 0x15d && def.spawnParams === params)?.key :
-                    candidate.key;
-                if (!targetKey)
-                  return [];
-                return [{
-                  ...placement, targetKey, targetGame: 'mm' as const, targetActorId: candidate.actorId, targetParams: params,
-                  dryAquatic: isDryAquatic('mm', candidate.actorId, actor.offset) || undefined
-                }];
-              });
-            });
-          }
           output.push({
             source: sourceKey(change),
             target: placementTargetKey(change),
             placement,
             ...(change.adaptiveGroup ? { adaptiveGroup: change.adaptiveGroup } : {}),
-            ...(change.protectedPick ? { protectedPick: true } : {}),
-            ...(chaoticMmChoices?.length ? { chaoticMmChoices } : {})
+            ...(change.protectedPick ? { protectedPick: true } : {})
           });
         });
       });
@@ -3393,8 +3434,8 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
     return pickEnemyWeighted(allowed, weights, max => random.next() % max);
   };
   const enabled = (game: Game) => (settings.games === 'ootmm' || settings.games === game) &&
-    (game === 'oot' ? settings.enemyShuffleOot : settings.enemyShuffleMm);
-  if (enabled('oot') && !settings.enemyShufflePreserveMinibosses) {
+    (game === 'oot' ? settings.enemyShuffleOot || settings.enemyShuffleOotMinibossOnly : settings.enemyShuffleMm || settings.enemyShuffleMmMinibossOnly);
+  if (enabled('oot') && (!settings.enemyShufflePreserveMinibosses || minibossOnly(settings, 'oot'))) {
     for (const source of ['oot-dead-hand-encounter', 'oot-dark-link-encounter']) {
       const targets = supplementalEnemyTargets(settings, { source, kind: 'arena' },
         dynamicEnemyPool(settings, 'oot', source === 'oot-dead-hand-encounter' ? 0xa4 : 0x33, OOT_ENCOUNTER_MEMORY_ROOMS[source].map(([scene]) => scene)), mq);
@@ -3424,7 +3465,7 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
   }
   if (enabled('mm')) {
     const guardBinding = { source: KEETA_GUARDS.key, kind: 'keeta-guards' as const };
-    const guard = choose(supplementalEnemyTargets(settings, guardBinding, dynamicEnemyPool(settings, 'mm', 0xed, 0x43), mq), 'mm', guardBinding);
+    const guard = minibossOnly(settings, 'mm') ? undefined : choose(supplementalEnemyTargets(settings, guardBinding, dynamicEnemyPool(settings, 'mm', 0xed, 0x43), mq), 'mm', guardBinding);
     if (guard)
       output.push({ source: KEETA_GUARDS.key, target: guard.key, kind: 'keeta-guards' });
     for (const source of SCRIPTED_MM_ENEMIES) {
@@ -3442,7 +3483,7 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
   }
   if (settings.enemyShuffleGoldSkulltulas) {
     for (const source of ENEMY_GOLD_SOURCES) {
-      if (!enabled(source.game)) continue;
+      if (!enabled(source.game) || minibossOnly(settings, source.game)) continue;
       if (source.game === 'oot' && source.scene <= 9) {
         const dungeon = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Spirit', 'Shadow', 'BotW', 'IC'][source.scene];
         if (source.slots[0].mq !== mq.has(DUNGEONS[dungeon])) continue;
@@ -3456,7 +3497,7 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
       }
     }
   }
-  if (enabled('oot')) {
+  if (enabled('oot') && !minibossOnly(settings, 'oot')) {
     for (const scene of [0x5c, 0x5e]) {
       const points = OOT_DESERT_LEEVER_SLOTS.filter(slot => slot.scene === scene).map(slot => ({
         slot,
@@ -3840,6 +3881,26 @@ export function enemyShuffleRoster(game: Game, crossGame: boolean) {
   return [...groups.values()];
 }
 
+export function enemyShuffleTargets(game: Game, crossGame: boolean): EnemyDefinition[] {
+  const forms = new Map<string, EnemyDefinition>();
+  for (const row of enemyShuffleRoster(game, crossGame)) {
+    for (const key of row.legacyKeys) {
+      const enemy = enemyDefinition(key);
+      if (enemy.targetAllowed === false || enemy.arenaOnly || enemyNeverShuffled(enemy.game, enemy.actorId) ||
+        enemyCanRespawn(enemy.game, enemy.actorId, enemy.spawnParams) || enemyIsPerched(enemy.game, enemy.actorId, enemy.spawnParams) ||
+        !enemySpawnMacroMatches('active-combat-form', { target: { ...enemy, params: enemy.spawnParams } }) ||
+        (enemy.game === game ? enemy.foreignOnly : enemy.nativeOnly || !foreignEnemyRuntimeReady(enemy.game, enemy.actorId, enemy.spawnParams) ||
+          nativeEnemyCounterparts(enemy.game, enemy.actorId, game, enemy.spawnParams).length))
+        continue;
+      const identity = enemyExclusionIdentity(enemy);
+      if (!forms.has(identity)) forms.set(identity, {
+        ...enemy, name: enemy.key.includes('-red-ice-') ? enemy.name : enemyExclusionName(enemyExclusionForms.get(identity) ?? enemy),
+      });
+    }
+  }
+  return [...forms.values()];
+}
+
 export function defaultEnemyShuffleWeight(miniboss: boolean, name = ''): number {
   return name.startsWith('Invisible ') ? 0.5 : miniboss ? 0.35 : 1;
 }
@@ -4098,11 +4159,7 @@ function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): v
     });
     const apply = (selected: readonly (EnemyDefinition | undefined)[]) => rows.forEach((row, i) => {
       row.splitChildren = selected.slice(i * 3, i * 3 + 3).flatMap(enemy => enemy ? [enemy.key] : []);
-      if (settings.logic === 'none' && settings.enemyShuffleSpawnMode === 'chaotic')
-        row.splitPool = row.splitChildren.some(key => {
-          const enemy = enemyDefinition(key);
-          return isMinibossEnemy(enemy.game, enemy.actorId, enemy.spawnParams);
-        }) ? undefined : [...new Set(row.splitChildren)];
+
     });
     const assess = (selected: readonly (EnemyDefinition | undefined)[]): AdaptiveMemoryAssessment => {
       apply(selected);
@@ -4132,8 +4189,136 @@ export function makeEnemyPlan(settings: Settings, random: Random, layouts: {
   mqDungeons?: ReadonlySet<string>;
   compatibility?: EnemyPlanCompatibility;
 } = {}, onProgress?: EnemyPlanProgress): EnemyPlan {
-  settings = Object.assign({}, settings, { [enemyCompatibility]: layouts.compatibility });
-  const progress = settings.enemyShuffleOot || settings.enemyShuffleMm ? onProgress : undefined;
+  if (settings.enemyShuffleOotMinibossOnly || settings.enemyShuffleMmMinibossOnly) {
+    return (['oot', 'mm'] as const).flatMap(game => {
+      if (settings.games !== 'ootmm' && settings.games !== game)
+        return [];
+      const only = minibossOnly(settings, game);
+      if (!only && !(game === 'oot' ? settings.enemyShuffleOot : settings.enemyShuffleMm))
+        return [];
+      const perGame = { ...settings, crossGameEnemies: only || settings.crossGameEnemies,
+        enemyShuffleOot: game === 'oot', enemyShuffleMm: game === 'mm',
+        enemyShuffleOotMinibossOnly: false, enemyShuffleMmMinibossOnly: false,
+      };
+      return makeEnemyPlanInternal(perGame, random, layouts, onProgress, only ? game : undefined);
+    });
+  }
+  return makeEnemyPlanInternal(settings, random, layouts, onProgress);
+}
+
+function limitRoomRedIce(plan: EnemyPlan, settings: Settings, random: Random): void {
+  const used = new Set<string>();
+  const entries = plan.flatMap(row => [
+    { row, finish: () => {} },
+    ...(row.splitChildren ?? []).map((target, index) => {
+      const child = { ...row, target, ootr: row.ootr && { ...row.ootr }, field: row.field && { ...row.field }, placement: row.placement && { ...row.placement } };
+      return { row: child, finish: () => { row.splitChildren = row.splitChildren!.map((value, i) => i === index ? child.target : value); } };
+    }),
+  ]).filter(({ row }) => enemyDefinition(row.target).key.includes('-red-ice-'));
+  for (const { row, finish } of shuffle(random, entries)) {
+    const source = enemyDefinition(row.source), target = enemyDefinition(row.target);
+    const rooms = new Map<string, number>();
+    const add = (game: Game, scene: number, room: number, count = 1, grotto?: number) => {
+      const key = `${game}/${scene}/${room}/${grotto ?? ''}`;
+      rooms.set(key, Math.max(rooms.get(key) ?? 0, count));
+    };
+    if (row.ootr) {
+      const counts = new Map<string, Set<number>>();
+      const locations = [row.ootr.location, ...row.ootr.aliases.map(([scene, room, setup, slot]) => ({ scene, room, setup, slot }))];
+      for (const location of locations) {
+        const key = `${location.scene}/${location.room}/${location.setup}`;
+        const slots = counts.get(key) ?? new Set<number>();
+        slots.add(location.slot);
+        counts.set(key, slots);
+        add('oot', location.scene, location.room, slots.size);
+      }
+    } else if (source.game === 'oot') {
+      for (const location of ootSupplementalMemoryRows([row], settings, () => false))
+        add('oot', location.scene, location.room);
+    } else {
+      for (const scene of MM_ENEMY_SCENES) {
+        if (row.placement && (row.placement.scene !== scene.scene || row.placement.grotto !== scene.grotto)) continue;
+        for (const map of scene.maps) {
+          const count = row.placement ? +map.actors.some(actor => actor.offset === row.placement!.actorOffset) :
+            mmEncounterRoots(scene, map, row).length;
+          if (count) add('mm', scene.scene, map.room, count, scene.grotto);
+        }
+      }
+    }
+    const gold = ENEMY_GOLD_SOURCES.find(value => value.key === row.source);
+    if (gold) {
+      const counts = new Map<string, number>();
+      for (const slot of gold.slots) {
+        const key = `${slot.room}/${slot.setup}/${slot.mq}`;
+        const count = (counts.get(key) ?? 0) + 1;
+        counts.set(key, count);
+        add(gold.game, gold.scene, slot.room, count);
+      }
+    }
+    if ([...rooms].every(([key, count]) => count === 1 && !used.has(key))) {
+      for (const key of rooms.keys()) used.add(key);
+      continue;
+    }
+    const host = source.game;
+    const original = enemyMemoryCost(host, target.game, target.actorId, target.spawnParams, settings);
+    const choice = row.ootr ?? row.field;
+    const nativeCandidates = choice ? ootEnemizerCandidatePools(ENEMIES, settings, [choice.location]).get(choice.location) ?? [] : undefined;
+    const available = ENEMIES.filter(candidate => candidate.game === target.game && candidate.actorId === target.actorId &&
+      candidate.targetAllowed !== false && !candidate.key.includes('-red-ice-') &&
+      (!nativeCandidates || nativeCandidates.some(value => value.def.key === candidate.key)) &&
+      enemyWeightFamily(candidate) === enemyWeightFamily(target) && !enemyCanRespawn(candidate.game, candidate.actorId, candidate.spawnParams) &&
+      !enemyShuffleExcluded(settings, candidate, host) && enemyTargetCompatible(settings, enemyPlacementLogicName(row), candidate));
+    const saved = { ...row, ootr: row.ootr && { ...row.ootr }, field: row.field && { ...row.field },
+      placement: row.placement && { ...row.placement } };
+    const apply = (replacement: EnemyDefinition) => {
+      row.target = replacement.key;
+      for (const choice of [row.ootr, row.field]) if (choice) {
+        const candidate = nativeCandidates!.find(value => value.def.key === replacement.key)!;
+        choice.targetIndex = candidate.index;
+        choice.target = candidate.index >= 0 ? OOT_ENEMIZER.targets[candidate.index] : {
+          ...choice.target, name: replacement.name, params: replacement.spawnParams, killLogic: replacement.killMacro, dropLogic: null,
+        };
+        choice.targetParams = replacement.spawnParams;
+        choice.killLogic = choice.target.killLogic;
+        choice.dropLogic = choice.target.dropLogic;
+      }
+      if (row.placement) Object.assign(row.placement, {
+        targetKey: replacement.key, targetGame: replacement.game,
+        targetActorId: replacement.actorId, targetParams: replacement.spawnParams,
+      });
+      finish();
+    };
+    let candidates = available.filter(candidate => {
+      const cost = enemyMemoryCost(host, candidate.game, candidate.actorId, candidate.spawnParams, settings);
+      return cost.instances <= original.instances && cost.actors <= original.actors &&
+        (cost.dynamicCollisions ?? 0) <= (original.dynamicCollisions ?? 0) &&
+        Object.entries(cost.shared).every(([key, bytes]) => bytes <= (original.shared[key] ?? 0));
+    });
+    if (!candidates.length) {
+      candidates = available.filter(candidate => {
+        apply(candidate);
+        const fits = enemyOotSceneMemoryReports(plan, settings).every(report => ootResourceExcess(report) <= 0) &&
+          enemySceneMemoryReports(plan, settings).every(report => report.resourceExcess <= 0);
+        Object.assign(row, saved);
+        finish();
+        return fits;
+      });
+    }
+    if (!candidates.length) throw new EnemyMemoryAllocationError(`No safe non-red-ice variant for ${row.source}`);
+    const weights = enemyFormWeights(candidates, value => value, value => enemyWeight(settings, host, value));
+    apply(pickEnemyWeighted(candidates, weights, max => random.next() % max));
+  }
+}
+
+function makeEnemyPlanInternal(settings: Settings, random: Random, layouts: {
+  mqDungeons?: ReadonlySet<string>;
+  compatibility?: EnemyPlanCompatibility;
+}, onProgress?: EnemyPlanProgress, only?: Game): EnemyPlan {
+  settings = Object.assign({}, settings, { [enemyCompatibility]: layouts.compatibility,
+    enemyShuffleOotMinibossOnly: only === 'oot',
+    enemyShuffleMmMinibossOnly: only === 'mm',
+  });
+  const progress = settings.enemyShuffleOot || settings.enemyShuffleMm || settings.enemyShuffleOotMinibossOnly || settings.enemyShuffleMmMinibossOnly ? onProgress : undefined;
   const forced = settings.plando.enemyTargets ?? {};
   for (const [game, key] of Object.entries(forced)) {
     const target = enemyDefinition(key!);
@@ -4151,6 +4336,7 @@ export function makeEnemyPlan(settings: Settings, random: Random, layouts: {
       plan = [...makeOotEnemizerPlan(ENEMIES, settings, random, layouts, supplemental, progress),
       ...makeMmEnemyPlan(ENEMIES, settings, random, supplemental, encounterRequests, progress), ...supplemental];
       planEnemySplits(plan, settings, random);
+      limitRoomRedIce(plan, settings, random);
       break;
     }
     catch (error) {
@@ -4160,6 +4346,11 @@ export function makeEnemyPlan(settings: Settings, random: Random, layouts: {
         constraints.push(error.acceptsSupplemental);
     }
   }
+  plan = plan.filter(row => {
+    if (row.kind !== 'scripted' && row.kind !== 'arena') return true;
+    const source = enemyDefinition(row.source);
+    return !enemyKeepsNativeEncounter(source.game, source.actorId, source.spawnParams, enemyDefinition(row.target));
+  });
   progress?.('Checking enemy memory limits');
   for (const report of enemyOotSceneMemoryReports(plan, settings))
     if (ootResourceExcess(report) > 0)
@@ -4333,6 +4524,7 @@ const ENEMY_COMBAT_OVERRIDES: Readonly<Record<Game, Readonly<Record<string, stri
     'mm-placement-biobaba-inert': 'true',
   },
   mm: {
+    'oot-gerudo-fighter-native-target': 'can_fight_pirates',
     'oot-flying-floor-tile-foreign': 'true',
     'oot-flying-floor-tile-source': 'true',
   },

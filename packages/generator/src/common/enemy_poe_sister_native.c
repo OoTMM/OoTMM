@@ -2,6 +2,9 @@
 #include <combo/enemy_native.h>
 #include <combo/rand.h>
 #include <combo/sfx.h>
+#include <combo/souls.h>
+#include <combo/global.h>
+#include <combo/enemy_soul_preview.h>
 
 typedef struct {
     Actor actor;
@@ -141,8 +144,38 @@ Actor* comboEnemyNativePoeSisterSpawn(ActorContext* ctx, ActorEntry* entry, Play
 {
     Actor* actor;
     if (!ctx || !entry || !play || ((u16)entry->id & 0x1fff) != POE_SISTER_ID ||
-        ((u16)entry->params != 0 && (u16)entry->params != 0x100 && (u16)entry->params != 0x200 && (u16)entry->params != 0x300))
+        ((u16)entry->params != 0 && (u16)entry->params != 0x100 && (u16)entry->params != 0x200 && (u16)entry->params != 0x300 && (u16)entry->params != 0x4000))
         return NULL;
+    if ((u16)entry->params == 0x4000)
+    {
+        comboEnemySoulPreviewGateBegin();
+        int allowed;
+#if defined(DEBUG)
+        extern int gDebugEnemySpawn;
+        if (gDebugEnemySpawn)
+            allowed = 1;
+        else
+#endif
+#if defined(GAME_OOT)
+            allowed = comboHasSoulOot(GI_OOT_SOUL_ENEMY_POE);
+        int game = 0;
+#else
+            allowed = comboHasSoulMm(GI_MM_SOUL_ENEMY_POE);
+        int game = 1;
+#endif
+        allowed = comboEnemySoulPreviewGate(play, game, POE_SISTER_ID, entry->params,
+            entry->pos.x, entry->pos.y, entry->pos.z, entry->rot.y, allowed);
+        if (allowed <= 0)
+        {
+            if (!allowed)
+                g.roomEnemyLackSoul = 1;
+            return NULL;
+        }
+        ActorEntry copy = *entry;
+        copy.id = ACTOR_ENEMY_POE_ENCOUNTER;
+        copy.params = 0;
+        return NativePoeSisterSpawnEntry(ctx, &copy, play);
+    }
     actor = NativePoeSisterSpawnEntry(ctx, entry, play);
     if (actor && actor->init)
         actor->init = poeSisterInit;

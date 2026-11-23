@@ -647,6 +647,16 @@ void comboEnemyNativeResourceUpdate(PlayState* play, EnemyNativeResource* state)
 #if defined(GAME_MM)
     actorId &= 0x1fff;
 #endif
+#if defined(GAME_MM)
+    if (actorId == ACTOR_EN_KAIZOKU)
+    {
+        s32 flag = ((u16)original.params >> 6) & 0x7f;
+        if (flag != 0x7f)
+            Flags_SetSwitch(play, flag);
+        state->state = ENEMY_RESOURCE_RESTORED;
+        return;
+    }
+#endif
 #if defined(GAME_OOT)
     if (actorId == ACTOR_EN_GELDB)
     {

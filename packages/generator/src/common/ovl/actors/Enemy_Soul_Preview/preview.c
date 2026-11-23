@@ -404,19 +404,27 @@ static int goldFloor(PlayState* play, Actor* actor, Vec3f* position, f32 height,
             Vec3f feet = { candidate.x, candidate.y + 2.f, candidate.z };
             CollisionPoly* wall;
             s32 bgId;
-            if (radius && (BgCheck_EntityLineTest1(&play->colCtx, &from, &to, &hit, &wall, 1, 0, 0, 0, &bgId) ||
+            if (grounded && radius && (BgCheck_EntityLineTest1(&play->colCtx, &from, &to, &hit, &wall, 1, 0, 0, 0, &bgId) ||
                 BgCheck_EntityLineTest1(&play->colCtx, &to, &feet, &hit, &wall, 1, 0, 1, 0, &bgId)))
                 continue;
 
             for (int side = 0; side < 8; ++side)
             {
                 Vec3f edge = candidate;
-                edge.x += 32.f * Math_SinS(side * 0x2000);
-                edge.z += 32.f * Math_CosS(side * 0x2000);
-                from = (Vec3f){ candidate.x, candidate.y + 40.f, candidate.z };
-                to = (Vec3f){ edge.x, candidate.y + 40.f, edge.z };
-                if (BgCheck_EntityLineTest1(&play->colCtx, &from, &to, &hit, &wall, 1, 0, 0, 0, &bgId) ||
-                    !goldFloorAt(play, actor, &edge, height) || edge.y < candidate.y - 30.f ||
+                f32 clearance = grounded ? 32.f : 40.f;
+                edge.x += clearance * Math_SinS(side * 0x2000);
+                edge.z += clearance * Math_CosS(side * 0x2000);
+                for (int level = 0; level < 3; ++level)
+                {
+                    from = (Vec3f){ candidate.x, candidate.y + 5.f + level * 35.f, candidate.z };
+                    to = (Vec3f){ edge.x, from.y, edge.z };
+                    if (BgCheck_EntityLineTest1(&play->colCtx, &from, &to, &hit, &wall, 1, 0, 0, 0, &bgId))
+                    {
+                        safe = 0;
+                        break;
+                    }
+                }
+                if (!safe || !goldFloorAt(play, actor, &edge, height) || edge.y < candidate.y - 30.f ||
                     edge.y > candidate.y + 30.f)
                 {
                     safe = 0;

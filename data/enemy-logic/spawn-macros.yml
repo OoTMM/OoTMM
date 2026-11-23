@@ -76,6 +76,12 @@
   any:
     - ceiling-source
     - wall-required
+    - game: oot
+      actor: 407
+    - game: mm
+      actor:
+        - 356
+        - 541
 
 "preserves-native-height":
   any:
@@ -301,8 +307,7 @@
 
 "dynamic-habitat-allowed":
   any:
-    - field: settings.enemyShuffleIgnoreRestrictions
-      equals: true
+    - false
     - not:
         any:
           - wall-required
@@ -328,8 +333,7 @@
         - field: source.restrictions
           nonempty: false
         - all:
-            - field: settings.enemyShuffleIgnoreRestrictions
-              equals: true
+            - false
             - not:
                 field: source.skipRaycast
                 equals: true
@@ -354,8 +358,7 @@
 
 "oot-relaxed-native-source":
   all:
-    - field: settings.enemyShuffleIgnoreRestrictions
-      equals: true
+    - false
     - not:
         field: source.broken
         equals: true
@@ -482,13 +485,23 @@
     - not:
         params: 2
 
-"mm-native-roster-form":
-  any:
-    - not:
-        actor: 236
+"swinging-stalchild":
+  all:
+    - game: mm
+      actor: 237
     - field: target.params
-      mask: 128
-      equals: 0
+      mask: 240
+      equals: 64
+
+"mm-native-roster-form":
+  all:
+    - not: swinging-stalchild
+    - any:
+        - not:
+            actor: 236
+        - field: target.params
+          mask: 128
+          equals: 0
 
 "mm-mounted-bio-baba-native":
   all:
@@ -688,8 +701,7 @@
 "oot-foreign-habitat":
   any:
     - all:
-        - field: settings.enemyShuffleIgnoreRestrictions
-          equals: true
+        - false
         - not:
             field: source.skipRaycast
             equals: true
@@ -714,8 +726,7 @@
 
 "oot-foreign-water-surface":
   any:
-    - field: settings.enemyShuffleIgnoreRestrictions
-      equals: true
+    - false
     - not: carnivorous-lily
     - field: facts.allWaterSurfaceSlots
       equals: true
@@ -738,8 +749,7 @@
 
 "mm-water-surface-source":
   any:
-    - field: settings.enemyShuffleIgnoreRestrictions
-      equals: true
+    - false
     - not: carnivorous-lily
     - field: facts.allWaterSurfaceSlots
       equals: true
@@ -754,6 +764,8 @@
             field: source.actorId
             equals: 349
         - field: settings.enemyShuffleMinibosses
+          equals: true
+        - field: settings.enemyShuffleMmMinibossOnly
           equals: true
 
 "mm-native-base-target":
@@ -837,6 +849,9 @@
 "oot-foreign-roster-extras":
   any:
     - game: mm
+      actor: 541
+      params: 8128
+    - game: mm
       actor: 275
       params: 0
     - game: mm
@@ -849,6 +864,19 @@
         actor: 301
     - not:
         params: 2
+
+"miniboss-encounter":
+  any:
+    - field: facts.miniboss
+      equals: true
+    - game: oot
+      actor: 275
+    - game: mm
+      actor: 132
+    - game: oot
+      actor: 37
+    - game: mm
+      actor: 25
 
 "miniboss":
   any:
@@ -869,13 +897,22 @@
               - game: mm
                 actor: 488
         - any:
-            - field: facts.catalogMiniboss
-              equals: true
+            - all:
+                - field: facts.catalogMiniboss
+                  equals: true
+                - not:
+                    any:
+                      - game: mm
+                        actor: 388
+                      - game: mm
+                        actor: 277
+                        params: [33151, 33407, 33919]
             - game: oot
               actor: 153
 
 "active-combat-form":
   all:
+    - not: swinging-stalchild
     - not:
         field: target.key
         equals: mm-placement-biobaba-inert
@@ -1411,6 +1448,7 @@
         - 221
         - 246
         - 277
+        - 407
         - 432
     - game: mm
       actor:
@@ -1665,8 +1703,7 @@
 "oot-relaxed-native-pool":
   all:
     - oot-native-roster
-    - field: settings.enemyShuffleIgnoreRestrictions
-      equals: true
+    - false
 
 "oot-standard":
   - oot-native/Stalfos
