@@ -358,30 +358,14 @@ void comboEnemyFlyingAttackAim(Actor* actor, PlayState* play, int launch)
     f32 dz = player->z - actor->world.pos.z;
     f32 xz = sqrtf(dx * dx + dz * dz);
     f32 distance = sqrtf(dx * dx + dy * dy + dz * dz);
-    if (!launch)
-    {
-        f32 hx = actor->world.pos.x - actor->home.pos.x;
-        f32 hy = actor->world.pos.y - actor->home.pos.y;
-        f32 hz = actor->world.pos.z - actor->home.pos.z;
-        if (hx * hx + hy * hy + hz * hz > 240.f * 240.f)
-            return;
-    }
     if (distance < 1.f)
         return;
-    f32 speed = 10.f * xz / distance;
-    f32 lift = 10.f * dy / distance;
     if (launch)
-    {
         actor->world.rot.y = actor->yawTowardsPlayer;
-        actor->speed = speed;
-        actor->velocity.y = lift;
-    }
     else
-    {
-        Math_SmoothStepToS(&actor->world.rot.y, actor->yawTowardsPlayer, 4, 0x300, 0);
-        Math_ApproachF(&actor->speed, speed, 0.2f, 0.5f);
-        Math_ApproachF(&actor->velocity.y, lift, 0.2f, 0.5f);
-    }
+        Math_SmoothStepToS(&actor->world.rot.y, actor->yawTowardsPlayer, 2, 0x800, 1);
+    actor->speed = 10.f * xz / distance;
+    actor->velocity.y = 10.f * dy / distance;
 }
 
 int comboEnemyNativePlacementIsShuffled(Actor* actor)
@@ -391,10 +375,9 @@ int comboEnemyNativePlacementIsShuffled(Actor* actor)
 #if defined(GAME_MM)
 static void shuffledDexihandThrow(PlayState* play, Actor* actor, f32 speed, s16 yaw, f32 lift, u32 damage)
 {
-    if (nativePlacementState(actor))
+    if (actor->params == 0 && sNativeScope && sNativeScope->actor == actor)
     {
-        if (actor->params == 0)
-            speed = lift = 8.f;
+        speed = lift = 8.f;
         yaw = Rand_Next() >> 16;
         Vec3f* pos = &GET_PLAYER(play)->actor.world.pos;
         pos->x += 2.f * (speed * Math_SinS(yaw) - actor->velocity.x);

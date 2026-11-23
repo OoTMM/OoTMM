@@ -3121,7 +3121,7 @@ export const ENEMY_MEMORY_FACTS = {
     'mm/689': {},
   },
   'standalone': {
-    'mm/GaroMaster': { 'code': 13952, 'instance': 1888, 'object': 341 },
+    'mm/GaroMaster': { 'code': 13968, 'instance': 1888, 'object': 341 },
     'mm/Gomess': { 'code': 17696, 'instance': 2320, 'object': 82 },
     'mm/Igos': { 'code': 37664, 'instance': 6256, 'object': 342 },
     'mm/Keeta': { 'code': 9744, 'instance': 1392, 'object': 616 },
@@ -3224,7 +3224,7 @@ export const ENEMY_MEMORY_FACTS = {
     'ovl/mm/mm_ovl_Native_Enemy_oot_en_tp.zovlx': { 'memory': 7920, 'profileOffset': 7116, 'instance': 464 },
     'ovl/mm/mm_ovl_Native_Enemy_oot_en_vali.zovlx': { 'memory': 10176, 'profileOffset': 8544, 'instance': 1088 },
     'ovl/mm/mm_ovl_Native_Enemy_oot_en_weiyer.zovlx': { 'memory': 7904, 'profileOffset': 6848, 'instance': 712 },
-    'ovl/mm/mm_ovl_Standalone_GaroMaster.zovlx': { 'memory': 13936, 'profileOffset': 12104, 'instance': 1872 },
+    'ovl/mm/mm_ovl_Standalone_GaroMaster.zovlx': { 'memory': 13952, 'profileOffset': 12120, 'instance': 1872 },
     'ovl/mm/mm_ovl_Standalone_Gomess.zovlx': { 'memory': 17680, 'profileOffset': 15896, 'instance': 2304 },
     'ovl/mm/mm_ovl_Standalone_Igos.zovlx': { 'memory': 37664, 'profileOffset': 33452, 'instance': 6236 },
     'ovl/mm/mm_ovl_Standalone_Keeta.zovlx': { 'memory': 9728, 'profileOffset': 7456, 'instance': 1372 },

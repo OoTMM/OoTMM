@@ -2975,9 +2975,13 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
         const target = changes.find(change => change.offset === offset)!.value & (game === 'mm' ? 0x1fff : 0xffff);
         const params = changes.find(change => change.offset === offset + 14)?.value ?? bufReadU16BE(rom, offset + 14);
         const previous = records.find(row => row.vrom === offset);
-        const operation = previous?.operation ?? (nativeResourceSource(game, source, bufReadU16BE(rom, offset + 14)) ? 1 :
+        let operation = previous?.operation ?? (nativeResourceSource(game, source, bufReadU16BE(rom, offset + 14)) ? 1 :
           (game === 'oot' && target === 0x1b0 && [0, 5, 10].includes(params)) ? 3 : (game === 'mm' && target === 0x50 && params === 0xff00) ? 5 : (game === 'oot' && target === 0x1c0 && [0, 1].includes(params)) ? 7 : ((game === 'oot' && target === 0xc7 && params === 1) || (game === 'mm' && target === 0x66 && [1, 2].includes(params))) ? 6 : ((game === 'oot' && target === 0x1d && [0, 0xffff].includes(params)) || (game === 'mm' && target === 0x14 && params === 0)) ? 4 : game === 'oot' && target === 0x115 ? 16 : game === 'oot' && target === 0x113 && [0xff82, 0xff83].includes(params) ? 64 : 0);
-        if (!operation) continue;
+        if (!operation) {
+          if (target === (game === 'oot' ? 0x11d : 0x8d)) operation = 15;
+          else if (game === 'oot' && target === 0x6b) operation = 512;
+          else continue;
+        }
         const record = nativePlacementRecord(rom, offset, operation, changes, target, params);
         if (previous) records[records.indexOf(previous)] = record; else records.push(record);
       }

@@ -8444,10 +8444,18 @@ static void Wart_Defeat(StandaloneWart* wart, PlayState* play)
     }
     if (duel->timer == 45 || duel->timer == 42)
     {
+#if defined(GAME_MM)
+        Vec3f* pos = &actor->world.pos;
+        Actor_Spawn(&play->actorCtx, play, ACTOR_EN_CLEAR_TAG, pos->x, pos->y, pos->z,
+                    0, 0, 0, CLEAR_TAG_LARGE_EXPLOSION);
+        Actor_PlaySfx(actor, NA_SE_IT_BIG_BOMB_EXPLOSION);
+#else
         Vec3f velocity = { 0.f, 0.f, 0.f };
         Vec3f accel = { 0.f, .1f, 0.f };
         EffectSsBomb2_SpawnLayered(play, &actor->world.pos, &velocity, &accel, 160, 22);
+        EffectSsBlast_SpawnWhiteShockwave(play, &actor->world.pos, &velocity, &velocity);
         Actor_PlaySfx(actor, NA_SE_IT_BOMB_EXPLOSION);
+#endif
     }
     if (duel->timer == 99)
     {
@@ -11154,7 +11162,12 @@ static void Duel_Draw(Actor* actor, PlayState* play)
     StandaloneDuel* duel = (StandaloneDuel*)actor;
     Gfx_SetupDL25_Opa(play->state.gfxCtx);
     if (DUEL_FIXED_FORM == DUEL_GARO)
+    {
         Gfx_SetupDL25_Xlu(play->state.gfxCtx);
+#if defined(GAME_MM)
+        Scene_SetRenderModeXlu(play, 0, 1);
+#endif
+    }
     OPEN_DISPS(play->state.gfxCtx);
     if (DUEL_FIXED_FORM == DUEL_IGOS)
     {

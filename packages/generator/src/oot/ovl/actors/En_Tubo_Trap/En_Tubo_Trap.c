@@ -261,13 +261,12 @@ void EnTuboTrap_Fly(EnTuboTrap* this, PlayState* play) {
     f32 dy = this->originPos.y - this->actor.world.pos.y;
     f32 dz = this->originPos.z - this->actor.world.pos.z;
 
-    if (comboEnemyNativePlacementIsShuffled(&this->actor))
-        comboEnemyFlyingAttackAim(&this->actor, play, 0);
-
     Actor_PlaySfx(&this->actor, NA_SE_EN_TUBOOCK_FLY - SFX_FLAG);
 
     if (240.0f < sqrtf(SQ(dx) + SQ(dy) + SQ(dz))) {
         Math_ApproachF(&this->actor.gravity, -3.0f, 0.2f, 0.5f);
+    } else if (comboEnemyNativePlacementIsShuffled(&this->actor)) {
+        comboEnemyFlyingAttackAim(&this->actor, play, 0);
     }
 
     this->actor.shape.rot.y += 5000;
