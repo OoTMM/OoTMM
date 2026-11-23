@@ -1944,6 +1944,9 @@ function mmSpawnLogicName(scene: MmScene, actor: MmActor): string {
 }
 
 function mmSpawnTargetAllowed(scene: MmScene, actor: MmActor, target: EnemySpawnTarget, settings: Settings, key?: string): boolean {
+  // The shuffled Dexihand uses zeroed throw parameters. Keep authored throws out of that conversion.
+  if (actor.actorId === 0x1d1 && target.game === 'mm' && target.actorId === actor.actorId)
+    return false;
   const source = mmSpawnSource(actor, key);
   return enemyTargetCompatible(settings, mmSpawnLogicName(scene, actor), target) &&
     mmSpawnLocations(scene, actor).every(where => enemySpawnTargetAllowed(where, source, target, settings));

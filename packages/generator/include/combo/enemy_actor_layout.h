@@ -130,7 +130,7 @@ static inline void comboEnemyNativeGuaySize(Actor* actor)
 typedef struct
 {
     Actor actor;
-    u8 animation[0x250 - sizeof(Actor)];
+    u8 animation[0x240 - sizeof(Actor)];
     ActorFunc action;
     s16 timeAlive, isNearWall, fallTargetYaw, deathTimer, knockbackTimer;
     s16 isMirroringPlayer, isPlayerOutOfRange, isKnockedback, hasSearchedForFlameCircles;
@@ -138,9 +138,9 @@ typedef struct
     Vec3f headPos, fireballRot, home;
 } EnemyNativeAnubis;
 
-ASSERT_OFFSET(EnemyNativeAnubis, action, 0x250);
-ASSERT_OFFSET(EnemyNativeAnubis, isPlayerOutOfRange, 0x260);
-ASSERT_OFFSET(EnemyNativeAnubis, home, 0x298);
+ASSERT_OFFSET(EnemyNativeAnubis, action, 0x240);
+ASSERT_OFFSET(EnemyNativeAnubis, isPlayerOutOfRange, 0x250);
+ASSERT_OFFSET(EnemyNativeAnubis, home, 0x288);
 
 typedef struct
 {
