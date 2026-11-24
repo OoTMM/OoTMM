@@ -9,6 +9,8 @@
 #include <combo/misc.h>
 #include <combo/common/actor_init.h>
 
+#define SWITCH_FLAG_NONE -1
+
 #define NBITS_TO_MASK(n)        ((1 << (n)) - 1)
 #define PARAMS_GET_U(p, s, n)   (((p) >> (s)) & NBITS_TO_MASK(n))
 #define PARAMS_GET_S(p, s, n)   (((p) & (NBITS_TO_MASK(n) << (s))) >> (s))
