@@ -50,6 +50,7 @@
     },
     "targets": {
       "build": {
+        "cache": false,
         "inputs": [
           {
             "dependentTasksOutputFiles": "**/*"

@@ -14,6 +14,7 @@ import { Patchfile } from './combo/patch-build/patchfile';
 import { CodeGen } from './combo/util/codegen';
 
 import { setupAssetsMap } from './build/build-assets-map';
+import { refreshEnemyMemory } from './build/refresh-enemy-memory';
 
 const env = process.env.NODE_ENV || 'development';
 const isProd = (env === 'production');
@@ -104,6 +105,11 @@ async function build() {
   ]);
 
   const installDir = await buildNative();
+  await refreshEnemyMemory(
+    installDir,
+    path.resolve(import.meta.dirname, '../../core/src/enemy-memory-data.ts'),
+    !!process.env.CI,
+  );
 
   /* Create the zip */
   const zip = new JSZip();
