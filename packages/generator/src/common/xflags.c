@@ -201,6 +201,16 @@ XflagID Xflag_InitEx(Actor* actor, PlayState* play)
     return Xflag_Lookup(&xf);
 }
 
+XflagID Xflag_InitShuffled(Actor* actor, PlayState* play)
+{
+    XflagID id;
+
+    id = Xflag_InitEx(actor, play);
+    if (!Xflag_IsShuffledEx(id))
+        return XFLAGID_NONE;
+    return id;
+}
+
 int Xflag_Init(Xflag* xf, Actor* actor, PlayState* play)
 {
     /* Check for an actor index of 0xff, meaning NO XFLAG */

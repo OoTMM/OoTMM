@@ -23,6 +23,7 @@ Xflag;
 
 /* New API */
 XflagID Xflag_InitEx(Actor* actor, PlayState* play);
+XflagID Xflag_InitShuffled(Actor* actor, PlayState* play);
 XflagID Xflag_LookupSlice(XflagID id, int sliceId);
 int Xflag_Get(XflagID id);
 void Xflag_Set(XflagID id);

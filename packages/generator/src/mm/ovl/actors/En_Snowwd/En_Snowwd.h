@@ -16,7 +16,7 @@ typedef struct EnSnowwd {
     /* 0x144 */ ColliderCylinder collider;
     /* 0x190 */ s16 timer;
     /* 0x194 */ EnSnowwdActionFunc actionFunc;
-    Xflag xflag;
+    XflagID xflag;
 } EnSnowwd; // size = 0x198
 
 #endif

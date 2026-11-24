@@ -47,7 +47,7 @@ static ColliderCylinderInit sCylinderInit = {
 void EnSnowwd_Init(Actor* thisx, PlayState* play) {
     EnSnowwd* this = (EnSnowwd*)thisx;
 
-    Xflag_Init(&this->xflag, thisx, play);
+    this->xflag = Xflag_InitShuffled(thisx, play);
 
     SNOWWD_DROPPED_COLLECTIBLE(thisx) = false;
     this->actor.home.rot.y = 0;
@@ -68,9 +68,9 @@ void EnSnowwd_Destroy(Actor* thisx, PlayState* play) {
 
 static int EnSnowwd_DropCustom(EnSnowwd* this, PlayState* play)
 {
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag, XFDROP_NONE);
         return true;
     }
     return false;
@@ -125,19 +125,21 @@ void EnSnowwd_Idle(EnSnowwd* this, PlayState* play) {
 void EnSnowwd_Update(Actor* thisx, PlayState* play) {
     EnSnowwd* this = (EnSnowwd*)thisx;
 
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
     this->actionFunc(this, play);
 }
 
 int EnSnowwd_CAMC(EnSnowwd* this, PlayState* play) {
     ComboItemOverride o;
 
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
