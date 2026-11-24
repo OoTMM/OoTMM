@@ -18,7 +18,7 @@ typedef struct ObjTree {
     /* 0x1B0 */ s16 swayAngle;
     /* 0x1B2 */ s16 swayVelocity;
     /* 0x1B4 */ s16 timer;
-    Xflag xflag;
+    XflagID xflag;
 } ObjTree; // size = 0x1B8
 
 #endif // Z_OBJ_TREE_H

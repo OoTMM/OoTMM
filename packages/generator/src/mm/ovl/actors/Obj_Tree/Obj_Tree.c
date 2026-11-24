@@ -88,7 +88,7 @@ void ObjTree_Init(Actor* thisx, PlayState* play) {
     ObjTree* this = (ObjTree*)thisx;
     CollisionHeader* colHeader = NULL;
 
-    Xflag_Init(&this->xflag, thisx, play);
+    this->xflag = Xflag_InitShuffled(thisx, play);
 
     if (OBJTREE_ISLARGE(&this->dyna.actor)) {
         Actor_SetScale(&this->dyna.actor, 0.15f);
@@ -156,10 +156,9 @@ void ObjTree_Sway(ObjTree* this, PlayState* play) {
 }
 
 void ObjTree_DropCustom(ObjTree* this, PlayState* play) {
-    Player* player = GET_PLAYER(play);
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (this->xflag == XFLAGID_NONE)
         return;
-    EnItem00_DropCustom(play, &((Actor*)player)->world.pos, &this->xflag);
+    EnItem00_DropCustomPlayerEx(play, this->xflag);
 }
 
 void ObjTree_UpdateCollision(ObjTree* this, PlayState* play) {
@@ -179,6 +178,9 @@ void ObjTree_UpdateCollision(ObjTree* this, PlayState* play) {
 void ObjTree_Update(Actor* thisx, PlayState* play) {
     ObjTree* this = (ObjTree*)thisx;
 
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
     ObjTree_UpdateCollision(this, play);
 }
@@ -186,13 +188,13 @@ void ObjTree_Update(Actor* thisx, PlayState* play) {
 static int ObjTree_CAMC(ObjTree* this, PlayState* play) {
     ComboItemOverride o;
 
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
