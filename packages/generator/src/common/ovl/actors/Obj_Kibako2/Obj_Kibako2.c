@@ -86,9 +86,9 @@ void ObjKibako2_SpawnCollectible(Actor_ObjKibako2* this, PlayState* play)
     s16 itemDropped;
     s16 collectibleFlagTemp;
 
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->dyna.actor.world.pos, this->xflag, XFDROP_NONE);
         return;
     }
 
@@ -238,9 +238,9 @@ void ObjKibako2_SpawnCollectible(Actor_ObjKibako2* this, PlayState* play)
 {
     s32 dropItem00Id;
 
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->dyna.actor.world.pos, this->xflag, XFDROP_NONE);
         return;
 
     }
@@ -354,7 +354,10 @@ static void ObjKibako2_Init(Actor_ObjKibako2* this, PlayState* play)
     CollisionHeader* colHeader;
     u32 bgId;
 
-    Xflag_Init(&this->xflag, &this->dyna.actor, play);
+    this->xflag = Xflag_InitEx(&this->dyna.actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     colHeader = NULL;
     DynaPolyActor_Init(&this->dyna, 0);
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
@@ -373,7 +376,10 @@ static void ObjKibako2_Init(Actor_ObjKibako2* this, PlayState* play)
 {
     s32 contents;
 
-    Xflag_Init(&this->xflag, &this->dyna.actor, play);
+    this->xflag = Xflag_InitEx(&this->dyna.actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     contents = KIBAKO2_CONTENTS(this);
     DynaPolyActor_Init(&this->dyna, 0);
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
@@ -400,6 +406,9 @@ static void ObjKibako2_Init(Actor_ObjKibako2* this, PlayState* play)
 
 static void ObjKibako2_Update(Actor_ObjKibako2* this, PlayState* play)
 {
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
 #if defined(GAME_MM)
     if (this->unk_1AC != 0) {
         play->actorCtx.flags |= ACTORCTX_FLAG_3;
@@ -443,13 +452,13 @@ static int ObjKibako2_CsmcType(Actor_ObjKibako2* this)
 {
     ComboItemOverride o;
 
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
     if (!csmcEnabled())
-        return o.gi ? CSMC_MAJOR : CSMC_NORMAL;
+        return CSMC_MAJOR;
 
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 

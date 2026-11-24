@@ -28,7 +28,7 @@ typedef struct Actor_ObjKibako2
 #endif
 
     /* Extended */
-    Xflag   xflag;
+    XflagID xflag;
 }
 Actor_ObjKibako2;
 
