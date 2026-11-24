@@ -27,8 +27,7 @@ typedef struct Actor_BgIcicle {
     s16 shiverTimer;
     ColliderCylinder collider;
 
-    Xflag xflag;
-    u8 isExtended;
+    XflagID xflag;
 } Actor_BgIcicle;
 
 #endif

@@ -68,28 +68,22 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_VEC3F_DIV1000(scale, 100, ICHAIN_STOP),
 };
 
-static void BgIcicle_InitXflag(Actor_BgIcicle* this, PlayState* play)
-{
-    Xflag_Init(&this->xflag, &this->dyna.actor, play);
-    this->isExtended = Xflag_IsShuffled(&this->xflag);
-}
-
-static int BgIcicle_IsShuffled(Actor_BgIcicle* this)
-{
-    return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
-}
-
 static int BgIcicle_DropCustom(Actor_BgIcicle* this, PlayState* play)
 {
-    if (!BgIcicle_IsShuffled(this))
+    if (this->xflag == XFLAGID_NONE)
         return 0;
-    EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
+    EnItem00_DropCustomEx(play, &this->dyna.actor.world.pos, this->xflag, XFDROP_NONE);
     return 1;
 }
 
 
 void BgIcicle_Init(Actor* thisx, PlayState* play) {
     Actor_BgIcicle* this = (Actor_BgIcicle*)thisx;
+
+    this->xflag = Xflag_InitEx(thisx, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
 #if defined(GAME_OOT)
     CollisionHeader* colHeader = NULL;
 
@@ -131,8 +125,6 @@ void BgIcicle_Init(Actor* thisx, PlayState* play) {
         this->actionFunc = BgIcicle_Wait;
     }
 #endif
-
-    BgIcicle_InitXflag(this, play);
 }
 
 void BgIcicle_Destroy(Actor* thisx, PlayState* play) {
@@ -301,6 +293,9 @@ void BgIcicle_UpdateAttacked(Actor_BgIcicle* this, PlayState* play) {
 void BgIcicle_Update(Actor* thisx, PlayState* play) {
     Actor_BgIcicle* this = (Actor_BgIcicle*)thisx;
 
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
 #if defined(GAME_MM)
     BgIcicle_UpdateAttacked(this, play);
 #endif
@@ -318,13 +313,13 @@ static int BgIcicle_CsmcType(Actor_BgIcicle* this, PlayState* play)
 {
     ComboItemOverride o;
 
-    if (!BgIcicle_IsShuffled(this))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
