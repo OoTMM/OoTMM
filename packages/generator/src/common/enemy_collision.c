@@ -788,6 +788,22 @@ s32 comboEnemyCollisionHit(PlayState* play, Collider* at, ColliderElement* atEle
         return result;
     }
 #else
+    if (sourceAc &&
+        ac->actor->id == FOREIGN_ENEMY_ACTOR_BASE + 0x002d &&
+        (enemySourceAttackFlags(at->actor, atElem) & 1u))
+    {
+        u8 oldOcFlags = atElem->ocElemFlags;
+        atElem->ocElemFlags &= ~OCELEM_UNK2;
+        result = EnemyNativeHit(play, at, atElem, atPos,
+                                ac, acElem, acPos, hitPos);
+        atElem->ocElemFlags = oldOcFlags;
+
+        if (result && acElem->acHitElem == atElem)
+            comboEnemyCaptureHit(acElem);
+
+        return result;
+    }
+
     if (sourceAt)
     {
         u8 oldOcFlags = atElem->ocElemFlags;

@@ -2,7 +2,6 @@
 #include <combo/enemy_native.h>
 
 #if defined(GAME_OOT)
-#include <combo/enemy_flight.h>
 
 typedef struct {
     Actor actor;
@@ -74,20 +73,10 @@ static void bigPoeWarpOut(Actor* actor, PlayState* play);
 
 static void bigPoeMove(Actor* actor, PlayState* play, f32 height)
 {
-    Vec3f next = {
-        actor->world.pos.x + actor->speed * Math_SinS(actor->world.rot.y),
-        height,
-        actor->world.pos.z + actor->speed * Math_CosS(actor->world.rot.y),
-    };
-    if (enemyFlightClear(play, &actor->world.pos, &next))
-        actor->world.pos = next;
-    else if (height != actor->world.pos.y)
-    {
-        next.x = actor->world.pos.x;
-        next.z = actor->world.pos.z;
-        if (enemyFlightClear(play, &actor->world.pos, &next))
-            actor->world.pos = next;
-    }
+    (void)play;
+    actor->world.pos.x += actor->speed * Math_SinS(actor->world.rot.y);
+    actor->world.pos.y = height;
+    actor->world.pos.z += actor->speed * Math_CosS(actor->world.rot.y);
 }
 
 static void bigPoeStartHover(NativeBigPoe* poe, s16 delay)
@@ -99,6 +88,8 @@ static void bigPoeStartHover(NativeBigPoe* poe, s16 delay)
     poe->hoverPhase = 40.f;
     poe->hoverYaw = actor->shape.rot.y;
     poe->lockFrames = 0;
+    actor->world.rot.y = actor->shape.rot.y;
+    actor->velocity.y = 0.f;
     actor->flags |= ACTOR_FLAG_ATTENTION_ENABLED;
     poe->body.base.acFlags |= AC_ON;
     poe->body.base.ocFlags1 |= OC1_ON;
@@ -108,7 +99,8 @@ static void bigPoeStartHover(NativeBigPoe* poe, s16 delay)
 static void bigPoeStartWarp(NativeBigPoe* poe)
 {
     Actor* actor = &poe->actor;
-    poe->body.base.acFlags &= ~AC_ON;
+    poe->body.base.acFlags &= ~(AC_ON | AC_HIT);
+    poe->body.base.atFlags = AT_TYPE_ENEMY;
     poe->body.base.ocFlags1 &= ~OC1_ON;
     actor->flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
     actor->speed = 0.f;
@@ -133,8 +125,7 @@ static void bigPoeWarpOut(Actor* actor, PlayState* play)
     s16 yaw = ((s32)Rand_Next() >> 20) + actor->yawTowardsPlayer;
     Vec3f next = { player->world.pos.x + distance * Math_SinS(yaw), actor->world.pos.y,
                    player->world.pos.z + distance * Math_CosS(yaw) };
-    if (enemyFlightClear(play, &actor->world.pos, &next))
-        actor->world.pos = next;
+    actor->world.pos = next;
     Actor_PlaySfx(actor, NA_SE_EN_PO_APPEAR);
     poe->spin = 0x2000;
     poe->action = bigPoeWarpIn;
@@ -154,18 +145,6 @@ static void bigPoeWarpIn(Actor* actor, PlayState* play)
 static void bigPoeHover(Actor* actor, PlayState* play)
 {
     NativeBigPoe* poe = (NativeBigPoe*)actor;
-    if (actor->isTargeted)
-    {
-        if (++poe->lockFrames == 40)
-        {
-            Actor_PlaySfx(actor, NA_SE_EN_PO_LAUGH);
-            bigPoeStartWarp(poe);
-            return;
-        }
-    }
-    else
-        poe->lockFrames = 0;
-
     SkelAnime_Update(&poe->skeleton);
     if (poe->timer)
         --poe->timer;
@@ -214,7 +193,6 @@ static void bigPoeSpinUp(Actor* actor, PlayState* play)
     if (poe->spin >= 0x3c00)
     {
         actor->world.rot.y = actor->yawTowardsPlayer;
-        poe->timer = 80;
         poe->action = bigPoeSpinAttack;
     }
 }
@@ -226,13 +204,11 @@ static void bigPoeSpinAttack(Actor* actor, PlayState* play)
     Math_StepToF(&actor->speed, 10.f, 1.f);
     f32 height = actor->world.pos.y;
     Math_SmoothStepToF(&height, GET_PLAYER(play)->actor.world.pos.y, .3f, 7.5f, 1.f);
-    Vec3f before = actor->world.pos;
     bigPoeMove(actor, play, height);
     bigPoeRotate(poe);
     s16 yawDiff = actor->yawTowardsPlayer - actor->world.rot.y;
-    if ((poe->body.base.atFlags & (AT_HIT | AT_BOUNCED)) ||
-        (ABS(yawDiff) > 0x4000 && actor->xzDistToPlayer > 50.f) ||
-        (actor->world.pos.x == before.x && actor->world.pos.z == before.z) || !--poe->timer)
+    if ((poe->body.base.atFlags & AT_HIT) ||
+        (ABS(yawDiff) > 0x4000 && actor->xzDistToPlayer > 50.f))
     {
         poe->body.base.atFlags = AT_TYPE_ENEMY;
         poe->action = bigPoeSpinDown;
@@ -270,8 +246,24 @@ static void bigPoeUpdate(Actor* actor, PlayState* play)
     ActorFunc flee = actorAddr(0x175, 0x80af8f20);
     if (poe->action == appearAction)
         actor->speed = 0.f;
+    ActorFunc damage = actorAddr(0x175, 0x80af90c4);
+    ActorFunc oldAction = poe->action;
+    int hit = (poe->body.base.acFlags & AC_HIT) != 0;
     if (poe->body.base.acFlags & AC_HARD)
         poe->body.base.acFlags &= ~AC_HIT;
+    if (actor->colChkInfo.health && actor->category == ACTORCAT_ENEMY &&
+        oldAction != appearAction && oldAction != damage &&
+        oldAction != bigPoeWarpOut && oldAction != bigPoeWarpIn &&
+        !(poe->body.base.acFlags & AC_HARD) && !hit && actor->isTargeted)
+    {
+        if (++poe->lockFrames == 40)
+        {
+            Actor_PlaySfx(actor, NA_SE_EN_PO_LAUGH);
+            bigPoeStartWarp(poe);
+        }
+    }
+    else
+        poe->lockFrames = 0;
     update(actor, play);
     sBigPoeSelectedActor = previous;
     *middle = saved;
@@ -285,13 +277,11 @@ static void bigPoeUpdate(Actor* actor, PlayState* play)
     if (poe->action == flee)
     {
         actor->speed = 0.f;
-        if (poe->lockFrames == 0xff)
+        if (oldAction == damage && actor->colChkInfo.health)
             bigPoeStartWarp(poe);
         else
             bigPoeStartHover(poe, 0);
     }
-    if (poe->action == actorAddr(0x175, 0x80af90c4))
-        poe->lockFrames = 0xff;
     if (poe->action == appearAction)
         actor->speed = 0.f;
     if (actor->category == ACTORCAT_ENEMY && actor->colChkInfo.health)
@@ -300,6 +290,13 @@ static void bigPoeUpdate(Actor* actor, PlayState* play)
         CollisionCheck_SetAT(play, &play->colChkCtx, &poe->body.base);
     actor->update = bigPoeUpdate;
 }
+
+static u8 sBigPoeDamageTable[32] = {
+    0, 1, 1, 1, 1, 1, 1, 0,
+    1, 1, 2, 1, 1, 2, 1, 1,
+    1, 0, 0, 0, 0, 0, 1, 2,
+    1, 2, 4, 2, 0, 0, 2, 0,
+};
 
 static void bigPoeActivate(Actor* actor, PlayState* play)
 {
@@ -314,6 +311,12 @@ static void bigPoeActivate(Actor* actor, PlayState* play)
     {
         appear(actor);
         NativeBigPoe* poe = (NativeBigPoe*)actor;
+        actor->colChkInfo.health = 10;
+        actor->colChkInfo.damageTable = (DamageTable*)sBigPoeDamageTable;
+        poe->body.dim.radius = 35;
+        poe->body.dim.height = 100;
+        poe->body.dim.yShift = 10;
+        actor->colChkInfo.mass = 50;
         actor->speed = 0.f;
         poe->lockFrames = 0;
         poe->body.elem.atDmgInfo = (ColliderElementDamageInfoAT){ 0xf7cfffff, 0, 0x10 };
@@ -379,6 +382,7 @@ static void bigPoeActivate(Actor* actor, PlayState* play)
     }
     poe->storePrevBgm = 1;
     poe->mainColor.a = 255;
+    actor->colChkInfo.health = 10;
     actor->flags |= ACTOR_FLAG_UPDATE_CULLING_DISABLED | 5;
     actor->world.pos.y = actor->home.pos.y + 100.f;
     actor->prevPos.y = actor->world.pos.y;

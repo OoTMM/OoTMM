@@ -1881,6 +1881,12 @@ static void enemyGroundCapture(Actor* actor, EnemyGroundStep* step, int native)
 {
     f32 gap;
     step->active = 0;
+    if (actor && actor->colChkInfo.health)
+    {
+        NativePlacementState* state = nativePlacementState(actor);
+        if (state && state->operation == 11)
+            return;
+    }
     if (enemyGroundActive(actor) && comboEnemyAirBound(actor) &&
         actor->floorHeight > -30000.f && actor->floorHeight < 30000.f)
     {
