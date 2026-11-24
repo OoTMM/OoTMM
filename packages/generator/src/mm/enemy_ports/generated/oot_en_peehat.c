@@ -1,6 +1,6 @@
 #include "oot_variant_compat.h"
 #include "types/en_peehat.h"
-#define IS_DAY 1
+#define IS_DAY (!gSave.isNight)
 #undef ACTOR_EN_PEEHAT
 #define ACTOR_EN_PEEHAT 0xc1d
 #undef OBJECT_PEEHAT
@@ -1082,6 +1082,53 @@ void EnPeehat_Adult_CollisionCheck(EnPeehat* this, PlayState* play) {
     }
 }
 
+static void peahatLimitCeiling(Actor* actor, PlayState* play, Vec3f from)
+{
+    Vec3f to = actor->world.pos;
+    Vec3f start = from;
+    Vec3f end = to;
+    Vec3f hit;
+    CollisionPoly* poly;
+    s32 bgId;
+    const f32 clearance = 90.f;
+    int movedXZ = from.x != to.x || from.z != to.z;
+
+    if (movedXZ)
+    {
+        start.y += clearance;
+        end.y += clearance;
+        if (BgCheck_EntityLineTest1(&play->colCtx, &start, &end, &hit, &poly,
+                                    1, 0, 1, 0, &bgId))
+        {
+            actor->world.pos.x = from.x;
+            actor->world.pos.z = from.z;
+            if (actor->world.pos.y > from.y)
+                actor->world.pos.y = from.y;
+            if (actor->velocity.y > 0.f)
+                actor->velocity.y = 0.f;
+        }
+    }
+
+    if (actor->world.pos.y >= from.y)
+    {
+        start = actor->world.pos;
+        start.y = from.y;
+        end = actor->world.pos;
+        end.y += clearance;
+        if (BgCheck_EntityLineTest1(&play->colCtx, &start, &end, &hit, &poly,
+                                    0, 0, 1, 0, &bgId))
+        {
+            f32 limit = hit.y - clearance;
+            if (limit < from.y)
+                limit = from.y;
+            if (actor->world.pos.y > limit)
+                actor->world.pos.y = limit;
+            if (actor->velocity.y > 0.f)
+                actor->velocity.y = 0.f;
+        }
+    }
+}
+
 void EnPeehat_Update(Actor* thisx, PlayState* play) {
     EnPeehat* this = (EnPeehat*)thisx;
     s32 i;
@@ -1090,6 +1137,7 @@ void EnPeehat_Update(Actor* thisx, PlayState* play) {
     CollisionPoly* poly;
     s32 bgId;
     Vec3f* posB;
+    Vec3f from = thisx->world.pos;
 
     if (thisx->params <= 0) {
         EnPeehat_Adult_CollisionCheck(this, play);
@@ -1101,6 +1149,8 @@ void EnPeehat_Update(Actor* thisx, PlayState* play) {
         }
 
         this->actionFunc(this, play);
+        if (thisx->update && thisx->params <= 0)
+            peahatLimitCeiling(thisx, play, from);
         if ((play->gameplayFrames & 0x7F) == 0) {
             this->jiggleRotInc = (Rand_ZeroOne() * 0.25f) + 0.5f;
         }

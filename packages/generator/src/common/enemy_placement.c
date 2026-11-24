@@ -1072,7 +1072,7 @@ static void nativeFlyingTileUpdate(Actor* actor, PlayState* play, ActorFunc upda
             comboEnemyFlyingAttackAim(actor, play, 1);
         Actor_UpdateBgCheckInfo(play, actor, 5.f, 20.f, 8.f,
             UPDBGCHECKINFO_FLAG_WALL | UPDBGCHECKINFO_FLAG_FLOOR | UPDBGCHECKINFO_FLAG_CEILING);
-        if (actor->bgCheckFlags & (BGCHECKFLAG_GROUND | BGCHECKFLAG_CEILING))
+        if (actor->bgCheckFlags & (BGCHECKFLAG_WALL | BGCHECKFLAG_GROUND | BGCHECKFLAG_CEILING))
             tile->action = (void*)((u8*)ovl->data + 0x80918b24 - ovl->vramStart);
     }
 }

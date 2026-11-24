@@ -292,7 +292,7 @@ static void bigPoeUpdate(Actor* actor, PlayState* play)
 }
 
 static u8 sBigPoeDamageTable[32] = {
-    0, 1, 1, 1, 1, 1, 1, 0,
+    0, 1, 1, 1, 1, 2, 1, 0,
     1, 1, 2, 1, 1, 2, 1, 1,
     1, 0, 0, 0, 0, 0, 1, 2,
     1, 2, 4, 2, 0, 0, 2, 0,

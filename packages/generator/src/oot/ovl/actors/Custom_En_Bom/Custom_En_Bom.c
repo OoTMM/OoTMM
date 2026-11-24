@@ -121,7 +121,6 @@ void EnBomMM_Init(Actor* thisx, PlayState* play)
 
     this->flashSpeedScale = 7;
     u8 bombType = ENBOMMM_GET_3(&this->actor);
-    this->isBlastMask = bombType == BOMB_EXPLOSIVE_TYPE_BLAST;
     this->isPowderKeg = bombType == BOMB_EXPLOSIVE_TYPE_POWDER_KEG;
     if (this->isPowderKeg)
     {
@@ -172,7 +171,7 @@ void EnBomMM_Init(Actor* thisx, PlayState* play)
     else
     {
         this->actionFunc = EnBomMM_Move;
-        this->timer = 0;
+        gCustomSave.powderKegTimer = 0;
     }
 
     // if (Actor_HasParent(&this->actor, play)) {
@@ -615,18 +614,8 @@ void EnBomMM_Update(Actor* thisx, PlayState* play)
                 }
                 //! @note Assumes `isPowderKeg` values aligns with clearTag params.
                 //! Here, 0/1 are small/large explosions respectively.
-                Actor* blast = NULL;
-                if (!this->isBlastMask)
-                {
-                    blast = Actor_Spawn(&play->actorCtx, play, ACTOR_EN_CLEAR_TAG, effPos.x, effPos.y - 10.0f, effPos.z,
-                                        0, 0, 0, CLEAR_TAG_PARAMS(this->isPowderKeg));
-                }
-                if (!blast || !blast->update)
-                {
-                    Vec3f velocity = { 0.f, 0.f, 0.f };
-                    Vec3f accel = { 0.f, .1f, 0.f };
-                    EffectSsBomb2_SpawnLayered(play, &effPos, &velocity, &accel, this->isPowderKeg ? 200 : 100, 19);
-                }
+                Actor_Spawn(&play->actorCtx, play, ACTOR_EN_CLEAR_TAG, effPos.x, effPos.y - 10.0f, effPos.z, 0, 0, 0,
+                            CLEAR_TAG_PARAMS(this->isPowderKeg));
                 Actor_RequestQuakeAndRumble(thisx, play, sQuakeY[this->isPowderKeg],
                                             sQuakeDurations[this->isPowderKeg]);
                 play->envCtx.adjLight1Color[0] = play->envCtx.adjLight1Color[1] =

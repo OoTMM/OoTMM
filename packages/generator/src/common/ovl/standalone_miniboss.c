@@ -263,6 +263,7 @@ enum {
     SLIME_THROW
 };
 enum { SLIME_VERTEX_COUNT = 162 };
+enum { SLIME_GRAB_STRUGGLE_PRESSES = 12 };
 enum { SLIME_HOOK_PULLS_ACTOR = 1u << 9, SLIME_HOOK_ATTACHED = 1u << 13 };
 typedef struct {
     Vec3f pos, velocity;
@@ -286,6 +287,7 @@ typedef struct {
     u8 grabSwings;
     u8 grabMove;
     u8 grabImpact;
+    u8 grabStruggle;
     u8 grabReverb;
     s16 grabYaw;
     f32 grabOffset;
@@ -3022,7 +3024,13 @@ static void Igos_UpdateHead(IgosFlyingHead* igos, StandaloneIgos* owner, PlaySta
                     break;
                 }
                 player->actor.parent = grabOwner;
-                Player_PlaySfx(player, NA_SE_VO_LI_DAMAGE_S);
+#if defined(GAME_MM)
+                Player_PlaySfx(player, NA_SE_VO_LI_DAMAGE_S + player->ageProperties->voiceSfxIdOffset);
+#else
+                Player_PlaySfx(player, comboIsLinkAdult()
+                    ? NA_SE_VO_LI_DAMAGE_S
+                    : NA_SE_VO_LI_DAMAGE_S_KID);
+#endif
 #if defined(GAME_MM)
             Play_EnableMotionBlur(150);
                 igos->headBiteBlur = 1;
@@ -5720,6 +5728,10 @@ static void Slime_GrabCombat(StandaloneSlime* slime, PlayState* play, Player* pl
         Slime_AbortGrab(slime, play);
         return;
     }
+    if (duel->phase == SLIME_GRAB &&
+        slime->grabStruggle < SLIME_GRAB_STRUGGLE_PRESSES &&
+        (play->state.input[0].press.button & (BTN_A | BTN_B)))
+        ++slime->grabStruggle;
     player->av2.actionVar2 = 0;
     Math_ScaledStepToS(&slime->shellGekkoPitch, 0, 0x400);
     f32 grabY = actor->world.pos.y - 500.f * slime->shellScaleY;
@@ -5823,6 +5835,11 @@ static void Slime_GrabCombat(StandaloneSlime* slime, PlayState* play, Player* pl
     }
     if (!finished)
         return;
+    if (slime->grabStruggle >= SLIME_GRAB_STRUGGLE_PRESSES)
+    {
+        Slime_StartThrow(slime);
+        return;
+    }
     if (!--slime->grabSwings)
     {
         if (!--slime->grabRounds || gSave.info.playerData.health < 5)
@@ -5834,7 +5851,9 @@ static void Slime_GrabCombat(StandaloneSlime* slime, PlayState* play, Player* pl
 #if defined(GAME_MM)
         Player_PlaySfx(player, NA_SE_VO_LI_DAMAGE_S + player->ageProperties->voiceSfxIdOffset);
 #else
-        Player_PlaySfx(player, NA_SE_VO_LI_DAMAGE_S);
+        Player_PlaySfx(player, comboIsLinkAdult()
+            ? NA_SE_VO_LI_DAMAGE_S
+            : NA_SE_VO_LI_DAMAGE_S_KID);
 #endif
         s16 yawStep = 0x4000 + (s16)(Rand_ZeroOne() * 0x4000);
         slime->grabYaw += Rand_ZeroOne() < .5f ? -yawStep : yawStep;
@@ -6210,6 +6229,7 @@ static int Slime_TryGrab(StandaloneSlime* slime, PlayState* play, Player* player
     duel->timer = 15;
     slime->squishRecovery = 0;
     slime->grabRounds = slime->grabImpact = slime->grabSwings = 0;
+    slime->grabStruggle = 0;
     slime->grabOffset = 0.f;
     slime->grabYaw = actor->world.rot.y;
     Slime_CopyClippedMesh(slime);

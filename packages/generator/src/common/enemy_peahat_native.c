@@ -14,6 +14,66 @@ extern int comboEnemyClampWall(PlayState*, Actor*, Vec3f);
 # define PEAHAT_OBJECT 0x14
 #endif
 
+static u32 nativePeahatNight(PlayState* play)
+{
+#if defined(GAME_OOT)
+    u16 scene = play->sceneId;
+    if (scene <= 0x0f || (scene >= 0x11 && scene <= 0x19) ||
+        (scene >= 0x70 && scene <= 0x79) || scene == 0x7b || scene == 0x7d)
+        return 0;
+#else
+    (void)play;
+#endif
+    return gSave.isNight;
+}
+
+static void peahatLimitCeiling(Actor* actor, PlayState* play, Vec3f from)
+{
+    Vec3f to = actor->world.pos;
+    Vec3f start = from;
+    Vec3f end = to;
+    Vec3f hit;
+    CollisionPoly* poly;
+    s32 bgId;
+    const f32 clearance = 90.f;
+    int movedXZ = from.x != to.x || from.z != to.z;
+
+    if (movedXZ)
+    {
+        start.y += clearance;
+        end.y += clearance;
+        if (BgCheck_EntityLineTest1(&play->colCtx, &start, &end, &hit, &poly,
+                                    1, 0, 1, 0, &bgId))
+        {
+            actor->world.pos.x = from.x;
+            actor->world.pos.z = from.z;
+            if (actor->world.pos.y > from.y)
+                actor->world.pos.y = from.y;
+            if (actor->velocity.y > 0.f)
+                actor->velocity.y = 0.f;
+        }
+    }
+
+    if (actor->world.pos.y >= from.y)
+    {
+        start = actor->world.pos;
+        start.y = from.y;
+        end = actor->world.pos;
+        end.y += clearance;
+        if (BgCheck_EntityLineTest1(&play->colCtx, &start, &end, &hit, &poly,
+                                    0, 0, 1, 0, &bgId))
+        {
+            f32 limit = hit.y - clearance;
+            if (limit < from.y)
+                limit = from.y;
+            if (actor->world.pos.y > limit)
+                actor->world.pos.y = limit;
+            if (actor->velocity.y > 0.f)
+                actor->velocity.y = 0.f;
+        }
+    }
+}
+
 static void nativePeahatUpdate(Actor* actor, PlayState* play)
 {
     ActorProfile* profile = comboEnemyNativeProfile(actor, PEAHAT_ACTOR, PEAHAT_OBJECT);
@@ -26,7 +86,7 @@ static void nativePeahatUpdate(Actor* actor, PlayState* play)
     }
     Vec3f from = actor->world.pos;
     night = gSave.isNight;
-    gSave.isNight = 0;
+    gSave.isNight = nativePeahatNight(play);
     actor->update = update;
     update(actor, play);
     gSave.isNight = night;
@@ -42,7 +102,7 @@ static void nativePeahatUpdate(Actor* actor, PlayState* play)
                  action == actorAddr(PEAHAT_ACTOR, 0x80897f44) ||
                  action == actorAddr(PEAHAT_ACTOR, 0x80898144);
 #endif
-        if (flying)
+        if (flying && !nativePeahatNight(play))
         {
             f32 target = GET_PLAYER(play)->actor.world.pos.y + 55.f;
             if (actor->floorPoly && target < actor->floorHeight + 30.f)
@@ -52,6 +112,7 @@ static void nativePeahatUpdate(Actor* actor, PlayState* play)
             Actor_UpdateBgCheckInfo(play, actor, 25.f, 30.f, 30.f,
                                     UPDBGCHECKINFO_FLAG_WALL | UPDBGCHECKINFO_FLAG_CEILING);
         }
+        peahatLimitCeiling(actor, play, from);
         actor->update = nativePeahatUpdate;
     }
 }
@@ -68,7 +129,7 @@ static void nativePeahatInit(Actor* actor, PlayState* play)
         return;
     }
     night = gSave.isNight;
-    gSave.isNight = 0;
+    gSave.isNight = nativePeahatNight(play);
     actor->init = init;
     init(actor, play);
     actor->init = NULL;
@@ -91,7 +152,7 @@ Actor* comboEnemyNativePeahatSpawn(ActorContext* ctx, ActorEntry* entry, PlaySta
         return NULL;
 #endif
     night = gSave.isNight;
-    gSave.isNight = 0;
+    gSave.isNight = nativePeahatNight(play);
     actor = NativePeahatSpawnEntry(ctx, entry, play);
     gSave.isNight = night;
     if (actor && actor->init)
