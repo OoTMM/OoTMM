@@ -111,6 +111,7 @@ void EnItem00_AddXflag(Actor_EnItem00* this);
 #define XFDROP_NO_INERTIA   0x01
 
 Actor_EnItem00* EnItem00_DropCustomEx(PlayState* play, const Vec3f* pos, XflagID id, int flags);
+Actor_EnItem00* EnItem00_DropCustomPlayerEx(PlayState* play, XflagID id);
 
 /* Legacy */
 Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag);

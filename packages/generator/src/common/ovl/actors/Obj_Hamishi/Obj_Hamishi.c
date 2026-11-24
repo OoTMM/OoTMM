@@ -78,36 +78,13 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDownward, 500, ICHAIN_STOP),
 };
 
-static int ObjHamishi_IsShuffled(Actor_ObjHamishi* this)
-{
-    return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
-}
-
 static int ObjHamishi_DropCustom(Actor_ObjHamishi* this, PlayState* play)
 {
-    Vec3f pos;
-
-    if (!ObjHamishi_IsShuffled(this))
+    if (this->xflag == XFLAGID_NONE)
         return 0;
 
-    pos = GET_PLAYER(play)->actor.world.pos;
-    pos.y += 20.0f;
-    EnItem00_DropCustomNoInertia(play, &pos, &this->xflag);
+    EnItem00_DropCustomPlayerEx(play, this->xflag);
     return 1;
-}
-
-static void ObjHamishi_InitXflag(Actor_ObjHamishi* this, PlayState* play)
-{
-#if defined(GAME_OOT)
-    // prevent init of boulders in child gerudo valley
-    if (play->sceneId == SCE_OOT_GERUDO_VALLEY && g.sceneSetupId == 0) return;
-#endif
-
-    ComboItemOverride   o;
-
-    Xflag_Init(&this->xflag, &this->actor, play);
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
 }
 
 void ObjHamishi_InitCollision(Actor_ObjHamishi* this, PlayState* play) {
@@ -219,7 +196,9 @@ s32 ObjHamishi_IsUnderwater(Actor_ObjHamishi* this, PlayState* play) {
 void ObjHamishi_Init(Actor_ObjHamishi* this, PlayState* play) {
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    ObjHamishi_InitXflag(this, play);
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     if (play->csCtx.state != CS_STATE_IDLE) {
         this->actor.cullingVolumeDistance += 1000.0f;
@@ -235,9 +214,9 @@ void ObjHamishi_Init(Actor_ObjHamishi* this, PlayState* play) {
 #endif
 
 #if defined(GAME_OOT)
-    if (!ObjHamishi_IsShuffled(this) && Flags_GetSwitch(play, PARAMS_GET_U(this->actor.params, 0, 6))) {
+    if (this->xflag == XFLAGID_NONE && Flags_GetSwitch(play, PARAMS_GET_U(this->actor.params, 0, 6))) {
 #else
-    if (!ObjHamishi_IsShuffled(this) && Flags_GetSwitch(play, OBJHAMISHI_GET_SWITCH_FLAG(&this->actor))) {
+    if (this->xflag == XFLAGID_NONE && Flags_GetSwitch(play, OBJHAMISHI_GET_SWITCH_FLAG(&this->actor))) {
 #endif
         Actor_Kill(&this->actor);
         return;
@@ -257,7 +236,10 @@ void ObjHamishi_Destroy(Actor_ObjHamishi* this, PlayState* play) {
 }
 
 void ObjHamishi_Update(Actor_ObjHamishi* this, PlayState* play) {
-        ObjHamishi_Shake(this);
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
+    ObjHamishi_Shake(this);
 
     if ((this->collider.base.acFlags & AC_HIT))
     {
@@ -342,13 +324,13 @@ static int ObjHamishi_CsmcType(Actor_ObjHamishi* this, PlayState* play)
 {
     ComboItemOverride o;
 
-    if (!ObjHamishi_IsShuffled(this))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 

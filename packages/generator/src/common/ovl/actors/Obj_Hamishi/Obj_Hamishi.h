@@ -20,8 +20,7 @@ typedef struct Actor_ObjHamishi {
     u8 unk_1A2;
 #endif
 
-    Xflag  xflag;
-    u8     isExtended;
+    XflagID xflag;
 } Actor_ObjHamishi;
 
 #endif

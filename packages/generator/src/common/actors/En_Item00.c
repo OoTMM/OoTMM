@@ -287,6 +287,20 @@ Actor_EnItem00* EnItem00_DropCustomEx(PlayState* play, const Vec3f* pos, XflagID
     return item;
 }
 
+Actor_EnItem00* EnItem00_DropCustomPlayerEx(PlayState* play, XflagID id)
+{
+    Vec3f pos;
+    Player* player;
+
+    player = GET_PLAYER(play);
+    if (!player)
+        return NULL;
+
+    pos = player->actor.world.pos;
+    pos.y += 20.0f;
+    return EnItem00_DropCustomEx(play, &pos, id, XFDROP_NO_INERTIA);
+}
+
 Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag)
 {
     XflagID id;
