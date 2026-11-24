@@ -2920,15 +2920,20 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
       for (const pair of supplementalPlan.filter(pair => pair.kind === 'restore' && enemyDefinition(pair.source).game === game)) {
         if (!roomUnmodified || room.mq || !nativeFightRestorationSource(pair.source)) continue;
         const target = enemyDefinition(pair.target);
+        const imported = target.game === game ? undefined : foreignTargets.get(pair.target);
+        if (target.game !== game && (!imported || imported.targetGame !== game ||
+          imported.sourceGame !== target.game || imported.sourceActorId !== target.actorId))
+          throw Error('Missing restored-fight foreign target adapter');
+        const actorId = imported?.actorId ?? target.actorId;
         for (const header of room.headers) {
           if (!nativeFightRestorationRoomAllowed(pair.source, header.room, settings)) continue;
           const restored = planNativeFightRestoration(game, rom, { ...header, start: room.start, end: room.end, mq: !!room.mq },
-            pair.source, { ...target, actorId: foreignTargets.get(pair.target)?.actorId ?? target.actorId });
+            pair.source, { ...target, actorId });
           if (!restored) continue;
           changes.push(...restored.changes);
           const operation = 1 | (needsGroundPlacement(game, bufReadU16BE(rom, restored.actorOffset) & 0x1fff, target) ? 1024 : 0);
-          records.push(nativePlacementRecord(rom, restored.actorOffset, operation, changes, foreignTargets.get(pair.target)?.actorId ?? target.actorId, target.spawnParams));
-          if (foreignTargets.has(pair.target) || nativeEnemyOnDemandObjects(game, target.actorId))
+          records.push(nativePlacementRecord(rom, restored.actorOffset, operation, changes, actorId, target.spawnParams));
+          if (imported || nativeEnemyOnDemandObjects(game, target.actorId))
             for (const alias of room.headers) supplementalRooms.push({ game, source: pair.source, target: pair.target, scene: alias.scene, room: alias.room });
           ++arenaReplaced;
           break;
@@ -2952,12 +2957,16 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
         const target = enemyDefinition(pair.target);
         const source = enemyDefinition(pair.source);
         if (enemyKeepsNativeEncounter('oot', source.actorId, source.spawnParams, target)) continue;
-        const selected = { actorId: foreignTargets.get(pair.target)?.actorId ?? target.actorId, spawnParams: target.spawnParams };
+        const imported = target.game === game ? undefined : foreignTargets.get(pair.target);
+        if (target.game !== game && (!imported || imported.targetGame !== game ||
+          imported.sourceGame !== target.game || imported.sourceActorId !== target.actorId))
+          throw Error('Missing OoT arena foreign target adapter');
+        const selected = { actorId: imported?.actorId ?? target.actorId, spawnParams: target.spawnParams };
         const arena = pair.source === 'oot-dead-hand-encounter' ? planDeadHandArenaCombat(rom, loc, selected) :
           pair.source === 'oot-dark-link-encounter' ? planDarkLinkArenaCombat(rom, loc, selected) :
             pair.source === 'oot-big-octo-encounter' && pair.target === 'oot-big-octo-arena-biri' ? planBigOctoArenaCombat(rom, loc, pair.target) : undefined;
         if (!arena || !header.actors) continue;
-        if (foreignTargets.has(pair.target) || nativeEnemyOnDemandObjects(game, target.actorId))
+        if (imported || nativeEnemyOnDemandObjects(game, target.actorId))
           supplementalRooms.push({ game, source: pair.source, target: pair.target, scene: header.scene, room: header.room });
         if (arena.controllerSlot !== undefined) {
           records.push(nativePlacementRecord(rom, header.actors.offset + arena.controllerSlot * 16, 8, [], selected.actorId, selected.spawnParams));

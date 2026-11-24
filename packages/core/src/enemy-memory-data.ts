@@ -3179,7 +3179,7 @@ export const ENEMY_MEMORY_FACTS = {
     'ovl/oot/oot_ovl_Native_Enemy_mm_en_estone.zovlx': { 'memory': 3760, 'profileOffset': 3212, 'instance': 936 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_en_famos.zovlx': { 'memory': 9040, 'profileOffset': 8016, 'instance': 1548 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_en_grasshopper.zovlx': { 'memory': 13440, 'profileOffset': 11784, 'instance': 6248 },
-    'ovl/oot/oot_ovl_Native_Enemy_mm_en_jso2.zovlx': { 'memory': 14832, 'profileOffset': 12952, 'instance': 1864 },
+    'ovl/oot/oot_ovl_Native_Enemy_mm_en_jso2.zovlx': { 'memory': 15216, 'profileOffset': 13304, 'instance': 1864 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_en_kame.zovlx': { 'memory': 10144, 'profileOffset': 8640, 'instance': 900 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_en_knight.zovlx': { 'memory': 37840, 'profileOffset': 33644, 'instance': 6228 },
     'ovl/oot/oot_ovl_Native_Enemy_mm_en_mkk.zovlx': { 'memory': 7216, 'profileOffset': 6228, 'instance': 460 },
