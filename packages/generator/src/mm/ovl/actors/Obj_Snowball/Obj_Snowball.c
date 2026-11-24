@@ -87,26 +87,12 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDistance, 2000, ICHAIN_STOP),
 };
 
-static int ObjSnowball_IsShuffled(Actor_ObjSnowball* this)
-{
-    return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
-}
-
 static int ObjSnowball_DropCustom(Actor_ObjSnowball* this, PlayState* play)
 {
-    if (!ObjSnowball_IsShuffled(this))
+    if (this->xflag == XFLAGID_NONE)
         return 0;
-    EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+    EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag, XFDROP_NONE);
     return 1;
-}
-
-static void ObjSnowball_InitXflag(Actor_ObjSnowball* this, PlayState* play)
-{
-    ComboItemOverride   o;
-
-    Xflag_Init(&this->xflag, &this->actor, play);
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
 }
 
 void ObjSnowball_SpawnEnemy(Actor_ObjSnowball* this, PlayState* play) {
@@ -465,7 +451,9 @@ void ObjSnowball_Init(Actor_ObjSnowball* this, PlayState* play) {
     s32 sp34;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    ObjSnowball_InitXflag(this, play);
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     sp34 = sp40 == 1;
     if (sp34) {
@@ -517,7 +505,7 @@ void ObjSnowball_Init(Actor_ObjSnowball* this, PlayState* play) {
 
     func_80B04338(this, play);
 
-    if ((sp40 == 5) && Flags_GetSwitch(play, OBJSNOWBALL_GET_SWITCH_FLAG(&this->actor)) && !ObjSnowball_IsShuffled(this)) {
+    if ((sp40 == 5) && Flags_GetSwitch(play, OBJSNOWBALL_GET_SWITCH_FLAG(&this->actor)) && this->xflag == XFLAGID_NONE) {
         Actor_Kill(&this->actor);
     }
 }
@@ -756,6 +744,9 @@ void func_80B04B60(Actor_ObjSnowball* this, PlayState* play) {
 void ObjSnowball_Update(Actor_ObjSnowball* this, PlayState* play) {
     s32 sp24 = FALSE;
 
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     if (this->actor.home.rot.y == 1) {
         if (this->unk_211 != 0) {
             if (Actor_TextboxIsClosing(&this->actor, play)) {
@@ -795,13 +786,13 @@ static int ObjSnowball_CsmcType(Actor_ObjSnowball* this)
 {
     ComboItemOverride o;
 
-    if(!ObjSnowball_IsShuffled(this))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
-    if(!csmcEnabled())
+    if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 

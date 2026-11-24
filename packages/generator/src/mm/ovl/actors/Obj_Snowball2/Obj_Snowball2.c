@@ -72,26 +72,12 @@ void func_80B38E20(Actor_ObjSnowball2* this) {
     Collider_UpdateSpheres(0, &this->collider);
 }
 
-static int ObjSnowball2_IsShuffled(Actor_ObjSnowball2* this)
-{
-    return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
-}
-
-static void ObjSnowball2_InitXflag(Actor_ObjSnowball2* this, PlayState* play)
-{
-    ComboItemOverride   o;
-
-    Xflag_Init(&this->xflag, &this->actor, play);
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
-}
-
 void ObjSnowball2_DropCollectible(Actor_ObjSnowball2* this, PlayState* play) {
     s32 itemDrop;
 
-    if (ObjSnowball2_IsShuffled(this))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag, XFDROP_NONE);
         return;
     }
 
@@ -314,7 +300,10 @@ static InitChainEntry sInitChain[] = {
 };
 
 void ObjSnowball2_Init(Actor_ObjSnowball2* this, PlayState* play) {
-    ObjSnowball2_InitXflag(this, play);
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     Actor_ProcessInitChain(&this->actor, sInitChain);
     Collider_InitJntSph(play, &this->collider);
     this->actor.shape.rot.x = 0;
@@ -595,6 +584,9 @@ void func_80B3A500(Actor_ObjSnowball2* this, PlayState* play) {
 }
 
 void ObjSnowball2_Update(Actor_ObjSnowball2* this, PlayState* play) {
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
 
     if (this->actor.projectedPos.z < 460.0f) {
@@ -616,13 +608,13 @@ static int ObjSnowball2_CsmcType(Actor_ObjSnowball2* this)
 {
     ComboItemOverride o;
 
-    if(!ObjSnowball2_IsShuffled(this))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
-    if(!csmcEnabled())
+    if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 

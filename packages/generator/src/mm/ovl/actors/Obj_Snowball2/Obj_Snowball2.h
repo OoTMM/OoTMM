@@ -21,8 +21,7 @@ typedef struct Actor_ObjSnowball2
     s8 unk_1AE;
     s8 unk_1AF;
     char unk1B0[4];
-    Xflag  xflag;
-    u8     isExtended;
+    XflagID xflag;
 }
 Actor_ObjSnowball2;
 
