@@ -16,14 +16,13 @@ static int ObjKibako_CsmcType(Actor_ObjKibako* this)
 {
     ComboItemOverride o;
 
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
-
     if (!csmcEnabled())
-        return o.gi ? CSMC_MAJOR : CSMC_NORMAL;
+        return CSMC_MAJOR;
 
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
@@ -36,7 +35,7 @@ static void ObjKibako_DrawWithTexture(Actor_ObjKibako* this, PlayState* play, u3
     type = ObjKibako_CsmcType(this);
     switch (type)
     {
-    case CSMC_BOSS_KEY: customVrom = CUSTOM_CRATE_BOSS_KEY_ADDR; break; /* TODO: Need a texture */
+    case CSMC_BOSS_KEY: customVrom = CUSTOM_CRATE_BOSS_KEY_ADDR; break;
     case CSMC_MAJOR: customVrom = CUSTOM_CRATE_MAJOR_ADDR; break;
     case CSMC_KEY: customVrom = CUSTOM_CHEST_KEY_FRONT_ADDR; break;
     case CSMC_SPIDER: customVrom = CUSTOM_CHEST_SPIDER_FRONT_ADDR; break;
@@ -110,9 +109,9 @@ void ObjKibako_SpawnCollectible(Actor_ObjKibako* this, PlayState* play)
 {
     s16 collectible;
 
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag, XFDROP_NONE);
         return;
     }
 
@@ -140,7 +139,11 @@ void ObjKibako_Init(Actor_ObjKibako* this, PlayState* play)
 {
     this->actor.draw = ObjKibako_Draw;
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    Xflag_Init(&this->xflag, &this->actor, play);
+
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actor.gravity = -1.2f;
     this->actor.minVelocityY = -13.0f;
     ObjKibako_InitCollider(this, play);
@@ -328,6 +331,8 @@ void ObjKibako_Thrown(Actor_ObjKibako* this, PlayState* play)
 
 void ObjKibako_Update(Actor_ObjKibako* this, PlayState* play)
 {
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
     this->actionFunc(this, play);
 }
 
@@ -404,9 +409,9 @@ void ObjKibako_SpawnCollectible(Actor_ObjKibako* this, PlayState* play)
 {
     s32 dropItem00Id;
 
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag, XFDROP_NONE);
         return;
     }
 
@@ -461,7 +466,10 @@ void ObjKibako_Init(Actor_ObjKibako* this, PlayState* play)
 {
     s32 objectIndex;
 
-    Xflag_Init(&this->xflag, &this->actor, play);
+    this->xflag = Xflag_InitEx(&this->actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     objectIndex = KIBAKO_BANK_INDEX(this);
     Actor_ProcessInitChain(&this->actor, sInitChain);
     Actor_SetScale(&this->actor, 0.15f);
@@ -597,7 +605,7 @@ void ObjKibako_Idle(Actor_ObjKibako* this, PlayState* play)
         ObjKibako_SetupHeld(this);
         this->actor.room = -1;
         this->actor.colChkInfo.mass = 120;
-        if (Item_CollectibleDropTable2(KIBAKO_COLLECTIBLE_ID(this)) && !Xflag_IsShuffled(&this->xflag)) {
+        if (Item_CollectibleDropTable2(KIBAKO_COLLECTIBLE_ID(this)) && this->xflag == XFLAGID_NONE) {
             ObjKibako_SpawnCollectible(this, play);
         }
 
@@ -738,6 +746,9 @@ void ObjKibako_Thrown(Actor_ObjKibako* this, PlayState* play)
 
 void ObjKibako_Update(Actor_ObjKibako* this, PlayState* play)
 {
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
     ObjKibako_SetShadow(this);
 }
