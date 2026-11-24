@@ -736,7 +736,8 @@ void Play_MainWrapper(PlayState* play)
         Multi_Disconnect();
 
     Play_Main(play);
-    comboEnemyEncounterPostFrame(play);
+    if (play->gameOverCtx.state == GAMEOVER_INACTIVE)
+        comboEnemyEncounterPostFrame(play);
     if (!(play->gameplayFrames & 7))
         comboEnemyObjectReleaseUnloadedRooms(play);
     Message_UpdateBlocking(play);

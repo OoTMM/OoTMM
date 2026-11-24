@@ -620,7 +620,8 @@ void Play_MainWrapper(PlayState* play)
         Multi_Disconnect();
 
     Play_Main(play);
-    comboEnemyEncounterPostFrame(play);
+    if (play->gameOverCtx.state == GAMEOVER_INACTIVE)
+        comboEnemyEncounterPostFrame(play);
     Message_UpdateBlocking(play);
     Dpad_Draw(play);
     Audio_DisplayMusicName(play);
