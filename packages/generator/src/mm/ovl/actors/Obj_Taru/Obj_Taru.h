@@ -14,8 +14,7 @@ struct Actor_ObjTaru
     ColliderCylinder    collider;
     Actor_ObjTaruFunc   actionFunc;
     s8                  unk_1AC;
-    Xflag               xflag;
-    u8                  isExtended;
+    XflagID             xflag;
 };
 
 #endif

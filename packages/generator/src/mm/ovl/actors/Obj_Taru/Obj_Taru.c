@@ -49,27 +49,12 @@ static InitChainEntry sInitChain[] = {
     ICHAIN_F32(cullingVolumeDownward, 200, ICHAIN_STOP),
 };
 
-static int ObjTaru_IsShuffled(Actor_ObjTaru* this)
-{
-    return !!(this->isExtended && !Xflag_GetIndirect(&this->xflag));
-}
-
 static int ObjTaru_DropCustom(Actor_ObjTaru* this, PlayState* play)
 {
-    if (!ObjTaru_IsShuffled(this))
+    if (!Xflag_IsShuffledEx(this->xflag))
         return 0;
-    EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
+    EnItem00_DropCustomEx(play, &this->dyna.actor.world.pos, this->xflag, XFDROP_NONE);
     return 1;
-}
-
-static void ObjTaru_InitXflag(Actor_ObjTaru* this, PlayState* play)
-{
-    ComboItemOverride   o;
-
-    /* Set the extended properties */
-    Xflag_Init(&this->xflag, &this->dyna.actor, play);
-    comboXflagItemOverride(&o, &this->xflag, 0);
-    this->isExtended = !!(o.gi && !Xflag_GetIndirect(&this->xflag));
 }
 
 void func_80B9B74C(Actor_ObjTaru* this, PlayState* play)
@@ -169,7 +154,10 @@ void ObjTaru_DropCollectible(Actor_ObjTaru* this, PlayState* play) {
 
 void ObjTaru_Init(Actor_ObjTaru* this, PlayState* play)
 {
-    ObjTaru_InitXflag(this, play);
+    this->xflag = Xflag_InitEx(&this->dyna.actor, play);
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     DynaPolyActor_Init(&this->dyna, 0);
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
 
@@ -273,6 +261,9 @@ void func_80B9C1A0(Actor_ObjTaru* this, PlayState* play) {
 
 void ObjTaru_Update(Actor_ObjTaru* this, PlayState* play)
 {
+    if (!Xflag_IsShuffledEx(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     if (!OBJ_TARU_GET_80(this))
     {
         if (this->unk_1AC != 0) {
@@ -286,13 +277,13 @@ static int ObjTaru_CsmcType(Actor_ObjTaru* this)
 {
     ComboItemOverride o;
 
-    if (!ObjTaru_IsShuffled(this))
+    if (!Xflag_IsShuffledEx(this->xflag))
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
