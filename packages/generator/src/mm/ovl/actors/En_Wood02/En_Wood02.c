@@ -364,7 +364,7 @@ static int EnWood02_DropCustom(EnWood02* this, PlayState* play)
 {
     if (this->xflag != XFLAGID_NONE && !Xflag_Get(this->xflag))
     {
-        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag, XFDROP_NONE);
         return true;
     }
     return false;

@@ -241,7 +241,7 @@ void EnKusa_DropCollectible(EnKusa* this, PlayState* play) {
 
     if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag, XFDROP_NONE);
         return;
     }
 

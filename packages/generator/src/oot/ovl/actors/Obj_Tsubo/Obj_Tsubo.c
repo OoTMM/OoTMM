@@ -79,7 +79,7 @@ void ObjTsubo_SpawnCollectible(Actor_ObjTsubo* this, PlayState* play)
 
     if (this->xflag != XFLAGID_NONE)
     {
-        drop = (Actor*)EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag);
+        drop = (Actor*)EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag, XFDROP_NONE);
     }
     else if ((dropParams >= 0) && (dropParams < ITEM00_MAX))
     {
@@ -338,7 +338,7 @@ void ObjTsubo_Thrown(Actor_ObjTsubo* this, PlayState* play)
     if (this->actor.world.pos.y < this->actor.home.pos.y - 1000.0f)
     {
         if (this->xflag != XFLAGID_NONE)
-            EnItem00_DropCustomNoInertiaEx(play, &this->actor.home.pos, this->xflag);
+            EnItem00_DropCustomEx(play, &this->actor.home.pos, this->xflag, XFDROP_NO_INERTIA);
         else
         {
             this->actor.world.pos = this->actor.home.pos;

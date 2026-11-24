@@ -110,7 +110,7 @@ void ObjGrassCarry_DropCollectible(ObjGrassCarry* this, s16 dropTable, PlayState
     id = this->grassElem->xflag;
     if (id != XFLAGID_NONE)
     {
-        EnItem00_DropCustomEx(play, &this->actor.world.pos, id);
+        EnItem00_DropCustomEx(play, &this->actor.world.pos, id, XFDROP_NONE);
         return;
     }
 

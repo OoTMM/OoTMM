@@ -238,16 +238,7 @@ void EnItem00_SetXflagCollectedHandler(Actor_EnItem00* this)
     this->handler = EnItem00_XflagCollectedHandler;
 }
 
-Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag)
-{
-    XflagID id;
-
-    id = Xflag_Lookup(xflag);
-    return EnItem00_DropCustomEx(play, pos, id);
-}
-
-
-Actor_EnItem00* EnItem00_DropCustomEx(PlayState* play, const Vec3f* pos, XflagID id)
+Actor_EnItem00* EnItem00_DropCustomEx(PlayState* play, const Vec3f* pos, XflagID id, int flags)
 {
     Actor* actor;
     Actor_EnItem00* item;
@@ -282,36 +273,32 @@ Actor_EnItem00* EnItem00_DropCustomEx(PlayState* play, const Vec3f* pos, XflagID
     if (!item)
         return NULL;
 
+    if (flags & XFDROP_NO_INERTIA)
+    {
+        item->actor.speed = 0.f;
+        item->actor.velocity.x = 0.f;
+        item->actor.velocity.y = 0.f;
+        item->actor.velocity.z = 0.f;
+    }
+
     /* Persist the drop */
     item->actor.update = EnItem00_UpdateXflagDrop;
 
     return item;
 }
 
-Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, const Xflag* xflag)
+Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag)
 {
-    Actor_EnItem00* item;
+    XflagID id;
 
-    item = EnItem00_DropCustom(play, pos, xflag);
-    if (!item)
-        return NULL;
-    item->actor.speed = 0.f;
-    item->actor.velocity.x = 0.f;
-    item->actor.velocity.y = 0.f;
-    item->actor.velocity.z = 0.f;
-    return item;
+    id = Xflag_Lookup(xflag);
+    return EnItem00_DropCustomEx(play, pos, id, XFDROP_NONE);
 }
 
-Actor_EnItem00* EnItem00_DropCustomNoInertiaEx(PlayState* play, const Vec3f* pos, XflagID xflag)
+Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, const Xflag* xflag)
 {
-    Actor_EnItem00* item;
+    XflagID id;
 
-    item = EnItem00_DropCustomEx(play, pos, xflag);
-    if (!item)
-        return NULL;
-    item->actor.speed = 0.f;
-    item->actor.velocity.x = 0.f;
-    item->actor.velocity.y = 0.f;
-    item->actor.velocity.z = 0.f;
-    return item;
+    id = Xflag_Lookup(xflag);
+    return EnItem00_DropCustomEx(play, pos, id, XFDROP_NO_INERTIA);
 }

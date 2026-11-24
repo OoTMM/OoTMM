@@ -14,7 +14,7 @@ static int ObjComb_DropCustom(Actor_ObjComb* this, PlayState* play)
 {
     if (this->xflag == XFLAGID_NONE)
         return FALSE;
-    EnItem00_DropCustomNoInertiaEx(play, &this->actor.world.pos, this->xflag);
+    EnItem00_DropCustomEx(play, &this->actor.world.pos, this->xflag, XFDROP_NO_INERTIA);
     return TRUE;
 }
 

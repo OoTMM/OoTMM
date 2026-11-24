@@ -239,7 +239,7 @@ void EnIshi_DropCollectible(EnIshi* this, PlayState* play) {
     pos.y += 20.0f;
     if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustomNoInertiaEx(play, &pos, this->xflag);
+        EnItem00_DropCustomEx(play, &pos, this->xflag, XFDROP_NO_INERTIA);
         return;
     }
 

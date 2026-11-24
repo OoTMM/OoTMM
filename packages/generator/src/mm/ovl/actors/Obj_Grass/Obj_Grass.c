@@ -125,7 +125,7 @@ void ObjGrass_OverrideMatrixCurrent(MtxF* matrix) {
 void ObjGrass_DropCollectible(ObjGrassElement* grassElem, PlayState* play) {
     if (grassElem->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustomEx(play, &grassElem->pos, grassElem->xflag);
+        EnItem00_DropCustomEx(play, &grassElem->pos, grassElem->xflag, XFDROP_NONE);
         return;
     }
 

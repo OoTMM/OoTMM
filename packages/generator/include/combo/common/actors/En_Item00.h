@@ -107,9 +107,13 @@ void EnItem00_SetObject(Actor_EnItem00* this, PlayState* play, f32* shadowOffset
 int  EnItem00_FixDrop(int drop);
 void EnItem00_AddXflag(Actor_EnItem00* this);
 
+#define XFDROP_NONE         0x00
+#define XFDROP_NO_INERTIA   0x01
+
+Actor_EnItem00* EnItem00_DropCustomEx(PlayState* play, const Vec3f* pos, XflagID id, int flags);
+
+/* Legacy */
 Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag);
-Actor_EnItem00* EnItem00_DropCustomEx(PlayState* play, const Vec3f* pos, XflagID id);
 Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, const Xflag* xflag);
-Actor_EnItem00* EnItem00_DropCustomNoInertiaEx(PlayState* play, const Vec3f* pos, XflagID xflag);
 
 #endif

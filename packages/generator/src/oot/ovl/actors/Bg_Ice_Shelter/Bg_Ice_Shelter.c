@@ -73,7 +73,7 @@ static int BgIceShelter_DropCustom(Actor_BgIceShelter* this, PlayState* play)
 {
     if (this->xflag == XFLAGID_NONE)
         return FALSE;
-    EnItem00_DropCustomEx(play, &this->dyna.actor.world.pos, this->xflag);
+    EnItem00_DropCustomEx(play, &this->dyna.actor.world.pos, this->xflag, XFDROP_NONE);
     return TRUE;
 }
 

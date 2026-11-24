@@ -115,7 +115,7 @@ static int ObjFlowerpot_DropCustom(Actor_ObjFlowerpot* this, PlayState* play, in
     if (!ObjFlowerpot_IsShuffled(this, slice))
         return FALSE;
     id = Xflag_LookupSlice(this->xflag, slice);
-    EnItem00_DropCustomEx(play, &this->actor.world.pos, id);
+    EnItem00_DropCustomEx(play, &this->actor.world.pos, id, XFDROP_NONE);
     return TRUE;
 }
 
