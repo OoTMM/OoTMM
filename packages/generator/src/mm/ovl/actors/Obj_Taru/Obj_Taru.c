@@ -51,7 +51,7 @@ static InitChainEntry sInitChain[] = {
 
 static int ObjTaru_DropCustom(Actor_ObjTaru* this, PlayState* play)
 {
-    if (!Xflag_IsShuffledEx(this->xflag))
+    if (this->xflag == XFLAGID_NONE)
         return 0;
     EnItem00_DropCustomEx(play, &this->dyna.actor.world.pos, this->xflag, XFDROP_NONE);
     return 1;
@@ -261,7 +261,7 @@ void func_80B9C1A0(Actor_ObjTaru* this, PlayState* play) {
 
 void ObjTaru_Update(Actor_ObjTaru* this, PlayState* play)
 {
-    if (!Xflag_IsShuffledEx(this->xflag))
+    if (Xflag_Get(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     if (!OBJ_TARU_GET_80(this))
@@ -277,7 +277,7 @@ static int ObjTaru_CsmcType(Actor_ObjTaru* this)
 {
     ComboItemOverride o;
 
-    if (!Xflag_IsShuffledEx(this->xflag))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
     if (!csmcEnabled())

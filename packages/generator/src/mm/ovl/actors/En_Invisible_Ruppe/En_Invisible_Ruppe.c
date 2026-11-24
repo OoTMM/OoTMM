@@ -136,7 +136,7 @@ void EnInvisibleRuppe_Destroy(Actor* thisx, PlayState* play) {
 void EnInvisibleRuppe_Update(Actor* thisx, PlayState* play) {
     EnInvisibleRuppe* this = (EnInvisibleRuppe*)thisx;
 
-    if (this->xflag != XFLAGID_NONE && !Xflag_IsShuffledEx(this->xflag))
+    if (this->xflag != XFLAGID_NONE && Xflag_Get(this->xflag))
     {
         this->xflag = XFLAGID_NONE;
         this->actor.draw = NULL;
