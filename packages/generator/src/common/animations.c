@@ -70,9 +70,6 @@ static int Combo_IsLikelySegmented(void* ptr) {
 
 #if defined(GAME_OOT) || defined(GAME_MM)
 
-static u32 sCompactLinkAnimVroms[2] __attribute__((section(".data"))) = { 0, 0 };
-EXPORT_SYMBOL(COMPACT_LINK_ANIM_VROMS, sCompactLinkAnimVroms);
-
 #define COMBO_IMPORTED_ANIM_HEADER_ENTRY(symbol, sourceOffset, frameCount, frameSize) \
     const ComboImportedPlayerAnimationHeader symbol = {                              \
         frameCount,                                                                  \
@@ -181,20 +178,6 @@ static int Combo_LinkAnimFrameDmaInfo(
     offset = header->linkAnimSegment & 0x00ffffff;
     frameSize = Combo_LinkAnimFrameSize(header, limbCount);
     offset += frameSize * frame;
-
-#if defined(GAME_OOT)
-    const u32 native = 0;
-#else
-    const u32 native = 1;
-#endif
-    if (segment == 0x07 || segment == COMBO_IMPORTED_LINK_ANIM_SEGMENT) {
-        u32 bank = segment == 0x07 ? native : 1 - native;
-        if (sCompactLinkAnimVroms[bank]) {
-            *outVrom = sCompactLinkAnimVroms[bank] + offset;
-            *outSize = frameSize;
-            return 1;
-        }
-    }
 
     if (segment == COMBO_IMPORTED_LINK_ANIM_SEGMENT) {
         *outVrom = (COMBO_FOREIGN_LINK_ANIMETION_VROM + offset) | VROM_FOREIGN_OFFSET;

@@ -12,6 +12,7 @@ import { DmaData } from './dma';
 import { Patchfile } from './patch-build/patchfile';
 import { RomBuilder } from './rom-builder';
 import { applyWholeFileDedupe } from './compact';
+import { applyAnimationStorageDedupe } from './animation-dedupe';
 import { applyAudioOnlyDedupe } from './audio-dedupe';
 import { forceSelectiveKeepSourcesRaw } from './enemies/overlay';
 import { prepareSoulPreviewSources } from './enemies/soul-preview-storage';
@@ -234,6 +235,11 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
       if (file.vaddr === undefined || file.paddr !== NATIVE_AUDIO_PHYSICAL_BASE[game] + file.vaddr)
         throw new Error(`Fixed boot/DMA file moved: ${game}/${name}`);
     }
+  }
+  if (!process.env.OOTMM_DISABLE_ANIMATION_DEDUPE) {
+    const animations = await applyAnimationStorageDedupe(romBuilder, patchfile);
+    if (animations)
+      monitor.log(`Pack: Address-preserving animation dedupe saved ${animations.savedBytes.toLocaleString()} bytes (${animations.tableBytes} bytes of map, ${animations.ranges.join('/')} ranges)`);
   }
   applyWholeFileDedupe(romBuilder);
 

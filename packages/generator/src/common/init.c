@@ -12,6 +12,10 @@
 ComboGlobal g;
 
 void initHeap(void);
+void comboAnimationDmaInit(void);
+#if defined(GAME_OOT)
+void comboCollisionCapacityInit(void);
+#endif
 void AudioCustom_Init(void);
 void comboInitObjects(void);
 void Xflag_InitSystem(void);
@@ -21,6 +25,10 @@ void menuInit();
 void comboInit(void)
 {
     initHeap();
+    comboAnimationDmaInit();
+#if defined(GAME_OOT)
+    comboCollisionCapacityInit();
+#endif
     AudioCustom_Init();
     Context_Init();
     Config_Init();

@@ -17,9 +17,36 @@ extern CollisionPairFunc gCollisionPairsOC[COLSHAPE_MAX][COLSHAPE_MAX];
 extern CollisionLineFunc gCollisionLinesOC[];
 s32 FrameAdvance_IsEnabled(PlayState* play);
 
+#if defined(GAME_OOT)
+typedef struct
+{
+    Collider* at[COLLIDER_CAPACITY];
+    Collider* ac[COLLIDER_CAPACITY];
+    Collider* oc[COLLIDER_CAPACITY];
+} CollisionCapacityStorage;
+
+static CollisionCapacityStorage* sCollisionCapacityStorage;
+extern void Fault_AddHungupAndCrashImpl(const char*, const char*);
+
+void comboCollisionCapacityInit(void)
+{
+    sCollisionCapacityStorage = malloc(sizeof(*sCollisionCapacityStorage));
+    if (!sCollisionCapacityStorage)
+    {
+        Fault_AddHungupAndCrashImpl("Collision capacity", "Out of memory");
+        for (;;) {}
+    }
+    bzero(sCollisionCapacityStorage, sizeof(*sCollisionCapacityStorage));
+}
+
+#define sCollidersAT (sCollisionCapacityStorage->at)
+#define sCollidersAC (sCollisionCapacityStorage->ac)
+#define sCollidersOC (sCollisionCapacityStorage->oc)
+#else
 static Collider* sCollidersAT[COLLIDER_CAPACITY];
 static Collider* sCollidersAC[COLLIDER_CAPACITY];
 static Collider* sCollidersOC[COLLIDER_CAPACITY];
+#endif
 
 #if defined(GAME_MM)
 static int sEnemyCombatActive;

@@ -170,11 +170,100 @@ static void dmaReadRaw(u32 source, void* destination, u32 size)
     }
 }
 
+typedef struct
+{
+    u32 start;
+    u32 size;
+} AnimationDmaBank;
+
+typedef struct
+{
+    u32 map;
+    u32 count;
+    AnimationDmaBank banks[2];
+} AnimationDmaConfig;
+
+typedef struct
+{
+    u32 logical;
+    u32 delta;
+} AnimationDmaRange;
+
+static AnimationDmaConfig sAnimationDmaConfig __attribute__((section(".data"))) = { 0 };
+EXPORT_SYMBOL(ANIMATION_DMA_MAP, sAnimationDmaConfig);
+
+static AnimationDmaRange* sAnimationDmaRanges;
+
+extern void Fault_AddHungupAndCrashImpl(const char*, const char*);
+
+void comboAnimationDmaInit(void)
+{
+    if (!sAnimationDmaConfig.map)
+        return;
+    u32 bytes = (sAnimationDmaConfig.count * 8 + 15) & ~15u;
+    sAnimationDmaRanges = malloc(bytes);
+    if (!sAnimationDmaRanges)
+    {
+        Fault_AddHungupAndCrashImpl("Animation DMA", "Out of memory");
+        for (;;) {}
+    }
+    DMARomToRam(sAnimationDmaConfig.map | PI_DOM1_ADDR2, sAnimationDmaRanges, bytes);
+}
+
+static u32 animationDmaEnd(u32 vrom)
+{
+#if defined(GAME_MM)
+    vrom ^= VROM_FOREIGN_OFFSET;
+#endif
+    u32 bank = vrom >> 26;
+    if (bank >= 2 || !sAnimationDmaConfig.map)
+        return 0;
+    const AnimationDmaBank* info = &sAnimationDmaConfig.banks[bank];
+    return vrom - info->start < info->size ? info->start + info->size : 0;
+}
+
+static int animationDmaRead(const DmaRequest* dma)
+{
+    u32 end = animationDmaEnd(dma->vromAddr);
+    if (!end)
+        return 0;
+    if (!sAnimationDmaRanges)
+        return 1;
+    u32 logical = dma->vromAddr;
+#if defined(GAME_MM)
+    logical ^= VROM_FOREIGN_OFFSET;
+#endif
+    u32 size = MIN(dma->size, end - logical);
+    u8* out = dma->dramAddr;
+    while (size)
+    {
+        const AnimationDmaRange* lo = sAnimationDmaRanges;
+        const AnimationDmaRange* hi = lo + sAnimationDmaConfig.count;
+        while (lo + 1 < hi)
+        {
+            const AnimationDmaRange* mid = lo + (hi - lo) / 2;
+            if (mid->logical <= logical)
+                lo = mid;
+            else
+                hi = mid;
+        }
+        u32 amount = MIN(size, lo[1].logical - logical);
+        dmaReadRaw(lo->delta + logical, out, amount);
+        logical += amount;
+        out += amount;
+        size -= amount;
+    }
+    return 1;
+}
+
 void DmaManagerRunRequest(const DmaRequest* dma)
 {
     DmaEntry e;
     u32 offset;
     int ret;
+
+    if (animationDmaRead(dma))
+        return;
 
     /* Find the file to DMA */
     ret = comboDmaLookup(&e, dma->vromAddr);
@@ -238,7 +327,7 @@ static u32 comboDmaLoadFilePartialImpl(void* dst, const DmaEntry* e, u32 vrom, u
 {
     if (!e)
         for (;;) {}
-    if (e->pend == 0xffffffff)
+    if (e->pend == 0xffffffff && !animationDmaEnd(e->vstart))
         return 0;
     if (size + offset > e->vend - e->vstart)
         size = e->vend - e->vstart - offset;
