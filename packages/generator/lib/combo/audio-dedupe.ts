@@ -168,7 +168,7 @@ function sampleInfo(font: Uint8Array, off: number) {
     codec: (font[off] >> 4) & 7,
     selector: (font[off] >> 2) & 3,
     size: bufReadU32BE(font, off) & 0x00ffffff,
-    sampleAddr: bufReadU32BE(font, off + 4),
+    sampleAddr: bufReadU32BE(font, off + 4) | 0,
   };
 }
 
@@ -353,9 +353,15 @@ function collectLocalSamples(game: Game, builder: RomBuilder, roms: Decompressed
 
     const bank = resolveAudioEntry(native.sampleEntries, logicalBank);
     const absolute = bank.entry.romAddr + info.sampleAddr;
-    if (absolute + info.size > native.audiotable.length ||
-        (font.kind !== 'custom' && info.sampleAddr + info.size > bank.entry.size))
-      throw new Error(`${font.key}: sample 0x${info.sampleAddr.toString(16)}+0x${info.size.toString(16)} outside ${game} Audiotable (bank ${logicalBank}, base 0x${bank.entry.romAddr.toString(16)}, bank size 0x${bank.entry.size.toString(16)}, table size 0x${native.audiotable.length.toString(16)})`);
+    if (absolute < 0 || absolute + info.size > native.audiotable.length) {
+      if (font.kind === 'custom') {
+        record.mixedSource = true;
+        return;
+      }
+      throw new Error(`${font.key}: sample outside ${game} Audiotable`);
+    }
+    if (font.kind !== 'custom' && (info.sampleAddr < 0 || info.sampleAddr + info.size > bank.entry.size))
+      throw new Error(`${font.key}: sample outside ${game} sample bank ${logicalBank}`);
     const source: LocalSource = {
       realBankId: bank.index, sampleOffset: info.sampleAddr, size: info.size, codec: info.codec,
       data: native.audiotable.subarray(absolute, absolute + info.size),
@@ -371,10 +377,11 @@ function collectLocalSamples(game: Game, builder: RomBuilder, roms: Decompressed
       record.mixedSource = true;
       for (const source of sources) {
         const base = native.sampleEntries[source.realBankId].romAddr;
-        const end = base + source.sampleOffset + source.size;
+        const start = Math.min(base, base + source.sampleOffset);
+        const end = Math.max(base, base + source.sampleOffset + source.size);
         for (const id of realBankIds(native.sampleEntries)) {
           const entry = native.sampleEntries[id];
-          if (entry.romAddr < end && entry.romAddr + entry.size > base)
+          if (entry.romAddr < end && entry.romAddr + entry.size > start)
             pinnedBanks.add(id);
         }
       }
@@ -458,7 +465,8 @@ function assignIntraGameDedupe(collection: LocalCollection) {
 }
 
 function fitsSampleBank(collection: LocalCollection, source: LocalSource) {
-  return source.sampleOffset + source.size <= resolvedBank(collection, source.realBankId).size;
+  return source.sampleOffset >= 0 &&
+      source.sampleOffset + source.size <= resolvedBank(collection, source.realBankId).size;
 }
 
 function mergeRanges(ranges: Range[]): Range[] {
@@ -589,9 +597,9 @@ function patchLocalSampleOffsets(collection: LocalCollection, layouts: Map<numbe
     for (const other of layouts.values())
       removed += removedBefore(other.removals, absolute - other.oldStart);
     const relocated = absolute - removed - layout.newStart;
-    if (relocated < 0 || relocated > 0xffffffff)
+    if (relocated < -0x80000000 || relocated > 0x7fffffff)
       throw new Error(`${collection.game}: relocated sample offset out of range`);
-    bufWriteU32BE(record.data, record.sampleOffsetInFont + 4, relocated);
+    bufWriteU32BE(record.data, record.sampleOffsetInFont + 4, relocated >>> 0);
   }
 }
 
@@ -876,7 +884,14 @@ type SampleProof = {
   crossBank: boolean;
 };
 
-type SampleProofs = { entries: Record<Game, AudioEntry[]>; proofs: SampleProof[] };
+type UnresolvedSampleProof = {
+  font: FontInstance; offset: number; header: Uint8Array; rawBank: number;
+};
+
+type SampleProofs = {
+  entries: Record<Game, AudioEntry[]>; proofs: SampleProof[];
+  unresolved: UnresolvedSampleProof[];
+};
 
 function resolveSample(font: FontInstance, offset: number, entries: Record<Game, AudioEntry[]>) {
   const info = sampleInfo(font.data, offset);
@@ -892,6 +907,7 @@ function snapshotSamples(builder: RomBuilder, roms: DecompressedRoms): SamplePro
   const native = { oot: originalNativeTables('oot', roms), mm: originalNativeTables('mm', roms) };
   const entries = { oot: native.oot.sampleEntries, mm: native.mm.sampleEntries };
   const proofs: SampleProof[] = [];
+  const unresolved: UnresolvedSampleProof[] = [];
   for (const font of allRuntimeFonts(builder, roms)) {
     const seen = new Set<number>();
     walkFontSamples(font, offset => {
@@ -904,20 +920,35 @@ function snapshotSamples(builder: RomBuilder, roms: DecompressedRoms): SamplePro
       const sample = resolveSample(font, offset, entries);
       if (!sample) return;
       const { entry } = sample.bank;
-      const crossBank = sample.sampleAddr + sample.size > entry.size;
+      const crossBank = sample.sampleAddr < 0 || sample.sampleAddr + sample.size > entry.size;
       const start = entry.romAddr + sample.sampleAddr;
-      if ((crossBank && font.kind !== 'custom') || start + sample.size > native[sample.game].audiotable.length)
+      const outsideTable = start < 0 || start + sample.size > native[sample.game].audiotable.length;
+      if (outsideTable && font.kind === 'custom') {
+        unresolved.push({
+          font, offset, header: font.data.slice(offset, offset + 0x10),
+          rawBank: font.metaData[font.metaOffset + 0x0a + sample.selector],
+        });
+        return;
+      }
+      if ((crossBank && font.kind !== 'custom') || outsideTable)
         throw new Error(`Sample outside Audiotable: ${font.key} (${sample.game} bank ${sample.bank.index}, header 0x${offset.toString(16)}, offset 0x${sample.sampleAddr.toString(16)}, size 0x${sample.size.toString(16)}, bank size 0x${entry.size.toString(16)}, table size 0x${native[sample.game].audiotable.length.toString(16)})`);
       const bytes = native[sample.game].audiotable.subarray(start, start + sample.size);
       proofs.push({ font, offset, codec: sample.codec, size: sample.size, bytes, crossBank });
     });
   }
-  return { entries, proofs };
+  return { entries, proofs, unresolved };
 }
 
 function verifySamples(verification: SampleProofs, builder: RomBuilder, layouts: Map<number, BankLayout>) {
   const tables = { oot: builder.fileByNameRequired('oot/Audiotable').data,
     mm: builder.fileByNameRequired('mm/Audiotable').data };
+  for (const proof of verification.unresolved) {
+    const info = sampleInfo(proof.font.data, proof.offset);
+    if (!info || info.selector > 1 ||
+        proof.font.metaData[proof.font.metaOffset + 0x0a + info.selector] !== proof.rawBank ||
+        !bytesEqual(proof.header, proof.font.data.subarray(proof.offset, proof.offset + 0x10)))
+      throw new Error(`Audio dedupe changed unresolved custom sample: ${proof.font.key} at 0x${proof.offset.toString(16)}`);
+  }
   for (const proof of verification.proofs) {
     const sample = resolveSample(proof.font, proof.offset, verification.entries);
     if (!sample || sample.codec !== proof.codec || sample.size !== proof.size)
@@ -928,7 +959,8 @@ function verifySamples(verification: SampleProofs, builder: RomBuilder, layouts:
     const base = layout?.newStart ?? entry.romAddr;
     const size = layout?.newSize ?? entry.size;
     const start = base + sample.sampleAddr;
-    if ((!proof.crossBank && sample.sampleAddr + sample.size > size) || start + sample.size > tables[sample.game].length ||
+    if ((!proof.crossBank && (sample.sampleAddr < 0 || sample.sampleAddr + sample.size > size)) ||
+        start < 0 || start + sample.size > tables[sample.game].length ||
         !bytesEqual(proof.bytes, tables[sample.game].subarray(start, start + sample.size)))
       throw new Error(`Audio dedupe changed sample bytes: ${proof.font.key} at 0x${proof.offset.toString(16)}`);
   }
