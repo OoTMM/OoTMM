@@ -1132,9 +1132,7 @@ static int addItemBeansMm(PlayState* play, u8 itemId, s16 gi, u16 param)
 static int addItemSwordOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
     int base;
-    int newMaster;
 
-    newMaster = param == 2 && !(gOotSave.info.inventory.equipment.swords & EQ_OOT_SWORD_MASTER);
     base = param;
     if (base > 3)
         base = 3;
@@ -1351,31 +1349,6 @@ static void addShieldMmRaw(MmShieldId shield, s32 progressive)
         gSharedCustomSave.mmProgressiveShields |= 2;
 }
 
-static s32 allShieldsShared(void)
-{
-    return
-        Config_Flag(CFG_SHARED_DEKU_SHIELD) && Config_Flag(CFG_SHARED_HYLIAN_SHIELD) &&
-        Config_Flag(CFG_SHARED_MIRROR_SHIELD) && (!Config_Flag(CFG_OOT_HERO_SHIELD) || Config_Flag(CFG_SHARED_HERO_SHIELD));
-}
-
-static s32 sharedShieldAdvancesOot(s32 sourceProgressive)
-{
-    if (!Config_Flag(CFG_OOT_PROGRESSIVE_SHIELDS))
-        return 0;
-    if (!Config_Flag(CFG_MM_PROGRESSIVE_SHIELDS))
-        return 1;
-    return sourceProgressive && allShieldsShared();
-}
-
-static s32 sharedShieldAdvancesMm(s32 sourceProgressive)
-{
-    if (!Config_Flag(CFG_MM_PROGRESSIVE_SHIELDS))
-        return 0;
-    if (!Config_Flag(CFG_OOT_PROGRESSIVE_SHIELDS))
-        return 1;
-    return sourceProgressive && allShieldsShared();
-}
-
 static void addShieldHeroOotRaw(void)
 {
     gSharedCustomSave.ootChildShields |=
@@ -1388,7 +1361,6 @@ static void addShieldHeroOotRaw(void)
     gOotChildShieldVariant = OOT_CHILD_SHIELD_HERO;
 #endif
 }
-
 
 static void addSharedProgressiveShield(u8 stage)
 {
@@ -2408,12 +2380,14 @@ u8 OotChildSword_GetOwnedMask(void)
 
 static int addItemSwordExtraOot(PlayState* play, u8 itemId, s16 gi, u16 param)
 {
-    u8 oldOwned;
-
     if (param >= 3)
         return 0;
 
+#if defined(GAME_OOT)
+    u8 oldOwned;
     oldOwned = gSharedCustomSave.extraSwordsOot & 0x07;
+#endif
+
     gSharedCustomSave.extraSwordsOot |= 1u << param;
     gOotSave.info.inventory.equipment.swords |= EQ_OOT_SWORD_KOKIRI;
 
