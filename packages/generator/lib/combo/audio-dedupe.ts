@@ -352,10 +352,10 @@ function collectLocalSamples(game: Game, builder: RomBuilder, roms: Decompressed
       throw new Error(`${font.key}: ${game} sample bank ${logicalBank} out of range`);
 
     const bank = resolveAudioEntry(native.sampleEntries, logicalBank);
-    if (info.sampleAddr + info.size > bank.entry.size)
-      throw new Error(`${font.key}: sample 0x${info.sampleAddr.toString(16)}+0x${info.size.toString(16)} outside ${game} sample bank ${logicalBank}`);
-
     const absolute = bank.entry.romAddr + info.sampleAddr;
+    if (absolute + info.size > native.audiotable.length ||
+        (font.kind !== 'custom' && info.sampleAddr + info.size > bank.entry.size))
+      throw new Error(`${font.key}: sample 0x${info.sampleAddr.toString(16)}+0x${info.size.toString(16)} outside ${game} Audiotable (bank ${logicalBank}, base 0x${bank.entry.romAddr.toString(16)}, bank size 0x${bank.entry.size.toString(16)}, table size 0x${native.audiotable.length.toString(16)})`);
     const source: LocalSource = {
       realBankId: bank.index, sampleOffset: info.sampleAddr, size: info.size, codec: info.codec,
       data: native.audiotable.subarray(absolute, absolute + info.size),
@@ -369,7 +369,15 @@ function collectLocalSamples(game: Game, builder: RomBuilder, roms: Decompressed
     if (sources.length === 1 && !record.mixedSource) record.source = sources[0];
     else if (sources.length) {
       record.mixedSource = true;
-      for (const source of sources) pinnedBanks.add(source.realBankId);
+      for (const source of sources) {
+        const base = native.sampleEntries[source.realBankId].romAddr;
+        const end = base + source.sampleOffset + source.size;
+        for (const id of realBankIds(native.sampleEntries)) {
+          const entry = native.sampleEntries[id];
+          if (entry.romAddr < end && entry.romAddr + entry.size > base)
+            pinnedBanks.add(id);
+        }
+      }
     }
   }
 
@@ -405,7 +413,8 @@ function assignIntraGameDedupe(collection: LocalCollection) {
   const candidates = new Map<string, { source: LocalSource; group: SampleRecord[] }[]>();
   const ordered = [...groupByPhysical(collection.records).values()].sort((a, b) => {
     const sa = a[0].source!, sb = b[0].source!;
-    return sa.realBankId - sb.realBankId || sa.sampleOffset - sb.sampleOffset;
+    return Number(!fitsSampleBank(collection, sa)) - Number(!fitsSampleBank(collection, sb)) ||
+        sa.realBankId - sb.realBankId || sa.sampleOffset - sb.sampleOffset;
   });
 
   for (const group of ordered) {
@@ -441,14 +450,15 @@ function assignIntraGameDedupe(collection: LocalCollection) {
       break;
     }
 
-    if (!redirected) {
+    if (!redirected && fitsSampleBank(collection, source)) {
       list.push({ source, group });
       candidates.set(key, list);
     }
   }
-}function rangeForSample(source: LocalSource, offset = source.sampleOffset, bankSize?: number): Range {
-  const start = offset & ~0xf, end = align16(offset + source.size);
-  return { start, end: bankSize === undefined ? end : Math.min(end, bankSize) };
+}
+
+function fitsSampleBank(collection: LocalCollection, source: LocalSource) {
+  return source.sampleOffset + source.size <= resolvedBank(collection, source.realBankId).size;
 }
 
 function mergeRanges(ranges: Range[]): Range[] {
@@ -475,29 +485,33 @@ function complementRanges(size: number, live: Range[]): Range[] {
 
 function buildLiveRanges(collection: LocalCollection) {
   const live = new Map<number, Range[]>();
-  const add = (bankId: number, range: Range) => pushMap(live, bankId, range);
+  const ids = realBankIds(collection.sampleEntries);
+  const addSample = (bankId: number, offset: number, size: number) => {
+    const origin = resolvedBank(collection, bankId);
+    const start = origin.romAddr + offset, end = start + size;
+    for (const id of ids) {
+      const bank = collection.sampleEntries[id];
+      const lo = Math.max(start, bank.romAddr) - bank.romAddr;
+      const hi = Math.min(end, bank.romAddr + bank.size) - bank.romAddr;
+      if (lo < hi)
+        pushMap(live, id, { start: lo & ~0xf, end: Math.min(align16(hi), bank.size) });
+    }
+  };
 
   for (const record of collection.records) {
     if (record.mixedSource) {
       for (const source of record.localSources.values())
-        add(source.realBankId, rangeForSample(source, source.sampleOffset, resolvedBank(collection, source.realBankId).size));
+        addSample(source.realBankId, source.sampleOffset, source.size);
       continue;
     }
     if (!record.source || record.foreignRedirect) continue;
     const source = record.source;
-    if (record.localBankRedirect) {
-      const target = record.localBankRedirect;
-      add(target.bankId, rangeForSample(
-          source, target.sampleOffset, resolvedBank(collection, target.bankId).size,
-      ));
-      continue;
-    }
-    add(source.realBankId, rangeForSample(
-        source, record.localRedirectOffset ?? source.sampleOffset, resolvedBank(collection, source.realBankId).size,
-    ));
+    const redirect = record.localBankRedirect;
+    addSample(redirect?.bankId ?? source.realBankId,
+        redirect?.sampleOffset ?? record.localRedirectOffset ?? source.sampleOffset, source.size);
   }
 
-  for (const real of realBankIds(collection.sampleEntries)) {
+  for (const real of ids) {
     const bank = collection.sampleEntries[real];
     if (collection.pinnedBanks.has(real)) live.set(real, [{ start: 0, end: bank.size }]);
     else {
@@ -570,7 +584,14 @@ function patchLocalSampleOffsets(collection: LocalCollection, layouts: Map<numbe
       record.data[record.sampleOffsetInFont] =
           (record.data[record.sampleOffsetInFont] & ~0x0c) | (redirect.selector << 2);
     }
-    bufWriteU32BE(record.data, record.sampleOffsetInFont + 4, target - removedBefore(layout.removals, target));
+    const absolute = layout.oldStart + target;
+    let removed = 0;
+    for (const other of layouts.values())
+      removed += removedBefore(other.removals, absolute - other.oldStart);
+    const relocated = absolute - removed - layout.newStart;
+    if (relocated < 0 || relocated > 0xffffffff)
+      throw new Error(`${collection.game}: relocated sample offset out of range`);
+    bufWriteU32BE(record.data, record.sampleOffsetInFont + 4, relocated);
   }
 }
 
@@ -603,7 +624,7 @@ function buildOotCanonicalIndex(collection: LocalCollection, layouts: Map<number
   for (const record of collection.records) {
     if (!record.source || record.mixedSource || protectedKeys.has(sourceKey(record.source))) continue;
     const source = record.source, layout = layouts.get(source.realBankId);
-    if (!layout) continue;
+    if (!layout || !fitsSampleBank(collection, source)) continue;
 
     const target = record.localRedirectOffset ?? source.sampleOffset;
     const offset = target - removedBefore(layout.removals, target);
@@ -852,6 +873,7 @@ function allRuntimeFonts(builder: RomBuilder, roms: DecompressedRoms): FontInsta
 
 type SampleProof = {
   font: FontInstance; offset: number; codec: number; size: number; bytes: Uint8Array;
+  crossBank: boolean;
 };
 
 type SampleProofs = { entries: Record<Game, AudioEntry[]>; proofs: SampleProof[] };
@@ -882,11 +904,12 @@ function snapshotSamples(builder: RomBuilder, roms: DecompressedRoms): SamplePro
       const sample = resolveSample(font, offset, entries);
       if (!sample) return;
       const { entry } = sample.bank;
-      if (sample.sampleAddr + sample.size > entry.size) throw new Error(`Sample outside bank: ${font.key}`);
+      const crossBank = sample.sampleAddr + sample.size > entry.size;
       const start = entry.romAddr + sample.sampleAddr;
+      if ((crossBank && font.kind !== 'custom') || start + sample.size > native[sample.game].audiotable.length)
+        throw new Error(`Sample outside Audiotable: ${font.key} (${sample.game} bank ${sample.bank.index}, header 0x${offset.toString(16)}, offset 0x${sample.sampleAddr.toString(16)}, size 0x${sample.size.toString(16)}, bank size 0x${entry.size.toString(16)}, table size 0x${native[sample.game].audiotable.length.toString(16)})`);
       const bytes = native[sample.game].audiotable.subarray(start, start + sample.size);
-      if (bytes.length !== sample.size) throw new Error(`Sample outside Audiotable: ${font.key}`);
-      proofs.push({ font, offset, codec: sample.codec, size: sample.size, bytes });
+      proofs.push({ font, offset, codec: sample.codec, size: sample.size, bytes, crossBank });
     });
   }
   return { entries, proofs };
@@ -905,7 +928,7 @@ function verifySamples(verification: SampleProofs, builder: RomBuilder, layouts:
     const base = layout?.newStart ?? entry.romAddr;
     const size = layout?.newSize ?? entry.size;
     const start = base + sample.sampleAddr;
-    if (sample.sampleAddr + sample.size > size || start + sample.size > tables[sample.game].length ||
+    if ((!proof.crossBank && sample.sampleAddr + sample.size > size) || start + sample.size > tables[sample.game].length ||
         !bytesEqual(proof.bytes, tables[sample.game].subarray(start, start + sample.size)))
       throw new Error(`Audio dedupe changed sample bytes: ${proof.font.key} at 0x${proof.offset.toString(16)}`);
   }

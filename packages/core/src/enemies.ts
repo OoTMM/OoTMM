@@ -961,6 +961,8 @@ export function scriptedMmTargetAllowed(target: EnemyDefinition, crossGame: bool
   if (target.arenaOnly || target.targetAllowed === false || enemyNeverShuffled(target.game, target.actorId) ||
     enemyCanRespawn(target.game, target.actorId, target.spawnParams) || enemyIsPerched(target.game, target.actorId, target.spawnParams))
     return false;
+  if (target.game === 'mm' && target.actorId === 0x16f && target.spawnParams !== 0x14)
+    return false;
   if (target.game === 'mm')
     return !target.foreignOnly && !!nativeEnemyOnDemandObjects('mm', target.actorId, target.spawnParams);
   return crossGame && !target.nativeOnly && foreignEnemyRuntimeReady('oot', target.actorId, target.spawnParams) &&

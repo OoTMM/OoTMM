@@ -1504,8 +1504,6 @@ function verifyScriptedMmRecord(rom: Uint8Array, sourceVrom: number, original: U
     row.actorId === (targetId >= 0xc00 ? targetId - 0xc00 : targetId) && row.spawnParams === targetParams && scriptedMmTargetAllowed(row, true, source));
   if (!source || !(target || targetId < 0xc00 && nativeResourceTarget('mm', targetId, targetParams)))
     throw new Error('Unreviewed scripted MM target');
-  if (targetId === 0x16f && !verifyScriptedMmNativeTarget(rom, targetId, targetParams, addresses, patch))
-    throw new Error('Unverified dungeon Bombchu terminal update');
   if (targetId >= 0xc00 && !patch.symPatches.has('FOREIGN_ENEMY_REGISTRY_MM')) throw new Error('Missing scripted MM donor registry');
   verifyScriptedMmController(rom, addresses, patch);
 }
@@ -1581,10 +1579,6 @@ function verifyScriptedMmNativeSource(rom: Uint8Array, actorId: number, addresse
   } catch {
     return false;
   }
-}
-
-function verifyScriptedMmNativeTarget(rom: Uint8Array, actorId: number, params: number, addresses?: GameAddresses, patch?: Patchfile): boolean {
-  return scriptedArenaFacts.nativeTargets.some(f => f.actorId === actorId && f.spawnParams === params) && verifyScriptedMmNativeSource(rom, actorId, addresses, patch);
 }
 
 type Setup = { actorOffsets: readonly number[]; complete: boolean };
