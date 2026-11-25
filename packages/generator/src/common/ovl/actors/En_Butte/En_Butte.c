@@ -183,7 +183,7 @@ static InitChainEntry sInitChain[] = {
 
 void EnButte_Init(Actor_EnButte* this, PlayState* play)
 {
-    this->xflag = Xflag_InitEx(&this->actor, play);
+    this->xflag = Xflag_Init(&this->actor, play);
 
     if (BUTTERFLY_GET(&this->actor) == BUTTERFLY_MINUS1)
         this->actor.params = BUTTERFLY_0;

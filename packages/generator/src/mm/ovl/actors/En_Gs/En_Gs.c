@@ -132,7 +132,7 @@ static InitChainEntry sInitChain[] = {
 void EnGs_Init(Actor* thisx, PlayState* play) {
     EnGs* this = (EnGs*)thisx;
 
-    this->xflag = Xflag_InitEx(thisx, play);
+    this->xflag = Xflag_Init(thisx, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
     this->unk_208 = -1;
     this->unk_204 = 1;
@@ -340,7 +340,7 @@ static void EnGs_SpawnFairy(EnGs* this, PlayState* play, int isBig)
 
     gossip = EnGs_ResolveClosest(play, this);
     id = Xflag_LookupSlice(gossip->xflag, isBig);
-    if (Xflag_IsValidEx(id))
+    if (Xflag_IsValid(id))
     {
         player = GET_PLAYER(play);
         spawnPos = player->actor.world.pos;

@@ -308,8 +308,8 @@ void EnIshi_Init(Actor* thisx, PlayState* play) {
     EnIshi* this = (EnIshi*)thisx;
     s16 type = PARAMS_GET_U(this->actor.params, 0, 1);
 
-    this->xflag = Xflag_InitEx(&this->actor, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->actor, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     Actor_ProcessInitChain(&this->actor, sInitChains[type]);

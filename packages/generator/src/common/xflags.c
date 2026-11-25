@@ -246,7 +246,7 @@ static int Xflag_InitQuery(XflagQuery* xf, Actor* actor, PlayState* play)
     return TRUE;
 }
 
-XflagID Xflag_InitEx(Actor* actor, PlayState* play)
+XflagID Xflag_Init(Actor* actor, PlayState* play)
 {
     XflagQuery xf;
 
@@ -262,13 +262,13 @@ XflagID Xflag_InitShuffled(Actor* actor, PlayState* play)
 {
     XflagID id;
 
-    id = Xflag_InitEx(actor, play);
-    if (!Xflag_IsShuffledEx(id))
+    id = Xflag_Init(actor, play);
+    if (!Xflag_IsShuffled(id))
         return XFLAGID_NONE;
     return id;
 }
 
-int Xflag_IsValidEx(XflagID id)
+int Xflag_IsValid(XflagID id)
 {
     ComboItemOverride o;
 
@@ -279,7 +279,7 @@ int Xflag_IsValidEx(XflagID id)
     return (o.gi != GI_NONE);
 }
 
-int Xflag_IsShuffledEx(XflagID id)
+int Xflag_IsShuffled(XflagID id)
 {
-    return Xflag_IsValidEx(id) && !Xflag_Get(id);
+    return Xflag_IsValid(id) && !Xflag_Get(id);
 }

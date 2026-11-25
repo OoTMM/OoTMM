@@ -142,8 +142,8 @@ static InitChainEntry sInitChain[] = {
 void BgIceShelter_Init(Actor_BgIceShelter* this, PlayState* play) {
     s16 type = BGICESHELTER_GET_TYPE(&this->dyna.actor);
 
-    this->xflag = Xflag_InitEx(&this->dyna.actor, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->dyna.actor, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);

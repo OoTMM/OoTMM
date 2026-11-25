@@ -92,7 +92,7 @@ static int ObjFlowerpot_IsShuffled(Actor_ObjFlowerpot* this, int slice)
     XflagID id;
 
     id = Xflag_LookupSlice(this->xflag, slice);
-    return Xflag_IsShuffledEx(id);
+    return Xflag_IsShuffled(id);
 }
 
 static void ObjFlowerpot_ShuffledItemOverride(ComboItemOverride* o, Actor_ObjFlowerpot* this, int slice)
@@ -425,7 +425,7 @@ void func_80A1C62C(Actor_ObjFlowerpot* this, PlayState* play) {
 
 void ObjFlowerpot_Init(Actor_ObjFlowerpot* this, PlayState* play)
 {
-    this->xflag = Xflag_InitEx(&this->actor, play);
+    this->xflag = Xflag_Init(&this->actor, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
     if (this->actor.shape.rot.y == 0) {

@@ -44,7 +44,7 @@ void func_80C25360(ObjSwprize* this, Vec3f* vec) {
 
 static Actor* ObjSwprize_DropCustom(PlayState* play, Vec3f* pos, XflagID xflag, s32 params)
 {
-    if (Xflag_IsShuffledEx(xflag))
+    if (Xflag_IsShuffled(xflag))
         return (Actor*)EnItem00_DropCustomEx(play, pos, xflag, XFDROP_NONE);
 
     return Item_DropCollectible(play, pos, params);
@@ -90,12 +90,12 @@ void ObjSwprize_Init(Actor* thisx, PlayState* play) {
     XflagID slice;
     u8 valid;
 
-    this->xflag = Xflag_InitEx(thisx, play);
+    this->xflag = Xflag_Init(thisx, play);
     valid = 0;
     for (int i = 0; i < 3; ++i)
     {
         slice = Xflag_LookupSlice(this->xflag, i);
-        if (Xflag_IsShuffledEx(slice))
+        if (Xflag_IsShuffled(slice))
         {
             valid = 1;
             break;

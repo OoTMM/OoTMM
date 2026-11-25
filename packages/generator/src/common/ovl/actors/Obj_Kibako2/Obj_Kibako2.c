@@ -354,8 +354,8 @@ static void ObjKibako2_Init(Actor_ObjKibako2* this, PlayState* play)
     CollisionHeader* colHeader;
     u32 bgId;
 
-    this->xflag = Xflag_InitEx(&this->dyna.actor, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->dyna.actor, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     colHeader = NULL;
@@ -376,8 +376,8 @@ static void ObjKibako2_Init(Actor_ObjKibako2* this, PlayState* play)
 {
     s32 contents;
 
-    this->xflag = Xflag_InitEx(&this->dyna.actor, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->dyna.actor, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     contents = KIBAKO2_CONTENTS(this);

@@ -92,11 +92,11 @@ void EnHitTag_Init(Actor* thisx, PlayState* play) {
 
     /* Xflag */
     valid = 0;
-    this->xflag = Xflag_InitEx(thisx, play);
+    this->xflag = Xflag_Init(thisx, play);
     for (int i = 0; i < 3; ++i)
     {
         xflag = Xflag_LookupSlice(this->xflag, i);
-        if (Xflag_IsShuffledEx(xflag))
+        if (Xflag_IsShuffled(xflag))
         {
             valid = 1;
             break;
@@ -137,7 +137,7 @@ void EnHitTag_WaitForHit(EnHitTag* this, PlayState* play) {
 
         for (i = 0; i < 3; i++) {
             xflag = Xflag_LookupSlice(this->xflag, i);
-            if (Xflag_IsShuffledEx(xflag))
+            if (Xflag_IsShuffled(xflag))
             {
                 EnItem00_DropCustomEx(play, &dropLocation, xflag, XFDROP_NONE);
             }

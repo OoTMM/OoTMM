@@ -216,8 +216,8 @@ void ObjTsubo_Init(Actor_ObjTsubo* this, PlayState* play)
     }
 
     /* Set the extended properties */
-    this->xflag = Xflag_InitEx(&this->actor, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->actor, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     type = OBJ_TSUBO_GET_TYPE(&this->actor);

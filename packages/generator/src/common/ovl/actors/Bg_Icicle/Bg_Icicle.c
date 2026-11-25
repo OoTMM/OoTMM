@@ -80,8 +80,8 @@ static int BgIcicle_DropCustom(Actor_BgIcicle* this, PlayState* play)
 void BgIcicle_Init(Actor* thisx, PlayState* play) {
     Actor_BgIcicle* this = (Actor_BgIcicle*)thisx;
 
-    this->xflag = Xflag_InitEx(thisx, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(thisx, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
 
 #if defined(GAME_OOT)

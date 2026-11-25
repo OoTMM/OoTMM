@@ -151,8 +151,8 @@ void ObjComb_ChooseItemDrop(Actor_ObjComb* this, PlayState* play)
 void ObjComb_Init(Actor_ObjComb* this, PlayState* play)
 {
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    this->xflag = Xflag_InitEx(&this->actor, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->actor, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
     Collider_InitJntSph(play, &this->collider);
     Collider_SetJntSph(play, &this->collider, &this->actor, &sJntSphInit, this->colliderItems);
@@ -546,8 +546,8 @@ void ObjComb_Init(Actor_ObjComb* this, PlayState* play)
     s32 sp2C = OBJCOMB_GET_8000(this) | OBJCOMB_GET_80(this);
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    this->xflag = Xflag_InitEx(&this->actor, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->actor, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
     Collider_InitJntSph(play, &this->collider);
 

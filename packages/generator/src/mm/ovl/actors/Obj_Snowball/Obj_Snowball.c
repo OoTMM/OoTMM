@@ -451,8 +451,8 @@ void ObjSnowball_Init(Actor_ObjSnowball* this, PlayState* play) {
     s32 sp34;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    this->xflag = Xflag_InitEx(&this->actor, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->actor, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     sp34 = sp40 == 1;

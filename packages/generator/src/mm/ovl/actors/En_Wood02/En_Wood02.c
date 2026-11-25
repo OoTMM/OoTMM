@@ -189,9 +189,9 @@ void EnWood02_Init(Actor* thisx, PlayState* play) {
     f32 floorY;
     s16 extraRot;
 
-    this->xflagSpawner = Xflag_InitEx(thisx, play);
+    this->xflagSpawner = Xflag_Init(thisx, play);
     this->xflag = this->xflagSpawner;
-    if (!Xflag_IsValidEx(this->xflag))
+    if (!Xflag_IsValid(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     this->actor.world.rot.z = 0;

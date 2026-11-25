@@ -106,7 +106,7 @@ void ObjGrassUnit_Init(Actor* this, PlayState* play2) {
     XflagID xfBase;
     XflagID xfIndex;
 
-    xfBase = Xflag_InitEx(this, play);
+    xfBase = Xflag_Init(this, play);
 
     if ((sGrassManager == NULL) && !ObjGrassUnit_SpawnObjGrass(this, play)) {
         Actor_Kill(this);
@@ -139,7 +139,7 @@ void ObjGrassUnit_Init(Actor* this, PlayState* play2) {
 
     for (i = 0; i < grassPattern->count; i++) {
         xfIndex = Xflag_LookupSlice(xfBase, i);
-        if (!Xflag_IsShuffledEx(xfIndex))
+        if (!Xflag_IsShuffled(xfIndex))
             xfIndex = XFLAGID_NONE;
 
         grassElem = &grassGroup->elements[grassGroup->count];

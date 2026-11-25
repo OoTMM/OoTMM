@@ -55,8 +55,8 @@ void ShotSun_Init(Actor* thisx, PlayState* play) {
     ShotSun* this = (ShotSun*)thisx;
     s32 params;
 
-    this->xflag = Xflag_InitEx(&this->actor, play);
-    if (!Xflag_IsValidEx(this->xflag))
+    this->xflag = Xflag_Init(&this->actor, play);
+    if (!Xflag_IsValid(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     params = PARAMS_GET_U(this->actor.params, 0, 8);

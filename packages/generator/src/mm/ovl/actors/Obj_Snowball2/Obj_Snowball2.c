@@ -300,8 +300,8 @@ static InitChainEntry sInitChain[] = {
 };
 
 void ObjSnowball2_Init(Actor_ObjSnowball2* this, PlayState* play) {
-    this->xflag = Xflag_InitEx(&this->actor, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->actor, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     Actor_ProcessInitChain(&this->actor, sInitChain);

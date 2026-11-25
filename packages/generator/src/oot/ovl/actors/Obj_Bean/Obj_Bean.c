@@ -493,7 +493,7 @@ void ObjBean_Init(Actor* thisx, PlayState* play) {
     s32 path;
     ObjBean* this = (ObjBean*)thisx;
 
-    sXflag = Xflag_InitEx(thisx, play);
+    sXflag = Xflag_Init(thisx, play);
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
     if (gOotSave.age == AGE_ADULT) {
@@ -724,7 +724,7 @@ void ObjBean_GrowWaterPhase3(ObjBean* this, PlayState* play) {
 
             for (i = 0; i < 3; i++) {
                 xflag = Xflag_LookupSlice(sXflag, i);
-                if (Xflag_IsShuffledEx(xflag))
+                if (Xflag_IsShuffled(xflag))
                     EnItem00_DropCustomEx(play, &itemDropPos, xflag, XFDROP_NONE);
                 else
                     Item_DropCollectible(play, &itemDropPos, ITEM00_FLEXIBLE);

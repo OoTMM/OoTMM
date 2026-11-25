@@ -21,16 +21,15 @@ typedef struct
 }
 XflagQuery;
 
-/* New API */
 XflagID Xflag_Lookup(const XflagQuery* xf);
 XflagID Xflag_LookupSlice(XflagID id, int sliceId);
-XflagID Xflag_InitEx(Actor* actor, PlayState* play);
+XflagID Xflag_Init(Actor* actor, PlayState* play);
 XflagID Xflag_InitShuffled(Actor* actor, PlayState* play);
 int Xflag_Get(XflagID id);
 void Xflag_Set(XflagID id);
 void Xflag_ItemQuery(ComboItemQuery* q, XflagID id, s16 gi);
 void Xflag_ItemOverride(ComboItemOverride* o, XflagID id, s16 gi);
-int Xflag_IsValidEx(XflagID id);
-int Xflag_IsShuffledEx(XflagID id);
+int Xflag_IsValid(XflagID id);
+int Xflag_IsShuffled(XflagID id);
 
 #endif /* COMBO_XFLAGS_H */

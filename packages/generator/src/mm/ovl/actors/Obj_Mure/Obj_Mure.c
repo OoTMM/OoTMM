@@ -70,7 +70,7 @@ s32 func_808D7928(Actor_ObjMure* this, PlayState* play)
 
 void ObjMure_Init(Actor_ObjMure* this, PlayState* play)
 {
-    this->xflag = Xflag_InitEx(&this->actor, play);
+    this->xflag = Xflag_Init(&this->actor, play);
 
     this->chNum = OBJ_MURE_GET_CHNUM(&this->actor);
     this->ptn = OBJ_MURE_GET_PTN(&this->actor);

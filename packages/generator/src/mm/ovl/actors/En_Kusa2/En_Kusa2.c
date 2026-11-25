@@ -328,7 +328,7 @@ void func_80A5BD14(EnKusa2* this, PlayState* play, s32 arg2) {
             kusa2->unk_1BC = 8;
         }
 
-        if (Xflag_IsShuffledEx(sXflagCurrent)) {
+        if (Xflag_IsShuffled(sXflagCurrent)) {
             EnItem00_DropCustomEx(play, &this->actor.world.pos, sXflagCurrent, XFDROP_NONE);
         } else {
             Item_DropCollectible(play, &this->actor.world.pos, D_80A5EB24[kusa2->unk_1BC]);
@@ -864,7 +864,7 @@ void EnKusa2_Init(Actor* thisx, PlayState* play) {
     if (!ENKUSA2_GET_1(&this->actor)) {
         sLastFrameCount = play->state.frameCount - 1;
         sDrawIndex = 0;
-        sXflagBase = Xflag_InitEx(thisx, play);
+        sXflagBase = Xflag_Init(thisx, play);
         EnKusa2_UpdateCurrentXflag(0);
         this->actor.update = func_80A5E604;
         this->actor.draw = NULL;

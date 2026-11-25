@@ -136,8 +136,8 @@ void EnItem00_InitWrapper(Actor_EnItem00* this, PlayState* play)
     this->isExtendedMajor = 0;
 
     /* Init the xflag */
-    this->xflag = Xflag_InitEx(&this->actor, play);
-    if (Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->actor, play);
+    if (Xflag_IsShuffled(this->xflag))
     {
         Xflag_ItemOverride(&o, this->xflag, 0);
         this->isExtended = 1;

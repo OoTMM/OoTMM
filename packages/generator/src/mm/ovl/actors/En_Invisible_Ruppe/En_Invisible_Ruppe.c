@@ -104,8 +104,8 @@ static void EnInvisibleRupee_DrawGlitter(EnInvisibleRuppe* this, PlayState* play
 void EnInvisibleRuppe_Init(Actor* thisx, PlayState* play) {
     EnInvisibleRuppe* this = (EnInvisibleRuppe*)thisx;
 
-    this->xflag = Xflag_InitEx(thisx, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(thisx, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
     else
         this->actor.draw = EnInvisibleRupee_DrawGlitter;

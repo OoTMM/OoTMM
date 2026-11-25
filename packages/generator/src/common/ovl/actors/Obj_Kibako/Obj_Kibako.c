@@ -140,8 +140,8 @@ void ObjKibako_Init(Actor_ObjKibako* this, PlayState* play)
     this->actor.draw = ObjKibako_Draw;
     Actor_ProcessInitChain(&this->actor, sInitChain);
 
-    this->xflag = Xflag_InitEx(&this->actor, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->actor, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     this->actor.gravity = -1.2f;
@@ -466,8 +466,8 @@ void ObjKibako_Init(Actor_ObjKibako* this, PlayState* play)
 {
     s32 objectIndex;
 
-    this->xflag = Xflag_InitEx(&this->actor, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->actor, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     objectIndex = KIBAKO_BANK_INDEX(this);

@@ -162,7 +162,7 @@ static int EnElf_IsShuffled(Actor_EnElf* this, PlayState* play)
     ComboItemQuery q;
     ComboItemOverride o;
 
-    if (!Xflag_IsValidEx(this->xflag))
+    if (!Xflag_IsValid(this->xflag))
         return FALSE;
     Xflag_ItemQuery(&q, this->xflag, this->extendedGi);
     if (Xflag_Get(this->xflag))
@@ -183,7 +183,7 @@ void EnElf_InitWrapper(Actor_EnElf* this, PlayState* play)
     }
     else
     {
-        this->xflag = Xflag_InitEx(&this->base, play);
+        this->xflag = Xflag_Init(&this->base, play);
     }
 
     init = actorAddr(ACTOR_EN_ELF, EN_ELF_INIT_VROM);

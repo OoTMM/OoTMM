@@ -39,7 +39,7 @@ int ObjMure3_IsAnyShuffled(Actor_ObjMure3* this, PlayState* play)
     for (s16 i = 0; i < count; ++i)
     {
         id = Xflag_LookupSlice(this->xflag, i);
-        if (Xflag_IsShuffledEx(id))
+        if (Xflag_IsShuffled(id))
         {
             return TRUE;
         }
@@ -168,7 +168,7 @@ void ObjMure3_DespawnChildren(Actor_ObjMure3* this, PlayState* play)
 void ObjMure3_Init(Actor* thisx, PlayState* play) {
     Actor_ObjMure3* this = (Actor_ObjMure3*)thisx;
 
-    this->xflag = Xflag_InitEx(&this->actor, play);
+    this->xflag = Xflag_Init(&this->actor, play);
     if (!ObjMure3_IsAnyShuffled(this, play) && Flags_GetSwitch(play, OBJMURE3_GET_SWITCH_FLAG(&this->actor))) {
         Actor_Kill(&this->actor);
         return;

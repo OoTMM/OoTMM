@@ -225,7 +225,7 @@ static InitChainEntry sInitChain[] = {
 
 void ObjMure2_Init(Actor_ObjMure2* this, PlayState* play)
 {
-    this->xflag = Xflag_InitEx(&this->actor, play);
+    this->xflag = Xflag_Init(&this->actor, play);
     Actor_ProcessInitChain(&this->actor, sInitChain);
     if (play->csCtx.state != CS_STATE_IDLE)
         this->actor.cullingVolumeDistance += 1200.0f;

@@ -196,8 +196,8 @@ s32 ObjHamishi_IsUnderwater(Actor_ObjHamishi* this, PlayState* play) {
 void ObjHamishi_Init(Actor_ObjHamishi* this, PlayState* play) {
 
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    this->xflag = Xflag_InitEx(&this->actor, play);
-    if (!Xflag_IsShuffledEx(this->xflag))
+    this->xflag = Xflag_Init(&this->actor, play);
+    if (!Xflag_IsShuffled(this->xflag))
         this->xflag = XFLAGID_NONE;
 
     if (play->csCtx.state != CS_STATE_IDLE) {
