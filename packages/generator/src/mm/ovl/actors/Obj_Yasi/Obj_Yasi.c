@@ -35,7 +35,7 @@ static InitChainEntry sInitChain[] = {
 void ObjYasi_Init(Actor* thisx, PlayState* play) {
     ObjYasi* this = (ObjYasi*)thisx;
 
-    Xflag_Init(&this->xflag, thisx, play);
+    this->xflag = Xflag_InitShuffled(thisx, play);
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
     DynaPolyActor_Init(&this->dyna, 0);
@@ -57,9 +57,9 @@ void ObjYasi_Destroy(Actor* thisx, PlayState* play) {
 
 static int ObjYasi_DropCustom(ObjYasi* this, PlayState* play)
 {
-    if (Xflag_IsShuffled(&this->xflag))
+    if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustom(play, &this->dyna.actor.world.pos, &this->xflag);
+        EnItem00_DropCustomEx(play, &this->dyna.actor.world.pos, this->xflag, XFDROP_NONE);
         return true;
     }
 
@@ -70,6 +70,9 @@ void ObjYasi_Update(Actor* thisx, PlayState* play) {
     ObjYasi* this = (ObjYasi*)thisx;
     s16 temp;
     Vec3f dropPos;
+
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     if (this->dyna.actor.home.rot.z != 0) {
         if (!ObjYasi_DropCustom(this, play) && CAN_DROP_NUT(thisx)) {
@@ -118,7 +121,7 @@ void ObjYasi_Draw(Actor* thisx, PlayState* play) {
     Gfx_DrawDListOpa(play, gPalmTreeDL);
 
     OPEN_DISPS(play->state.gfxCtx);
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (this->xflag == XFLAGID_NONE)
     {
         gSPDisplayList(POLY_OPA_DISP++, sDisplayListNuts);
     }
@@ -126,7 +129,7 @@ void ObjYasi_Draw(Actor* thisx, PlayState* play) {
     {
         ComboItemOverride o;
 
-        comboXflagItemOverride(&o, &this->xflag, 0);
+        Xflag_ItemOverride(&o, this->xflag, GI_NONE);
         Matrix_Translate(this->dyna.actor.world.pos.x + 5.f, this->dyna.actor.world.pos.y + 290.f, this->dyna.actor.world.pos.z, MTXMODE_NEW);
         Matrix_Scale(0.5f, 0.5f, 0.5f, MTXMODE_APPLY);
         Matrix_RotateY(this->dyna.actor.shape.rot.y * (M_PI / 0x8000), MTXMODE_APPLY);
