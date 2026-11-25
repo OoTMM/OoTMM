@@ -330,7 +330,10 @@ void EnIshi_DropItem(EnIshi* this, PlayState* play) {
     pos.y += 20.0f;
 
     if (this->xflag != XFLAGID_NONE) {
-        EnItem00_DropCustomEx(play, &pos, this->xflag, XFDROP_NO_INERTIA);
+        if (ENISHI_GET_SIZE_FLAG(&this->actor) == ISHI_SIZE_SILVER_BOULDER)
+            EnItem00_DropCustomEx(play, &pos, this->xflag, XFDROP_NO_INERTIA);
+        else
+            EnIshi_DropCustom(this, play);
         return;
     }
 

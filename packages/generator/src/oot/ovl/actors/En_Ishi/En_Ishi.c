@@ -234,12 +234,16 @@ void EnIshi_SpawnDustLarge(EnIshi* this, PlayState* play) {
 
 void EnIshi_DropCollectible(EnIshi* this, PlayState* play) {
     s16 dropParams;
-    Vec3f pos = GET_PLAYER(play)->actor.world.pos;
+    s32 isBoulder = PARAMS_GET_U(this->actor.params, 0, 1) == ROCK_LARGE;
+    s32 outOfBounds = this->actor.world.pos.y < this->actor.home.pos.y - 1000.0f;
+    Vec3f pos = isBoulder ? GET_PLAYER(play)->actor.world.pos :
+        (outOfBounds ? this->actor.home.pos : this->actor.world.pos);
 
-    pos.y += 20.0f;
+    if (isBoulder)
+        pos.y += 20.0f;
     if (this->xflag != XFLAGID_NONE)
     {
-        EnItem00_DropCustomEx(play, &pos, this->xflag, XFDROP_NO_INERTIA);
+        EnItem00_DropCustomEx(play, &pos, this->xflag, (isBoulder || outOfBounds) ? XFDROP_NO_INERTIA : XFDROP_NONE);
         return;
     }
 
