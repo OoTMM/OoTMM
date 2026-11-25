@@ -36,7 +36,7 @@ void Xflag_InitSystem(void)
     sCacheIndex = 0;
 }
 
-static u32 Xflag_GetKey(const Xflag* xf)
+static u32 Xflag_GetKey(const XflagQuery* xf)
 {
     u32 key;
 
@@ -100,6 +100,19 @@ XflagID Xflag_LookupKey(u32 key)
     return cartId;
 }
 
+XflagID Xflag_Lookup(const XflagQuery* xf)
+{
+    XflagID id;
+    u32 key;
+
+    if (xf->sceneId == 0xff)
+        return XFLAGID_NONE;
+    key = Xflag_GetKey(xf);
+    id = Xflag_LookupKey(key);
+    id = Xflag_LookupSlice(id, xf->sliceId);
+    return id;
+}
+
 XflagID Xflag_LookupSlice(XflagID id, int sliceId)
 {
     u32 key;
@@ -111,19 +124,6 @@ XflagID Xflag_LookupSlice(XflagID id, int sliceId)
 
     key = 0x40000000 | ((sliceId & 0x3f) << 16) | id;
     return Xflag_LookupKey(key);
-}
-
-XflagID Xflag_Lookup(const Xflag* xf)
-{
-    XflagID id;
-    u32 key;
-
-    if (xf->sceneId == 0xff)
-        return XFLAGID_NONE;
-    key = Xflag_GetKey(xf);
-    id = Xflag_LookupKey(key);
-    id = Xflag_LookupSlice(id, xf->sliceId);
-    return id;
 }
 
 int Xflag_Get(XflagID id)
@@ -138,16 +138,6 @@ void Xflag_Set(XflagID id)
     if (id == XFLAGID_NONE)
         return;
     BITMAP8_SET(gSharedCustomSave.xflags, id);
-}
-
-int Xflag_GetIndirect(const Xflag* xf)
-{
-    return Xflag_Get(Xflag_Lookup(xf));
-}
-
-void Xflag_SetIndirect(const Xflag* xf)
-{
-    Xflag_Set(Xflag_Lookup(xf));
 }
 
 void Xflag_ItemQuery(ComboItemQuery* q, XflagID id, s16 gi)
@@ -174,51 +164,11 @@ void Xflag_ItemOverride(ComboItemOverride* o, XflagID id, s16 gi)
     comboItemOverride(o, &q);
 }
 
-void comboXflagItemQuery(ComboItemQuery* q, const Xflag* xf, s16 gi)
-{
-    XflagID id;
-
-    id = Xflag_Lookup(xf);
-    Xflag_ItemQuery(q, id, gi);
-}
-
-void comboXflagItemOverride(ComboItemOverride* o, const Xflag* xf, s16 gi)
-{
-    ComboItemQuery q;
-
-    comboXflagItemQuery(&q, xf, gi);
-    comboItemOverride(o, &q);
-}
-
-XflagID Xflag_InitEx(Actor* actor, PlayState* play)
-{
-    Xflag xf;
-
-    if (g.xflagOverride)
-        return g.xflagId;
-
-    Xflag_Init(&xf, actor, play);
-    return Xflag_Lookup(&xf);
-}
-
-XflagID Xflag_InitShuffled(Actor* actor, PlayState* play)
-{
-    XflagID id;
-
-    id = Xflag_InitEx(actor, play);
-    if (!Xflag_IsShuffledEx(id))
-        return XFLAGID_NONE;
-    return id;
-}
-
-int Xflag_Init(Xflag* xf, Actor* actor, PlayState* play)
+static int Xflag_InitQuery(XflagQuery* xf, Actor* actor, PlayState* play)
 {
     /* Check for an actor index of 0xff, meaning NO XFLAG */
     if (actor->actorIndex == 0xff)
-    {
-        Xflag_Clear(xf);
         return FALSE;
-    }
 
     xf->sceneId = play->sceneId;
     xf->setupId = g.sceneSetupId;
@@ -296,22 +246,26 @@ int Xflag_Init(Xflag* xf, Actor* actor, PlayState* play)
     return TRUE;
 }
 
-int Xflag_IsValid(Xflag* xf)
+XflagID Xflag_InitEx(Actor* actor, PlayState* play)
 {
-    ComboItemOverride o;
+    XflagQuery xf;
 
-    /* Fast check */
-    if (xf->sceneId == 0xff)
-        return FALSE;
+    if (g.xflagOverride)
+        return g.xflagId;
 
-    comboXflagItemOverride(&o, xf, GI_NONE);
-    if (o.gi == GI_NONE)
-    {
-        xf->sceneId = 0xff;
-        return FALSE;
-    }
+    if (!Xflag_InitQuery(&xf, actor, play))
+        return XFLAGID_NONE;
+    return Xflag_Lookup(&xf);
+}
 
-    return TRUE;
+XflagID Xflag_InitShuffled(Actor* actor, PlayState* play)
+{
+    XflagID id;
+
+    id = Xflag_InitEx(actor, play);
+    if (!Xflag_IsShuffledEx(id))
+        return XFLAGID_NONE;
+    return id;
 }
 
 int Xflag_IsValidEx(XflagID id)
@@ -325,21 +279,7 @@ int Xflag_IsValidEx(XflagID id)
     return (o.gi != GI_NONE);
 }
 
-int Xflag_IsShuffled(Xflag* xf)
-{
-    return Xflag_IsValid(xf) && !Xflag_GetIndirect(xf);
-}
-
 int Xflag_IsShuffledEx(XflagID id)
 {
     return Xflag_IsValidEx(id) && !Xflag_Get(id);
-}
-
-void Xflag_Clear(Xflag* xf)
-{
-    xf->sceneId = 0xff;
-    xf->setupId = 0;
-    xf->roomId = 0;
-    xf->sliceId = 0;
-    xf->id = 0;
 }

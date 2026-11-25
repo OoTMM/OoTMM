@@ -2,12 +2,9 @@
 
 static void ComboPlay_SpawnLayoutDependantRupee(PlayState* play, float x, float y, float z, s16 params, u8 actorIndex)
 {
-    Xflag xf;
-    Xflag_Clear(&xf);
+    XflagQuery xf = {};
     xf.sceneId = play->sceneId;
     xf.roomId = 0x02;
-    xf.sliceId = 0;
-    xf.setupId = 0;
     xf.id = actorIndex;
 
     g.xflagOverride = TRUE;

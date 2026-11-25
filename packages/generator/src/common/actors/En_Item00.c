@@ -300,19 +300,3 @@ Actor_EnItem00* EnItem00_DropCustomPlayerEx(PlayState* play, XflagID id)
     pos.y += 20.0f;
     return EnItem00_DropCustomEx(play, &pos, id, XFDROP_NO_INERTIA);
 }
-
-Actor_EnItem00* EnItem00_DropCustom(PlayState* play, const Vec3f* pos, const Xflag* xflag)
-{
-    XflagID id;
-
-    id = Xflag_Lookup(xflag);
-    return EnItem00_DropCustomEx(play, pos, id, XFDROP_NONE);
-}
-
-Actor_EnItem00* EnItem00_DropCustomNoInertia(PlayState* play, const Vec3f* pos, const Xflag* xflag)
-{
-    XflagID id;
-
-    id = Xflag_Lookup(xflag);
-    return EnItem00_DropCustomEx(play, pos, id, XFDROP_NO_INERTIA);
-}
