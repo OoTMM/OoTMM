@@ -283,6 +283,8 @@ function applyExactOotEnemizer(roms: DecompressedRoms, addresses: GameAddresses,
         continue;
       }
       const original = resolved.data.subarray(resolved.offset, resolved.offset + 16);
+      if (ootActorKey(key) === ootActorKey(choice.location))
+        choice.sourceParams = bufReadU16BE(original, 14);
       if (enemyKeepsNativeEncounter('oot', bufReadU16BE(original, 0), bufReadU16BE(original, 14),
         { ...enemyDefinition(row.target), spawnParams: choice.targetParams })) continue;
       if (!resolved.mq) {
