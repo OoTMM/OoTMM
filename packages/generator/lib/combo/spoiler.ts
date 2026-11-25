@@ -3,7 +3,7 @@ import type { PlayerItem, LogicResult, HintGossipFoolish, HintGossipPath, HintGo
 
 import { sortBy } from 'lodash-es';
 import { ENTRANCES, hintLocations, SCENES, ENEMY_LOGIC_MM_ROOMS } from '@ootmm/data';
-import { SETTINGS, TRICKS, MM_GENERIC_GROTTOS, exportSettings, regionData, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS, enemyDefinition, ENEMY_GOLD_SOURCES, OOT_DESERT_LEEVER_SLOTS, OOT_FIELD_STALCHILD_SLOTS, OOT_FOREST_BOW_SLOTS, OOT_BURIAL_ENEMY_SLOTS, OOT_ENCOUNTER_MEMORY_ROOMS } from '@ootmm/core';
+import { SETTINGS, TRICKS, MM_GENERIC_GROTTOS, exportSettings, regionData, SONG_EVENT_LOCATIONS_OOT, SONG_EVENT_LOCATIONS_MM, SONG_EVENT_SONGS, enemyDefinition, ENEMIES, ENEMY_GOLD_SOURCES, OOT_DESERT_LEEVER_SLOTS, OOT_FIELD_STALCHILD_SLOTS, OOT_FOREST_BOW_SLOTS, OOT_BURIAL_ENEMY_SLOTS, OOT_ENCOUNTER_MEMORY_ROOMS } from '@ootmm/core';
 import { DUNGEONS_BY_KEY, PATH_EVENT_DATA, BOSS_METADATA_BY_DUNGEON, ANALYSIS_EVENTS, WORLD_FLAGS, locationData, makeLocation } from '@ootmm/logic';
 
 import { itemName } from './names';
@@ -663,6 +663,86 @@ const ENEMY_SPAWNER_SLOTS = new Map([
   ...OOT_DESERT_LEEVER_SLOTS, ...OOT_FIELD_STALCHILD_SLOTS, ...OOT_FOREST_BOW_SLOTS, ...OOT_BURIAL_ENEMY_SLOTS,
 ].map(slot => [slot.key, slot]));
 
+function enemySpoilerHex(value: number): string {
+  return `0x${(value & 0xffff).toString(16).padStart(4, '0')}`;
+}
+
+function enemySpoilerParams(game: string, actorId: number, params: number | undefined,
+  fallback: string, isSource: boolean): { name: string; detail: string } {
+  if (params === undefined) return { name: fallback, detail: 'authored parameters unavailable' };
+  const p = params & 0xffff;
+  const lo = p & 0xff, hi = p >>> 8;
+  const fields: string[] = [];
+  let name: string | undefined;
+  const forms = (names: Readonly<Record<number, string>>, value: number, field = 'form') => {
+    name = names[value];
+    fields.push(`${field}: ${name ?? 'unrecognized'} (${enemySpoilerHex(value)})`);
+  };
+  if (game === 'oot' && actorId === 0x69) {
+    forms({ 0xff: 'Blue Bubble', 0xfe: 'Red Bubble', 0xfd: 'White Bubble', 0xfc: 'Green Bubble', 0xfb: 'Big Green Bubble' }, lo);
+    fields.push(`upper-byte configuration: ${enemySpoilerHex(hi)}`);
+  } else if (game === 'oot' && actorId === 0x13 || game === 'mm' && actorId === 0x0c) {
+    forms({ 0: 'Fire Keese', 1: 'Fire Keese', 2: 'Keese', 3: 'Keese', 4: 'Ice Keese' }, lo);
+    if (name && (p & 0x8000)) name = `Invisible ${name}`;
+    fields.push(`invisible: ${p & 0x8000 ? 'yes' : 'no'}`);
+    if (p & 0x7f00) fields.push(`other upper bits: ${enemySpoilerHex(p & 0x7f00)}`);
+  } else if (game === 'oot' && actorId === 0x1b || game === 'mm' && actorId === 0x12) {
+    forms(game === 'oot' ? { 0xfffe: 'Blue Tektite', 0xffff: 'Red Tektite', 0: 'Red Tektite' } :
+      { 0xfffd: 'Blue Tektite', 0xfffe: 'Blue Tektite', 0xffff: 'Red Tektite', 0: 'Red Tektite' }, p);
+  } else if (game === 'oot' && actorId === 0x1af || game === 'mm' && actorId === 0xec) {
+    forms({ 0: 'Wolfos', 1: 'White Wolfos' }, lo);
+    fields.push(`upper-byte configuration: ${enemySpoilerHex(hi)}`);
+  } else if (game === 'oot' && actorId === 0x113 || game === 'mm' && actorId === 0x84) {
+    forms({ 1: 'Silver Iron Knuckle', 2: 'Black Iron Knuckle', 3: 'White Iron Knuckle' }, lo & 0x7f, 'armor');
+    fields.push(`other configuration bits: ${enemySpoilerHex(p & 0xff80)}`);
+  } else if (game === 'oot' && actorId === 0x90 || game === 'mm' && actorId === 0x4c) {
+    forms({ 0: 'ReDead (mourns when stationary)', 1: 'ReDead', 2: 'ReDead', 3: 'Invisible ReDead',
+      4: 'Frozen ReDead', 5: 'Dancing ReDead', 6: 'Dancing ReDead', 7: 'Dancing ReDead' }, lo);
+    fields.push(`upper-byte configuration: ${enemySpoilerHex(hi)}`);
+  } else if (game === 'oot' && actorId === 0x8a) {
+    forms({ 0: 'Beamos (Large)', 1: 'Beamos (Small)' }, lo, 'size');
+    fields.push(`upper-byte configuration: ${enemySpoilerHex(hi)}`);
+  } else if (game === 'oot' && actorId === 0x25) {
+    if (p === 0xfffe || p === 0xff80) forms({ 0xfffe: 'Dinolfos', 0xff80: 'Dinolfos' }, p);
+    else if (p === 0xffff) forms({ 0xffff: 'Lizalfos' }, p);
+  } else if (game === 'mm' && actorId === 0x14a) {
+    forms({ 0: 'Blue ChuChu', 1: 'Green ChuChu', 2: 'Yellow ChuChu', 3: 'Red ChuChu' }, lo, 'color');
+    fields.push(`upper-byte configuration: ${enemySpoilerHex(hi)}`);
+  } else if (game === 'mm' && actorId === 0x12d) {
+    forms({ 0: 'Bio Deku Baba', 1: 'Leafless Bio Deku Baba', 2: 'Bio Deku Baba Lily Pad', 4: 'Walking Bio Deku Baba' }, lo);
+    if (hi) fields.push(`upper-byte configuration: ${enemySpoilerHex(hi)}`);
+  } else if (game === 'mm' && actorId === 0x1e9) {
+    forms({ 0: 'Masked Hiploop', 0x0101: 'Hiploop' }, p);
+  } else if (game === 'mm' && actorId === 0x1e6) {
+    forms({ 0: 'Small Eeno', 1: 'Large Eeno' }, p & 1, 'size');
+    if (p & 0xfffe) fields.push(`other configuration bits: ${enemySpoilerHex(p & 0xfffe)}`);
+  } else if (game === 'mm' && actorId === 0x109) {
+    forms({ 0: 'Dragonfly', 1: 'Dragonfly (grows when spawned)', 2: 'Woodfall Temple final-room Dragonfly', 3: 'Woodfall Dragonfly', 0xffff: 'Dragonfly (unused normal)' }, p, 'type');
+  } else if (game === 'mm' && actorId === 0x15b) {
+    const type = p & 0x1f, flags = (p >>> 5) & 7;
+    name = flags & 4 ? 'Perching Bad Bat' : type > 1 && type !== 0x1f ? 'Bad Bat swarm' : 'Bad Bat';
+    fields.push(`type/count: ${type}`, `switch flag: ${hi}`, `perch: ${flags & 4 ? 'yes' : 'no'}`,
+      `check relative height: ${flags & 2 ? 'yes' : 'no'}`);
+    if (flags & 1) fields.push('other flag: 0x1');
+  } else if (game === 'mm' && actorId === 0x13a) {
+    fields.push(`type: ${p >>> 12}`, `revive timer field: ${(p >>> 7) & 0x1f}`, `switch flag: ${p & 0x7f}`);
+  }
+
+  /* Cover the entire roster using exact authored/catalog forms. A unique
+   * catalog label is useful even where individual bit fields are undocumented.
+   * Do not infer meanings from another actor or from a conflicting form. */
+  const candidates = ENEMIES.filter(e => e.game === game && e.actorId === actorId);
+  const exactForms = candidates.filter(e => e.spawnParams === p);
+  const exact = [...new Set((exactForms.length ? exactForms : candidates.filter(e => e.params.includes(p))).map(e => e.name))];
+  if (!name && isSource && exact.length === 1) name = exact[0];
+  if (!fields.length) {
+    if (!isSource || exact.length === 1) fields.push(`catalog form: ${name ?? fallback}; field meanings not decoded`);
+    else if (exact.length > 1) fields.push(`ambiguous catalog forms: ${exact.join(' / ')}; field meanings not decoded`);
+    else fields.push('unmapped authored parameters');
+  }
+  return { name: name ?? fallback, detail: fields.join('; ') };
+}
+
 export function makeEnemySpoilerLog(result: LogicResult, options: Options): string | undefined {
   if (!result.worlds.some(world => world.enemyPlan.length)) return;
   const writer = new LogWriter();
@@ -692,8 +772,14 @@ export function makeEnemySpoilerLog(result: LogicResult, options: Options): stri
           row.source;
         const layout = row.ootr?.location.mq ? ' [MQ]' : row.placement?.grotto !== undefined ? ' [' + MM_GENERIC_GROTTOS.find(grotto => grotto.id === row.placement!.grotto)!.name + ' Generic Grotto]' : '';
         const params = row.ootr?.targetParams ?? row.placement?.targetParams ?? row.field?.targetParams ?? target.spawnParams;
-        const sourceName = row.source === 'mm-ikana-throne-scripted' ? 'Igos du Ikana' : source.name;
-        writer.write(`${location}${layout}: ${sourceName} → ${target.name} [${target.game.toUpperCase()} actor 0x${target.actorId.toString(16)}, params 0x${params.toString(16)}]`);
+        const sourceActorId = row.ootr?.location.actorId ?? row.placement?.sourceActorId ?? source.actorId;
+        const sourceParams = row.ootr?.sourceParams ?? row.placement?.sourceParams;
+        const sourceLabel = enemySpoilerParams(game, sourceActorId, sourceParams,
+          row.source === 'mm-ikana-throne-scripted' ? 'Igos du Ikana' : source.name, true);
+        const targetLabel = enemySpoilerParams(target.game, target.actorId, params, target.name, false);
+        const sourceInfo = ` [${game.toUpperCase()} actor ${enemySpoilerHex(sourceActorId)}, params ${sourceParams === undefined ? 'unavailable' : enemySpoilerHex(sourceParams)}; ${sourceLabel.detail}]`;
+        const targetInfo = ` [${target.game.toUpperCase()} actor ${enemySpoilerHex(target.actorId)}, params ${enemySpoilerHex(params)}; ${targetLabel.detail}]`;
+        writer.write(`${location}${layout}: ${sourceLabel.name}${sourceInfo} → ${targetLabel.name}${targetInfo}`);
         for (const [scene, room, setup, slot] of row.ootr?.aliases ?? [])
           writer.write(`  Also applies to ${enemyRoomLabel(game, scene, room, setup, slot)}`);
         if (row.splitChildren?.length)

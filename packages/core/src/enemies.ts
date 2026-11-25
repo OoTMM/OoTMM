@@ -1031,6 +1031,7 @@ export type OotEnemizerChoice = {
   targetIndex: number;
   ignoreRestrictions?: boolean;
   foreign?: boolean;
+  sourceParams?: number;
   targetParams: number;
   killLogic: string;
   dropLogic: string | null;
