@@ -18,19 +18,16 @@ void Player_Unfreeze(PlayState* play)
     link->stateFlags1 &= ~PLAYER_ACTOR_STATE_FROZEN;
 }
 
+#if defined(GAME_OOT)
 s32 Player_InflictEnvironmentalDamage(PlayState* play, s32 damage, Player* actor)
 {
-#if defined(GAME_OOT)
     const s16 darkLinkId = ACTOR_EN_TORCH2;
     const u32 inflictDamage = 0x80850fa0;
-#else
-    const s16 darkLinkId = 0xc33;
-    const u32 inflictDamage = 0x8085b3e0;
-#endif
     if (actor != GET_PLAYER(play) && actor->actor.id == darkLinkId)
         return 0;
     return ((s32(*)(PlayState*, s32))OverlayAddr(inflictDamage))(play, damage);
 }
+#endif
 
 s32 Play_ApplyPlayerDamage(PlayState* play, Player* this, s32 damage)
 {

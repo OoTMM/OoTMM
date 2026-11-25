@@ -6,6 +6,7 @@
 #include <combo/matrix.h>
 #include <combo/magic.h>
 #include <combo/mm/actor_arms_hook.h>
+#include <combo/mm/dark_link.h>
 #include <combo/sfx.h>
 #include <combo/custom.h>
 #include <combo/enemy_native.h>
@@ -19,7 +20,8 @@ static u8 sDarkLinkAdultPropertiesLoaded;
 
 #define DARK_LINK_COMBAT_IDLE ((PlayerAnimationHeader*)0x0400d468)
 #define DARK_LINK_PERCH_JUMP  ((PlayerAnimationHeader*)0x0400dcd8)
-#define DARK_LINK_PERCH_LAND  ((PlayerAnimationHeader*)0x0400d420)
+#define DARK_LINK_PERCH_SLASH ((PlayerAnimationHeader*)0x0400d868)
+#define DARK_LINK_PERCH_SLASH_END ((PlayerAnimationHeader*)0x0400d870)
 
 static void DarkLink_PlayOotVoice(Actor* actor, u16 sfxId) {
     FOREIGN_ENEMY_API_SFX_GENERAL(sfxId, &actor->projectedPos, 4, &sDarkLinkSfxFrequency, &gSfxDefaultFreqAndVolScale,
@@ -72,7 +74,7 @@ static void DarkLink_UpdateBody(MmDarkLink* enemy) {
         if (fighter->stateFlags1 & (1u << 22))
             height *= .8f;
         enemy->body.dim.height = height;
-        enemy->body.dim.yShift = MIN(head, feet);
+        enemy->body.dim.yShift = MIN(head, feet) + fighter->actor.shape.yOffset * fighter->actor.scale.y;
     }
     Collider_UpdateCylinder(&fighter->actor, &enemy->body);
 }
@@ -139,8 +141,6 @@ static Actor* DarkLink_ProjectileThreat(PlayState* play, Actor* actor) {
 void comboEnemyRandomDrop(PlayState*, Actor*, Vec3f*, s16);
 void enemySetOotDropFlag(Actor*, ColliderElement*, s32);
 
-int comboMmDarkLinkPerch(PlayState* play, int hold);
-
 static void DarkLink_Init(Actor* actor, PlayState* play) {
     MmDarkLink* enemy = (MmDarkLink*)actor;
     Player* fighter = &enemy->player;
@@ -199,8 +199,7 @@ static void DarkLink_Init(Actor* actor, PlayState* play) {
 static void DarkLink_Destroy(Actor* actor, PlayState* play) {
     MmDarkLink* enemy = (MmDarkLink*)actor;
     Player* fighter = &enemy->player;
-    if (enemy->swordPerch)
-        comboMmDarkLinkPerch(play, 0);
+    comboMmDarkLinkPerch(actor, play, 0);
     for (int i = 0; i < 3; ++i) {
         if (Effect_GetByIndex(fighter->meleeWeaponEffectIndex[i]))
             Effect_Destroy(play, fighter->meleeWeaponEffectIndex[i]);
@@ -240,18 +239,50 @@ static int DarkLink_Swing(MmDarkLink* enemy, PlayState* play, Player* player, s1
     return 1;
 }
 
-static int DarkLink_CheckPerch(Actor* actor, Player* player, PlayState* play, Vec3f* perch) {
+static void DarkLink_OotPerchPoint(Player* player, Vec3f* perch) {
     s16 yaw = player->actor.shape.rot.y - 0x3e8;
     *perch = player->actor.world.pos;
     perch->x += 45.f * Math_SinS(yaw);
+    perch->y += 26.3f;
     perch->z += 45.f * Math_CosS(yaw);
+}
+
+static int DarkLink_GetPerchPoint(Player* player, Vec3f* perch) {
+    static const f32 lengths[] = { 3000.f, 3000.f, 4000.f, 5500.f };
+    s32 sword = ((s32 (*)(Player*, s32))0x80124278)(player, player->heldItemAction);
+    if (sword < 0 || sword >= 4)
+        return 0;
+    MtxF* hand = &player->leftHandMf;
+    Vec3f base = {
+        hand->xw + hand->xy * 400.f,
+        hand->yw + hand->yy * 400.f,
+        hand->zw + hand->zy * 400.f,
+    };
+    Vec3f blade = { hand->xx * lengths[sword], hand->yx * lengths[sword], hand->zx * lengths[sword] };
+    f32 lengthSq = blade.x * blade.x + blade.y * blade.y + blade.z * blade.z;
+    f32 horizontalSq = blade.x * blade.x + blade.z * blade.z;
+    if (!(lengthSq >= 25.f && lengthSq <= 22500.f && horizontalSq >= 25.f) ||
+        !(Math_Vec3f_DistXYZ(&base, &player->actor.world.pos) <= 100.f))
+        return 0;
+    DarkLink_OotPerchPoint(player, perch);
+    f32 along = ((perch->x - base.x) * blade.x + (perch->z - base.z) * blade.z) / horizontalSq;
+    along = MAX(.15f, MIN(.90f, along));
+    perch->x = base.x + along * blade.x;
+    perch->y = base.y + along * blade.y;
+    perch->z = base.z + along * blade.z;
+    return 1;
+}
+
+static int DarkLink_CheckPerch(Actor* actor, Player* player, PlayState* play, Vec3f* perch) {
+    if (player->transformation != MM_PLAYER_FORM_HUMAN)
+        return 0;
+    DarkLink_OotPerchPoint(player, perch);
     Vec3f from = actor->world.pos;
     Vec3f to = *perch;
     Vec3f hit;
     CollisionPoly* poly;
     s32 bgId;
     from.y += 20.f;
-    to.y += 20.f;
     return fabsf(to.y - from.y) <= 80.f &&
            !BgCheck_EntityLineTest1(&play->colCtx, &from, &to, &hit, &poly, 1, 1, 1, 0, &bgId);
 }
@@ -355,7 +386,7 @@ static void DarkLink_Reposition(MmDarkLink* enemy, PlayState* play, Player* play
         }
     }
     actor->world.pos = actor->prevPos = spot;
-    actor->shape.yOffset = 0.f;
+    enemy->perchHeight = actor->shape.yOffset = 0.f;
     enemy->player.invincibilityTimer = 0;
     enemy->player.stateFlags1 &= ~(PLAYER_STATE1_MM_20000000 | PLAYER_STATE1_MM_80000000);
     enemy->player.stateFlags2 &= ~PLAYER_STATE2_MM_80000000;
@@ -376,12 +407,51 @@ static void DarkLink_HoldStunnedPose(Player* fighter, PlayState* play) {
 }
 
 static void DarkLink_SwordStandPose(Player* fighter, PlayState* play) {
-    int finished = PlayerAnimation_Update(play, &fighter->skelAnime);
-    if (fighter->skelAnime.animation == DARK_LINK_PERCH_JUMP && (finished || fighter->skelAnime.curFrame >= 2.f))
-        PlayerAnimation_PlayOnce(play, &fighter->skelAnime, DARK_LINK_PERCH_LAND);
-    else if (fighter->skelAnime.animation == DARK_LINK_PERCH_LAND && finished)
-        PlayerAnimation_PlayLoopSetSpeed(play, &fighter->skelAnime, DARK_LINK_COMBAT_IDLE, 1.f);
+    MmDarkLink* enemy = (MmDarkLink*)fighter;
+    fighter->skelAnime.moveFlags = 0;
     fighter->linearVelocity = fighter->actor.speed = fighter->actor.velocity.y = 0.f;
+    if (enemy->perchSwung == 1) {
+        enemy->perchSwung = 2;
+        fighter->unk_ADD = 0;
+        fighter->meleeWeaponAnimation = PLAYER_MWA_FORWARD_SLASH_1H;
+        fighter->meleeWeaponState = 0;
+        ((void (*)(Player*, s32))OverlayAddr(0x8083375c))(fighter, PLAYER_MWA_FORWARD_SLASH_1H);
+        PlayerAnimation_PlayOnce(play, &fighter->skelAnime, DARK_LINK_PERCH_SLASH);
+        DarkLink_PlayOotVoice(&fighter->actor, 0x6800);
+        return;
+    }
+    int finished = PlayerAnimation_Update(play, &fighter->skelAnime);
+    if (fighter->skelAnime.animation == DARK_LINK_PERCH_SLASH) {
+        fighter->meleeWeaponState = fighter->skelAnime.curFrame >= 1.f && fighter->skelAnime.curFrame <= 4.f;
+        if (finished) {
+            fighter->meleeWeaponState = 0;
+            PlayerAnimation_PlayOnce(play, &fighter->skelAnime, DARK_LINK_PERCH_SLASH_END);
+        }
+    } else if (fighter->skelAnime.animation == DARK_LINK_PERCH_JUMP) {
+        if (enemy->swordPerch <= 24)
+            PlayerAnimation_Change(play, &fighter->skelAnime, DARK_LINK_COMBAT_IDLE,
+                                   1.f, 0.f, 28.f, 0, -3.f);
+    } else if (fighter->skelAnime.animation == DARK_LINK_PERCH_SLASH_END) {
+        if (finished)
+            PlayerAnimation_PlayLoopSetSpeed(play, &fighter->skelAnime, DARK_LINK_COMBAT_IDLE, 1.f);
+    } else if (fighter->skelAnime.animation != DARK_LINK_COMBAT_IDLE) {
+        PlayerAnimation_PlayLoopSetSpeed(play, &fighter->skelAnime, DARK_LINK_COMBAT_IDLE, 1.f);
+    }
+}
+
+static void DarkLink_PlacePerch(MmDarkLink* enemy, Vec3f* target) {
+    Actor* actor = &enemy->player.actor;
+    if (enemy->swordPerch < 27) {
+        Math_SmoothStepToF(&actor->world.pos.x, target->x, 1.f, 5.f, 0.f);
+        Math_SmoothStepToF(&actor->world.pos.z, target->z, 1.f, 5.f, 0.f);
+    }
+    f32 footY = 0.f;
+    if (enemy->swordPerch < 27 && enemy->bodyPose == 7)
+        footY = MIN(enemy->bodyLimbY[1], enemy->bodyLimbY[2]);
+    f32 height = actor->scale.y > 0.f ? (target->y - actor->world.pos.y - footY) / actor->scale.y : 0.f;
+    Math_SmoothStepToF(&enemy->perchHeight, height, 1.f, 2000.f, 0.f);
+    actor->shape.yOffset = enemy->perchHeight;
+    actor->prevPos = actor->world.pos;
 }
 
 static void DarkLink_Update(Actor* actor, PlayState* play) {
@@ -475,7 +545,7 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
             enemy->swordPose = enemy->shieldPose = 0;
             enemy->stun = 0;
             if (enemy->swordPerch)
-                comboMmDarkLinkPerch(play, 0);
+                comboMmDarkLinkPerch(actor, play, 0);
             enemy->swordPerch = enemy->jumpTimer = enemy->jumpCounter = enemy->rolling = 0;
             enemy->perchHeight = actor->shape.yOffset = 0.f;
             if (!actor->colChkInfo.health) {
@@ -555,18 +625,17 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
     int perchRelease = 0;
     int pursuitHop = 0;
     int lockedOn = player->lockOnActor == actor;
-    Vec3f perchFrom = actor->world.pos;
-    Vec3f perchTarget = perchFrom;
-    int perchInterrupted = enemy->swordPerch && !comboMmDarkLinkPerch(play, 1);
+    Vec3f perchTarget = actor->world.pos;
+    int perchInterrupted = enemy->swordPerch && !comboMmDarkLinkPerch(actor, play, 1);
     if (enemy->swordPerch &&
-        (perchInterrupted || distance > 100.f || !DarkLink_CheckPerch(actor, player, play, &perchTarget))) {
-        comboMmDarkLinkPerch(play, 0);
+        (perchInterrupted || distance > 100.f || !DarkLink_GetPerchPoint(player, &perchTarget))) {
+        comboMmDarkLinkPerch(actor, play, 0);
         if (!perchInterrupted)
             player->skelAnime.curFrame = 3.f;
         enemy->swordPerch = 0;
-        enemy->perchHeight = 0.f;
-        actor->shape.yOffset = 0.f;
         actor->flags |= ACTOR_FLAG_ATTENTION_ENABLED;
+        fighter->meleeWeaponState = 0;
+        backflip = perchRelease = 1;
     }
     if (!activating && distance <= 610.f && fighter->invincibilityTimer >= 0) {
         input->cur.button = BTN_Z;
@@ -574,7 +643,9 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
     } else {
         fighter->lockOnActor = NULL;
     }
-    if (enemy->stun) {
+    if (perchRelease) {
+        input->cur.button = 0;
+    } else if (enemy->stun) {
         input->cur.button = 0;
     } else if (!enemy->swordPerch && enemy->rolling) {
         heading = enemy->rollHeading;
@@ -616,16 +687,16 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
             player->skelAnime.curFrame = 2.f;
         if (!enemy->swordPerch || (player->invincibilityTimer > 0 && !fighter->meleeWeaponState)) {
             player->skelAnime.curFrame = 3.f;
-            comboMmDarkLinkPerch(play, 0);
+            comboMmDarkLinkPerch(actor, play, 0);
             enemy->swordPerch = 0;
             actor->flags |= ACTOR_FLAG_ATTENTION_ENABLED;
             actor->world.rot.y = actor->shape.rot.y = actor->yawTowardsPlayer;
-            Math_SmoothStepToF(&actor->world.pos.x, perchTarget.x, 1.f, 5.f, 0.f);
-            Math_SmoothStepToF(&actor->world.pos.z, perchTarget.z, 1.f, 5.f, 0.f);
+            fighter->meleeWeaponState = 0;
             backflip = perchRelease = 1;
-        } else if (enemy->swordPerch < 16 && !enemy->perchSwung) {
-            if (DarkLink_Swing(enemy, play, player, &heading, &magnitude))
-                enemy->perchSwung = 1;
+        } else if (enemy->swordPerch < 16 && !enemy->perchSwung &&
+                   fabsf(actor->world.pos.x - perchTarget.x) <= 5.f &&
+                   fabsf(actor->world.pos.z - perchTarget.z) <= 5.f) {
+            enemy->perchSwung = DarkLink_Swing(enemy, play, player, &heading, &magnitude) ? 1 : 3;
         } else if (enemy->swordPerch == 19) {
             DarkLink_PlayOotVoice(actor, 0x6814);
         }
@@ -641,7 +712,8 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
                (s16)(actor->yawTowardsPlayer - actor->world.rot.y) != -32768) {
         if (attack == PLAYER_MWA_STAB_1H && distance < 90.f) {
             if (distance <= 85.f && lockedOn && !player->invincibilityTimer && !fighter->meleeWeaponState &&
-                !enemy->counter && DarkLink_CheckPerch(actor, player, play, &perchTarget)) {
+                !enemy->counter && (actor->bgCheckFlags & BGCHECKFLAG_GROUND) &&
+                DarkLink_CheckPerch(actor, player, play, &perchTarget) && comboMmDarkLinkPerch(actor, play, 1)) {
                 player->meleeWeaponState = 0;
                 player->actor.speed = player->linearVelocity = 0.f;
                 fighter->linearVelocity = 0.f;
@@ -655,8 +727,10 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
                 fighter->invincibilityTimer = -7;
                 enemy->swordPerch = 27;
                 enemy->perchSwung = 0;
+                enemy->perchHeight = 0.f;
+                enemy->swordSweep = 0;
+                enemy->jumpTimer = enemy->jumpCounter = enemy->rolling = 0;
                 actor->flags &= ~ACTOR_FLAG_ATTENTION_ENABLED;
-                comboMmDarkLinkPerch(play, 1);
             } else {
                 backflip = 1;
             }
@@ -740,18 +814,42 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
         else
             input->cur.button = BTN_R;
     }
+    if (enemy->swordPerch) {
+        input->cur.button = BTN_Z;
+        input->cur.stick_x = input->cur.stick_y = 0;
+        fighter->lockOnActor = &player->actor;
+        actor->bgCheckFlags |= BGCHECKFLAG_GROUND;
+        fighter->linearVelocity = actor->speed = actor->velocity.y = 0.f;
+    }
     input->press.button = input->cur.button & ~input->prev.button;
     input->rel.button = input->prev.button & ~input->cur.button;
     ((void (*)(Input*))0x8008524c)(input);
     input->press.stick_x += (s8)(input->cur.stick_x - input->prev.stick_x);
     input->press.stick_y += (s8)(input->cur.stick_y - input->prev.stick_y);
-    if (enemy->swordPerch && !enemy->perchSwung) {
+    if (enemy->swordPerch) {
         if (enemy->swordPerch == 27) {
             fighter->skelAnime.moveFlags = 0;
+            fighter->meleeWeaponState = 0;
             PlayerAnimation_PlayOnce(play, &fighter->skelAnime, DARK_LINK_PERCH_JUMP);
         }
         fighter->actionFunc = DarkLink_SwordStandPose;
-    } else if (fighter->actionFunc == DarkLink_SwordStandPose) {
+        DarkLink_PlacePerch(enemy, &perchTarget);
+        actor->world.rot.y = actor->shape.rot.y = Math_Vec3f_Yaw(&actor->world.pos, &player->actor.world.pos);
+        fighter->currentYaw = actor->shape.rot.y;
+        DarkLink_SwordStandPose(fighter, play);
+        if (fighter->invincibilityTimer < 0)
+            ++fighter->invincibilityTimer;
+        else if (fighter->invincibilityTimer > 0)
+            --fighter->invincibilityTimer;
+        for (int i = 0; i < 2; ++i)
+            fighter->meleeWeaponQuads[i].elem.atDmgInfo.damage = 8;
+        actor->focus.pos = actor->world.pos;
+        actor->focus.pos.y += 20.f + enemy->perchHeight * actor->scale.y;
+        DarkLink_UpdateBody(enemy);
+        return;
+    }
+    if (fighter->actionFunc == DarkLink_SwordStandPose) {
+        fighter->meleeWeaponState = 0;
         play->func_18780(fighter, play);
     }
     PlayerActionFunc action = fighter->actionFunc;
@@ -766,7 +864,7 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
         (actor->world.pos.y < actor->home.pos.y - 160.f &&
          (actor->floorHeight < -30000.f || actor->world.pos.y < actor->floorHeight - 160.f))) {
         if (enemy->swordPerch)
-            comboMmDarkLinkPerch(play, 0);
+            comboMmDarkLinkPerch(actor, play, 0);
         DarkLink_Reposition(enemy, play, player);
         return;
     }
@@ -821,16 +919,8 @@ static void DarkLink_Update(Actor* actor, PlayState* play) {
     }
     if (enemy->staggerTimer && !--enemy->staggerTimer)
         enemy->counter = enemy->staggerCount = 0;
-    if (enemy->swordPerch) {
-        if (enemy->swordPerch < 27) {
-            Math_SmoothStepToF(&perchFrom.x, perchTarget.x, 1.f, 5.f, 0.f);
-            Math_SmoothStepToF(&perchFrom.z, perchTarget.z, 1.f, 5.f, 0.f);
-        }
-        Math_SmoothStepToF(&enemy->perchHeight, 2630.f, 1.f, 2000.f, 0.f);
-        actor->world.pos = actor->prevPos = perchFrom;
-        actor->velocity.y = 0.f;
-    } else if (enemy->perchHeight != 0.f) {
-        actor->world.pos.y += enemy->perchHeight * .01f;
+    if (enemy->perchHeight != 0.f) {
+        actor->world.pos.y += enemy->perchHeight * actor->scale.y;
         enemy->perchHeight = 0.f;
     }
     actor->shape.yOffset = enemy->perchHeight;
@@ -933,7 +1023,9 @@ static void DarkLink_PostLimbDraw(PlayState* play, s32 limb, Gfx** dList, Vec3s*
         Vec3f part;
         Matrix_MultVec3f(&origin, &part);
         s32 bodyPart = limb == PLAYER_LIMB_HEAD ? 0 : limb == PLAYER_LIMB_LEFT_FOOT ? 1 : 2;
-        enemy->bodyLimbY[bodyPart] = part.y - actor->world.pos.y;
+        if (enemy->swordPerch && bodyPart != 0)
+            part.y = actor->shape.feetPos[limb == PLAYER_LIMB_RIGHT_FOOT].y;
+        enemy->bodyLimbY[bodyPart] = part.y - actor->world.pos.y - actor->shape.yOffset * actor->scale.y;
         enemy->bodyPose |= 1 << bodyPart;
     }
 }
