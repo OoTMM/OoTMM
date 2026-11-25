@@ -15,7 +15,7 @@ typedef struct ObjSwprize {
     /* 0x000 */ Actor actor;
     /* 0x144 */ ObjSwprizeActionFunc actionFunc;
     /* 0x148 */ s16 timer;
-    Xflag xflag;
+    XflagID xflag;
 } ObjSwprize; // size = 0x14C
 
 #endif // Z_OBJ_SWPRIZE_H

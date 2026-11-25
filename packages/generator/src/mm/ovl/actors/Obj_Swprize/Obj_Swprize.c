@@ -42,10 +42,10 @@ void func_80C25360(ObjSwprize* this, Vec3f* vec) {
     Matrix_Pop();
 }
 
-static Actor* ObjSwprize_DropCustom(PlayState* play, Vec3f* pos, Xflag* xflag, s32 params)
+static Actor* ObjSwprize_DropCustom(PlayState* play, Vec3f* pos, XflagID xflag, s32 params)
 {
-    if (Xflag_IsShuffled(xflag))
-        return (Actor*)EnItem00_DropCustom(play, pos, xflag);
+    if (Xflag_IsShuffledEx(xflag))
+        return (Actor*)EnItem00_DropCustomEx(play, pos, xflag, XFDROP_NONE);
 
     return Item_DropCollectible(play, pos, params);
 }
@@ -57,15 +57,14 @@ void func_80C253D0(ObjSwprize* this, PlayState* play) {
     Vec3f sp78;
     s32 type = OBJ_SWPRIZE_GET_TYPE(thisx);
     s32 temp_s0 = D_80C257F0[type];
-    Xflag xflag;
+    XflagID xflag;
 
-    memcpy(&xflag, &this->xflag, sizeof(Xflag));
     func_80C25360(this, &sp78);
 
     if (type == 2) {
         for (i = 0; i < 3; i++) {
-            xflag.sliceId = i;
-            collectible = ObjSwprize_DropCustom(play, &thisx->world.pos, &xflag, temp_s0);
+            xflag = Xflag_LookupSlice(this->xflag, i);
+            collectible = ObjSwprize_DropCustom(play, &thisx->world.pos, xflag, temp_s0);
             if (collectible != NULL) {
                 if (sp78.y < 0.98f) {
                     collectible->velocity.y = (sp78.y + 1.0f) * 4.0f;
@@ -77,7 +76,7 @@ void func_80C253D0(ObjSwprize* this, PlayState* play) {
             }
         }
     } else {
-        collectible = ObjSwprize_DropCustom(play, &thisx->world.pos, &xflag, temp_s0);
+        collectible = ObjSwprize_DropCustom(play, &thisx->world.pos, this->xflag, temp_s0);
         if ((collectible != NULL) && (sp78.y < 0.98f)) {
             collectible->velocity.y = (sp78.y + 1.0f) * 4.0f;
             collectible->speed = (2.0f * (1.0f - fabsf(sp78.y))) + 2.0f;
@@ -88,10 +87,26 @@ void func_80C253D0(ObjSwprize* this, PlayState* play) {
 
 void ObjSwprize_Init(Actor* thisx, PlayState* play) {
     ObjSwprize* this = (ObjSwprize*)thisx;
+    XflagID slice;
+    u8 valid;
 
-    Xflag_Init(&this->xflag, thisx, play);
+    this->xflag = Xflag_InitEx(thisx, play);
+    valid = 0;
+    for (int i = 0; i < 3; ++i)
+    {
+        slice = Xflag_LookupSlice(this->xflag, i);
+        if (Xflag_IsShuffledEx(slice))
+        {
+            valid = 1;
+            break;
+        }
+    }
 
-    if (Flags_GetSwitch(play, OBJ_SWPRIZE_GET_SWITCH_FLAG(&this->actor))) {
+    /* Need to reset the switch so that bugs can be set again */
+    if (valid)
+        ClearSwitchFlag(play, OBJ_SWPRIZE_GET_SWITCH_FLAG(&this->actor));
+
+    if (!valid && Flags_GetSwitch(play, OBJ_SWPRIZE_GET_SWITCH_FLAG(&this->actor))) {
         ObjSwprize_SetupDoNothing(this);
     } else {
         func_80C25640(this);
