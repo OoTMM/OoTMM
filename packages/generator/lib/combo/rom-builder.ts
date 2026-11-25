@@ -255,6 +255,14 @@ export class RomBuilder {
     }
   }
 
+  replaceFileData(name: string, data: Uint8Array) {
+    const file = this.fileByNameRequired(name);
+    if (file.injected || file.alias || file.type === 'dummy' || file.paddr !== undefined)
+      throw new Error(`Cannot replace audio file: ${name}`);
+    file.data = data;
+    file.vsize = undefined;
+  }
+
   alias(to: string, from: string) {
     const fileTo = this.fileByNameRequired(to);
     const fileFrom = this.fileByNameRequired(from);

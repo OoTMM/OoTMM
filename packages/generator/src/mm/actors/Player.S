@@ -863,6 +863,21 @@ PATCH_END
 
 PATCH_GROUP_END
 
+Player_ClampRightHandPose:
+  sltiu   t9, v0, 2
+  bnez    t9, 1f
+   nop
+  move    v0, zero
+1:
+  sll     t9, v0, 2
+  jr      ra
+   lui    t1, 0x801c
+
+PATCH_START 0x80126148
+  jal     Player_ClampRightHandPose
+   nop
+PATCH_END
+
 /* Fix Adult Link arrow position */
 PATCH_START 0x80128CE4
   lbu     v1, 0x014B (s1)

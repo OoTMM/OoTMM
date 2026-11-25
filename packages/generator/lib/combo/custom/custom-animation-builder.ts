@@ -8,9 +8,6 @@ import {
   PLAYER_ANIM_FRAME_SIZE,
   gameFileDma,
   getDecompressedGameFile,
-  buildPlayerAnimationDedupePlan,
-  remapImportedPlayerAnimationOffset,
-  type PlayerAnimationDedupePlan,
 } from '../compact.ts';
 
 type AnimationDef = {
@@ -116,7 +113,7 @@ function parseSourcePlayerAnimHeader(buf: Uint8Array, off: number): SourcePlayer
   };
 }
 
-function buildImportedAnimation(roms: DecompressedRoms, def: CustomAnimation, plan: PlayerAnimationDedupePlan): ImportedAnimation {
+function buildImportedAnimation(roms: DecompressedRoms, def: CustomAnimation): ImportedAnimation {
   const srcGame = def.home_game;
   const dstGame = otherGame(srcGame);
   const frameDataOffset = parseNum(def.frame_data_offset, `${def.name}.frame_data_offset`);
@@ -161,7 +158,7 @@ function buildImportedAnimation(roms: DecompressedRoms, def: CustomAnimation, pl
     srcGame,
     dstGame,
     frameCount,
-    frameDataOffset: remapImportedPlayerAnimationOffset(plan, srcGame, frameDataOffset),
+    frameDataOffset,
     frameSize: PLAYER_ANIM_FRAME_SIZE,
   };
 }
@@ -273,7 +270,6 @@ async function emitImportedAnimationsHeader(roms: DecompressedRoms, pack: Import
 }
 
 export async function patchAnimationPorts(roms: DecompressedRoms) {
-  const plan = buildPlayerAnimationDedupePlan(roms);
-  const pack = DATA_ANIMATIONS.map(anim => buildImportedAnimation(roms, anim, plan));
+  const pack = DATA_ANIMATIONS.map(anim => buildImportedAnimation(roms, anim));
   await emitImportedAnimationsHeader(roms, pack);
 }

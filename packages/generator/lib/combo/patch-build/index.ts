@@ -15,7 +15,6 @@ import { patchRandomizer } from '../randomizer';
 import { patchEnemies } from '../randomizer/enemies';
 import { bufReadU16BE, bufReadU32BE, bufWriteU32BE } from '../util/buffer';
 import { FileResolver } from '../file-resolver';
-import { buildPlayerAnimationDedupePlan, installCompactPlayerAnimations } from '../compact';
 import { archiveEnemyPort } from '../enemies/overlay';
 
 export type BuildPatchfileIn = {
@@ -115,7 +114,6 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
   let ovlAddr = 0xe0000000;
 
   const fileResolver = new FileResolver();
-  const compactAnimations = buildPlayerAnimationDedupePlan(args.roms);
 
   for (let world = 0; world < args.settings.players; ++world) {
     const p = args.patch.dup();
@@ -304,7 +302,6 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
 
     patchRandomizer(world, args.logic, args.settings, p);
     patchEnemies(args.logic.worlds[world].enemyPlan, args.roms, args.addresses, p, args.settings, args.monitor);
-    installCompactPlayerAnimations(p, compactAnimations);
     patches.push(p);
   }
 

@@ -12,6 +12,7 @@ import { DmaData } from './dma';
 import { Patchfile } from './patch-build/patchfile';
 import { RomBuilder } from './rom-builder';
 import { applyWholeFileDedupe } from './compact';
+import { applyAudioOnlyDedupe } from './audio-dedupe';
 import { forceSelectiveKeepSourcesRaw } from './enemies/overlay';
 import { prepareSoulPreviewSources } from './enemies/soul-preview-storage';
 import { validateOverlayRelocations } from './overlay-validation';
@@ -88,12 +89,13 @@ function extractFiles(game: Game, roms: DecompressedRoms, romBuilder: RomBuilder
 
 const NATIVE_AUDIO_PHYSICAL_BASE = { oot: 0, mm: 0x4d9f40 } as const;
 
-function verifyNativeAudioPhysicalLayout(builder: Pick<RomBuilder, 'fileByNameRequired'>): void {
+function verifyNativeAudioPhysicalLayout(builder: Pick<RomBuilder, 'fileByNameRequired'>, compacted = false): void {
   for (const game of ['oot', 'mm'] as const) {
     for (const name of ['Audiobank', 'Audioseq', 'Audiotable']) {
       const file = builder.fileByNameRequired(game + '/' + name);
       if (file.type !== 'uncompressed' || file.alias || !file.injected || file.vaddr === undefined ||
-        file.paddr !== NATIVE_AUDIO_PHYSICAL_BASE[game] + file.vaddr || !file.dma ||
+        file.paddr === undefined || ((!compacted || game === 'oot') &&
+        file.paddr !== NATIVE_AUDIO_PHYSICAL_BASE[game] + file.vaddr) || !file.dma ||
         file.dma.physStart !== file.paddr || file.dma.physEnd !== 0 || file.dma.virtStart !== file.vaddr ||
         file.dma.virtEnd - file.dma.virtStart !== file.data.length) {
         throw new Error('Native audio file must retain its fixed physical ROM placement: ' + game + '/' + name);
@@ -155,10 +157,6 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
 
   forceSelectiveKeepSourcesRaw(romBuilder, patchfile, 'patched');
 
-  /* We need to pack a few static files before we can pack the rest */
-  await injectFirst('oot', romBuilder, 6);
-  await injectFirst('mm', romBuilder,  6);
-
   /* Add the extra files */
   for (const newFile of patchfile.newFiles) {
     const type = newFile.compressed ? 'compressed' : 'uncompressed';
@@ -175,8 +173,6 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
   for (const a of ALIASES_OOT) {
     romBuilder.alias(`oot/${a}`, `mm/${a}`);
   }
-
-  verifyNativeAudioPhysicalLayout(romBuilder);
 
   /* Inject a unique player ID */
   const playerId = new Uint8Array(16);
@@ -222,6 +218,23 @@ export async function pack(args: PackArgs): Promise<PackOutput> {
   }
 
   prepareSoulPreviewSources(romBuilder, patchfile);
+  const audioDedupe = process.env.OOTMM_DISABLE_AUDIO_DEDUPE ? null : applyAudioOnlyDedupe(roms, romBuilder);
+  if (audioDedupe) {
+    for (const row of audioDedupe.savings)
+      monitor.log(`Pack: ${row.name} dedupe saved ${row.bytes.toLocaleString()} bytes`);
+    monitor.log(`Pack: Audio dedupe saved ${audioDedupe.savedBytes.toLocaleString()} bytes`);
+  }
+  await injectFirst('oot', romBuilder, 6);
+  await injectFirst('mm', romBuilder, 6);
+  audioDedupe?.finalizePhysicalTables();
+  verifyNativeAudioPhysicalLayout(romBuilder, audioDedupe !== null);
+  for (const game of GAMES) {
+    for (const name of ['makerom', 'boot', 'dmadata']) {
+      const file = romBuilder.fileByNameRequired(`${game}/${name}`);
+      if (file.vaddr === undefined || file.paddr !== NATIVE_AUDIO_PHYSICAL_BASE[game] + file.vaddr)
+        throw new Error(`Fixed boot/DMA file moved: ${game}/${name}`);
+    }
+  }
   applyWholeFileDedupe(romBuilder);
 
   /* Build the final ROM */
