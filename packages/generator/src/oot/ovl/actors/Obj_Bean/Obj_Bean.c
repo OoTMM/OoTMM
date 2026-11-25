@@ -324,7 +324,7 @@ s32 ObjBean_CheckForHorseTrample(ObjBean* this, PlayState* play) {
     return false;
 }
 
-static Xflag sXflag;
+static XflagID sXflag;
 
 void ObjBean_Break(ObjBean* this, PlayState* play) {
     Vec3f pos;
@@ -493,7 +493,7 @@ void ObjBean_Init(Actor* thisx, PlayState* play) {
     s32 path;
     ObjBean* this = (ObjBean*)thisx;
 
-    Xflag_Init(&sXflag, thisx, play);
+    sXflag = Xflag_InitEx(thisx, play);
 
     Actor_ProcessInitChain(&this->dyna.actor, sInitChain);
     if (gOotSave.age == AGE_ADULT) {
@@ -711,7 +711,7 @@ void ObjBean_SetupGrowWaterPhase3(ObjBean* this) {
 void ObjBean_GrowWaterPhase3(ObjBean* this, PlayState* play) {
     s32 i;
     Vec3f itemDropPos;
-    Xflag xflag;
+    XflagID xflag;
 
     this->transformFunc(this);
     if (this->timer == 40) {
@@ -722,11 +722,10 @@ void ObjBean_GrowWaterPhase3(ObjBean* this, PlayState* play) {
             itemDropPos.y = this->dyna.actor.world.pos.y - 25.0f;
             itemDropPos.z = this->dyna.actor.world.pos.z;
 
-            memcpy(&xflag, &sXflag, sizeof(Xflag));
             for (i = 0; i < 3; i++) {
-                xflag.sliceId = i;
-                if (Xflag_IsShuffled(&xflag))
-                    EnItem00_DropCustom(play, &itemDropPos, &xflag);
+                xflag = Xflag_LookupSlice(sXflag, i);
+                if (Xflag_IsShuffledEx(xflag))
+                    EnItem00_DropCustomEx(play, &itemDropPos, xflag, XFDROP_NONE);
                 else
                     Item_DropCollectible(play, &itemDropPos, ITEM00_FLEXIBLE);
             }
