@@ -169,11 +169,12 @@ void ObjBombiwa_Init(Actor* thisx, PlayState* play) {
     ObjBombiwa* this = (ObjBombiwa*)thisx;
     s32 sp34 = OBJBOMBIWA_GET_100(&this->actor);
 
+    this->xflag = Xflag_InitShuffled(thisx, play);
+
     Actor_ProcessInitChain(&this->actor, sInitChain);
-    Xflag_Init(&this->xflag, &this->actor, play);
     Collider_InitCylinder(play, &this->collider);
 
-    if (Flags_GetSwitch(play, OBJBOMBIWA_GET_SWITCH_FLAG(&this->actor)) && !Xflag_IsShuffled(&this->xflag)) {
+    if (Flags_GetSwitch(play, OBJBOMBIWA_GET_SWITCH_FLAG(&this->actor)) && this->xflag == XFLAGID_NONE) {
         Actor_Kill(&this->actor);
         return;
     }
@@ -205,10 +206,8 @@ void ObjBombiwa_Destroy(Actor* thisx, PlayState* play2) {
 }
 
 static void ObjBombiwa_OnBreak(ObjBombiwa* this, PlayState* play) {
-    if (Xflag_IsShuffled(&this->xflag)) {
-        Vec3f pos = GET_PLAYER(play)->actor.world.pos;
-        pos.y += 20.0f;
-        EnItem00_DropCustomNoInertia(play, &pos, &this->xflag);
+    if (this->xflag != XFLAGID_NONE) {
+        EnItem00_DropCustomPlayerEx(play, this->xflag);
     }
 }
 
@@ -444,6 +443,9 @@ void func_8093A1F0(ObjBombiwa* this, PlayState* play) {
 void ObjBombiwa_Update(Actor* thisx, PlayState* play) {
     ObjBombiwa* this = (ObjBombiwa*)thisx;
 
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
+
     this->actionFunc(this, play);
 }
 
@@ -451,13 +453,13 @@ static int ObjBombiwa_CAMC(ObjBombiwa* this, PlayState* play)
 {
     ComboItemOverride o;
 
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 

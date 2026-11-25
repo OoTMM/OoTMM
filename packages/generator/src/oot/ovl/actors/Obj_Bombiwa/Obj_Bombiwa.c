@@ -69,10 +69,11 @@ void ObjBombiwa_InitCollision(Actor* thisx, PlayState* play) {
 void ObjBombiwa_Init(Actor* thisx, PlayState* play) {
     ObjBombiwa* this = (ObjBombiwa*)thisx;
 
+    this->xflag = Xflag_InitShuffled(thisx, play);
+
     Actor_ProcessInitChain(thisx, sInitChain);
-    Xflag_Init(&this->xflag, &this->actor, play);
     ObjBombiwa_InitCollision(thisx, play);
-    if ((Flags_GetSwitch(play, PARAMS_GET_U(thisx->params, 0, 6)) != 0) && !Xflag_IsShuffled(&this->xflag)) {
+    if ((Flags_GetSwitch(play, PARAMS_GET_U(thisx->params, 0, 6)) != 0) && this->xflag == XFLAGID_NONE) {
         Actor_Kill(thisx);
     } else {
         CollisionCheck_SetInfo(&thisx->colChkInfo, NULL, &sColChkInfoInit);
@@ -102,12 +103,8 @@ void ObjBombiwa_Break(ObjBombiwa* this, PlayState* play) {
     s16 scale;
     s32 i;
 
-    if (Xflag_IsShuffled(&this->xflag))
-    {
-        Vec3f dropPos = GET_PLAYER(play)->actor.world.pos;
-        dropPos.y += 20.0f;
-        EnItem00_DropCustomNoInertia(play, &dropPos, &this->xflag);
-    }
+    if (this->xflag != XFLAGID_NONE)
+        EnItem00_DropCustomPlayerEx(play, this->xflag);
 
     dlist = object_bombiwa_DL_0009E0;
     for (i = 0; i < ARRAY_COUNT(sEffectScales); i++) {
@@ -127,6 +124,9 @@ void ObjBombiwa_Break(ObjBombiwa* this, PlayState* play) {
 
 void ObjBombiwa_Update(Actor* thisx, PlayState* play) {
     ObjBombiwa* this = (ObjBombiwa*)thisx;
+
+    if (Xflag_Get(this->xflag))
+        this->xflag = XFLAGID_NONE;
 
     if ((func_80033684(play, &this->actor) != NULL) ||
         ((this->collider.base.acFlags & AC_HIT) && (this->collider.elem.acHitElem->atDmgInfo.dmgFlags & DMG_HAMMER))) {
@@ -150,13 +150,13 @@ static int ObjBombiwa_CAMC(ObjBombiwa* this, PlayState* play)
 {
     ComboItemOverride o;
 
-    if (!Xflag_IsShuffled(&this->xflag))
+    if (this->xflag == XFLAGID_NONE)
         return CSMC_NORMAL;
 
     if (!csmcEnabled())
         return CSMC_MAJOR;
 
-    comboXflagItemOverride(&o, &this->xflag, 0);
+    Xflag_ItemOverride(&o, this->xflag, GI_NONE);
     return csmcFromItemCloaked(o.gi, o.cloakGi);
 }
 
