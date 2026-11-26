@@ -545,6 +545,7 @@ void hookPlay_Init(PlayState* play)
     u32 entrance;
 
     gPlay = play;
+    comboEnemyOverlayReset();
     comboEnemyCollisionReset();
     comboEnemyEncounterReset();
     int isEndOfGame;
@@ -736,10 +737,16 @@ void Play_MainWrapper(PlayState* play)
         Multi_Disconnect();
 
     Play_Main(play);
-    if (play->gameOverCtx.state == GAMEOVER_INACTIVE)
+    /* Do not spawn, reconcile, or reap enemy objects during transitions. */
+    if (play->state.running &&
+        play->gameOverCtx.state == GAMEOVER_INACTIVE &&
+        play->transitionTrigger == TRANS_TRIGGER_OFF &&
+        play->transitionMode == 0)
+    {
         comboEnemyEncounterPostFrame(play);
-    if (!(play->gameplayFrames & 7))
-        comboEnemyObjectReleaseUnloadedRooms(play);
+        if (!(play->gameplayFrames & 7))
+            comboEnemyObjectReleaseUnloadedRooms(play);
+    }
     Message_UpdateBlocking(play);
     Play_CheckRoomChangeHook(play);
     Audio_DisplayMusicName(play);

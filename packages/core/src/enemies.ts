@@ -1690,7 +1690,25 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
     }
   }
   catch (error) {
-    throw new OotEnemyResourceLimit(error instanceof Error ? error.message : String(error));
+    if (!(error instanceof EnemyMemoryAllocationError)) throw error;
+    if (settings.enemyShuffleOotMode === 'grouped' || !fits(units.map(() => undefined)))
+      throw new OotEnemyResourceLimit(error.message, { cause: error });
+    onProgress?.('trying weighted fallback for the same scene');
+    try {
+      selectedUnits = solveWeightedMemory(units.map(unit => {
+        const weights = enemyFormWeights(unit.choices, c => c.get(unit.members[0])!.def, target => enemyWeight(settings, 'oot', target));
+        return unit.choices.map((value, i) => ({ value, weight: weights[i], cost: enemyMemoryTotal(choiceCosts.get(value)!).bytes }));
+      }), max => random.next() % max, fits);
+    }
+    catch (fallback) {
+      if (!(fallback instanceof EnemyMemoryAllocationError)) throw fallback;
+      throw new OotEnemyResourceLimit(`adaptive search: ${error.message}; weighted fallback: ${fallback.message}`, { cause: fallback });
+    }
+    adaptiveGroups.clear();
+    protectedPicks.clear();
+    for (const unit of units)
+      if (unit.choices.length === 1)
+        for (const location of unit.members) protectedPicks.add(location);
   }
   const usedMinibosses = new Set([...fixed, ...selectedUnits.flatMap(unit => [...unit.values()].map(row => row.def))]
     .filter(target => isMinibossEnemy(target.game, target.actorId, target.spawnParams)).map(enemyVarietyFamily));
@@ -1876,25 +1894,17 @@ function makeOotEnemizerPlan(defs: readonly EnemyDefinition[], settings: Setting
   let completed = 0;
   for (const [scene, locations] of scenes) {
     onProgress?.('Placing OoT enemies', completed, scenes.size);
-    let accepted = false;
-    for (let attempt = 0; attempt < 1; attempt++) {
-      try {
-        result.push(...makeOotEnemizerScenePlan(defs, settings, random, locations, gold,
-          message => onProgress?.(`Placing OoT enemies: ${message}`, completed, scenes.size)));
-        accepted = true;
-        break;
-      }
-      catch (error) {
-        if (!(error instanceof OotEnemyResourceLimit))
-          throw error;
-        const forced = settings.plando.enemyTargets?.oot;
-        if (forced) {
-          throw new OotEnemyResourceLimit('Forced OoT target cannot fit selected-enemy resource envelope in scene ' + scene + ': ' + forced);
-        }
-      }
+    try {
+      result.push(...makeOotEnemizerScenePlan(defs, settings, random, locations, gold,
+        message => onProgress?.(`Placing OoT enemies: ${message}`, completed, scenes.size)));
     }
-    if (!accepted) {
-      throw new OotEnemyResourceLimit('OoT scene ' + scene + ': bounded selected-enemy resource search exhausted');
+    catch (error) {
+      if (!(error instanceof OotEnemyResourceLimit)) throw error;
+      const forced = settings.plando.enemyTargets?.oot;
+      if (forced)
+        throw new OotEnemyResourceLimit(`Forced OoT target cannot fit selected-enemy resource envelope in scene ${scene}: ${forced}; ${error.message}`, { cause: error });
+      // The enclosing planner already retries the whole allocation up to 8 times.
+      throw new OotEnemyResourceLimit(`OoT scene ${scene}: bounded selected-enemy resource search exhausted; ${error.message}`, { cause: error });
     }
     onProgress?.('Placing OoT enemies', ++completed, scenes.size);
   }

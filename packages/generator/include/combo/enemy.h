@@ -108,6 +108,7 @@ float comboEnemySourceMmDamage(struct Collider* ac, Actor* attacker, struct Coll
 void comboEnemyHintEnter(Actor* actor, u8 source);
 u8 comboEnemyHintLeave(Actor* actor);
 Actor* comboEnemyCurrentActor(void);
+void comboEnemyOverlayReset(void);
 void comboEnemyCollisionEnter(Actor* actor);
 void comboEnemyCollisionLeave(Actor* actor);
 void comboEnemyCollisionRelease(Actor* actor);

@@ -66,6 +66,16 @@ EXPORT_SYMBOL(FOREIGN_ENEMY_REGISTRY_MM, gForeignEnemyRegistryVrom);
 
 static u32 sSpawnFlags;
 
+void comboEnemyOverlayReset(void)
+{
+    memset(sForeignEnemyOverlays, 0, sizeof(sForeignEnemyOverlays));
+    memset(sForeignEnemyIds, 0, sizeof(sForeignEnemyIds));
+    memset(sForeignEnemyFlags, 0, sizeof(sForeignEnemyFlags));
+    sCurrentEnemyActor = NULL;
+    sCurrentEnemyCallback = ~0u;
+    sSpawnFlags = 0;
+}
+
 #if defined(GAME_OOT)
 # define ENEMY_NATIVE_GAME 0u
 # define EnemyArenaMalloc ((void* (*)(u32))0x80066c10)
