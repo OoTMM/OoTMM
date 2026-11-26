@@ -865,19 +865,6 @@
     - not:
         params: 2
 
-"miniboss-encounter":
-  any:
-    - field: facts.miniboss
-      equals: true
-    - game: oot
-      actor: 275
-    - game: mm
-      actor: 132
-    - game: oot
-      actor: 37
-    - game: mm
-      actor: 25
-
 "miniboss":
   any:
     - all:

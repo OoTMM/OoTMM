@@ -57,6 +57,9 @@ Actor* comboEnemyFamilySpawn(EnemyFamily*, ActorContext*, ActorEntry*, PlayState
 Actor* comboEnemyFamilySpawnVanillaChild(EnemyFamily*, ActorContext*, Actor*, PlayState*, s16,
                                         f32, f32, f32, s16, s16, s16, s32);
 void comboEnemyFamilyClear(EnemyFamily*);
+#if defined(GAME_OOT)
+void comboEnemyFamilySetVirtualFloor(EnemyFamily*, PlayState*, const ActorEntry*);
+#endif
 void comboEnemyNativeCancelInit(Actor*, PlayState*);
 void comboEnemyFamilySpawned(Actor*);
 int comboEnemyFamilySpawning(void);

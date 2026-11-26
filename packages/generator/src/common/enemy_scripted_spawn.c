@@ -95,7 +95,7 @@ typedef struct
     u16 id;
     u16 params;
     u16 operation;
-    u16 enabled;
+    u16 flags;
 } ForestBowChoice;
 
 static ForestBowChoice sChoices[3] __attribute__((section(".data")));
@@ -126,7 +126,7 @@ static Actor* forestBowSpawn(ActorContext* ctx, Actor* parent, PlayState* play, 
 {
     u32 slot = params == 1 ? 0 : x < 100.f ? 1 : 2;
     const ForestBowChoice* choice = &sChoices[slot];
-    if (play->sceneId != 3 || parent->room != 6 || !choice->enabled)
+    if (play->sceneId != 3 || parent->room != 6 || !(choice->flags & 1))
         return Actor_SpawnAsChild(ctx, parent, play, id, x, y, z, rx, ry, rz, params);
     if (sPlatform && sPlatform != parent)
         return parent;
@@ -139,6 +139,8 @@ static Actor* forestBowSpawn(ActorContext* ctx, Actor* parent, PlayState* play, 
 
     EnemyFamily* family = &sFamilies[slot];
     ActorEntry entry = { choice->id, { x, y, z }, { rx, ry, rz }, choice->params };
+    if (choice->flags & 2)
+        comboEnemyFamilySetVirtualFloor(family, play, &entry);
     u32 segment = gSegments[6];
     u8 lackSoul = g.roomEnemyLackSoul;
     family->complete = forestBowComplete;

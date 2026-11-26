@@ -788,9 +788,12 @@ s32 comboEnemyCollisionHit(PlayState* play, Collider* at, ColliderElement* atEle
         return result;
     }
 #else
-    if (sourceAc &&
-        ac->actor->id == FOREIGN_ENEMY_ACTOR_BASE + 0x002d &&
-        (enemySourceAttackFlags(at->actor, atElem) & 1u))
+    /* Shaboms pop on AC_HIT, including hits from the Deku Nut flash. */
+    if (ac->actor &&
+        ((ac->actor->id == ACTOR_EN_BUBBLE &&
+          (atElem->atDmgInfo.dmgFlags & DMG_DEKU_NUT)) ||
+         (sourceAc && ac->actor->id == FOREIGN_ENEMY_ACTOR_BASE + 0x002d &&
+          (enemySourceAttackFlags(at->actor, atElem) & 1u))))
     {
         u8 oldOcFlags = atElem->ocElemFlags;
         atElem->ocElemFlags &= ~OCELEM_UNK2;
@@ -798,7 +801,7 @@ s32 comboEnemyCollisionHit(PlayState* play, Collider* at, ColliderElement* atEle
                                 ac, acElem, acPos, hitPos);
         atElem->ocElemFlags = oldOcFlags;
 
-        if (result && acElem->acHitElem == atElem)
+        if (sourceAc && result && acElem->acHitElem == atElem)
             comboEnemyCaptureHit(acElem);
 
         return result;
@@ -1012,8 +1015,11 @@ EXPORT_LINKABLE_SYMBOL(FOREIGN_ENEMY_API_APPLY_DAMAGE, enemyDamageApply);
 
 static float enemyDamageAdmission(Collider* at, ColliderElement* atElem, Collider* ac, ColliderElement* acElem, u32* effect)
 {
-    if (ac && acElem && comboEnemyUsesSourceDamage(ac->actor))
+    if (ac && acElem && (comboEnemyUsesSourceDamage(ac->actor) ||
+        (ac->actor && ac->actor->id == ACTOR_EN_BUBBLE && atElem &&
+         (atElem->atDmgInfo.dmgFlags & DMG_DEKU_NUT))))
     {
+        /* Native Shaboms need the hit notification even for zero-damage nuts. */
         *effect = 0;
         return 1.0f + acElem->acDmgInfo.defense;
     }

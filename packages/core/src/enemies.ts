@@ -12,7 +12,7 @@ import { enemy_mm_placement_data as mmPlacementData, enemy_placement_data as pla
 import { Random, shuffle } from './random';
 import { mmRoomOverlapStates } from './enemy-room-overlap';
 import { ENEMY_OOT_POSITIONS } from './enemy-position-data';
-import { enemySpawnSourceAllowed, enemySpawnTargetAllowed, enemySpawnMacroMatches, enemySpawnMacroGroup, enemySpawnLimit, enemySpawnMinibossEncounter, type EnemySpawnLocation, type EnemySpawnTarget } from './enemy-spawn-rules';
+import { spawnEncounter, spawnEncounterAllows, validateSpawnRegistry, type SpawnInventoryRow, enemySpawnSourceAllowed, enemySpawnTargetAllowed, enemySpawnMacroMatches, enemySpawnMacroGroup, enemySpawnLimit, type EnemySpawnLocation, type EnemySpawnTarget } from './enemy-spawn-rules';
 import { ENEMY_MEMORY_POLICY, OOT_GAMEPLAY_POLICY, enemyMemoryCost, enemyMemoryTotal, makeEnemyMemoryEvaluator, enemyNativeActorFact, enemyObjectBytes, EnemyMemoryAllocationError, enemySceneObjectBounds, enemyScriptedRootOffsets, enemyPinnedMmActors, enemyNativeActorDependencies, enemyNativeDynamicCollisionCount, enemyOriginalRoomDynamicCollisions, enemyScriptedControllerCost, solveWeightedMemory, solveAdaptiveMemory, type AdaptiveMemoryAssessment, type AdaptiveMemoryChoice, type EnemyMemoryCost, type EnemyMemoryOptions } from './enemy-memory';
 
 const spawnActorTypes = new Map(Object.values(ENEMY_SPAWN_ACTOR_TYPES).map(row => [row.game + '/' + row.actorId, row]));
@@ -913,13 +913,8 @@ export function enemyKeepsNativeEncounter(game: Game, actorId: number, params: n
       isMinibossEnemy(target.game, target.actorId, target.spawnParams));
 }
 
-export function isMinibossEncounter(game: Game, actorId: number, params?: number): boolean {
-  return enemySpawnMacroMatches('miniboss-encounter', { target: { game, actorId, params },
-    facts: { miniboss: isMinibossEnemy(game, actorId, params) } });
-}
-
-export function requiresMinibossReplacement(settings: Partial<Settings>, game: Game, actorId: number,
-  sourceIsMiniboss = isMinibossEncounter(game, actorId)): boolean {
+export function requiresMinibossReplacement(settings: Partial<Settings>, game: Game, _actorId: number,
+  sourceIsMiniboss: boolean): boolean {
   return (minibossOnly(settings, game) || !!settings.enemyShuffleMinibosses && !!settings.enemyShuffleMinibossType &&
     settings.enemyShuffleMinibossType !== 'anywhere') && sourceIsMiniboss;
 }
@@ -927,7 +922,7 @@ export function requiresMinibossReplacement(settings: Partial<Settings>, game: G
 function minibossPlacementAllowed(settings: Settings, host: Game, sourceActorId: number, target: Pick<EnemyDefinition, 'game' | 'actorId'> & {
   spawnParams?: number;
   variables?: readonly number[];
-}, sourceIsMiniboss = isMinibossEncounter(host, sourceActorId)): boolean {
+}, sourceIsMiniboss: boolean): boolean {
   const params = 'spawnParams' in target ? target.spawnParams : target.variables?.[0];
   if (target.game === host && target.actorId === (host === 'oot' ? 0x91 : 0x1e8) && (params === 0 || params === 0x4000) &&
     (params === 0x4000) !== sourceIsMiniboss)
@@ -970,7 +965,7 @@ export function scriptedMmTargetAllowed(target: EnemyDefinition, crossGame: bool
     !nativeEnemyCounterparts('oot', target.actorId, 'mm', target.spawnParams).length;
 }
 
-function dynamicEnemyPool(settings: Settings, host: Game, sourceId: number, scene?: number | readonly number[]): EnemyDefinition[] {
+function dynamicEnemyPool(settings: Settings, host: Game, sourceId: number, scene: number | readonly number[] | undefined, sourceIsMiniboss: boolean): EnemyDefinition[] {
   const scenes = scene === undefined ? [] : typeof scene === 'number' ? [scene] : scene;
   const keys = new Set(enemyShuffleRoster(host, settings.crossGameEnemies).flatMap(row => row.legacyKeys));
   const forms = new Map<string, EnemyDefinition>();
@@ -996,7 +991,7 @@ function dynamicEnemyPool(settings: Settings, host: Game, sourceId: number, scen
      * replacements on the floor. They do not retain an authored wall transform. */
     if (!enemySpawnMacroMatches('dynamic-habitat-allowed', { target: { ...enemy, params: enemy.spawnParams }, settings })) continue;
     if (isMinibossEnemy(enemy.game, enemy.actorId, enemy.spawnParams) && !settings.enemyShuffleMinibosses && !minibossOnly(settings, host) ||
-      !minibossPlacementAllowed(settings, host, sourceId, enemy)) continue;
+      !minibossPlacementAllowed(settings, host, sourceId, enemy, sourceIsMiniboss)) continue;
     const identity = `${enemy.game}/${enemy.actorId}/${enemy.spawnParams}`;
     if (!forms.has(identity))
       forms.set(identity, enemy);
@@ -1077,16 +1072,29 @@ function ootSpawnLocations(location: OotEnemizerLocation): EnemySpawnLocation[] 
     .map(([scene, room, setup, slot]) => ({ game: 'oot' as const, scene, room, setup, slot, mq: false }))];
 }
 
-function ootSpawnIsMinibossEncounter(defs: readonly EnemyDefinition[], location: OotEnemizerLocation, settings: Settings): boolean {
-  return enemySpawnMinibossEncounter(ootSpawnLocations(location), ootSpawnSource(defs, location),
-    isMinibossEncounter('oot', location.actorId), settings);
+function namedSpawnId(game: Game, key: string): string {
+  return `${game}/named/${key}`;
+}
+
+function spawnPointId(location: EnemySpawnLocation, grotto?: number): string {
+  const layout = location.game === 'oot' ? (location.mq ? 'mq' : 'vanilla') : (grotto === undefined ? 'normal' : `grotto-${grotto}`);
+  return `${location.game}/${layout}/${location.scene ?? '-'}/${location.room ?? '-'}/${location.setup ?? '-'}/${location.slot ?? '-'}`;
+}
+
+function ootSpawnRegistryId(location: OotEnemizerLocation): string {
+  return location.fieldSlot === undefined ? spawnPointId({ ...location, game: 'oot' }) :
+    namedSpawnId('oot', OOT_DYNAMIC_PLANNER_SLOTS[location.fieldSlot].key);
+}
+
+function ootSpawnIsMinibossEncounter(location: OotEnemizerLocation): boolean {
+  return spawnEncounter(ootSpawnRegistryId(location)).minibossEncounter;
 }
 
 function ootSpawnSource(defs: readonly EnemyDefinition[], location: OotEnemizerLocation) {
   const key = location.fieldSlot === undefined
     ? location.broken ? undefined : ootEnemizerSourceKey(defs, location)
     : OOT_DYNAMIC_PLANNER_SLOTS[location.fieldSlot].key;
-  return { ...location, key, habitat: key ? enemyDefinition(key).habitat : undefined };
+  return { ...location, key, encounterId: ootSpawnRegistryId(location), habitat: key ? enemyDefinition(key).habitat : undefined };
 }
 
 const { sceneKeeps: nativeSceneKeeps, roomCounts } = placementData;
@@ -1296,7 +1304,7 @@ function ootEnemizerCandidatePools(defs: readonly EnemyDefinition[], settings: S
       pool = pool.filter(({ def }) => !isMinibossEnemy(def.game, def.actorId, def.spawnParams));
     else
       pool = pool.filter(({ def }) => minibossPlacementAllowed(settings, 'oot', location.actorId, def,
-        ootSpawnIsMinibossEncounter(defs, location, settings)));
+        ootSpawnIsMinibossEncounter(location)));
     if (forced) {
       pool = pool.filter(row => row.def.key === forced || (row.index >= 0 &&
         forcedOotForms.some(def => def.actorId === row.def.actorId && def.spawnParams === row.def.spawnParams)));
@@ -1516,7 +1524,7 @@ function makeOotEnemizerScenePlan(defs: readonly EnemyDefinition[], settings: Se
   }[] = [];
   const groups = new Map<string, OotEnemizerLocation[]>();
   for (const location of candidates.keys()) {
-    const key = settings.enemyShuffleOotMode === 'grouped' ? `${location.scene}/${ootEnemizerModelBank(baseDefinition(defs, location.actorId))}/${ootSpawnIsMinibossEncounter(defs, location, settings)}` : ootEnemizerLocationKey(location);
+    const key = settings.enemyShuffleOotMode === 'grouped' ? `${location.scene}/${ootEnemizerModelBank(baseDefinition(defs, location.actorId))}/${ootSpawnIsMinibossEncounter(location)}` : ootEnemizerLocationKey(location);
     const entries = groups.get(key) ?? [];
     entries.push(location);
     groups.set(key, entries);
@@ -1757,15 +1765,15 @@ export function enemyNeverShuffled(game: Game, actorId: number): boolean {
   return enemySpawnMacroMatches('never-shuffled', { target: { game, actorId } });
 }
 
-export function enemySourceAllowedBySettings(game: Game, actorId: number, settings: Settings, params?: number,
-  sourceIsMiniboss = isMinibossEncounter(game, actorId, params)): boolean {
+export function enemySourceAllowedBySettings(game: Game, actorId: number, settings: Settings, params: number | undefined,
+  sourceIsMiniboss: boolean): boolean {
   /* Wallmaster Shuffle owns natural Wallmaster source slots: they must stay
    * in place so their authored entrance-shuffle warp destinations still work. */
   if (minibossOnly(settings, game) && !sourceIsMiniboss)
     return false;
   if (settings.erWallmasters !== 'none' && (game === 'oot' ? actorId === 0x11 : actorId === 0x0a))
     return false;
-  return enemySpawnMacroMatches('source-settings-allowed', { target: { game, actorId, params }, settings, facts: { miniboss: !minibossOnly(settings, game) && isMinibossEnemy(game, actorId, params) } });
+  return enemySpawnMacroMatches('source-settings-allowed', { target: { game, actorId, params }, settings, facts: { miniboss: !minibossOnly(settings, game) && sourceIsMiniboss } });
 }
 
 function ootResourceExcess(report: ReturnType<typeof enemyOotSceneMemoryReports>[number]): number {
@@ -1854,7 +1862,8 @@ function makeOotEnemizerPlan(defs: readonly EnemyDefinition[], settings: Setting
   const scenes = new Map<number, OotEnemizerLocation[]>();
   const mq = resolvedMq(settings, options.mqDungeons);
   for (const location of [...ootEnemizerLocations(mq, settings), ...ootFieldStalchildLocations(), ...(!mq.has(DUNGEONS.Forest) ? ootForestBowLocations() : []), ...ootBurialEnemyLocations(mq)]) {
-    if (!enemySourceAllowedBySettings('oot', location.actorId, settings, undefined, ootSpawnIsMinibossEncounter(defs, location, settings))) continue;
+    if (!spawnEncounterAllows(ootSpawnRegistryId(location), settings, 'oot') ||
+      !enemySourceAllowedBySettings('oot', location.actorId, settings, undefined, ootSpawnIsMinibossEncounter(location))) continue;
     const source = ootSpawnSource(defs, location);
     if (!ootSpawnLocations(location).every(where => enemySpawnSourceAllowed(settings, where, source))) continue;
     const rows = scenes.get(location.scene);
@@ -1936,22 +1945,28 @@ type MmScene = {
 
 function mmSpawnLocations(scene: MmScene, actor: MmActor): EnemySpawnLocation[] {
   return scene.maps.flatMap(map => map.actors.filter(alias => alias.offset === actor.offset)
-    .map(alias => ({ game: 'mm' as const, scene: scene.scene, room: map.room, setup: map.setup, slot: alias.slot })));
+    .map(alias => ({ game: 'mm' as const, scene: scene.scene, room: map.room, setup: map.setup, slot: alias.slot, grotto: scene.grotto })));
 }
 
-function mmSpawnSource(actor: MmActor, key?: string) {
+function mmSpawnSource(scene: MmScene, actor: MmActor, key?: string) {
   const habitat = ENEMIES.find(enemy => enemy.game === 'mm' && enemy.actorId === actor.actorId)?.habitat;
-  return { ...actor, habitat, key: actor.actorId === 0x12d && actor.params === 2 ? MM_BIO_BABA_LILY_PAD_KEY : key };
+  return { ...actor, habitat, encounterId: mmSpawnRegistryId(scene, actor), key: actor.actorId === 0x12d && actor.params === 2 ? MM_BIO_BABA_LILY_PAD_KEY : key };
 }
 
-function mmSpawnIsMinibossEncounter(settings: Settings, scene: MmScene, actor: MmActor, key?: string): boolean {
-  return enemySpawnMinibossEncounter(mmSpawnLocations(scene, actor), mmSpawnSource(actor, key),
-    isMinibossEncounter('mm', actor.actorId), settings);
+function mmSpawnRegistryId(scene: MmScene, actor: MmActor): string {
+  const points = mmSpawnLocations(scene, actor).map(where => spawnPointId(where, scene.grotto)).sort();
+  if (!points.length) throw new Error('Missing MM physical spawn: ' + actor.offset);
+  return points[0];
+}
+
+function mmSpawnIsMinibossEncounter(scene: MmScene, actor: MmActor): boolean {
+  return spawnEncounter(mmSpawnRegistryId(scene, actor)).minibossEncounter;
 }
 
 function mmSpawnSourceAllowed(settings: Settings, scene: MmScene, actor: MmActor, key?: string): boolean {
-  const source = mmSpawnSource(actor, key);
-  return enemySourceAllowedBySettings('mm', actor.actorId, settings, undefined, mmSpawnIsMinibossEncounter(settings, scene, actor, key)) &&
+  const source = mmSpawnSource(scene, actor, key);
+  return spawnEncounterAllows(mmSpawnRegistryId(scene, actor), settings, 'mm') &&
+    enemySourceAllowedBySettings('mm', actor.actorId, settings, undefined, mmSpawnIsMinibossEncounter(scene, actor)) &&
     mmSpawnLocations(scene, actor).every(where => enemySpawnSourceAllowed(settings, where, source));
 }
 
@@ -1963,7 +1978,7 @@ function mmSpawnTargetAllowed(scene: MmScene, actor: MmActor, target: EnemySpawn
   // The shuffled Dexihand uses zeroed throw parameters. Keep authored throws out of that conversion.
   if (actor.actorId === 0x1d1 && target.game === 'mm' && target.actorId === actor.actorId)
     return false;
-  const source = mmSpawnSource(actor, key);
+  const source = mmSpawnSource(scene, actor, key);
   return enemyTargetCompatible(settings, mmSpawnLogicName(scene, actor), target) &&
     mmSpawnLocations(scene, actor).every(where => enemySpawnTargetAllowed(where, source, target, settings));
 }
@@ -2019,7 +2034,7 @@ function mmSceneSkipped(scene: number): boolean {
   return enemySpawnMacroMatches('mm-skipped-scene', { location: { scene } });
 }
 
-type MmTargetGroupAllows = (source: readonly MmEnemy[], target: MmEnemy, actor?: MmActor) => boolean;
+type MmTargetGroupAllows = (source: readonly MmEnemy[], target: MmEnemy, actor?: MmActor, members?: readonly MmActor[]) => boolean;
 
 export function mmPlacementTypeAllows(source: Pick<MmEnemy, 'type'> & Partial<Pick<MmEnemy, 'game' | 'actorId'>>, target: Pick<MmEnemy, 'type'> & Partial<Pick<MmEnemy, 'game' | 'actorId'>>): boolean {
   return enemySpawnMacroMatches('mm-placement-type', { source, target });
@@ -2039,7 +2054,7 @@ function solveMmScene(scene: MmScene, nativeRoster: readonly MmEnemy[], targetRo
       (e.objectId <= 3 || objects.has(e.objectId)));
     if (!source || !mmSpawnSourceAllowed(memoryOptions, scene, actor, source.key))
       return;
-    const groupKey = `${source.objectId}/${mmSpawnIsMinibossEncounter(memoryOptions, scene, actor, source.key)}`;
+    const groupKey = `${source.objectId}/${mmSpawnIsMinibossEncounter(scene, actor)}`;
     const entries = groups.get(groupKey) ?? [];
     const existing = entries.find(e => e.actor.offset === actor.offset);
     if (existing)
@@ -2051,7 +2066,7 @@ function solveMmScene(scene: MmScene, nativeRoster: readonly MmEnemy[], targetRo
   const rows = [...groups.values()].map(entries => ({ entries, copies: entries.length }));
   const allocations = rows.map(row => {
     const sources = [...new Set(row.entries.map(e => e.source))];
-    const compatible = targetRoster.filter(target => groupAllows(sources, target) &&
+    const compatible = targetRoster.filter(target => groupAllows(sources, target, undefined, row.entries.map(entry => entry.actor)) &&
       row.entries.every(({ actor, source }) => groupAllows([source], target, actor) &&
         (ignoreRestrictions || mmPlacementTypeAllows(source, target))));
     if (!compatible.length && row.entries.some(entry => enemyCompatibilityRule(memoryOptions, mmSpawnLogicName(scene, entry.actor))))
@@ -2605,7 +2620,7 @@ function solveMmSceneIndividual(scene: MmScene, nativeRoster: readonly MmEnemy[]
     return [];
   const sameSpawn = new Map<string, Slot[]>();
   for (const slot of slots.values()) {
-    const key = `${slot.actor.raw.join(',')}/${mmSpawnIsMinibossEncounter(memoryOptions, scene, slot.actor, slot.source.key)}`;
+    const key = `${slot.actor.raw.join(',')}/${mmSpawnIsMinibossEncounter(scene, slot.actor)}`;
     const entries = sameSpawn.get(key);
     if (entries)
       entries.push(slot);
@@ -3018,7 +3033,7 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
       scene.maps.forEach((map, mapIndex) => map.actors.forEach(actor => {
         const source = native.find(e => e.actorId === actor.actorId && mmSourceFormAllowed(actor) && (e.objectId <= 3 || objects.has(e.objectId)));
         if (!source || !mmSpawnSourceAllowed(settings, scene, actor, source.key) || !mmSpawnTargetAllowed(scene, actor, selected, settings, source.key)) return;
-        if (!source || ((settings.enemyShuffleMinibosses || minibossOnly(settings, 'mm')) && !minibossPlacementAllowed(settings, 'mm', actor.actorId, selected, mmSpawnIsMinibossEncounter(settings, scene, actor, source.key))) || enemySpawnMacroMatches('mm-native-dinolfos-target', { target: selected }) && !enemyMmCounterpartSlotAllowed(actor.actorId, actor.params, actor.raw, selected.actorId) ||
+        if (!source || ((settings.enemyShuffleMinibosses || minibossOnly(settings, 'mm')) && !minibossPlacementAllowed(settings, 'mm', actor.actorId, selected, mmSpawnIsMinibossEncounter(scene, actor))) || enemySpawnMacroMatches('mm-native-dinolfos-target', { target: selected }) && !enemyMmCounterpartSlotAllowed(actor.actorId, actor.params, actor.raw, selected.actorId) ||
           (!mmAquaticSpawnAllowed(actor, selected) ||
             (enemyIsCarnivorousLily(selected.game, selected.actorId) && !mmWaterSurfaceSlot(actor.offset))))
           return;
@@ -3063,14 +3078,14 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
     onProgress?.('Preparing MM enemy placements', completed++, MM_ENEMY_SCENES.length);
     try {
       const sceneIndividual = individual;
-      const allows: MmTargetGroupAllows = (source, target, actor) => {
-        const sourceSlots = () => actor ? [actor] : scene.maps.flatMap(map => map.actors).filter(slot => mmSourceFormAllowed(slot) && source.some(row => row.actorId === slot.actorId));
+      const allows: MmTargetGroupAllows = (source, target, actor, members) => {
+        const sourceSlots = () => actor ? [actor] : members ?? [];
         if (!sourceSlots().every(slot => mmSpawnTargetAllowed(scene, slot, { ...enemyDefinition(target.key), spawnParams: target.variables[0] }, settings,
           source.find(row => row.actorId === slot.actorId)?.key)))
           return false;
         if (actor && (settings.enemyShuffleMinibosses || minibossOnly(settings, 'mm')) &&
           !minibossPlacementAllowed(settings, 'mm', actor.actorId, target,
-            mmSpawnIsMinibossEncounter(settings, scene, actor, source.find(row => row.actorId === actor.actorId)?.key)))
+            mmSpawnIsMinibossEncounter(scene, actor)))
           return false;
         if (!enemySpawnMacroMatches('mm-scripted-scene-target', { target, facts: { scriptedDinolfos: scriptedDinolfosScenes.has(scene.scene) } }))
           return false;
@@ -3089,7 +3104,7 @@ function makeMmEnemyPlan(defs: readonly EnemyDefinition[], settings: Settings, r
         ...target, variables: target.variables.filter(params => !isGraveyardExpandingTarget(scene.scene, target.game, target.actorId, params)),
       })).filter(target => target.variables.length);
       const actorChanges = sceneIndividual
-        ? solveMmSceneIndividual(scene, native, sceneTargets, next, allows, false, target => enemyWeight(settings, 'mm', target), (source, actor) => requiresMinibossReplacement(settings, 'mm', source.actorId, mmSpawnIsMinibossEncounter(settings, scene, actor, source.key)), supplemental, settings, problems)
+        ? solveMmSceneIndividual(scene, native, sceneTargets, next, allows, false, target => enemyWeight(settings, 'mm', target), (source, actor) => requiresMinibossReplacement(settings, 'mm', source.actorId, mmSpawnIsMinibossEncounter(scene, actor)), supplemental, settings, problems)
         : solveMmScene(scene, native, sceneTargets, next, allows, false, target => enemyWeight(settings, 'mm', target), supplemental, settings, problems);
       emitScenes.push(() => {
         for (const change of actorChanges)
@@ -3398,9 +3413,11 @@ function mmAllocationError(message: string, scene: MmScene, rows: readonly MmMem
 
 export function enemyGoldTargetPool(settings: Settings, source: typeof ENEMY_GOLD_SOURCES[number]): EnemyDefinition[] {
   const locations = source.slots.map(slot => ({ ...slot, game: source.game, scene: source.scene }));
-  if (!locations.every(where => enemySpawnSourceAllowed(settings, where, { ...where, key: source.key }))) return [];
-  const targets = dynamicEnemyPool(settings, source.game, source.game === 'oot' ? 0x95 : 0x39, source.scene)
-    .filter(target => enemyTargetCompatible(settings, source.key.replaceAll('-', '_'), target) && locations.every(where => enemySpawnTargetAllowed(where, { ...where, key: source.key }, target, settings)));
+  if (!locations.every(where => enemySpawnSourceAllowed(settings, where, { ...where, key: source.key, encounterId: namedSpawnId(source.game, source.key) }))) return [];
+  const id = namedSpawnId(source.game, source.key);
+  if (!spawnEncounterAllows(id, settings, source.game)) return [];
+  const targets = dynamicEnemyPool(settings, source.game, source.game === 'oot' ? 0x95 : 0x39, source.scene, spawnEncounter(id).minibossEncounter)
+    .filter(target => enemyTargetCompatible(settings, source.key.replaceAll('-', '_'), target) && locations.every(where => enemySpawnTargetAllowed(where, { ...where, key: source.key, encounterId: namedSpawnId(source.game, source.key) }, target, settings)));
   if (!targets.length && enemyCompatibilityRule(settings, source.key.replaceAll('-', '_')))
     throw new Error('No compatible weighted enemy for ' + source.location);
   return targets;
@@ -3409,6 +3426,7 @@ export function enemyGoldTargetPool(settings: Settings, source: typeof ENEMY_GOL
 function supplementalEnemyTargets(settings: Settings, binding: Pick<EnemyReplacement, 'source' | 'kind'>,
   targets: readonly EnemyDefinition[], mq: ReadonlySet<string>): EnemyDefinition[] {
   const source = enemyDefinition(binding.source);
+  if (!spawnEncounterAllows(namedSpawnId(source.game, source.key), settings, source.game)) return [];
   const points: { location: EnemySpawnLocation; source: { key: string; actorId: number; params: number; habitat: EnemyDefinition['habitat'] } }[] = source.game === 'mm'
     ? MM_NATIVE_SCENES.flatMap(scene => scene.maps.flatMap(map => (binding.kind === 'keeta-guards' && scene.scene === 0x43
       ? map.actors.filter(actor => actor.actorId === 0x11b || actor.actorId === 0x28f)
@@ -3428,9 +3446,9 @@ function supplementalEnemyTargets(settings: Settings, binding: Pick<EnemyReplace
     }));
   if (!points.length)
     points.push({ location: { game: source.game }, source: { key: source.key, actorId: source.actorId, habitat: source.habitat, params: source.spawnParams } });
-  if (!points.every(point => enemySpawnSourceAllowed(settings, point.location, point.source))) return [];
+  if (!points.every(point => enemySpawnSourceAllowed(settings, point.location, { ...point.source, encounterId: namedSpawnId(point.location.game, point.source.key) }))) return [];
   const name = enemyPlacementLogicName({ ...binding, target: source.key });
-  const eligible = targets.filter(target => enemyTargetCompatible(settings, name, target) && points.every(point => enemySpawnTargetAllowed(point.location, point.source, target, settings)));
+  const eligible = targets.filter(target => enemyTargetCompatible(settings, name, target) && points.every(point => enemySpawnTargetAllowed(point.location, { ...point.source, encounterId: namedSpawnId(point.location.game, point.source.key) }, target, settings)));
   if (!eligible.length && enemyCompatibilityRule(settings, name))
     throw new Error('No compatible weighted enemy for ' + binding.source);
   return eligible;
@@ -3457,24 +3475,24 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
   };
   const enabled = (game: Game) => (settings.games === 'ootmm' || settings.games === game) &&
     (game === 'oot' ? settings.enemyShuffleOot || settings.enemyShuffleOotMinibossOnly : settings.enemyShuffleMm || settings.enemyShuffleMmMinibossOnly);
-  if (enabled('oot') && (!settings.enemyShufflePreserveMinibosses || minibossOnly(settings, 'oot'))) {
+  if (enabled('oot')) {
     for (const source of ['oot-dead-hand-encounter', 'oot-dark-link-encounter']) {
       const targets = supplementalEnemyTargets(settings, { source, kind: 'arena' },
-        dynamicEnemyPool(settings, 'oot', source === 'oot-dead-hand-encounter' ? 0xa4 : 0x33, OOT_ENCOUNTER_MEMORY_ROOMS[source].map(([scene]) => scene)), mq);
+        dynamicEnemyPool(settings, 'oot', source === 'oot-dead-hand-encounter' ? 0xa4 : 0x33, OOT_ENCOUNTER_MEMORY_ROOMS[source].map(([scene]) => scene), spawnEncounter(namedSpawnId('oot', source)).minibossEncounter), mq);
       const target = choose(targets, 'oot');
       if (target)
         output.push({ source, target: target.key, kind: 'arena' });
     }
   }
   for (const source of NATIVE_FIGHT_RESTORATION_SOURCES) {
-    if (!enabled(source.game) || !enemySourceAllowedBySettings(source.game, source.actorId, settings, source.params[0]) ||
+    if (!enabled(source.game) || !enemySourceAllowedBySettings(source.game, source.actorId, settings, source.params[0], spawnEncounter(namedSpawnId(source.game, source.key)).minibossEncounter) ||
       !nativeFightRestorationRoomAllowed(source.key, 2, settings))
       continue;
     const scenes = source.game === 'oot' ? OOT_ENCOUNTER_MEMORY_ROOMS[source.key].map(([scene]) => scene) :
       MM_NATIVE_SCENES.filter(scene => scene.maps.some(map => map.actors.some(actor =>
         actor.actorId === source.actorId && (source.params as readonly number[]).includes(actor.params)))).map(scene => scene.scene);
     let targets = supplementalEnemyTargets(settings, { source: source.key, kind: 'restore' },
-      dynamicEnemyPool(settings, source.game, source.actorId, scenes), mq);
+      dynamicEnemyPool(settings, source.game, source.actorId, scenes, spawnEncounter(namedSpawnId(source.game, source.key)).minibossEncounter), mq);
     if (source.game === 'oot' && OOT_ENCOUNTER_MEMORY_ROOMS[source.key]
       .filter(([, room]) => nativeFightRestorationRoomAllowed(source.key, room, settings)).length > 1) {
       const ordinary = targets.filter(target => !isMinibossEnemy(target.game, target.actorId, target.spawnParams) &&
@@ -3487,17 +3505,17 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
   }
   if (enabled('mm')) {
     const guardBinding = { source: KEETA_GUARDS.key, kind: 'keeta-guards' as const };
-    const guard = minibossOnly(settings, 'mm') ? undefined : choose(supplementalEnemyTargets(settings, guardBinding, dynamicEnemyPool(settings, 'mm', 0xed, 0x43), mq), 'mm', guardBinding);
+    const guard = choose(supplementalEnemyTargets(settings, guardBinding, dynamicEnemyPool(settings, 'mm', 0xed, 0x43, spawnEncounter(namedSpawnId('mm', KEETA_GUARDS.key)).minibossEncounter), mq), 'mm', guardBinding);
     if (guard)
       output.push({ source: KEETA_GUARDS.key, target: guard.key, kind: 'keeta-guards' });
     for (const source of SCRIPTED_MM_ENEMIES) {
-      if (!enemySourceAllowedBySettings(source.game, source.actorId, settings, source.spawnParams) ||
+      if (!enemySourceAllowedBySettings(source.game, source.actorId, settings, source.spawnParams, spawnEncounter(namedSpawnId(source.game, source.key)).minibossEncounter) ||
         !enemySpawnMacroMatches('mm-scripted-source', { source, settings }))
         continue;
       const scenes = MM_NATIVE_SCENES.filter(scene => scene.maps.some(map => map.actors.some(actor =>
         actor.actorId === source.actorId && enemyScriptedRootOffsets[scene.scene]?.includes(actor.offset)))).map(scene => scene.scene);
       const targets = supplementalEnemyTargets(settings, { source: source.key, kind: 'scripted' },
-        dynamicEnemyPool(settings, 'mm', source.actorId, scenes).filter(enemy => scriptedMmTargetAllowed(enemy, settings.crossGameEnemies, source)), mq);
+        dynamicEnemyPool(settings, 'mm', source.actorId, scenes, spawnEncounter(namedSpawnId('mm', source.key)).minibossEncounter).filter(enemy => scriptedMmTargetAllowed(enemy, settings.crossGameEnemies, source)), mq);
       const target = choose(targets, source.game, { source: source.key, kind: 'scripted' });
       if (target)
         output.push({ source: source.key, target: target.key, kind: 'scripted' });
@@ -3505,7 +3523,7 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
   }
   if (settings.enemyShuffleGoldSkulltulas) {
     for (const source of ENEMY_GOLD_SOURCES) {
-      if (!enabled(source.game) || minibossOnly(settings, source.game)) continue;
+      if (!enabled(source.game)) continue;
       if (source.game === 'oot' && source.scene <= 9) {
         const dungeon = ['DT', 'DC', 'JJ', 'Forest', 'Fire', 'Water', 'Spirit', 'Shadow', 'BotW', 'IC'][source.scene];
         if (source.slots[0].mq !== mq.has(DUNGEONS[dungeon])) continue;
@@ -3519,21 +3537,26 @@ function makeSupplementalEnemyPlan(defs: readonly EnemyDefinition[], settings: S
       }
     }
   }
-  if (enabled('oot') && !minibossOnly(settings, 'oot')) {
-    for (const scene of [0x5c, 0x5e]) {
+  if (enabled('oot')) {
+    for (const scene of [0x5c, 0x5e]) for (const sourceIsMiniboss of [false, true]) {
       const points = OOT_DESERT_LEEVER_SLOTS.filter(slot => slot.scene === scene).map(slot => ({
         slot,
         location: { game: 'oot' as const, scene, room: slot.room, mq: false },
         source: { key: slot.key, actorId: 0x1c, params: 0 },
-      })).filter(point => enemySpawnSourceAllowed(settings, point.location, point.source));
-      const targets = dynamicEnemyPool(settings, 'oot', 0x1c, scene);
+      })).filter(point => {
+        const id = namedSpawnId('oot', point.slot.key);
+        return spawnEncounterAllows(id, settings, 'oot') && spawnEncounter(id).minibossEncounter === sourceIsMiniboss &&
+          enemySpawnSourceAllowed(settings, point.location, { ...point.source, encounterId: namedSpawnId(point.location.game, point.source.key) });
+      });
+      if (!points.length) continue;
+      const targets = dynamicEnemyPool(settings, 'oot', 0x1c, scene, sourceIsMiniboss);
       const grouped = settings.enemyShuffleOotMode === 'grouped';
       const groupedTargets = grouped ? targets.filter(target => points.every(point =>
-        enemySpawnTargetAllowed(point.location, point.source, target, settings))) : [];
+        enemySpawnTargetAllowed(point.location, { ...point.source, encounterId: namedSpawnId(point.location.game, point.source.key) }, target, settings))) : [];
       const groupTarget = grouped ? choose(groupedTargets, 'oot') : undefined;
       for (const point of points) {
         const candidates = grouped ? groupedTargets : targets.filter(target =>
-          enemySpawnTargetAllowed(point.location, point.source, target, settings));
+          enemySpawnTargetAllowed(point.location, { ...point.source, encounterId: namedSpawnId(point.location.game, point.source.key) }, target, settings));
         const target = grouped ? groupTarget : choose(candidates, 'oot');
         if (!target) continue;
         output.push({ source: point.slot.key, target: target.key, kind: 'desert-spawner' });
@@ -4169,8 +4192,8 @@ function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): v
       } else {
         const sourceActor = mmScene!.maps[row.placement!.mapIndex].actors.find(actor => actor.offset === row.placement!.actorOffset)!;
         const locations = mmSpawnLocations(mmScene!, sourceActor);
-        candidates = dynamicEnemyPool(settings, host, sourceId, scene).filter(target => enemyTargetCompatible(settings, enemyPlacementLogicName(row), target) && locations.every(location =>
-          enemySpawnTargetAllowed(location, { ...sourceActor, key: row.source }, target, settings)));
+        candidates = dynamicEnemyPool(settings, host, sourceId, scene, mmSpawnIsMinibossEncounter(mmScene!, sourceActor)).filter(target => enemyTargetCompatible(settings, enemyPlacementLogicName(row), target) && locations.every(location =>
+          enemySpawnTargetAllowed(location, { ...sourceActor, key: row.source, encounterId: mmSpawnRegistryId(mmScene!, sourceActor) }, target, settings)));
       }
       const unique = [...new Map(candidates.map(enemy => [`${enemy.game}/${enemy.actorId}/${enemy.spawnParams}`, enemy])).values()];
       const choices = unique.map(value => ({
@@ -4207,10 +4230,75 @@ function planEnemySplits(plan: EnemyPlan, settings: Settings, random: Random): v
   }
 }
 
+export function enemySpawnInventory(): SpawnInventoryRow[] {
+  const rows = new Map<string, SpawnInventoryRow>();
+  const add = (id: string, game: Game, actorId: number, sourceKey: string | undefined,
+    points: readonly EnemySpawnLocation[], sharedController = false, grotto?: number) => {
+    const locations = [...new Set(points.map(point => spawnPointId(point, grotto)))].sort();
+    const row: SpawnInventoryRow = { id, game, actorId, ...(sourceKey === undefined ? {} : { sourceKey }), locations, sharedController };
+    const previous = rows.get(id);
+    if (previous && JSON.stringify(previous) !== JSON.stringify(row))
+      throw new Error('Conflicting physical enemy spawn inventory: ' + id);
+    rows.set(id, row);
+  };
+  const ootLocations: readonly OotEnemizerLocation[] = [...OOT_ENEMIZER.locations, ...ootFieldStalchildLocations(), ...ootForestBowLocations(), ...ootBurialEnemyLocations(new Set())];
+  for (const location of ootLocations) {
+    const points = ootSpawnLocations(location);
+    const source = enemyNeverShuffled('oot', location.actorId) && location.fieldSlot === undefined ?
+      { actorId: location.actorId, key: undefined } : ootSpawnSource(ENEMIES, location);
+    add(ootSpawnRegistryId(location), 'oot', location.actorId, source.key, points);
+  }
+  const mmRoster = new Map<number, string>();
+  for (const source of MM_NATIVE_ROSTER) if (!mmRoster.has(source.actorId))
+    mmRoster.set(source.actorId, mmNativeRosterKey(source.key));
+  for (const source of mmNativeCounterpartRoster(ENEMIES)) if (!mmRoster.has(source.actorId))
+    mmRoster.set(source.actorId, source.actorId === 0x50 ? 'mm-skullwalltula-native-target' : source.key);
+  if (!mmRoster.has(0x216)) mmRoster.set(0x216, 'mm-leever-native-target');
+  for (const scene of MM_ENEMY_SCENES) {
+    const seen = new Set<number>();
+    for (const map of scene.maps) for (const actor of map.actors) {
+      const key = mmRoster.get(actor.actorId);
+      if (key === undefined || seen.has(actor.offset)) continue;
+      seen.add(actor.offset);
+      const points = mmSpawnLocations(scene, actor), source = mmSpawnSource(scene, actor, key);
+      add(mmSpawnRegistryId(scene, actor), 'mm', actor.actorId, source.key, points, false, scene.grotto);
+    }
+  }
+  const named = (source: EnemyDefinition, kind: EnemyReplacement['kind']) => {
+    const points: EnemySpawnLocation[] = source.game === 'oot' ? (OOT_ENCOUNTER_MEMORY_ROOMS[source.key] ?? []).map(([scene, room]) =>
+      ({ game: 'oot', scene, room, setup: 0, mq: false })) : MM_NATIVE_SCENES.flatMap(scene => scene.maps.flatMap(map =>
+      mmEncounterRoots(scene, map, { source: source.key, target: source.key, kind }).map(actor =>
+        ({ game: 'mm' as const, scene: scene.scene, room: map.room, setup: map.setup, slot: actor.slot }))));
+    if (!points.length) points.push({ game: source.game });
+    add(namedSpawnId(source.game, source.key), source.game, source.actorId, source.key, points,
+      kind === 'arena' || kind === 'restore' || kind === 'scripted' || kind === 'keeta-guards');
+  };
+  for (const key of ['oot-dead-hand-encounter', 'oot-dark-link-encounter']) named(enemyDefinition(key), 'arena');
+  for (const source of NATIVE_FIGHT_RESTORATION_SOURCES) named(enemyDefinition(source.key), 'restore');
+  for (const source of SCRIPTED_MM_ENEMIES) named(source, 'scripted');
+  named(KEETA_GUARDS, 'keeta-guards');
+  for (const source of ENEMY_GOLD_SOURCES) {
+    const actorId = source.game === 'oot' ? 0x95 : 0x39;
+    const points = source.slots.map(slot => ({ ...slot, game: source.game, scene: source.scene }));
+    add(namedSpawnId(source.game, source.key), source.game, actorId, source.key, points);
+  }
+  for (const slot of OOT_DESERT_LEEVER_SLOTS) {
+    const points: EnemySpawnLocation[] = [{ game: 'oot', scene: slot.scene, room: slot.room, mq: false }];
+    add(namedSpawnId('oot', slot.key), 'oot', 0x1c, slot.key, points);
+  }
+  return [...rows.values()].sort((a, b) => a.id.localeCompare(b.id));
+}
+
+let spawnRegistryValidated = false;
+
 export function makeEnemyPlan(settings: Settings, random: Random, layouts: {
   mqDungeons?: ReadonlySet<string>;
   compatibility?: EnemyPlanCompatibility;
 } = {}, onProgress?: EnemyPlanProgress): EnemyPlan {
+  if (!spawnRegistryValidated && (settings.enemyShuffleOot || settings.enemyShuffleMm || settings.enemyShuffleOotMinibossOnly || settings.enemyShuffleMmMinibossOnly)) {
+    validateSpawnRegistry(enemySpawnInventory());
+    spawnRegistryValidated = true;
+  }
   if (settings.enemyShuffleOotMinibossOnly || settings.enemyShuffleMmMinibossOnly) {
     return (['oot', 'mm'] as const).flatMap(game => {
       if (settings.games !== 'ootmm' && settings.games !== game)

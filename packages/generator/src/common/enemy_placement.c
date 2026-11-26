@@ -361,11 +361,20 @@ void comboEnemyFlyingAttackAim(Actor* actor, PlayState* play, int launch)
     if (distance < 1.f)
         return;
     if (launch)
+    {
         actor->world.rot.y = actor->yawTowardsPlayer;
+        actor->speed = 10.f * xz / distance;
+        actor->velocity.y = 10.f * dy / distance;
+    }
     else
-        Math_SmoothStepToS(&actor->world.rot.y, actor->yawTowardsPlayer, 2, 0x800, 1);
-    actor->speed = 10.f * xz / distance;
-    actor->velocity.y = 10.f * dy / distance;
+    {
+        /* Half the yaw correction and vertical tracking, without slowing flight. */
+        Math_SmoothStepToS(&actor->world.rot.y, actor->yawTowardsPlayer, 4, 0x400, 1);
+        f32 targetY = 10.f * dy / distance;
+        actor->velocity.y += 0.5f * (targetY - actor->velocity.y);
+        actor->velocity.y = MAX(-10.f, MIN(10.f, actor->velocity.y));
+        actor->speed = sqrtf(MAX(0.f, 100.f - SQ(actor->velocity.y)));
+    }
 }
 
 int comboEnemyNativePlacementIsShuffled(Actor* actor)
@@ -2172,6 +2181,114 @@ static int ootEnemizerPlacementKey(PlayState* play, u32 room, u32 slot, u32* out
     return 1;
 }
 
+typedef struct
+{
+    u32 visit;
+    u32 slots[8];
+    u16 geometries;
+} OotHallwayWait;
+static OotHallwayWait sOotHallwayWait[32];
+
+static void ootHallwayBegin(PlayState* play, ActorEntry* list, u32 count)
+{
+    s32 room = play->roomCtx.curRoom.num;
+    if (room < 0 || room >= 32)
+        return;
+    OotHallwayWait* wait = &sOotHallwayWait[room];
+    memset(wait, 0, sizeof(*wait));
+    if (play->sceneId != 3 || !list || count > 255 || sOotEnemizerRoomKeys[room].list != list)
+        return;
+    wait->visit = sNativeVisits[room];
+    for (u32 i = 0; i < count; ++i)
+        if (list[i].id == 0x68 && !(list[i].params & 0x4000))
+            ++wait->geometries;
+}
+
+static int ootHallwayPending(s32 room)
+{
+    if (room < 0 || room >= 32)
+        return 0;
+    OotHallwayWait* wait = &sOotHallwayWait[room];
+    if (!wait->geometries || !wait->visit || wait->visit != sNativeVisits[room])
+        return 0;
+    for (u32 i = 0; i < ARRAY_COUNT(wait->slots); ++i)
+        if (wait->slots[i])
+            return 1;
+    return 0;
+}
+
+static int ootHallwayDefer(PlayState* play, ActorEntry* entry)
+{
+    s32 room = play->roomCtx.curRoom.num;
+    if (!sDeferRoomActors || room < 0 || room >= 32 || Flags_GetClear(play, room) || entry->id == 0x68)
+        return 0;
+    OotHallwayWait* wait = &sOotHallwayWait[room];
+    OotEnemizerRoomKeys* keys = &sOotEnemizerRoomKeys[room];
+    if (!wait->geometries || wait->visit != sNativeVisits[room] || !keys->list || keys->scene != play->sceneId)
+        return 0;
+    u32 distance = (u32)entry - (u32)keys->list;
+    if (distance % sizeof(*entry) || distance / sizeof(*entry) >= keys->count)
+        return 0;
+    u32 slot = distance / sizeof(*entry), key;
+    NativePlacement record;
+    if (!comboIsForeignEnemyActor(entry->id) &&
+        (!ootEnemizerPlacementKey(play, room, slot, &key) || !nativePlacementLookup(key, &record) ||
+         memcmp(entry, &record.replacement, sizeof(*entry))))
+        return 0;
+    wait->slots[slot >> 5] |= 1u << (slot & 31);
+    NativeEncounterUnsetTemp(play, room);
+    return 1;
+}
+
+static void ootHallwayPostFrame(PlayState* play)
+{
+    s32 room = play->roomCtx.curRoom.num;
+    if (!ootHallwayPending(room))
+        return;
+    OotHallwayWait* wait = &sOotHallwayWait[room];
+    OotEnemizerRoomKeys* keys = &sOotEnemizerRoomKeys[room];
+    if (!keys->list || keys->scene != play->sceneId || sDeferRoomActors)
+        return;
+    NativeEncounterUnsetTemp(play, room);
+    u32 ready = 0;
+    for (u32 i = 0; i < BG_ACTOR_MAX; ++i)
+    {
+        BgActor* bg = &play->colCtx.dyna.bgActors[i];
+        if ((play->colCtx.dyna.bgActorFlags[i] & 5) == 1 && bg->colHeader && bg->colHeader->numPolygons &&
+            bg->actor && bg->actor->update && bg->actor->id == 0x68 && bg->actor->room == room)
+            ++ready;
+    }
+    if (ready < wait->geometries || !play->colCtx.dyna.polyList)
+        return;
+    if (!comboEnemyRoomModelsPreload(play))
+        return;
+    u8 previousActor = gCurrentSpawnActorNum;
+    ActorEntry* previousList = sRoomList;
+    u32 previousCount = sRoomCount;
+    s32 previousRoom = sListRoom;
+    if (gForeignEnemyRegistryVrom)
+    {
+        if (!sRooms[room].visit || !sRooms[room].listVrom)
+            return;
+        sRoomList = keys->list;
+        sRoomCount = keys->count;
+        sListRoom = room;
+    }
+    for (u32 slot = 0; slot < keys->count; ++slot)
+    {
+        u32 mask = 1u << (slot & 31);
+        if (!(wait->slots[slot >> 5] & mask))
+            continue;
+        wait->slots[slot >> 5] &= ~mask;
+        gCurrentSpawnActorNum = slot;
+        comboEnemySpawnRoomEntry(&play->actorCtx, &keys->list[slot], play);
+    }
+    sRoomList = previousList;
+    sRoomCount = previousCount;
+    sListRoom = previousRoom;
+    gCurrentSpawnActorNum = previousActor;
+}
+
 int comboEnemyActorPlacementKey(Actor* actor, PlayState* play, u32* out)
 {
     if (!actor || !ootEnemizerPlacementKey(play, actor->room, actor->actorIndex, out))
@@ -2206,6 +2323,7 @@ void comboEnemyEncounterReset(void)
     memset(sRooms, 0, sizeof(sRooms));
 #if defined(GAME_OOT)
     memset(sOotEnemizerRoomKeys, 0, sizeof(sOotEnemizerRoomKeys));
+    memset(sOotHallwayWait, 0, sizeof(sOotHallwayWait));
 #endif
     sRoomList = NULL;
     sRoomCount = 0;
@@ -2236,6 +2354,7 @@ void comboEnemyEncounterBeginRoom(PlayState* play, const void* cmd, ActorEntry* 
 #endif
 #if defined(GAME_OOT)
     ootEnemizerCaptureKeys(play, list, count);
+    ootHallwayBegin(play, list, count);
 #endif
 #if defined(GAME_OOT)
     if (!gForeignEnemyRegistryVrom)
@@ -2407,6 +2526,10 @@ void comboEnemySpawnRoomEntry(ActorContext* ctx, ActorEntry* entry, PlayState* p
     const s16 id = enemyRoomActorId(entry);
     const u32 distance = (u32)entry - (u32)sRoomList;
     int defer = comboIsForeignEnemyActor(id);
+#if defined(GAME_OOT)
+    if (ootHallwayDefer(play, entry))
+        return;
+#endif
 #if defined(GAME_MM)
     defer |= enemyRoomStandaloneMiniboss(entry);
     if (!defer && sDeferRoomActors && sNativePlacementVrom && room >= 0 &&
@@ -2627,6 +2750,9 @@ void comboEnemyEncounterPostFrame(PlayState* play)
         }
         gCurrentSpawnActorNum = previous;
     }
+#if defined(GAME_OOT)
+    ootHallwayPostFrame(play);
+#endif
     comboEnemyEncounterReconcile(play);
 }
 #if defined(GAME_MM)
@@ -2740,6 +2866,10 @@ int comboEnemyEncounterPending(s32 room)
         return 0;
     if (comboEnemyNativePlacementPending(room))
         return 1;
+#if defined(GAME_OOT)
+    if (ootHallwayPending(room))
+        return 1;
+#endif
     if (sBlockedRooms & (1u << room))
         return 1;
     for (u32 i = 0; i < ARRAY_COUNT(sRooms[room].remaining); ++i)

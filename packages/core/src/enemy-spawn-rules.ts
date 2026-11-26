@@ -1,4 +1,4 @@
-import { ENEMY_SPAWN_RULES, parseEnemySpawnRules, type Game, type EnemySpawnHabitat, type EnemySpawnPredicate, type EnemySpawnRoom, type EnemySpawnRules } from '@ootmm/data';
+import { ENEMY_SPAWN_RULES, parseEnemySpawnRules, type Game, type EnemySpawnHabitat, type EnemySpawnPredicate, type EnemySpawnRoom, type EnemySpawnRules, type EnemySpawnRule, type EnemySpawnEncounter } from '@ootmm/data';
 import type { Settings } from './settings';
 
 export type EnemySpawnLocation = {
@@ -8,9 +8,10 @@ export type EnemySpawnLocation = {
   setup?: number;
   slot?: number;
   mq?: boolean;
+  grotto?: number;
 };
 
-export type EnemySpawnSource = { actorId: number; params?: number; key?: string; habitat?: EnemySpawnHabitat };
+export type EnemySpawnSource = { encounterId?: string; actorId: number; params?: number; key?: string; habitat?: EnemySpawnHabitat };
 export type EnemySpawnTarget = { game: Game; actorId: number; spawnParams: number; habitat: EnemySpawnHabitat };
 export type EnemySpawnContext = {
   source?: object;
@@ -131,12 +132,14 @@ function compileRules(data: EnemySpawnRules) {
     const alternatives = value.map(compile);
     return context => alternatives.some(predicate => predicate(context));
   };
-  const entries = Object.values(data.rules).map(rule => ({
+  const compilePolicy = (rule: EnemySpawnRule) => ({
     ...rule,
     when: compile(rule.when ?? true),
     allow: selection(rule.allow, true),
     deny: selection(rule.deny, false),
-  }));
+  });
+  const entries = Object.values(data.rules).map(compilePolicy);
+  const localEntries = new Map(Object.entries(data.encounters ?? {}).map(([id, row]) => [id, Object.values(row.policies).map(compilePolicy)]));
   const globalEntries: typeof entries = [];
   const byScene = new Map<string, Set<typeof entries[number]>>();
   for (const rule of entries) {
@@ -152,8 +155,8 @@ function compileRules(data: EnemySpawnRules) {
     }
   }
   const pointEntries = new Map<string, typeof entries>();
-  const at = (location: EnemySpawnLocation, sourceKey: string | undefined) => {
-    const key = JSON.stringify([location.game, location.scene, location.room, location.setup, location.slot, !!location.mq, sourceKey]);
+  const at = (location: EnemySpawnLocation, sourceKey: string | undefined, encounterId?: string) => {
+    const key = JSON.stringify([location.game, location.scene, location.room, location.setup, location.slot, !!location.mq, location.grotto, sourceKey, encounterId]);
     let result = pointEntries.get(key);
     if (!result) {
       const candidates = new Set([...globalEntries, ...(byScene.get(location.game + '/*') ?? []),
@@ -161,6 +164,7 @@ function compileRules(data: EnemySpawnRules) {
       result = [...candidates].filter(rule =>
         (!rule.rooms || rule.rooms.some(room => roomMatches(room, location))) &&
         (!rule.spawns || sourceKey !== undefined && rule.spawns.includes(sourceKey)));
+      if (encounterId !== undefined) result.push(...(localEntries.get(encounterId) ?? []));
       pointEntries.set(key, result);
     }
     return result;
@@ -203,34 +207,63 @@ function roomMatches(room: EnemySpawnRoom, location: EnemySpawnLocation): boolea
     (room.room === undefined || room.room === location.room) &&
     (room.setup === undefined || room.setup === location.setup) &&
     (room.slots === undefined || location.slot !== undefined && room.slots.includes(location.slot)) &&
+    (room.grotto === undefined || room.grotto === location.grotto) &&
     (room.mq === undefined || room.mq === !!location.mq);
-}
-
-export function enemySpawnMinibossEncounter(locations: readonly EnemySpawnLocation[], source: EnemySpawnSource,
-  fallback: boolean, settings?: Partial<Settings>, data: EnemySpawnRules = rules): boolean {
-  let result: boolean | undefined;
-  for (const location of locations) {
-    const context = { source: { ...source, game: location.game }, location, settings };
-    for (const rule of compiledRules(data).at(location, source.key)) {
-      if (rule.minibossEncounter === undefined || !rule.when(context)) continue;
-      if (result !== undefined && result !== rule.minibossEncounter)
-        throw new Error('Conflicting miniboss encounter rules: ' + JSON.stringify(locations));
-      result = rule.minibossEncounter;
-    }
-  }
-  return result ?? fallback;
 }
 
 export function enemySpawnSourceAllowed(settings: Settings, location: EnemySpawnLocation, source: EnemySpawnSource,
   data: EnemySpawnRules = rules): boolean {
   const context = { source: { game: location.game, ...source }, location, settings };
-  return compiledRules(data).at(location, source.key).every(rule => !rule.when(context) ||
+  return compiledRules(data).at(location, source.key, source.encounterId).every(rule => !rule.when(context) ||
     !rule.preserve && (!rule.preserveUnless || settings[rule.preserveUnless]));
 }
 
 export function enemySpawnTargetAllowed(location: EnemySpawnLocation, source: EnemySpawnSource, target: EnemySpawnTarget,
   settings?: Settings, data: EnemySpawnRules = rules): boolean {
   const context = { source: { game: location.game, ...source }, location, settings, target: { ...target, params: target.spawnParams } };
-  return compiledRules(data).at(location, source.key).every(rule => !rule.when(context) ||
+  return compiledRules(data).at(location, source.key, source.encounterId).every(rule => !rule.when(context) ||
     rule.allow(context) && !rule.deny(context));
+}
+
+export type SpawnInventoryRow = {
+  id: string;
+  game: Game;
+  actorId: number;
+  sourceKey?: string;
+  locations: string[];
+  sharedController: boolean;
+};
+
+export type SpawnRegistryRow = EnemySpawnEncounter;
+
+const registry = rules.encounters ?? {};
+
+export function spawnEncounter(id: string): SpawnRegistryRow {
+  if (!registry || !Object.hasOwn(registry, id)) throw new Error('Unclassified enemy spawn: ' + id + '; add the encounter to spawn-encounters.yml.');
+  const row = registry[id];
+  if (!row || typeof row.minibossEncounter !== 'boolean' || typeof row.excluded !== 'boolean')
+    throw new Error('Invalid enemy spawn classification: ' + id);
+  return row;
+}
+
+export function spawnEncounterAllows(id: string, settings: Settings, game: Game): boolean {
+  const row = spawnEncounter(id);
+  const only = game === 'oot' ? settings.enemyShuffleOotMinibossOnly : settings.enemyShuffleMmMinibossOnly;
+  return !row.excluded && (!only || row.minibossEncounter) &&
+    (!settings.enemyShufflePreserveMinibosses || only || !row.minibossEncounter);
+}
+
+export function validateSpawnRegistry(inventory: readonly SpawnInventoryRow[]): void {
+  const expected = new Set<string>();
+  for (const source of inventory) {
+    if (expected.has(source.id)) throw new Error('Duplicate inventory spawn: ' + source.id);
+    expected.add(source.id);
+    const row = spawnEncounter(source.id);
+    if (row.game !== source.game || row.actorId !== source.actorId || row.sourceKey !== source.sourceKey ||
+      row.sharedController !== source.sharedController || !Array.isArray(row.locations) ||
+      JSON.stringify([...row.locations].sort()) !== JSON.stringify(source.locations))
+      throw new Error('Stale enemy spawn registry entry: ' + source.id);
+  }
+  for (const id of Object.keys(registry)) if (!expected.has(id))
+    throw new Error('Unknown enemy spawn registry entry: ' + id);
 }

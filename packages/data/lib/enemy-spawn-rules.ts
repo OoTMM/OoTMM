@@ -17,6 +17,7 @@ export type EnemySpawnRoom = {
   setup?: number;
   slots?: number[];
   mq?: boolean;
+  grotto?: number;
 };
 
 export type EnemySpawnRule = {
@@ -25,7 +26,6 @@ export type EnemySpawnRule = {
   when?: EnemySpawnPredicate;
   allow?: EnemySpawnPredicate | EnemySpawnPredicate[];
   deny?: EnemySpawnPredicate | EnemySpawnPredicate[];
-  minibossEncounter?: boolean;
   preserve?: boolean;
   preserveUnless?: EnemySpawnSetting;
   restrictions?: string[];
@@ -39,9 +39,23 @@ export type EnemySpawnRule = {
   limits?: Record<string, { when: EnemySpawnPredicate; maximum: number }[]>;
 };
 
+export type EnemySpawnEncounter = {
+  game: Game;
+  actorId: number;
+  sourceKey?: string;
+  locations: string[];
+  sharedController: boolean;
+  minibossEncounter: boolean;
+  excluded: boolean;
+  virtualFloor?: boolean;
+  policies: Record<string, EnemySpawnRule>;
+};
+
 export type EnemySpawnRules = {
   macros: Record<string, EnemySpawnPredicate>;
-  rules: Record<string, EnemySpawnRule>;
+  rules: Record<string, EnemySpawnRule>; // Shared policies only.
+  encounters?: Record<string, EnemySpawnEncounter>;
+  policyOrder?: string[];
   limits?: Record<string, { when: EnemySpawnPredicate; maximum: number }[]>;
 };
 
@@ -156,13 +170,48 @@ function normalizeLimits(value: unknown, where: string) {
   }));
 }
 
+const nativePlacementFields = ['restrictions', 'meets', 'explicit', 'varOverrides', 'logicOverrides', 'skipRaycast', 'position'] as const;
+const encounterPolicyFields = ['when', 'allow', 'deny', 'preserveUnless', ...nativePlacementFields] as const;
+type SpawnPoint = Omit<EnemySpawnRoom, 'slots'> & { slot?: number };
+function spawnPointFromId(id: string): SpawnPoint | undefined {
+  const [game, layout, scene, room, setup, slot, ...rest] = id.split('/');
+  if (rest.length || (game !== 'oot' && game !== 'mm') || ![scene, room, setup, slot].every(value => /^\d+$/.test(value ?? '') && Number(value) <= 255)) return undefined;
+  const point: SpawnPoint = { game, scene: Number(scene), room: Number(room), setup: Number(setup), slot: Number(slot) };
+  if (game === 'oot') {
+    if (layout !== 'vanilla' && layout !== 'mq') return undefined;
+    point.mq = layout === 'mq';
+  } else if (layout !== 'normal') {
+    if (!/^grotto-\d+$/.test(layout) || Number(layout.slice(7)) > 255) return undefined;
+    point.grotto = Number(layout.slice(7));
+  }
+  return point;
+}
+function pointId(point: SpawnPoint): string {
+  const layout = point.game === 'oot' ? (point.mq ? 'mq' : 'vanilla') : (point.grotto === undefined ? 'normal' : `grotto-${point.grotto}`);
+  return `${point.game}/${layout}/${point.scene ?? '-'}/${point.room ?? '-'}/${point.setup ?? '-'}/${point.slot ?? '-'}`;
+}
+function orderedSpawnPolicies(data: EnemySpawnRules) {
+  const entries = new Map<string, { name: string; rule: EnemySpawnRule; encounterId?: string }>();
+  for (const [name, rule] of Object.entries(data.rules)) entries.set(name, { name, rule });
+  for (const [encounterId, row] of Object.entries(data.encounters ?? {})) for (const [name, rule] of Object.entries(row.policies)) {
+    if (entries.has(name)) fail('duplicate policy name ' + name);
+    entries.set(name, { name, rule, encounterId });
+  }
+  const ordered: typeof entries = new Map();
+  for (const name of data.policyOrder ?? []) if (entries.has(name)) {
+    ordered.set(name, entries.get(name)!);
+    entries.delete(name);
+  }
+  return [...ordered.values(), ...entries.values()];
+}
+
 /* The build rejects unknown fields and unresolved/cyclic macros. Policy data
  * can change without editing the evaluator or silently ignoring a typo. */
 export function parseEnemySpawnRules(value: unknown): EnemySpawnRules {
-  const root = object(value, ['macros', 'rules', 'limits'], 'root');
+  const root = object(value, ['macros', 'rules', 'limits', 'encounters', 'policyOrder'], 'root');
   const macros = Object.fromEntries(Object.entries(record(root.macros, 'macros'))
     .map(([name, value]) => [name, normalizePredicate(value, 'macro ' + name)]));
-  const rules = Object.fromEntries(Object.entries(record(root.rules, 'rules')).map(([name, input]) => {
+  const normalizeRule = (name: string, input: unknown): EnemySpawnRule => {
     const value = record(input, 'rule ' + name);
     const result = { ...value };
     for (const field of ['allow', 'deny']) if (value[field] !== undefined)
@@ -171,8 +220,37 @@ export function parseEnemySpawnRules(value: unknown): EnemySpawnRules {
         : normalizePredicate(value[field], name + ': ' + field);
     if (value.when !== undefined) result.when = normalizePredicate(value.when, name + ': when');
     if (value.limits !== undefined) result.limits = normalizeLimits(value.limits, name + ': limits');
-    return [name, result];
-  }));
+    return result as EnemySpawnRule;
+  };
+  const rules = Object.fromEntries(Object.entries(record(root.rules, 'shared policies')).map(([name, input]) => [name, normalizeRule(name, input)]));
+  const encounters: Record<string, EnemySpawnEncounter> = {};
+  for (const [id, input] of Object.entries(record(root.encounters ?? {}, 'encounters'))) {
+    const row = object(input, ['game', 'actorId', 'sourceKey', 'locations', 'sharedController', 'minibossEncounter', 'excluded', 'virtualFloor', 'policies', ...encounterPolicyFields], id);
+    const game = row.game;
+    if (game !== 'oot' && game !== 'mm') return fail(id + ': invalid game');
+    const locations = stringList(row.locations, id + ': locations');
+    if (!locations.length || locations.some(point => !point.startsWith(game + '/'))) fail(id + ': invalid locations');
+    if (row.sourceKey !== undefined && (typeof row.sourceKey !== 'string' || !row.sourceKey)) fail(id + ': invalid source key');
+    if (id.startsWith(game + '/named/')) {
+      if (typeof row.sourceKey !== 'string' || id !== `${game}/named/${row.sourceKey}`) fail(id + ': named source mismatch');
+    } else if (!spawnPointFromId(id) || !locations.includes(id) || locations.some(point => !spawnPointFromId(point))) fail(id + ': invalid physical locations');
+    const policies: Record<string, EnemySpawnRule> = {};
+    const local = (name: string, input: unknown) => {
+      const body = object(input, [...encounterPolicyFields, 'preserve'], id + ': ' + name);
+      if (game === 'mm' && nativePlacementFields.some(field => Object.hasOwn(body, field))) fail(id + ': OoT placement attribute on MM spawn');
+      if (!['allow', 'deny', 'preserve', 'preserveUnless'].some(field => Object.hasOwn(body, field)) && !nativePlacementFields.some(field => Object.hasOwn(body, field))) fail(id + ': local policy has no action');
+      if (Object.hasOwn(policies, name)) fail(id + ': duplicate policy ' + name);
+      policies[name] = normalizeRule(name, body);
+    };
+    for (const [name, input] of Object.entries(record(row.policies ?? {}, id + ': policies'))) local(name, input);
+    const inline = Object.fromEntries(encounterPolicyFields.filter(field => Object.hasOwn(row, field)).map(field => [field, row[field]]));
+    if (Object.keys(inline).length) local('@encounter/' + id, inline);
+    encounters[id] = { game, actorId: integer(row.actorId, 0xffff, id + ': actorId'), ...(row.sourceKey === undefined ? {} : { sourceKey: row.sourceKey as string }), locations,
+      sharedController: bool(row.sharedController, id + ': sharedController'), minibossEncounter: bool(row.minibossEncounter, id + ': minibossEncounter'), excluded: bool(row.excluded, id + ': excluded'),
+      ...(row.virtualFloor === undefined ? {} : { virtualFloor: bool(row.virtualFloor, id + ': virtualFloor') }), policies };
+  }
+  const policyOrder = root.policyOrder === undefined ? undefined : stringList(root.policyOrder, 'policyOrder');
+  const result: EnemySpawnRules = { macros, rules, ...(root.encounters === undefined ? {} : { encounters }), ...(policyOrder === undefined ? {} : { policyOrder }) };
   const edges = new Map<string, Set<string>>();
   const predicate = (value: unknown, where: string, refs: Set<string>): void => {
     if (typeof value === 'boolean') return;
@@ -232,16 +310,20 @@ export function parseEnemySpawnRules(value: unknown): EnemySpawnRules {
     visited.add(name);
   };
   Object.keys(macros).forEach(visit);
-  for (const [name, value] of Object.entries(rules)) {
-    const rule = object(value, ['rooms', 'spawns', 'when', 'allow', 'deny', 'minibossEncounter', 'preserve', 'preserveUnless',
+  for (const { name, rule: value } of orderedSpawnPolicies(result)) {
+    const rule = object(value, ['rooms', 'spawns', 'when', 'allow', 'deny', 'preserve', 'preserveUnless',
       'restrictions', 'meets', 'explicit', 'varOverrides', 'logicOverrides', 'skipRaycast', 'position', 'maxHeightDifference', 'limits'], 'rule ' + name);
     if (rule.rooms !== undefined) {
       if (!Array.isArray(rule.rooms) || !rule.rooms.length) fail(name + ': rooms');
       for (const value of rule.rooms as unknown[]) {
-        const room = object(value, ['game', 'scene', 'room', 'setup', 'slots', 'mq'], name + ': room');
+        const room = object(value, ['game', 'scene', 'room', 'setup', 'slots', 'mq', 'grotto'], name + ': room');
         if (room.game !== 'oot' && room.game !== 'mm') fail(name + ': game');
         for (const field of ['scene', 'room', 'setup']) if (room[field] !== undefined) integer(room[field], 0xff, name + ': ' + field);
         if (room.slots !== undefined) numberList(room.slots, 0xff, name + ': slots', false);
+        if (room.grotto !== undefined) {
+          if (room.game !== 'mm') fail(name + ': grotto is MM-only');
+          integer(room.grotto, 0xff, name + ': grotto');
+        }
         if (room.mq !== undefined && (typeof room.mq !== 'boolean' || room.game !== 'oot')) fail(name + ': mq');
       }
     }
@@ -251,7 +333,7 @@ export function parseEnemySpawnRules(value: unknown): EnemySpawnRules {
       const entries = Array.isArray(rule[field]) ? rule[field] as unknown[] : [rule[field]];
       entries.forEach(entry => predicate(entry, name + ': ' + field, new Set()));
     }
-    for (const field of ['preserve', 'skipRaycast', 'minibossEncounter']) if (rule[field] !== undefined) bool(rule[field], name + ': ' + field);
+    for (const field of ['preserve', 'skipRaycast']) if (rule[field] !== undefined) bool(rule[field], name + ': ' + field);
     for (const field of ['restrictions', 'meets', 'explicit']) if (rule[field] !== undefined) stringList(rule[field], name + ': ' + field);
     if (rule.varOverrides !== undefined) for (const [target, value] of Object.entries(record(rule.varOverrides, name + ': varOverrides')))
       integer(value, 0xffff, name + ': variant ' + target);
@@ -276,7 +358,7 @@ export function parseEnemySpawnRules(value: unknown): EnemySpawnRules {
     if (rule.preserveUnless !== undefined && !['restoreBrokenActors', 'enemyShuffleLaggySpawns'].includes(rule.preserveUnless as string))
       fail(name + ': unknown preservation setting');
     if (rule.allow === undefined && rule.deny === undefined && rule.preserve === undefined &&
-      rule.preserveUnless === undefined && rule.minibossEncounter === undefined && rule.maxHeightDifference === undefined && rule.limits === undefined) fail(name + ': missing action');
+      rule.preserveUnless === undefined && rule.maxHeightDifference === undefined && rule.limits === undefined && !nativePlacementFields.some(field => Object.hasOwn(rule, field))) fail(name + ': missing action');
   }
   for (const [name, value] of Object.entries(record(root.limits ?? {}, 'limits'))) {
     if (!Array.isArray(value) || !value.length) fail(name + ': expected limit list');
@@ -286,7 +368,7 @@ export function parseEnemySpawnRules(value: unknown): EnemySpawnRules {
       integer(limit.maximum, 0xffff, name + ': maximum');
     }
   }
-  return { macros, rules, ...(root.limits === undefined ? {} : { limits: root.limits }) } as EnemySpawnRules;
+  return { ...result, ...(root.limits === undefined ? {} : { limits: root.limits as EnemySpawnRules['limits'] }) };
 }
 
 export function parseEnemySpawnActorTypes(input: unknown): Record<string, EnemySpawnActorType> {
@@ -443,7 +525,9 @@ export function applyEnemyMmSpawnPolicies<T extends { key: string; actorId: numb
  * editors only maintain point selectors and enemy macros. */
 export function compileEnemySpawnPolicies(macrosInput: unknown, placementsInput: unknown) {
   const rawMacros = record(macrosInput, 'macros');
-  const rules = parseEnemySpawnRules({ macros: rawMacros, rules: placementsInput });
+  const document = object(placementsInput, ['encounters', 'sharedPolicies', 'policyOrder'], 'spawn-encounters.yml');
+  const rules = parseEnemySpawnRules({ macros: rawMacros, rules: document.sharedPolicies, encounters: document.encounters, policyOrder: document.policyOrder });
+  if (!rules.encounters || !Object.keys(rules.encounters).length) fail('empty encounter registry');
   type Context = Record<string, unknown>;
   const read = (context: Context, path: string): unknown => path.split('.').reduce<unknown>((value, key) =>
     value && typeof value === 'object' && Object.hasOwn(value, key) ? (value as Context)[key] : undefined, context);
@@ -571,14 +655,16 @@ export function compileEnemySpawnPolicies(macrosInput: unknown, placementsInput:
   const limits: NonNullable<EnemySpawnRules['limits']> = {};
   type Point = Omit<EnemySpawnRoom, 'slots'> & { slot?: number };
   type NamedRule = { name: string; rule: EnemySpawnRule };
-  const namedRules = Object.entries(rules.rules).map(([name, rule]) => ({ name, rule }));
+  const namedRules = orderedSpawnPolicies(rules);
   const attributeFields = ['restrictions', 'meets', 'explicit', 'varOverrides', 'logicOverrides', 'skipRaycast', 'position'] as const;
   const roomMatches = (room: EnemySpawnRoom, point: Point) => room.game === point.game &&
     (room.scene === undefined || room.scene === point.scene) && (room.room === undefined || room.room === point.room) &&
     (room.setup === undefined || room.setup === point.setup) && (room.mq === undefined || room.mq === !!point.mq) &&
+    (room.grotto === undefined || room.grotto === point.grotto) &&
     (room.slots === undefined || point.slot !== undefined && room.slots.includes(point.slot));
-  const at = (point: Point, key?: string) => namedRules.filter(({ rule }) =>
-    (!rule.rooms || rule.rooms.some(room => roomMatches(room, point))) && (!rule.spawns || key !== undefined && rule.spawns.includes(key)));
+  const at = (point: Point, key?: string) => namedRules.filter(({ rule, encounterId }) => encounterId !== undefined
+    ? encounterId === (key === undefined ? pointId(point) : `${point.game}/named/${key}`)
+    : (!rule.rooms || rule.rooms.some(room => roomMatches(room, point))) && (!rule.spawns || key !== undefined && rule.spawns.includes(key)));
   const mergeAttributes = (name: string, attributes: Record<string, unknown>, rule: EnemySpawnRule) => {
     for (const field of attributeFields) {
       if (rule[field] === undefined) continue;
@@ -633,7 +719,15 @@ export function compileEnemySpawnPolicies(macrosInput: unknown, placementsInput:
   };
   const points = new Map<string, { name: string; point: Point }>();
   const scripted = new Map<string, { name: string; points: Point[] }>();
-  for (const [name, rule] of Object.entries(rules.rules)) {
+  for (const { name, rule, encounterId } of namedRules) {
+    if (encounterId !== undefined) {
+      const point = spawnPointFromId(encounterId);
+      if (point?.game === 'oot') {
+        const key = [point.mq, point.scene, point.room, point.setup, point.slot].join('/');
+        if (!points.has(key)) points.set(key, { name, point });
+      }
+      continue;
+    }
     if (rule.maxHeightDifference !== undefined) {
       if (rule.when !== undefined || rule.spawns || !rule.rooms?.length) fail(name + ': runtime height requires unconditional rooms');
       for (const room of rule.rooms!) {
@@ -707,6 +801,9 @@ export function compileEnemySpawnPolicies(macrosInput: unknown, placementsInput:
       }
     }
   }
+  for (const { name, rule, encounterId } of namedRules) if (encounterId?.startsWith('oot/named/') &&
+    nativePlacementFields.some(field => rule[field] !== undefined) && !Object.hasOwn(templates, encounterId.slice('oot/named/'.length)))
+    fail(name + ': named encounter has no native placement template');
   rules.limits = limits;
   return {
     rules,

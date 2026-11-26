@@ -45,11 +45,11 @@ async function run() {
   const manifestLocations = { version: 1, locations: checks.checks.map((check: any, index: number) => ({ key: check.key, location: check.location })) };
   const manifestEntrances = { version: 1, entrances: entrancesData };
 
-  const [enemySpawnMacros, enemySpawnPlacements] = await Promise.all([
+  const [enemySpawnMacros, enemySpawnDocument] = await Promise.all([
     loadYaml('enemy-logic/spawn-macros.yml'),
-    loadYaml('enemy-logic/spawn-rules.yml'),
+    loadYaml('enemy-logic/spawn-encounters.yml'),
   ]);
-  const enemySpawn = compileEnemySpawnPolicies(enemySpawnMacros, enemySpawnPlacements);
+  const enemySpawn = compileEnemySpawnPolicies(enemySpawnMacros, enemySpawnDocument);
   const enemyRuntimeHeader = [
     '#ifndef COMBO_DATA_ENEMY_SPAWN_H', '#define COMBO_DATA_ENEMY_SPAWN_H', '',
     'typedef struct { s16 scene; s16 room; f32 maxHeightDifference; } EnemyOotRuntimeSpawnRule;',
