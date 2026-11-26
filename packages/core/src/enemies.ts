@@ -3758,7 +3758,7 @@ export type EnemyPlan = EnemyReplacement[];
 export function enemyPlanEncounterId(row: EnemyPlan[number]): string {
   if (row.placement) {
     const p = row.placement;
-    const scene = MM_NATIVE_SCENES.find(scene => scene.scene === p.scene && scene.grotto === p.grotto);
+    const scene = MM_ENEMY_SCENES.find(scene => scene.scene === p.scene && scene.grotto === p.grotto);
     const actor = scene?.maps[p.mapIndex]?.actors.find(actor => actor.offset === p.actorOffset);
     if (!scene || !actor) throw new Error('Missing MM encounter for planned actor ' + p.actorOffset);
     return mmSpawnRegistryId(scene, actor);
