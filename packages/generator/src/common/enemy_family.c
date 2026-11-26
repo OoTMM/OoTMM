@@ -1,5 +1,6 @@
 #include <combo.h>
 #include <combo/enemy_native.h>
+#include <combo/enemy_placement.h>
 
 typedef struct
 {
@@ -35,9 +36,10 @@ static FamilyChild* familyChild(Actor* actor, int vacant)
     return vacant ? free : NULL;
 }
 
-#if defined(GAME_OOT)
-typedef struct
+typedef struct FamilyVirtualFloor
 {
+    struct FamilyVirtualFloor* next;
+    EnemyFamily standalone;
     EnemyFamily* family;
     Actor* root;
     CollisionHeader* header;
@@ -46,38 +48,52 @@ typedef struct
     s16 targetId;
 } FamilyVirtualFloor;
 
-static FamilyVirtualFloor sVirtualFloors[8];
-static u8 sVirtualFloorCount;
+#define ENEMY_FAMILY_FLOOR_ONLY 16
+static FamilyVirtualFloor* sVirtualFloors;
 
+#if defined(GAME_OOT)
 typedef f32 (*FamilyRaycast)(PlayState*, CollisionContext*, u16, CollisionPoly**, s32*, Vec3f*, Actor*, u32, f32);
+#else
+/* MM BgCheck_RaycastFloorImpl has an additional static/dynamic query flag. */
+typedef f32 (*FamilyRaycast)(PlayState*, CollisionContext*, u16, CollisionPoly**, s32*, Vec3f*, Actor*, u32, f32, s32);
+#endif
 static FamilyRaycast volatile sOriginalRaycast __attribute__((section(".data"))) = NULL;
+#if defined(GAME_OOT)
 EXPORT_SYMBOL(ENEMY_VIRTUAL_FLOOR_ORIGINAL_V1, sOriginalRaycast);
+#else
+EXPORT_SYMBOL(ENEMY_VIRTUAL_FLOOR_ORIGINAL_MM_V1, sOriginalRaycast);
+#endif
 
 static FamilyVirtualFloor* familyFloor(EnemyFamily* family, int vacant)
 {
-    FamilyVirtualFloor* free = NULL;
-    if (!family)
+    if (family)
+        for (FamilyVirtualFloor* floor = sVirtualFloors; floor; floor = floor->next)
+            if (floor->family == family)
+                return floor;
+    if (!vacant)
         return NULL;
-    for (u32 i = 0; i < ARRAY_COUNT(sVirtualFloors); ++i)
-    {
-        FamilyVirtualFloor* floor = &sVirtualFloors[i];
-        if (floor->family == family)
-            return floor;
-        if (!floor->family && !free)
-            free = floor;
-    }
-    return vacant ? free : NULL;
+    FamilyVirtualFloor* floor = malloc(sizeof(*floor));
+    if (!floor)
+        return NULL;
+    memset(floor, 0, sizeof(*floor));
+    floor->family = family ? family : &floor->standalone;
+    floor->next = sVirtualFloors;
+    sVirtualFloors = floor;
+    return floor;
 }
 
-void comboEnemyFamilySetVirtualFloor(EnemyFamily* family, PlayState* play, const ActorEntry* entry)
+int comboEnemyFamilySetVirtualFloor(EnemyFamily* family, PlayState* play, const ActorEntry* entry)
 {
+    if (!family || !play || !entry || !sOriginalRaycast)
+        return 0;
     FamilyVirtualFloor* floor = familyFloor(family, 1);
-    if (!floor || !play || !entry)
-        return;
-    if (!floor->family)
-        ++sVirtualFloorCount;
-    *floor = (FamilyVirtualFloor){ .family = family, .header = play->colCtx.colHeader,
-        .origin = { entry->pos.x, entry->pos.y, entry->pos.z }, .targetId = entry->id };
+    if (!floor)
+        return 0;
+    floor->root = NULL;
+    floor->surface = NULL;
+    floor->header = play->colCtx.colHeader;
+    floor->origin = (Vec3f){ entry->pos.x, entry->pos.y, entry->pos.z };
+    floor->targetId = entry->id;
     static const s16 dirs[][2] = {
         { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 },
         { 1, 1 }, { -1, 1 }, { 1, -1 }, { -1, -1 },
@@ -89,7 +105,11 @@ void comboEnemyFamilySetVirtualFloor(EnemyFamily* family, PlayState* play, const
                 floor->origin.z + radius * dirs[i][1] };
             CollisionPoly* poly = NULL;
             s32 bgId = BGCHECK_SCENE;
+#if defined(GAME_OOT)
             f32 y = BgCheck_EntityRaycastDown4(&play->colCtx, &poly, &bgId, NULL, &probe);
+#else
+            f32 y = BgCheck_EntityRaycastFloor5(&play->colCtx, &poly, &bgId, NULL, &probe);
+#endif
             if (poly && bgId == BGCHECK_SCENE && poly->normal.y > 0x6000 &&
                 y >= floor->origin.y - 120.f && y <= floor->origin.y + 50.f)
             {
@@ -97,11 +117,12 @@ void comboEnemyFamilySetVirtualFloor(EnemyFamily* family, PlayState* play, const
                 break;
             }
         }
+    return 1;
 }
 
 static FamilyVirtualFloor* familyActorFloor(Actor* actor)
 {
-    if (!actor || !sVirtualFloorCount)
+    if (!actor || !sVirtualFloors)
         return NULL;
     FamilyChild* child = familyChild(actor, 0);
     FamilyVirtualFloor* floor = child ? familyFloor(child->family, 0) : NULL;
@@ -110,7 +131,7 @@ static FamilyVirtualFloor* familyActorFloor(Actor* actor)
     if (!child && sCollecting && sFamily)
     {
         floor = familyFloor(sFamily, 0);
-        if (floor && actor->id == floor->targetId && actor->home.pos.x == floor->origin.x &&
+        if (floor && actor->home.pos.x == floor->origin.x &&
             actor->home.pos.z == floor->origin.z &&
             (actor->category == ACTORCAT_ENEMY || actor->category == ACTORCAT_BOSS))
             return floor;
@@ -119,9 +140,17 @@ static FamilyVirtualFloor* familyActorFloor(Actor* actor)
 }
 
 static f32 familyVirtualRaycast(PlayState* play, CollisionContext* col, u16 xpFlags,
-    CollisionPoly** outPoly, s32* outBgId, Vec3f* pos, Actor* actor, u32 flags, f32 distance)
+    CollisionPoly** outPoly, s32* outBgId, Vec3f* pos, Actor* actor, u32 flags, f32 distance
+#if defined(GAME_MM)
+    , s32 queryFlags
+#endif
+    )
 {
+#if defined(GAME_OOT)
     f32 y = sOriginalRaycast(play, col, xpFlags, outPoly, outBgId, pos, actor, flags, distance);
+#else
+    f32 y = sOriginalRaycast(play, col, xpFlags, outPoly, outBgId, pos, actor, flags, distance, queryFlags);
+#endif
     if (!actor || !(xpFlags & 2) || !(flags & 4))
         return y;
     FamilyVirtualFloor* floor = familyActorFloor(actor);
@@ -132,7 +161,11 @@ static f32 familyVirtualRaycast(PlayState* play, CollisionContext* col, u16 xpFl
     *outBgId = BGCHECK_SCENE;
     return floor->origin.y;
 }
+#if defined(GAME_OOT)
 EXPORT_SYMBOL(ENEMY_VIRTUAL_FLOOR_RAYCAST_V1, familyVirtualRaycast);
+#else
+EXPORT_SYMBOL(ENEMY_VIRTUAL_FLOOR_RAYCAST_MM_V1, familyVirtualRaycast);
+#endif
 
 static void familyFloorClamp(Actor* actor, PlayState* play)
 {
@@ -149,7 +182,48 @@ static void familyFloorClamp(Actor* actor, PlayState* play)
     if (actor->floorHeight < y)
         actor->floorHeight = y;
 }
-#endif
+
+static void familyReleaseFloor(EnemyFamily* family)
+{
+    for (FamilyVirtualFloor** link = &sVirtualFloors; *link; link = &(*link)->next)
+    {
+        FamilyVirtualFloor* floor = *link;
+        if (floor->family == family)
+        {
+            *link = floor->next;
+            free(floor);
+            return;
+        }
+    }
+}
+
+int comboEnemyVirtualFloorActive(void)
+{
+    return familyFloor(sFamily, 0) != NULL;
+}
+
+int comboEnemyVirtualFloorBegin(EnemyVirtualFloorScope* scope, PlayState* play, const ActorEntry* entry)
+{
+    memset(scope, 0, sizeof(*scope));
+    if (!play || !entry || !sOriginalRaycast)
+        return 0;
+    FamilyVirtualFloor* floor = familyFloor(NULL, 1);
+    if (!floor)
+        return 0;
+    EnemyFamily* family = floor->family;
+    family->flags = ENEMY_FAMILY_FLOOR_ONLY;
+    if (!comboEnemyFamilySetVirtualFloor(family, play, entry))
+    {
+        familyReleaseFloor(family);
+        return 0;
+    }
+    scope->family = family;
+    scope->previous = sFamily;
+    scope->collecting = sCollecting;
+    sFamily = family;
+    sCollecting = 1;
+    return 1;
+}
 
 static void familyBind(FamilyChild* child)
 {
@@ -182,7 +256,7 @@ static void familyUnbind(FamilyChild* child)
 
 int comboEnemyFamilySpawning(void)
 {
-    return sFamily != NULL;
+    return sFamily != NULL && !(sFamily->flags & ENEMY_FAMILY_FLOOR_ONLY);
 }
 
 int comboEnemyFamilyIsGold(Actor* actor)
@@ -235,6 +309,10 @@ void comboEnemyFamilySpawned(Actor* actor)
     if (child->actor == actor)
         return;
     *child = (FamilyChild){ .actor = actor, .family = sFamily };
+    FamilyVirtualFloor* floor = familyFloor(sFamily, 0);
+    if (floor && !floor->root && (actor->id == floor->targetId || actor->category == ACTORCAT_ENEMY || actor->category == ACTORCAT_BOSS) &&
+        actor->home.pos.x == floor->origin.x && actor->home.pos.z == floor->origin.z)
+        floor->root = actor;
     ++sFamily->live;
     if (!sCollecting)
         familyBind(child);
@@ -249,16 +327,12 @@ static void familyRun(Actor* actor, PlayState* play, int action)
     familyUnbind(child);
     EnemyFamily* previous = sFamily;
     sFamily = child->family;
-#if defined(GAME_OOT)
     if (action != 2)
         familyFloorClamp(actor, play);
-#endif
     if (callback)
         callback(actor, play);
-#if defined(GAME_OOT)
     if (action != 2 && actor->update)
         familyFloorClamp(actor, play);
-#endif
     sFamily = previous;
     if (action == 1)
     {
@@ -334,11 +408,9 @@ static void familyFini(Actor* actor, PlayState* play)
     if (!child)
         return;
     EnemyFamily* family = child->family;
-#if defined(GAME_OOT)
     FamilyVirtualFloor* floor = familyFloor(family, 0);
     if (floor && floor->root == actor)
         floor->root = NULL;
-#endif
     ActorFunc fini = child->fini;
     if (actor->init || actor->update)
         family->blocked = 1;
@@ -350,8 +422,13 @@ static void familyFini(Actor* actor, PlayState* play)
     if (fini)
         fini(actor, play);
     sFamily = previous;
-    if (family->live && !--family->live && family->complete)
-        family->complete(family, play);
+    if (family->live && !--family->live)
+    {
+        if (family->complete)
+            family->complete(family, play);
+        if (!family->live && sFamily != family)
+            familyReleaseFloor(family);
+    }
 }
 
 void comboEnemyFamilyClear(EnemyFamily* family)
@@ -373,21 +450,13 @@ void comboEnemyFamilyClear(EnemyFamily* family)
         }
         Actor_Kill(actor);
     }
-#if defined(GAME_OOT)
-    FamilyVirtualFloor* floor = familyFloor(family, 0);
-    if (floor)
-    {
-        memset(floor, 0, sizeof(*floor));
-        --sVirtualFloorCount;
-    }
-#endif
     memset(family, 0, sizeof(*family));
+    familyReleaseFloor(family);
 }
 
 static Actor* familyFinishSpawn(EnemyFamily* family, Actor* actor, EnemyFamily* previous, int collecting)
 {
     comboEnemyFamilySpawned(actor);
-#if defined(GAME_OOT)
     FamilyVirtualFloor* floor = familyFloor(family, 0);
     if (floor && actor)
     {
@@ -395,7 +464,6 @@ static Actor* familyFinishSpawn(EnemyFamily* family, Actor* actor, EnemyFamily* 
         if (gPlay)
             familyFloorClamp(actor, gPlay);
     }
-#endif
     for (u32 i = 0; i < ARRAY_COUNT(sChildren); ++i)
         if (sChildren[i].actor && sChildren[i].actor != (Actor*)1 && sChildren[i].family == family &&
             sChildren[i].actor->fini != familyFini)
@@ -404,7 +472,18 @@ static Actor* familyFinishSpawn(EnemyFamily* family, Actor* actor, EnemyFamily* 
     sFamily = previous;
     if (actor)
         family->started = 1;
+    if (!family->live)
+        familyReleaseFloor(family);
     return actor;
+}
+
+void comboEnemyVirtualFloorEnd(EnemyVirtualFloorScope* scope, Actor* actor)
+{
+    if (scope->family)
+    {
+        familyFinishSpawn(scope->family, actor, scope->previous, scope->collecting);
+        scope->family = NULL;
+    }
 }
 
 Actor* comboEnemyFamilySpawn(EnemyFamily* family, ActorContext* ctx, ActorEntry* entry, PlayState* play, u32 operation)
@@ -412,7 +491,13 @@ Actor* comboEnemyFamilySpawn(EnemyFamily* family, ActorContext* ctx, ActorEntry*
     EnemyFamily* previous = sFamily;
     int collecting = sCollecting;
     if (previous)
-        family->flags |= previous->flags;
+        family->flags |= previous->flags & ~ENEMY_FAMILY_FLOOR_ONLY;
+    if (operation != 0xffff && (operation & ENEMY_DYNAMIC_VIRTUAL_FLOOR))
+    {
+        if (!comboEnemyFamilySetVirtualFloor(family, play, entry))
+            return NULL;
+        operation &= ~ENEMY_DYNAMIC_VIRTUAL_FLOOR;
+    }
     sFamily = family;
     sCollecting = 1;
     Actor* actor = comboEnemyDynamicSpawn(ctx, entry, play, operation);
@@ -426,7 +511,7 @@ Actor* comboEnemyFamilySpawnVanillaChild(EnemyFamily* family, ActorContext* ctx,
     EnemyFamily* previous = sFamily;
     int collecting = sCollecting;
     if (previous)
-        family->flags |= previous->flags;
+        family->flags |= previous->flags & ~ENEMY_FAMILY_FLOOR_ONLY;
     sFamily = family;
     sCollecting = 1;
     Actor* actor = Actor_SpawnAsChild(ctx, parent, play, id, x, y, z, rx, ry, rz, params);
@@ -449,12 +534,20 @@ static void familyActorDestroy(Actor* actor, PlayState* play)
     if (!child)
         return;
     EnemyFamily* family = child->family;
+    FamilyVirtualFloor* floor = familyFloor(family, 0);
+    if (floor && floor->root == actor)
+        floor->root = NULL;
     family->blocked = 1;
     familyUnbind(child);
     *child = (FamilyChild){ .actor = (Actor*)1 };
     comboEnemyNativeCancelInit(actor, play);
-    if (family->live && !--family->live && family->complete)
-        family->complete(family, play);
+    if (family->live && !--family->live)
+    {
+        if (family->complete)
+            family->complete(family, play);
+        if (!family->live && sFamily != family)
+            familyReleaseFloor(family);
+    }
 }
 
 PATCH_FUNC(0x800b6948, familyActorDestroy);

@@ -3755,6 +3755,22 @@ type EnemyReplacement = {
 
 export type EnemyPlan = EnemyReplacement[];
 
+export function enemyPlanEncounterId(row: EnemyPlan[number]): string {
+  if (row.placement) {
+    const p = row.placement;
+    const scene = MM_NATIVE_SCENES.find(scene => scene.scene === p.scene && scene.grotto === p.grotto);
+    const actor = scene?.maps[p.mapIndex]?.actors.find(actor => actor.offset === p.actorOffset);
+    if (!scene || !actor) throw new Error('Missing MM encounter for planned actor ' + p.actorOffset);
+    return mmSpawnRegistryId(scene, actor);
+  }
+  if (row.ootr) return ootSpawnRegistryId(row.ootr.location);
+  return namedSpawnId(enemyDefinition(row.source).game, row.source);
+}
+
+export function enemyPlanVirtualFloor(row: EnemyPlan[number]): boolean {
+  return spawnEncounter(enemyPlanEncounterId(row)).virtualFloor === true;
+}
+
 type EnemyShuffleIdentity = Pick<EnemyDefinition, 'key' | 'game' | 'actorId' | 'objectId' | 'spawnParams'>;
 
 function enemyExclusionName(enemy: EnemyDefinition): string {

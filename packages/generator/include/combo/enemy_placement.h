@@ -14,6 +14,7 @@
 #define ENEMY_NATIVE_AIR            256u
 #define ENEMY_NATIVE_UPRIGHT        512u
 #define ENEMY_NATIVE_GROUND         1024u
+#define ENEMY_DYNAMIC_VIRTUAL_FLOOR 2048u
 #define ENEMY_NATIVE_IRON_KNUCKLE   64u
 int comboEnemyFlyingAttackInRange(Actor*, PlayState*, f32);
 void comboEnemyFlyingAttackAim(Actor*, PlayState*, int);

@@ -32,7 +32,7 @@ static Actor* burialSpawn(s32 slot, ActorContext* ctx, PlayState* play, s16 id,
 
     const BurialEnemyChoice* choice = &sBurialChoices[slot];
     ActorEntry entry = { choice->id, { x, y, z }, { rx, ry, rz }, choice->params };
-    if (choice->operation & ENEMY_NATIVE_GROUND)
+    if ((choice->operation & ENEMY_NATIVE_GROUND) && !(choice->operation & ENEMY_DYNAMIC_VIRTUAL_FLOOR))
     {
         ActorEntry grounded;
         comboEnemyNativeFloorEntry(play, &entry, &grounded);
@@ -139,8 +139,6 @@ static Actor* forestBowSpawn(ActorContext* ctx, Actor* parent, PlayState* play, 
 
     EnemyFamily* family = &sFamilies[slot];
     ActorEntry entry = { choice->id, { x, y, z }, { rx, ry, rz }, choice->params };
-    if (choice->flags & 2)
-        comboEnemyFamilySetVirtualFloor(family, play, &entry);
     u32 segment = gSegments[6];
     u8 lackSoul = g.roomEnemyLackSoul;
     family->complete = forestBowComplete;

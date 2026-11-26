@@ -16,6 +16,7 @@ import {
   enemyIsElevatedSource, enemyPreservesNativeHeight, enemyRequiresGroundPlacement,
   mmAquaticSlot, enemyIsCarnivorousLily, ootWaterSurfaceSlot, mmWaterSurfaceSlot, tentacleSlotAt, MM_NATIVE_SCENES, isOotEnemizerNativeExtensionChoice, ootNativeChoiceAllows,
   OOT_ENEMIZER, ENEMY_SOURCE_ADDITIONS, ootEnemizerLocationKey,
+  enemyPlanVirtualFloor, enemyPlanEncounterId,
   type EnemyDefinition, type EnemyPlan, type Settings, type Monitor, type BigOctoArenaCombatTargetKey, type NativeArenaCombatTargetKey, type NativeMinibossVariantKey, type OotEnemizerReplacement, type OotEnemizerChoice,
 } from '@ootmm/core';
 import { debugEnemyForms, installDebugEnemyCatalog } from '../enemies/debug-catalog';
@@ -47,7 +48,7 @@ import CRC32 from 'crc-32';
 import { enemy_placement_data as placementData, enemy_big_octo_slot as slot } from '../../../../core/src/enemy-data';
 import { GI } from '../data';
 import { CONFIG } from '../config';
-import { ENGINE_ACTORS, ENEMY_SPAWN_RULES, type EnemySpawnRules, type Game } from '@ootmm/data';
+import { ENGINE_ACTORS, type Game } from '@ootmm/data';
 
 type Change = { offset: number; value: number };
 
@@ -123,6 +124,7 @@ function exactMmActivationRecords(rom: Uint8Array, plan: EnemyPlan, patch: Patch
   return plan.flatMap(row => {
     const placement = row.placement;
     if (!placement || placement.sourceActorId === 0x13a) return [];
+    const virtualFloor = enemyPlanVirtualFloor(row);
     const { actorOffset, raw, targetGame, targetActorId, targetParams, sourceActorId, dryAquatic } = placement;
     const peahat = targetGame === 'mm' && targetActorId === 0x14 && targetParams === 0 && sourceActorId !== 0x14;
     const skullwall = targetGame === 'mm' && targetActorId === 0x50;
@@ -135,9 +137,9 @@ function exactMmActivationRecords(rom: Uint8Array, plan: EnemyPlan, patch: Patch
     const base = imported ? 0 : dryAquatic ? 29 : skullwall ? 5 : peahat ? 4 : MM_PLACEMENT_OPERATIONS[targetActorId] ?? 0;
     const grounded = !dryAquatic && needsGroundPlacement('mm', sourceActorId, definition);
     const operation = base | (imported ? 0 : (air ? 256 : 0) | (attached ? 0 : 512)) | (grounded ? 1024 : 0);
-    if (imported && !grounded && placement.grotto === undefined) return [];
+    if (!virtualFloor && imported && !grounded && placement.grotto === undefined) return [];
     const runtimeId = targetActorId + (imported ? 0xc00 : 0);
-    if (!operation && !row.chaoticMmChoices?.length && placement.grotto === undefined) return [];
+    if (!virtualFloor && !operation && !row.chaoticMmChoices?.length && placement.grotto === undefined) return [];
     if (!matchesMmActorEntry(rom, actorOffset, raw))
       throw new Error('MM activation original actor entry mismatch');
     if (skullwall) verifyMmSkullwalltulaSlot(rom, placement);
@@ -155,6 +157,7 @@ function exactMmActivationRecords(rom: Uint8Array, plan: EnemyPlan, patch: Patch
       changes.push({ offset: actorOffset + 4, value: mmAquaticPlacementY(rom, actorOffset) & 0xffff });
 
     const record = nativePlacementRecord(rom, actorOffset, operation, changes, runtimeId, targetParams);
+    if (virtualFloor) record.virtualFloor = true;
     if (placement.grotto !== undefined) {
       record.instanceSource = actorOffset;
       record.vrom = mmGrottoPlacementKey(placement);
@@ -259,11 +262,12 @@ function applyExactOotEnemizer(roms: DecompressedRoms, addresses: GameAddresses,
   const switchRecords: OotEnemizerSwitchRecord[] = [];
   const missing: OotEnemizerPhysicalKey[] = [];
   const splitChoices = new Map<number, EnemySplitChoices>();
-  const writes = new Map<number, { resolved: Resolved; replacement: Uint8Array }>();
+  const writes = new Map<number, { resolved: Resolved; replacement: Uint8Array; virtualFloor: boolean }>();
   let replaced = 0;
   let mqReplaced = 0;
   for (const row of rows) {
     const choice = row.ootr;
+    const virtualFloor = enemyPlanVirtualFloor(row);
     const keys: OotEnemizerPhysicalKey[] = [
       { ...choice.location },
       ...choice.aliases.map(([scene, room, setup, slot]) => ({ scene, room, setup, slot, mq: false })),
@@ -302,16 +306,16 @@ function applyExactOotEnemizer(roms: DecompressedRoms, addresses: GameAddresses,
       const entry = prepareOotEnemizerActor(choice, original, key, imported);
       if (!entry) continue;
       const previous = writes.get(resolved.vrom);
-      if (previous && !bufEqual(entry.replacement, previous.replacement))
+      if (previous && (previous.virtualFloor !== virtualFloor || !bufEqual(entry.replacement, previous.replacement)))
         throw Error('Conflicting exact OoT alias choices');
       if (!previous) {
-        writes.set(resolved.vrom, { resolved, replacement: entry.replacement });
+        writes.set(resolved.vrom, { resolved, replacement: entry.replacement, virtualFloor });
         if (key.mq) ++mqReplaced;
         else ++replaced;
       }
       if (row.splitChildren)
         splitChoices.set(resolved.vrom, { seeded: row.splitChildren, pool: row.splitPool });
-      if (entry.operation && !records.has(resolved.vrom)) {
+      if ((entry.operation || virtualFloor) && !records.has(resolved.vrom)) {
         const changes = Array.from({ length: 8 }, (_, index) => {
           const offset = index * 2;
           return { offset, value: bufReadU16BE(entry.replacement, offset) };
@@ -320,6 +324,7 @@ function applyExactOotEnemizer(roms: DecompressedRoms, addresses: GameAddresses,
         record.vrom = resolved.vrom;
         if (resolved.mq) record.mq = resolved.mq;
         record.ootPlacement = { choice, key };
+        if (virtualFloor) record.virtualFloor = true;
         records.set(record.vrom, record);
       }
       if (entry.switchFlag >= 0)
@@ -474,14 +479,19 @@ function applyOverlappingEdits(bytes: Uint8Array, offset: number, edits: readonl
 /* Locate the shared vanilla floor-raycast implementation via three known
  * wrappers, then redirect its actor-aware call sites. No guessed prologue,
  * trampoline, or writes to the original implementation are required. */
-function installOotVirtualFloorRaycast(rom: Uint8Array, addresses: GameAddresses, patch: Patchfile): void {
-  const down1 = 0x8002f3a4, down2 = 0x8002f400, down3 = 0x8002f454, down4 = 0x8002f4b8;
-  const end = 0x800313a4; // DynaPoly_SetBgActor, after the raycast wrappers.
+function installVirtualFloorRaycast(game: Game, rom: Uint8Array, addresses: GameAddresses, patch: Patchfile): void {
+  const oot = game === 'oot';
+  const down1 = oot ? 0x8002f3a4 : 0x800c3fa0;
+  const down4 = oot ? 0x8002f4b8 : 0x800c411c;
+  const down5 = oot ? down4 + 0x70 : 0x800c4188;
+  const end = oot ? 0x800313a4 : 0x800c62bc;
+  const codeStart = oot ? 0x800110a0 : 0x800a5ac0;
+  const code = `${game}/code`;
   const callTarget = (word: number, pc: number) => word >>> 26 === 3
     ? (((pc + 4) & 0xf0000000) | ((word & 0x03ffffff) << 2)) >>> 0 : undefined;
   const read = (pc: number) => {
-    const f = addresses.oot.fileFromRAM(pc);
-    if (f.name !== 'oot/code' || f.addr + 4 > rom.length) throw Error('OoT floor raycast revision mismatch');
+    const f = addresses[game].fileFromRAM(pc);
+    if (f.name !== code || f.addr + 4 > rom.length) throw Error(game + ' floor raycast revision mismatch');
     return bufReadU32BE(rom, f.addr);
   };
   const calls = (start: number, stop: number) => {
@@ -492,33 +502,36 @@ function installOotVirtualFloorRaycast(rom: Uint8Array, addresses: GameAddresses
     }
     return result;
   };
-  const wrappers = [calls(down1, down2), calls(down2, down3), calls(down3, down4)];
-  if (wrappers.some(rows => rows.length !== 1)) throw Error('Unexpected OoT floor raycast wrapper layout');
+  const wrappers = oot
+    ? [calls(down1, 0x8002f400), calls(0x8002f400, 0x8002f454), calls(0x8002f454, down4)]
+    : [calls(down1, down4), calls(down4, down5)];
+  if (oot ? wrappers.some(rows => rows.length !== 1) : wrappers[0].length !== 4 || wrappers[1].length !== 1)
+    throw Error(`Unexpected ${game} floor raycast wrapper layout`);
   const original = wrappers[0][0].target;
-  if (original < 0x800110a0 || original >= down1 || wrappers.some(rows => rows[0].target !== original))
-    throw Error('OoT floor raycast wrappers do not share the expected implementation');
+  if (original < codeStart || original >= down1 || wrappers.some(rows => rows.some(row => row.target !== original)))
+    throw Error(`${game} floor raycast wrappers do not share the expected implementation`);
   const sites = calls(down4, end).filter(row => row.target === original);
-  if (sites.length < 4 || sites[0].pc >= down4 + 0x70 || sites[1].pc >= down4 + 0x100)
-    throw Error('Missing OoT actor-aware floor raycast wrappers');
-  const hook = patch.symbols.oot.get('ENEMY_VIRTUAL_FLOOR_RAYCAST_V1');
-  const pointer = 'ENEMY_VIRTUAL_FLOOR_ORIGINAL_V1';
-  const payload = patch.newFiles.find(file => file.name === 'oot/payload');
-  const span = payload?.vram?.oot;
+  if (sites.length < 4 || sites[0].pc >= down5 || sites[1].pc >= (oot ? down4 + 0x100 : down5 + 0x70))
+    throw Error(`Missing ${game} actor-aware floor raycast wrappers`);
+  const hook = patch.symbols[game].get(oot ? 'ENEMY_VIRTUAL_FLOOR_RAYCAST_V1' : 'ENEMY_VIRTUAL_FLOOR_RAYCAST_MM_V1');
+  const pointer = oot ? 'ENEMY_VIRTUAL_FLOOR_ORIGINAL_V1' : 'ENEMY_VIRTUAL_FLOOR_ORIGINAL_MM_V1';
+  const payload = patch.newFiles.find(file => file.name === `${game}/payload`);
+  const span = payload?.vram?.[game];
   if (!span || !payload || hook?.length !== 1 || hook[0] % 4 || hook[0] < span[0] || hook[0] >= span[1] ||
-    patch.symbols.oot.get(pointer)?.length !== 1 || patch.symPatches.has(pointer))
-    throw Error('Missing/conflicting virtual-floor runtime; rebuild the OoT payload');
-  if (patch.removedFiles.includes('oot/code') || patch.newFiles.some(file => file.name === 'oot/code'))
-    throw Error('Conflicting OoT code replacement');
+    patch.symbols[game].get(pointer)?.length !== 1 || patch.symPatches.has(pointer))
+    throw Error('Missing/conflicting virtual-floor runtime; rebuild the ' + game + ' payload');
+  if (patch.removedFiles.includes(code) || patch.newFiles.some(file => file.name === code))
+    throw Error('Conflicting ' + game + ' code replacement');
   const replacement = (0x0c000000 | ((hook[0] >>> 2) & 0x03ffffff)) >>> 0;
   for (const site of sites) {
-    const f = addresses.oot.fileFromRAM(site.pc);
+    const f = addresses[game].fileFromRAM(site.pc);
     const staged = Uint8Array.from(rom.subarray(f.addr, f.addr + 4));
     applyOverlappingEdits(staged, f.offset, patch.patches[f.name] ?? []);
-    if (bufReadU32BE(staged, 0) !== site.word) throw Error('Conflicting OoT floor raycast call patch');
+    if (bufReadU32BE(staged, 0) !== site.word) throw Error('Conflicting ' + game + ' floor raycast call patch');
   }
   patch.addSymbolPatch(pointer, toU32Buffer([original]));
   for (const site of sites) {
-    const f = addresses.oot.fileFromRAM(site.pc);
+    const f = addresses[game].fileFromRAM(site.pc);
     patch.addPatch(f.name, f.offset, toU32Buffer([replacement]));
   }
 }
@@ -623,6 +636,7 @@ type NativePlacementRecord = {
   vrom: number;
   operation: number;
   weight?: number;
+  virtualFloor?: boolean;
   ootPlacement?: { choice: OotEnemizerChoice; key: OotEnemizerPhysicalKey };
   sourceVrom?: number;
   instanceSource?: number;
@@ -1002,7 +1016,7 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
       verifySource('iron-knuckle', () => verifyNativeIronKnuckleSource(rom));
     } else if (operation !== 0) throw new Error('Unsupported native placement operation');
     const previous = sorted.get(row.vrom);
-    if (previous && (previous.operation !== row.operation || previous.targetId !== row.targetId || previous.targetParams !== row.targetParams ||
+    if (previous && (!!previous.virtualFloor !== !!row.virtualFloor || previous.operation !== row.operation || previous.targetId !== row.targetId || previous.targetParams !== row.targetParams ||
       !bufEqual(previous.replacement, row.replacement))) throw new Error('Conflicting native placement aliases');
     sorted.set(row.vrom, row);
   }
@@ -1016,6 +1030,16 @@ function installNativePlacements(game: Game, rom: Uint8Array, patch: Patchfile, 
   if (patch.symPatches.has(symbol)) throw new Error('Native placements already installed');
   patch.addNewFile({ name: `enemy/native/${game}/placements`, vrom, data, compressed: false });
   patch.addSymbolPatch(symbol, toU32Buffer([vrom]));
+  const floors = rows.filter(row => row.virtualFloor).map(row => row.vrom);
+  if (floors.length) {
+    const floorSymbol = `ENEMY_VIRTUAL_FLOOR_PLACEMENTS_${game.toUpperCase()}_V1`;
+    if (floors.length > 4096 || patch.symbols[game].get(floorSymbol)?.length !== 1 || patch.symPatches.has(floorSymbol))
+      throw Error('Missing/conflicting virtual-floor placement table');
+    const floorData = toU32Buffer([floors.length, ...floors]);
+    const floorVrom = allocatePlacementMetadata(patch, game, floorData.length, 'Virtual-floor placement metadata capacity exceeded');
+    patch.addNewFile({ name: `enemy/native/${game}/virtual-floors`, vrom: floorVrom, data: floorData, compressed: false });
+    patch.addSymbolPatch(floorSymbol, toU32Buffer([floorVrom]));
+  }
 }
 
 function modifiedRomRange(game: Game, start: number, size: number, addresses: GameAddresses, patch: Patchfile, requireContiguous = false) {
@@ -2443,6 +2467,11 @@ function installDynamicChoices(patch: Patchfile, plan: EnemyPlan, foreign: Reado
   }
 }
 
+const DYNAMIC_VIRTUAL_FLOOR = 2048;
+function encounterDynamicOperation(row: EnemyPlan[number], operation: number): number {
+  return operation | (enemyPlanVirtualFloor(row) ? DYNAMIC_VIRTUAL_FLOOR : 0);
+}
+
 function installDesertLeeverShuffle(patch: Patchfile, plan: EnemyPlan, rooms: EnemySupplementalRoom[], foreign: ReadonlyMap<string, ForeignEnemyPlacement>): void {
   const data = new Uint8Array(OOT_DESERT_LEEVER_SLOTS.length * 8);
   OOT_DESERT_LEEVER_SLOTS.forEach((slot, index) => {
@@ -2450,7 +2479,7 @@ function installDesertLeeverShuffle(patch: Patchfile, plan: EnemyPlan, rooms: En
     if (!row) return;
     const target = enemyDefinition(row.target);
     const choice = dynamicEnemyChoice('oot', target, foreign);
-    [choice.id, choice.params, choice.operation, 1].forEach((value, field) =>
+    [choice.id, choice.params, encounterDynamicOperation(row, choice.operation), 1].forEach((value, field) =>
       bufWriteU16BE(data, index * 8 + field * 2, value));
     rooms.push({ game: 'oot', source: row.source, target: row.target, scene: slot.scene, room: slot.room });
   });
@@ -2482,7 +2511,7 @@ function installFieldStalchildShuffle(patch: Patchfile, settings: Settings, plan
       const entry = prepareOotEnemizerActor(choice, original, choice.location, imported);
       if (!entry) throw Error('Missing Hyrule Field spawn adapter');
       cumulative += Math.max(1, Math.floor(weights[i] * 32768 / total));
-      [entry.targetId, entry.targetParams, entry.operation, cumulative].forEach((value, field) =>
+      [entry.targetId, entry.targetParams, encounterDynamicOperation(row, entry.operation), cumulative].forEach((value, field) =>
         bufWriteU16BE(data, i * 8 + field * 2, value));
     });
     const vrom = allocatePlacementMetadata(patch, 'oot', data.length, 'Field enemy metadata space exhausted');
@@ -2580,7 +2609,7 @@ function installLilySourceChoices(plan: EnemyPlan, rom: Uint8Array, patch: Patch
     keys.add(key);
     rooms.push({ game: 'mm', source: row.source, target: row.target, scene: source.scene, room: source.room });
     const choice = dynamicEnemyChoice('mm', { ...target, spawnParams: source.targetParams }, foreign);
-    [source.scene, source.sourceParams, choice.id, choice.params, +(target.habitat === 'air'), choice.operation]
+    [source.scene, source.sourceParams, choice.id, choice.params, +(target.habitat === 'air'), encounterDynamicOperation(row, choice.operation)]
       .forEach((value, j) => bufWriteU16BE(data, 8 + i * 12 + j * 2, value));
   });
   const vrom = allocatePlacementMetadata(patch, 'mm', data.length, 'Lily source metadata capacity exceeded');
@@ -2616,7 +2645,7 @@ function installGoldSkulltulaChoices(plan: EnemyPlan, roms: DecompressedRoms, pa
       const choice = dynamicEnemyChoice(game, target, foreign);
       const at = 8 + i * 12;
       const flags = +(target.habitat === 'air') | ('groundReward' in source && source.groundReward ? 2 : 0);
-      [source.scene, source.reward, choice.id, choice.params, flags, choice.operation]
+      [source.scene, source.reward, choice.id, choice.params, flags, encounterDynamicOperation(row, choice.operation)]
         .forEach((v, j) => bufWriteU16BE(data, at + j * 2, v));
     }
     const vrom = allocatePlacementMetadata(patch, game, data.length, 'Gold Skulltula choice metadata capacity exceeded');
@@ -2747,7 +2776,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
     const target = enemyDefinition(guards.target);
     const choice = dynamicEnemyChoice('mm', target, foreignTargets);
     const data = new Uint8Array(8);
-    [choice.id, choice.params, choice.operation, 1].forEach((value, i) => bufWriteU16BE(data, i * 2, value));
+    [choice.id, choice.params, encounterDynamicOperation(guards, choice.operation), 1].forEach((value, i) => bufWriteU16BE(data, i * 2, value));
     patch.addSymbolPatch('ENEMY_MM_KEETA_GUARDS_V1', data);
     for (const room of collectEnemyRooms(roms.mm.rom, 'mm')) for (const header of room.headers) {
       if (header.scene !== 0x43 || !header.actors) continue;
@@ -2757,26 +2786,28 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
     }
   }
   installFieldStalchildShuffle(patch, settings, plan, foreignTargets, supplementalRooms);
-  const encounters = (ENEMY_SPAWN_RULES as unknown as EnemySpawnRules).encounters;
-  const supportedVirtualFloors = new Set(OOT_FOREST_BOW_SLOTS.map(slot => 'oot/named/' + slot.key));
-  for (const [id, encounter] of Object.entries(encounters ?? {}))
-    if (encounter.virtualFloor && !supportedVirtualFloors.has(id))
-      throw Error('Virtual floor is not wired to the runtime for ' + id);
-  let virtualFloor = false;
+  // Every selected floor is wired through either the physical placement table
+  // or an individual scripted choice. Unknown future controller types fail closed.
+  const supportedFloorKinds = new Set(['forest-bow', 'burial-spawner', 'field-spawner', 'desert-spawner', 'keeta-guards', 'gold', 'scripted', 'restore', 'arena']);
+  const floorGames = new Set<Game>();
+  for (const row of plan) {
+    if (!enemyPlanVirtualFloor(row)) continue;
+    if (!row.ootr && !row.placement && (!row.kind || !supportedFloorKinds.has(row.kind)))
+      throw Error('Unsupported virtual-floor controller: ' + enemyPlanEncounterId(row));
+    floorGames.add(enemyDefinition(row.source).game);
+  }
+  for (const game of floorGames) installVirtualFloorRaycast(game, roms[game].rom, addresses, patch);
   const forestBow = new Uint8Array(OOT_FOREST_BOW_SLOTS.length * 8);
   OOT_FOREST_BOW_SLOTS.forEach((slot, i) => {
     const row = plan.find(row => row.kind === 'forest-bow' && row.source === slot.key);
     if (!row) return;
     const choice = dynamicEnemyChoice('oot', enemyDefinition(row.target), foreignTargets);
-    const floor = encounters?.['oot/named/' + slot.key]?.virtualFloor === true;
-    virtualFloor ||= floor;
-    [choice.id, choice.params, choice.operation, floor ? 3 : 1].forEach((value, field) =>
+    [choice.id, choice.params, encounterDynamicOperation(row, choice.operation), 1].forEach((value, field) =>
       bufWriteU16BE(forestBow, i * 8 + field * 2, value));
     supplementalRooms.push({ game: 'oot', source: row.source, target: row.target, scene: slot.scene, room: slot.room });
   });
   if (forestBow.some(value => value))
     patch.addSymbolPatch('ENEMY_FOREST_BOW_CHOICES', forestBow);
-  if (virtualFloor) installOotVirtualFloorRaycast(roms.oot.rom, addresses, patch);
   const burial = new Uint8Array(OOT_BURIAL_ENEMY_SLOTS.length * 8);
   OOT_BURIAL_ENEMY_SLOTS.forEach((slot, i) => {
     const row = plan.find(row => row.kind === 'burial-spawner' && row.source === slot.key);
@@ -2784,7 +2815,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
     const target = enemyDefinition(row.target);
     const choice = dynamicEnemyChoice('oot', target, foreignTargets);
     const operation = choice.operation | (target.habitat === 'ground' ? 1024 : 0);
-    [choice.id, choice.params, operation, 1].forEach((value, field) =>
+    [choice.id, choice.params, encounterDynamicOperation(row, operation), 1].forEach((value, field) =>
       bufWriteU16BE(burial, i * 8 + field * 2, value));
     supplementalRooms.push({ game: 'oot', source: row.source, target: row.target, scene: slot.scene, room: slot.room });
   });
@@ -2941,7 +2972,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
           verifyScriptedMmController(rom, addresses, patch);
 
           if (!imported && !nativeEnemyOnDemandObjects(game, target.actorId)) continue;
-          records.push(nativePlacementRecord(rom, offset, 128, [], imported?.actorId ?? target.actorId, target.spawnParams));
+          records.push({ ...nativePlacementRecord(rom, offset, 128, [], imported?.actorId ?? target.actorId, target.spawnParams), virtualFloor: enemyPlanVirtualFloor(pair) });
           supplementalEdits.add(`mm/${offset}`);
           if (imported || nativeEnemyOnDemandObjects(game, target.actorId)) for (const alias of aliases) supplementalRooms.push({ game, source: pair.source, target: pair.target, scene: alias.scene, room: alias.room });
           ++arenaReplaced;
@@ -2998,7 +3029,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
           if (!restored) continue;
           changes.push(...restored.changes);
           const operation = 1 | (needsGroundPlacement(game, bufReadU16BE(rom, restored.actorOffset) & 0x1fff, target) ? 1024 : 0);
-          records.push(nativePlacementRecord(rom, restored.actorOffset, operation, changes, actorId, target.spawnParams));
+          records.push({ ...nativePlacementRecord(rom, restored.actorOffset, operation, changes, actorId, target.spawnParams), virtualFloor: enemyPlanVirtualFloor(pair) });
           if (imported || nativeEnemyOnDemandObjects(game, target.actorId))
             for (const alias of room.headers) supplementalRooms.push({ game, source: pair.source, target: pair.target, scene: alias.scene, room: alias.room });
           ++arenaReplaced;
@@ -3035,10 +3066,10 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
         if (imported || nativeEnemyOnDemandObjects(game, target.actorId))
           supplementalRooms.push({ game, source: pair.source, target: pair.target, scene: header.scene, room: header.room });
         if (arena.controllerSlot !== undefined) {
-          records.push(nativePlacementRecord(rom, header.actors.offset + arena.controllerSlot * 16, 8, [], selected.actorId, selected.spawnParams));
+          records.push({ ...nativePlacementRecord(rom, header.actors.offset + arena.controllerSlot * 16, 8, [], selected.actorId, selected.spawnParams), virtualFloor: enemyPlanVirtualFloor(pair) });
         }
         if (arena.replacementSlot !== undefined)
-          records.push(nativePlacementRecord(rom, header.actors.offset + arena.replacementSlot * 16, 129, arena.changes, selected.actorId, selected.spawnParams));
+          records.push({ ...nativePlacementRecord(rom, header.actors.offset + arena.replacementSlot * 16, 129, arena.changes, selected.actorId, selected.spawnParams), virtualFloor: enemyPlanVirtualFloor(pair) });
         for (const slot of arena.suppressedOriginalSlots)
           records.push(nativePlacementRecord(rom, header.actors.offset + slot * 16, 2, []));
         changes.push(...arena.changes);
@@ -3059,7 +3090,7 @@ export function patchEnemies(plan: EnemyPlan, roms: DecompressedRoms, addresses:
           else continue;
         }
         const record = nativePlacementRecord(rom, offset, operation, changes, target, params);
-        if (previous) records[records.indexOf(previous)] = record; else records.push(record);
+        if (previous) { record.virtualFloor = previous.virtualFloor; records[records.indexOf(previous)] = record; } else records.push(record);
       }
       for (const record of records) if (record.operation === 2 && actorOffsets.has(record.sourceVrom ?? record.vrom))
         supplementalEdits.add(`${game}/${record.sourceVrom ?? record.vrom}`);

@@ -45,6 +45,7 @@ typedef struct
 #endif
     u8 operation;
     u8 hadHealth;
+    u8 virtualFloor;
 #if defined(GAME_OOT)
     u32 generation;
     u8 arenaDefeated;
@@ -58,10 +59,23 @@ typedef struct
 static u32 sNativeArenaGeneration;
 #endif
 
-static EnemyFamily sNativeFamilies[64];
-
 #define NATIVE_PLACEMENT_STATE_CAPACITY 64
 static NativePlacementState* sNativeStates;
+static EnemyFamily* sNativeFamilies;
+
+static int nativePlacementAllocStates(void)
+{
+    if (!sNativeStates)
+    {
+        u32 bytes = NATIVE_PLACEMENT_STATE_CAPACITY * (sizeof(*sNativeStates) + sizeof(*sNativeFamilies));
+        sNativeStates = malloc(bytes);
+        if (!sNativeStates)
+            return 0;
+        memset(sNativeStates, 0, bytes);
+        sNativeFamilies = (EnemyFamily*)(sNativeStates + NATIVE_PLACEMENT_STATE_CAPACITY);
+    }
+    return 1;
+}
 #define NATIVE_PLACEMENT_STATE_COUNT (sNativeStates ? NATIVE_PLACEMENT_STATE_CAPACITY : 0)
 static u32 sNativeVisits[32];
 static u32 sNativeBlockedVisits[32];
@@ -80,6 +94,30 @@ int comboEnemyNativeMusicSuppressed(void)
 
 static u32 sNativePlacementVrom __attribute__((section(".data"))) = 0;
 static u32 sChaoticPlacementVrom __attribute__((section(".data"))) = 0;
+static u32 sVirtualFloorPlacementVrom __attribute__((section(".data"))) = 0;
+#if defined(GAME_OOT)
+EXPORT_SYMBOL(ENEMY_VIRTUAL_FLOOR_PLACEMENTS_OOT_V1, sVirtualFloorPlacementVrom);
+#else
+EXPORT_SYMBOL(ENEMY_VIRTUAL_FLOOR_PLACEMENTS_MM_V1, sVirtualFloorPlacementVrom);
+#endif
+
+static int virtualFloorPlacement(u32 key)
+{
+    u32 count;
+    if (!sVirtualFloorPlacementVrom || comboDmaLoadFilePartial(&count, sVirtualFloorPlacementVrom, 0, 4) != 4 || count > 4096)
+        return 0;
+    u32 low = 0, high = count;
+    while (low < high)
+    {
+        u32 mid = low + (high - low) / 2, value;
+        if (comboDmaLoadFilePartial(&value, sVirtualFloorPlacementVrom, 4 + mid * 4, 4) != 4)
+            return 0;
+        if (value == key) return 1;
+        if (value < key) low = mid + 1;
+        else high = mid;
+    }
+    return 0;
+}
 #if defined(GAME_OOT)
 #define NativePlacementSpawnEntry ((Actor * (*)(ActorContext*, ActorEntry*, PlayState*))0x800255c4)
 #define NATIVE_PLACEMENT_GAME     0u
@@ -269,10 +307,12 @@ void comboEnemyNativePlacementSetActorList(PlayState* play, ActorEntry* list, u3
 void comboEnemyNativePlacementReset(void)
 {
     nativePlacementClearRows();
-    for (u32 i = 0; i < ARRAY_COUNT(sNativeFamilies); ++i)
-        comboEnemyFamilyClear(&sNativeFamilies[i]);
+    if (sNativeFamilies)
+        for (u32 i = 0; i < NATIVE_PLACEMENT_STATE_CAPACITY; ++i)
+            comboEnemyFamilyClear(&sNativeFamilies[i]);
     free(sNativeStates);
     sNativeStates = NULL;
+    sNativeFamilies = NULL;
     memset(sNativeVisits, 0, sizeof(sNativeVisits));
     memset(sNativeBlockedVisits, 0, sizeof(sNativeBlockedVisits));
     sNativeScope = NULL;
@@ -520,6 +560,7 @@ Actor* comboEnemyNativeArenaSpawn(ActorContext* ctx, ActorEntry* entry, PlayStat
         return NULL;
     EnemyFamily* family = &sNativeFamilies[owner - sNativeStates];
     family->complete = nativeFamilyComplete;
+    if (owner->virtualFloor && !comboEnemyFamilySetVirtualFloor(family, play, entry)) return NULL;
     return comboEnemyFamilySpawn(family, ctx, entry, play, 0xffff);
 }
 
@@ -1260,13 +1301,8 @@ static Actor* nativePlacementTraitsSpawn(ActorContext* ctx, ActorEntry* entry, P
     s32 room = play->roomCtx.curRoom.num;
     if (room < 0 || room >= 32)
         return NULL;
-    if (!sNativeStates)
-    {
-        sNativeStates = malloc(NATIVE_PLACEMENT_STATE_CAPACITY * sizeof(*sNativeStates));
-        if (!sNativeStates)
-            return NULL;
-        memset(sNativeStates, 0, NATIVE_PLACEMENT_STATE_CAPACITY * sizeof(*sNativeStates));
-    }
+    if (!nativePlacementAllocStates())
+        return NULL;
     ActorEntry copy = *entry;
     u32 traits = operation & (ENEMY_NATIVE_AIR | ENEMY_NATIVE_UPRIGHT);
     u32 base = operation & ~(ENEMY_NATIVE_AIR | ENEMY_NATIVE_UPRIGHT | ENEMY_NATIVE_FLOOR);
@@ -1281,7 +1317,7 @@ static Actor* nativePlacementTraitsSpawn(ActorContext* ctx, ActorEntry* entry, P
         return NULL;
     }
 #if defined(GAME_OOT)
-    if (operation & ENEMY_NATIVE_FLOOR)
+    if ((operation & ENEMY_NATIVE_FLOOR) && !comboEnemyVirtualFloorActive())
         comboEnemyNativeFloorEntry(play, entry, &copy);
 #endif
     if (traits & ENEMY_NATIVE_UPRIGHT)
@@ -1373,33 +1409,18 @@ static Actor* nativePlacementTraitsSpawn(ActorContext* ctx, ActorEntry* entry, P
     return actor;
 }
 
-int comboEnemyNativePlacementSpawn(ActorContext* ctx, ActorEntry* entry, PlayState* play)
+static int nativeRoomRecord(PlayState* play, const ActorEntry* entry, NativePlacement* record, int* instancePlacement)
 {
-    NativePlacement record;
-    NativePlacement seedRecord;
-    ActorEntry* seedEntry = entry;
-    ActorEntry adjusted;
-    ActorEntry instanceEntry;
-    int instancePlacement = 0;
-#if defined(GAME_OOT)
-    u32 mqKey;
-#endif
-    NativePlacementState* state = NULL;
-    Actor* actor;
     s32 room = play->roomCtx.curRoom.num;
     u32 segment = (u32)play->roomCtx.curRoom.segment;
-    u32 address = (u32)entry, start, end;
+    u32 address = (u32)entry, start, end, key;
     RomFile* files = play->roomList;
-    if (!sNativePlacementVrom || room < 0 || room >= 32 || room >= play->numRooms ||
-        !play->roomList || !segment)
+    *instancePlacement = 0;
+    if (!sNativePlacementVrom || room < 0 || room >= 32 || room >= play->numRooms || !files || !segment)
         return 0;
 #if defined(GAME_OOT)
-    if (comboMqEnemyPlacementKey(play, entry, &mqKey))
-    {
-        if (!nativePlacementLookup(mqKey, &record))
-            return 0;
-        goto selected;
-    }
+    if (comboMqEnemyPlacementKey(play, entry, &key))
+        return nativePlacementLookup(key, record);
 #endif
     if (address < segment)
         return 0;
@@ -1407,21 +1428,31 @@ int comboEnemyNativePlacementSpawn(ActorContext* ctx, ActorEntry* entry, PlaySta
     end = (u32)files[room].vromEnd;
     if (!start || end <= start || end - start < sizeof(*entry) || address - segment > end - start - sizeof(*entry))
         return 0;
+    key = start + address - segment;
 #if defined(GAME_MM)
     u32 grotto = gGrottoData & 0x1f;
     if (play->sceneId == SCE_MM_GROTTOS && room == 4 && grotto >= 0x13)
     {
-        instancePlacement = 1;
-        if (!nativePlacementLookup(0xe0000000u + (grotto - 0x13) * 0x10000 + address - segment, &record))
-            return 0;
+        *instancePlacement = 1;
+        key = 0xe0000000u + (grotto - 0x13) * 0x10000 + address - segment;
     }
-    else
 #endif
-    if (!nativePlacementLookup(start + address - segment, &record))
+    return nativePlacementLookup(key, record);
+}
+
+int comboEnemyNativePlacementSpawn(ActorContext* ctx, ActorEntry* entry, PlayState* play)
+{
+    NativePlacement record;
+    NativePlacement seedRecord;
+    ActorEntry* seedEntry = entry;
+    ActorEntry adjusted;
+    ActorEntry instanceEntry;
+    int instancePlacement;
+    NativePlacementState* state = NULL;
+    Actor* actor;
+    s32 room = play->roomCtx.curRoom.num;
+    if (!nativeRoomRecord(play, entry, &record, &instancePlacement))
         return 0;
-#if defined(GAME_OOT)
-selected:
-#endif
     if (memcmp(entry, instancePlacement ? &record.original : &record.replacement, sizeof(*entry)))
     {
         if (!comboIsForeignEnemyActor(entry->id & 0x1fff))
@@ -1444,16 +1475,17 @@ selected:
         record = choice;
         entry = &record.replacement;
     }
-retrySeed:
+retrySeed:;
+    int virtualFloor = virtualFloorPlacement(record.vrom);
     if (record.operation & ENEMY_NATIVE_GROUND)
     {
         Vec3f pos = { entry->pos.x, entry->pos.y, entry->pos.z };
         adjusted = *entry;
         /* Hanging sources can overhang a wall or a narrow ledge. Keep the
          * nearby search first, then widen it with the same safety checks. */
-        if (comboEnemyFindFloor(play, NULL, &pos, 0.f, 50, 1) ||
+        if (!virtualFloor && !comboEnemyVirtualFloorActive() && (comboEnemyFindFloor(play, NULL, &pos, 0.f, 50, 1) ||
             comboEnemyFindFloor(play, NULL, &pos, 0.f, 150, 1) ||
-            comboEnemyFindFloor(play, NULL, &pos, 0.f, 512, 1))
+            comboEnemyFindFloor(play, NULL, &pos, 0.f, 512, 1)))
             adjusted.pos = (Vec3s){ pos.x, pos.y, pos.z };
 
 #if defined(GAME_MM)
@@ -1471,21 +1503,16 @@ retrySeed:
         return 1;
     }
 #endif
-    if (!sNativeStates)
+    if (!nativePlacementAllocStates())
     {
-        sNativeStates = malloc(NATIVE_PLACEMENT_STATE_CAPACITY * sizeof(*sNativeStates));
-        if (!sNativeStates)
-        {
 #if defined(GAME_MM)
-            comboEnemyNativePlacementBlock(room);
+        comboEnemyNativePlacementBlock(room);
 #else
-            if (sNativeVisits[room])
-                sNativeBlockedVisits[room] = sNativeVisits[room];
+        if (sNativeVisits[room])
+            sNativeBlockedVisits[room] = sNativeVisits[room];
 #endif
-            g.roomEnemyLackSoul = 1;
-            return 1;
-        }
-        memset(sNativeStates, 0, NATIVE_PLACEMENT_STATE_CAPACITY * sizeof(*sNativeStates));
+        g.roomEnemyLackSoul = 1;
+        return 1;
     }
 #if defined(GAME_MM)
     if (!record.operation && (entry->id & 0x1fff) == ACTOR_EN_PP)
@@ -1510,7 +1537,8 @@ retrySeed:
 #if defined(GAME_OOT)
         if (operation & ENEMY_NATIVE_FLOOR)
         {
-            comboEnemyNativeFloorEntry(play, entry, &copy);
+            if (!virtualFloor && !comboEnemyVirtualFloorActive())
+                comboEnemyNativeFloorEntry(play, entry, &copy);
             operation &= ~ENEMY_NATIVE_FLOOR;
         }
         if (!comboOotEnemizerCanSpawn(play, &copy))
@@ -1532,8 +1560,11 @@ retrySeed:
 #if defined(GAME_OOT)
     if (record.operation & ENEMY_NATIVE_FLOOR)
     {
-        comboEnemyNativeFloorEntry(play, entry, &adjusted);
-        entry = &adjusted;
+        if (!virtualFloor && !comboEnemyVirtualFloorActive())
+        {
+            comboEnemyNativeFloorEntry(play, entry, &adjusted);
+            entry = &adjusted;
+        }
         record.operation &= ~ENEMY_NATIVE_FLOOR;
     }
     if (!comboOotEnemizerCanSpawn(play, entry))
@@ -1721,6 +1752,7 @@ retrySeed:
         state->room = room;
         state->visit = sNativeVisits[room];
         state->operation = ENEMY_SCRIPTED_MM;
+        state->virtualFloor = virtualFloor;
         state->init = binding->actor.init;
         state->update = binding->actor.update;
         state->fini = binding->actor.fini;
@@ -1778,7 +1810,8 @@ retrySeed:
         state->operation = ENEMY_NATIVE_RESOURCE;
         EnemyFamily* family = &sNativeFamilies[state - sNativeStates];
         family->complete = nativeFamilyComplete;
-        if (!comboEnemyFamilySpawn(family, ctx, entry, play, 0xffff))
+        if ((virtualFloor && !comboEnemyFamilySetVirtualFloor(family, play, entry)) ||
+            !comboEnemyFamilySpawn(family, ctx, entry, play, 0xffff))
         {
             sNativeBlockedVisits[room] = sNativeVisits[room];
             g.roomEnemyLackSoul = 1;
@@ -1816,6 +1849,7 @@ retrySeed:
     state->room = room;
     state->visit = sNativeVisits[room];
     state->operation = record.operation;
+    state->virtualFloor = virtualFloor;
 #if defined(GAME_OOT)
     state->targetId = record.targetId;
     state->targetParams = record.targetParams;
@@ -2520,6 +2554,26 @@ void comboEnemyEndSpawnBatch(ActorContext* ctx, PlayState* play)
     gCurrentSpawnActorNum = previous;
 }
 
+static int virtualRoomFloorEntry(PlayState* play, const ActorEntry* entry, ActorEntry* floorEntry)
+{
+    NativePlacement record;
+    int instancePlacement;
+    if (!sVirtualFloorPlacementVrom || !nativeRoomRecord(play, entry, &record, &instancePlacement) ||
+        !virtualFloorPlacement(record.vrom) ||
+        memcmp(entry, instancePlacement ? &record.original : &record.replacement, sizeof(*entry)))
+        return 0;
+    u32 operation = record.operation & ~(ENEMY_NATIVE_GROUND | ENEMY_NATIVE_FLOOR | ENEMY_NATIVE_AIR | ENEMY_NATIVE_UPRIGHT);
+    /* These own genuine scripted families and set the floor when the target
+     * is created. Do not wrap the monitor or arena geometry as an enemy. */
+    if (operation == ENEMY_NATIVE_RESOURCE || operation == ENEMY_NATIVE_ARENA || operation == 128)
+        return 0;
+    *floorEntry = record.replacement;
+#if defined(GAME_MM)
+    floorEntry->id &= 0x1fff;
+#endif
+    return 1;
+}
+
 void comboEnemySpawnRoomEntry(ActorContext* ctx, ActorEntry* entry, PlayState* play)
 {
     const s32 room = play->roomCtx.curRoom.num;
@@ -2561,10 +2615,18 @@ void comboEnemySpawnRoomEntry(ActorContext* ctx, ActorEntry* entry, PlayState* p
         sDeferredRoomActors[slot >> 5] |= 1u << (slot & 31);
         return;
     }
+    EnemyVirtualFloorScope floor = {0};
+    ActorEntry floorEntry;
+    if (virtualRoomFloorEntry(play, entry, &floorEntry) && !comboEnemyVirtualFloorBegin(&floor, play, &floorEntry))
+    {
+        g.roomEnemyLackSoul = 1;
+        return;
+    }
     if (!gForeignEnemyRegistryVrom)
     {
         if (!comboEnemyNativePlacementSpawn(ctx, entry, play))
             NativeEncounterSpawnEntry(ctx, entry, play);
+        comboEnemyVirtualFloorEnd(&floor, NULL);
         return;
     }
     EnemyPlacement previous = sNextPlacement;
@@ -2580,6 +2642,7 @@ void comboEnemySpawnRoomEntry(ActorContext* ctx, ActorEntry* entry, PlayState* p
     }
     if (!comboEnemyNativePlacementSpawn(ctx, entry, play))
         NativeEncounterSpawnEntry(ctx, entry, play);
+    comboEnemyVirtualFloorEnd(&floor, NULL);
     sNextPlacement = previous;
     sNextActor = previousId;
 }
@@ -2599,6 +2662,8 @@ Actor* comboEnemyScriptedSpawnTarget(Actor* monitor, PlayState* play, f32 x, f32
         return NULL;
     ActorEntry entry = { .id = binding->targetId, .params = binding->targetParams,
         .pos = { x, y, z }, .rot = { 7, ((u16)(s16)(yaw * (360.f / 65536.f)) << 7) | 0x7f, 0x7f } };
+    NativePlacementState* state = nativePlacementState(monitor);
+    if (state && state->virtualFloor && !comboEnemyFamilySetVirtualFloor(family, play, &entry)) return NULL;
     return comboEnemyFamilySpawn(family, &play->actorCtx, &entry, play, 0xffff);
 }
 
@@ -2644,7 +2709,7 @@ static u32 dynamicOperation(s16 id, u16 params)
     return 0;
 }
 
-Actor* comboEnemyDynamicSpawn(ActorContext* ctx, ActorEntry* entry, PlayState* play, u32 operation)
+static Actor* enemyDynamicSpawnImpl(ActorContext* ctx, ActorEntry* entry, PlayState* play, u32 operation)
 {
     s16 id = entry->id;
 #if defined(GAME_MM)
@@ -2678,6 +2743,21 @@ Actor* comboEnemyDynamicSpawn(ActorContext* ctx, ActorEntry* entry, PlayState* p
     Actor* actor = nativePlacementPolicySpawn(ctx, entry, play, 0);
     sNextPlacement = previous;
     sNextActor = previousId;
+    return actor;
+}
+
+Actor* comboEnemyDynamicSpawn(ActorContext* ctx, ActorEntry* entry, PlayState* play, u32 operation)
+{
+    if (operation == 0xffff || !(operation & ENEMY_DYNAMIC_VIRTUAL_FLOOR))
+        return enemyDynamicSpawnImpl(ctx, entry, play, operation);
+    EnemyVirtualFloorScope floor;
+    if (!comboEnemyVirtualFloorBegin(&floor, play, entry))
+    {
+        g.roomEnemyLackSoul = 1;
+        return NULL;
+    }
+    Actor* actor = enemyDynamicSpawnImpl(ctx, entry, play, operation & ~ENEMY_DYNAMIC_VIRTUAL_FLOOR);
+    comboEnemyVirtualFloorEnd(&floor, actor);
     return actor;
 }
 
