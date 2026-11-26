@@ -25,6 +25,7 @@ export type EnemySpawnRule = {
   when?: EnemySpawnPredicate;
   allow?: EnemySpawnPredicate | EnemySpawnPredicate[];
   deny?: EnemySpawnPredicate | EnemySpawnPredicate[];
+  minibossEncounter?: boolean;
   preserve?: boolean;
   preserveUnless?: EnemySpawnSetting;
   restrictions?: string[];
@@ -232,7 +233,7 @@ export function parseEnemySpawnRules(value: unknown): EnemySpawnRules {
   };
   Object.keys(macros).forEach(visit);
   for (const [name, value] of Object.entries(rules)) {
-    const rule = object(value, ['rooms', 'spawns', 'when', 'allow', 'deny', 'preserve', 'preserveUnless',
+    const rule = object(value, ['rooms', 'spawns', 'when', 'allow', 'deny', 'minibossEncounter', 'preserve', 'preserveUnless',
       'restrictions', 'meets', 'explicit', 'varOverrides', 'logicOverrides', 'skipRaycast', 'position', 'maxHeightDifference', 'limits'], 'rule ' + name);
     if (rule.rooms !== undefined) {
       if (!Array.isArray(rule.rooms) || !rule.rooms.length) fail(name + ': rooms');
@@ -250,7 +251,7 @@ export function parseEnemySpawnRules(value: unknown): EnemySpawnRules {
       const entries = Array.isArray(rule[field]) ? rule[field] as unknown[] : [rule[field]];
       entries.forEach(entry => predicate(entry, name + ': ' + field, new Set()));
     }
-    for (const field of ['preserve', 'skipRaycast']) if (rule[field] !== undefined) bool(rule[field], name + ': ' + field);
+    for (const field of ['preserve', 'skipRaycast', 'minibossEncounter']) if (rule[field] !== undefined) bool(rule[field], name + ': ' + field);
     for (const field of ['restrictions', 'meets', 'explicit']) if (rule[field] !== undefined) stringList(rule[field], name + ': ' + field);
     if (rule.varOverrides !== undefined) for (const [target, value] of Object.entries(record(rule.varOverrides, name + ': varOverrides')))
       integer(value, 0xffff, name + ': variant ' + target);
@@ -275,7 +276,7 @@ export function parseEnemySpawnRules(value: unknown): EnemySpawnRules {
     if (rule.preserveUnless !== undefined && !['restoreBrokenActors', 'enemyShuffleLaggySpawns'].includes(rule.preserveUnless as string))
       fail(name + ': unknown preservation setting');
     if (rule.allow === undefined && rule.deny === undefined && rule.preserve === undefined &&
-      rule.preserveUnless === undefined && rule.maxHeightDifference === undefined && rule.limits === undefined) fail(name + ': missing action');
+      rule.preserveUnless === undefined && rule.minibossEncounter === undefined && rule.maxHeightDifference === undefined && rule.limits === undefined) fail(name + ': missing action');
   }
   for (const [name, value] of Object.entries(record(root.limits ?? {}, 'limits'))) {
     if (!Array.isArray(value) || !value.length) fail(name + ': expected limit list');

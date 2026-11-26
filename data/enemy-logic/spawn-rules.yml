@@ -8,6 +8,33 @@
 # The shipped oot-relaxed-native-pool explicitly opts native pools into that setting.
 # Sparse native flags, variant/position overrides and runtime guards stay beside their point.
 
+# Regression safeguards for preview-enemy-shuffle-144265b (pyvyNLAZ).
+"mm/Grottos - exclude traversal-blocking Eyegore":
+  rooms:
+    - game: mm
+      scene: 7
+  deny:
+    - game: mm
+      actor: 388
+
+"mm/Woodfall - exclude club Moblin from traversal room":
+  rooms:
+    - game: mm
+      scene: 70
+      room: 0
+  deny:
+    - game: oot
+      actor: 75
+      params: [2, 65535]
+
+"oot/Temple Spirit - preserve Child Climb pending crash investigation":
+  rooms:
+    - game: oot
+      scene: 6
+      room: 4
+      mq: false
+  preserve: true
+
 "oot/Ganon Tower - Standard spawns":
   rooms:
     - game: oot
@@ -75,6 +102,7 @@
       slots:
         - 0
       mq: false
+  minibossEncounter: true
   allow:
     - oot-standard
     - other-roster-forms
@@ -3340,6 +3368,8 @@
     - oot-relaxed-native-pool
   deny:
     - oot-native/Bari
+    # Twisted hallway bubble anchors are airborne; never ground-snap them.
+    - not: flying
   skipRaycast: true
 
 "oot/Temple Forest - Only Wallmaster, floating spawns, Original height, Restricted targets":
@@ -12221,6 +12251,18 @@
   deny:
     - mm-native/Chuchu
   when: mm-ordinary-source
+
+# Encounter classification is independent of allow/deny and preservation.
+# Only explicitly authored slots are overridden; other sources retain their default.
+"oot/Temple Spirit - Upper Lizalfos encounter classification":
+  rooms:
+    - game: oot
+      scene: 6
+      room: 26
+      setup: 0
+      mq: false
+      slots: [3, 4]
+  minibossEncounter: false
 
 "oot/Dodongo's Cavern/Lizalfos floors":
   rooms:

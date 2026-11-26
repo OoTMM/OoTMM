@@ -451,7 +451,16 @@ function prepareOotEnemizerActor(choice: OotEnemizerChoice, original: Uint8Array
     else adjustment = OOT_ACTOR_ADJUSTMENTS[id] ?? 0;
   }
   const operation = traits | raycast | adjustment;
-  return { replacement: out, operation, switchFlag: metadata?.switchFlag ?? -1, targetId: id, targetParams: params };
+  let switchFlag = metadata?.switchFlag ?? -1;
+  const sourceId = bufReadU16BE(original, 0);
+  const sourceParams = bufReadU16BE(original, 14);
+  if (key.scene === 0x17 && key.room === 1 && sourceId === 0x113 &&
+      (sourceParams & 0xff) === 0) {
+    const flag = sourceParams >>> 8;
+    if (flag < 64)
+      switchFlag = flag;
+  }
+  return { replacement: out, operation, switchFlag, targetId: id, targetParams: params };
 }
 
 function applyOverlappingEdits(bytes: Uint8Array, offset: number, edits: readonly { addr: number; data: Uint8Array }[], size = bytes.length) {

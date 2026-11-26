@@ -206,6 +206,21 @@ function roomMatches(room: EnemySpawnRoom, location: EnemySpawnLocation): boolea
     (room.mq === undefined || room.mq === !!location.mq);
 }
 
+export function enemySpawnMinibossEncounter(locations: readonly EnemySpawnLocation[], source: EnemySpawnSource,
+  fallback: boolean, settings?: Partial<Settings>, data: EnemySpawnRules = rules): boolean {
+  let result: boolean | undefined;
+  for (const location of locations) {
+    const context = { source: { ...source, game: location.game }, location, settings };
+    for (const rule of compiledRules(data).at(location, source.key)) {
+      if (rule.minibossEncounter === undefined || !rule.when(context)) continue;
+      if (result !== undefined && result !== rule.minibossEncounter)
+        throw new Error('Conflicting miniboss encounter rules: ' + JSON.stringify(locations));
+      result = rule.minibossEncounter;
+    }
+  }
+  return result ?? fallback;
+}
+
 export function enemySpawnSourceAllowed(settings: Settings, location: EnemySpawnLocation, source: EnemySpawnSource,
   data: EnemySpawnRules = rules): boolean {
   const context = { source: { game: location.game, ...source }, location, settings };
