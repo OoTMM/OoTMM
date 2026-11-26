@@ -30,7 +30,7 @@ export async function refreshEnemyMemory(binDir: string, factsPath: string, chec
     if (!size || size > 0xffff) throw new Error(`Invalid actor instance: ${name}`);
     const code = Math.max(Number(memory), align16(Math.max(end - start, data.length)));
     const instanceBound = Math.max(Number(instance), size);
-    const next = `${match[1]}${code}, 'profileOffset': ${offset}, 'instance': ${instanceBound} }`;
+    const next = `${match[1]}${code}, 'profileOffset': ${profile}, 'instance': ${instanceBound} }`;
     replacements.set(name, next);
     if (next !== match[0]) console.log(`Enemy memory: ${name}: ${memory}/${profile}/${instance} -> ${code}/${offset}/${instanceBound}`);
 
