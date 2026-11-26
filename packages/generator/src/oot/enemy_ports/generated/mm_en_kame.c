@@ -740,7 +740,7 @@ void EnKame_Dead(EnKame* this, PlayState* play) {
         if (this->timer == 1) {
             this->actor.colorFilterTimer = 100;
         } else if (this->actor.colorFilterTimer == 0) {
-            Actor_SetColorFilter(&this->actor, COLORFILTER_COLORFLAG_NONE, 255, COLORFILTER_BUFFLAG_OPA, 100);
+            Actor_SetColorFilter(&this->actor, COLORFILTER_COLORFLAG_RED, 255, COLORFILTER_BUFFLAG_OPA, 100);
         }
 
         this->actor.shape.rot.x += Rand_S16Offset(0x700, 0x1400);
