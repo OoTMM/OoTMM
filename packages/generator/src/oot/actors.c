@@ -13,6 +13,7 @@
 #include <combo/actor.h>
 #include <combo/multi.h>
 #include <combo/actors.h>
+#include <combo/enemy_debris.h>
 
 void comboEnemyGohmaHatchedWrap(Actor*, PlayState*);
 
@@ -359,6 +360,9 @@ Actor* Actor_SpawnWrapper(ActorContext* actorCtx, PlayState* play, short actorId
 
     if (comboIsForeignEnemyActor(actorId))
         return comboSpawnForeignEnemy(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, 0x7f, 0x3ff, NULL);
+
+    if (!comboEnemyDebrisActorAllowed(actorCtx, actorId, variable))
+        return NULL;
 
     if (actorId < 0 || !canSpawnActor(play, actorId, variable))
         return NULL;

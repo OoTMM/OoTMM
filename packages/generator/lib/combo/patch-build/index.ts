@@ -298,6 +298,29 @@ export async function buildPatchfiles(args: BuildPatchfileIn): Promise<Patchfile
         addrs.push(addr);
         p.symbols[game].set(name, addrs);
       }
+      const drawHook = p.symbols[game].get('ENEMY_DEBRIS_DRAW_ACTOR_V2');
+      if (!drawHook || drawHook.length !== 1) {
+        throw new Error(`Missing/ambiguous debris draw hook (${game}); rebuild the payload`);
+      }
+      const [draw, start, end] = game === 'oot'
+        ? [0x80024280, 0x80024784, 0x80024cc4]
+        : [0x800b9a04, 0x800b9ef4, 0x800ba660];
+      const oldJal = (0x0c000000 | ((draw >>> 2) & 0x03ffffff)) >>> 0;
+      const newJal = (0x0c000000 | ((drawHook[0] >>> 2) & 0x03ffffff)) >>> 0;
+      const sites = [];
+      for (let addr = start; addr < end; addr += 4) {
+        const file = args.addresses[game].fileFromRAM(addr);
+        if ((bufReadU32BE(rom, file.addr) >>> 0) === oldJal) sites.push(file);
+      }
+      if (sites.length !== 2) {
+        throw new Error(`Expected 2 native Actor_Draw calls in ${game}, got ${sites.length}`);
+      }
+      for (const site of sites) {
+        const instr = new Uint8Array(4);
+        bufWriteU32BE(instr, 0, newJal);
+        p.addPatch(site.name, site.offset, instr);
+        patchedFiles.add(site.name);
+      }
     }
 
     patchRandomizer(world, args.logic, args.settings, p);

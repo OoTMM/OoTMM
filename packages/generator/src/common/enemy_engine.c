@@ -5,6 +5,7 @@
 #include <combo/math.h>
 #include <combo/enemy_native.h>
 #include <combo/enemy.h>
+#include <combo/enemy_debris.h>
 
 extern void* comboEnemyResolveKeepPointer(void* pointer);
 
@@ -386,11 +387,93 @@ void comboEnemyDeathFlamePreset(PlayState* play, Vec3f* position, Vec3f* velocit
 EXPORT_LINKABLE_SYMBOL(FOREIGN_ENEMY_API_DEATH_FLAME_PRESET, comboEnemyDeathFlamePreset);
 #endif
 
+/* Cosmetic fragments use no text ID. Keep a wrapping gameplay-frame
+ * deadline there so culled debris cannot hold the budget indefinitely. */
+#define ENEMY_DEBRIS_MAX_AGE 120u
+
+static int enemyDebrisScan(ActorContext* ctx, unsigned used, PlayState* reap)
+{
+    u16 now = reap ? (u16)reap->gameplayFrames : 0;
+    for (unsigned category = 0; category < ACTORCAT_MAX; ++category)
+    {
+        Actor* actor = ctx->actors[category].first;
+        for (unsigned n = 0; actor && n < 256; ++n, actor = actor->next)
+        {
+            if (!actor->update)
+                continue;
+            unsigned weight = comboEnemyDebrisWeight(actor->id, (u16)actor->params);
+            if (!weight)
+                continue;
+            if (reap)
+            {
+                if (!actor->messageId)
+                {
+                    actor->messageId = (u16)(now + ENEMY_DEBRIS_MAX_AGE);
+                    if (!actor->messageId)
+                        actor->messageId = 1;
+                }
+                else if ((u16)(now - actor->messageId) < 0x8000u)
+                {
+                    Actor_Kill(actor);
+                    /* Finish imported encounter members before deletion. */
+                    comboEnemyEncounterComplete(actor, reap);
+                }
+            }
+            else if ((used += weight) > ENEMY_DEBRIS_ACTOR_BUDGET)
+                return 0;
+        }
+    }
+    return 1;
+}
+
+int comboEnemyDebrisActorAllowed(ActorContext* ctx, s16 id, u16 params)
+{
+    unsigned used = comboEnemyDebrisWeight(id, params);
+    return !used || enemyDebrisScan(ctx, used, NULL);
+}
+
+void comboEnemyDebrisPostFrame(PlayState* play)
+{
+    if (!play->pauseCtx.state)
+        enemyDebrisScan(&play->actorCtx, 0, play);
+}
+
+void comboEnemyDebrisDrawActor(PlayState* play, Actor* actor)
+{
+    if (actor->category != ACTORCAT_PLAYER &&
+        !comboEnemyDebrisGfxRoom(play->state.gfxCtx, ENEMY_DEBRIS_ACTOR_OPA_MIN,
+                                ENEMY_DEBRIS_ACTOR_XLU_MIN))
+        return;
+#if defined(GAME_OOT)
+    ((void (*)(PlayState*, Actor*))0x80024280u)(play, actor);
+#else
+    ((void (*)(PlayState*, Actor*))0x800b9a04u)(play, actor);
+#endif
+}
+EXPORT_SYMBOL(ENEMY_DEBRIS_DRAW_ACTOR_V2, comboEnemyDebrisDrawActor);
+
+static void enemyDebrisDrawEffect(PlayState* play, s32 index)
+{
+    if (!gEffectSsTable.data || index < 0 || (u32)index >= gEffectSsTable.size)
+        return;
+    EffectSs* effect = &gEffectSsTable.data[index];
+    if (effect->draw && comboEnemyDebrisGfxRoom(play->state.gfxCtx,
+            ENEMY_DEBRIS_EFFECT_OPA_MIN, ENEMY_DEBRIS_EFFECT_XLU_MIN))
+        ((void (*)(PlayState*, s32, EffectSs*))effect->draw)(play, index, effect);
+}
+#if defined(GAME_OOT)
+PATCH_FUNC(0x8001b76c, enemyDebrisDrawEffect);
+#else
+PATCH_FUNC(0x800b07d8, enemyDebrisDrawEffect);
+#endif
+
 extern void comboEnemyNativeEffectSpawn(PlayState*, s32, s32, void*);
 
 void comboEnemyEffectSpawn(PlayState* play, s32 type, s32 priority, void* data)
 {
     EnemyNativeSegments scope = { 0 };
+    if (!comboEnemyDebrisEffectAllowed(type))
+        return;
     if (!comboEnemyCurrentActor())
     {
         comboEnemyNativeEffectSpawn(play, type, priority, data);

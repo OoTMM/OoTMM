@@ -10,7 +10,11 @@ typedef struct
     u8 hadHealth, defeated;
 } FamilyChild;
 
+#if defined(GAME_OOT)
+static FamilyChild sChildren[224];
+#else
 static FamilyChild sChildren[256];
+#endif
 static EnemyFamily* sFamily;
 static int sCollecting;
 
@@ -21,11 +25,23 @@ static void familyDraw(Actor*, PlayState*);
 
 static FamilyChild* familyChild(Actor* actor, int vacant)
 {
+#if defined(GAME_OOT)
+    u32 start = ((u32)actor >> 4) & 255u;
+    if (start >= ARRAY_COUNT(sChildren))
+        start -= ARRAY_COUNT(sChildren);
+#else
     u32 start = ((u32)actor >> 4) & (ARRAY_COUNT(sChildren) - 1);
+#endif
     FamilyChild* free = NULL;
     for (u32 i = 0; i < ARRAY_COUNT(sChildren); ++i)
     {
+#if defined(GAME_OOT)
+        FamilyChild* child = &sChildren[start];
+        if (++start == ARRAY_COUNT(sChildren))
+            start = 0;
+#else
         FamilyChild* child = &sChildren[(start + i) & (ARRAY_COUNT(sChildren) - 1)];
+#endif
         if (child->actor == actor)
             return child;
         if (!child->actor)

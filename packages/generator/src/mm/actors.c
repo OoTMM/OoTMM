@@ -13,6 +13,7 @@
 #include <combo/multi.h>
 #include <combo/actors.h>
 #include <combo/mm/actors/En_Horse.h>
+#include <combo/enemy_debris.h>
 
 #include "combo/custom.h"
 
@@ -661,6 +662,9 @@ Actor *Actor_SpawnAsChildAndCutsceneWrapper(ActorContext *actorCtx, PlayState *p
 
     if (comboIsForeignEnemyActor(actorId))
         return comboSpawnForeignEnemy(actorCtx, play, actorId, x, y, z, rx, ry, rz, variable, ex1, ex2, (Actor *)ex3);
+
+    if (!comboEnemyDebrisActorAllowed(actorCtx, actorId, variable))
+        return NULL;
 
     if (!canSpawnActor(play, actorId, variable))
         return NULL;

@@ -13,6 +13,7 @@
 #include <combo/global.h>
 #include <combo/souls.h>
 #include <combo/enemy_native.h>
+#include <combo/enemy_debris.h>
 
 typedef struct
 {
@@ -688,6 +689,9 @@ static Actor* enemySpawnRegistered(ActorContext* actorCtx, PlayState* play, s16 
     u32 previousSegment;
     int allocationFailed, previousLackSoul;
 
+    if (!comboEnemyDebrisActorAllowed(actorCtx, actorId, params))
+        return NULL;
+
     if (!comboIsForeignEnemyActor(actorId) || !enemyLookupRegistration(actorId, &registration))
     {
         g.roomEnemyLackSoul = 1;
@@ -1038,7 +1042,16 @@ static Actor* enemyBioBabaMember(ActorContext* ctx, PlayState* play, Actor* pare
                  (owner->params == 3 && params == 4) ||
                  (owner->params == 4 && params >= 10 && params < 24));
     if (valid && play && ctx == &play->actorCtx && play->roomCtx.curRoom.num == group.room)
+    {
+        int cosmetic = params >= 10 && params < 24;
+        int previousLackSoul = g.roomEnemyLackSoul;
         child = enemySpawnRegistered(ctx, play, 0xd2d, x, y, z, rx, ry, rz, params, csId, halfDays, parent, &group, 0, 0);
+        if (cosmetic && (!child || !child->update))
+        {
+            g.roomEnemyLackSoul = previousLackSoul;
+            return child;
+        }
+    }
     if (!child || !child->update)
         comboEnemyEncounterBlock(&group);
     return child;
@@ -1517,8 +1530,14 @@ static Actor* enemyEggDebris(ActorContext* ctx, Actor* parent, PlayState* play, 
         g.roomEnemyLackSoul = 1;
         return NULL;
     }
-    Actor* child = enemySpawnMember(&group, play, ctx, id == 0x2b && params >= 10 && params <= 24 && !rx && !rz,
-                                    id, 0, x, y, z, rx, ry, rz, params);
+    if (id != 0x2b || params < 10 || params > 24 || rx || rz || !play ||
+        ctx != &play->actorCtx || play->roomCtx.curRoom.num != group.room)
+        return NULL;
+    int previousLackSoul = g.roomEnemyLackSoul;
+    Actor* child = enemySpawnRegistered(ctx, play, 0xc2b, x, y, z, rx, ry, rz,
+                                        params, 0x7f, 0x3ff, NULL, &group, 0, 0);
+    if (!child || !child->update)
+        g.roomEnemyLackSoul = previousLackSoul;
     if (child)
     {
         child->parent = parent;

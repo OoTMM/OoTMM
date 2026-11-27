@@ -10,6 +10,7 @@
 #include <combo/enemy_room_models.h>
 #include <combo/enemy_resource.h>
 #include <combo/enemy_native.h>
+#include <combo/enemy_debris.h>
 #if defined(GAME_OOT)
 #include <combo/actor_ovl.h>
 #include <combo/enemy_oot_enemizer.h>
@@ -2112,7 +2113,11 @@ static int sAllocationRetryPhase;
 static EnemyPlacement sAllocationRetryPlacement;
 static ActorEntry* sAllocationRetryList;
 static EnemyRoom sRooms[32];
+#if defined(GAME_OOT)
+static EnemyEncounter sEncounters[224];
+#else
 static EnemyEncounter sEncounters[256];
+#endif
 static ActorEntry* sRoomList;
 static u32 sRoomCount;
 static s32 sListRoom = -1;
@@ -2790,6 +2795,7 @@ int comboEnemyEncounterRetryAllocation(const EnemyPlacement* placement)
 
 void comboEnemyEncounterPostFrame(PlayState* play)
 {
+    comboEnemyDebrisPostFrame(play);
 #if defined(GAME_MM)
     comboEnemyDependenciesSpawnActors(play);
 #endif
