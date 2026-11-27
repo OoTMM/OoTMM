@@ -3302,6 +3302,9 @@ static AttackAnimInfo sHammerAttackAnimInfo[] = {
 
 AttackAnimInfo* Player_GetMeleeAttackAnimInfo(void* a0, Player* player, PlayerMeleeWeaponAnimation meleeWeaponAnim) {
     AttackAnimInfo* sMeleeAttackAnimInfo = OverlayAddr(0x8085cd30);
+    if ((u32)meleeWeaponAnim >= PLAYER_MWA_MAX)
+        meleeWeaponAnim = player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER
+            ? PLAYER_MWA_FORWARD_SLASH_2H : PLAYER_MWA_FORWARD_SLASH_1H;
     AttackAnimInfo* ret = &sMeleeAttackAnimInfo[meleeWeaponAnim];
 
     if (player->heldItemAction == PLAYER_CUSTOM_IA_HAMMER && meleeWeaponAnim < PLAYER_MWA_FLIPSLASH_START) {
@@ -3341,10 +3344,15 @@ static s8 sHammerAttackAnims[] = {
 };
 
 void Player_SpecialMeleeWeaponAnim(Player* this, void* a1, PlayerMeleeWeaponAnimation* animation) {
-    s32 temp_a1 = this->unk_AE3[this->unk_ADE];
-
     if (this->heldItemAction == PLAYER_CUSTOM_IA_HAMMER) {
-        *animation = sHammerAttackAnims[temp_a1];
+        s32 direction = -1;
+        if ((u32)this->unk_ADE < ARRAY_COUNT(this->unk_AE3))
+            direction = this->unk_AE3[this->unk_ADE];
+
+        if ((u32)direction < ARRAY_COUNT(sHammerAttackAnims))
+            *animation = sHammerAttackAnims[direction];
+        else
+            *animation = PLAYER_MWA_FORWARD_SLASH_1H;
         /* no combo and no lunge */
         this->unk_ADD = 0;
         this->stateFlags2 &= ~(1 << 30);
